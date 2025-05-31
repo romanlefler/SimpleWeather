@@ -18,7 +18,7 @@
   "license": "GPL-3.0-or-later",
   "author": "Roman Lefler",
   "type": "module",
-  "main": "dist/extension.ts",
+  "main": "dist/build/extension.ts",
   "scripts": {
     "test": "echo 'Tests not implemeneted yet.'"
   },
