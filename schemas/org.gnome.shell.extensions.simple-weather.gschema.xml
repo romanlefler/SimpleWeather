@@ -1,11 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <schemalist>
+    <enum id="org.gnome.shell.extensions.simple-weather.temp-unit">
+        <value value="1" nick="fahrenheit" />
+        <value value="2" nick="celsius" />
+    </enum>
     <schema id="org.gnome.shell.extensions.simple-weather" path="/org/gnome/shell/extensions/simple-weather/">
 
         <key name="is-activated" type="b">
             <default>false</default>
             <summary>Is Activated</summary>
             <description>True if the extension is activated (i.e. user accepts network connections).</description>
+        </key>
+
+        <key name="locations" type="as">
+            <default>[ ]</default>
+            <summary>List of Locations</summary>
+            <description>List of locations where each string is a coordinate set</description>
+        </key>
+
+        <key name="temp-unit" enum="org.gnome.shell.extensions.simple-weather.temp-unit">
+            <default>'fahrenheit'</default>
+            <summary>Temperature Unit</summary>
         </key>
 
     </schema>
