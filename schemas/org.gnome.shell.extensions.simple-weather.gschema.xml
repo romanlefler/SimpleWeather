@@ -2,7 +2,7 @@
 <schemalist>
     <schema id="org.gnome.shell.extensions.simple-weather" path="/org/gnome/shell/extensions/simple-weather/">
 
-        <key name="isActivated" type="b">
+        <key name="is-activated" type="b">
             <default>false</default>
             <summary>Is Activated</summary>
             <description>True if the extension is activated (i.e. user accepts network connections).</description>
