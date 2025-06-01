@@ -25,7 +25,8 @@ import * as PanelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js';
 import { Provider } from "./providers/provider.js";
 import { OpenMeteo } from "./providers/openmeteo.js";
 import { LibSoup } from "./libsoup.js";
-import { TempUnits } from "./units.js";
+import { Config } from "./config.js";
+import { Weather } from "./weather.js";
 
 export default class SimpleWeatherExtension extends Extension {
 
@@ -33,12 +34,15 @@ export default class SimpleWeatherExtension extends Extension {
     #indicator? : PanelMenu.Button;
     #panelLabel? : St.Label;
 
+    #cachedWeather? : Weather;
+    #config? : Config;
     #libsoup? : LibSoup;
     #provider? : Provider;
     #fetchLoopId? : number;
 
     enable() {
         this.#gsettings = this.getSettings();
+        this.#config = new Config(this.#gsettings);
         this.#libsoup = new LibSoup();
         this.#provider = new OpenMeteo(this.#libsoup);
 
@@ -56,8 +60,9 @@ export default class SimpleWeatherExtension extends Extension {
         this.#fetchLoopId = GLib.timeout_add_seconds(
             GLib.PRIORITY_DEFAULT,
             15 * 60,
-            this.#updateWeather
+            this.#updateWeather.bind(this)
         );
+        this.#config.onTempUnitChanged(this.#updateGui.bind(this));
         this.#updateWeather();
     }
 
@@ -73,6 +78,8 @@ export default class SimpleWeatherExtension extends Extension {
         this.#libsoup?.free();
         this.#libsoup = undefined;
         this.#provider = undefined;
+        this.#config?.free();
+        this.#config = undefined;
     }
 
     #updateWeather() {
@@ -85,10 +92,16 @@ export default class SimpleWeatherExtension extends Extension {
     async #updateWeatherAsync() {
 
         if(!this.#provider) throw new Error("Provider was undefined!");
-        const w = await this.#provider!.fetchWeather();
+        this.#cachedWeather = await this.#provider!.fetchWeather();
+        this.#updateGui();
+    }
 
-        this.#panelLabel!.text = `${Math.round(w.temp.get(TempUnits.Fahrenheit))}\u00B0`;
+    #updateGui() {
+        const w = this.#cachedWeather;
+        if(!w) return;
 
+        const tempUnit = this.#config!.getTempUnit();
+        this.#panelLabel!.text = `${Math.round(w.temp.get(tempUnit))}\u00B0`;
     }
 
 }
