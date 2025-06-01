@@ -20,7 +20,7 @@ import { Temp } from "../units.js";
 import { Weather } from "../weather.js";
 import { Provider } from "./provider.js";
 
-const ENDPOINT = "https://api.weatherapi.com/v1/forecast.json";
+const ENDPOINT = "https://api.open-meteo.com/v1/forecast";
 
 export class OpenMeteo implements Provider {
 
@@ -35,9 +35,9 @@ export class OpenMeteo implements Provider {
     async #fetch() : Promise<any> {
 
         const params = {
-            latitude: 0,
-            longitude: 0,
-            current: "temperature",
+            latitude: String(0),
+            longitude: String(0),
+            current: "temperature_2m",
             temperature_unit: "fahrenheit"
         };
         // params.lang

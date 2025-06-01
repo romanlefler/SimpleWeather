@@ -45,7 +45,7 @@ export class LibSoup {
         this.#realUserSession = undefined;
     }
 
-    async fetchJson(url : string, params : Record<string, any>,
+    async fetchJson(url : string, params : Record<string, string>,
         useTrackedAgent = false) : Promise<ServerResponse> {
 
         const sess = useTrackedAgent ? this.#realUserSession : this.#genericSession;
@@ -77,7 +77,7 @@ export class LibSoup {
                     }
 
                     const status = msg.statusCode;
-                    return { status, body };
+                    resolve({ status, body });
                 }
             );
         });
