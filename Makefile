@@ -1,7 +1,7 @@
 
 NAME    := simple-weather
-DOMAIN  := romanlefler.github.io
-VERSION := $(shell awk '/version-name/{print $$NF}' ./info/metadata.json)
+UUID  := $(shell awk -F'"' '/uuid/ { print $$4 }' ./info/metadata.json)
+VERSION := $(shell awk -F'"' '/version-name/ { print $$4 }' ./info/metadata.json)
 
 INFO    := ./info
 SCHEMAS := ./schemas
@@ -28,8 +28,8 @@ out: $(JSOUT) $(SCHEMAOUT) $(SCHEMACP) $(METADATACP)
 pack: $(ZIP)
 
 install: out
-	rm -rf ~/.local/share/gnome-shell/extensions/$(NAME)@$(DOMAIN)
-	cp -r $(BUILD) ~/.local/share/gnome-shell/extensions/$(NAME)@$(DOMAIN)
+	rm -rf ~/.local/share/gnome-shell/extensions/$(UUID)
+	cp -r $(BUILD) ~/.local/share/gnome-shell/extensions/$(UUID)
 
 clean:
 	rm -rf $(DIST)
