@@ -18,18 +18,18 @@ SRCS       := $(wildcard $(SRC)/*[!.d].ts)
 SCHEMAOUT  := $(SCHEMAOUTDIR)/gschemas.compiled
 SCHEMACP   := $(SCHEMAOUTDIR)/org.gnome.shell.extensions.$(NAME).gschema.xml
 METADATACP := $(BUILD)/metadata.json
-JSOUT      := $(patsubst %.js,%.ts,$(SRCS))
+JSOUT      := $(SRCS:$(SRC)/%.ts=$(BUILD)/%.js)
 ZIP		   := $(DIST)/$(NAME)-v$(VERSION).zip
 
-.PHONY: all pack install clean
+.PHONY: out pack install clean
 
-all: $(BUILD)/extension.js
+out: $(JSOUT) $(SCHEMAOUT) $(SCHEMACP) $(METADATACP)
 
 pack: $(ZIP)
 
-install:
+install: out
 	rm -rf ~/.local/share/gnome-shell/extensions/$(NAME)@$(DOMAIN)
-	mv $(BUILD) ~/.local/share/gnome-shell/extensions/$(NAME)@$(DOMAIN)
+	cp -r $(BUILD) ~/.local/share/gnome-shell/extensions/$(NAME)@$(DOMAIN)
 
 clean:
 	rm -rf $(DIST)
@@ -38,7 +38,7 @@ node_modules: package.json
 	printf -- 'NEEDED: npm\n'
 	npm install
 
-$(JSOUT): $(SRCS) node_modules
+$(BUILD)/%.js: $(SRC)/%.ts node_modules
 	printf -- 'NEEDED: tsc\n'
 	tsc
 
@@ -55,7 +55,7 @@ $(METADATACP): $(METADATA)
 	mkdir -p $(BUILD)
 	cp $(METADATA) $(METADATACP)
 
-$(ZIP): $(JSOUT) $(SCHEMAOUT) $(SCHEMACP) $(METADATACP)
+$(ZIP): out
 	printf -- 'NEEDED: zip\n'
 	mkdir -p $(DIST)
 	(cd $(BUILD) && zip ../../$(ZIP) -9r ./)
