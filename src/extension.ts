@@ -33,6 +33,7 @@ export default class SimpleWeatherExtension extends Extension {
     #gsettings? : Gio.Settings;
     #indicator? : PanelMenu.Button;
     #panelLabel? : St.Label;
+    #panelIcon? : St.Icon;
 
     #cachedWeather? : Weather;
     #config? : Config;
@@ -48,12 +49,21 @@ export default class SimpleWeatherExtension extends Extension {
 
         this.#indicator = new PanelMenu.Button(0.0, "Weather", false);
 
+        const layout = new St.BoxLayout({
+            orientation: Clutter.Orientation.HORIZONTAL
+        });
         this.#panelLabel = new St.Label({
             text: "...",
             y_align: Clutter.ActorAlign.CENTER,
             y_expand: true
         });
-        this.#indicator.add_child(this.#panelLabel);
+        this.#panelIcon = new St.Icon({
+            icon_name: "view-refresh-symbolic",
+            style_class: "system-status-icon"
+        });
+        layout.add_child(this.#panelLabel);
+        layout.add_child(this.#panelIcon);
+        this.#indicator.add_child(layout);
 
         Main.panel.addToStatusArea(this.uuid, this.#indicator);
 
@@ -72,14 +82,19 @@ export default class SimpleWeatherExtension extends Extension {
             this.#fetchLoopId = undefined;
         }
 
-        this.#gsettings = undefined;
+        this.#panelIcon = undefined;
+        this.#panelLabel = undefined;
         this.#indicator?.destroy();
         this.#indicator = undefined;
+
+        this.#gsettings = undefined;
         this.#libsoup?.free();
         this.#libsoup = undefined;
-        this.#provider = undefined;
         this.#config?.free();
         this.#config = undefined;
+
+        this.#provider = undefined;
+        this.#cachedWeather = undefined;
     }
 
     #updateWeather() {
@@ -102,6 +117,8 @@ export default class SimpleWeatherExtension extends Extension {
 
         const tempUnit = this.#config!.getTempUnit();
         this.#panelLabel!.text = `${Math.round(w.temp.get(tempUnit))}\u00B0`;
+
+        this.#panelIcon!.icon_name = w.gIconName;
     }
 
 }

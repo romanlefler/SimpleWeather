@@ -18,7 +18,7 @@
 import { LibSoup } from "../libsoup.js";
 import { Temp } from "../units.js";
 import { Weather } from "../weather.js";
-import { Provider } from "./provider.js";
+import { getGIconName, Icons, Provider } from "./provider.js";
 
 const ENDPOINT = "https://api.open-meteo.com/v1/forecast";
 
@@ -37,7 +37,7 @@ export class OpenMeteo implements Provider {
         const params = {
             latitude: String(0),
             longitude: String(0),
-            current: "temperature_2m",
+            current: "temperature_2m,weather_code,is_day",
             temperature_unit: "fahrenheit"
         };
         // params.lang
@@ -48,11 +48,63 @@ export class OpenMeteo implements Provider {
 
     async fetchWeather() : Promise<Weather> {
         const body = await this.#fetch();
-        const temp = new Temp(body.current?.temperature_2m ?? NaN);
+        const cur = body.current;
+
+        const temp = new Temp(cur?.temperature_2m ?? NaN);
+        const isNight = cur?.is_day === 0;
+
+        const icon = codeToIcon[cur?.weather_code ?? 0];
+        const gIconName = getGIconName(icon, isNight);
 
         return {
-            temp
+            temp,
+            gIconName,
+            isNight
         };
     }
 
 }
+
+// https://open-meteo.com/en/docs#weather_variable_documentation
+const codeToIcon : Record<number, string> = {
+    0: Icons.Clear,
+
+    1: Icons.Clear,
+    2: Icons.Cloudy,
+    3: Icons.Overcast,
+
+    45: Icons.Foggy,
+    48: Icons.Foggy,
+
+    51: Icons.RainScattered,
+    53: Icons.Rainy,
+    55: Icons.Rainy,
+
+    56: Icons.FreezingRain,
+    57: Icons.FreezingRain,
+
+    61: Icons.RainScattered,
+    63: Icons.Rainy,
+    65: Icons.Rainy,
+
+    66: Icons.FreezingRain,
+    67: Icons.FreezingRain,
+
+    71: Icons.Snowy,
+    73: Icons.Snowy,
+    75: Icons.Snowy,
+
+    77: Icons.Snowy,
+
+    80: Icons.RainScattered,
+    81: Icons.Rainy,
+    82: Icons.Rainy,
+
+    85: Icons.Snowy,
+    86: Icons.Snowy,
+
+    95: Icons.Stormy,
+
+    96: Icons.Hail,
+    99: Icons.Hail
+};

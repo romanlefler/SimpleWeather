@@ -24,3 +24,34 @@ export interface Provider {
     fetchWeather() : Promise<Weather>;
 
 }
+
+export const Icons = {
+    Clear: "clear",
+    Cloudy: "few-clouds",
+    Foggy: "fog",
+    FreezingRain: "freezing-rain",
+    FreezingStorm: "freezing-storm",
+    Hail: "snow",
+    Overcast: "overcast",
+    Misty: "fog",
+    Rainy: "showers",
+    RainScattered: "showers-scattered",
+    Snowy: "snow",
+    Stormy: "storm",
+    Windy: "windy",
+    Tornado: "tornado"
+};
+
+function iconHasNightVariant(name : string)
+{
+  return name === "clear" || name === "few-clouds";
+}
+
+export function getGIconName(name : string, isNight : boolean) : string
+{
+  let fullName = "weather-" + name;
+
+  if(isNight && iconHasNightVariant(name)) fullName += "-night";
+  return fullName;
+}
+

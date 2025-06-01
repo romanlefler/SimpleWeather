@@ -21,4 +21,8 @@ export interface Weather {
 
     temp : Temp;
 
+    gIconName : string;
+
+    isNight : boolean;
+
 }
