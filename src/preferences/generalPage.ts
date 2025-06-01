@@ -48,7 +48,7 @@ export class GeneralPage extends Adw.PreferencesPage {
             selected: settings.get_enum("temp-unit") - 1
         });
         tempRow.connect("notify::selected", () => {
-            settings.set_enum("temp-unit", tempRow.selected);
+            settings.set_enum("temp-unit", tempRow.selected + 1);
         });
         group.add(tempRow);
 
