@@ -30,7 +30,7 @@ export class GeneralPage extends Adw.PreferencesPage {
 
         super({
             title: "General",
-            icon_name: "dialog-information-symbolic"
+            icon_name: "preferences-system-symbolic"
         });
 
         const group = new Adw.PreferencesGroup({

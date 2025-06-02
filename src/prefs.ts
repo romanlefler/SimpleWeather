@@ -19,6 +19,7 @@ import Adw from "gi://Adw";
 
 import { ExtensionPreferences } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
 import { GeneralPage } from "./preferences/generalPage.js";
+import { LocationsPage } from "./preferences/locationsPage.js";
 
 export default class SimpleWeatherPreferences extends ExtensionPreferences {
 
@@ -26,6 +27,7 @@ export default class SimpleWeatherPreferences extends ExtensionPreferences {
         
         const settings = this.getSettings();
         window.add(new GeneralPage(settings));
+        window.add(new LocationsPage(settings, window));
 
     }
 

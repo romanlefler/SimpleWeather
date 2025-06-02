@@ -12,10 +12,17 @@
             <description>True if the extension is activated (i.e. user accepts network connections).</description>
         </key>
 
+        <!-- as = string[] -->
         <key name="locations" type="as">
             <default>[ ]</default>
             <summary>List of Locations</summary>
             <description>List of locations where each string is a coordinate set</description>
+        </key>
+
+        <!-- x = int64 -->
+        <key name="main-location-index" type="x">
+            <default>0</default>
+            <summary>Index of Primary Location</summary>
         </key>
 
         <key name="temp-unit" enum="org.gnome.shell.extensions.simple-weather.temp-unit">
