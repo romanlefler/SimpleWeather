@@ -1,34 +1,37 @@
 
 NAME    := simple-weather
-UUID  := $(shell awk -F'"' '/uuid/ { print $$4 }' ./info/metadata.json)
-VERSION := $(shell awk -F'"' '/version-name/ { print $$4 }' ./info/metadata.json)
+UUID  := $(shell awk -F'"' '/uuid/ { print $$4 }' ./static/metadata.json)
+VERSION := $(shell awk -F'"' '/version-name/ { print $$4 }' ./static/metadata.json)
 
-INFO    := ./info
+STATIC  := ./static
 SCHEMAS := ./schemas
 SRC     := ./src
 DIST    := ./dist
 BUILD   := $(DIST)/build
 SCHEMAOUTDIR := $(BUILD)/schemas
 
-METADATA   := $(INFO)/metadata.json
+METADATA   := $(STATIC)/metadata.json
+STYLESHEET := $(STATIC)/stylesheet.css
 SCHEMASRC  := $(SCHEMAS)/org.gnome.shell.extensions.$(NAME).gschema.xml
 # This excludes .d.ts files
 SRCS       := $(wildcard $(SRC)/*[!.d].ts)
 
-SCHEMAOUT  := $(SCHEMAOUTDIR)/gschemas.compiled
-SCHEMACP   := $(SCHEMAOUTDIR)/org.gnome.shell.extensions.$(NAME).gschema.xml
-METADATACP := $(BUILD)/metadata.json
-JSOUT      := $(SRCS:$(SRC)/%.ts=$(BUILD)/%.js)
-ZIP		   := $(DIST)/$(NAME)-v$(VERSION).zip
+SCHEMAOUT    := $(SCHEMAOUTDIR)/gschemas.compiled
+SCHEMACP     := $(SCHEMAOUTDIR)/org.gnome.shell.extensions.$(NAME).gschema.xml
+METADATACP   := $(BUILD)/metadata.json
+STYLESHEETCP := $(BUILD)/stylesheet.css
+JSOUT        := $(SRCS:$(SRC)/%.ts=$(BUILD)/%.js)
+ZIP		     := $(DIST)/$(NAME)-v$(VERSION).zip
 
 .PHONY: out pack install clean
 
-out: $(JSOUT) $(SCHEMAOUT) $(SCHEMACP) $(METADATACP)
+out: $(JSOUT) $(SCHEMAOUT) $(SCHEMACP) $(METADATACP) $(STYLESHEETCP)
 
 pack: $(ZIP)
 
 install: out
 	rm -rf ~/.local/share/gnome-shell/extensions/$(UUID)
+	mkdir -p ~/.local/share/gnome-shell/extensions
 	cp -r $(BUILD) ~/.local/share/gnome-shell/extensions/$(UUID)
 
 clean:
@@ -54,6 +57,10 @@ $(SCHEMACP): $(SCHEMASRC)
 $(METADATACP): $(METADATA)
 	mkdir -p $(BUILD)
 	cp $(METADATA) $(METADATACP)
+
+$(STYLESHEETCP): $(STYLESHEET)
+	mkdir -p $(BUILD)
+	cp $(STYLESHEET) $(STYLESHEETCP)
 
 $(ZIP): out
 	printf -- 'NEEDED: zip\n'
