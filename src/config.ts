@@ -57,9 +57,6 @@ export class Config {
         const filtered = locArr.filter(l => l !== null) as Location[];
         if(filtered.length === 0) {
             const newLoc = Location.newHere();
-            const newArr = [ newLoc.toString() ];
-            const newGVariant = writeGTypeAS(newArr);
-            this.#settings!.set_value("locations", newGVariant);
             filtered.push(newLoc);
         }
         return filtered;
@@ -131,5 +128,8 @@ export function writeGTypeAS(arr : string[]) : GLib.Variant<any> {
         const gv = GLib.Variant.new_string(k);
         gVariantArr.push(gv);
     }
-    return GLib.Variant.new_array(null, gVariantArr);
+    return GLib.Variant.new_array(
+        new GLib.VariantType("s"),
+        gVariantArr
+    );
 }
