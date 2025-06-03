@@ -104,6 +104,7 @@ export class LocationsPage extends Adw.PreferencesPage {
             row.connect("activated", () => {
                 if(permIndex === this.#config.getMainLocationIndex()) return;
                 this.#settings.set_int64("main-location-index", permIndex);
+                this.#settings.apply();
             });
             const box = new Gtk.Box({
                 orientation: Gtk.Orientation.HORIZONTAL,
@@ -115,11 +116,14 @@ export class LocationsPage extends Adw.PreferencesPage {
                 icon_name: "document-edit-symbolic",
                 valign: Gtk.Align.CENTER
             });
-            editBtn.connect("clicked", this.#editLoc.bind(this, l, permIndex));
+            editBtn.connect("clicked", () => {
+                this.#editLoc(l, permIndex).catch(console.error);
+            });
             const deleteBtn = new Gtk.Button({
                 icon_name: "edit-delete-symbolic",
                 valign: Gtk.Align.CENTER
             });
+            deleteBtn.connect("clicked", this.#deleteLoc.bind(this, locs, permIndex));
             box.append(editBtn);
             box.append(deleteBtn);
             row.add_suffix(box);
@@ -175,6 +179,20 @@ export class LocationsPage extends Adw.PreferencesPage {
         const strArray = locsArray.map(k => k.toString());
         const gVariant = writeGTypeAS(strArray);
         this.#settings.set_value("locations", gVariant);
+        this.#settings.apply();
+    }
+
+    #deleteLoc(locs : Location[], index : number) {
+        locs.splice(index, 1);
+        const strArray = locs.map(k => k.toString());
+        const gVariant = writeGTypeAS(strArray);
+        this.#settings.set_value("locations", gVariant);
+
+        const cur = this.#config.getMainLocationIndex();
+        const len = Math.max(1, locs.length);
+        if(cur >= len) this.#settings.set_int64("main-location-index", len - 1);
+
+        this.#settings.apply();
     }
 
 }

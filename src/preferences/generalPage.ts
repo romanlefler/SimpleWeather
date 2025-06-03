@@ -49,6 +49,7 @@ export class GeneralPage extends Adw.PreferencesPage {
         });
         tempRow.connect("notify::selected", () => {
             settings.set_enum("temp-unit", tempRow.selected + 1);
+            settings.apply();
         });
         group.add(tempRow);
 

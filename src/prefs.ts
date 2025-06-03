@@ -26,6 +26,8 @@ export default class SimpleWeatherPreferences extends ExtensionPreferences {
     async fillPreferencesWindow(window: Adw.PreferencesWindow): Promise<void> {
         
         const settings = this.getSettings();
+        settings.delay();
+
         window.add(new GeneralPage(settings));
         window.add(new LocationsPage(settings, window));
 
