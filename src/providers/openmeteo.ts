@@ -15,6 +15,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import { Config } from "../config.js";
 import { LibSoup } from "../libsoup.js";
 import { Temp } from "../units.js";
 import { Weather } from "../weather.js";
@@ -25,18 +26,24 @@ const ENDPOINT = "https://api.open-meteo.com/v1/forecast";
 export class OpenMeteo implements Provider {
 
     readonly #soup : LibSoup;
+    readonly #config : Config;
 
     readonly nameKey = "Open-Meteo";
 
-    constructor(soup : LibSoup) {
+    constructor(soup : LibSoup, config : Config) {
         this.#soup = soup;
+        this.#config = config;
     }
 
     async #fetch() : Promise<any> {
 
+        const loc = this.#config.getMainLocation();
+        const lat = loc.lat();
+        const lon = loc.lon();
+
         const params = {
-            latitude: String(0),
-            longitude: String(0),
+            latitude: String(lat),
+            longitude: String(lon),
             current: "temperature_2m,weather_code,is_day",
             temperature_unit: "fahrenheit"
         };

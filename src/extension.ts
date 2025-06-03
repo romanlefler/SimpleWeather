@@ -49,7 +49,7 @@ export default class SimpleWeatherExtension extends Extension {
         this.#gsettings = this.getSettings();
         this.#config = new Config(this.#gsettings);
         this.#libsoup = new LibSoup();
-        this.#provider = new OpenMeteo(this.#libsoup);
+        this.#provider = new OpenMeteo(this.#libsoup, this.#config);
 
         this.#indicator = new PanelMenu.Button(0.0, "Weather", false);
 
@@ -76,6 +76,8 @@ export default class SimpleWeatherExtension extends Extension {
             15 * 60,
             this.#updateWeather.bind(this)
         );
+        this.#config.onMainLocationChanged(this.#updateWeather.bind(this));
+
         this.#config.onTempUnitChanged(this.#updateGui.bind(this));
         this.#updateWeather();
     }

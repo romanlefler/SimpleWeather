@@ -37,11 +37,13 @@ export class Location {
     }
 
     lat() : number {
-        return this.#lat!;
+        if(typeof this.#lat !== "number") throw new Error("Can't get latitude.");
+        return this.#lat;
     }
 
     lon() : number {
-        return this.#lon!;
+        if(typeof this.#lon !== "number") throw new Error("Can't get longitude.");
+        return this.#lon;
     }
 
     getCoordsString() {
