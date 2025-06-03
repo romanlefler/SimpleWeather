@@ -24,6 +24,7 @@ import { LibSoup } from "../libsoup.js";
 import { Config, writeGTypeAS } from "../config.js";
 import { editLocation } from "./editLocation.js";
 import { Location } from "../location.js";
+import { UserInputError } from "../errors.js";
 
 const ICON_SELECTED = "radio-checked-symbolic";
 const ICON_NOT_SELECTED = "radio-checked-symbolic";
@@ -41,12 +42,17 @@ export class LocationsPage extends Adw.PreferencesPage {
     #locGroup : Adw.PreferencesGroup;
     #locRows : Adw.ActionRow[];
 
+    // When locations is changed, this will tick up.
+    // Useful for seeing if it's changed.
+    #changeTracker : number;
+
     constructor(settings : Gio.Settings, window : Adw.PreferencesWindow) {
 
         super({
             title: "Locations",
             icon_name: "find-location-symbolic"
         });
+        this.#changeTracker = 0;
         this.#window = window;
         this.#settings = settings;
         this.#config = new Config(settings);
@@ -65,7 +71,10 @@ export class LocationsPage extends Adw.PreferencesPage {
         });
         this.add(this.#locGroup);
 
-        this.#config.onLocationsChanged(this.#guiRefreshList.bind(this));
+        this.#config.onLocationsChanged(() => {
+            this.#changeTracker++;
+            this.#guiRefreshList();
+        });
         this.#config.onMainLocationIndexChanged(this.#guiRefreshChecks.bind(this));
 
         this.#guiRefreshList();
@@ -84,7 +93,6 @@ export class LocationsPage extends Adw.PreferencesPage {
         const inx = this.#config.getMainLocationIndex();
         const locs = this.#config.getLocations();
         for(let i = 0; i < locs.length; i++) {
-            console.error(i);
             const l = locs[i];
             const row = new Adw.ActionRow({
                 title: l.getName(),
@@ -107,7 +115,7 @@ export class LocationsPage extends Adw.PreferencesPage {
                 icon_name: "document-edit-symbolic",
                 valign: Gtk.Align.CENTER
             });
-            editBtn.connect("clicked", this.#editLoc.bind(this, l));
+            editBtn.connect("clicked", this.#editLoc.bind(this, l, permIndex));
             const deleteBtn = new Gtk.Button({
                 icon_name: "edit-delete-symbolic",
                 valign: Gtk.Align.CENTER
@@ -131,20 +139,39 @@ export class LocationsPage extends Adw.PreferencesPage {
         }
     }
 
-    async #editLoc(loc : Location) {
+    #toast(s : string) {
+        const toast = new Adw.Toast({ title: s });
+        this.#window.add_toast(toast);
+    }
+
+    async #editLoc(loc : Location, index : number) {
+        // This lets us know if the locations list has changed
+        const onTracker = this.#changeTracker;
+
         let newLoc;
         try {
             newLoc = await editLocation(this.#window, loc);
         }
         catch(e) {
+            if(e instanceof UserInputError) {
+                this.#toast(e.message);
+                return;
+            }
+
             console.error(e);
-            const toast = new Adw.Toast({ title: "Internal Error" });
-            this.#window.add_toast(toast);
+            this.#toast("Internal Error");
             return;
         }
 
         if(!newLoc) return;
+        // If locations changed then we don't know the state of anything
+        if(onTracker !== this.#changeTracker) {
+            this.#toast("Something else edited the locations.");
+            return;
+        }
+
         const locsArray = this.#config.getLocations();
+        locsArray[index] = newLoc;
         const strArray = locsArray.map(k => k.toString());
         const gVariant = writeGTypeAS(strArray);
         this.#settings.set_value("locations", gVariant);

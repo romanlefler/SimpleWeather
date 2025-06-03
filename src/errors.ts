@@ -22,6 +22,15 @@ export class UnitError extends Error {
 
     constructor(msg? : string) {
         super(msg);
+        this.name = "UnitError";
     }
 
+}
+
+export class UserInputError extends Error {
+
+    constructor(msg? : string) {
+        super(msg);
+        this.name = "UserInputError";
+    }
 }

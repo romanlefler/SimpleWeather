@@ -17,9 +17,15 @@
 
 import Adw from "gi://Adw";
 import Gtk from "gi://Gtk";
-import GLib from "gi://GLib";
 import { Location } from "../location.js";
+import { UserInputError } from "../errors.js";
 
+/**
+ * Shows a dialog to create or edit a location.
+ * @param parent Parent window for dialog
+ * @param loc Location to edit, or undefined to create a blank one
+ * @returns The new location, or null if canceled. Rejects if inputs are invalid.
+ */
 export async function editLocation(parent : Gtk.Window, loc? : Location) : Promise<Location | null> {
     const dialog = new Gtk.Window({
         transient_for: parent,
@@ -39,7 +45,7 @@ export async function editLocation(parent : Gtk.Window, loc? : Location) : Promi
     let coordsText;
     if(!loc) coordsText = "40.7 -73.97";
     else if(loc.isHere()) coordsText = "here";
-    else coordsText = `${loc.lat} ${loc.lon}`;
+    else coordsText = `${loc.lat()} ${loc.lon()}`;
     const coordsRow = new Adw.EntryRow({
         title: "Coordinates",
         text: coordsText
@@ -55,12 +61,33 @@ export async function editLocation(parent : Gtk.Window, loc? : Location) : Promi
         }),
         css_classes: [ "suggested-action" ]
     });
-    dialog.set_titlebar(save);
+    group.add(save);
+    dialog.set_child(group);
+    dialog.set_default_widget(save);
 
     const prom = new Promise<Location | null>((resolve, reject) => {
         save.connect("clicked", () => {
-            // TODO
-            resolve(Location.newHere());
+            const name = nameRow.text;
+            const coords = coordsRow.text;
+
+            if(coords === "here") {
+                console.error(name);
+                resolve(Location.newHere(name || undefined));
+            }
+            else {
+                const parsedCoords = parseCoords(coords);
+                console.error(parsedCoords);
+                if (parsedCoords) {
+                    if (!name) {
+                        reject(new UserInputError("Name is required."));
+                    }
+                    else resolve(Location.newCoords(name, parsedCoords[0], parsedCoords[1]));
+                }
+                else {
+                    reject(new UserInputError("Invalid coordinates entry."));
+                }
+            }
+            dialog.close();
         });
         dialog.connect("close-request", () => {
             dialog.destroy();
@@ -70,4 +97,17 @@ export async function editLocation(parent : Gtk.Window, loc? : Location) : Promi
 
     dialog.show();
     return prom;
+}
+
+function parseCoords(s : string) : [number, number] | null {
+    // e.g. replaces 5,43 with 5.43 for l10n
+    s = s.replace(/(\d)(,)(\d)/g, "$1.$2");
+
+    const split = s.split(" ");
+    if(split.length !== 2) return null;
+
+    const lat = parseFloat(split[0]);
+    const lon = parseFloat(split[1]);
+    if(isNaN(lat) || isNaN(lon)) return null;
+    else return [ lat, lon ];
 }
