@@ -71,12 +71,10 @@ export async function editLocation(parent : Gtk.Window, loc? : Location) : Promi
             const coords = coordsRow.text;
 
             if(coords === "here") {
-                console.error(name);
                 resolve(Location.newHere(name || undefined));
             }
             else {
                 const parsedCoords = parseCoords(coords);
-                console.error(parsedCoords);
                 if (parsedCoords) {
                     if (!name) {
                         reject(new UserInputError("Name is required."));
