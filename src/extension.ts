@@ -27,6 +27,7 @@ import { OpenMeteo } from "./providers/openmeteo.js";
 import { LibSoup } from "./libsoup.js";
 import { Config } from "./config.js";
 import { Weather } from "./weather.js";
+import { delayTask, removeSourceIfTruthy } from "./utils.js";
 
 export default class SimpleWeatherExtension extends Extension {
 
@@ -39,7 +40,10 @@ export default class SimpleWeatherExtension extends Extension {
     #config? : Config;
     #libsoup? : LibSoup;
     #provider? : Provider;
+
     #fetchLoopId? : number;
+    #delayFetchId? : number;
+    #resolverFailCount : number = 0;
 
     enable() {
         this.#gsettings = this.getSettings();
@@ -77,10 +81,8 @@ export default class SimpleWeatherExtension extends Extension {
     }
 
     disable() {
-        if(this.#fetchLoopId) {
-            GLib.source_remove(this.#fetchLoopId);
-            this.#fetchLoopId = undefined;
-        }
+        this.#fetchLoopId = removeSourceIfTruthy(this.#delayFetchId);
+        this.#delayFetchId = removeSourceIfTruthy(this.#delayFetchId);
 
         this.#panelIcon = undefined;
         this.#panelLabel = undefined;
@@ -98,8 +100,18 @@ export default class SimpleWeatherExtension extends Extension {
     }
 
     #updateWeather() {
-        this.#updateWeatherAsync().catch(err => {
+        this.#updateWeatherAsync().then(() => {
+            this.#resolverFailCount = 0;
+        }).catch(err => {
             console.error(err);
+            // This happens on boot presumably when things are loaded
+            // out of order, try max 3 times
+            if(err instanceof Gio.ResolverError && ++this.#resolverFailCount <= 3) {
+                this.#delayFetchId = delayTask(5.0, () => {
+                    this.#delayFetchId = undefined;
+                    this.#updateWeather();
+                });
+            }
         });
         return GLib.SOURCE_CONTINUE;
     }
