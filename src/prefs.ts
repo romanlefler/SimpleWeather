@@ -20,8 +20,17 @@ import Adw from "gi://Adw";
 import { ExtensionPreferences } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
 import { GeneralPage } from "./preferences/generalPage.js";
 import { LocationsPage } from "./preferences/locationsPage.js";
+import { ExtensionMetadata } from "resource:///org/gnome/shell/extensions/extension.js";
+import { AboutPage } from "./preferences/aboutPage.js";
 
 export default class SimpleWeatherPreferences extends ExtensionPreferences {
+
+    readonly #metadata : ExtensionMetadata;
+
+    constructor(metadata : ExtensionMetadata) {
+        super(metadata);
+        this.#metadata = metadata;
+    }
 
     async fillPreferencesWindow(window: Adw.PreferencesWindow): Promise<void> {
         
@@ -30,6 +39,7 @@ export default class SimpleWeatherPreferences extends ExtensionPreferences {
 
         window.add(new GeneralPage(settings));
         window.add(new LocationsPage(settings, window));
+        window.add(new AboutPage(settings, this.#metadata));
 
     }
 
