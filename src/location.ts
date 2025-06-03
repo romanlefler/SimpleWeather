@@ -47,9 +47,11 @@ export class Location {
     getCoordsString() {
         const isNorth = this.#lat! >= 0;
         const isEast = this.#lon! >= 0;
-        const lat = isNorth ? "%f N" : "%f S";
-        const lon = isEast ? "%f E" : "%f W";
-        return `${lat.format(this.#lat?.toLocaleString())} ${lon.format(this.#lon?.toLocaleString())}`;
+        const latFmt = isNorth ? "%f N" : "%f S";
+        const lonFmt = isEast ? "%f E" : "%f W";
+        const latStr = Math.abs(this.#lat!).toLocaleString();
+        const lonStr = Math.abs(this.#lon!).toLocaleString();
+        return `${latFmt.format(latStr)} ${lonFmt.format(lonStr)}`;
     }
 
     toString() {
