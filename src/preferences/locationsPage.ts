@@ -65,6 +65,12 @@ export class LocationsPage extends Adw.PreferencesPage {
                 label: "Add"
             })
         });
+        addButton.connect("clicked", () => {
+            this.#editLoc(null, -1).catch(e => {
+                console.error(e);
+                this.#toastError(e);
+            });
+        });
         this.#locGroup = new Adw.PreferencesGroup({
             title: "Locations",
             header_suffix: addButton
@@ -117,7 +123,10 @@ export class LocationsPage extends Adw.PreferencesPage {
                 valign: Gtk.Align.CENTER
             });
             editBtn.connect("clicked", () => {
-                this.#editLoc(l, permIndex).catch(console.error);
+                this.#editLoc(l, permIndex).catch(e => {
+                    console.error(e);
+                    this.#toastError(e);
+                });
             });
             const deleteBtn = new Gtk.Button({
                 icon_name: "edit-delete-symbolic",
@@ -148,13 +157,18 @@ export class LocationsPage extends Adw.PreferencesPage {
         this.#window.add_toast(toast);
     }
 
-    async #editLoc(loc : Location, index : number) {
+    #toastError(e : any) {
+        if(e instanceof Error) this.#toast("Internal Error: %s".format(e.name));
+        else this.#toast("Internal Error");
+    }
+
+    async #editLoc(loc : Location | null, index : number) {
         // This lets us know if the locations list has changed
         const onTracker = this.#changeTracker;
 
         let newLoc;
         try {
-            newLoc = await editLocation(this.#window, loc);
+            newLoc = await editLocation(this.#window, loc ?? undefined);
         }
         catch(e) {
             if(e instanceof UserInputError) {
@@ -163,7 +177,7 @@ export class LocationsPage extends Adw.PreferencesPage {
             }
 
             console.error(e);
-            this.#toast("Internal Error");
+            this.#toastError(e);
             return;
         }
 
@@ -175,7 +189,9 @@ export class LocationsPage extends Adw.PreferencesPage {
         }
 
         const locsArray = this.#config.getLocations();
-        locsArray[index] = newLoc;
+        if(loc) locsArray[index] = newLoc;
+        else locsArray.push(newLoc);
+
         const strArray = locsArray.map(k => k.toString());
         const gVariant = writeGTypeAS(strArray);
         this.#settings.set_value("locations", gVariant);
