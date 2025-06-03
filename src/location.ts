@@ -47,8 +47,8 @@ export class Location {
     getCoordsString() {
         const isNorth = this.#lat! >= 0;
         const isEast = this.#lon! >= 0;
-        const latFmt = isNorth ? "%f N" : "%f S";
-        const lonFmt = isEast ? "%f E" : "%f W";
+        const latFmt = isNorth ? "%f\u00B0N" : "%f\u00B0S";
+        const lonFmt = isEast ? "%f\u00B0E" : "%f\u00B0W";
         const latStr = Math.abs(this.#lat!).toLocaleString();
         const lonStr = Math.abs(this.#lon!).toLocaleString();
         return `${latFmt.format(latStr)} ${lonFmt.format(lonStr)}`;
