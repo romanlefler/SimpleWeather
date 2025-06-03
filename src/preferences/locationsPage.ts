@@ -27,7 +27,7 @@ import { Location } from "../location.js";
 import { UserInputError } from "../errors.js";
 
 const ICON_SELECTED = "radio-checked-symbolic";
-const ICON_NOT_SELECTED = "radio-checked-symbolic";
+const ICON_NOT_SELECTED = "radio-symbolic";
 
 export class LocationsPage extends Adw.PreferencesPage {
 
