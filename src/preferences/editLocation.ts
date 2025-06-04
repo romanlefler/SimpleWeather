@@ -62,7 +62,8 @@ export async function editLocation(parent : Gtk.Window, loc? : Location) : Promi
         css_classes: [ "suggested-action" ]
     });
     group.add(save);
-    dialog.set_child(group);
+    page.add(group);
+    dialog.set_child(page);
     dialog.set_default_widget(save);
 
     const prom = new Promise<Location | null>((resolve, reject) => {
