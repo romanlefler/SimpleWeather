@@ -83,7 +83,7 @@ export default class SimpleWeatherExtension extends Extension {
     }
 
     disable() {
-        this.#fetchLoopId = removeSourceIfTruthy(this.#delayFetchId);
+        this.#fetchLoopId = removeSourceIfTruthy(this.#fetchLoopId);
         this.#delayFetchId = removeSourceIfTruthy(this.#delayFetchId);
 
         this.#panelIcon = undefined;
