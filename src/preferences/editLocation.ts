@@ -45,7 +45,10 @@ export async function editLocation(parent : Gtk.Window, loc? : Location) : Promi
     let coordsText;
     if(!loc) coordsText = "40.7 -73.97";
     else if(loc.isHere()) coordsText = "here";
-    else coordsText = `${loc.lat()} ${loc.lon()}`;
+    else {
+        const latLon = await loc.latLon();
+        coordsText = `${latLon.lat} ${latLon.lon}`;
+    }
     const coordsRow = new Adw.EntryRow({
         title: "Coordinates",
         text: coordsText

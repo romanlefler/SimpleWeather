@@ -34,3 +34,12 @@ export class UserInputError extends Error {
         this.name = "UserInputError";
     }
 }
+
+export class NoLocServiceError extends Error {
+
+    constructor(msg? : string) {
+        super(msg);
+        this.name = "NoLocServiceError";
+    }
+
+}

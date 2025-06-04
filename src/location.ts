@@ -1,5 +1,28 @@
+/*
+    Copyright 2025 Roman Lefler
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+import { getMyLoc } from "./myLocation.js";
 
 const latlonRegex = /^([0-9]+\.?[0-9]*),([0-9]+\.?[0-9]*)$/;
+
+export interface LatLon {
+    lat : number;
+    lon : number;
+}
 
 export class Location {
 
@@ -36,14 +59,9 @@ export class Location {
         return this.#isHere;
     }
 
-    lat() : number {
-        if(typeof this.#lat !== "number") throw new Error("Can't get latitude.");
-        return this.#lat;
-    }
-
-    lon() : number {
-        if(typeof this.#lon !== "number") throw new Error("Can't get longitude.");
-        return this.#lon;
+    async latLon() : Promise<LatLon> {
+        if(this.#isHere) return await getMyLoc();
+        else return { lat: this.#lat!, lon: this.#lon! };
     }
 
     getCoordsString() {

@@ -38,12 +38,11 @@ export class OpenMeteo implements Provider {
     async #fetch() : Promise<any> {
 
         const loc = this.#config.getMainLocation();
-        const lat = loc.lat();
-        const lon = loc.lon();
+        const coords = await loc.latLon();
 
         const params = {
-            latitude: String(lat),
-            longitude: String(lon),
+            latitude: String(coords.lat),
+            longitude: String(coords.lon),
             current: "temperature_2m,weather_code,is_day",
             temperature_unit: "fahrenheit"
         };
