@@ -37,7 +37,6 @@ export class GeneralPage extends Adw.PreferencesPage {
             title: "Units",
             description: "Configure units of measurement"
         });
-        this.add(group);
 
         const tempUnits = new Gtk.StringList();
         tempUnits.append("Fahrenheit");
@@ -52,6 +51,22 @@ export class GeneralPage extends Adw.PreferencesPage {
             settings.apply();
         });
         group.add(tempRow);
+
+        const myLocProvs = new Gtk.StringList();
+        myLocProvs.append("Online - IPinfo");
+        myLocProvs.append("System - Geoclue");
+        const myLocRow = new Adw.ComboRow({
+            title: "My Location Provider",
+            model: myLocProvs,
+            selected: settings.get_enum("my-loc-provider") - 1
+        });
+        myLocRow.connect("notify::selected", () => {
+            settings.set_enum("my-loc-provider", myLocRow.selected + 1);
+            settings.apply();
+        });
+        group.add(myLocRow);
+
+        this.add(group);
 
     }
 
