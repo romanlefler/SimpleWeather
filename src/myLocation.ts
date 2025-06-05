@@ -20,38 +20,52 @@ import Geoclue from "gi://Geoclue";
 
 import { LatLon } from "./location.js";
 import { NoLocServiceError } from "./errors.js";
+import { LibSoup } from "./libsoup.js";
+import { Config } from "./config.js";
+
+let soup : LibSoup;
+let config : Config;
 
 let cachedMyLoc : LatLon | null = null;
-let isGettingLoc : boolean = false;
+let isGettingLoc : Promise<LatLon> | null = null;
 let lastGotTime : Date = new Date(0);
 
-function cloneLatLon(loc : LatLon) {
-    return { lat: loc.lat, lon: loc.lon };
+function cloneCache() : LatLon {
+    return {
+        lat: cachedMyLoc!.lat,
+        lon: cachedMyLoc!.lon
+    };
 }
-
-export async function getMyLoc() : Promise<LatLon> {
-    if(cachedMyLoc) {
+    
+export async function getMyLocation() : Promise<LatLon> {
+    if (cachedMyLoc) {
         const diffMin = (Date.now() - lastGotTime.getTime()) / 1000 / 60;
-        // refresh every 10 min
-        if(diffMin < 10.0) return cloneLatLon(cachedMyLoc);
+        // TODO: This should be a setting
+        // refresh every 60 min
+        if (diffMin < 60.0) return cloneCache();
     }
 
-    isGettingLoc = true;
     try {
-        cachedMyLoc = await geoclueGetLoc();
+        // This allows us to not wait for two or more different
+        // async requests
+        if(!isGettingLoc) isGettingLoc = geoclueGetLoc();
+
+        cachedMyLoc = await isGettingLoc;
     }
-    catch(e) {
+    catch (e) {
         console.error(e);
     }
-    isGettingLoc = false;
+    isGettingLoc = null;
     lastGotTime = new Date();
 
-    if(cachedMyLoc) return cachedMyLoc;
+    if (cachedMyLoc) return cachedMyLoc;
 
     throw new Error("Failed to get My Location.");
 }
 
-async function geoclueGetLoc() : Promise<LatLon> {
+// Geoclue will no longer work for most users since Mozilla
+// has disconitnued their geolocation service
+async function geoclueGetLoc() : Promise <LatLon> {
     return new Promise<LatLon>((resolve, reject) => {
         Geoclue.Simple.new(
             "simpleweather",
@@ -63,9 +77,9 @@ async function geoclueGetLoc() : Promise<LatLon> {
                     let simple = Geoclue.Simple.new_finish(result);
                     loc = simple.get_location();
                 }
-                catch(e : any) {
-                    if(e.message &&
-                    e.message.includes("org.freedesktop.DBus.Error.AccessDenied")) {
+                catch (e : any) {
+                    if (e.message &&
+                        e.message.includes("org.freedesktop.DBus.Error.AccessDenied")) {
                         reject(new NoLocServiceError());
                         return;
                     }

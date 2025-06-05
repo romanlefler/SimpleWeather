@@ -15,7 +15,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { getMyLoc } from "./myLocation.js";
+import { getMyLocation } from "./myLocation.js";
 
 const latlonRegex = /^([0-9]+\.?[0-9]*),([0-9]+\.?[0-9]*)$/;
 
@@ -60,7 +60,7 @@ export class Location {
     }
 
     async latLon() : Promise<LatLon> {
-        if(this.#isHere) return await getMyLoc();
+        if(this.#isHere) return await getMyLocation();
         else return { lat: this.#lat!, lon: this.#lon! };
     }
 
