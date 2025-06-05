@@ -33,7 +33,7 @@ export class GeneralPage extends Adw.PreferencesPage {
             icon_name: "preferences-system-symbolic"
         });
 
-        const group = new Adw.PreferencesGroup({
+        const unitGroup = new Adw.PreferencesGroup({
             title: "Units",
             description: "Configure units of measurement"
         });
@@ -50,13 +50,21 @@ export class GeneralPage extends Adw.PreferencesPage {
             settings.set_enum("temp-unit", tempRow.selected + 1);
             settings.apply();
         });
-        group.add(tempRow);
+        unitGroup.add(tempRow);
+
+        this.add(unitGroup);
+
+        const myLocGroup = new Adw.PreferencesGroup({
+            title: "My Location",
+            description: "Configure how your location is found"
+        });
 
         const myLocProvs = new Gtk.StringList();
         myLocProvs.append("Online - IPinfo");
         myLocProvs.append("System - Geoclue");
+        myLocProvs.append("Disable");
         const myLocRow = new Adw.ComboRow({
-            title: "My Location Provider",
+            title: "Provider",
             model: myLocProvs,
             selected: settings.get_enum("my-loc-provider") - 1
         });
@@ -64,9 +72,25 @@ export class GeneralPage extends Adw.PreferencesPage {
             settings.set_enum("my-loc-provider", myLocRow.selected + 1);
             settings.apply();
         });
-        group.add(myLocRow);
+        myLocGroup.add(myLocRow);
 
-        this.add(group);
+        const myLocRefresh = new Adw.SpinRow({
+            title: "Refresh Interval (Minutes)",
+            adjustment: new Gtk.Adjustment({
+                lower: 10.0,
+                upper: 10000,
+                step_increment: 5.0,
+                page_increment: 30.0,
+                value: settings.get_double("my-loc-refresh-min")
+            }),
+        });
+        myLocRefresh.connect("notify::value", () => {
+            settings.set_double("my-loc-refresh-min", myLocRefresh.value);
+            settings.apply();
+        });
+        myLocGroup.add(myLocRefresh);
+
+        this.add(myLocGroup);
 
     }
 

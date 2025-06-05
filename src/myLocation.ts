@@ -32,7 +32,8 @@ let lastGotTime : Date = new Date(0);
 
 export enum MyLocationProvider {
     IpInfoIo = 1,
-    Geoclue = 2
+    Geoclue = 2,
+    Disable = 3
 }
 
 function cloneCache() : LatLon {
@@ -59,7 +60,7 @@ export async function getMyLocation() : Promise<LatLon> {
         const diffMin = (Date.now() - lastGotTime.getTime()) / 1000 / 60;
         // TODO: This should be a setting
         // refresh every 60 min
-        if (diffMin < 60.0) return cloneCache();
+        if (diffMin < config.getMyLocationRefreshMin()) return cloneCache();
     }
 
     try {
@@ -73,6 +74,8 @@ export async function getMyLocation() : Promise<LatLon> {
                 case MyLocationProvider.Geoclue:
                     isGettingLoc = geoclueGetLoc();
                     break;
+                case MyLocationProvider.Disable:
+                    throw new Error("My Location Disabled");
             }
         }
 

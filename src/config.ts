@@ -114,6 +114,12 @@ export class Config {
         else return val;
     }
 
+    getMyLocationRefreshMin() : number {
+        const val = this.#settings!.get_double("my-loc-refresh-min");
+        if(val < 10.0) return 10.0;
+        else return val;
+    }
+
 }
 
 function readGTypeAS(gvariant : GLib.Variant<any>) : string[] {
