@@ -30,6 +30,11 @@ let cachedMyLoc : LatLon | null = null;
 let isGettingLoc : Promise<LatLon> | null = null;
 let lastGotTime : Date = new Date(0);
 
+export enum MyLocationProvider {
+    IpInfoIo = 1,
+    Geoclue = 2
+}
+
 function cloneCache() : LatLon {
     return {
         lat: cachedMyLoc!.lat,
@@ -60,7 +65,16 @@ export async function getMyLocation() : Promise<LatLon> {
     try {
         // This allows us to not wait for two or more different
         // async requests
-        if(!isGettingLoc) isGettingLoc = ipinfoGetLoc();
+        if(!isGettingLoc) {
+            switch(config.getMyLocationProvider()) {
+                case MyLocationProvider.IpInfoIo:
+                    isGettingLoc = ipinfoGetLoc();
+                    break;
+                case MyLocationProvider.Geoclue:
+                    isGettingLoc = geoclueGetLoc();
+                    break;
+            }
+        }
 
         cachedMyLoc = await isGettingLoc;
     }

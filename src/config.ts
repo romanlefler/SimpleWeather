@@ -19,6 +19,7 @@ import GLib from "gi://GLib";
 import Gio from "gi://Gio";
 import { TempUnits } from "./units.js";
 import { Location } from "./location.js";
+import { MyLocationProvider } from "./myLocation.js";
 
 export class Config {
 
@@ -105,6 +106,12 @@ export class Config {
             if(key === "main-location-index") callback();
         });
         this.#handlerIds.push(id);
+    }
+
+    getMyLocationProvider() : MyLocationProvider {
+        const val = this.#settings!.get_enum("my-loc-provider");
+        if(val > 2 || val < 1) return 1;
+        else return val;
     }
 
 }

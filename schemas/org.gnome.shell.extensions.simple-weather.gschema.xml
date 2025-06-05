@@ -4,6 +4,10 @@
         <value value="1" nick="fahrenheit" />
         <value value="2" nick="celsius" />
     </enum>
+    <enum id="org.gnome.shell.extensions.simple-weather.my-loc-provider">
+        <value value="1" nick="ipinfo.io" />
+        <value value="2" nick="geoclue" />
+    </enum>
     <schema id="org.gnome.shell.extensions.simple-weather" path="/org/gnome/shell/extensions/simple-weather/">
 
         <key name="is-activated" type="b">
@@ -28,6 +32,11 @@
         <key name="temp-unit" enum="org.gnome.shell.extensions.simple-weather.temp-unit">
             <default>'fahrenheit'</default>
             <summary>Temperature Unit</summary>
+        </key>
+
+        <key name="my-loc-provider" enum="org.gnome.shell.extensions.simple-weather.my-loc-provider">
+            <default>'ipinfo.io'</default>
+            <summary>My Location Provider</summary>
         </key>
 
     </schema>
