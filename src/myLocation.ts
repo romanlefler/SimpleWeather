@@ -54,7 +54,7 @@ export async function getMyLoc() : Promise<LatLon> {
 async function geoclueGetLoc() : Promise<LatLon> {
     return new Promise<LatLon>((resolve, reject) => {
         Geoclue.Simple.new(
-            "SimpleWeather",
+            "simpleweather",
             Geoclue.AccuracyLevel.NEIGHBORHOOD,
             null,
             (_ : any, result : any) => {
