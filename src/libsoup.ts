@@ -53,6 +53,7 @@ export class LibSoup {
 
         const paramsEncoded = Soup.form_encode_hash(params);
         const msg = Soup.Message.new_from_encoded_form("GET", url, paramsEncoded);
+        msg.request_headers.append("Accept", "application/json");
 
         return new Promise((resolve, reject) => {
             sess.send_and_read_async(
