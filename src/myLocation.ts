@@ -36,6 +36,18 @@ function cloneCache() : LatLon {
         lon: cachedMyLoc!.lon
     };
 }
+
+export function setUpMyLocation(inSoup : LibSoup, inConfig : Config) : void {
+    soup = inSoup;
+    config = inConfig;
+}
+
+export function freeMyLocation() {
+    // @ts-ignore
+    soup = undefined;
+    // @ts-ignore
+    config = undefined;
+}
     
 export async function getMyLocation() : Promise<LatLon> {
     if (cachedMyLoc) {
@@ -48,7 +60,7 @@ export async function getMyLocation() : Promise<LatLon> {
     try {
         // This allows us to not wait for two or more different
         // async requests
-        if(!isGettingLoc) isGettingLoc = geoclueGetLoc();
+        if(!isGettingLoc) isGettingLoc = ipinfoGetLoc();
 
         cachedMyLoc = await isGettingLoc;
     }
@@ -61,6 +73,21 @@ export async function getMyLocation() : Promise<LatLon> {
     if (cachedMyLoc) return cachedMyLoc;
 
     throw new Error("Failed to get My Location.");
+}
+
+async function ipinfoGetLoc() : Promise<LatLon> {
+    const params = {
+        token: "c9ff6ef8fa57bd" // don't look
+    };
+    const resp = await soup.fetchJson("https://ipinfo.io/json", params);
+    if(Math.floor(resp.status / 100) !== 2) throw new Error(`ipinfo.io responded with error ${resp.status}.`);
+
+    const body = resp.body;
+    const coords = body.loc.split(",");
+    return {
+        lat: parseFloat(coords[0]),
+        lon: parseFloat(coords[1])
+    };
 }
 
 // Geoclue will no longer work for most users since Mozilla

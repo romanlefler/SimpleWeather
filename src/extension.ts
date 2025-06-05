@@ -28,6 +28,7 @@ import { LibSoup } from "./libsoup.js";
 import { Config } from "./config.js";
 import { Weather } from "./weather.js";
 import { delayTask, removeSourceIfTruthy } from "./utils.js";
+import { freeMyLocation, setUpMyLocation } from "./myLocation.js";
 
 export default class SimpleWeatherExtension extends Extension {
 
@@ -50,6 +51,7 @@ export default class SimpleWeatherExtension extends Extension {
         this.#config = new Config(this.#gsettings);
         this.#libsoup = new LibSoup();
         this.#provider = new OpenMeteo(this.#libsoup, this.#config);
+        setUpMyLocation(this.#libsoup, this.#config);
 
         this.#indicator = new PanelMenu.Button(0.0, "Weather", false);
 
@@ -97,6 +99,7 @@ export default class SimpleWeatherExtension extends Extension {
         this.#config?.free();
         this.#config = undefined;
 
+        freeMyLocation();
         this.#provider = undefined;
         this.#cachedWeather = undefined;
     }
