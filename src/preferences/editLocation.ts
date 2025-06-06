@@ -19,6 +19,7 @@ import Adw from "gi://Adw";
 import Gtk from "gi://Gtk";
 import { Location } from "../location.js";
 import { UserInputError } from "../errors.js";
+import { gettext as _g } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
 
 /**
  * Shows a dialog to create or edit a location.
@@ -29,13 +30,13 @@ import { UserInputError } from "../errors.js";
 export async function editLocation(parent : Gtk.Window, loc? : Location) : Promise<Location | null> {
     const dialog = new Gtk.Window({
         transient_for: parent,
-        title: loc ? "Edit %s".format(loc.getName()) : "New Location",
+        title: loc ? _g("Edit %s".format(loc.getName())) : _g("New Location"),
         modal: true,
     });
     const page = new Adw.PreferencesPage();
     const group = new Adw.PreferencesGroup();
     const nameRow = new Adw.EntryRow({
-        title: "Name",
+        title: _g("Name"),
         text: loc?.getRawName() ?? ""
     });
 
@@ -50,7 +51,7 @@ export async function editLocation(parent : Gtk.Window, loc? : Location) : Promi
         coordsText = `${latLon.lat} ${latLon.lon}`;
     }
     const coordsRow = new Adw.EntryRow({
-        title: "Coordinates",
+        title: _g("Coordinates"),
         text: coordsText
     });
 
@@ -60,7 +61,7 @@ export async function editLocation(parent : Gtk.Window, loc? : Location) : Promi
     const save = new Gtk.Button({
         child: new Adw.ButtonContent({
             icon_name: "document-save-symbolic",
-            label: "Save"
+            label: _g("Save")
         }),
         css_classes: [ "suggested-action" ]
     });
@@ -81,12 +82,12 @@ export async function editLocation(parent : Gtk.Window, loc? : Location) : Promi
                 const parsedCoords = parseCoords(coords);
                 if (parsedCoords) {
                     if (!name) {
-                        reject(new UserInputError("Name is required."));
+                        reject(new UserInputError(_g("Name is required.")));
                     }
                     else resolve(Location.newCoords(name, parsedCoords[0], parsedCoords[1]));
                 }
                 else {
-                    reject(new UserInputError("Invalid coordinates entry."));
+                    reject(new UserInputError(_g("Invalid coordinates entry.")));
                 }
             }
             dialog.close();

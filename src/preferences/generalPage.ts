@@ -19,6 +19,7 @@ import GObject from "gi://GObject";
 import Gtk from "gi://Gtk";
 import Gio from "gi://Gio";
 import Adw from "gi://Adw";
+import { gettext as _g } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
 
 export class GeneralPage extends Adw.PreferencesPage {
 
@@ -29,7 +30,7 @@ export class GeneralPage extends Adw.PreferencesPage {
     constructor(settings : Gio.Settings) {
 
         super({
-            title: "General",
+            title: _g("General"),
             icon_name: "preferences-system-symbolic"
         });
 
@@ -39,8 +40,8 @@ export class GeneralPage extends Adw.PreferencesPage {
         });
 
         const tempUnits = new Gtk.StringList();
-        tempUnits.append("Fahrenheit");
-        tempUnits.append("Celsius");
+        tempUnits.append(_g("Fahrenheit"));
+        tempUnits.append(_g("Celsius"));
         const tempRow = new Adw.ComboRow({
             title: "Temperature",
             model: tempUnits,
@@ -55,14 +56,14 @@ export class GeneralPage extends Adw.PreferencesPage {
         this.add(unitGroup);
 
         const myLocGroup = new Adw.PreferencesGroup({
-            title: "My Location",
-            description: "Configure how your location is found"
+            title: _g("My Location"),
+            description: _g("Configure how your location is found")
         });
 
         const myLocProvs = new Gtk.StringList();
-        myLocProvs.append("Online - IPinfo");
-        myLocProvs.append("System - Geoclue");
-        myLocProvs.append("Disable");
+        myLocProvs.append(`${_g("Online")} - IPinfo`);
+        myLocProvs.append(`${_g("System")} - Geoclue`);
+        myLocProvs.append(_g("Disable"));
         const myLocRow = new Adw.ComboRow({
             title: "Provider",
             model: myLocProvs,
@@ -75,7 +76,7 @@ export class GeneralPage extends Adw.PreferencesPage {
         myLocGroup.add(myLocRow);
 
         const myLocRefresh = new Adw.SpinRow({
-            title: "Refresh Interval (Minutes)",
+            title: _g("Refresh Interval (Minutes)"),
             adjustment: new Gtk.Adjustment({
                 lower: 10.0,
                 upper: 10000,

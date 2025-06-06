@@ -3,18 +3,19 @@ NAME    := simple-weather
 UUID  := $(shell awk -F'"' '/uuid/ { print $$4 }' ./static/metadata.json)
 VERSION := $(shell awk -F'"' '/version-name/ { print $$4 }' ./static/metadata.json)
 
-STATIC  := ./static
-SCHEMAS := ./schemas
-SRC     := ./src
-DIST    := ./dist
-BUILD   := $(DIST)/build
+STATIC       := ./static
+SCHEMAS      := ./schemas
+SRC          := ./src
+DIST         := ./dist
+BUILD        := $(DIST)/build
 SCHEMAOUTDIR := $(BUILD)/schemas
+PO			 := ./po
 
 METADATA   := $(STATIC)/metadata.json
 STYLESHEET := $(STATIC)/stylesheet.css
 SCHEMASRC  := $(SCHEMAS)/org.gnome.shell.extensions.$(NAME).gschema.xml
 # This excludes .d.ts files
-SRCS       := $(wildcard $(SRC)/*[!.d].ts)
+SRCS       := $(shell find $(SRC) -type f -name '*.ts' ! -name '*.d.ts')
 
 SCHEMAOUT    := $(SCHEMAOUTDIR)/gschemas.compiled
 SCHEMACP     := $(SCHEMAOUTDIR)/org.gnome.shell.extensions.$(NAME).gschema.xml
@@ -22,12 +23,15 @@ METADATACP   := $(BUILD)/metadata.json
 STYLESHEETCP := $(BUILD)/stylesheet.css
 JSOUT        := $(SRCS:$(SRC)/%.ts=$(BUILD)/%.js)
 ZIP		     := $(DIST)/$(NAME)-v$(VERSION).zip
+POT			 := $(PO)/$(UUID).pot
 
 .PHONY: out pack install clean
 
-out: $(JSOUT) $(SCHEMAOUT) $(SCHEMACP) $(METADATACP) $(STYLESHEETCP)
+out: $(POT) $(JSOUT) $(SCHEMAOUT) $(SCHEMACP) $(METADATACP) $(STYLESHEETCP)
 
 pack: $(ZIP)
+
+pot: $(POT)
 
 install: out
 	rm -rf ~/.local/share/gnome-shell/extensions/$(UUID)
@@ -36,6 +40,7 @@ install: out
 
 clean:
 	rm -rf $(DIST)
+	rm $(POT)
 
 node_modules: package.json
 	printf -- 'NEEDED: npm\n'
@@ -61,6 +66,15 @@ $(METADATACP): $(METADATA)
 $(STYLESHEETCP): $(STYLESHEET)
 	mkdir -p $(BUILD)
 	cp $(STYLESHEET) $(STYLESHEETCP)
+
+$(POT): $(SRCS)
+	printf -- 'NEEDED: xgettext\n'
+	mkdir -p $(PO)
+	xgettext --from-code=UTF-8 -o $(POT) -k_g -k_p -F \
+		-L TypeScript --copyright-holder='Roman Lefler' \
+		--package-name=$(UUID) --package-version=$(VERSION) \
+		--msgid-bugs-address=simpleweather-gnome@proton.me \
+		$(SRCS)
 
 $(ZIP): out
 	printf -- 'NEEDED: zip\n'

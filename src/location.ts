@@ -15,6 +15,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import { gettext as _g } from "./gettext.js";
 import { getMyLocation } from "./myLocation.js";
 
 const latlonRegex = /^([0-9]+\.?[0-9]*),([0-9]+\.?[0-9]*)$/;
@@ -44,7 +45,7 @@ export class Location {
     }
 
     getName() : string {
-        return this.#name ?? "My Location";
+        return this.#name ?? _g("My Location");
     }
 
     getRawName() : string | null {
@@ -52,7 +53,7 @@ export class Location {
     }
 
     getDescription() : string {
-        return this.#isHere ? "My Location" : this.getCoordsString();
+        return this.#isHere ? _g("My Location") : this.getCoordsString();
     }
 
     isHere() : boolean {
@@ -67,8 +68,8 @@ export class Location {
     getCoordsString() {
         const isNorth = this.#lat! >= 0;
         const isEast = this.#lon! >= 0;
-        const latFmt = isNorth ? "%f\u00B0N" : "%f\u00B0S";
-        const lonFmt = isEast ? "%f\u00B0E" : "%f\u00B0W";
+        const latFmt = isNorth ? _g("%f\u00B0N") : _g("%f\u00B0S");
+        const lonFmt = isEast ? _g("%f\u00B0E") : _g("%f\u00B0W");
         const latStr = Math.abs(this.#lat!).toLocaleString();
         const lonStr = Math.abs(this.#lon!).toLocaleString();
         return `${latFmt.format(latStr)} ${lonFmt.format(lonStr)}`;

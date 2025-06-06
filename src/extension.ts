@@ -29,6 +29,8 @@ import { Config } from "./config.js";
 import { Weather } from "./weather.js";
 import { delayTask, removeSourceIfTruthy } from "./utils.js";
 import { freeMyLocation, setUpMyLocation } from "./myLocation.js";
+import { setUpGettext } from "./gettext.js";
+import { gettext as shellGettext } from "resource:///org/gnome/shell/extensions/extension.js";
 
 export default class SimpleWeatherExtension extends Extension {
 
@@ -47,6 +49,7 @@ export default class SimpleWeatherExtension extends Extension {
     #resolverFailCount : number = 0;
 
     enable() {
+        setUpGettext(shellGettext);
         this.#gsettings = this.getSettings();
         this.#config = new Config(this.#gsettings);
         this.#libsoup = new LibSoup();

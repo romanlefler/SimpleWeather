@@ -20,6 +20,7 @@ import Gtk from "gi://Gtk";
 import Gio from "gi://Gio";
 import Adw from "gi://Adw";
 import { ExtensionMetadata } from "resource:///org/gnome/shell/extensions/extension.js";
+import { gettext as _g } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
 
 function md(s : string, classes? : string[]) : Gtk.Label {
     const props : Partial<Gtk.Label.ConstructorProps> = {
@@ -39,7 +40,7 @@ export class AboutPage extends Adw.PreferencesPage {
     constructor(settings : Gio.Settings, metadata : ExtensionMetadata) {
 
         super({
-            title: "About",
+            title: _g("About"),
             icon_name: "help-about-symbolic"
         });
 
@@ -50,17 +51,17 @@ export class AboutPage extends Adw.PreferencesPage {
         topBox.append(md("SimpleWeather for GNOME", [ "simpleweather-h1" ]));
         topBox.append(md("Roman Lefler", [ "simpleweather-h2" ]));
         topBox.append(md(
-            `<a href=\"https://github.com/romanlefler/SimpleWeather\">${"GitHub Repository"}</a>`,
+            `<a href=\"https://github.com/romanlefler/SimpleWeather\">${_g("GitHub Repository")}</a>`,
         ));
         topGroup.add(topBox);
         this.add(topGroup);
 
         const infoGroup = new Adw.PreferencesGroup();
         const versionRow = new Adw.ActionRow({
-            title: "SimpleWeather Version"
+            title: _g("SimpleWeather Version")
         });
         versionRow.add_suffix(new Gtk.Label({
-            label: metadata["version-name"] ?? "Unknown"
+            label: metadata["version-name"] ?? _g("Unknown")
         }));
         infoGroup.add(versionRow);
         this.add(infoGroup);
@@ -71,7 +72,7 @@ export class AboutPage extends Adw.PreferencesPage {
         });
         const owrLink = "<a href=\"https://github.com/penguin-teal/gnome-openweather\">OpenWeather Refined</a>";
         bottomBox.append(md(
-            "This extension is a rewrite of the %s project.".format(owrLink)
+            _g("This extension is a rewrite of the %s project.").format(owrLink)
         ));
         bottomGroup.add(bottomBox);
         this.add(bottomGroup);

@@ -4,6 +4,7 @@
     "uuid": "simple-weather@romanlefler.github.io",
     "url": "https://github.com/romanlefler/SimpleWeather",
     "settings-schema": "org.gnome.shell.extensions.simple-weather",
+    "gettext-domain": "simple-weather@romanlefler.github.io",
     "shell-version": [
         "48"
     ],

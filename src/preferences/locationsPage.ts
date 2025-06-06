@@ -25,6 +25,7 @@ import { Config, writeGTypeAS } from "../config.js";
 import { editLocation } from "./editLocation.js";
 import { Location } from "../location.js";
 import { UserInputError } from "../errors.js";
+import { gettext as _g } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
 
 const ICON_SELECTED = "radio-checked-symbolic";
 const ICON_NOT_SELECTED = "radio-symbolic";
@@ -49,7 +50,7 @@ export class LocationsPage extends Adw.PreferencesPage {
     constructor(settings : Gio.Settings, window : Adw.PreferencesWindow) {
 
         super({
-            title: "Locations",
+            title: _g("Locations"),
             icon_name: "find-location-symbolic"
         });
         this.#changeTracker = 0;
@@ -62,7 +63,7 @@ export class LocationsPage extends Adw.PreferencesPage {
         const addButton = new Gtk.Button({
             child: new Adw.ButtonContent({
                 icon_name: "list-add-symbolic",
-                label: "Add"
+                label: _g("Add")
             })
         });
         addButton.connect("clicked", () => {
@@ -72,7 +73,7 @@ export class LocationsPage extends Adw.PreferencesPage {
             });
         });
         this.#locGroup = new Adw.PreferencesGroup({
-            title: "Locations",
+            title: _g("Locations"),
             header_suffix: addButton
         });
         this.add(this.#locGroup);
@@ -158,8 +159,8 @@ export class LocationsPage extends Adw.PreferencesPage {
     }
 
     #toastError(e : any) {
-        if(e instanceof Error) this.#toast("Internal Error: %s".format(e.name));
-        else this.#toast("Internal Error");
+        if(e instanceof Error) this.#toast(_g("Internal Error: %s").format(e.name));
+        else this.#toast(_g("Internal Error"));
     }
 
     async #editLoc(loc : Location | null, index : number) {
@@ -184,7 +185,7 @@ export class LocationsPage extends Adw.PreferencesPage {
         if(!newLoc) return;
         // If locations changed then we don't know the state of anything
         if(onTracker !== this.#changeTracker) {
-            this.#toast("Something else edited the locations.");
+            this.#toast(_g("Something else edited the locations."));
             return;
         }
 

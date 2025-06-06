@@ -22,6 +22,8 @@ import { GeneralPage } from "./preferences/generalPage.js";
 import { LocationsPage } from "./preferences/locationsPage.js";
 import { ExtensionMetadata } from "resource:///org/gnome/shell/extensions/extension.js";
 import { AboutPage } from "./preferences/aboutPage.js";
+import { setUpGettext } from "./gettext.js";
+import { gettext as prefsGettext } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
 
 export default class SimpleWeatherPreferences extends ExtensionPreferences {
 
@@ -33,7 +35,8 @@ export default class SimpleWeatherPreferences extends ExtensionPreferences {
     }
 
     async fillPreferencesWindow(window: Adw.PreferencesWindow): Promise<void> {
-        
+        setUpGettext(prefsGettext);
+
         const settings = this.getSettings();
         settings.delay();
 
