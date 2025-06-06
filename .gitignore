@@ -3,4 +3,4 @@ build/
 dist/
 
 node_modules/
-po/simple-weather@romanlefler.github.io
+po/simple-weather@romanlefler.github.io.pot
