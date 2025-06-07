@@ -30,7 +30,7 @@ import { gettext as _g } from "resource:///org/gnome/Shell/Extensions/js/extensi
 export async function editLocation(parent : Gtk.Window, loc? : Location) : Promise<Location | null> {
     const dialog = new Gtk.Window({
         transient_for: parent,
-        title: loc ? _g("Edit %s".format(loc.getName())) : _g("New Location"),
+        title: loc ? _g("Edit %s").format(loc.getName()) : _g("New Location"),
         modal: true,
     });
     const page = new Adw.PreferencesPage();
