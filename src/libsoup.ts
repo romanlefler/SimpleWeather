@@ -21,7 +21,7 @@ import Soup from "gi://Soup";
 const genericUserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) " +
     "AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.10 Safari/605.1.1";
 
-const realUserAgent = "simple-weather@romanlefler.github.io";
+const realUserAgent = "simple-weather@romanlefler.com";
 
 export interface ServerResponse {
     status : number;
