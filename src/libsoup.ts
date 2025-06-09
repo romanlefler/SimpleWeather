@@ -35,8 +35,8 @@ export class LibSoup {
     #realUserSession? : Soup.Session;
 
     constructor() {
-        this.#genericSession = new Soup.Session();
-        this.#realUserSession = new Soup.Session();
+        this.#genericSession = new Soup.Session({ user_agent: genericUserAgent });
+        this.#realUserSession = new Soup.Session({ user_agent: realUserAgent });
     }
 
     free() {
@@ -70,16 +70,24 @@ export class LibSoup {
                     const json = new TextDecoder().decode(byteArray);
                     if(!json) return reject("Server response was empty.");
 
+                    const status = msg.statusCode;
+                    const is2xx = Math.floor(status / 100) === 2;
+
                     let body : any;
                     try {
                         body = JSON.parse(json);
                     }
                     catch(e) {
-                        return reject(e);
+                        if(e instanceof SyntaxError) {
+                            reject(new SyntaxError(
+                                "Couldn't parse body JSON. " +
+                                `User-Agent: ${sess.userAgent}, Status: ${status}, Text: "${json}"`,
+                                { cause: e }
+                            ));
+                        }
+                        else return reject(e);
                     }
 
-                    const status = msg.statusCode;
-                    const is2xx = Math.floor(status / 100) === 2;
                     resolve({ status, body, is2xx: is2xx });
                 }
             );
