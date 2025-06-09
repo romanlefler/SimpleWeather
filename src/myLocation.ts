@@ -97,7 +97,7 @@ async function ipinfoGetLoc() : Promise<LatLon> {
         token: "c9ff6ef8fa57bd" // don't look
     };
     const resp = await soup.fetchJson("https://ipinfo.io/json", params);
-    if(Math.floor(resp.status / 100) !== 2) throw new Error(`ipinfo.io responded with error ${resp.status}.`);
+    if(!resp.is2xx) throw new Error(`ipinfo.io responded with error ${resp.status}.`);
 
     const body = resp.body;
     const coords = body.loc.split(",");

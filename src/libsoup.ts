@@ -24,8 +24,9 @@ const genericUserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) " +
 const realUserAgent = "simple-weather@romanlefler.com";
 
 export interface ServerResponse {
-    status : number;
-    body : any;
+    readonly status : number;
+    readonly is2xx : boolean;
+    readonly body : any;
 }
 
 export class LibSoup {
@@ -78,7 +79,8 @@ export class LibSoup {
                     }
 
                     const status = msg.statusCode;
-                    resolve({ status, body });
+                    const is2xx = Math.floor(status / 100) === 2;
+                    resolve({ status, body, is2xx: is2xx });
                 }
             );
         });
