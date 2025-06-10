@@ -16,6 +16,7 @@ STYLESHEET := $(STATIC)/stylesheet.css
 SCHEMASRC  := $(SCHEMAS)/org.gnome.shell.extensions.$(NAME).gschema.xml
 # This excludes .d.ts files
 SRCS       := $(shell find $(SRC) -type f -name '*.ts' ! -name '*.d.ts')
+POFILES	   := $(wildcard $(PO)/*.po)
 
 SCHEMAOUT    := $(SCHEMAOUTDIR)/gschemas.compiled
 SCHEMACP     := $(SCHEMAOUTDIR)/org.gnome.shell.extensions.$(NAME).gschema.xml
@@ -27,7 +28,7 @@ POT			 := $(PO)/$(UUID).pot
 
 .PHONY: out pack install clean
 
-out: $(POT) $(JSOUT) $(SCHEMAOUT) $(SCHEMACP) $(METADATACP) $(STYLESHEETCP)
+out: $(POT) $(JSOUT) $(SCHEMAOUT) $(SCHEMACP) $(METADATACP) $(STYLESHEETCP) copypo
 
 pack: $(ZIP)
 
@@ -75,6 +76,9 @@ $(POT): $(SRCS)
 		--package-name=$(UUID) --package-version=$(VERSION) \
 		--msgid-bugs-address=simpleweather-gnome@proton.me \
 		$(SRCS)
+
+copypo: $(POFILES)
+	cp -r $(PO) $(BUILD)/po
 
 $(ZIP): out
 	printf -- 'NEEDED: zip\n'
