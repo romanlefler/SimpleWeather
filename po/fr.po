@@ -1,0 +1,166 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: simpleweather\n"
+"Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
+"POT-Creation-Date: 2025-06-09 21:47-0500\n"
+"PO-Revision-Date: 2025-06-10 03:24\n"
+"Last-Translator: \n"
+"Language-Team: French\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Crowdin-Project: simpleweather\n"
+"X-Crowdin-Project-ID: 798380\n"
+"X-Crowdin-Language: fr\n"
+"X-Crowdin-File: simple-weather@romanlefler.com.pot\n"
+"X-Crowdin-File-ID: 2\n"
+
+#: src/location.ts:48 src/location.ts:56 src/preferences/generalPage.ts:59
+msgid "My Location"
+msgstr "Ma position"
+
+#: src/location.ts:71
+#, javascript-format
+msgid "%f°N"
+msgstr "%f°N"
+
+#: src/location.ts:71
+#, javascript-format
+msgid "%f°S"
+msgstr ""
+
+#: src/location.ts:72
+#, javascript-format
+msgid "%f°E"
+msgstr ""
+
+#: src/location.ts:72
+#, javascript-format
+msgid "%f°W"
+msgstr "%f°W"
+
+#: src/preferences/aboutPage.ts:43
+msgid "About"
+msgstr "À propos de"
+
+#: src/preferences/aboutPage.ts:54
+msgid "GitHub Repository"
+msgstr "GitHub Repository"
+
+#: src/preferences/aboutPage.ts:61
+msgid "SimpleWeather Version"
+msgstr "Version SimpleWeather"
+
+#: src/preferences/aboutPage.ts:64
+msgid "Unknown"
+msgstr "Inconnu"
+
+#: src/preferences/aboutPage.ts:75
+#, javascript-format
+msgid "This extension is a rewrite of the %s project."
+msgstr "Cette extension est une réécriture du projet %s."
+
+#: src/preferences/editLocation.ts:33
+#, javascript-format
+msgid "Edit %s"
+msgstr "Modifier %s"
+
+#: src/preferences/editLocation.ts:33
+msgid "New Location"
+msgstr "Nouvel emplacement"
+
+#: src/preferences/editLocation.ts:41
+msgid "Name"
+msgstr "Nom"
+
+#: src/preferences/editLocation.ts:56
+msgid "Coordinates"
+msgstr "Coordonnées"
+
+#: src/preferences/editLocation.ts:66
+msgid "Save"
+msgstr "Enregistrer"
+
+#: src/preferences/editLocation.ts:87
+msgid "Name is required."
+msgstr "Le nom est requis."
+
+#: src/preferences/editLocation.ts:92
+msgid "Invalid coordinates entry."
+msgstr "Entrée de coordonnées invalide."
+
+#: src/preferences/generalPage.ts:33
+msgid "General"
+msgstr "Généraux"
+
+#: src/preferences/generalPage.ts:43
+msgid "Fahrenheit"
+msgstr "Fahrenheit"
+
+#: src/preferences/generalPage.ts:44
+msgid "Celsius"
+msgstr "Celsius"
+
+#: src/preferences/generalPage.ts:60
+msgid "Configure how your location is found"
+msgstr "Configurer comment votre localisation est trouvée"
+
+#: src/preferences/generalPage.ts:64
+msgid "Online"
+msgstr "En ligne"
+
+#: src/preferences/generalPage.ts:65
+msgid "System"
+msgstr "Système"
+
+#: src/preferences/generalPage.ts:66
+msgid "Disable"
+msgstr "Désactiver"
+
+#: src/preferences/generalPage.ts:79
+msgid "Refresh Interval (Minutes)"
+msgstr "Intervalle de rafraîchissement (minutes)"
+
+#: src/preferences/locationsPage.ts:54 src/preferences/locationsPage.ts:77
+msgid "Locations"
+msgstr "Emplacements"
+
+#: src/preferences/locationsPage.ts:67
+msgid "Add"
+msgstr "Ajouter"
+
+#: src/preferences/locationsPage.ts:163
+#, javascript-format
+msgid "Internal Error: %s"
+msgstr "Erreur interne : %s"
+
+#: src/preferences/locationsPage.ts:164
+msgid "Internal Error"
+msgstr "Erreur interne"
+
+#: src/preferences/locationsPage.ts:189
+msgid "Something else edited the locations."
+msgstr "Quelque chose d'autre a modifié les lieux."
+
+#: src/preferences/search.ts:43
+msgid "Search Location"
+msgstr "Rechercher un emplacement"
+
+#: src/preferences/search.ts:52
+msgid "City, Neighborhood, etc."
+msgstr "Ville, quartier, etc."
+
+#: src/preferences/search.ts:57
+msgid "Search"
+msgstr "Chercher"
+
+#: src/preferences/search.ts:167
+msgid "No results."
+msgstr "Aucun résultat."
+
+#: src/preferences/search.ts:172
+msgid "No copyright information available."
+msgstr "Aucune information sur les droits d'auteur disponible."
+

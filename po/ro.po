@@ -1,0 +1,166 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: simpleweather\n"
+"Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
+"POT-Creation-Date: 2025-06-09 21:47-0500\n"
+"PO-Revision-Date: 2025-06-10 03:24\n"
+"Last-Translator: \n"
+"Language-Team: Romanian\n"
+"Language: ro_RO\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100>0 && n%100<20)) ? 1 : 2);\n"
+"X-Crowdin-Project: simpleweather\n"
+"X-Crowdin-Project-ID: 798380\n"
+"X-Crowdin-Language: ro\n"
+"X-Crowdin-File: simple-weather@romanlefler.com.pot\n"
+"X-Crowdin-File-ID: 2\n"
+
+#: src/location.ts:48 src/location.ts:56 src/preferences/generalPage.ts:59
+msgid "My Location"
+msgstr "Locația mea"
+
+#: src/location.ts:71
+#, javascript-format
+msgid "%f°N"
+msgstr "%f°N"
+
+#: src/location.ts:71
+#, javascript-format
+msgid "%f°S"
+msgstr "%f°S"
+
+#: src/location.ts:72
+#, javascript-format
+msgid "%f°E"
+msgstr "%f°E"
+
+#: src/location.ts:72
+#, javascript-format
+msgid "%f°W"
+msgstr "%f°V"
+
+#: src/preferences/aboutPage.ts:43
+msgid "About"
+msgstr "Despre"
+
+#: src/preferences/aboutPage.ts:54
+msgid "GitHub Repository"
+msgstr "GitHub Repository"
+
+#: src/preferences/aboutPage.ts:61
+msgid "SimpleWeather Version"
+msgstr "Versiunea meteo Simplă"
+
+#: src/preferences/aboutPage.ts:64
+msgid "Unknown"
+msgstr "Necunoscut"
+
+#: src/preferences/aboutPage.ts:75
+#, javascript-format
+msgid "This extension is a rewrite of the %s project."
+msgstr "Această extensie este o rescriere a proiectului %s."
+
+#: src/preferences/editLocation.ts:33
+#, javascript-format
+msgid "Edit %s"
+msgstr "Editează %s"
+
+#: src/preferences/editLocation.ts:33
+msgid "New Location"
+msgstr "Locație nouă"
+
+#: src/preferences/editLocation.ts:41
+msgid "Name"
+msgstr "Nume"
+
+#: src/preferences/editLocation.ts:56
+msgid "Coordinates"
+msgstr "Coordonate"
+
+#: src/preferences/editLocation.ts:66
+msgid "Save"
+msgstr "Salvează"
+
+#: src/preferences/editLocation.ts:87
+msgid "Name is required."
+msgstr "Numele este necesar."
+
+#: src/preferences/editLocation.ts:92
+msgid "Invalid coordinates entry."
+msgstr "Intrare coordonate nevalidă."
+
+#: src/preferences/generalPage.ts:33
+msgid "General"
+msgstr "Generalități"
+
+#: src/preferences/generalPage.ts:43
+msgid "Fahrenheit"
+msgstr "Fahrenheit"
+
+#: src/preferences/generalPage.ts:44
+msgid "Celsius"
+msgstr "Celsius"
+
+#: src/preferences/generalPage.ts:60
+msgid "Configure how your location is found"
+msgstr "Configurați modul în care este găsită locația dvs."
+
+#: src/preferences/generalPage.ts:64
+msgid "Online"
+msgstr "Online"
+
+#: src/preferences/generalPage.ts:65
+msgid "System"
+msgstr "Sistem"
+
+#: src/preferences/generalPage.ts:66
+msgid "Disable"
+msgstr "Dezactivează"
+
+#: src/preferences/generalPage.ts:79
+msgid "Refresh Interval (Minutes)"
+msgstr "Interval Reîmprospătare (Minute)"
+
+#: src/preferences/locationsPage.ts:54 src/preferences/locationsPage.ts:77
+msgid "Locations"
+msgstr "Locații"
+
+#: src/preferences/locationsPage.ts:67
+msgid "Add"
+msgstr "Adăugare"
+
+#: src/preferences/locationsPage.ts:163
+#, javascript-format
+msgid "Internal Error: %s"
+msgstr "Eroare internă: %s"
+
+#: src/preferences/locationsPage.ts:164
+msgid "Internal Error"
+msgstr "Eroare internă"
+
+#: src/preferences/locationsPage.ts:189
+msgid "Something else edited the locations."
+msgstr "Altfel am editat locațiile."
+
+#: src/preferences/search.ts:43
+msgid "Search Location"
+msgstr "Căutare Locație"
+
+#: src/preferences/search.ts:52
+msgid "City, Neighborhood, etc."
+msgstr "Oraș, Vecinătate etc."
+
+#: src/preferences/search.ts:57
+msgid "Search"
+msgstr "Caută"
+
+#: src/preferences/search.ts:167
+msgid "No results."
+msgstr "Niciun rezultat."
+
+#: src/preferences/search.ts:172
+msgid "No copyright information available."
+msgstr "Nu sunt disponibile informații privind drepturile de autor."
+
