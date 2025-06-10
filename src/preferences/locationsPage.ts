@@ -26,6 +26,7 @@ import { editLocation } from "./editLocation.js";
 import { Location } from "../location.js";
 import { UserInputError } from "../errors.js";
 import { gettext as _g } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
+import { searchDialog } from "./search.js";
 
 const ICON_SELECTED = "radio-checked-symbolic";
 const ICON_NOT_SELECTED = "radio-symbolic";
@@ -67,7 +68,7 @@ export class LocationsPage extends Adw.PreferencesPage {
             })
         });
         addButton.connect("clicked", () => {
-            this.#editLoc(null, -1).catch(e => {
+            this.#addLoc().catch(e => {
                 console.error(e);
                 this.#toastError(e);
             });
@@ -197,6 +198,30 @@ export class LocationsPage extends Adw.PreferencesPage {
         const gVariant = writeGTypeAS(strArray);
         this.#settings.set_value("locations", gVariant);
         this.#settings.apply();
+    }
+
+    async #addLoc() {
+
+        let newLoc;
+        try {
+            newLoc = await searchDialog(this.#window, this.#libSoup);
+        }
+        catch(e) {
+            console.error(e);
+            this.#toastError(e);
+            return;
+        }
+
+        if(!newLoc) return;
+
+        const locsArray = this.#config.getLocations();
+        locsArray.push(newLoc);
+
+        const strArray = locsArray.map(k => k.toString());
+        const gVariant = writeGTypeAS(strArray);
+        this.#settings.set_value("locations", gVariant);
+        this.#settings.apply();
+
     }
 
     #deleteLoc(locs : Location[], index : number) {
