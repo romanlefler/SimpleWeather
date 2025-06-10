@@ -51,7 +51,7 @@ msgstr "GitHub Repository"
 
 #: src/preferences/aboutPage.ts:61
 msgid "SimpleWeather Version"
-msgstr "简单的天气版本"
+msgstr "SimpleWeather 版本"
 
 #: src/preferences/aboutPage.ts:64
 msgid "Unknown"
