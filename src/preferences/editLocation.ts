@@ -32,6 +32,8 @@ export async function editLocation(parent : Gtk.Window, loc? : Location) : Promi
         transient_for: parent,
         title: loc ? _g("Edit %s").format(loc.getName()) : _g("New Location"),
         modal: true,
+        width_request: parent.get_width() * 0.75,
+        height_request: parent.get_height() * 0.75
     });
     const page = new Adw.PreferencesPage();
     const group = new Adw.PreferencesGroup();
