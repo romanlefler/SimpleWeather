@@ -40,10 +40,11 @@ export class Popup {
 
         this.#condition = new St.Icon({
             icon_name: "weather-clear-symbolic",
-            icon_size: 64
+            style_class: "simpleweather-popup-icon"
         });
         this.#temp = new St.Label({
-            text: "0\u00B0"
+            text: "0\u00B0",
+            style_class: "simpleweather-popup-temp"
         });
 
         const hbox = new St.BoxLayout({ vertical: false });
@@ -56,6 +57,7 @@ export class Popup {
 
         const childItem = new PopupMenu.PopupBaseMenuItem({ reactive: false });
         childItem.actor.add_child(hbox);
+
         menu.addMenuItem(childItem);
     }
 

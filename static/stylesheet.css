@@ -1,4 +1,13 @@
 
+.simpleweather-popup-icon {
+    icon-size: 128px;
+}
+
+.simpleweather-popup-temp {
+    font-size: 64px;
+    text-align: center;
+}
+
 .simpleweather-h1 {
     font-size: 1.75em;
 }
