@@ -132,7 +132,8 @@ export class LocationsPage extends Adw.PreferencesPage {
             });
             const deleteBtn = new Gtk.Button({
                 icon_name: "edit-delete-symbolic",
-                valign: Gtk.Align.CENTER
+                valign: Gtk.Align.CENTER,
+                css_classes: [ "destructive-action" ]
             });
             deleteBtn.connect("clicked", this.#deleteLoc.bind(this, locs, permIndex));
             box.append(editBtn);
