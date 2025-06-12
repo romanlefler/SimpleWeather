@@ -16,6 +16,8 @@
 */
 
 import GLib from "gi://GLib";
+import { Weather } from "./weather.js";
+import { Config } from "./config.js";
 
 export function delayTask(seconds : number, callback : () => void) : number {
     return GLib.timeout_add_seconds(
@@ -31,4 +33,9 @@ export function delayTask(seconds : number, callback : () => void) : number {
 export function removeSourceIfTruthy(id : number | null | undefined) : undefined {
     if(id) GLib.source_remove(id);
     return undefined;
+}
+
+export function displayTemp(w : Weather, cfg : Config) : string {
+    const tempUnit = cfg.getTempUnit();
+    return `${Math.round(w.temp.get(tempUnit))}\u00B0`;
 }

@@ -27,10 +27,12 @@ import { OpenMeteo } from "./providers/openmeteo.js";
 import { LibSoup } from "./libsoup.js";
 import { Config } from "./config.js";
 import { Weather } from "./weather.js";
-import { delayTask, removeSourceIfTruthy } from "./utils.js";
+import { delayTask, displayTemp, removeSourceIfTruthy } from "./utils.js";
 import { freeMyLocation, setUpMyLocation } from "./myLocation.js";
 import { setUpGettext } from "./gettext.js";
 import { gettext as shellGettext } from "resource:///org/gnome/shell/extensions/extension.js";
+import { Popup } from "./popup.js";
+import { PopupMenu } from "resource:///org/gnome/shell/ui/popupMenu.js";
 
 export default class SimpleWeatherExtension extends Extension {
 
@@ -38,6 +40,7 @@ export default class SimpleWeatherExtension extends Extension {
     #indicator? : PanelMenu.Button;
     #panelLabel? : St.Label;
     #panelIcon? : St.Icon;
+    #popup? : Popup;
 
     #cachedWeather? : Weather;
     #config? : Config;
@@ -56,7 +59,8 @@ export default class SimpleWeatherExtension extends Extension {
         this.#provider = new OpenMeteo(this.#libsoup, this.#config);
         setUpMyLocation(this.#libsoup, this.#config);
 
-        this.#indicator = new PanelMenu.Button(0.0, "Weather", false);
+        this.#indicator = new PanelMenu.Button(0, "Weather", false);
+        this.#popup = new Popup(this.#config, this.#indicator.menu as PopupMenu);
 
         const layout = new St.BoxLayout({
             orientation: Clutter.Orientation.HORIZONTAL
@@ -91,6 +95,10 @@ export default class SimpleWeatherExtension extends Extension {
         this.#fetchLoopId = removeSourceIfTruthy(this.#fetchLoopId);
         this.#delayFetchId = removeSourceIfTruthy(this.#delayFetchId);
 
+        if(this.#popup && this.#indicator) {
+            this.#popup.destroy(this.#indicator.menu as PopupMenu);
+            this.#popup = undefined;
+        }
         this.#panelIcon = undefined;
         this.#panelLabel = undefined;
         this.#indicator?.destroy();
@@ -135,10 +143,11 @@ export default class SimpleWeatherExtension extends Extension {
         const w = this.#cachedWeather;
         if(!w) return;
 
-        const tempUnit = this.#config!.getTempUnit();
-        this.#panelLabel!.text = `${Math.round(w.temp.get(tempUnit))}\u00B0`;
+        this.#panelLabel!.text = displayTemp(w, this.#config!);
 
         this.#panelIcon!.icon_name = w.gIconName;
+
+        this.#popup!.updateGui(w);
     }
 
 }
