@@ -102,8 +102,9 @@ export class LocationsPage extends Adw.PreferencesPage {
         const locs = this.#config.getLocations();
         for(let i = 0; i < locs.length; i++) {
             const l = locs[i];
+            const name = l.getName();
             const row = new Adw.ActionRow({
-                title: l.getName(),
+                title: name,
                 subtitle: l.getDescription(),
                 activatable: true,
                 icon_name: i === inx ? ICON_SELECTED : ICON_NOT_SELECTED
@@ -135,7 +136,18 @@ export class LocationsPage extends Adw.PreferencesPage {
                 valign: Gtk.Align.CENTER,
                 css_classes: [ "destructive-action" ]
             });
-            deleteBtn.connect("clicked", this.#deleteLoc.bind(this, locs, permIndex));
+            deleteBtn.connect("clicked", () => {
+                const alert = new Gtk.AlertDialog({
+                    message: _g("Are you sure you want delete %s?").format(name),
+                    buttons: [ _g("Cancel"), _g("Delete") ],
+                    cancel_button: 0,
+                    default_button: 1
+                });
+                alert.choose(this.#window, null, (_, result) => {
+                    const inx = alert.choose_finish(result);
+                    if(inx === 1) this.#deleteLoc(locs, permIndex);
+                });
+            });
             box.append(editBtn);
             box.append(deleteBtn);
             row.add_suffix(box);
