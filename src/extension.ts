@@ -42,6 +42,7 @@ export default class SimpleWeatherExtension extends Extension {
     #panelLabel? : St.Label;
     #panelIcon? : St.Icon;
     #popup? : Popup;
+    #hasAddedIndicator : boolean = false;
 
     #cachedWeather? : Weather;
     #config? : Config;
@@ -138,8 +139,6 @@ export default class SimpleWeatherExtension extends Extension {
         layout.add_child(this.#panelIcon);
         this.#indicator.add_child(layout);
 
-        Main.panel.addToStatusArea(this.uuid, this.#indicator);
-
         // Set up a timer to refresh the weather on repeat
         this.#fetchLoopId = GLib.timeout_add_seconds(
             GLib.PRIORITY_DEFAULT,
@@ -172,6 +171,7 @@ export default class SimpleWeatherExtension extends Extension {
             this.#popup.destroy(this.#indicator.menu as PopupMenu);
             this.#popup = undefined;
         }
+        this.#hasAddedIndicator = false;
         this.#panelIcon = undefined;
         this.#panelLabel = undefined;
         this.#indicator?.destroy();
@@ -191,6 +191,12 @@ export default class SimpleWeatherExtension extends Extension {
     #updateWeather() {
         this.#updateWeatherAsync().then(() => {
             this.#resolverFailCount = 0;
+
+            if(!this.#hasAddedIndicator) {
+                this.#hasAddedIndicator = true;
+                Main.panel.addToStatusArea(this.uuid, this.#indicator!);
+            }
+
         }).catch(err => {
             console.error(err);
             // This happens on boot presumably when things are loaded
