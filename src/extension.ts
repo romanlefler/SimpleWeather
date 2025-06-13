@@ -82,8 +82,9 @@ export default class SimpleWeatherExtension extends Extension {
      * This is the entry point.
      */
     enable() {
-        // Set up the gettext abstraction
+        // Set up a couple necessaary things already
         setUpGettext(shellGettext);
+        this.#gsettings = this.getSettings();
         // Call an async enable method
         this.#asyncEnable().catch(e => {
             console.error(e);
@@ -95,9 +96,13 @@ export default class SimpleWeatherExtension extends Extension {
         // First wait for the layout manager or the layout won't show
         await this.#waitForLayoutMan();
         // Show welcome screen if user's never seen it
-        // If the user clicks abort, abort this method
-        const shouldContinue = await showWelcome();
-        if(!shouldContinue) return;
+        if(!this.#gsettings!.get_boolean("is-activated")) {
+            const shouldContinue = await showWelcome();
+            // If the user clicked abort, abort enabling
+            if(!shouldContinue) return;
+            // Otherwise mark the welcome screen as accepted
+            this.#gsettings!.set_boolean("is-activated", true);
+        }
 
         // Continue on like normal
         this.#enablePastWelcome();
@@ -107,8 +112,8 @@ export default class SimpleWeatherExtension extends Extension {
         // This is normal extension enabling now
         
         // Set everything up
-        this.#gsettings = this.getSettings();
-        this.#config = new Config(this.#gsettings);
+        // Gettext and gsettings are already set up
+        this.#config = new Config(this.#gsettings!);
         this.#libsoup = new LibSoup();
         this.#provider = new OpenMeteo(this.#libsoup, this.#config);
         setUpMyLocation(this.#libsoup, this.#config);
