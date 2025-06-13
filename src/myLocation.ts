@@ -26,8 +26,8 @@ import { Config } from "./config.js";
 let soup : LibSoup;
 let config : Config;
 
-let cachedMyLoc : LatLon | null = null;
-let isGettingLoc : Promise<LatLon> | null = null;
+let cachedMyLoc : MyLocResult | null = null;
+let isGettingLoc : Promise<MyLocResult> | null = null;
 let lastGotTime : Date = new Date(0);
 
 export enum MyLocationProvider {
@@ -36,10 +36,17 @@ export enum MyLocationProvider {
     Disable = 3
 }
 
-function cloneCache() : LatLon {
+export interface MyLocResult extends LatLon {
+    city : string | null;
+    country : string | null;
+}
+
+function cloneCache() : MyLocResult {
     return {
         lat: cachedMyLoc!.lat,
-        lon: cachedMyLoc!.lon
+        lon: cachedMyLoc!.lon,
+        city: cachedMyLoc!.city,
+        country: cachedMyLoc!.country
     };
 }
 
@@ -55,7 +62,7 @@ export function freeMyLocation() {
     config = undefined;
 }
     
-export async function getMyLocation() : Promise<LatLon> {
+export async function getMyLocation() : Promise<MyLocResult> {
     if (cachedMyLoc) {
         const diffMin = (Date.now() - lastGotTime.getTime()) / 1000 / 60;
         // TODO: This should be a setting
@@ -92,7 +99,7 @@ export async function getMyLocation() : Promise<LatLon> {
     throw new Error("Failed to get My Location.");
 }
 
-async function ipinfoGetLoc() : Promise<LatLon> {
+async function ipinfoGetLoc() : Promise<MyLocResult> {
     const params = {
         token: "c9ff6ef8fa57bd" // don't look
     };
@@ -103,14 +110,16 @@ async function ipinfoGetLoc() : Promise<LatLon> {
     const coords = body.loc.split(",");
     return {
         lat: parseFloat(coords[0]),
-        lon: parseFloat(coords[1])
+        lon: parseFloat(coords[1]),
+        city: body.city ?? null,
+        country: body.country ?? null
     };
 }
 
 // Geoclue will no longer work for most users since Mozilla
 // has disconitnued their geolocation service
-async function geoclueGetLoc() : Promise <LatLon> {
-    return new Promise<LatLon>((resolve, reject) => {
+async function geoclueGetLoc() : Promise <MyLocResult> {
+    return new Promise<MyLocResult>((resolve, reject) => {
         Geoclue.Simple.new(
             "simpleweather",
             Geoclue.AccuracyLevel.NEIGHBORHOOD,
@@ -131,9 +140,11 @@ async function geoclueGetLoc() : Promise <LatLon> {
                     return;
                 }
 
-                let ret : LatLon = {
+                let ret : MyLocResult = {
                     lat: loc.latitude,
-                    lon: loc.longitude
+                    lon: loc.longitude,
+                    city: null,
+                    country: null
                 };
                 resolve(ret);
             }

@@ -61,7 +61,10 @@ export class Location {
     }
 
     async latLon() : Promise<LatLon> {
-        if(this.#isHere) return await getMyLocation();
+        if(this.#isHere) {
+            const myLoc = await getMyLocation();
+            return { lat: myLoc.lat, lon: myLoc.lon };
+        }
         else return { lat: this.#lat!, lon: this.#lon! };
     }
 
