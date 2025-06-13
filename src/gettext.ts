@@ -17,10 +17,20 @@
 
 let gettextFn : ((str : string) => string) | undefined;
 
+/**
+ * Sets up the gettext abstraction.
+ * Import the correct gettext for the process and pass it into here.
+ */
 export function setUpGettext(gettext : (str : string) => string) : void {
     gettextFn = gettext;
 }
 
+/**
+ * This is the normal GNU gettext function.
+ * This function exists as an abstraction between the two imports for
+ * extension.js and prefs.js, so the same code can be used in
+ * both processes.
+ */
 export function gettext(str : string) : string {
     return gettextFn!(str);
 }
