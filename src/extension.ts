@@ -108,7 +108,7 @@ export default class SimpleWeatherExtension extends Extension {
             // They both need basic setup, but set first time config
             // requires basic setup before running
             this.#basicSetup();
-            setFirstTimeConfig(this.#gsettings!);
+            await setFirstTimeConfig(this.#gsettings!);
         }
         else this.#basicSetup();
 

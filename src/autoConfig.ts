@@ -34,7 +34,7 @@ function isDesktop() : boolean {
 
     const str = new TextDecoder().decode(fileResult[1]);
     // Chassis 3 = desktop
-    return str === "3";
+    return str === "3\n";
 }
 
 /**
