@@ -137,6 +137,5 @@ class WelcomeDialog extends ModalDialog {
 
 export async function showWelcome() : Promise<boolean> {
     const dialog = new WelcomeDialog();
-    console.error("Showing welcome.");
     return dialog.choose();
 }
