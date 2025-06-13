@@ -33,6 +33,7 @@ import { setUpGettext } from "./gettext.js";
 import { gettext as shellGettext } from "resource:///org/gnome/shell/extensions/extension.js";
 import { Popup } from "./popup.js";
 import { PopupMenu } from "resource:///org/gnome/shell/ui/popupMenu.js";
+import { showWelcome } from "./welcome.js";
 
 export default class SimpleWeatherExtension extends Extension {
 
@@ -49,16 +50,70 @@ export default class SimpleWeatherExtension extends Extension {
 
     #fetchLoopId? : number;
     #delayFetchId? : number;
+    #waitLayoutId? : number;
+
     #resolverFailCount : number = 0;
 
+    /**
+     * Waits for the layout manager's starting up property to be false.
+     * @returns True if layout manager is done, otherwise false if wait is aborted.
+     */
+    async #waitForLayoutMan() : Promise<boolean> {
+        if(!Main.layoutManager._startingUp) return true;
+        if(this.#waitLayoutId) {
+            throw new Error("Cannot wait for layout twice at once.");
+        }
+
+        return new Promise<boolean>(resolve => {
+            const id = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 500, () => {
+                if (!Main.layoutManager._startingUp) {
+                    this.#waitLayoutId = undefined;
+                    resolve(true);
+                    return GLib.SOURCE_REMOVE;
+                }
+                else return GLib.SOURCE_CONTINUE;
+            });
+            this.#waitLayoutId = id;
+        });
+    }
+
+    /**
+     * Called by GNOME Extensions when this extension is enabled.
+     * This is the entry point.
+     */
     enable() {
+        // Set up the gettext abstraction
         setUpGettext(shellGettext);
+        // Call an async enable method
+        this.#asyncEnable().catch(e => {
+            console.error(e);
+            throw e;
+        });
+    }
+
+    async #asyncEnable() {
+        // First wait for the layout manager or the layout won't show
+        await this.#waitForLayoutMan();
+        // Show welcome screen if user's never seen it
+        // If the user clicks abort, abort this method
+        const shouldContinue = await showWelcome();
+        if(!shouldContinue) return;
+
+        // Continue on like normal
+        this.#enablePastWelcome();
+    }
+
+    #enablePastWelcome() {
+        // This is normal extension enabling now
+        
+        // Set everything up
         this.#gsettings = this.getSettings();
         this.#config = new Config(this.#gsettings);
         this.#libsoup = new LibSoup();
         this.#provider = new OpenMeteo(this.#libsoup, this.#config);
         setUpMyLocation(this.#libsoup, this.#config);
 
+        // Add the menu into the top bar
         this.#indicator = new PanelMenu.Button(0, "Weather", false);
         this.#popup = new Popup(this.#config, this.#indicator.menu as PopupMenu);
 
@@ -80,20 +135,33 @@ export default class SimpleWeatherExtension extends Extension {
 
         Main.panel.addToStatusArea(this.uuid, this.#indicator);
 
+        // Set up a timer to refresh the weather on repeat
         this.#fetchLoopId = GLib.timeout_add_seconds(
             GLib.PRIORITY_DEFAULT,
             15 * 60,
             this.#updateWeather.bind(this)
         );
-        this.#config.onMainLocationChanged(this.#updateWeather.bind(this));
 
+        // Some settings require the weather to be re-fetched
+        this.#config.onMainLocationChanged(this.#updateWeather.bind(this));
+        // Some settings just require a GUI update
         this.#config.onTempUnitChanged(this.#updateGui.bind(this));
+
+        // First weather fetch
         this.#updateWeather();
     }
 
+    /**
+     * Called by GNOME Extensions when this extension is disabled.
+     * Everything must be manually freed since this class may not be
+     * garbage-collected.
+     */
     disable() {
+        // removeSourceIfTruthy is a shorthand for removing source
+        // if it is defined then returning undefined
         this.#fetchLoopId = removeSourceIfTruthy(this.#fetchLoopId);
         this.#delayFetchId = removeSourceIfTruthy(this.#delayFetchId);
+        this.#waitLayoutId = removeSourceIfTruthy(this.#waitLayoutId);
 
         if(this.#popup && this.#indicator) {
             this.#popup.destroy(this.#indicator.menu as PopupMenu);
