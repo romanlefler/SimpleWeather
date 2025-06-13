@@ -209,8 +209,8 @@ export default class SimpleWeatherExtension extends Extension {
         }).catch(err => {
             console.error(err);
             // This happens on boot presumably when things are loaded
-            // out of order, try max 3 times
-            if(err instanceof Gio.ResolverError && ++this.#resolverFailCount <= 3) {
+            // out of order, try max 5 times
+            if(err instanceof Gio.ResolverError && ++this.#resolverFailCount <= 5) {
                 this.#delayFetchId = delayTask(5.0, () => {
                     this.#delayFetchId = undefined;
                     this.#updateWeather();
