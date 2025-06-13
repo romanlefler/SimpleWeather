@@ -34,6 +34,7 @@ import { gettext as shellGettext } from "resource:///org/gnome/shell/extensions/
 import { Popup } from "./popup.js";
 import { PopupMenu } from "resource:///org/gnome/shell/ui/popupMenu.js";
 import { showWelcome } from "./welcome.js";
+import { setFirstTimeConfig } from "./autoConfig.js";
 
 export default class SimpleWeatherExtension extends Extension {
 
@@ -103,25 +104,33 @@ export default class SimpleWeatherExtension extends Extension {
             if(!shouldContinue) return;
             // Otherwise mark the welcome screen as accepted
             this.#gsettings!.set_boolean("is-activated", true);
+
+            // They both need basic setup, but set first time config
+            // requires basic setup before running
+            this.#basicSetup();
+            setFirstTimeConfig(this.#gsettings!);
         }
+        else this.#basicSetup();
 
         // Continue on like normal
         this.#enablePastWelcome();
     }
 
-    #enablePastWelcome() {
-        // This is normal extension enabling now
-        
+    #basicSetup() {
         // Set everything up
         // Gettext and gsettings are already set up
         this.#config = new Config(this.#gsettings!);
         this.#libsoup = new LibSoup();
         this.#provider = new OpenMeteo(this.#libsoup, this.#config);
         setUpMyLocation(this.#libsoup, this.#config);
+    }
 
+    #enablePastWelcome() {
+        // This is normal extension enabling now
+        
         // Add the menu into the top bar
         this.#indicator = new PanelMenu.Button(0, "Weather", false);
-        this.#popup = new Popup(this.#config, this.#indicator.menu as PopupMenu);
+        this.#popup = new Popup(this.#config!, this.#indicator.menu as PopupMenu);
 
         const layout = new St.BoxLayout({
             orientation: Clutter.Orientation.HORIZONTAL
@@ -147,9 +156,9 @@ export default class SimpleWeatherExtension extends Extension {
         );
 
         // Some settings require the weather to be re-fetched
-        this.#config.onMainLocationChanged(this.#updateWeather.bind(this));
+        this.#config!.onMainLocationChanged(this.#updateWeather.bind(this));
         // Some settings just require a GUI update
-        this.#config.onTempUnitChanged(this.#updateGui.bind(this));
+        this.#config!.onTempUnitChanged(this.#updateGui.bind(this));
 
         // First weather fetch
         this.#updateWeather();
