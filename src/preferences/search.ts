@@ -16,6 +16,7 @@
 */
 
 import Adw from "gi://Adw";
+import Gio from "gi://Gio";
 import GObject from "gi://GObject";
 import Gtk from "gi://Gtk";
 import Pango from "gi://Pango";
@@ -53,10 +54,10 @@ export async function searchDialog(parent : Gtk.Window, soup : LibSoup) : Promis
     });
     group.add(searchField);
 
-    const submitButton = new Gtk.Button({
+    const searchButton = new Gtk.Button({
         label: _g("Search")
     });
-    group.add(submitButton);
+    group.add(searchButton);
 
     const resultsLocList : SelLoc[] = [ ];
     const stringList = new Gtk.StringList();
@@ -86,7 +87,7 @@ export async function searchDialog(parent : Gtk.Window, soup : LibSoup) : Promis
 
     return new Promise<Location | null>((resolve, reject) => {
 
-        submitButton.connect("clicked", () => {
+        searchButton.connect("clicked", () => {
             const a : SearchArgs = {
                 search: searchField.text,
                 licenseLabel,
@@ -98,7 +99,11 @@ export async function searchDialog(parent : Gtk.Window, soup : LibSoup) : Promis
                 resultsLocList.splice(0, oldLen, ...locArr);
                 populateList(stringList, locArr);
             }).catch(e => {
-                reject(e);
+                if(e instanceof Gio.ResolverError) {
+                    console.error(e);
+                    showNoInternetDialog(dialog);
+                }
+                else reject(e);
             });
         });
 
@@ -128,6 +133,13 @@ interface SearchArgs {
     licenseLabel : Gtk.Label;
     resultsList : Gtk.StringList;
     soup : LibSoup;
+}
+
+function showNoInternetDialog(parent : Gtk.Window) {
+    const alert = new Gtk.AlertDialog({
+        message: _g("No Internet")
+    });
+    alert.show(parent);
 }
 
 function setupListFactory() : Gtk.SignalListItemFactory {
