@@ -62,7 +62,15 @@ export class LibSoup {
                 GLib.PRIORITY_DEFAULT,
                 null,
                 (_, result) => {
-                    const gBytes = sess.send_and_read_finish(result);
+                    let gBytes : GLib.Bytes;
+                    try {
+                        gBytes = sess.send_and_read_finish(result);
+                    }
+                    catch(e) {
+                        reject(e);
+                        return;
+                    }
+
                     const byteArray = gBytes.get_data();
                     if(!byteArray) return reject("Failed to get byte stream from server response.");
                     
