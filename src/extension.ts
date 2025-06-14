@@ -130,7 +130,7 @@ export default class SimpleWeatherExtension extends Extension {
         
         // Add the menu into the top bar
         this.#indicator = new PanelMenu.Button(0, "Weather", false);
-        this.#popup = new Popup(this.#config!, this.#indicator.menu as PopupMenu);
+        this.#popup = new Popup(this.#config!, this.metadata, this.#indicator.menu as PopupMenu);
 
         const layout = new St.BoxLayout({
             orientation: Clutter.Orientation.HORIZONTAL

@@ -20,7 +20,7 @@ import Gio from "gi://Gio";
 import GLib from "gi://GLib";
 import GObject from "gi://GObject";
 import St from "gi://St";
-import { Extension, gettext as _ } from "resource:///org/gnome/shell/extensions/extension.js";
+import { Extension, ExtensionMetadata, gettext as _ } from "resource:///org/gnome/shell/extensions/extension.js";
 import * as Main from "resource:///org/gnome/shell/ui/main.js";
 import * as PanelMenu from "resource:///org/gnome/shell/ui/panelMenu.js";
 import * as PopupMenu from "resource:///org/gnome/shell/ui/popupMenu.js";
@@ -31,12 +31,14 @@ import { displayTemp } from "./utils.js";
 export class Popup {
 
     readonly #config : Config;
+    readonly #metadata : ExtensionMetadata;
 
     #condition : St.Icon;
     #temp : St.Label;
 
-    constructor(config : Config, menu : PopupMenu.PopupMenu) {
+    constructor(config : Config, metadata : ExtensionMetadata, menu : PopupMenu.PopupMenu) {
         this.#config = config;
+        this.#metadata = metadata;
 
         this.#condition = new St.Icon({
             icon_name: "weather-clear-symbolic",
@@ -66,7 +68,13 @@ export class Popup {
     }
 
     updateGui(w : Weather) {
-        this.#condition.icon_name = w.gIconName;
+        const iconPath = `${this.#metadata.path}/icons/${w.gIconName}-symbolic.svg`;
+        const iconFile = Gio.File.new_for_path(iconPath);
+        console.error(iconFile.query_exists(null));
+        console.error(iconPath);
+        const gicon = new Gio.FileIcon({ file: iconFile });
+
+        this.#condition.gicon = gicon;
         this.#temp.text = displayTemp(w, this.#config);
     }
 

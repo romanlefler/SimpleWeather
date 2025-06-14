@@ -10,6 +10,7 @@ DIST         := ./dist
 BUILD        := $(DIST)/build
 SCHEMAOUTDIR := $(BUILD)/schemas
 PO			 := ./po
+ICONS        := ./icons
 
 METADATA   := $(STATIC)/metadata.json
 STYLESHEET := $(STATIC)/stylesheet.css
@@ -17,6 +18,7 @@ SCHEMASRC  := $(SCHEMAS)/org.gnome.shell.extensions.$(NAME).gschema.xml
 # This excludes .d.ts files
 SRCS       := $(shell find $(SRC) -type f -name '*.ts' ! -name '*.d.ts')
 POFILES	   := $(wildcard $(PO)/*.po)
+ICONSVGS   := $(wildcard $(ICONS)/*.svg)
 
 SCHEMAOUT    := $(SCHEMAOUTDIR)/gschemas.compiled
 SCHEMACP     := $(SCHEMAOUTDIR)/org.gnome.shell.extensions.$(NAME).gschema.xml
@@ -28,7 +30,7 @@ POT			 := $(PO)/$(UUID).pot
 
 .PHONY: out pack install clean
 
-out: $(POT) $(JSOUT) $(SCHEMAOUT) $(SCHEMACP) $(METADATACP) $(STYLESHEETCP) copypo
+out: $(POT) $(JSOUT) $(SCHEMAOUT) $(SCHEMACP) $(METADATACP) $(STYLESHEETCP) copypo copyicons
 
 pack: $(ZIP)
 
@@ -79,6 +81,9 @@ $(POT): $(SRCS)
 
 copypo: $(POFILES)
 	cp -r $(PO) $(BUILD)/po
+
+copyicons: $(ICONSVGS)
+	cp -r $(ICONS) $(BUILD)/icons
 
 $(ZIP): out
 	printf -- 'NEEDED: zip\n'
