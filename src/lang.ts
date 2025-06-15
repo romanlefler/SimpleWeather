@@ -19,9 +19,7 @@ import GLib from "gi://GLib";
 import { Weather } from "./weather.js";
 import { Config } from "./config.js";
 
-// "u" is invalid so something will throw
-// if it uses before it's initialized
-let locales : string[] = [ "u" ];
+let locales : string[] | undefined;
 
 /**
  * Initializes locales for use in JavaScript.
@@ -54,7 +52,7 @@ export function initLocales() : string | undefined {
     } catch(e) {
         if(e instanceof RangeError) {
             console.error(e);
-            locales = [ "en" ];
+            locales = undefined;
             return e.message;
         }
         else throw e;
@@ -76,7 +74,7 @@ export function strcaseeq(s1 : string, s2 : string) : boolean {
     return s1.toUpperCase() === s2.toUpperCase();
 }
 
-export function getLocales() : string[] {
+export function getLocales() : string[] | undefined {
     return locales;
 }
 
