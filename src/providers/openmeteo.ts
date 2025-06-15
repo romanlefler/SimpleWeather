@@ -44,28 +44,43 @@ export class OpenMeteo implements Provider {
             latitude: String(coords.lat),
             longitude: String(coords.lon),
             current: "temperature_2m,weather_code,is_day",
+            daily: "sunset,sunrise",
             temperature_unit: "fahrenheit"
         };
         // params.lang
 
         const response = await this.#soup.fetchJson(ENDPOINT, params, false);
+        if(!response.is2xx) {
+            throw new Error(
+                `Open-Meteo gave status code ${response.status}. ` +
+                `Reason: ${response.body?.reason ?? "None Given"}`
+            );
+        }
+
         return response.body;
     }
 
     async fetchWeather() : Promise<Weather> {
         const body = await this.#fetch();
-        const cur = body.current;
+        const cur = body.current!;
+        const daily = body.daily!;
 
-        const temp = new Temp(cur?.temperature_2m ?? NaN);
-        const isNight = cur?.is_day === 0;
+        const temp = new Temp(cur.temperature_2m);
+        const isNight = cur.is_day === 0;
 
-        const icon = codeToIcon[cur?.weather_code ?? 0];
+        const icon = codeToIcon[cur.weather_code];
         const gIconName = getGIconName(icon, isNight);
+
+        // Z means UTC
+        const sunrise = new Date(body.daily.sunrise[0] + "Z");
+        const sunset = new Date(body.daily.sunset[0] + "Z");
 
         return {
             temp,
             gIconName,
-            isNight
+            isNight,
+            sunrise,
+            sunset
         };
     }
 

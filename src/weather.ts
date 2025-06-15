@@ -25,4 +25,8 @@ export interface Weather {
 
     isNight : boolean;
 
+    sunset : Date;
+
+    sunrise : Date;
+
 }

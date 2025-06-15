@@ -27,7 +27,8 @@ import { OpenMeteo } from "./providers/openmeteo.js";
 import { LibSoup } from "./libsoup.js";
 import { Config } from "./config.js";
 import { Weather } from "./weather.js";
-import { delayTask, displayTemp, removeSourceIfTruthy } from "./utils.js";
+import { delayTask, removeSourceIfTruthy } from "./utils.js";
+import { displayTemp, displayTime, initLocales } from "./lang.js";
 import { freeMyLocation, setUpMyLocation } from "./myLocation.js";
 import { setUpGettext } from "./gettext.js";
 import { gettext as shellGettext } from "resource:///org/gnome/shell/extensions/extension.js";
@@ -44,6 +45,8 @@ export default class SimpleWeatherExtension extends Extension {
     #panelIcon? : St.Icon;
     #popup? : Popup;
     #hasAddedIndicator : boolean = false;
+    #sunTimeLabel? : St.Label;
+    #sunTimeIcon? : St.Icon;
 
     #cachedWeather? : Weather;
     #config? : Config;
@@ -87,6 +90,7 @@ export default class SimpleWeatherExtension extends Extension {
         // Set up a couple necessaary things already
         setUpGettext(shellGettext);
         this.#gsettings = this.getSettings();
+        initLocales();
         // Call an async enable method
         this.#asyncEnable().catch(e => {
             console.error(e);
@@ -144,8 +148,20 @@ export default class SimpleWeatherExtension extends Extension {
             icon_name: "view-refresh-symbolic",
             style_class: "system-status-icon"
         });
+        this.#sunTimeLabel = new St.Label({
+            text: "...",
+            y_align: Clutter.ActorAlign.CENTER,
+            y_expand: true,
+            style: "padding-left: 8px;"
+        });
+        this.#sunTimeIcon = new St.Icon({
+            icon_name: "daytime-sunset-symbolic",
+            style_class: "system-status-icon"
+        });
         layout.add_child(this.#panelLabel);
         layout.add_child(this.#panelIcon);
+        layout.add_child(this.#sunTimeLabel);
+        layout.add_child(this.#sunTimeIcon);
         this.#indicator.add_child(layout);
 
         // Set up a timer to refresh the weather on repeat
@@ -234,6 +250,12 @@ export default class SimpleWeatherExtension extends Extension {
         this.#panelLabel!.text = displayTemp(w, this.#config!);
 
         this.#panelIcon!.icon_name = w.gIconName;
+
+        const showSunset = w.sunset < w.sunrise;
+        const sunTime = showSunset ? w.sunset : w.sunrise;
+        this.#sunTimeLabel!.text = displayTime(sunTime, this.#config!);
+
+        this.#sunTimeIcon!.icon_name = `daytime-${showSunset ? "sunset" : "sunrise"}-symbolic`;
 
         this.#popup!.updateGui(w);
     }

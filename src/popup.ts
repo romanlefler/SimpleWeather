@@ -26,7 +26,7 @@ import * as PanelMenu from "resource:///org/gnome/shell/ui/panelMenu.js";
 import * as PopupMenu from "resource:///org/gnome/shell/ui/popupMenu.js";
 import { Config } from "./config.js";
 import { Weather } from "./weather.js";
-import { displayTemp } from "./utils.js";
+import { displayTemp } from "./lang.js";
 
 export class Popup {
 
@@ -70,8 +70,6 @@ export class Popup {
     updateGui(w : Weather) {
         const iconPath = `${this.#metadata.path}/icons/${w.gIconName}-symbolic.svg`;
         const iconFile = Gio.File.new_for_path(iconPath);
-        console.error(iconFile.query_exists(null));
-        console.error(iconPath);
         const gicon = new Gio.FileIcon({ file: iconFile });
 
         this.#condition.gicon = gicon;

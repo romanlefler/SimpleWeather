@@ -24,6 +24,7 @@ import { ExtensionMetadata } from "resource:///org/gnome/shell/extensions/extens
 import { AboutPage } from "./preferences/aboutPage.js";
 import { setUpGettext } from "./gettext.js";
 import { gettext as prefsGettext } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
+import { initLocales } from "./lang.js";
 
 export default class SimpleWeatherPreferences extends ExtensionPreferences {
 
@@ -36,6 +37,7 @@ export default class SimpleWeatherPreferences extends ExtensionPreferences {
 
     async fillPreferencesWindow(window: Adw.PreferencesWindow): Promise<void> {
         setUpGettext(prefsGettext);
+        initLocales();
 
         const settings = this.getSettings();
         settings.delay();
