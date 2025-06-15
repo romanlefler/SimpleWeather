@@ -44,5 +44,10 @@
             <summary>My Location Refresh Minutes</summary>
         </key>
 
+        <key name="dont-check-locales" type="b">
+            <default>false</default>
+            <summary>Supress dialog that says there's a bug in handling your locales</summary>
+        </key>
+
     </schema>
 </schemalist>

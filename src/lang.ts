@@ -25,9 +25,9 @@ let locales : string[] = [ "u" ];
 
 /**
  * Initializes locales for use in JavaScript.
- * @returns True if locales were successfully converted,
+ * @returns Undefined upon success, or the error message
  */
-export function initLocales() : boolean {
+export function initLocales() : string | undefined {
     // GLib gets locales from env variables
     const gLibLocales = GLib.get_language_names();
     const out : string[] = [ ];
@@ -55,13 +55,13 @@ export function initLocales() : boolean {
         if(e instanceof RangeError) {
             console.error(e);
             locales = [ "en" ];
-            return false;
+            return e.message;
         }
         else throw e;
     }
 
     locales = out;
-    return true;
+    return undefined;
 }
 
 /**

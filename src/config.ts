@@ -120,6 +120,10 @@ export class Config {
         else return val;
     }
 
+    getDontCheckLocales() : boolean {
+        return this.#settings!.get_boolean("dont-check-locales");
+    }
+
 }
 
 function readGTypeAS(gvariant : GLib.Variant<any>) : string[] {
