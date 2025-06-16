@@ -14,6 +14,10 @@ Many translations have been auto-generated using CrowdIn.
 They are probably very bad; create pull requests to fix mistakes
 or add missing translations.
 
+## Building
+
+Consult [`docs/building.md`](./docs/building.md).
+
 ## 48.0.0 Checklist
 
 - [x] Option for sunrise/sundown in top bar
