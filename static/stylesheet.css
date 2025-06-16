@@ -8,6 +8,10 @@
     text-align: center;
 }
 
+.simpleweather-card-icon {
+    icon-size: 64px;
+}
+
 .simpleweather-h1 {
     font-size: 1.75em;
 }

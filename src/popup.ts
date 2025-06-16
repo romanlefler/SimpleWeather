@@ -26,15 +26,64 @@ import * as PanelMenu from "resource:///org/gnome/shell/ui/panelMenu.js";
 import * as PopupMenu from "resource:///org/gnome/shell/ui/popupMenu.js";
 import { Config } from "./config.js";
 import { Weather } from "./weather.js";
-import { displayTemp } from "./lang.js";
+import { displayDayOfWeek, displayTemp } from "./lang.js";
+import { gettext as _g } from "./gettext.js";
+
+interface ForecastCard {
+    card : St.BoxLayout;
+    day : St.Label;
+    icon : St.Icon;
+    high : St.Label;
+    low : St.Label;
+}
+
+function createForecastCard() : ForecastCard {
+    const card = new St.BoxLayout({
+        vertical: true,
+        x_expand: true,
+        y_expand: true
+    });
+
+    const day = new St.Label({
+        text: displayDayOfWeek(new Date()),
+        x_align: Clutter.ActorAlign.CENTER
+    });
+
+    const icon = new St.Icon({
+        icon_name: "view-refresh-symbolic",
+        style_class: "simpleweather-card-icon"
+    });
+
+    const high = new St.Label({
+        text: _g("H: %s").format("0\u00B0"),
+        x_align: Clutter.ActorAlign.CENTER
+    });
+
+    const low = new St.Label({
+        text: _g("L: %s").format("0\u00B0"),
+        x_align: Clutter.ActorAlign.CENTER
+    });
+
+    card.add_child(icon);
+    card.add_child(high);
+    card.add_child(low);
+    return {
+        card,
+        day,
+        icon,
+        high,
+        low
+    };
+}
 
 export class Popup {
 
     readonly #config : Config;
     readonly #metadata : ExtensionMetadata;
 
-    #condition : St.Icon;
-    #temp : St.Label;
+    readonly #condition : St.Icon;
+    readonly #temp : St.Label;
+    readonly #forecastCards : ForecastCard[];
 
     constructor(config : Config, metadata : ExtensionMetadata, menu : PopupMenu.PopupMenu) {
         this.#config = config;
@@ -57,6 +106,19 @@ export class Popup {
 
         hbox.add_child(leftVBox);
 
+        const forecasts = new St.BoxLayout({
+            vertical: false,
+            x_expand: true,
+            y_expand: false
+        });
+        this.#forecastCards = [ ];
+        for(let i = 0; i < 7; i++) {
+            const c = createForecastCard();
+            forecasts.add_child(c.card);
+            this.#forecastCards.push(c);
+        }
+        hbox.add_child(forecasts);
+
         const childItem = new PopupMenu.PopupBaseMenuItem({ reactive: false });
         childItem.actor.add_child(hbox);
 
@@ -67,13 +129,29 @@ export class Popup {
         menu.firstMenuItem.destroy();
     }
 
-    updateGui(w : Weather) {
-        const iconPath = `${this.#metadata.path}/icons/${w.gIconName}-symbolic.svg`;
+    #createIcon(s : string) : Gio.Icon {
+        const iconPath = `${this.#metadata.path}/icons/${s}-symbolic.svg`;
         const iconFile = Gio.File.new_for_path(iconPath);
-        const gicon = new Gio.FileIcon({ file: iconFile });
+        return new Gio.FileIcon({ file: iconFile });
+    }
 
-        this.#condition.gicon = gicon;
+    updateGui(w : Weather) {
+        this.#condition.gicon = this.#createIcon(w.gIconName);
         this.#temp.text = displayTemp(w, this.#config);
+
+        this.#updateForecast(w);
+    }
+
+    #updateForecast(w : Weather) {
+        const fore = w.forecast;
+        for(let i = 0; i < this.#forecastCards.length; i++) {
+            const c = this.#forecastCards[i];
+
+            c.day.text = displayDayOfWeek(fore[i].date);
+            c.icon.gicon = this.#createIcon(fore[i].gIconName);
+            c.high.text = _g("H: %s").format("PLACEHOLDER");
+            c.low.text = _g("L: %s").format("PLACEHOLDER");
+        }
     }
 
 }
