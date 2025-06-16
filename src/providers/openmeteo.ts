@@ -80,7 +80,8 @@ export class OpenMeteo implements Provider {
         for(let i = 0; i < dayCount; i++) {
             const fDateStr = daily.time[i];
             // We always want day icons for forecast
-            const fIconName = getGIconName(daily.weather_code, false);
+            const fIcon = codeToIcon[daily.weather_code[i]];
+            const fIconName = getGIconName(fIcon, false);
             forecast.push({
                 // This T00 thing tells the parser to assume local time (which we must do)
                 date: new Date(`${fDateStr}T00:00:00`),
