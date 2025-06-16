@@ -100,3 +100,10 @@ export function displayTime(d : Date, cfg : Config, showAmPm : boolean = true) :
 
     return str;
 }
+
+export function displayDayOfWeek(d : Date) : string {
+    const locales = getLocales();
+    return d.toLocaleDateString(locales, {
+        weekday: "long"
+    });
+};
