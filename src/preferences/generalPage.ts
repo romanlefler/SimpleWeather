@@ -35,15 +35,15 @@ export class GeneralPage extends Adw.PreferencesPage {
         });
 
         const unitGroup = new Adw.PreferencesGroup({
-            title: "Units",
-            description: "Configure units of measurement"
+            title: _g("Units"),
+            description: _g("Configure units of measurement")
         });
 
         const tempUnits = new Gtk.StringList();
         tempUnits.append(_g("Fahrenheit"));
         tempUnits.append(_g("Celsius"));
         const tempRow = new Adw.ComboRow({
-            title: "Temperature",
+            title: _g("Temperature"),
             model: tempUnits,
             selected: settings.get_enum("temp-unit") - 1
         });
@@ -65,7 +65,7 @@ export class GeneralPage extends Adw.PreferencesPage {
         myLocProvs.append(`${_g("System")} - Geoclue`);
         myLocProvs.append(_g("Disable"));
         const myLocRow = new Adw.ComboRow({
-            title: "Provider",
+            title: _g("Provider"),
             model: myLocProvs,
             selected: settings.get_enum("my-loc-provider") - 1
         });
