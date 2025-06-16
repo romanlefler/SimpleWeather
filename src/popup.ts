@@ -104,7 +104,10 @@ export class Popup {
 
         const hbox = new St.BoxLayout({ vertical: false });
 
-        const leftVBox = new St.BoxLayout({ vertical: true });
+        const leftVBox = new St.BoxLayout({
+            vertical: true,
+            style_class: "modal-dialog simpleweather-current"
+        });
         leftVBox.add_child(this.#condition);
         leftVBox.add_child(this.#temp);
 
