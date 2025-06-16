@@ -51,7 +51,8 @@ function createForecastCard() : ForecastCard {
 
     const icon = new St.Icon({
         icon_name: "view-refresh-symbolic",
-        style_class: "simpleweather-card-icon"
+        style_class: "simpleweather-card-icon",
+        x_align: Clutter.ActorAlign.CENTER
     });
 
     const high = new St.Label({
@@ -92,11 +93,13 @@ export class Popup {
 
         this.#condition = new St.Icon({
             icon_name: "weather-clear-symbolic",
-            style_class: "simpleweather-popup-icon"
+            style_class: "simpleweather-popup-icon",
+            x_align: Clutter.ActorAlign.CENTER
         });
         this.#temp = new St.Label({
             text: "0\u00B0",
-            style_class: "simpleweather-popup-temp"
+            style_class: "simpleweather-popup-temp",
+            x_align: Clutter.ActorAlign.CENTER
         });
 
         const hbox = new St.BoxLayout({ vertical: false });
@@ -150,8 +153,8 @@ export class Popup {
 
             c.day.text = displayDayOfWeek(fore[i].date);
             c.icon.gicon = this.#createIcon(fore[i].gIconName);
-            c.high.text = _g("H: %s").format(fore[i].tempMax);
-            c.low.text = _g("L: %s").format(fore[i].tempMin);
+            c.high.text = _g("H: %s").format(displayTemp(fore[i].tempMax, this.#config));
+            c.low.text = _g("L: %s").format(displayTemp(fore[i].tempMin, this.#config));
         }
     }
 
