@@ -25,6 +25,14 @@ Create zip archive of extension to `dist/simple-weather@romanlefler.com-vVERSION
 make pack
 ```
 
+## Install to User
+
+Install the extension for this user:
+
+```shell
+make install
+```
+
 ## Clean Build Directory
 
 Remove build files:
