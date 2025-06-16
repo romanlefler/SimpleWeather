@@ -3,7 +3,6 @@
 UUID=$(awk -F'"' '/uuid/ { print $4 }' ./static/metadata.json)
 rm -rf $HOME/.local/share/gnome-shell/extensions/$UUID
 
-make clean
 make install
 
 # export G_MESSAGES_DEBUG=all
