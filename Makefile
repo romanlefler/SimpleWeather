@@ -45,7 +45,7 @@ install: out
 
 clean:
 	rm -rf $(DIST)
-	rm $(POT)
+	rm -f $(POT)
 
 ./node_modules: package.json
 	printf -- 'NEEDED: npm\n'
