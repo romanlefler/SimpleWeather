@@ -43,4 +43,7 @@ export interface DayForecast {
 
     tempMax : Temp;
 
+    // Should be 0 - 100
+    precipChancePercent : number;
+
 }

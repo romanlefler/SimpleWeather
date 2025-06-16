@@ -35,6 +35,7 @@ interface ForecastCard {
     icon : St.Icon;
     high : St.Label;
     low : St.Label;
+    rainChance : St.Label;
 }
 
 function createForecastCard() : ForecastCard {
@@ -65,16 +66,23 @@ function createForecastCard() : ForecastCard {
         x_align: Clutter.ActorAlign.CENTER
     });
 
+    const rainChance = new St.Label({
+        text: "",
+        x_align: Clutter.ActorAlign.CENTER
+    });
+
     card.add_child(day);
     card.add_child(icon);
     card.add_child(high);
     card.add_child(low);
+    card.add_child(rainChance);
     return {
         card,
         day,
         icon,
         high,
-        low
+        low,
+        rainChance
     };
 }
 
@@ -159,6 +167,12 @@ export class Popup {
             c.icon.gicon = this.#createIcon(fore[i].gIconName);
             c.high.text = _g("H: %s").format(displayTemp(fore[i].tempMax, this.#config));
             c.low.text = _g("L: %s").format(displayTemp(fore[i].tempMin, this.#config));
+            
+            const rainChance = fore[i].precipChancePercent;
+            // Round to multiple of 5
+            const roundedRainChance = Math.round(rainChance / 5) * 5;
+            // Only show chances >= 30%
+            c.rainChance.text = rainChance >= 30 ? `${roundedRainChance}%` : "";
         }
     }
 

@@ -44,7 +44,8 @@ export class OpenMeteo implements Provider {
             latitude: String(coords.lat),
             longitude: String(coords.lon),
             current: "temperature_2m,weather_code,is_day",
-            daily: "sunset,sunrise,weather_code,temperature_2m_min,temperature_2m_max",
+            daily: "sunset,sunrise,weather_code,temperature_2m_min,temperature_2m_max," +
+                "precipitation_probability_max",
             temperature_unit: "fahrenheit"
         };
         // params.lang
@@ -87,7 +88,8 @@ export class OpenMeteo implements Provider {
                 date: new Date(`${fDateStr}T00:00:00`),
                 gIconName: fIconName,
                 tempMin: new Temp(daily.temperature_2m_min[i]),
-                tempMax: new Temp(daily.temperature_2m_max[i])
+                tempMax: new Temp(daily.temperature_2m_max[i]),
+                precipChancePercent: daily.precipitation_probability_max[i]
             });
         }
 
