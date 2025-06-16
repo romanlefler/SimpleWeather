@@ -27,7 +27,7 @@ METADATACP   := $(BUILD)/metadata.json
 STYLESHEETCP := $(BUILD)/stylesheet.css
 ZIP		     := $(DIST)/$(NAME)-v$(VERSION).zip
 POT			 := $(PO)/$(UUID).pot
-ICONSOUT	 := $(ICONSVGS:$(ICONS)/%:$(BUILD)/icons/%)
+ICONSOUT	 := $(ICONSSRCS:$(ICONS)/%=$(BUILD)/icons/%)
 MOS          := $(POFILES:$(PO)/%.po=$(BUILD)/locale/%/LC_MESSAGES/$(UUID).mo)
 
 .PHONY: out pack install clean copyicons ts
