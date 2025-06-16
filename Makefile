@@ -18,19 +18,21 @@ SCHEMASRC  := $(SCHEMAS)/org.gnome.shell.extensions.$(NAME).gschema.xml
 # This excludes .d.ts files
 SRCS       := $(shell find $(SRC) -type f -name '*.ts' ! -name '*.d.ts')
 POFILES	   := $(wildcard $(PO)/*.po)
-ICONSVGS   := $(wildcard $(ICONS)/*.svg)
+# This intentionally includes the license file
+ICONSSRCS  := $(wildcard $(ICONS)/*)
 
 SCHEMAOUT    := $(SCHEMAOUTDIR)/gschemas.compiled
 SCHEMACP     := $(SCHEMAOUTDIR)/org.gnome.shell.extensions.$(NAME).gschema.xml
 METADATACP   := $(BUILD)/metadata.json
 STYLESHEETCP := $(BUILD)/stylesheet.css
-JSOUT        := $(SRCS:$(SRC)/%.ts=$(BUILD)/%.js)
 ZIP		     := $(DIST)/$(NAME)-v$(VERSION).zip
 POT			 := $(PO)/$(UUID).pot
+ICONSOUT	 := $(ICONSVGS:$(ICONS)/%:$(BUILD)/icons/%)
+MOS          := $(POFILES:$(PO)/%.po=$(BUILD)/locale/%/LC_MESSAGES/$(UUID).mo)
 
-.PHONY: out pack install clean
+.PHONY: out pack install clean copyicons ts
 
-out: $(POT) $(JSOUT) $(SCHEMAOUT) $(SCHEMACP) $(METADATACP) $(STYLESHEETCP) copypo copyicons
+out: $(POT) ts $(SCHEMAOUT) $(SCHEMACP) $(METADATACP) $(STYLESHEETCP) $(ICONSOUT) $(MOS)
 
 pack: $(ZIP)
 
@@ -45,11 +47,13 @@ clean:
 	rm -rf $(DIST)
 	rm $(POT)
 
-node_modules: package.json
+./node_modules: package.json
 	printf -- 'NEEDED: npm\n'
 	npm install
 
-$(BUILD)/%.js: $(SRC)/%.ts node_modules
+ts: $(BUILD)/extension.js
+
+$(BUILD)/extension.js: $(SRCS) ./node_modules
 	printf -- 'NEEDED: tsc\n'
 	tsc
 
@@ -79,11 +83,15 @@ $(POT): $(SRCS)
 		--msgid-bugs-address=simpleweather-gnome@proton.me \
 		$(SRCS)
 
-copypo: $(POFILES)
-	cp -r $(PO) $(BUILD)/po
+$(BUILD)/locale/%/LC_MESSAGES/$(UUID).mo: $(PO)/%.po
+	mkdir -p $(BUILD)/locale/$*/LC_MESSAGES
+	msgfmt -c $< -o $@
 
-copyicons: $(ICONSVGS)
-	cp -r $(ICONS) $(BUILD)/icons
+$(BUILD)/icons:
+	mkdir -p $@
+
+$(BUILD)/icons/%: $(ICONS)/% $(BUILD)/icons
+	cp $< $@
 
 $(ZIP): out
 	printf -- 'NEEDED: zip\n'
