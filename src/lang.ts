@@ -18,6 +18,7 @@
 import GLib from "gi://GLib";
 import { Weather } from "./weather.js";
 import { Config } from "./config.js";
+import { Temp } from "./units.js";
 
 let locales : string[] | undefined;
 
@@ -78,9 +79,9 @@ export function getLocales() : string[] | undefined {
     return locales;
 }
 
-export function displayTemp(w : Weather, cfg : Config) : string {
+export function displayTemp(t : Temp, cfg : Config) : string {
     const tempUnit = cfg.getTempUnit();
-    return `${Math.round(w.temp.get(tempUnit))}\u00B0`;
+    return `${Math.round(t.get(tempUnit))}\u00B0`;
 }
 
 export function displayTime(d : Date, cfg : Config, showAmPm : boolean = true) : string {

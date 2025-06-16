@@ -137,7 +137,7 @@ export class Popup {
 
     updateGui(w : Weather) {
         this.#condition.gicon = this.#createIcon(w.gIconName);
-        this.#temp.text = displayTemp(w, this.#config);
+        this.#temp.text = displayTemp(w.temp, this.#config);
 
         this.#updateForecast(w);
     }
@@ -149,8 +149,8 @@ export class Popup {
 
             c.day.text = displayDayOfWeek(fore[i].date);
             c.icon.gicon = this.#createIcon(fore[i].gIconName);
-            c.high.text = _g("H: %s").format("PLACEHOLDER");
-            c.low.text = _g("L: %s").format("PLACEHOLDER");
+            c.high.text = _g("H: %s").format(fore[i].tempMax);
+            c.low.text = _g("L: %s").format(fore[i].tempMin);
         }
     }
 

@@ -247,7 +247,7 @@ export default class SimpleWeatherExtension extends Extension {
         const w = this.#cachedWeather;
         if(!w) return;
 
-        this.#panelLabel!.text = displayTemp(w, this.#config!);
+        this.#panelLabel!.text = displayTemp(w.temp, this.#config!);
 
         this.#panelIcon!.icon_name = w.gIconName;
 
