@@ -64,6 +64,7 @@ function createForecastCard() : ForecastCard {
         x_align: Clutter.ActorAlign.CENTER
     });
 
+    card.add_child(day);
     card.add_child(icon);
     card.add_child(high);
     card.add_child(low);
