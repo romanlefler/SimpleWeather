@@ -29,4 +29,18 @@ export interface Weather {
 
     sunrise : Date;
 
+    forecast : DayForecast[];
+
+}
+
+export interface DayForecast {
+
+    date : Date;
+
+    gIconName : string;
+
+    tempMin : Temp;
+
+    tempMax : Temp;
+
 }
