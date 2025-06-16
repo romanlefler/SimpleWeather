@@ -113,7 +113,8 @@ export class Popup {
         const forecasts = new St.BoxLayout({
             vertical: false,
             x_expand: true,
-            y_expand: false
+            y_expand: false,
+            style_class: "simpleweather-card-row"
         });
         this.#forecastCards = [ ];
         for(let i = 0; i < 7; i++) {

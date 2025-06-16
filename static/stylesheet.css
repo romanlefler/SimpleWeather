@@ -12,6 +12,10 @@
     icon-size: 64px;
 }
 
+.simpleweather-card-row {
+    spacing: 12px;
+}
+
 .simpleweather-h1 {
     font-size: 1.75em;
 }
