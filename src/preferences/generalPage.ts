@@ -20,6 +20,7 @@ import Gtk from "gi://Gtk";
 import Gio from "gi://Gio";
 import Adw from "gi://Adw";
 import { gettext as _g } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
+import { WeatherProviderNames } from "../providers/provider.js";
 
 export class GeneralPage extends Adw.PreferencesPage {
 
@@ -52,8 +53,27 @@ export class GeneralPage extends Adw.PreferencesPage {
             settings.apply();
         });
         unitGroup.add(tempRow);
-
         this.add(unitGroup);
+
+        const weatherServiceGroup = new Adw.PreferencesGroup({
+            title: _g("Weather Service"),
+            description: _g("Configure how the weather is attained")
+        });
+
+        const wProvList = new Gtk.StringList({
+            strings: WeatherProviderNames as string[]
+        });
+        const wProvRow = new Adw.ComboRow({
+            title: _g("Weather Provider"),
+            model: wProvList,
+            selected: settings.get_enum("weather-provider") - 1
+        });
+        wProvRow.connect("notify::selected", () => {
+            settings.set_enum("weather-provider", wProvRow.selected + 1);
+            settings.apply();
+        });
+        weatherServiceGroup.add(wProvRow);
+        this.add(weatherServiceGroup);
 
         const myLocGroup = new Adw.PreferencesGroup({
             title: _g("My Location"),

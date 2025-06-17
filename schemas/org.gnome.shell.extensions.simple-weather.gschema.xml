@@ -9,6 +9,9 @@
         <value value="2" nick="geoclue" />
         <value value="3" nick="disable" />
     </enum>
+    <enum id="org.gnome.shell.extensions.simple-weather.weather-provider">
+        <value value="1" nick="open-meteo" />
+    </enum>
     <schema id="org.gnome.shell.extensions.simple-weather" path="/org/gnome/shell/extensions/simple-weather/">
 
         <key name="is-activated" type="b">
@@ -39,6 +42,7 @@
             <default>'ipinfo.io'</default>
             <summary>My Location Provider</summary>
         </key>
+
         <key name="my-loc-refresh-min" type="d">
             <default>60.0</default>
             <summary>My Location Refresh Minutes</summary>
@@ -47,6 +51,11 @@
         <key name="dont-check-locales" type="b">
             <default>false</default>
             <summary>Supress dialog that says there's a bug in handling your locales</summary>
+        </key>
+
+        <key name="weather-provider" enum="org.gnome.shell.extensions.simple-weather.weather-provider">
+            <default>'open-meteo'</default>
+            <summary>Weather Provider</summary>
         </key>
 
     </schema>

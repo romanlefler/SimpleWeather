@@ -19,7 +19,8 @@ import { Config } from "../config.js";
 import { LibSoup } from "../libsoup.js";
 import { Temp } from "../units.js";
 import { DayForecast, Weather } from "../weather.js";
-import { getGIconName, Icons, Provider } from "./provider.js";
+import { getGIconName, Icons } from "../icons.js"
+import { Provider } from "./provider.js";
 
 const ENDPOINT = "https://api.open-meteo.com/v1/forecast";
 

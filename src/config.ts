@@ -20,6 +20,7 @@ import Gio from "gi://Gio";
 import { TempUnits } from "./units.js";
 import { Location } from "./location.js";
 import { MyLocationProvider } from "./myLocation.js";
+import { WeatherProviderNames } from "./providers/provider.js";
 
 export class Config {
 
@@ -122,6 +123,19 @@ export class Config {
 
     getDontCheckLocales() : boolean {
         return this.#settings!.get_boolean("dont-check-locales");
+    }
+
+    getWeatherProvider() : number {
+        const val = this.#settings!.get_enum("weather-provider");
+        if(val < 1 || val > WeatherProviderNames.length) return 1;
+        else return val;
+    }
+
+    onWeatherProviderChanged(callback : () => void) {
+        const id = this.#settings!.connect("changed", (_, key) => {
+            if(key === "weather-provider") callback();
+        });
+        this.#handlerIds.push(id);
     }
 
 }

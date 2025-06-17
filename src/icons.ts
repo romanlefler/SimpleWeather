@@ -15,29 +15,31 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Config } from "../config.js";
-import { LibSoup } from "../libsoup.js";
-import { Weather } from "../weather.js";
-import { OpenMeteo } from "./openmeteo.js";
+export const Icons = {
+    Clear: "clear",
+    Cloudy: "few-clouds",
+    Foggy: "fog",
+    FreezingRain: "freezing-rain",
+    FreezingStorm: "freezing-storm",
+    Hail: "snow",
+    Overcast: "overcast",
+    Misty: "fog",
+    Rainy: "showers",
+    RainScattered: "showers-scattered",
+    Snowy: "snow",
+    Stormy: "storm",
+    Windy: "windy",
+    Tornado: "tornado"
+};
 
-export interface Provider {
-
-    readonly nameKey: string;
-
-    fetchWeather(): Promise<Weather>;
-
+function iconHasNightVariant(name: string) {
+    return name === "clear" || name === "few-clouds";
 }
 
-export function createProvider(soup : LibSoup, config : Config) {
-    const id = config.getWeatherProvider();
-    switch(id) {
-        case 1:
-            return new OpenMeteo(soup, config);
-        default:
-            throw new Error("Invalid weather provider ID.");
-    }
+export function getGIconName(name: string, isNight: boolean): string {
+    let fullName = "weather-" + name;
+
+    if (isNight && iconHasNightVariant(name)) fullName += "-night";
+    return fullName;
 }
 
-export const WeatherProviderNames : readonly string[] = Object.freeze([
-    "Open-Meteo"
-]);

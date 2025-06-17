@@ -22,7 +22,7 @@ import St from 'gi://St';
 import { Extension } from "resource:///org/gnome/shell/extensions/extension.js";
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as PanelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js';
-import { Provider } from "./providers/provider.js";
+import { createProvider, Provider } from "./providers/provider.js";
 import { OpenMeteo } from "./providers/openmeteo.js";
 import { LibSoup } from "./libsoup.js";
 import { Config } from "./config.js";
@@ -125,7 +125,7 @@ export default class SimpleWeatherExtension extends Extension {
         // Gettext and gsettings are already set up
         this.#config = new Config(this.#gsettings!);
         this.#libsoup = new LibSoup();
-        this.#provider = new OpenMeteo(this.#libsoup, this.#config);
+        this.#provider = createProvider(this.#libsoup, this.#config);
         setUpMyLocation(this.#libsoup, this.#config);
     }
 
@@ -173,6 +173,10 @@ export default class SimpleWeatherExtension extends Extension {
 
         // Some settings require the weather to be re-fetched
         this.#config!.onMainLocationChanged(this.#updateWeather.bind(this));
+        this.#config!.onWeatherProviderChanged(() => {
+            this.#provider = createProvider(this.#libsoup!, this.#config!);
+            this.#updateWeather();
+        });
         // Some settings just require a GUI update
         this.#config!.onTempUnitChanged(this.#updateGui.bind(this));
 
