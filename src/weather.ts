@@ -29,7 +29,11 @@ export interface Weather {
 
     sunrise : Date;
 
+    // each item is 1 day apart
     forecast : Forecast[];
+
+    // each item is 1 hour apart
+    hourForecast : Forecast[];
 
     providerName : string;
 
@@ -41,9 +45,11 @@ export interface Forecast {
 
     gIconName : string;
 
-    tempMin : Temp;
+    temp? : Temp;
 
-    tempMax : Temp;
+    tempMin? : Temp;
+
+    tempMax? : Temp;
 
     // Should be 0 - 100
     precipChancePercent : number;

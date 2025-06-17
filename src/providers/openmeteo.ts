@@ -47,6 +47,9 @@ export class OpenMeteo implements Provider {
             current: "temperature_2m,weather_code,is_day",
             daily: "sunset,sunrise,weather_code,temperature_2m_min,temperature_2m_max," +
                 "precipitation_probability_max",
+            hourly: "temperature_2m,weather_code,precipitation_probability,is_day",
+            // Note that 24 is not the max
+            forecast_hours: "28",
             temperature_unit: "fahrenheit"
         };
         // params.lang
@@ -66,6 +69,7 @@ export class OpenMeteo implements Provider {
         const body = await this.#fetch();
         const cur = body.current!;
         const daily = body.daily!;
+        const hourly = body.hourly!;
 
         const temp = new Temp(cur.temperature_2m);
         const isNight = cur.is_day === 0;
@@ -94,6 +98,21 @@ export class OpenMeteo implements Provider {
             });
         }
 
+        const hourForecast : Forecast[] = [ ];
+        const hourCount = hourly.time.length;
+        for(let i = 0; i < hourCount; i++) {
+            const fDateStr = hourly.time[i];
+            const fIsNight = hourly.is_day[i] === 0;
+            const fIcon = codeToIcon[daily.weather_code[i]];
+            const fIconName = getGIconName(fIcon, fIsNight);
+            hourForecast.push({
+                date: new Date(`${fDateStr}Z`),
+                gIconName: fIconName,
+                temp: new Temp(hourly.temperature_2m[i]),
+                precipChancePercent: hourly.precipitation_probability[i]
+            });
+        }
+
         return {
             temp,
             gIconName,
@@ -101,6 +120,7 @@ export class OpenMeteo implements Provider {
             sunrise,
             sunset,
             forecast: dayForecast,
+            hourForecast,
             providerName: this.nameKey
         };
     }

@@ -25,17 +25,25 @@ import * as Main from "resource:///org/gnome/shell/ui/main.js";
 import * as PanelMenu from "resource:///org/gnome/shell/ui/panelMenu.js";
 import * as PopupMenu from "resource:///org/gnome/shell/ui/popupMenu.js";
 import { Config } from "./config.js";
-import { Weather } from "./weather.js";
-import { displayDayOfWeek, displayTemp } from "./lang.js";
+import { Forecast, Weather } from "./weather.js";
+import { displayDayOfWeek, displayTemp, displayTime } from "./lang.js";
 import { gettext as _g } from "./gettext.js";
 
 interface ForecastCard {
     card : St.BoxLayout;
     day : St.Label;
     icon : St.Icon;
-    high : St.Label;
-    low : St.Label;
-    rainChance : St.Label;
+    data1 : St.Label;
+    data2 : St.Label;
+    data3 : St.Label;
+}
+
+enum ForecastMode {
+    Week = 0,
+    SevenHours = 1,
+    SecondPartOfDay = 2,
+
+    Max = 2
 }
 
 function createForecastCard() : ForecastCard {
@@ -56,33 +64,33 @@ function createForecastCard() : ForecastCard {
         x_align: Clutter.ActorAlign.CENTER
     });
 
-    const high = new St.Label({
-        text: _g("H: %s").format("0\u00B0"),
+    const data1 = new St.Label({
+        text: "",
         x_align: Clutter.ActorAlign.CENTER
     });
 
-    const low = new St.Label({
-        text: _g("L: %s").format("0\u00B0"),
+    const data2 = new St.Label({
+        text: "",
         x_align: Clutter.ActorAlign.CENTER
     });
 
-    const rainChance = new St.Label({
+    const data3 = new St.Label({
         text: "",
         x_align: Clutter.ActorAlign.CENTER
     });
 
     card.add_child(day);
     card.add_child(icon);
-    card.add_child(high);
-    card.add_child(low);
-    card.add_child(rainChance);
+    card.add_child(data1);
+    card.add_child(data2);
+    card.add_child(data3);
     return {
         card,
         day,
         icon,
-        high,
-        low,
-        rainChance
+        data1,
+        data2,
+        data3
     };
 }
 
@@ -100,9 +108,13 @@ export class Popup {
     readonly #forecastCards : ForecastCard[];
     readonly #copyright : St.Label;
 
+    #foreMode : ForecastMode;
+    #cachedWeather? : Weather;
+
     constructor(config : Config, metadata : ExtensionMetadata, menu : PopupMenu.PopupMenu) {
         this.#config = config;
         this.#metadata = metadata;
+        this.#foreMode = ForecastMode.Week;
 
         this.#condition = new St.Icon({
             icon_name: "weather-clear-symbolic",
@@ -130,7 +142,8 @@ export class Popup {
             vertical: false,
             x_expand: true,
             y_expand: false,
-            style_class: "simpleweather-card-row"
+            style_class: "simpleweather-card-row",
+            reactive: true
         });
         this.#forecastCards = [ ];
         for(let i = 0; i < 7; i++) {
@@ -139,6 +152,14 @@ export class Popup {
             this.#forecastCards.push(c);
         }
         hbox.add_child(forecasts);
+
+        forecasts.connect("button-press-event", () => {
+            this.#foreMode++;
+            if(this.#foreMode > ForecastMode.Max) this.#foreMode = 0;
+
+            const w = this.#cachedWeather;
+            if(w) this.#updateForecast(w);
+        });
 
         const childItem = new PopupMenu.PopupBaseMenuItem({ reactive: false });
         childItem.actor.add_child(hbox);
@@ -177,20 +198,54 @@ export class Popup {
     }
 
     #updateForecast(w : Weather) {
-        const fore = w.forecast;
+        this.#cachedWeather = w;
+
+        const everyOtherHour = w.hourForecast.filter((_, i) => i % 2 === 0);
+
+        const forecastArrs = [
+            w.forecast,
+            everyOtherHour,
+            everyOtherHour.slice(7)
+        ];
+        const fore : Forecast[] = forecastArrs[this.#foreMode];
+
         for(let i = 0; i < this.#forecastCards.length; i++) {
             const c = this.#forecastCards[i];
 
-            c.day.text = displayDayOfWeek(fore[i].date);
+            let dateText : string;
+            if(this.#foreMode === ForecastMode.Week) dateText = displayDayOfWeek(fore[i].date);
+            else dateText = displayTime(fore[i].date, this.#config, true);
+
+            c.day.text = dateText;
+
             c.icon.gicon = this.#createIcon(fore[i].gIconName);
-            c.high.text = _g("H: %s").format(displayTemp(fore[i].tempMax, this.#config));
-            c.low.text = _g("L: %s").format(displayTemp(fore[i].tempMin, this.#config));
+
+            const text : string[] = [ ];
+
+            const temp = fore[i].temp;
+            const tempMin = fore[i].tempMin;
+            const tempMax = fore[i].tempMax;
+            if(temp !== undefined) {
+                text.push(displayTemp(temp, this.#config));
+            }
+            else if(tempMax !== undefined && tempMin !== undefined) {
+                text.push(_g("H: %s").format(displayTemp(tempMax, this.#config)));
+                text.push(_g("L: %s").format(displayTemp(tempMin, this.#config)));
+            }
             
             const rainChance = fore[i].precipChancePercent;
             // Round to multiple of 5
             const roundedRainChance = Math.round(rainChance / 5) * 5;
             // Only show chances >= 30%
-            c.rainChance.text = rainChance >= 30 ? `${roundedRainChance}%` : "";
+            text.push(rainChance >= 30 ? `${roundedRainChance}%` : "");
+
+            if(text.length > 3) throw new Error("Too much text to display.");
+            while(text.length < 3) text.push("");
+
+            c.data1.text = text[0];
+            c.data2.text = text[1];
+            c.data3.text = text[2];
+
         }
     }
 
