@@ -86,6 +86,10 @@ function createForecastCard() : ForecastCard {
     };
 }
 
+function copyrightText(provName : string) : string {
+    return `${_g("Weather Data")} \u00A9 ${provName} 2025`;
+}
+
 export class Popup {
 
     readonly #config : Config;
@@ -94,6 +98,7 @@ export class Popup {
     readonly #condition : St.Icon;
     readonly #temp : St.Label;
     readonly #forecastCards : ForecastCard[];
+    readonly #copyright : St.Label;
 
     constructor(config : Config, metadata : ExtensionMetadata, menu : PopupMenu.PopupMenu) {
         this.#config = config;
@@ -138,7 +143,19 @@ export class Popup {
         const childItem = new PopupMenu.PopupBaseMenuItem({ reactive: false });
         childItem.actor.add_child(hbox);
 
+        const textRect = new St.BoxLayout({
+            vertical: false,
+        });
+        this.#copyright = new St.Label({
+            text: ""
+        });
+        textRect.add_child(this.#copyright);
+
+        const baseText = new PopupMenu.PopupBaseMenuItem({ reactive: false });
+        baseText.actor.add_child(textRect);
+
         menu.addMenuItem(childItem);
+        menu.addMenuItem(baseText);
     }
 
     destroy(menu : PopupMenu.PopupMenu) {
@@ -154,6 +171,7 @@ export class Popup {
     updateGui(w : Weather) {
         this.#condition.gicon = this.#createIcon(w.gIconName);
         this.#temp.text = displayTemp(w.temp, this.#config);
+        this.#copyright.text = copyrightText(w.providerName);
 
         this.#updateForecast(w);
     }

@@ -100,7 +100,8 @@ export class OpenMeteo implements Provider {
             isNight,
             sunrise,
             sunset,
-            forecast
+            forecast,
+            providerName: this.nameKey
         };
     }
 

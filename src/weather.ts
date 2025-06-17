@@ -31,6 +31,8 @@ export interface Weather {
 
     forecast : DayForecast[];
 
+    providerName : string;
+
 }
 
 export interface DayForecast {
