@@ -29,13 +29,13 @@ export interface Weather {
 
     sunrise : Date;
 
-    forecast : DayForecast[];
+    forecast : Forecast[];
 
     providerName : string;
 
 }
 
-export interface DayForecast {
+export interface Forecast {
 
     date : Date;
 

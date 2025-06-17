@@ -18,7 +18,7 @@
 import { Config } from "../config.js";
 import { LibSoup } from "../libsoup.js";
 import { Temp } from "../units.js";
-import { DayForecast, Weather } from "../weather.js";
+import { Forecast, Weather } from "../weather.js";
 import { getGIconName, Icons } from "../icons.js"
 import { Provider } from "./provider.js";
 
@@ -77,14 +77,14 @@ export class OpenMeteo implements Provider {
         const sunrise = new Date(body.daily.sunrise[0] + "Z");
         const sunset = new Date(body.daily.sunset[0] + "Z");
 
-        const forecast : DayForecast[] = [ ];
+        const dayForecast : Forecast[] = [ ];
         const dayCount = daily.time.length;
         for(let i = 0; i < dayCount; i++) {
             const fDateStr = daily.time[i];
             // We always want day icons for forecast
             const fIcon = codeToIcon[daily.weather_code[i]];
             const fIconName = getGIconName(fIcon, false);
-            forecast.push({
+            dayForecast.push({
                 // This T00 thing tells the parser to assume local time (which we must do)
                 date: new Date(`${fDateStr}T00:00:00`),
                 gIconName: fIconName,
@@ -100,7 +100,7 @@ export class OpenMeteo implements Provider {
             isNight,
             sunrise,
             sunset,
-            forecast,
+            forecast: dayForecast,
             providerName: this.nameKey
         };
     }
