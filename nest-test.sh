@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/bin/bash
+set -e
 
 UUID=$(awk -F'"' '/uuid/ { print $4 }' ./static/metadata.json)
 rm -rf $HOME/.local/share/gnome-shell/extensions/$UUID
