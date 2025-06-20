@@ -15,7 +15,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Temp } from "./units.js";
+import { Direction, Pressure, Speed, Temp } from "./units.js";
 
 export interface Weather {
 
@@ -34,6 +34,18 @@ export interface Weather {
 
     // each item is 1 hour apart
     hourForecast : Forecast[];
+
+    feelsLike : Temp;
+
+    wind : Speed;
+
+    gusts : Speed;
+
+    windDir : Direction,
+
+    humidity: number;
+
+    pressure : Pressure;
 
     providerName : string;
 

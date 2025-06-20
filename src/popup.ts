@@ -108,6 +108,8 @@ export class Popup {
     readonly #forecastCards : ForecastCard[];
     readonly #copyright : St.Label;
 
+    readonly #menuItems : PopupMenu.PopupBaseMenuItem[];
+
     #foreMode : ForecastMode;
     #cachedWeather? : Weather;
 
@@ -138,6 +140,9 @@ export class Popup {
 
         hbox.add_child(leftVBox);
 
+        const rightVBox = new St.BoxLayout({
+            vertical: true
+        });
         const forecasts = new St.BoxLayout({
             vertical: false,
             x_expand: true,
@@ -151,7 +156,8 @@ export class Popup {
             forecasts.add_child(c.card);
             this.#forecastCards.push(c);
         }
-        hbox.add_child(forecasts);
+        rightVBox.add_child(forecasts);
+        hbox.add_child(rightVBox);
 
         forecasts.connect("button-press-event", () => {
             this.#foreMode++;
@@ -175,12 +181,13 @@ export class Popup {
         const baseText = new PopupMenu.PopupBaseMenuItem({ reactive: false });
         baseText.actor.add_child(textRect);
 
+        this.#menuItems = [ childItem, baseText ];
         menu.addMenuItem(childItem);
         menu.addMenuItem(baseText);
     }
 
     destroy(menu : PopupMenu.PopupMenu) {
-        menu.firstMenuItem.destroy();
+        this.#menuItems.forEach(m => m.destroy());
     }
 
     #createIcon(s : string) : Gio.Icon {

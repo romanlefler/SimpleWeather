@@ -17,7 +17,7 @@
 
 import { Config } from "../config.js";
 import { LibSoup } from "../libsoup.js";
-import { Temp } from "../units.js";
+import { Direction, Pressure, Speed, Temp } from "../units.js";
 import { Forecast, Weather } from "../weather.js";
 import { getGIconName, Icons } from "../icons.js"
 import { Provider } from "./provider.js";
@@ -44,15 +44,17 @@ export class OpenMeteo implements Provider {
         const params = {
             latitude: String(coords.lat),
             longitude: String(coords.lon),
-            current: "temperature_2m,weather_code,is_day",
+            current: "temperature_2m,weather_code,is_day,relative_humidity_2m," +
+                "apparent_temperature,surface_pressure,wind_speed_10m,wind_gusts_10m," +
+                "wind_direction_10m",
             daily: "sunset,sunrise,weather_code,temperature_2m_min,temperature_2m_max," +
                 "precipitation_probability_max",
             hourly: "temperature_2m,weather_code,precipitation_probability,is_day",
             // Note that 24 is not the max
             forecast_hours: "28",
-            temperature_unit: "fahrenheit"
+            temperature_unit: "fahrenheit",
+            wind_speed_unit: "mph"
         };
-        // params.lang
 
         const response = await this.#soup.fetchJson(ENDPOINT, params, false);
         if(!response.is2xx) {
@@ -72,6 +74,12 @@ export class OpenMeteo implements Provider {
         const hourly = body.hourly!;
 
         const temp = new Temp(cur.temperature_2m);
+        const feelsLike = new Temp(cur.apparent_temperature);
+        const wind = new Speed(cur.wind_speed_10m);
+        const gusts = new Speed(cur.wind_gusts_10m);
+        const windDir = new Direction(cur.wind_direction_10m);
+        const humidity : number = cur.relative_humidity_2m;
+        const pressure = new Pressure(cur.surface_pressure);
         const isNight = cur.is_day === 0;
 
         const icon = codeToIcon[cur.weather_code];
@@ -121,6 +129,12 @@ export class OpenMeteo implements Provider {
             sunset,
             forecast: dayForecast,
             hourForecast,
+            feelsLike,
+            wind,
+            gusts,
+            windDir,
+            humidity,
+            pressure,
             providerName: this.nameKey
         };
     }

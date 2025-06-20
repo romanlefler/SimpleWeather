@@ -29,7 +29,7 @@ export enum TempUnits {
 
 export class Temp {
 
-    #fahrenheit;
+    #fahrenheit : number;
 
     constructor(fahrenheit : number) {
         this.#fahrenheit = fahrenheit;
@@ -45,5 +45,85 @@ export class Temp {
                 throw new UnitError("Temperature unit invalid.");
         }
     }
+}
 
+export enum SpeedUnits {
+    Mph = 1,
+    Mps = 2,
+    Kph = 3,
+    Kn = 4,
+    Fps = 5
+}
+
+export class Speed {
+
+    #mph : number;
+
+    constructor(mph : number) {
+        this.#mph = mph;
+    }
+
+    get(units : SpeedUnits) {
+        switch(units) {
+            case SpeedUnits.Mph:
+                return this.#mph;
+            case SpeedUnits.Mps:
+                return this.#mph * 0.44704;
+            case SpeedUnits.Kph:
+                return this.#mph * 1.609344;
+            case SpeedUnits.Kn:
+                return this.#mph * 0.868976;
+            case SpeedUnits.Fps:
+                return this.#mph * 1.466667;
+            default:
+                throw new UnitError("Speed unit invalid.");
+        }
+    }
+}
+
+export enum DirectionUnits {
+    Degrees = 1,
+    EightPoint = 2
+}
+
+export class Direction {
+
+    #degrees : number;
+
+    constructor(degrees : number) {
+        let deg = degrees % 360;
+        if(deg < 0) deg += 360;
+        this.#degrees = deg;
+    }
+
+    get(unit : DirectionUnits) {
+        switch(unit) {
+            case DirectionUnits.Degrees:
+                return this.#degrees;
+            case DirectionUnits.EightPoint:
+                const point = this.#degrees % (360 / 8);
+                const map = [ "N", "NE", "E", "SE", "S", "SW", "W", "NW" ];
+                return map[point];
+        }
+    }
+}
+
+export enum PressureUnits {
+    HPa
+}
+
+export class Pressure {
+
+    #hPa : number;
+
+    constructor(hPa : number) {
+        this.#hPa = hPa;
+    }
+
+    get(unit : PressureUnits) {
+        switch(unit) {
+            case PressureUnits.HPa:
+                return this.#hPa;
+        }
+    }
 }
