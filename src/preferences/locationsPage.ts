@@ -228,11 +228,13 @@ export class LocationsPage extends Adw.PreferencesPage {
         if(!newLoc) return;
 
         const locsArray = this.#config.getLocations();
+        const newIndex = locsArray.length;
         locsArray.push(newLoc);
 
         const strArray = locsArray.map(k => k.toString());
         const gVariant = writeGTypeAS(strArray);
         this.#settings.set_value("locations", gVariant);
+        this.#settings.set_int64("main-location-index", newIndex);
         this.#settings.apply();
 
     }
@@ -245,7 +247,8 @@ export class LocationsPage extends Adw.PreferencesPage {
 
         const cur = this.#config.getMainLocationIndex();
         const len = Math.max(1, locs.length);
-        if(cur >= len) this.#settings.set_int64("main-location-index", len - 1);
+        if(cur > len) this.#settings.set_int64("main-location-index", len - 1);
+        else if(cur === len) this.#settings.set_int64("main-location-index", 0);
 
         this.#settings.apply();
     }
