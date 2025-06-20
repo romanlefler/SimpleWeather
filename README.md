@@ -2,6 +2,9 @@
 
 A GNOME shell extension for viewing the weather.
 
+![Screenshot](https://github.com/user-attachments/assets/2b727a12-2d59-416e-b294-9771ea58844e)
+
+
 ## Features
 
 - Display temperature and conditions in top bar
