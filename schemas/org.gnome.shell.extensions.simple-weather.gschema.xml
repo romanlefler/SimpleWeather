@@ -18,7 +18,7 @@
         <value value="3" nick="kph" />
         <value value="4" nick="kn" />
         <value value="5" nick="fps" />
-        <value value="5" nick="beaufort" />
+        <value value="6" nick="beaufort" />
     </enum>
     <enum id="org.gnome.shell.extensions.simple-weather.direction-unit">
         <value value="1" nick="degrees" />

@@ -53,6 +53,48 @@ export class GeneralPage extends Adw.PreferencesPage {
             settings.apply();
         });
         unitGroup.add(tempRow);
+
+        const speedUnits = new Gtk.StringList({ strings: [
+            "mph", "m/s", "km/h", "Knots", "ft/s", "Beaufort"
+        ]});
+        const speedRow = new Adw.ComboRow({
+            title: _g("Speed"),
+            model: speedUnits,
+            selected: settings.get_enum("speed-unit") - 1
+        });
+        speedRow.connect("notify::selected", () => {
+            settings.set_enum("speed-unit", speedRow.selected + 1);
+            settings.apply();
+        });
+        unitGroup.add(speedRow);
+
+        const pressureUnits = new Gtk.StringList({ strings: [
+            "hPa"
+        ]});
+        const pressureRow = new Adw.ComboRow({
+            title: _g("Pressure"),
+            model: pressureUnits,
+            selected: settings.get_enum("pressure-unit") - 1
+        });
+        pressureRow.connect("notify::selected", () => {
+            settings.set_enum("pressure-unit", pressureRow.selected + 1);
+            settings.apply();
+        });
+        unitGroup.add(pressureRow);
+
+        const directionUnits = new Gtk.StringList({ strings: [
+            _g("Degrees"), _g("Eight-Point Compass")
+        ]});
+        const directionRow = new Adw.ComboRow({
+            title: _g("Direction"),
+            model: directionUnits,
+            selected: settings.get_enum("direction-unit") - 1
+        });
+        directionRow.connect("notify::selected", () => {
+            settings.set_enum("direction-unit", directionRow.selected + 1);
+            settings.apply();
+        });
+        unitGroup.add(directionRow);
         this.add(unitGroup);
 
         const weatherServiceGroup = new Adw.PreferencesGroup({
