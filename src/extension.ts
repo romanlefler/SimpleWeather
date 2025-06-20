@@ -179,6 +179,9 @@ export default class SimpleWeatherExtension extends Extension {
         });
         // Some settings just require a GUI update
         this.#config!.onTempUnitChanged(this.#updateGui.bind(this));
+        this.#config!.onSpeedUnitChanged(this.#updateGui.bind(this));
+        this.#config!.onPressureUnitChanged(this.#updateGui.bind(this));
+        this.#config!.onDirectionUnitChanged(this.#updateGui.bind(this));
 
         // First weather fetch
         this.#updateWeather();
