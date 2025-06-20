@@ -52,7 +52,8 @@ export enum SpeedUnits {
     Mps = 2,
     Kph = 3,
     Kn = 4,
-    Fps = 5
+    Fps = 5,
+    Beaufort = 6
 }
 
 export class Speed {
@@ -75,6 +76,15 @@ export class Speed {
                 return this.#mph * 0.868976;
             case SpeedUnits.Fps:
                 return this.#mph * 1.466667;
+            case SpeedUnits.Beaufort:
+                // The upper end of the scale of each Beaufort number
+                // Numbers obtained from Wikipedia
+                const maxes = [ 1, 3, 7, 12, 18, 24, 31, 38, 46, 54, 63, 72 ];
+                for(let i = 0; i < maxes.length; i++) {
+                    if(this.#mph <= maxes[i]) return i;
+                }
+                // Anything > 72 mph is a 12
+                return 12;
             default:
                 throw new UnitError("Speed unit invalid.");
         }

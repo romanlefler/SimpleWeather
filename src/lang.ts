@@ -111,7 +111,7 @@ export function displayDayOfWeek(d : Date) : string {
 
 export function displaySpeed(s : Speed, cfg : Config) {
     const unit = cfg.getSpeedUnit();
-    const suffices = [ "mph", "m/s", "kph", "kn", "ft/s" ];
+    const suffices = [ "mph", "m/s", "kph", "kn", "ft/s", "bft" ];
     return `${Math.round(s.get(unit))} ${suffices[unit - 1]}`;
 }
 
