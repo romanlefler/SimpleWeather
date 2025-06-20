@@ -79,7 +79,8 @@ export class OpenMeteo implements Provider {
         const gusts = new Speed(cur.wind_gusts_10m);
         const windDir = new Direction(cur.wind_direction_10m);
         const humidity : number = cur.relative_humidity_2m;
-        const pressure = new Pressure(cur.surface_pressure);
+        // hPa to inHg
+        const pressure = new Pressure(cur.surface_pressure * 0.02953);
         const isNight = cur.is_day === 0;
 
         const icon = codeToIcon[cur.weather_code];

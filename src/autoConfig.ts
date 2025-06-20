@@ -21,7 +21,7 @@ import { writeGTypeAS } from "./config.js";
 import { getMyLocation } from "./myLocation.js";
 import { Location } from "./location.js";
 import { gettext as _g } from "./gettext.js"
-import { SpeedUnits, TempUnits } from "./units.js";
+import { PressureUnits, SpeedUnits, TempUnits } from "./units.js";
 
 /**
  * Tests if this computer is a desktop.
@@ -55,14 +55,17 @@ export async function setFirstTimeConfig(settings : Gio.Settings) {
     if(myLoc.country === "US") {
         settings.set_enum("temp-unit", TempUnits.Fahrenheit);
         settings.set_enum("speed-unit", SpeedUnits.Mph);
+        settings.set_enum("speed-unit", PressureUnits.InHg);
     }
     else if(myLoc.country === "UK" || myLoc.country === "GB") {
         settings.set_enum("temp-unit", TempUnits.Celsius);
         settings.set_enum("speed-unit", SpeedUnits.Mph);
+        settings.set_enum("speed-unit", PressureUnits.HPa);
     }
     else {
         settings.set_enum("temp-unit", TempUnits.Celsius);
         settings.set_enum("speed-unit", SpeedUnits.Kph);
+        settings.set_enum("speed-unit", PressureUnits.HPa);
     }
 
 }

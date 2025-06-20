@@ -25,7 +25,8 @@
         <value value="2" nick="eight-point" />
     </enum>
     <enum id="org.gnome.shell.extensions.simple-weather.pressure-unit">
-        <value value="1" nick="hPa" />
+        <value value="1" nick="inHg" />
+        <value value="2" nick="hPa" />
     </enum>
     <schema id="org.gnome.shell.extensions.simple-weather" path="/org/gnome/shell/extensions/simple-weather/">
 
@@ -84,7 +85,7 @@
         </key>
 
         <key name="pressure-unit" enum="org.gnome.shell.extensions.simple-weather.pressure-unit">
-            <default>'hPa'</default>
+            <default>'inHg'</default>
             <summary>Pressure Unit</summary>
         </key>
 

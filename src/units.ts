@@ -123,21 +123,24 @@ export class Direction {
 }
 
 export enum PressureUnits {
-    HPa = 1
+    InHg = 1,
+    HPa = 2
 }
 
 export class Pressure {
 
-    #hPa : number;
+    #inHg : number;
 
-    constructor(hPa : number) {
-        this.#hPa = hPa;
+    constructor(inHg : number) {
+        this.#inHg = inHg;
     }
 
     get(unit : PressureUnits) : number {
         switch(unit) {
+            case PressureUnits.InHg:
+                return this.#inHg;
             case PressureUnits.HPa:
-                return this.#hPa;
+                return this.#inHg * 33.86389;
             default:
                 throw new UnitError("Pressure unit invalid.");
         }

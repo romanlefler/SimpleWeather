@@ -69,7 +69,7 @@ export class GeneralPage extends Adw.PreferencesPage {
         unitGroup.add(speedRow);
 
         const pressureUnits = new Gtk.StringList({ strings: [
-            "hPa"
+            "inHg", "hPa"
         ]});
         const pressureRow = new Adw.ComboRow({
             title: _g("Pressure"),

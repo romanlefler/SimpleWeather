@@ -125,6 +125,6 @@ export function displayDirection(d : Direction, cfg : Config) {
 
 export function displayPressure(p : Pressure, cfg : Config) {
     const unit = cfg.getPressureUnit();
-    const suffices = [ "hPa" ];
+    const suffices = [ "inHg", "hPa" ];
     return `${Math.round(p.get(unit))} ${suffices[unit - 1]}`;
 }
