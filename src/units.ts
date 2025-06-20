@@ -35,7 +35,7 @@ export class Temp {
         this.#fahrenheit = fahrenheit;
     }
 
-    get(units : TempUnits) {
+    get(units : TempUnits) : number {
         switch(units) {
             case TempUnits.Fahrenheit:
                 return this.#fahrenheit;
@@ -64,7 +64,7 @@ export class Speed {
         this.#mph = mph;
     }
 
-    get(units : SpeedUnits) {
+    get(units : SpeedUnits) : number {
         switch(units) {
             case SpeedUnits.Mph:
                 return this.#mph;
@@ -106,13 +106,15 @@ export class Direction {
         this.#degrees = deg;
     }
 
-    get(unit : DirectionUnits) {
+    get(unit : DirectionUnits) : number | string {
         switch(unit) {
             case DirectionUnits.Degrees:
                 return this.#degrees;
             case DirectionUnits.EightPoint:
-                const point = Math.floor(this.#degrees / (360 / 8));
-                const map = [ "N", "NE", "E", "SE", "S", "SW", "W", "NW" ];
+                const point = Math.round(this.#degrees / (360 / 8));
+                // While it's not possible to be exactly 8 (second N),
+                // We could round up to 8 since 7.9 and others are valid inputs
+                const map = [ "N", "NE", "E", "SE", "S", "SW", "W", "NW", "N" ];
                 return map[point];
             default:
                 throw new UnitError("Direction unit invalid.");
@@ -132,7 +134,7 @@ export class Pressure {
         this.#hPa = hPa;
     }
 
-    get(unit : PressureUnits) {
+    get(unit : PressureUnits) : number {
         switch(unit) {
             case PressureUnits.HPa:
                 return this.#hPa;
