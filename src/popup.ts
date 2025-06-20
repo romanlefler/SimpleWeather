@@ -173,7 +173,9 @@ export class Popup {
     #foreMode : ForecastMode;
     #cachedWeather? : Weather;
 
-    constructor(config : Config, metadata : ExtensionMetadata, menu : PopupMenu.PopupMenu) {
+    constructor(config : Config, metadata : ExtensionMetadata,
+        openPreferences : () => void, menu : PopupMenu.PopupMenu) {
+
         this.#config = config;
         this.#metadata = metadata;
         this.#foreMode = ForecastMode.Week;
@@ -235,12 +237,40 @@ export class Popup {
             vertical: false,
         });
         this.#copyright = new St.Label({
-            text: ""
+            text: "",
+            x_expand: false,
+            x_align: Clutter.ActorAlign.START,
+            y_align: Clutter.ActorAlign.CENTER,
         });
         textRect.add_child(this.#copyright);
 
         const baseText = new PopupMenu.PopupBaseMenuItem({ reactive: false });
         baseText.actor.add_child(textRect);
+
+        const baseSpacer = new St.Widget({
+            x_expand: true
+        });
+        baseText.actor.add_child(baseSpacer);
+
+        const configBtn = new St.Button({
+            child: new St.Icon({
+                icon_name: "preferences-system-symbolic",
+                style_class: "simpleweather-settings-icon"
+            }),
+            reactive: true,
+            can_focus: true,
+            track_hover: true,
+            style_class: "message-list-clear-button button",
+            accessible_name: _g("Settings"),
+            x_expand: false,
+            x_align: Clutter.ActorAlign.END,
+            y_align: Clutter.ActorAlign.CENTER
+        });
+        configBtn.connect("clicked", () => {
+            menu.toggle();
+            openPreferences();
+        });
+        baseText.actor.add_child(configBtn);
 
         this.#menuItems = [ childItem, baseText ];
         menu.addMenuItem(childItem);
