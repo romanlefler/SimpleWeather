@@ -127,9 +127,6 @@ class WelcomeDialog extends ModalDialog {
                 this.close();
                 resolve(true);
             });
-            this.connect("popup-menu", () => {
-                console.error("shown");
-            });
             this.open();
         });
     }
