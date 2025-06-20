@@ -17,12 +17,9 @@
 
 import Clutter from "gi://Clutter";
 import Gio from "gi://Gio";
-import GLib from "gi://GLib";
-import GObject from "gi://GObject";
 import St from "gi://St";
-import { Extension, ExtensionMetadata, gettext as _ } from "resource:///org/gnome/shell/extensions/extension.js";
-import * as Main from "resource:///org/gnome/shell/ui/main.js";
-import * as PanelMenu from "resource:///org/gnome/shell/ui/panelMenu.js";
+import Meta from "gi://Meta";
+import { ExtensionMetadata, gettext as _ } from "resource:///org/gnome/shell/extensions/extension.js";
 import * as PopupMenu from "resource:///org/gnome/shell/ui/popupMenu.js";
 import { Config } from "./config.js";
 import { Forecast, Weather } from "./weather.js";
@@ -157,6 +154,16 @@ function copyrightText(provName : string) : string {
     return `${_g("Weather Data")} \u00A9 ${provName} 2025`;
 }
 
+// Widget must have reactive and track_hover true
+function setPointer(widget : Clutter.Actor) : void {
+    widget.connect("enter-event", () => {
+        global.display.set_cursor(Meta.Cursor.POINTER);
+    });
+    widget.connect("leave-event", () => {
+        global.display.set_cursor(Meta.Cursor.DEFAULT);
+    });
+}
+
 export class Popup {
 
     readonly #config : Config;
@@ -209,8 +216,9 @@ export class Popup {
             vertical: false,
             x_expand: true,
             y_expand: false,
-            style_class: "simpleweather-card-row",
-            reactive: true
+            track_hover: true,
+            reactive: true,
+            style_class: "button simpleweather-card-row"
         });
         this.#forecastCards = [ ];
         for(let i = 0; i < 7; i++) {
@@ -260,17 +268,20 @@ export class Popup {
             reactive: true,
             can_focus: true,
             track_hover: true,
-            style_class: "message-list-clear-button button",
             accessible_name: _g("Settings"),
             x_expand: false,
             x_align: Clutter.ActorAlign.END,
-            y_align: Clutter.ActorAlign.CENTER
+            y_align: Clutter.ActorAlign.CENTER,
+            style_class: "message-list-clear-button button",
         });
         configBtn.connect("clicked", () => {
             menu.toggle();
             openPreferences();
         });
         baseText.actor.add_child(configBtn);
+
+        setPointer(forecasts);
+        setPointer(configBtn);
 
         this.#menuItems = [ childItem, baseText ];
         menu.addMenuItem(childItem);

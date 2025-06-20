@@ -22,6 +22,7 @@
 
 .simpleweather-card-row {
     spacing: 12px;
+    font-weight: normal;
 }
 
 .simpleweather-settings-icon {
