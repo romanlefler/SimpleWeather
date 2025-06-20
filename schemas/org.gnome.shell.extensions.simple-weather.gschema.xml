@@ -27,6 +27,7 @@
     <enum id="org.gnome.shell.extensions.simple-weather.pressure-unit">
         <value value="1" nick="inHg" />
         <value value="2" nick="hPa" />
+        <value value="3" nick="mmHg" />
     </enum>
     <schema id="org.gnome.shell.extensions.simple-weather" path="/org/gnome/shell/extensions/simple-weather/">
 

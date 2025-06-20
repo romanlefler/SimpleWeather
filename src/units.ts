@@ -124,7 +124,8 @@ export class Direction {
 
 export enum PressureUnits {
     InHg = 1,
-    HPa = 2
+    HPa = 2,
+    MmHg = 3
 }
 
 export class Pressure {
@@ -141,6 +142,8 @@ export class Pressure {
                 return this.#inHg;
             case PressureUnits.HPa:
                 return this.#inHg * 33.86389;
+            case PressureUnits.MmHg:
+                return this.#inHg * 25.4;
             default:
                 throw new UnitError("Pressure unit invalid.");
         }
