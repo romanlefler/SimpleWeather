@@ -17,7 +17,7 @@
 
 import GLib from "gi://GLib";
 import Gio from "gi://Gio";
-import { TempUnits } from "./units.js";
+import { DirectionUnits, PressureUnits, SpeedUnits, TempUnits } from "./units.js";
 import { Location } from "./location.js";
 import { MyLocationProvider } from "./myLocation.js";
 import { WeatherProviderNames } from "./providers/provider.js";
@@ -134,6 +134,39 @@ export class Config {
     onWeatherProviderChanged(callback : () => void) {
         const id = this.#settings!.connect("changed", (_, key) => {
             if(key === "weather-provider") callback();
+        });
+        this.#handlerIds.push(id);
+    }
+
+    getSpeedUnit() : SpeedUnits {
+        return this.#settings!.get_enum("speed-unit");
+    }
+
+    onSpeedUnitChanged(callback : () => void) {
+        const id = this.#settings!.connect("changed", (_, key) => {
+            if(key === "speed-unit") callback();
+        });
+        this.#handlerIds.push(id);
+    }
+
+    getDirectionUnit(): DirectionUnits {
+        return this.#settings!.get_enum("direction-unit");
+    }
+
+    onDirectionUnitChanged(callback : () => void) {
+        const id = this.#settings!.connect("changed", (_, key) => {
+            if(key === "direction-unit") callback();
+        });
+        this.#handlerIds.push(id);
+    }
+
+    getPressureUnit() : PressureUnits {
+        return this.#settings!.get_enum("pressure-unit");
+    }
+
+    onPressureUnitChanged(callback : () => void) {
+        const id = this.#settings!.connect("changed", (_, key) => {
+            if(key === "pressure-unit") callback();
         });
         this.#handlerIds.push(id);
     }

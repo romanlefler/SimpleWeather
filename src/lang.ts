@@ -18,7 +18,7 @@
 import GLib from "gi://GLib";
 import { Weather } from "./weather.js";
 import { Config } from "./config.js";
-import { Temp } from "./units.js";
+import { Direction, DirectionUnits, Pressure, Speed, Temp } from "./units.js";
 
 let locales : string[] | undefined;
 
@@ -108,3 +108,23 @@ export function displayDayOfWeek(d : Date) : string {
         weekday: "long"
     });
 };
+
+export function displaySpeed(s : Speed, cfg : Config) {
+    const unit = cfg.getSpeedUnit();
+    const suffices = [ "mph", "m/s", "kph", "kn", "ft/s" ];
+    return `${Math.round(s.get(unit))} ${suffices[unit - 1]}`;
+}
+
+export function displayDirection(d : Direction, cfg : Config) {
+    const unit = cfg.getDirectionUnit();
+    const suffix = unit === DirectionUnits.Degrees ? "\u00B0" : "";
+    let val = d.get(unit);
+    if(typeof val === "number") val = Math.round(val);
+    return `${val}${suffix}`;
+}
+
+export function displayPressure(p : Pressure, cfg : Config) {
+    const unit = cfg.getPressureUnit();
+    const suffices = [ "hPa" ];
+    return `${Math.round(p.get(unit))} ${suffices[unit - 1]}`;
+}

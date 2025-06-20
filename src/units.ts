@@ -101,15 +101,17 @@ export class Direction {
             case DirectionUnits.Degrees:
                 return this.#degrees;
             case DirectionUnits.EightPoint:
-                const point = this.#degrees % (360 / 8);
+                const point = Math.floor(this.#degrees / (360 / 8));
                 const map = [ "N", "NE", "E", "SE", "S", "SW", "W", "NW" ];
                 return map[point];
+            default:
+                throw new UnitError("Direction unit invalid.");
         }
     }
 }
 
 export enum PressureUnits {
-    HPa
+    HPa = 1
 }
 
 export class Pressure {
@@ -124,6 +126,8 @@ export class Pressure {
         switch(unit) {
             case PressureUnits.HPa:
                 return this.#hPa;
+            default:
+                throw new UnitError("Pressure unit invalid.");
         }
     }
 }

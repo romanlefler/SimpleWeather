@@ -12,6 +12,20 @@
     <enum id="org.gnome.shell.extensions.simple-weather.weather-provider">
         <value value="1" nick="open-meteo" />
     </enum>
+    <enum id="org.gnome.shell.extensions.simple-weather.speed-unit">
+        <value value="1" nick="mph" />
+        <value value="2" nick="mps" />
+        <value value="3" nick="kph" />
+        <value value="4" nick="kn" />
+        <value value="5" nick="fps" />
+    </enum>
+    <enum id="org.gnome.shell.extensions.simple-weather.direction-unit">
+        <value value="1" nick="degrees" />
+        <value value="2" nick="eight-point" />
+    </enum>
+    <enum id="org.gnome.shell.extensions.simple-weather.pressure-unit">
+        <value value="1" nick="hPa" />
+    </enum>
     <schema id="org.gnome.shell.extensions.simple-weather" path="/org/gnome/shell/extensions/simple-weather/">
 
         <key name="is-activated" type="b">
@@ -56,6 +70,21 @@
         <key name="weather-provider" enum="org.gnome.shell.extensions.simple-weather.weather-provider">
             <default>'open-meteo'</default>
             <summary>Weather Provider</summary>
+        </key>
+
+        <key name="speed-unit" enum="org.gnome.shell.extensions.simple-weather.speed-unit">
+            <default>'mph'</default>
+            <summary>Speed Unit</summary>
+        </key>
+
+        <key name="direction-unit" enum="org.gnome.shell.extensions.simple-weather.direction-unit">
+            <default>'eight-point'</default>
+            <summary>Direction Unit</summary>
+        </key>
+
+        <key name="pressure-unit" enum="org.gnome.shell.extensions.simple-weather.pressure-unit">
+            <default>'hPa'</default>
+            <summary>Pressure Unit</summary>
         </key>
 
     </schema>

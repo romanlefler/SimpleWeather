@@ -26,7 +26,7 @@ import * as PanelMenu from "resource:///org/gnome/shell/ui/panelMenu.js";
 import * as PopupMenu from "resource:///org/gnome/shell/ui/popupMenu.js";
 import { Config } from "./config.js";
 import { Forecast, Weather } from "./weather.js";
-import { displayDayOfWeek, displayTemp, displayTime } from "./lang.js";
+import { displayDayOfWeek, displayDirection, displayPressure, displaySpeed, displayTemp, displayTime } from "./lang.js";
 import { gettext as _g } from "./gettext.js";
 
 interface ForecastCard {
@@ -94,6 +94,65 @@ function createForecastCard() : ForecastCard {
     };
 }
 
+interface CurInfo {
+    temp : St.Label;
+    feelsLike : St.Label;
+    wind : St.Label,
+    gusts: St.Label,
+    windDir: St.Label;
+    humidity: St.Label;
+    pressure: St.Label;
+}
+
+function addChildren(parent : Clutter.Actor, ...children : Clutter.Actor[]) {
+    children.forEach(m => parent.add_child(m));
+}
+
+function evenLabel(opts : Partial<St.Label.ConstructorProps> = {}) {
+    const label = new St.Label({
+        x_expand: true,
+        y_align: Clutter.ActorAlign.CENTER,
+        x_align: Clutter.ActorAlign.FILL,
+        style_class: "simpleweather-current-item",
+        ...opts
+    });
+    const box = new St.BoxLayout({
+        x_expand: true,
+        x_align: Clutter.ActorAlign.FILL,
+    });
+    box.add_child(label);
+    return { label, box };
+}
+
+function createCurInfo(parent : Clutter.Actor) : CurInfo {
+    const cols = new St.BoxLayout({ vertical: true, x_expand: true });
+    const row1 = new St.BoxLayout({ vertical: false, x_expand: true, y_expand: true, x_align: Clutter.ActorAlign.FILL });
+    const row2 = new St.BoxLayout({ vertical: false, x_expand: true, y_expand: true, x_align: Clutter.ActorAlign.FILL });
+    addChildren(cols, row1, row2);
+
+    const temp = evenLabel();
+    const feelsLike = evenLabel();
+    const wind = evenLabel();
+    const gusts = evenLabel();
+    const windDir = evenLabel();
+    const humidity = evenLabel();
+    const pressure = evenLabel();
+    const c : CurInfo = {
+        temp: temp.label,
+        feelsLike: feelsLike.label,
+        wind: wind.label,
+        gusts: gusts.label,
+        windDir: windDir.label,
+        humidity: humidity.label,
+        pressure: pressure.label,
+    };
+    addChildren(row1, temp.box, wind.box, gusts.box, pressure.box);
+    addChildren(row2, feelsLike.box, windDir.box, humidity.box);
+
+    parent.add_child(cols);
+    return c;
+}
+
 function copyrightText(provName : string) : string {
     return `${_g("Weather Data")} \u00A9 ${provName} 2025`;
 }
@@ -107,6 +166,7 @@ export class Popup {
     readonly #temp : St.Label;
     readonly #forecastCards : ForecastCard[];
     readonly #copyright : St.Label;
+    readonly #curInfo : CurInfo;
 
     readonly #menuItems : PopupMenu.PopupBaseMenuItem[];
 
@@ -157,6 +217,7 @@ export class Popup {
             this.#forecastCards.push(c);
         }
         rightVBox.add_child(forecasts);
+        this.#curInfo = createCurInfo(rightVBox);
         hbox.add_child(rightVBox);
 
         forecasts.connect("button-press-event", () => {
@@ -254,6 +315,15 @@ export class Popup {
             c.data3.text = text[2];
 
         }
+
+        const inf = this.#curInfo;
+        inf.temp.text = _g("Temp: %s").format(displayTemp(w.temp, this.#config));
+        inf.feelsLike.text = _g("Feels Like: %s").format(displayTemp(w.feelsLike, this.#config));
+        inf.wind.text = _g("Wind: %s").format(displaySpeed(w.wind, this.#config));
+        inf.windDir.text = _g("Wind: %s").format(displayDirection(w.windDir, this.#config));
+        inf.gusts.text = _g("Gusts: %s").format(displaySpeed(w.gusts, this.#config));
+        inf.humidity.text = _g("Humidity: %s").format(`${Math.round(w.humidity)}%`);
+        inf.pressure.text = _g("Pressure: %s").format(displayPressure(w.pressure, this.#config));
     }
 
 }
