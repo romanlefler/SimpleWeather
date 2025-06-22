@@ -17,7 +17,7 @@
 
 import { Config } from "../config.js";
 import { LibSoup } from "../libsoup.js";
-import { Direction, Pressure, Speed, Temp } from "../units.js";
+import { Direction, Pressure, RainMeasurement, Speed, Temp } from "../units.js";
 import { Forecast, Weather } from "../weather.js";
 import { getGIconName, Icons } from "../icons.js"
 import { Provider } from "./provider.js";
@@ -46,14 +46,15 @@ export class OpenMeteo implements Provider {
             longitude: String(coords.lon),
             current: "temperature_2m,weather_code,is_day,relative_humidity_2m," +
                 "apparent_temperature,surface_pressure,wind_speed_10m,wind_gusts_10m," +
-                "wind_direction_10m",
+                "wind_direction_10m,precipitation",
             daily: "sunset,sunrise,weather_code,temperature_2m_min,temperature_2m_max," +
                 "precipitation_probability_max,uv_index_max",
             hourly: "temperature_2m,weather_code,precipitation_probability,is_day",
             // Note that 24 is not the max
             forecast_hours: "28",
             temperature_unit: "fahrenheit",
-            wind_speed_unit: "mph"
+            wind_speed_unit: "mph",
+            precipitation_unit: "inch"
         };
 
         const response = await this.#soup.fetchJson(ENDPOINT, params, false);
@@ -83,6 +84,7 @@ export class OpenMeteo implements Provider {
         const pressure = new Pressure(cur.surface_pressure * 0.02953);
         const uvIndex = daily.uv_index_max[0];
         const isNight = cur.is_day === 0;
+        const precipitation = new RainMeasurement(cur.precipitation);
 
         const icon = codeToIcon[cur.weather_code];
         const gIconName = getGIconName(icon, isNight);
@@ -138,6 +140,7 @@ export class OpenMeteo implements Provider {
             humidity,
             pressure,
             uvIndex,
+            precipitation,
             providerName: this.nameKey
         };
     }

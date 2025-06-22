@@ -15,7 +15,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Direction, Pressure, Speed, Temp } from "./units.js";
+import { Direction, Pressure, RainMeasurement, Speed, Temp } from "./units.js";
 
 export interface Weather {
 
@@ -48,6 +48,8 @@ export interface Weather {
     pressure : Pressure;
 
     uvIndex : number;
+
+    precipitation : RainMeasurement;
 
     providerName : string;
 
