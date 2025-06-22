@@ -22,6 +22,13 @@ import { Location } from "./location.js";
 import { MyLocationProvider } from "./myLocation.js";
 import { WeatherProviderNames } from "./providers/provider.js";
 
+export enum UnitPreset {
+    Custom = 0,
+    US = 1,
+    UK = 2,
+    Metric = 3
+}
+
 export class Config {
 
     #settings? : Gio.Settings;
@@ -41,12 +48,15 @@ export class Config {
     }
 
     getTempUnit() : TempUnits {
-        return this.#settings!.get_enum("temp-unit");
+        return this.#returnUnit(
+            "temp-unit",
+            { us: TempUnits.Fahrenheit, metric: TempUnits.Celsius }
+        );
     }
 
     onTempUnitChanged(callback : () => void) {
         const id = this.#settings!.connect("changed", (_, key) => {
-            if(key === "temp-unit") callback();
+            if(key === "temp-unit" || key === "unit-preset") callback();
         });
         this.#handlerIds.push(id);
     }
@@ -139,12 +149,15 @@ export class Config {
     }
 
     getSpeedUnit() : SpeedUnits {
-        return this.#settings!.get_enum("speed-unit");
+        return this.#returnUnit(
+            "speed-unit",
+            { us: SpeedUnits.Mph, uk: SpeedUnits.Mph, metric: SpeedUnits.Kph }
+        );
     }
 
     onSpeedUnitChanged(callback : () => void) {
         const id = this.#settings!.connect("changed", (_, key) => {
-            if(key === "speed-unit") callback();
+            if(key === "speed-unit" || key === "unit-preset") callback();
         });
         this.#handlerIds.push(id);
     }
@@ -155,22 +168,59 @@ export class Config {
 
     onDirectionUnitChanged(callback : () => void) {
         const id = this.#settings!.connect("changed", (_, key) => {
-            if(key === "direction-unit") callback();
+            if(key === "direction-unit" || key === "unit-preset") callback();
         });
         this.#handlerIds.push(id);
     }
 
     getPressureUnit() : PressureUnits {
-        return this.#settings!.get_enum("pressure-unit");
+        return this.#returnUnit(
+            "pressure-unit",
+            { us: PressureUnits.InHg, metric: PressureUnits.HPa }
+        );
     }
 
     onPressureUnitChanged(callback : () => void) {
         const id = this.#settings!.connect("changed", (_, key) => {
-            if(key === "pressure-unit") callback();
+            if(key === "pressure-unit" || key === "unit-preset") callback();
         });
         this.#handlerIds.push(id);
     }
 
+
+
+    getUnitPreset() : UnitPreset {
+        return this.#settings!.get_enum("unit-preset");
+    }
+
+    /**
+     * Shorthand for checking unit presets and outputting appropriate value,
+     * or otherwise checking settings via get_enum for a number.
+     *
+     * args.us Unit for US preset
+     *
+     * args.uk Unit for UK preset. If not specified falls back to metric.
+     *
+     * args.metric Unit for Metric preset
+     * 
+     * @param getEnumKey Backup get_enum string key
+     */
+    #returnUnit(getEnumKey : string, args : { us? : number, uk? : number, metric? : number }) : number {
+        const preset = this.getUnitPreset();
+        switch(preset) {
+            case UnitPreset.US:
+                if(args.us !== undefined) return args.us;
+                else break;
+            case UnitPreset.UK:
+                if(args.uk !== undefined) return args.uk;
+                // Fall back to metric.
+                // FALL THRU
+            case UnitPreset.Metric:
+                if(args.metric !== undefined) return args.metric;
+                else break;
+        }
+        return this.#settings!.get_enum(getEnumKey);
+    }
 }
 
 function readGTypeAS(gvariant : GLib.Variant<any>) : string[] {

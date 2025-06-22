@@ -12,6 +12,12 @@
     <enum id="org.gnome.shell.extensions.simple-weather.weather-provider">
         <value value="1" nick="open-meteo" />
     </enum>
+    <enum id="org.gnome.shell.extensions.simple-weather.unit-preset">
+        <value value="0" nick="custom" />
+        <value value="1" nick="us" />
+        <value value="2" nick="uk" />
+        <value value="3" nick="metric" />
+    </enum>
     <enum id="org.gnome.shell.extensions.simple-weather.speed-unit">
         <value value="1" nick="mph" />
         <value value="2" nick="mps" />
@@ -110,6 +116,11 @@
         <key name="distance-unit" enum="org.gnome.shell.extensions.simple-weather.distance-unit">
             <default>'mi'</default>
             <summary>Distance Unit</summary>
+        </key>
+
+        <key name="unit-preset" enum="org.gnome.shell.extensions.simple-weather.unit-preset">
+            <default>'metric'</default>
+            <summary>Preset for Units</summary>
         </key>
 
     </schema>

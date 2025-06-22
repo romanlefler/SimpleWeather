@@ -22,6 +22,10 @@ import Adw from "gi://Adw";
 import { gettext as _g } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
 import { WeatherProviderNames } from "../providers/provider.js";
 
+function setVisibilites(value : boolean, ...widgets : Gtk.Widget[]) {
+    for(let w of widgets) w.visible = value;
+}
+
 export class GeneralPage extends Adw.PreferencesPage {
 
     static {
@@ -40,13 +44,26 @@ export class GeneralPage extends Adw.PreferencesPage {
             description: _g("Configure units of measurement")
         });
 
+        const unitPresetUnits = new Gtk.StringList({ strings: [
+            _g("US"), _g("UK"), _g("Metric"), _g("Custom")
+        ]});
+        const unitPresetFromEnumMap = [ 3, 0, 1, 2 ];
+        const curUnitPreset = settings.get_enum("unit-preset");
+        const unitPresetRow = new Adw.ComboRow({
+            title: _g("Units"),
+            model: unitPresetUnits,
+            selected: unitPresetFromEnumMap[curUnitPreset]
+        });
+        // Connecting on this one is done later
+        unitGroup.add(unitPresetRow);
+
         const tempUnits = new Gtk.StringList();
         tempUnits.append(_g("Fahrenheit"));
         tempUnits.append(_g("Celsius"));
         const tempRow = new Adw.ComboRow({
             title: _g("Temperature"),
             model: tempUnits,
-            selected: settings.get_enum("temp-unit") - 1
+            selected: settings.get_enum("temp-unit") - 1,
         });
         tempRow.connect("notify::selected", () => {
             settings.set_enum("temp-unit", tempRow.selected + 1);
@@ -109,6 +126,19 @@ export class GeneralPage extends Adw.PreferencesPage {
             settings.apply();
         });
         unitGroup.add(distanceRow);
+
+        // If unit preset is not custom, most unit rows shouldn't be shown
+        setVisibilites(curUnitPreset === 0, tempRow, speedRow, pressureRow,
+            rainMeasurementRow, distanceRow);
+        unitPresetRow.connect("notify::selected", () => {
+            const toEnumMap = [ 1, 2, 3, 0 ];
+            const val = toEnumMap[unitPresetRow.selected];
+            setVisibilites(val === 0, tempRow, speedRow, pressureRow,
+                rainMeasurementRow, distanceRow);
+
+            settings.set_enum("unit-preset", val);
+            settings.apply();
+        });
 
         const directionUnits = new Gtk.StringList({ strings: [
             _g("Degrees"), _g("Eight-Point Compass")

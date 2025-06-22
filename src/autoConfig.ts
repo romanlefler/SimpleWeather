@@ -17,11 +17,10 @@
 
 import GLib from "gi://GLib";
 import Gio from "gi://Gio";
-import { writeGTypeAS } from "./config.js";
+import { UnitPreset, writeGTypeAS } from "./config.js";
 import { getMyLocation } from "./myLocation.js";
 import { Location } from "./location.js";
 import { gettext as _g } from "./gettext.js"
-import { PressureUnits, SpeedUnits, TempUnits } from "./units.js";
 
 /**
  * Tests if this computer is a desktop.
@@ -53,19 +52,13 @@ export async function setFirstTimeConfig(settings : Gio.Settings) {
     }
 
     if(myLoc.country === "US") {
-        settings.set_enum("temp-unit", TempUnits.Fahrenheit);
-        settings.set_enum("speed-unit", SpeedUnits.Mph);
-        settings.set_enum("speed-unit", PressureUnits.InHg);
+        settings.set_enum("unit-preset", UnitPreset.US);
     }
     else if(myLoc.country === "UK" || myLoc.country === "GB") {
-        settings.set_enum("temp-unit", TempUnits.Celsius);
-        settings.set_enum("speed-unit", SpeedUnits.Mph);
-        settings.set_enum("speed-unit", PressureUnits.HPa);
+        settings.set_enum("unit-preset", UnitPreset.UK);
     }
     else {
-        settings.set_enum("temp-unit", TempUnits.Celsius);
-        settings.set_enum("speed-unit", SpeedUnits.Kph);
-        settings.set_enum("speed-unit", PressureUnits.HPa);
+        settings.set_enum("unit-preset", UnitPreset.Metric);
     }
 
 }
