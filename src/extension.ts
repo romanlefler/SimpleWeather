@@ -220,8 +220,6 @@ export default class SimpleWeatherExtension extends Extension {
 
     #updateWeather() {
         this.#updateWeatherAsync().then(() => {
-            this.#resolverFailCount = 0;
-
             if(!this.#hasAddedIndicator) {
                 this.#hasAddedIndicator = true;
                 Main.panel.addToStatusArea(this.uuid, this.#indicator!);
@@ -230,9 +228,15 @@ export default class SimpleWeatherExtension extends Extension {
         }).catch(err => {
             console.error(err);
             // This happens on boot presumably when things are loaded
-            // out of order, try max 5 times
-            if(err instanceof Gio.ResolverError && ++this.#resolverFailCount <= 5) {
-                this.#delayFetchId = delayTask(5.0, () => {
+            // out of order, try max 10 times
+            //
+            // This tries for just over a minute, which should be plenty of time for
+            // Wi-Fi to start
+            //
+            // Fail count never resets so that if repeatedly trying to connect fails once
+            // we don't constantly retry for a minute every time the timer goes off
+            if(err instanceof Gio.ResolverError && ++this.#resolverFailCount <= 10) {
+                this.#delayFetchId = delayTask(7.5, () => {
                     this.#delayFetchId = undefined;
                     this.#updateWeather();
                 });
