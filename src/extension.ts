@@ -183,6 +183,8 @@ export default class SimpleWeatherExtension extends Extension {
         this.#config!.onSpeedUnitChanged(this.#updateGui.bind(this));
         this.#config!.onPressureUnitChanged(this.#updateGui.bind(this));
         this.#config!.onDirectionUnitChanged(this.#updateGui.bind(this));
+        this.#config!.onRainMeasurementUnitChanged(this.#updateGui.bind(this));
+        this.#config!.onDistanceUnitChanged(this.#updateGui.bind(this));
 
         // First weather fetch
         this.#updateWeather();

@@ -17,7 +17,7 @@
 
 import GLib from "gi://GLib";
 import Gio from "gi://Gio";
-import { DirectionUnits, PressureUnits, SpeedUnits, TempUnits } from "./units.js";
+import { DirectionUnits, DistanceUnits, PressureUnits, RainMeasurementUnits, SpeedUnits, TempUnits } from "./units.js";
 import { Location } from "./location.js";
 import { MyLocationProvider } from "./myLocation.js";
 import { WeatherProviderNames } from "./providers/provider.js";
@@ -183,6 +183,34 @@ export class Config {
     onPressureUnitChanged(callback : () => void) {
         const id = this.#settings!.connect("changed", (_, key) => {
             if(key === "pressure-unit" || key === "unit-preset") callback();
+        });
+        this.#handlerIds.push(id);
+    }
+
+    getRainMeasurementUnit() : RainMeasurementUnits {
+        return this.#returnUnit(
+            "rain-measurement-unit",
+            { us: RainMeasurementUnits.In, metric: RainMeasurementUnits.Mm }
+        );
+    }
+
+    onRainMeasurementUnitChanged(callback : () => void) {
+        const id = this.#settings!.connect("changed", (_, key) => {
+            if(key === "rain-measurement-unit" || key === "unit-preset") callback();
+        });
+        this.#handlerIds.push(id);
+    }
+
+    getDistanceUnit() : DistanceUnits {
+        return this.#returnUnit(
+            "distance-unit",
+            { us: DistanceUnits.Mi, uk: DistanceUnits.Mi, metric: DistanceUnits.Km }
+        );
+    }
+
+    onDistanceUnitChanged(callback : () => void) {
+        const id = this.#settings!.connect("changed", (_, key) => {
+            if(key === "distance-unit" || key === "unit-preset") callback();
         });
         this.#handlerIds.push(id);
     }
