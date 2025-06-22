@@ -44,6 +44,9 @@ export class LocationsPage extends Adw.PreferencesPage {
     #locGroup : Adw.PreferencesGroup;
     #locRows : Adw.ActionRow[];
 
+    #moveUp : Gtk.Button;
+    #moveDown : Gtk.Button;
+
     // When locations is changed, this will tick up.
     // Useful for seeing if it's changed.
     #changeTracker : number;
@@ -85,24 +88,56 @@ export class LocationsPage extends Adw.PreferencesPage {
         });
         this.#config.onMainLocationIndexChanged(this.#guiRefreshChecks.bind(this));
 
-        this.#guiRefreshList();
-
         const bottomBox = new Gtk.Box({
             orientation: Gtk.Orientation.HORIZONTAL,
             margin_top: 10
         });
+        this.#moveUp = new Gtk.Button({
+            child: new Adw.ButtonContent({
+                label: _g("Move Up"),
+                icon_name: "arrow-up"
+            }),
+            hexpand: true,
+            margin_end: 2,
+            sensitive: false
+        });
+        this.#moveUp.connect("clicked", () => {
+            const index = this.#config.getMainLocationIndex();
+            if(index === 0) return;
+            this.#moveLocs(index, false);
+        });
+        bottomBox.append(this.#moveUp);
+        this.#moveDown = new Gtk.Button({
+            child: new Adw.ButtonContent({
+                label: _g("Move Down"),
+                icon_name: "arrow-down"
+            }),
+            hexpand: true,
+            margin_start: 2,
+            margin_end: 2,
+            sensitive: false
+        });
+        this.#moveDown.connect("clicked", () => {
+            const index = this.#config.getMainLocationIndex();
+            if(index === this.#locRows.length - 1) return;
+            this.#moveLocs(index, true);
+        });
+        bottomBox.append(this.#moveDown);
         const addMyLocBtn = new Gtk.Button({
             child: new Adw.ButtonContent({
-                label: _g("Add My Loc."),
+                label: _g("Add Here"),
                 icon_name: "list-add-symbolic"
             }),
-            hexpand: true
+            hexpand: true,
+            margin_start: 2
         });
         addMyLocBtn.connect("clicked", () => {
             this.#appendLocObj(Location.newHere());
         });
         bottomBox.append(addMyLocBtn);
         this.#locGroup.add(bottomBox);
+
+        this.#guiRefreshList();
     }
 
     #guiRemoveAll() {
@@ -171,6 +206,7 @@ export class LocationsPage extends Adw.PreferencesPage {
             this.#locGroup.add(row);
             this.#locRows.push(row);
         }
+        this.#updateMoveButtons(inx);
     }
 
     #guiRefreshChecks() {
@@ -182,6 +218,12 @@ export class LocationsPage extends Adw.PreferencesPage {
             );
 
         }
+        this.#updateMoveButtons(inx);
+    }
+
+    #updateMoveButtons(mainLocationIndex : number) {
+        this.#moveUp.sensitive = mainLocationIndex !== 0;
+        this.#moveDown.sensitive = mainLocationIndex !== this.#locRows.length - 1;
     }
 
     #toast(s : string) {
@@ -256,6 +298,19 @@ export class LocationsPage extends Adw.PreferencesPage {
         const gVariant = writeGTypeAS(strArray);
         this.#settings.set_value("locations", gVariant);
         this.#settings.set_int64("main-location-index", newIndex);
+        this.#settings.apply();
+    }
+
+    #moveLocs(oldIndex : number, down : boolean) {
+        const locsArray = this.#config.getLocations();
+        const item = locsArray.splice(oldIndex, 1)[0];
+        if(down) locsArray.splice(oldIndex + 1, 0, item);
+        else locsArray.splice(oldIndex - 1, 0, item);
+
+        const strArray = locsArray.map(k => k.toString());
+        const gVariant = writeGTypeAS(strArray);
+        this.#settings.set_value("locations", gVariant);
+        this.#settings.set_int64("main-location-index", down ? oldIndex + 1 : oldIndex - 1);
         this.#settings.apply();
     }
 
