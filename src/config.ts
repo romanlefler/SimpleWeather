@@ -221,6 +221,17 @@ export class Config {
         return this.#settings!.get_enum("unit-preset");
     }
 
+    onAnyUnitChanged(callback : () => void) {
+        const id = this.#settings!.connect("changed", (_, key) => {
+            const unitKeys = [
+                "unit-preset", "temp-unit", "speed-unit", "pressure-unit",
+                "rain-measurement-unit", "distance-unit"
+             ];
+             if(unitKeys.includes(key)) callback();
+        });
+        this.#handlerIds.push(id);
+    }
+
     /**
      * Shorthand for checking unit presets and outputting appropriate value,
      * or otherwise checking settings via get_enum for a number.

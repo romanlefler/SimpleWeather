@@ -58,7 +58,6 @@ export default class SimpleWeatherExtension extends Extension {
     #waitLayoutId? : number;
 
     #resolverFailCount : number = 0;
-    #lastGuiUpdate : Date = new Date(0);
 
     /**
      * Waits for the layout manager's starting up property to be false.
@@ -180,12 +179,7 @@ export default class SimpleWeatherExtension extends Extension {
             this.#updateWeather();
         });
         // Some settings just require a GUI update
-        this.#config!.onTempUnitChanged(this.#updateGui.bind(this));
-        this.#config!.onSpeedUnitChanged(this.#updateGui.bind(this));
-        this.#config!.onPressureUnitChanged(this.#updateGui.bind(this));
-        this.#config!.onDirectionUnitChanged(this.#updateGui.bind(this));
-        this.#config!.onRainMeasurementUnitChanged(this.#updateGui.bind(this));
-        this.#config!.onDistanceUnitChanged(this.#updateGui.bind(this));
+        this.#config!.onAnyUnitChanged(this.#updateGui.bind(this));
 
         // First weather fetch
         this.#updateWeather();
@@ -257,10 +251,6 @@ export default class SimpleWeatherExtension extends Extension {
     #updateGui() {
         const w = this.#cachedWeather;
         if(!w) return;
-        // Don't update within 250 ms
-        if(Date.now() - this.#lastGuiUpdate.getTime() <= 250) return;
-        else this.#lastGuiUpdate = new Date();
-
 
         this.#panelLabel!.text = displayTemp(w.temp, this.#config!);
 
