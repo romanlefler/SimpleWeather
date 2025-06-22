@@ -23,6 +23,7 @@ import Pango from "gi://Pango";
 import { Location } from "../location.js";
 import { gettext as _g } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
 import { LibSoup } from "../libsoup.js";
+import { Config } from "../config.js";
 
 const SEARCH_BASE = "https://nominatim.openstreetmap.org";
 const SEARCH_ENDPOINT = `${SEARCH_BASE}/search`;
@@ -37,7 +38,7 @@ interface SelLoc {
     lon : number;
 }
 
-export async function searchDialog(parent : Gtk.Window, soup : LibSoup) : Promise<Location | null> {
+export async function searchDialog(parent : Gtk.Window, soup : LibSoup, cfg : Config) : Promise<Location | null> {
 
     const dialog = new Gtk.Window({
         transient_for: parent,
@@ -92,7 +93,8 @@ export async function searchDialog(parent : Gtk.Window, soup : LibSoup) : Promis
                 search: searchField.text,
                 licenseLabel,
                 resultsList: stringList,
-                soup
+                soup,
+                currentLocNames: cfg.getLocations().map(l => l.getName())
             };
             fetchNominatim(a).then(locArr => {
                 const oldLen = resultsLocList.length;
@@ -133,6 +135,7 @@ interface SearchArgs {
     licenseLabel : Gtk.Label;
     resultsList : Gtk.StringList;
     soup : LibSoup;
+    currentLocNames : string[];
 }
 
 function showNoInternetDialog(parent : Gtk.Window) {
@@ -190,9 +193,14 @@ async function fetchNominatim(a : SearchArgs) : Promise<SelLoc[]> {
         const name = fixDisplayName(place);
         const lat = parseFloat(place.lat);
         const lon = parseFloat(place.lon);
+
+        let friendlyName = place.address.city ?? place.address.town ?? name;
+        // If a duplicate name exists use the longer one
+        if(a.currentLocNames.includes(friendlyName)) friendlyName = name;
+
         list.push({
             buttonName: name,
-            friendlyName: place.address.city ?? place.address.town ?? name,
+            friendlyName,
             lat,
             lon
         });

@@ -217,7 +217,7 @@ export class LocationsPage extends Adw.PreferencesPage {
 
         let newLoc;
         try {
-            newLoc = await searchDialog(this.#window, this.#libSoup);
+            newLoc = await searchDialog(this.#window, this.#libSoup, this.#config);
         }
         catch(e) {
             console.error(e);
