@@ -96,7 +96,6 @@ interface CurInfo {
     feelsLike : St.Label;
     wind : St.Label,
     gusts: St.Label,
-    windDir: St.Label;
     humidity: St.Label;
     pressure: St.Label;
     uvIndex : St.Label;
@@ -132,7 +131,6 @@ function createCurInfo(parent : Clutter.Actor) : CurInfo {
     const feelsLike = evenLabel();
     const wind = evenLabel();
     const gusts = evenLabel();
-    const windDir = evenLabel();
     const humidity = evenLabel();
     const pressure = evenLabel();
     const uvIndex = evenLabel();
@@ -141,13 +139,12 @@ function createCurInfo(parent : Clutter.Actor) : CurInfo {
         feelsLike: feelsLike.label,
         wind: wind.label,
         gusts: gusts.label,
-        windDir: windDir.label,
         humidity: humidity.label,
         pressure: pressure.label,
         uvIndex: uvIndex.label
     };
     addChildren(row1, temp.box, wind.box, gusts.box, pressure.box);
-    addChildren(row2, feelsLike.box, windDir.box, humidity.box, uvIndex.box);
+    addChildren(row2, feelsLike.box, humidity.box, uvIndex.box);
 
     parent.add_child(cols);
     return c;
@@ -363,8 +360,10 @@ export class Popup {
         const inf = this.#curInfo;
         inf.temp.text = _g("Temp: %s").format(displayTemp(w.temp, this.#config));
         inf.feelsLike.text = _g("Feels Like: %s").format(displayTemp(w.feelsLike, this.#config));
-        inf.wind.text = _g("Wind: %s").format(displaySpeed(w.wind, this.#config));
-        inf.windDir.text = _g("Wind: %s").format(displayDirection(w.windDir, this.#config));
+        inf.wind.text = _g("Wind: %s, %s").format(
+            displayDirection(w.windDir, this.#config),
+            displaySpeed(w.wind, this.#config)
+        );
         inf.gusts.text = _g("Gusts: %s").format(displaySpeed(w.gusts, this.#config));
         inf.humidity.text = _g("Humidity: %s").format(`${Math.round(w.humidity)}%`);
         inf.pressure.text = _g("Pressure: %s").format(displayPressure(w.pressure, this.#config));
