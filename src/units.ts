@@ -149,3 +149,66 @@ export class Pressure {
         }
     }
 }
+
+export enum RainMeasurementUnits {
+    In = 1,
+    Mm = 2,
+    Cm = 3,
+    Pt = 4
+}
+
+export class RainMeasurement {
+
+    #inches : number;
+
+    constructor(inches : number) {
+        this.#inches = inches;
+    }
+
+    get(unit : RainMeasurementUnits) : number {
+        switch(unit) {
+            case RainMeasurementUnits.In:
+                return this.#inches;
+            case RainMeasurementUnits.Mm:
+                return this.#inches * 25.4;
+            case RainMeasurementUnits.Cm:
+                return this.#inches * 2.54;
+            case RainMeasurementUnits.Pt:
+                return this.#inches * 0.01;
+            default:
+                throw new UnitError("Rain measurement unit invalid.");
+        }
+    }
+
+}
+
+export enum DistanceUnits {
+    Mi = 1,
+    Km = 2,
+    Ft = 3,
+    M = 4
+}
+
+export class Distance {
+
+    #miles : number;
+
+    constructor(miles : number) {
+        this.#miles = miles;
+    }
+
+    get(unit : DistanceUnits) : number {
+        switch(unit) {
+            case DistanceUnits.Mi:
+                return this.#miles;
+            case DistanceUnits.Km:
+                return this.#miles * 1.609344;
+            case DistanceUnits.Ft:
+                return this.#miles * 5280;
+            case DistanceUnits.M:
+                return this.#miles * 1609.344;
+            default:
+                throw new UnitError("Distance unit invalid.");
+        }
+    }
+}

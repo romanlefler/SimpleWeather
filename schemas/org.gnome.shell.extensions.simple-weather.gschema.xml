@@ -29,6 +29,18 @@
         <value value="2" nick="hPa" />
         <value value="3" nick="mmHg" />
     </enum>
+    <enum id="org.gnome.shell.extensions.simple-weather.rain-measurement-unit">
+        <value value="1" nick="in" />
+        <value value="2" nick="mm" />
+        <value value="3" nick="cm" />
+        <value value="4" nick="pt" />
+    </enum>
+    <enum id="org.gnome.shell.extensions.simple-weather.distance-unit">
+        <value value="1" nick="mi" />
+        <value value="2" nick="km" />
+        <value value="3" nick="ft" />
+        <value value="4" nick="meter" />
+    </enum>
     <schema id="org.gnome.shell.extensions.simple-weather" path="/org/gnome/shell/extensions/simple-weather/">
 
         <key name="is-activated" type="b">
@@ -88,6 +100,16 @@
         <key name="pressure-unit" enum="org.gnome.shell.extensions.simple-weather.pressure-unit">
             <default>'inHg'</default>
             <summary>Pressure Unit</summary>
+        </key>
+
+        <key name="rain-measurement-unit" enum="org.gnome.shell.extensions.simple-weather.rain-measurement-unit">
+            <default>'in'</default>
+            <summary>Rain Measurement Unit</summary>
+        </key>
+
+        <key name="distance-unit" enum="org.gnome.shell.extensions.simple-weather.distance-unit">
+            <default>'mi'</default>
+            <summary>Distance Unit</summary>
         </key>
 
     </schema>

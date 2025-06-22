@@ -82,6 +82,34 @@ export class GeneralPage extends Adw.PreferencesPage {
         });
         unitGroup.add(pressureRow);
 
+        const rainMeasurementUnits = new Gtk.StringList({ strings: [
+            "in", "mm", "cm", "pts"
+        ]});
+        const rainMeasurementRow = new Adw.ComboRow({
+            title: _g("Rain Measurement"),
+            model: rainMeasurementUnits,
+            selected: settings.get_enum("rain-measurement-unit") - 1
+        });
+        rainMeasurementRow.connect("notify::selected", () => {
+            settings.set_enum("rain-measurement-unit", rainMeasurementRow.selected + 1);
+            settings.apply();
+        });
+        unitGroup.add(rainMeasurementRow);
+
+        const distanceUnits = new Gtk.StringList({ strings: [
+            "mi", "km", "ft", "m"
+        ]});
+        const distanceRow = new Adw.ComboRow({
+            title: _g("Distance"),
+            model: distanceUnits,
+            selected: settings.get_enum("distance-unit") - 1
+        });
+        distanceRow.connect("notify::selected", () => {
+            settings.set_enum("distance-unit", distanceRow.selected + 1);
+            settings.apply();
+        });
+        unitGroup.add(distanceRow);
+
         const directionUnits = new Gtk.StringList({ strings: [
             _g("Degrees"), _g("Eight-Point Compass")
         ]});
