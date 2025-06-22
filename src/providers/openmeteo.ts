@@ -48,7 +48,7 @@ export class OpenMeteo implements Provider {
                 "apparent_temperature,surface_pressure,wind_speed_10m,wind_gusts_10m," +
                 "wind_direction_10m",
             daily: "sunset,sunrise,weather_code,temperature_2m_min,temperature_2m_max," +
-                "precipitation_probability_max",
+                "precipitation_probability_max,uv_index_max",
             hourly: "temperature_2m,weather_code,precipitation_probability,is_day",
             // Note that 24 is not the max
             forecast_hours: "28",
@@ -81,6 +81,7 @@ export class OpenMeteo implements Provider {
         const humidity : number = cur.relative_humidity_2m;
         // hPa to inHg
         const pressure = new Pressure(cur.surface_pressure * 0.02953);
+        const uvIndex = daily.uv_index_max[0];
         const isNight = cur.is_day === 0;
 
         const icon = codeToIcon[cur.weather_code];
@@ -136,6 +137,7 @@ export class OpenMeteo implements Provider {
             windDir,
             humidity,
             pressure,
+            uvIndex,
             providerName: this.nameKey
         };
     }

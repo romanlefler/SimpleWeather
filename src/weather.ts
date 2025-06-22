@@ -47,6 +47,8 @@ export interface Weather {
 
     pressure : Pressure;
 
+    uvIndex : number;
+
     providerName : string;
 
 }
