@@ -60,7 +60,7 @@ $(BUILD)/extension.js: $(SRCS) ./node_modules
 $(SCHEMAOUT): $(SCHEMASRC)
 	printf -- 'NEEDED: glib-compile-schemas\n'
 	mkdir -p $(SCHEMAOUTDIR)
-	glib-compile-schemas $(SCHEMAS) --targetdir=$(SCHEMAOUTDIR)
+	glib-compile-schemas $(SCHEMAS) --targetdir=$(SCHEMAOUTDIR) --strict
 
 $(SCHEMACP): $(SCHEMASRC)
 	mkdir -p $(SCHEMAOUTDIR)
