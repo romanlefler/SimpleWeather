@@ -17,7 +17,7 @@
 
 import { Config } from "../config.js";
 import { LibSoup } from "../libsoup.js";
-import { Direction, Pressure, RainMeasurement, Speed, Temp } from "../units.js";
+import { Direction, Pressure, RainMeasurement, RainMeasurementUnits, Speed, Temp } from "../units.js";
 import { Forecast, Weather } from "../weather.js";
 import { getGIconName, Icons } from "../icons.js"
 import { Provider } from "./provider.js";
@@ -46,10 +46,11 @@ export class OpenMeteo implements Provider {
             longitude: String(coords.lon),
             current: "temperature_2m,weather_code,is_day,relative_humidity_2m," +
                 "apparent_temperature,surface_pressure,wind_speed_10m,wind_gusts_10m," +
-                "wind_direction_10m,precipitation",
+                "wind_direction_10m,precipitation,cloud_cover",
             daily: "sunset,sunrise,weather_code,temperature_2m_min,temperature_2m_max," +
-                "precipitation_probability_max,uv_index_max",
-            hourly: "temperature_2m,weather_code,precipitation_probability,is_day",
+                "precipitation_probability_max,uv_index_max,cloud_cover_mean,precipitation_sum",
+            hourly: "temperature_2m,weather_code,precipitation_probability,is_day,cloud_cover," +
+                "precipitation",
             // Note that 24 is not the max
             forecast_hours: "28",
             temperature_unit: "fahrenheit",
@@ -86,7 +87,8 @@ export class OpenMeteo implements Provider {
         const isNight = cur.is_day === 0;
         const precipitation = new RainMeasurement(cur.precipitation);
 
-        const icon = codeToIcon[cur.weather_code];
+        const weatherCode = fixWeatherCode(cur.weather_code, cur.cloud_cover, precipitation);
+        const icon = codeToIcon[weatherCode];
         const gIconName = getGIconName(icon, isNight);
 
         // Z means UTC
@@ -97,8 +99,12 @@ export class OpenMeteo implements Provider {
         const dayCount = daily.time.length;
         for(let i = 0; i < dayCount; i++) {
             const fDateStr = daily.time[i];
-            // We always want day icons for forecast
-            const fIcon = codeToIcon[daily.weather_code[i]];
+            const fPrecipitation = new RainMeasurement(daily.precipitation_sum[i]);
+            const fCloudCover = daily.cloud_cover_mean[i];
+            // We always want day icons for day forecast
+            const fWeatherCode = fixWeatherCode(daily.weather_code[i],
+                fCloudCover, fPrecipitation);
+            const fIcon = codeToIcon[fWeatherCode];
             const fIconName = getGIconName(fIcon, false);
             dayForecast.push({
                 // This T00 thing tells the parser to assume local time (which we must do)
@@ -114,8 +120,12 @@ export class OpenMeteo implements Provider {
         const hourCount = hourly.time.length;
         for(let i = 0; i < hourCount; i++) {
             const fDateStr = hourly.time[i];
+            const fPrecipitation = new RainMeasurement(hourly.precipitation[i]);
+            const fCloudCover = hourly.cloud_cover[i];
             const fIsNight = hourly.is_day[i] === 0;
-            const fIcon = codeToIcon[daily.weather_code[i]];
+            const fWeatherCode = fixWeatherCode(hourly.weather_code[i],
+                fCloudCover, fPrecipitation);
+            const fIcon = codeToIcon[fWeatherCode];
             const fIconName = getGIconName(fIcon, fIsNight);
             hourForecast.push({
                 date: new Date(`${fDateStr}Z`),
@@ -145,6 +155,21 @@ export class OpenMeteo implements Provider {
         };
     }
 
+}
+
+function fixWeatherCode(code : number, cloudPercent : number, precip : RainMeasurement) : number {
+    // Compensate for https://github.com/open-meteo/open-meteo/issues/812
+    // Often the CAPE might be over 3000 J/kg but it's completely sunny outside
+    if(code === 95) {
+        if(cloudPercent < 40 && precip.get(RainMeasurementUnits.In) < 0.1) {
+            // In Open-Meteo's WeatherCode.swift calculate function
+            // cloud cover >= 20% is weather code 1
+            if(cloudPercent >= 20) return 1;
+            else return 0;
+        }
+        else return code;
+    }
+    else return code;
 }
 
 // https://open-meteo.com/en/docs#weather_variable_documentation
