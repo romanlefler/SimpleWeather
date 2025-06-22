@@ -86,6 +86,23 @@ export class LocationsPage extends Adw.PreferencesPage {
         this.#config.onMainLocationIndexChanged(this.#guiRefreshChecks.bind(this));
 
         this.#guiRefreshList();
+
+        const bottomBox = new Gtk.Box({
+            orientation: Gtk.Orientation.HORIZONTAL,
+            margin_top: 10
+        });
+        const addMyLocBtn = new Gtk.Button({
+            child: new Adw.ButtonContent({
+                label: _g("Add My Loc."),
+                icon_name: "list-add-symbolic"
+            }),
+            hexpand: true
+        });
+        addMyLocBtn.connect("clicked", () => {
+            this.#appendLocObj(Location.newHere());
+        });
+        bottomBox.append(addMyLocBtn);
+        this.#locGroup.add(bottomBox);
     }
 
     #guiRemoveAll() {
@@ -226,7 +243,11 @@ export class LocationsPage extends Adw.PreferencesPage {
         }
 
         if(!newLoc) return;
+        
+        this.#appendLocObj(newLoc);
+    }
 
+    #appendLocObj(newLoc : Location) {
         const locsArray = this.#config.getLocations();
         const newIndex = locsArray.length;
         locsArray.push(newLoc);
@@ -236,7 +257,6 @@ export class LocationsPage extends Adw.PreferencesPage {
         this.#settings.set_value("locations", gVariant);
         this.#settings.set_int64("main-location-index", newIndex);
         this.#settings.apply();
-
     }
 
     #deleteLoc(locs : Location[], index : number) {
