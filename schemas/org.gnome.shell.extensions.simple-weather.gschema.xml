@@ -69,7 +69,7 @@
         </key>
 
         <key name="temp-unit" enum="org.gnome.shell.extensions.simple-weather.temp-unit">
-            <default>'fahrenheit'</default>
+            <default>'celsius'</default>
             <summary>Temperature Unit</summary>
         </key>
 
@@ -94,7 +94,7 @@
         </key>
 
         <key name="speed-unit" enum="org.gnome.shell.extensions.simple-weather.speed-unit">
-            <default>'mph'</default>
+            <default>'kph'</default>
             <summary>Speed Unit</summary>
         </key>
 
@@ -104,17 +104,17 @@
         </key>
 
         <key name="pressure-unit" enum="org.gnome.shell.extensions.simple-weather.pressure-unit">
-            <default>'inHg'</default>
+            <default>'hPa'</default>
             <summary>Pressure Unit</summary>
         </key>
 
         <key name="rain-measurement-unit" enum="org.gnome.shell.extensions.simple-weather.rain-measurement-unit">
-            <default>'in'</default>
+            <default>'mm'</default>
             <summary>Rain Measurement Unit</summary>
         </key>
 
         <key name="distance-unit" enum="org.gnome.shell.extensions.simple-weather.distance-unit">
-            <default>'mi'</default>
+            <default>'km'</default>
             <summary>Distance Unit</summary>
         </key>
 
