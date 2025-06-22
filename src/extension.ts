@@ -58,6 +58,7 @@ export default class SimpleWeatherExtension extends Extension {
     #waitLayoutId? : number;
 
     #resolverFailCount : number = 0;
+    #lastGuiUpdate : Date = new Date(0);
 
     /**
      * Waits for the layout manager's starting up property to be false.
@@ -256,6 +257,10 @@ export default class SimpleWeatherExtension extends Extension {
     #updateGui() {
         const w = this.#cachedWeather;
         if(!w) return;
+        // Don't update within 250 ms
+        if(Date.now() - this.#lastGuiUpdate.getTime() <= 250) return;
+        else this.#lastGuiUpdate = new Date();
+
 
         this.#panelLabel!.text = displayTemp(w.temp, this.#config!);
 
