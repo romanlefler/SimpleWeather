@@ -225,7 +225,7 @@ export class Config {
         const id = this.#settings!.connect("changed", (_, key) => {
             const unitKeys = [
                 "unit-preset", "temp-unit", "speed-unit", "pressure-unit",
-                "rain-measurement-unit", "distance-unit"
+                "rain-measurement-unit", "distance-unit", "direction-unit"
              ];
              if(unitKeys.includes(key)) callback();
         });
