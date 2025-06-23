@@ -21,6 +21,7 @@ import { Direction, Pressure, RainMeasurement, RainMeasurementUnits, Speed, Temp
 import { Forecast, Weather } from "../weather.js";
 import { getGIconName, Icons } from "../icons.js"
 import { Provider } from "./provider.js";
+import { getTimezoneName } from "../utils.js";
 
 const ENDPOINT = "https://api.open-meteo.com/v1/forecast";
 
@@ -55,7 +56,8 @@ export class OpenMeteo implements Provider {
             forecast_hours: "28",
             temperature_unit: "fahrenheit",
             wind_speed_unit: "mph",
-            precipitation_unit: "inch"
+            precipitation_unit: "inch",
+            timezone: getTimezoneName()
         };
 
         const response = await this.#soup.fetchJson(ENDPOINT, params, false);
@@ -91,9 +93,8 @@ export class OpenMeteo implements Provider {
         const icon = codeToIcon[weatherCode];
         const gIconName = getGIconName(icon, isNight);
 
-        // Z means UTC
-        const sunrise = new Date(body.daily.sunrise[0] + "Z");
-        const sunset = new Date(body.daily.sunset[0] + "Z");
+        const sunrise = new Date(body.daily.sunrise[0]);
+        const sunset = new Date(body.daily.sunset[0]);
 
         const dayForecast : Forecast[] = [ ];
         const dayCount = daily.time.length;
@@ -128,7 +129,7 @@ export class OpenMeteo implements Provider {
             const fIcon = codeToIcon[fWeatherCode];
             const fIconName = getGIconName(fIcon, fIsNight);
             hourForecast.push({
-                date: new Date(`${fDateStr}Z`),
+                date: new Date(fDateStr),
                 gIconName: fIconName,
                 temp: new Temp(hourly.temperature_2m[i]),
                 precipChancePercent: hourly.precipitation_probability[i]
