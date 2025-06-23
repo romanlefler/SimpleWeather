@@ -93,8 +93,12 @@ export class OpenMeteo implements Provider {
         const icon = codeToIcon[weatherCode];
         const gIconName = getGIconName(icon, isNight);
 
-        const sunrise = new Date(body.daily.sunrise[0]);
-        const sunset = new Date(body.daily.sunset[0]);
+        // If sunrise/sunset have already happened, take the next day's
+        const now = new Date();
+        let sunrise = new Date(body.daily.sunrise[0]);
+        if(now > sunrise) sunrise = new Date(body.daily.sunrise[1]);
+        let sunset = new Date(body.daily.sunset[0]);
+        if(now > sunset) sunset = new Date(body.daily.sunset[1]);
 
         const dayForecast : Forecast[] = [ ];
         const dayCount = daily.time.length;
