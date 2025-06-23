@@ -2,9 +2,7 @@
 
 A highly configurable GNOME shell extension for viewing the weather.
 
-![Screenshot](https://github.com/user-attachments/assets/1ab81009-4355-453d-b674-d2e9471c29e7)
-
-
+![Screenshot](./docs/screenshot.png)
 
 ## Features
 
