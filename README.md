@@ -1,8 +1,9 @@
 # SimpleWeather
 
-A GNOME shell extension for viewing the weather.
+A highly configurable GNOME shell extension for viewing the weather.
 
-![Screenshot](https://github.com/user-attachments/assets/2b727a12-2d59-416e-b294-9771ea58844e)
+![Screenshot](https://github.com/user-attachments/assets/1ab81009-4355-453d-b674-d2e9471c29e7)
+
 
 
 ## Features
