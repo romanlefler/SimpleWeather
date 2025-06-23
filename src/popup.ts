@@ -183,6 +183,8 @@ export class Popup {
     readonly #forecastCards : ForecastCard[];
     readonly #copyright : St.Label;
     readonly #curInfo : CurInfo;
+    readonly #placeLabel : St.Label;
+    readonly #placeBtn : St.Button;
 
     readonly #menuItems : PopupMenu.PopupBaseMenuItem[];
 
@@ -190,8 +192,13 @@ export class Popup {
     #cachedWeather? : Weather;
     #wasHiContrast : boolean = false;
 
-    constructor(config : Config, metadata : ExtensionMetadata,
-        openPreferences : () => void, menu : PopupMenu.PopupMenu) {
+    constructor(
+        config : Config,
+        metadata : ExtensionMetadata,
+        openPreferences : () => void,
+        menu : PopupMenu.PopupMenu,
+        settings : Gio.Settings
+    ) {
 
         this.#config = config;
         this.#metadata = metadata;
@@ -265,10 +272,29 @@ export class Popup {
         const baseText = new PopupMenu.PopupBaseMenuItem({ reactive: false });
         baseText.actor.add_child(textRect);
 
-        const baseSpacer = new St.Widget({
+        this.#placeLabel = new St.Label();
+        this.#placeBtn = new St.Button({
+            child: this.#placeLabel,
+            style_class: "button",
+            margin_left: 20,
+            margin_right: 20,
+            reactive: true,
+            opacity: 255,
             x_expand: true
         });
-        baseText.actor.add_child(baseSpacer);
+        this.#placeBtn.connect("clicked", () => {
+            // These will be restored in the #updateGUI method
+            this.#placeBtn.reactive = false;
+            this.#placeBtn.opacity = 127;
+
+            const index = config.getMainLocationIndex();
+            const placeCount = config.getLocations().length;
+            let newIndex;
+            if(index === placeCount - 1) newIndex = 0;
+            else newIndex = index + 1;
+            settings.set_int64("main-location-index", newIndex);
+        });
+        baseText.actor.add_child(this.#placeBtn);
 
         const configBtn = new St.Button({
             child: new St.Icon({
@@ -291,6 +317,7 @@ export class Popup {
         baseText.actor.add_child(configBtn);
 
         setPointer(forecasts);
+        setPointer(this.#placeBtn);
         setPointer(configBtn);
 
         this.#menuItems = [ childItem, baseText ];
@@ -367,6 +394,8 @@ export class Popup {
 
         }
 
+        this.#placeLabel.text = w.loc.getName();
+
         const inf = this.#curInfo;
         inf.temp.text = _g("Temp: %s").format(displayTemp(w.temp, this.#config));
         inf.feelsLike.text = _g("Feels Like: %s").format(displayTemp(w.feelsLike, this.#config));
@@ -402,6 +431,9 @@ export class Popup {
                 }
             }
         }
+
+        this.#placeBtn.reactive = true;
+        this.#placeBtn.opacity = 255;
     }
 
 }

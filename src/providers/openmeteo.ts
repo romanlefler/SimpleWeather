@@ -22,6 +22,7 @@ import { Forecast, Weather } from "../weather.js";
 import { getGIconName, Icons } from "../icons.js"
 import { Provider } from "./provider.js";
 import { getTimezoneName } from "../utils.js";
+import { Location } from "../location.js";
 
 const ENDPOINT = "https://api.open-meteo.com/v1/forecast";
 
@@ -37,9 +38,8 @@ export class OpenMeteo implements Provider {
         this.#config = config;
     }
 
-    async #fetch() : Promise<any> {
+    async #fetch(loc : Location) : Promise<any> {
 
-        const loc = this.#config.getMainLocation();
         const coords = await loc.latLon();
 
         const params = {
@@ -72,7 +72,8 @@ export class OpenMeteo implements Provider {
     }
 
     async fetchWeather() : Promise<Weather> {
-        const body = await this.#fetch();
+        const loc = this.#config.getMainLocation();
+        const body = await this.#fetch(loc);
         const cur = body.current!;
         const daily = body.daily!;
         const hourly = body.hourly!;
@@ -156,7 +157,8 @@ export class OpenMeteo implements Provider {
             pressure,
             uvIndex,
             precipitation,
-            providerName: this.nameKey
+            providerName: this.nameKey,
+            loc
         };
     }
 

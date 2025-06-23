@@ -15,6 +15,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import { Location } from "./location.js";
 import { Direction, Pressure, RainMeasurement, Speed, Temp } from "./units.js";
 
 export interface Weather {
@@ -52,6 +53,8 @@ export interface Weather {
     precipitation : RainMeasurement;
 
     providerName : string;
+
+    loc : Location;
 
 }
 
