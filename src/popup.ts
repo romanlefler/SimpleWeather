@@ -20,6 +20,7 @@ import Gio from "gi://Gio";
 import St from "gi://St";
 import Meta from "gi://Meta";
 import { ExtensionMetadata, gettext as _ } from "resource:///org/gnome/shell/extensions/extension.js";
+import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as PopupMenu from "resource:///org/gnome/shell/ui/popupMenu.js";
 import { Config } from "./config.js";
 import { Forecast, Weather } from "./weather.js";
@@ -106,6 +107,11 @@ function addChildren(parent : Clutter.Actor, ...children : Clutter.Actor[]) {
     children.forEach(m => parent.add_child(m));
 }
 
+function getTextColor() : `rgba(${number}, ${number}, ${number}, ${number})` {
+    const color = Main.panel.get_theme_node().get_foreground_color();
+    return `rgba(${color.red}, ${color.green}, ${color.blue}, ${color.alpha / 255})`;
+}
+
 function evenLabel(opts : Partial<St.Label.ConstructorProps> = {}) {
     const label = new St.Label({
         x_expand: true,
@@ -182,6 +188,7 @@ export class Popup {
 
     #foreMode : ForecastMode;
     #cachedWeather? : Weather;
+    #wasHiContrast : boolean = false;
 
     constructor(config : Config, metadata : ExtensionMetadata,
         openPreferences : () => void, menu : PopupMenu.PopupMenu) {
@@ -374,6 +381,27 @@ export class Popup {
         inf.precipitation.text = _g("Precipitation: %s").format(
             displayRainMeasurement(w.precipitation, this.#config)
         );
+
+        // This only performs the updates if necessary
+        if(this.#config.getHighContrast()) {
+            if(!this.#wasHiContrast) {
+                this.#wasHiContrast = true;
+                const color = getTextColor();
+                const affected = [ this.#copyright, ...Object.values(inf) ];
+                for(const w of affected) {
+                    if(w instanceof St.Widget) w.style = `color:${color};`;
+                }
+            }
+        }
+        else {
+            if(this.#wasHiContrast) {
+                this.#wasHiContrast = false;
+                const affected = [ this.#copyright, ...Object.values(inf) ];
+                for(const w of affected) {
+                    if(w instanceof St.Widget) w.style = "";
+                }
+            }
+        }
     }
 
 }

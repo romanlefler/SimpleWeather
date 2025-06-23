@@ -213,6 +213,20 @@ export class GeneralPage extends Adw.PreferencesPage {
 
         this.add(myLocGroup);
 
+        const a11yGroup = new Adw.PreferencesGroup({
+            title: _g("Accessibility"),
+            description: _g("Configure accessibility features")
+        });
+        const hiContrastRow = new Adw.SwitchRow({
+            title: _g("High Contrast"),
+            active: settings.get_boolean("high-contrast")
+        });
+        hiContrastRow.connect("notify::active", () => {
+            settings.set_boolean("high-contrast", hiContrastRow.active);
+            settings.apply();
+        });
+        a11yGroup.add(hiContrastRow);
+        this.add(a11yGroup);
     }
 
 }

@@ -123,5 +123,10 @@
             <summary>Preset for Units</summary>
         </key>
 
+        <key name="high-contrast" type="b">
+            <default>false</default>
+            <summary>Forces pop-up to all be main color</summary>
+        </key>
+
     </schema>
 </schemalist>

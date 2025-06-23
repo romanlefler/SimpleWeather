@@ -215,6 +215,17 @@ export class Config {
         this.#handlerIds.push(id);
     }
 
+    getHighContrast() : boolean {
+        return this.#settings!.get_boolean("high-contrast");
+    }
+
+    onHighContrastChanged(callback : () => void) {
+        const id = this.#settings!.connect("changed", (_, key) => {
+            if(key === "high-contrast") callback();
+        });
+        this.#handlerIds.push(id);
+    }
+
 
 
     getUnitPreset() : UnitPreset {
