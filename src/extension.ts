@@ -166,8 +166,10 @@ export default class SimpleWeatherExtension extends Extension {
         });
         layout.add_child(this.#panelLabel);
         layout.add_child(this.#panelIcon);
-        layout.add_child(this.#sunTimeLabel);
-        layout.add_child(this.#sunTimeIcon);
+        if(this.#config!.getShowSunTime()) {
+            layout.add_child(this.#sunTimeLabel);
+            layout.add_child(this.#sunTimeIcon);
+        }
         this.#indicator.add_child(layout);
 
         // Set up a timer to refresh the weather on repeat
@@ -186,6 +188,16 @@ export default class SimpleWeatherExtension extends Extension {
         // Some settings just require a GUI update
         this.#config!.onAnyUnitChanged(this.#updateGui.bind(this));
         this.#config!.onHighContrastChanged(this.#updateGui.bind(this));
+        this.#config!.onShowSunTimeChanged(b => {
+            if (b) {
+                layout.add_child(this.#sunTimeLabel!);
+                layout.add_child(this.#sunTimeIcon!);
+            }
+            else {
+                layout.remove_child(this.#sunTimeLabel!);
+                layout.remove_child(this.#sunTimeIcon!);
+            }
+        });
 
         // First weather fetch
         this.#updateWeather();

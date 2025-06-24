@@ -128,5 +128,10 @@
             <summary>Forces pop-up to all be main color</summary>
         </key>
 
+        <key name="show-suntime" type="b">
+            <default>false</default>
+            <summary>Show sunrise/sunset in panel</summary>
+        </key>
+
     </schema>
 </schemalist>

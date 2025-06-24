@@ -226,6 +226,19 @@ export class Config {
         this.#handlerIds.push(id);
     }
 
+    getShowSunTime() : boolean {
+        return this.#settings!.get_boolean("show-suntime");
+    }
+
+    onShowSunTimeChanged(callback : (val : boolean) => void) {
+        const id = this.#settings!.connect("changed", (_, key) => {
+            if(key === "show-suntime") {
+                callback(this.#settings!.get_boolean("show-suntime"));
+            }
+        });
+        this.#handlerIds.push(id);
+    }
+
 
 
     getUnitPreset() : UnitPreset {

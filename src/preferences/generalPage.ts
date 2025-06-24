@@ -227,6 +227,21 @@ export class GeneralPage extends Adw.PreferencesPage {
         });
         a11yGroup.add(hiContrastRow);
         this.add(a11yGroup);
+
+        const panelGroup = new Adw.PreferencesGroup({
+            title: _g("Panel"),
+            description: _g("Configure the panel and pop-up")
+        });
+        const showSunTimeRow = new Adw.SwitchRow({
+            title: _g("Show Sunrise/Sunset"),
+            active: settings.get_boolean("show-suntime")
+        });
+        showSunTimeRow.connect("notify::active", () => {
+            settings.set_boolean("show-suntime", showSunTimeRow.active);
+            settings.apply();
+        });
+        panelGroup.add(showSunTimeRow);
+        this.add(panelGroup);
     }
 
 }
