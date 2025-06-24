@@ -46,7 +46,7 @@ export default class SimpleWeatherPreferences extends ExtensionPreferences {
 
         window.add(new GeneralPage(settings));
         window.add(new LocationsPage(settings, window));
-        window.add(new AboutPage(settings, this.#metadata));
+        window.add(new AboutPage(settings, this.#metadata, window));
 
     }
 

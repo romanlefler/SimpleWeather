@@ -21,6 +21,9 @@ import Gio from "gi://Gio";
 import Adw from "gi://Adw";
 import { ExtensionMetadata } from "resource:///org/gnome/shell/extensions/extension.js";
 import { gettext as _g } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
+// @ts-ignore
+import { PACKAGE_VERSION } from "resource:///org/gnome/Shell/Extensions/js/misc/config.js";
+import { getLocales } from "../lang.js";
 
 function md(s : string, classes? : string[]) : Gtk.Label {
     const props : Partial<Gtk.Label.ConstructorProps> = {
@@ -37,7 +40,7 @@ export class AboutPage extends Adw.PreferencesPage {
         GObject.registerClass(this);
     }
 
-    constructor(settings : Gio.Settings, metadata : ExtensionMetadata) {
+    constructor(settings : Gio.Settings, metadata : ExtensionMetadata, window : Adw.PreferencesWindow) {
 
         super({
             title: _g("About"),
@@ -64,6 +67,40 @@ export class AboutPage extends Adw.PreferencesPage {
             label: metadata["version-name"] ?? _g("Unknown")
         }));
         infoGroup.add(versionRow);
+
+        const settingsRow = new Adw.ActionRow({
+            title: _g("Settings")
+        });
+        const settingsBtnContent = new Adw.ButtonContent({
+            label: _g("Copy"),
+            icon_name: "edit-copy-symbolic"
+        });
+        const settingsButton = new Gtk.Button({
+            child: settingsBtnContent
+        });
+        settingsButton.connect("clicked", () => {
+            const keys : string[] = settings.settings_schema.list_keys();
+            keys.splice(keys.indexOf("locations"), 1);
+
+            const obj : Record<string, string> = { };
+            for(let k of keys) {
+                const val = settings.get_user_value(k);
+                if(val === null) continue;
+                obj[k] = val.print(false);
+            }
+            obj["app-version"] = metadata["version-name"] ?? "Unknown";
+            obj["gnome-version"] = PACKAGE_VERSION;
+            obj["user-locale"] = (getLocales() ?? [])[0] ?? "Unknown";
+            settingsBtnContent.icon_name = "checkbox";
+            settingsButton.get_clipboard().set(JSON.stringify(obj));
+
+            let toast = new Adw.Toast({
+                title: _g("Copied settings JSON to clipboard.")
+            });
+            window.add_toast(toast);
+        });
+        settingsRow.add_suffix(settingsButton);
+        infoGroup.add(settingsRow);
         this.add(infoGroup);
 
         const bottomGroup = new Adw.PreferencesGroup();
