@@ -4,6 +4,10 @@ A highly configurable GNOME shell extension for viewing the weather.
 
 ![Screenshot](./docs/screenshot.png)
 
+Also has support for translations (albeit translations are probably poor).
+
+![International Screenshot](./docs/intlscreenshot.png)
+
 ## Features
 
 - Display temperature and conditions in top bar
