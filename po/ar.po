@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
-"POT-Creation-Date: 2025-06-09 21:47-0500\n"
-"PO-Revision-Date: 2025-06-10 03:24\n"
+"POT-Creation-Date: 2025-06-23 19:40-0500\n"
+"PO-Revision-Date: 2025-06-24 00:49\n"
 "Last-Translator: \n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
@@ -17,29 +17,88 @@ msgstr ""
 "X-Crowdin-File: simple-weather@romanlefler.com.pot\n"
 "X-Crowdin-File-ID: 2\n"
 
-#: src/location.ts:48 src/location.ts:56 src/preferences/generalPage.ts:59
+#: src/autoConfig.ts:49 src/location.ts:48 src/location.ts:56
+#: src/preferences/generalPage.ts:179
 msgid "My Location"
 msgstr "موقعي"
 
-#: src/location.ts:71
+#: src/location.ts:74
 #, javascript-format
 msgid "%f°N"
 msgstr "%f°N"
 
-#: src/location.ts:71
+#: src/location.ts:74
 #, javascript-format
 msgid "%f°S"
 msgstr "%f°S"
 
-#: src/location.ts:72
+#: src/location.ts:75
 #, javascript-format
 msgid "%f°E"
 msgstr "%f°E"
 
-#: src/location.ts:72
+#: src/location.ts:75
 #, javascript-format
 msgid "%f°W"
 msgstr "%f°W"
+
+#: src/popup.ts:163
+msgid "Weather Data"
+msgstr "بيانات الطقس"
+
+#: src/popup.ts:307
+msgid "Settings"
+msgstr "الإعدادات"
+
+#: src/popup.ts:378
+#, javascript-format
+msgid "H: %s"
+msgstr ""
+
+#: src/popup.ts:379
+#, javascript-format
+msgid "L: %s"
+msgstr ""
+
+#: src/popup.ts:400
+#, javascript-format
+msgid "Temp: %s"
+msgstr "إمبراطور: %s"
+
+#: src/popup.ts:401
+#, javascript-format
+msgid "Feels Like: %s"
+msgstr "يشعر بالإعجاب: %s"
+
+#: src/popup.ts:402
+#, javascript-format
+msgid "Wind: %s, %s"
+msgstr "الرياح: %s، %s"
+
+#: src/popup.ts:406
+#, javascript-format
+msgid "Gusts: %s"
+msgstr "الغازات: %s"
+
+#: src/popup.ts:407
+#, javascript-format
+msgid "Humidity: %s"
+msgstr "الرطوبة: %s"
+
+#: src/popup.ts:408
+#, javascript-format
+msgid "Pressure: %s"
+msgstr "الضغط: %s"
+
+#: src/popup.ts:409
+#, javascript-format
+msgid "UV High: %s"
+msgstr "UV عالي: %s"
+
+#: src/popup.ts:410
+#, javascript-format
+msgid "Precipitation: %s"
+msgstr "هطول الأمطار: %s"
 
 #: src/preferences/aboutPage.ts:43
 msgid "About"
@@ -51,7 +110,7 @@ msgstr "GitHub Repository"
 
 #: src/preferences/aboutPage.ts:61
 msgid "SimpleWeather Version"
-msgstr "نسخة SimpleWeather"
+msgstr "نسخة الطقس البسيطة"
 
 #: src/preferences/aboutPage.ts:64
 msgid "Unknown"
@@ -91,76 +150,245 @@ msgstr "الاسم مطلوب."
 msgid "Invalid coordinates entry."
 msgstr "إدخال إحداثيات غير صالحة."
 
-#: src/preferences/generalPage.ts:33
+#: src/preferences/generalPage.ts:38
 msgid "General"
 msgstr "عام"
 
-#: src/preferences/generalPage.ts:43
+#: src/preferences/generalPage.ts:43 src/preferences/generalPage.ts:53
+msgid "Units"
+msgstr "الوحدات"
+
+#: src/preferences/generalPage.ts:44
+msgid "Configure units of measurement"
+msgstr "تكوين وحدات القياس"
+
+#: src/preferences/generalPage.ts:48
+msgid "Custom"
+msgstr "مخصص"
+
+#: src/preferences/generalPage.ts:48
+msgid "Metric"
+msgstr "متري"
+
+#: src/preferences/generalPage.ts:48
+msgid "UK"
+msgstr "المملكة المتحدة"
+
+#: src/preferences/generalPage.ts:48
+msgid "US"
+msgstr "الولايات المتحدة"
+
+#: src/preferences/generalPage.ts:61
 msgid "Fahrenheit"
 msgstr "Fahrenheit"
 
-#: src/preferences/generalPage.ts:44
+#: src/preferences/generalPage.ts:62
 msgid "Celsius"
 msgstr "سيلسيوس"
 
-#: src/preferences/generalPage.ts:60
+#: src/preferences/generalPage.ts:64
+msgid "Temperature"
+msgstr "درجة"
+
+#: src/preferences/generalPage.ts:78
+msgid "Speed"
+msgstr "السرعة"
+
+#: src/preferences/generalPage.ts:92
+msgid "Pressure"
+msgstr "الضغط"
+
+#: src/preferences/generalPage.ts:106
+msgid "Rain Measurement"
+msgstr "قياس الأمطار"
+
+#: src/preferences/generalPage.ts:120
+msgid "Distance"
+msgstr "المسافة"
+
+#: src/preferences/generalPage.ts:144
+msgid "Degrees"
+msgstr "الدرجات"
+
+#: src/preferences/generalPage.ts:144
+msgid "Eight-Point Compass"
+msgstr "بوصلة من 8 نقاط"
+
+#: src/preferences/generalPage.ts:147
+msgid "Direction"
+msgstr "الاتجاه"
+
+#: src/preferences/generalPage.ts:159
+msgid "Weather Service"
+msgstr "خدمة الطقس"
+
+#: src/preferences/generalPage.ts:160
+msgid "Configure how the weather is attained"
+msgstr "تكوين كيفية تحقيق الطقس"
+
+#: src/preferences/generalPage.ts:167
+msgid "Weather Provider"
+msgstr "موفر الطقس"
+
+#: src/preferences/generalPage.ts:180
 msgid "Configure how your location is found"
 msgstr "تكوين كيفية العثور على موقعك"
 
-#: src/preferences/generalPage.ts:64
+#: src/preferences/generalPage.ts:184
 msgid "Online"
 msgstr "متصل"
 
-#: src/preferences/generalPage.ts:65
+#: src/preferences/generalPage.ts:185
 msgid "System"
 msgstr "النظام"
 
-#: src/preferences/generalPage.ts:66
+#: src/preferences/generalPage.ts:186
 msgid "Disable"
 msgstr "تعطيل"
 
-#: src/preferences/generalPage.ts:79
+#: src/preferences/generalPage.ts:188
+msgid "Provider"
+msgstr "موفر"
+
+#: src/preferences/generalPage.ts:199
 msgid "Refresh Interval (Minutes)"
 msgstr "الفاصل الزمني للتحديث (دقائق)"
 
-#: src/preferences/locationsPage.ts:54 src/preferences/locationsPage.ts:77
+#: src/preferences/generalPage.ts:217
+msgid "Accessibility"
+msgstr "إمكانية الوصول"
+
+#: src/preferences/generalPage.ts:218
+msgid "Configure accessibility features"
+msgstr "تهيئة ميزات إمكانية الوصول"
+
+#: src/preferences/generalPage.ts:221
+msgid "High Contrast"
+msgstr "تباين عالي"
+
+#: src/preferences/generalPage.ts:232
+msgid "Panel"
+msgstr "لوحة"
+
+#: src/preferences/generalPage.ts:233
+msgid "Configure the panel and pop-up"
+msgstr "تكوين اللوحة والنوافذ المنبثقة"
+
+#: src/preferences/generalPage.ts:236
+msgid "Show Sunrise/Sunset"
+msgstr "إظهار الشمس/الغطاء الشمسي"
+
+#: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
 msgstr "المواقع"
 
-#: src/preferences/locationsPage.ts:67
+#: src/preferences/locationsPage.ts:70
 msgid "Add"
 msgstr "إضافة"
 
-#: src/preferences/locationsPage.ts:163
+#: src/preferences/locationsPage.ts:97
+msgid "Move Up"
+msgstr "تحريك للأعلى"
+
+#: src/preferences/locationsPage.ts:112
+msgid "Move Down"
+msgstr "تحريك للأسفل"
+
+#: src/preferences/locationsPage.ts:128
+msgid "Add Here"
+msgstr "أضف هنا"
+
+#: src/preferences/locationsPage.ts:193
+#, javascript-format
+msgid "Are you sure you want delete %s?"
+msgstr "هل أنت متأكد من أنك تريد حذف %s؟"
+
+#: src/preferences/locationsPage.ts:194
+msgid "Cancel"
+msgstr "إلغاء"
+
+#: src/preferences/locationsPage.ts:194
+msgid "Delete"
+msgstr "حذف"
+
+#: src/preferences/locationsPage.ts:235
 #, javascript-format
 msgid "Internal Error: %s"
 msgstr "خطأ داخلي: %s"
 
-#: src/preferences/locationsPage.ts:164
+#: src/preferences/locationsPage.ts:236
 msgid "Internal Error"
 msgstr "خطأ داخلي"
 
-#: src/preferences/locationsPage.ts:189
+#: src/preferences/locationsPage.ts:261
 msgid "Something else edited the locations."
 msgstr "شيء آخر قام بتحرير المواقع."
 
-#: src/preferences/search.ts:43
+#: src/preferences/search.ts:45
 msgid "Search Location"
 msgstr "موقع البحث"
 
-#: src/preferences/search.ts:52
+#: src/preferences/search.ts:54
 msgid "City, Neighborhood, etc."
 msgstr "المدينة، الجوار، إلخ."
 
-#: src/preferences/search.ts:57
+#: src/preferences/search.ts:59
 msgid "Search"
 msgstr "البحث"
 
-#: src/preferences/search.ts:167
+#: src/preferences/search.ts:143
+msgid "No Internet"
+msgstr "لا يوجد إنترنت"
+
+#: src/preferences/search.ts:182
 msgid "No results."
 msgstr "لا توجد نتائج."
 
-#: src/preferences/search.ts:172
+#: src/preferences/search.ts:187
 msgid "No copyright information available."
 msgstr "لا تتوفر معلومات عن حقوق التأليف والنشر."
+
+#: src/prefs.ts:60
+#, javascript-format
+msgid "SimpleWeather doesn't know how to handle your locale.\n"
+"\tError - %s\n"
+"Please consider submitting a bug report on GitHub."
+msgstr ""
+
+#: src/prefs.ts:63
+msgid "Don't Show Again"
+msgstr "لا تظهر مرة أخرى"
+
+#: src/prefs.ts:63
+msgid "Ignore"
+msgstr "تجاهل"
+
+#: src/prefs.ts:63
+msgid "Open GitHub"
+msgstr "Open GitHub"
+
+#: src/welcome.ts:53
+#, javascript-format
+msgid "Welcome to %s"
+msgstr "مرحبا بكم في %s"
+
+#: src/welcome.ts:74
+#, javascript-format
+msgid "%s occasionally connects to the selected weather service. By default, it will use the Internet to connect to:\n"
+"  •  %s, an %s service for weather\n"
+"  •  %s, optional for resolving the current location\n"
+"  •  %s, for searching locations by name\n\n"
+msgstr "%s يتصل من وقت لآخر بخدمة الطقس المحددة. بشكل افتراضي، سوف تستخدم الإنترنت للاتصال بـ:\n"
+"  •  %s، خدمة %s للطقس\n"
+"  •  %s، اختياري لحل الموقع الحالي\n"
+"  •  %s، للبحث في المواقع بالاسم\n\n"
+
+#: src/welcome.ts:83
+#, javascript-format
+msgid "Thank you for installing %s!"
+msgstr "شكرا لك على تثبيت %s!"
+
+#: src/welcome.ts:99
+msgid "Abort"
+msgstr "الغاء"
 

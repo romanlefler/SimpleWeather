@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
-"POT-Creation-Date: 2025-06-09 21:47-0500\n"
-"PO-Revision-Date: 2025-06-10 03:24\n"
+"POT-Creation-Date: 2025-06-23 19:40-0500\n"
+"PO-Revision-Date: 2025-06-24 00:49\n"
 "Last-Translator: \n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
@@ -17,29 +17,88 @@ msgstr ""
 "X-Crowdin-File: simple-weather@romanlefler.com.pot\n"
 "X-Crowdin-File-ID: 2\n"
 
-#: src/location.ts:48 src/location.ts:56 src/preferences/generalPage.ts:59
+#: src/autoConfig.ts:49 src/location.ts:48 src/location.ts:56
+#: src/preferences/generalPage.ts:179
 msgid "My Location"
 msgstr "自分の場所"
 
-#: src/location.ts:71
+#: src/location.ts:74
 #, javascript-format
 msgid "%f°N"
 msgstr "%f°N"
 
-#: src/location.ts:71
+#: src/location.ts:74
 #, javascript-format
 msgid "%f°S"
 msgstr "%f°S"
 
-#: src/location.ts:72
+#: src/location.ts:75
 #, javascript-format
 msgid "%f°E"
 msgstr "%f°E"
 
-#: src/location.ts:72
+#: src/location.ts:75
 #, javascript-format
 msgid "%f°W"
 msgstr "%f°W"
+
+#: src/popup.ts:163
+msgid "Weather Data"
+msgstr "天気データ"
+
+#: src/popup.ts:307
+msgid "Settings"
+msgstr "設定"
+
+#: src/popup.ts:378
+#, javascript-format
+msgid "H: %s"
+msgstr "H: %s"
+
+#: src/popup.ts:379
+#, javascript-format
+msgid "L: %s"
+msgstr "L: %s"
+
+#: src/popup.ts:400
+#, javascript-format
+msgid "Temp: %s"
+msgstr "Temp: %s"
+
+#: src/popup.ts:401
+#, javascript-format
+msgid "Feels Like: %s"
+msgstr "気分： %s"
+
+#: src/popup.ts:402
+#, javascript-format
+msgid "Wind: %s, %s"
+msgstr "風力: %s, %s"
+
+#: src/popup.ts:406
+#, javascript-format
+msgid "Gusts: %s"
+msgstr "突破数： %s"
+
+#: src/popup.ts:407
+#, javascript-format
+msgid "Humidity: %s"
+msgstr "湿度: %s"
+
+#: src/popup.ts:408
+#, javascript-format
+msgid "Pressure: %s"
+msgstr "プレッシャー： %s"
+
+#: src/popup.ts:409
+#, javascript-format
+msgid "UV High: %s"
+msgstr "UV高: %s"
+
+#: src/popup.ts:410
+#, javascript-format
+msgid "Precipitation: %s"
+msgstr "降水量: %s"
 
 #: src/preferences/aboutPage.ts:43
 msgid "About"
@@ -51,7 +110,7 @@ msgstr "GitHub Repository"
 
 #: src/preferences/aboutPage.ts:61
 msgid "SimpleWeather Version"
-msgstr "SimpleWeather バージョン"
+msgstr "シンプルな天気バージョン"
 
 #: src/preferences/aboutPage.ts:64
 msgid "Unknown"
@@ -91,76 +150,244 @@ msgstr "名前が必要です。"
 msgid "Invalid coordinates entry."
 msgstr "座標入力が無効です。"
 
-#: src/preferences/generalPage.ts:33
+#: src/preferences/generalPage.ts:38
 msgid "General"
 msgstr "全般"
 
-#: src/preferences/generalPage.ts:43
+#: src/preferences/generalPage.ts:43 src/preferences/generalPage.ts:53
+msgid "Units"
+msgstr "単位"
+
+#: src/preferences/generalPage.ts:44
+msgid "Configure units of measurement"
+msgstr "測定単位の設定"
+
+#: src/preferences/generalPage.ts:48
+msgid "Custom"
+msgstr "カスタム"
+
+#: src/preferences/generalPage.ts:48
+msgid "Metric"
+msgstr "メトリック"
+
+#: src/preferences/generalPage.ts:48
+msgid "UK"
+msgstr "英国"
+
+#: src/preferences/generalPage.ts:48
+msgid "US"
+msgstr "米国"
+
+#: src/preferences/generalPage.ts:61
 msgid "Fahrenheit"
 msgstr "Fahrenheit"
 
-#: src/preferences/generalPage.ts:44
+#: src/preferences/generalPage.ts:62
 msgid "Celsius"
 msgstr "摂氏度"
 
-#: src/preferences/generalPage.ts:60
+#: src/preferences/generalPage.ts:64
+msgid "Temperature"
+msgstr "温度"
+
+#: src/preferences/generalPage.ts:78
+msgid "Speed"
+msgstr "速度"
+
+#: src/preferences/generalPage.ts:92
+msgid "Pressure"
+msgstr "<unk>"
+
+#: src/preferences/generalPage.ts:106
+msgid "Rain Measurement"
+msgstr "雨の測定"
+
+#: src/preferences/generalPage.ts:120
+msgid "Distance"
+msgstr "距離"
+
+#: src/preferences/generalPage.ts:144
+msgid "Degrees"
+msgstr "度"
+
+#: src/preferences/generalPage.ts:144
+msgid "Eight-Point Compass"
+msgstr "8点コンパス（8点）"
+
+#: src/preferences/generalPage.ts:147
+msgid "Direction"
+msgstr "方向"
+
+#: src/preferences/generalPage.ts:159
+msgid "Weather Service"
+msgstr "天気サービス"
+
+#: src/preferences/generalPage.ts:160
+msgid "Configure how the weather is attained"
+msgstr "天気の達成方法を設定する"
+
+#: src/preferences/generalPage.ts:167
+msgid "Weather Provider"
+msgstr "天気プロバイダー"
+
+#: src/preferences/generalPage.ts:180
 msgid "Configure how your location is found"
 msgstr "位置情報がどのように見つかるかを設定します"
 
-#: src/preferences/generalPage.ts:64
+#: src/preferences/generalPage.ts:184
 msgid "Online"
 msgstr "オンライン"
 
-#: src/preferences/generalPage.ts:65
+#: src/preferences/generalPage.ts:185
 msgid "System"
 msgstr "システム"
 
-#: src/preferences/generalPage.ts:66
+#: src/preferences/generalPage.ts:186
 msgid "Disable"
 msgstr "無効"
 
-#: src/preferences/generalPage.ts:79
+#: src/preferences/generalPage.ts:188
+msgid "Provider"
+msgstr "プロバイダー"
+
+#: src/preferences/generalPage.ts:199
 msgid "Refresh Interval (Minutes)"
 msgstr "更新間隔 (分)"
 
-#: src/preferences/locationsPage.ts:54 src/preferences/locationsPage.ts:77
+#: src/preferences/generalPage.ts:217
+msgid "Accessibility"
+msgstr "アクセシビリティ"
+
+#: src/preferences/generalPage.ts:218
+msgid "Configure accessibility features"
+msgstr "ユーザー補助機能を設定"
+
+#: src/preferences/generalPage.ts:221
+msgid "High Contrast"
+msgstr "ハイコントラスト（ハイコントラスト）"
+
+#: src/preferences/generalPage.ts:232
+msgid "Panel"
+msgstr "パネル"
+
+#: src/preferences/generalPage.ts:233
+msgid "Configure the panel and pop-up"
+msgstr "パネルとポップアップを設定する"
+
+#: src/preferences/generalPage.ts:236
+msgid "Show Sunrise/Sunset"
+msgstr "日の出/日没を表示"
+
+#: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
 msgstr "場所"
 
-#: src/preferences/locationsPage.ts:67
+#: src/preferences/locationsPage.ts:70
 msgid "Add"
 msgstr "追加"
 
-#: src/preferences/locationsPage.ts:163
+#: src/preferences/locationsPage.ts:97
+msgid "Move Up"
+msgstr "上へ移動"
+
+#: src/preferences/locationsPage.ts:112
+msgid "Move Down"
+msgstr "下に移動"
+
+#: src/preferences/locationsPage.ts:128
+msgid "Add Here"
+msgstr "ここに追加"
+
+#: src/preferences/locationsPage.ts:193
+#, javascript-format
+msgid "Are you sure you want delete %s?"
+msgstr "%s を削除してもよろしいですか？"
+
+#: src/preferences/locationsPage.ts:194
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: src/preferences/locationsPage.ts:194
+msgid "Delete"
+msgstr "削除"
+
+#: src/preferences/locationsPage.ts:235
 #, javascript-format
 msgid "Internal Error: %s"
 msgstr "内部エラー: %s"
 
-#: src/preferences/locationsPage.ts:164
+#: src/preferences/locationsPage.ts:236
 msgid "Internal Error"
 msgstr "内部エラー"
 
-#: src/preferences/locationsPage.ts:189
+#: src/preferences/locationsPage.ts:261
 msgid "Something else edited the locations."
 msgstr "他の何かが場所を編集しました。"
 
-#: src/preferences/search.ts:43
+#: src/preferences/search.ts:45
 msgid "Search Location"
 msgstr "場所を検索"
 
-#: src/preferences/search.ts:52
+#: src/preferences/search.ts:54
 msgid "City, Neighborhood, etc."
 msgstr "市区町村等"
 
-#: src/preferences/search.ts:57
+#: src/preferences/search.ts:59
 msgid "Search"
 msgstr "検索"
 
-#: src/preferences/search.ts:167
+#: src/preferences/search.ts:143
+msgid "No Internet"
+msgstr "インターネットがありません"
+
+#: src/preferences/search.ts:182
 msgid "No results."
 msgstr "結果はありません。"
 
-#: src/preferences/search.ts:172
+#: src/preferences/search.ts:187
 msgid "No copyright information available."
 msgstr "著作権情報がありません。"
+
+#: src/prefs.ts:60
+#, javascript-format
+msgid "SimpleWeather doesn't know how to handle your locale.\n"
+"\tError - %s\n"
+"Please consider submitting a bug report on GitHub."
+msgstr "SimpleWeatherはあなたのロケールの処理方法を知りません。\n"
+"\tエラー - %s\n"
+"GitHubでバグレポートを送信することを検討してください。"
+
+#: src/prefs.ts:63
+msgid "Don't Show Again"
+msgstr "今後表示しない"
+
+#: src/prefs.ts:63
+msgid "Ignore"
+msgstr "無視"
+
+#: src/prefs.ts:63
+msgid "Open GitHub"
+msgstr "Open GitHub"
+
+#: src/welcome.ts:53
+#, javascript-format
+msgid "Welcome to %s"
+msgstr "%s へようこそ"
+
+#: src/welcome.ts:74
+#, javascript-format
+msgid "%s occasionally connects to the selected weather service. By default, it will use the Internet to connect to:\n"
+"  •  %s, an %s service for weather\n"
+"  •  %s, optional for resolving the current location\n"
+"  •  %s, for searching locations by name\n\n"
+msgstr ""
+
+#: src/welcome.ts:83
+#, javascript-format
+msgid "Thank you for installing %s!"
+msgstr "%s をインストールしていただきありがとうございます！"
+
+#: src/welcome.ts:99
+msgid "Abort"
+msgstr "中止する"
 

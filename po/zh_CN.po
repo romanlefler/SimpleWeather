@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
-"POT-Creation-Date: 2025-06-09 21:47-0500\n"
-"PO-Revision-Date: 2025-06-10 03:24\n"
+"POT-Creation-Date: 2025-06-23 19:40-0500\n"
+"PO-Revision-Date: 2025-06-24 00:49\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -17,29 +17,88 @@ msgstr ""
 "X-Crowdin-File: simple-weather@romanlefler.com.pot\n"
 "X-Crowdin-File-ID: 2\n"
 
-#: src/location.ts:48 src/location.ts:56 src/preferences/generalPage.ts:59
+#: src/autoConfig.ts:49 src/location.ts:48 src/location.ts:56
+#: src/preferences/generalPage.ts:179
 msgid "My Location"
 msgstr "我的位置"
 
-#: src/location.ts:71
+#: src/location.ts:74
 #, javascript-format
 msgid "%f°N"
 msgstr "%f°N"
 
-#: src/location.ts:71
+#: src/location.ts:74
 #, javascript-format
 msgid "%f°S"
 msgstr "%f°S"
 
-#: src/location.ts:72
+#: src/location.ts:75
 #, javascript-format
 msgid "%f°E"
 msgstr "%f°E"
 
-#: src/location.ts:72
+#: src/location.ts:75
 #, javascript-format
 msgid "%f°W"
 msgstr "%f°W"
+
+#: src/popup.ts:163
+msgid "Weather Data"
+msgstr "天气数据"
+
+#: src/popup.ts:307
+msgid "Settings"
+msgstr "设置"
+
+#: src/popup.ts:378
+#, javascript-format
+msgid "H: %s"
+msgstr "H: %s"
+
+#: src/popup.ts:379
+#, javascript-format
+msgid "L: %s"
+msgstr "L: %s"
+
+#: src/popup.ts:400
+#, javascript-format
+msgid "Temp: %s"
+msgstr "临时: %s"
+
+#: src/popup.ts:401
+#, javascript-format
+msgid "Feels Like: %s"
+msgstr "感觉喜欢： %s"
+
+#: src/popup.ts:402
+#, javascript-format
+msgid "Wind: %s, %s"
+msgstr "风: %s, %s"
+
+#: src/popup.ts:406
+#, javascript-format
+msgid "Gusts: %s"
+msgstr "Gusts: %s"
+
+#: src/popup.ts:407
+#, javascript-format
+msgid "Humidity: %s"
+msgstr ""
+
+#: src/popup.ts:408
+#, javascript-format
+msgid "Pressure: %s"
+msgstr "压力: %s"
+
+#: src/popup.ts:409
+#, javascript-format
+msgid "UV High: %s"
+msgstr "UV 高: %s"
+
+#: src/popup.ts:410
+#, javascript-format
+msgid "Precipitation: %s"
+msgstr ""
 
 #: src/preferences/aboutPage.ts:43
 msgid "About"
@@ -51,7 +110,7 @@ msgstr "GitHub Repository"
 
 #: src/preferences/aboutPage.ts:61
 msgid "SimpleWeather Version"
-msgstr "SimpleWeather 版本"
+msgstr "简单的天气版本"
 
 #: src/preferences/aboutPage.ts:64
 msgid "Unknown"
@@ -91,76 +150,244 @@ msgstr "名称是必需的。"
 msgid "Invalid coordinates entry."
 msgstr "无效的坐标项。"
 
-#: src/preferences/generalPage.ts:33
+#: src/preferences/generalPage.ts:38
 msgid "General"
 msgstr "A. 概况"
 
-#: src/preferences/generalPage.ts:43
+#: src/preferences/generalPage.ts:43 src/preferences/generalPage.ts:53
+msgid "Units"
+msgstr "单位"
+
+#: src/preferences/generalPage.ts:44
+msgid "Configure units of measurement"
+msgstr "配置测量单位"
+
+#: src/preferences/generalPage.ts:48
+msgid "Custom"
+msgstr "自定义"
+
+#: src/preferences/generalPage.ts:48
+msgid "Metric"
+msgstr "公制"
+
+#: src/preferences/generalPage.ts:48
+msgid "UK"
+msgstr "联合王国"
+
+#: src/preferences/generalPage.ts:48
+msgid "US"
+msgstr "美国"
+
+#: src/preferences/generalPage.ts:61
 msgid "Fahrenheit"
 msgstr "Fahrenheit"
 
-#: src/preferences/generalPage.ts:44
+#: src/preferences/generalPage.ts:62
 msgid "Celsius"
 msgstr "摄氏度"
 
-#: src/preferences/generalPage.ts:60
+#: src/preferences/generalPage.ts:64
+msgid "Temperature"
+msgstr "温度"
+
+#: src/preferences/generalPage.ts:78
+msgid "Speed"
+msgstr "速度"
+
+#: src/preferences/generalPage.ts:92
+msgid "Pressure"
+msgstr "气压"
+
+#: src/preferences/generalPage.ts:106
+msgid "Rain Measurement"
+msgstr "降雨量计算"
+
+#: src/preferences/generalPage.ts:120
+msgid "Distance"
+msgstr "距离"
+
+#: src/preferences/generalPage.ts:144
+msgid "Degrees"
+msgstr "度"
+
+#: src/preferences/generalPage.ts:144
+msgid "Eight-Point Compass"
+msgstr "八点指南针"
+
+#: src/preferences/generalPage.ts:147
+msgid "Direction"
+msgstr "方向"
+
+#: src/preferences/generalPage.ts:159
+msgid "Weather Service"
+msgstr "天气服务"
+
+#: src/preferences/generalPage.ts:160
+msgid "Configure how the weather is attained"
+msgstr "配置天气是如何实现的"
+
+#: src/preferences/generalPage.ts:167
+msgid "Weather Provider"
+msgstr "天气提供商"
+
+#: src/preferences/generalPage.ts:180
 msgid "Configure how your location is found"
 msgstr "配置如何找到您的位置"
 
-#: src/preferences/generalPage.ts:64
+#: src/preferences/generalPage.ts:184
 msgid "Online"
 msgstr "在线"
 
-#: src/preferences/generalPage.ts:65
+#: src/preferences/generalPage.ts:185
 msgid "System"
 msgstr "系统"
 
-#: src/preferences/generalPage.ts:66
+#: src/preferences/generalPage.ts:186
 msgid "Disable"
 msgstr "禁用"
 
-#: src/preferences/generalPage.ts:79
+#: src/preferences/generalPage.ts:188
+msgid "Provider"
+msgstr "提供商"
+
+#: src/preferences/generalPage.ts:199
 msgid "Refresh Interval (Minutes)"
 msgstr "刷新间隔 (分钟)"
 
-#: src/preferences/locationsPage.ts:54 src/preferences/locationsPage.ts:77
+#: src/preferences/generalPage.ts:217
+msgid "Accessibility"
+msgstr "无障碍环境"
+
+#: src/preferences/generalPage.ts:218
+msgid "Configure accessibility features"
+msgstr "配置辅助功能"
+
+#: src/preferences/generalPage.ts:221
+msgid "High Contrast"
+msgstr "高对比度"
+
+#: src/preferences/generalPage.ts:232
+msgid "Panel"
+msgstr "面板"
+
+#: src/preferences/generalPage.ts:233
+msgid "Configure the panel and pop-up"
+msgstr "配置面板和弹出窗口"
+
+#: src/preferences/generalPage.ts:236
+msgid "Show Sunrise/Sunset"
+msgstr "显示日落/未集"
+
+#: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
 msgstr "地点"
 
-#: src/preferences/locationsPage.ts:67
+#: src/preferences/locationsPage.ts:70
 msgid "Add"
 msgstr "添加"
 
-#: src/preferences/locationsPage.ts:163
+#: src/preferences/locationsPage.ts:97
+msgid "Move Up"
+msgstr "上移"
+
+#: src/preferences/locationsPage.ts:112
+msgid "Move Down"
+msgstr "向下移动"
+
+#: src/preferences/locationsPage.ts:128
+msgid "Add Here"
+msgstr "添加到这里"
+
+#: src/preferences/locationsPage.ts:193
+#, javascript-format
+msgid "Are you sure you want delete %s?"
+msgstr "您确定要删除 %s 吗？"
+
+#: src/preferences/locationsPage.ts:194
+msgid "Cancel"
+msgstr "取消"
+
+#: src/preferences/locationsPage.ts:194
+msgid "Delete"
+msgstr "删除"
+
+#: src/preferences/locationsPage.ts:235
 #, javascript-format
 msgid "Internal Error: %s"
 msgstr "内部错误: %s"
 
-#: src/preferences/locationsPage.ts:164
+#: src/preferences/locationsPage.ts:236
 msgid "Internal Error"
 msgstr "内部错误"
 
-#: src/preferences/locationsPage.ts:189
+#: src/preferences/locationsPage.ts:261
 msgid "Something else edited the locations."
 msgstr "其他地方编辑."
 
-#: src/preferences/search.ts:43
+#: src/preferences/search.ts:45
 msgid "Search Location"
 msgstr "搜索位置"
 
-#: src/preferences/search.ts:52
+#: src/preferences/search.ts:54
 msgid "City, Neighborhood, etc."
 msgstr "城市、邻里等"
 
-#: src/preferences/search.ts:57
+#: src/preferences/search.ts:59
 msgid "Search"
 msgstr "搜索"
 
-#: src/preferences/search.ts:167
+#: src/preferences/search.ts:143
+msgid "No Internet"
+msgstr "无网络"
+
+#: src/preferences/search.ts:182
 msgid "No results."
 msgstr "没有结果。"
 
-#: src/preferences/search.ts:172
+#: src/preferences/search.ts:187
 msgid "No copyright information available."
 msgstr "没有可用的版权信息。"
+
+#: src/prefs.ts:60
+#, javascript-format
+msgid "SimpleWeather doesn't know how to handle your locale.\n"
+"\tError - %s\n"
+"Please consider submitting a bug report on GitHub."
+msgstr "SimpleWeather 不知道如何处理您的本地。\n"
+"\t错误 - %s\n"
+"请考虑在 GitHub 上提交错误报告。"
+
+#: src/prefs.ts:63
+msgid "Don't Show Again"
+msgstr "不再显示"
+
+#: src/prefs.ts:63
+msgid "Ignore"
+msgstr "忽略"
+
+#: src/prefs.ts:63
+msgid "Open GitHub"
+msgstr "Open GitHub"
+
+#: src/welcome.ts:53
+#, javascript-format
+msgid "Welcome to %s"
+msgstr "欢迎使用 %s"
+
+#: src/welcome.ts:74
+#, javascript-format
+msgid "%s occasionally connects to the selected weather service. By default, it will use the Internet to connect to:\n"
+"  •  %s, an %s service for weather\n"
+"  •  %s, optional for resolving the current location\n"
+"  •  %s, for searching locations by name\n\n"
+msgstr ""
+
+#: src/welcome.ts:83
+#, javascript-format
+msgid "Thank you for installing %s!"
+msgstr "感谢您安装 %s！"
+
+#: src/welcome.ts:99
+msgid "Abort"
+msgstr "中止"
 

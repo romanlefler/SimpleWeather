@@ -5,22 +5,22 @@ msgstr ""
 "POT-Creation-Date: 2025-06-23 19:40-0500\n"
 "PO-Revision-Date: 2025-06-24 00:49\n"
 "Last-Translator: \n"
-"Language-Team: Finnish\n"
-"Language: fi_FI\n"
+"Language-Team: Spanish\n"
+"Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Crowdin-Project: simpleweather\n"
 "X-Crowdin-Project-ID: 798380\n"
-"X-Crowdin-Language: fi\n"
+"X-Crowdin-Language: es-ES\n"
 "X-Crowdin-File: simple-weather@romanlefler.com.pot\n"
 "X-Crowdin-File-ID: 2\n"
 
 #: src/autoConfig.ts:49 src/location.ts:48 src/location.ts:56
 #: src/preferences/generalPage.ts:179
 msgid "My Location"
-msgstr "Oma Sijainti"
+msgstr "Mi ubicación"
 
 #: src/location.ts:74
 #, javascript-format
@@ -44,11 +44,11 @@ msgstr "%f°W"
 
 #: src/popup.ts:163
 msgid "Weather Data"
-msgstr "Säätiedot"
+msgstr "Datos meteorológicos"
 
 #: src/popup.ts:307
 msgid "Settings"
-msgstr "Asetukset"
+msgstr "Ajustes"
 
 #: src/popup.ts:378
 #, javascript-format
@@ -68,41 +68,41 @@ msgstr "Temp: %s"
 #: src/popup.ts:401
 #, javascript-format
 msgid "Feels Like: %s"
-msgstr "Tuntuu Tykkä: %s"
+msgstr "Me gusta: %s"
 
 #: src/popup.ts:402
 #, javascript-format
 msgid "Wind: %s, %s"
-msgstr "Tuuli: %s, %s"
+msgstr "Viento: %s, %s"
 
 #: src/popup.ts:406
 #, javascript-format
 msgid "Gusts: %s"
-msgstr "Gusts: %s"
+msgstr "Gustos: %s"
 
 #: src/popup.ts:407
 #, javascript-format
 msgid "Humidity: %s"
-msgstr "Kosteus: %s"
+msgstr "Humedad: %s"
 
 #: src/popup.ts:408
 #, javascript-format
 msgid "Pressure: %s"
-msgstr "Paine: %s"
+msgstr "Presión: %s"
 
 #: src/popup.ts:409
 #, javascript-format
 msgid "UV High: %s"
-msgstr "Uv Korkea: %s"
+msgstr "Alto UV: %s"
 
 #: src/popup.ts:410
 #, javascript-format
 msgid "Precipitation: %s"
-msgstr "Sademäärä: %s"
+msgstr "Precipitación: %s"
 
 #: src/preferences/aboutPage.ts:43
 msgid "About"
-msgstr "Tietoja"
+msgstr "Acerca de"
 
 #: src/preferences/aboutPage.ts:54
 msgid "GitHub Repository"
@@ -110,73 +110,73 @@ msgstr "GitHub Repository"
 
 #: src/preferences/aboutPage.ts:61
 msgid "SimpleWeather Version"
-msgstr "SimpleWeather Versio"
+msgstr "Versión de simpleWeather"
 
 #: src/preferences/aboutPage.ts:64
 msgid "Unknown"
-msgstr "Tuntematon"
+msgstr "Desconocido"
 
 #: src/preferences/aboutPage.ts:75
 #, javascript-format
 msgid "This extension is a rewrite of the %s project."
-msgstr "Tämä lisäosa on %s -projektin uudelleenkirjoitus."
+msgstr "Esta extensión es una reescritura del proyecto %s."
 
 #: src/preferences/editLocation.ts:33
 #, javascript-format
 msgid "Edit %s"
-msgstr "Muokkaa %s"
+msgstr "Editar %s"
 
 #: src/preferences/editLocation.ts:33
 msgid "New Location"
-msgstr "Uusi Sijainti"
+msgstr "Nueva ubicación"
 
 #: src/preferences/editLocation.ts:41
 msgid "Name"
-msgstr "Nimi"
+msgstr "Nombre"
 
 #: src/preferences/editLocation.ts:56
 msgid "Coordinates"
-msgstr "Koordinaatit"
+msgstr "Coordenadas"
 
 #: src/preferences/editLocation.ts:66
 msgid "Save"
-msgstr "Tallenna"
+msgstr "Guardar"
 
 #: src/preferences/editLocation.ts:87
 msgid "Name is required."
-msgstr "Nimi vaaditaan."
+msgstr "Se requiere un nombre."
 
 #: src/preferences/editLocation.ts:92
 msgid "Invalid coordinates entry."
-msgstr "Virheellinen koordinaattien merkintä."
+msgstr "Entrada de coordenadas no válida."
 
 #: src/preferences/generalPage.ts:38
 msgid "General"
-msgstr "Yleiset"
+msgstr "General"
 
 #: src/preferences/generalPage.ts:43 src/preferences/generalPage.ts:53
 msgid "Units"
-msgstr "Yksiköt"
+msgstr "Unidades"
 
 #: src/preferences/generalPage.ts:44
 msgid "Configure units of measurement"
-msgstr "Määritä mittayksiköt"
+msgstr "Configurar unidades de medida"
 
 #: src/preferences/generalPage.ts:48
 msgid "Custom"
-msgstr "Mukautettu"
+msgstr "Personalizado"
 
 #: src/preferences/generalPage.ts:48
 msgid "Metric"
-msgstr "Metrinen"
+msgstr "Métrica"
 
 #: src/preferences/generalPage.ts:48
 msgid "UK"
-msgstr "Iso-Britannia"
+msgstr "Reino Unido"
 
 #: src/preferences/generalPage.ts:48
 msgid "US"
-msgstr "US"
+msgstr "SUS"
 
 #: src/preferences/generalPage.ts:61
 msgid "Fahrenheit"
@@ -188,182 +188,182 @@ msgstr "Celsius"
 
 #: src/preferences/generalPage.ts:64
 msgid "Temperature"
-msgstr "Lämpötila"
+msgstr "Temperatura"
 
 #: src/preferences/generalPage.ts:78
 msgid "Speed"
-msgstr "Nopeus"
+msgstr "Velocidad"
 
 #: src/preferences/generalPage.ts:92
 msgid "Pressure"
-msgstr "Paine"
+msgstr "Presión"
 
 #: src/preferences/generalPage.ts:106
 msgid "Rain Measurement"
-msgstr "Sademäärän Mittaus"
+msgstr "Medida de lluvia"
 
 #: src/preferences/generalPage.ts:120
 msgid "Distance"
-msgstr "Etäisyys"
+msgstr "Distancia"
 
 #: src/preferences/generalPage.ts:144
 msgid "Degrees"
-msgstr "Astetta"
+msgstr "Grados"
 
 #: src/preferences/generalPage.ts:144
 msgid "Eight-Point Compass"
-msgstr "Kahdeksan Pisteen Kompassi"
+msgstr "Brújula de ocho puntos"
 
 #: src/preferences/generalPage.ts:147
 msgid "Direction"
-msgstr "Suunta"
+msgstr "Dirección"
 
 #: src/preferences/generalPage.ts:159
 msgid "Weather Service"
-msgstr "Sääpalvelu"
+msgstr "Servicio meteorológico"
 
 #: src/preferences/generalPage.ts:160
 msgid "Configure how the weather is attained"
-msgstr "Määritä miten sää on saavutettu"
+msgstr "Configurar cómo se alcanza el clima"
 
 #: src/preferences/generalPage.ts:167
 msgid "Weather Provider"
-msgstr "Säätarjoaja"
+msgstr "Proveedor de tiempo"
 
 #: src/preferences/generalPage.ts:180
 msgid "Configure how your location is found"
-msgstr "Määritä miten sijaintisi löytyy"
+msgstr "Configurar cómo se encuentra tu ubicación"
 
 #: src/preferences/generalPage.ts:184
 msgid "Online"
-msgstr "Paikalla"
+msgstr "En línea"
 
 #: src/preferences/generalPage.ts:185
 msgid "System"
-msgstr "Järjestelmä"
+msgstr "Sistema"
 
 #: src/preferences/generalPage.ts:186
 msgid "Disable"
-msgstr "Poista Käytöstä"
+msgstr "Desactivar"
 
 #: src/preferences/generalPage.ts:188
 msgid "Provider"
-msgstr "Tarjoaja"
+msgstr "Proveedor"
 
 #: src/preferences/generalPage.ts:199
 msgid "Refresh Interval (Minutes)"
-msgstr "Päivitä Aikaväli (Minuuttia)"
+msgstr "Intervalo de actualización (minutos)"
 
 #: src/preferences/generalPage.ts:217
 msgid "Accessibility"
-msgstr "Esteettömyys"
+msgstr "Accesibilidad"
 
 #: src/preferences/generalPage.ts:218
 msgid "Configure accessibility features"
-msgstr "Määritä esteettömyysominaisuudet"
+msgstr "Configurar características de accesibilidad"
 
 #: src/preferences/generalPage.ts:221
 msgid "High Contrast"
-msgstr "Korkea Kontrasti"
+msgstr "Alto contrato"
 
 #: src/preferences/generalPage.ts:232
 msgid "Panel"
-msgstr "Paneeli"
+msgstr "Panel"
 
 #: src/preferences/generalPage.ts:233
 msgid "Configure the panel and pop-up"
-msgstr "Määritä paneeli ja ponnahdusikkuna"
+msgstr "Configurar el panel y emerger"
 
 #: src/preferences/generalPage.ts:236
 msgid "Show Sunrise/Sunset"
-msgstr "Näytä Auringon/Auringonlasku"
+msgstr "Mostrar Sunrise/Sunset"
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
-msgstr "Sijainnit"
+msgstr "Ubicaciones"
 
 #: src/preferences/locationsPage.ts:70
 msgid "Add"
-msgstr "Lisää"
+msgstr "Añadir"
 
 #: src/preferences/locationsPage.ts:97
 msgid "Move Up"
-msgstr "Siirrä Ylös"
+msgstr "Subir"
 
 #: src/preferences/locationsPage.ts:112
 msgid "Move Down"
-msgstr "Siirrä Alas"
+msgstr "Mover abajo"
 
 #: src/preferences/locationsPage.ts:128
 msgid "Add Here"
-msgstr "Lisää Tähän"
+msgstr "Añadir aquí"
 
 #: src/preferences/locationsPage.ts:193
 #, javascript-format
 msgid "Are you sure you want delete %s?"
-msgstr "Oletko varma, että haluat poistaa %s?"
+msgstr "¿Está seguro que desea eliminar %s?"
 
 #: src/preferences/locationsPage.ts:194
 msgid "Cancel"
-msgstr "Peruuta"
+msgstr "Cancelar"
 
 #: src/preferences/locationsPage.ts:194
 msgid "Delete"
-msgstr "Poista"
+msgstr "Eliminar"
 
 #: src/preferences/locationsPage.ts:235
 #, javascript-format
 msgid "Internal Error: %s"
-msgstr "Sisäinen Virhe: %s"
+msgstr "Error interno: %s"
 
 #: src/preferences/locationsPage.ts:236
 msgid "Internal Error"
-msgstr "Sisäinen Virhe"
+msgstr "Error interno"
 
 #: src/preferences/locationsPage.ts:261
 msgid "Something else edited the locations."
-msgstr "Jotain muuta muokkasi sijainteja."
+msgstr "Algo más editó las ubicaciones."
 
 #: src/preferences/search.ts:45
 msgid "Search Location"
-msgstr "Etsi Sijaintia"
+msgstr "Buscar ubicación"
 
 #: src/preferences/search.ts:54
 msgid "City, Neighborhood, etc."
-msgstr "Kaupunki, naapurusto, jne."
+msgstr "Ciudad, Neighborhood, etc."
 
 #: src/preferences/search.ts:59
 msgid "Search"
-msgstr "Etsi"
+msgstr "Buscar"
 
 #: src/preferences/search.ts:143
 msgid "No Internet"
-msgstr "Ei Internet-yhteyttä"
+msgstr "Sin Internet"
 
 #: src/preferences/search.ts:182
 msgid "No results."
-msgstr "Ei tuloksia."
+msgstr "Sin resultados."
 
 #: src/preferences/search.ts:187
 msgid "No copyright information available."
-msgstr "Tekijänoikeustietoja ei ole saatavilla."
+msgstr "No hay información de derechos de autor disponible."
 
 #: src/prefs.ts:60
 #, javascript-format
 msgid "SimpleWeather doesn't know how to handle your locale.\n"
 "\tError - %s\n"
 "Please consider submitting a bug report on GitHub."
-msgstr "SimpleWeather ei osaa käsitellä paikallistasi.\n"
-"\t¶ Virhe - %s\n"
-"Harkitse vikailmoituksen lähettämistä GitHubissa."
+msgstr "SimpleWeather no sabe cómo manejar su locale.\n"
+"\tError - %s\n"
+"Por favor, considere enviar un informe de error en GitHub."
 
 #: src/prefs.ts:63
 msgid "Don't Show Again"
-msgstr "Älä Näytä Uudelleen"
+msgstr "No mostrar de nuevo"
 
 #: src/prefs.ts:63
 msgid "Ignore"
-msgstr "Ohita"
+msgstr "Ignorar"
 
 #: src/prefs.ts:63
 msgid "Open GitHub"
@@ -372,7 +372,7 @@ msgstr "Open GitHub"
 #: src/welcome.ts:53
 #, javascript-format
 msgid "Welcome to %s"
-msgstr "Tervetuloa %s"
+msgstr "Bienvenido a %s"
 
 #: src/welcome.ts:74
 #, javascript-format
@@ -380,17 +380,17 @@ msgid "%s occasionally connects to the selected weather service. By default, it 
 "  •  %s, an %s service for weather\n"
 "  •  %s, optional for resolving the current location\n"
 "  •  %s, for searching locations by name\n\n"
-msgstr "%s yhdistää silloin tällöin valittuun sääpalveluun. Oletuksena se käyttää Internetiä yhteyden muodostamiseen:\n"
-"  •  %s, %s palvelu säälle\n"
-"  •  %s, valinnainen nykyisen sijainnin\n"
-"  •  %sratkaisemiseksi hakemalla sijainteja nimellä\n\n"
+msgstr "%s se conecta ocasionalmente al servicio meteorológico seleccionado. Por defecto, usará Internet para conectarse a:\n"
+"  •  %s, un servicio %s para el tiempo\n"
+"  •  %s, opcional para resolver la ubicación actual\n"
+"  •  %s, para buscar ubicaciones por nombre\n\n"
 
 #: src/welcome.ts:83
 #, javascript-format
 msgid "Thank you for installing %s!"
-msgstr "Kiitos, että asensit %s!"
+msgstr "¡Gracias por instalar %s!"
 
 #: src/welcome.ts:99
 msgid "Abort"
-msgstr "Keskeytä"
+msgstr "Abordar"
 
