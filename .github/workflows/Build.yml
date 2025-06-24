@@ -1,0 +1,26 @@
+name: 'Translation Build'
+
+on:
+    workflow_dispatch:
+    pull_request:
+        types: [ 'opened' ]
+        branches: [ 'master' ]
+        paths:
+        - '**.po'
+        - '**.ts'
+        - '**.svg'
+        - '**.xml'
+        - '**.json'
+        - '**.css'
+        - 'Makefile'
+    push:
+        branches:
+          - 'master'
+
+jobs:
+    build_translations:
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v3
+        - run: make
+        - run: make clean
