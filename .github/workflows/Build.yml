@@ -22,5 +22,6 @@ jobs:
         runs-on: ubuntu-latest
         steps:
         - uses: actions/checkout@v3
+        - run: apt-get install gettext npm -y
         - run: make
         - run: make clean
