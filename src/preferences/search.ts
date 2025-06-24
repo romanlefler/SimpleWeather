@@ -82,7 +82,7 @@ export async function searchDialog(parent : Gtk.Window, soup : LibSoup, cfg : Co
     group.add(licenseLabel);
 
     const addBtn = new Gtk.Button({
-        label: "Add"
+        label: _g("Add")
     });
     group.add(addBtn);
 
