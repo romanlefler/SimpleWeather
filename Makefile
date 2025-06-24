@@ -78,7 +78,7 @@ $(POT): $(SRCS)
 	printf -- 'NEEDED: xgettext\n'
 	mkdir -p $(PO)
 	xgettext --from-code=UTF-8 -o $(POT) -k_g -k_p -F \
-		-L TypeScript --copyright-holder='Roman Lefler' \
+		-L JavaScript --copyright-holder='Roman Lefler' \
 		--package-name=$(UUID) --package-version=$(VERSION) \
 		--msgid-bugs-address=simpleweather-gnome@proton.me \
 		$(SRCS)
