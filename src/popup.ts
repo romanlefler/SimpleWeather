@@ -259,12 +259,13 @@ export class Popup {
             x_expand: true
         });
         this.#placeBtn.connect("clicked", () => {
+            const placeCount = config.getLocations().length;
+            if(placeCount === 1) return;
             // These will be restored in the #updateGUI method
             this.#placeBtn.reactive = false;
             this.#placeBtn.opacity = 127;
 
             const index = config.getMainLocationIndex();
-            const placeCount = config.getLocations().length;
             let newIndex;
             if(index === placeCount - 1) newIndex = 0;
             else newIndex = index + 1;
