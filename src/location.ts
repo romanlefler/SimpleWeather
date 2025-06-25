@@ -31,6 +31,10 @@ export class Location {
      * True if this is the special location "here"
      */
     #isHere : boolean;
+    /**
+     * If this is here, the city name that is resolved.
+     */
+    #hereCityName? : string;
 
     #lat? : number;
     #lon? : number;
@@ -45,7 +49,10 @@ export class Location {
     }
 
     getName() : string {
-        return this.#name ?? _g("My Location");
+        if(this.#name) return this.#name;
+        const txt = _g("My Location");
+        if(this.#hereCityName) return `${txt} - ${this.#hereCityName}`;
+        else return txt;
     }
 
     getRawName() : string | null {
@@ -63,6 +70,7 @@ export class Location {
     async latLon() : Promise<LatLon> {
         if(this.#isHere) {
             const myLoc = await getMyLocation();
+            this.#hereCityName = myLoc.city ?? undefined;
             return { lat: myLoc.lat, lon: myLoc.lon };
         }
         else return { lat: this.#lat!, lon: this.#lon! };
