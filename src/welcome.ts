@@ -76,7 +76,7 @@ class WelcomeDialog extends ModalDialog {
             "  \u2022  %s, an %s service for weather\n" +
             "  \u2022  %s, optional for resolving the current location\n" +
             "  \u2022  %s, for searching locations by name\n\n"
-        ), "SimpleWeather", "Open-Meteo", "AGPL 3.0", "IPinfo", "Nominatim");
+        ), "SimpleWeather", "Open-Meteo", "AGPL 3.0", "ipapi.co", "Nominatim");
         box.add_child(weatherProv);
 
         const thanks = paragraph(_g(

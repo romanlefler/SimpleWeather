@@ -33,7 +33,8 @@ let lastGotTime : Date = new Date(0);
 export enum MyLocationProvider {
     IpInfoIo = 1,
     Geoclue = 2,
-    Disable = 3
+    Disable = 3,
+    Ipapi = 4
 }
 
 export interface MyLocResult extends LatLon {
@@ -81,6 +82,9 @@ export async function getMyLocation() : Promise<MyLocResult> {
                 case MyLocationProvider.Geoclue:
                     isGettingLoc = geoclueGetLoc();
                     break;
+                case MyLocationProvider.Ipapi:
+                    isGettingLoc = ipapiGetLoc();
+                    break;
                 case MyLocationProvider.Disable:
                     throw new Error("My Location Disabled");
             }
@@ -113,6 +117,17 @@ async function ipinfoGetLoc() : Promise<MyLocResult> {
         lon: parseFloat(coords[1]),
         city: body.city ?? null,
         country: body.country ?? null
+    };
+}
+
+async function ipapiGetLoc() : Promise<MyLocResult> {
+    const resp = await soup.fetchJson("https://ipapi.co/json", { });
+    const body = resp.body;
+    return {
+        lat: body.latitude,
+        lon: body.longitude,
+        city: body.city ?? null,
+        country: body.country_code ?? null
     };
 }
 

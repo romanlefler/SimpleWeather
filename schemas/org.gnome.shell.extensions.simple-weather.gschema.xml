@@ -8,6 +8,7 @@
         <value value="1" nick="ipinfo.io" />
         <value value="2" nick="geoclue" />
         <value value="3" nick="disable" />
+        <value value="4" nick="ipapi.co" />
     </enum>
     <enum id="org.gnome.shell.extensions.simple-weather.weather-provider">
         <value value="1" nick="open-meteo" />
@@ -74,7 +75,7 @@
         </key>
 
         <key name="my-loc-provider" enum="org.gnome.shell.extensions.simple-weather.my-loc-provider">
-            <default>'ipinfo.io'</default>
+            <default>'ipapi.co'</default>
             <summary>My Location Provider</summary>
         </key>
 

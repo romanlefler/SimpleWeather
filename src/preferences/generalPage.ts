@@ -181,16 +181,19 @@ export class GeneralPage extends Adw.PreferencesPage {
         });
 
         const myLocProvs = new Gtk.StringList();
+        myLocProvs.append(`${_g("Online")} - ipapi.co`);
         myLocProvs.append(`${_g("Online")} - IPinfo`);
         myLocProvs.append(`${_g("System")} - Geoclue`);
         myLocProvs.append(_g("Disable"));
+        const myLocProvFromEnum = [ 0x0, 1, 2, 3, 0 ];
         const myLocRow = new Adw.ComboRow({
             title: _g("Provider"),
             model: myLocProvs,
-            selected: settings.get_enum("my-loc-provider") - 1
+            selected: myLocProvFromEnum[settings.get_enum("my-loc-provider")]
         });
         myLocRow.connect("notify::selected", () => {
-            settings.set_enum("my-loc-provider", myLocRow.selected + 1);
+            const myLocProvToEnum = [ 4, 1, 2, 3 ];
+            settings.set_enum("my-loc-provider", myLocProvToEnum[myLocRow.selected]);
             settings.apply();
         });
         myLocGroup.add(myLocRow);
