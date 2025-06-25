@@ -125,6 +125,13 @@ export class Config {
         else return val;
     }
 
+    onMyLocationProviderChanged(callback : () => void) {
+        const id = this.#settings!.connect("changed", (_, key) => {
+            if(key === "my-loc-provider") callback();
+        });
+        this.#handlerIds.push(id);
+    }
+
     getMyLocationRefreshMin() : number {
         const val = this.#settings!.get_double("my-loc-refresh-min");
         if(val < 10.0) return 10.0;

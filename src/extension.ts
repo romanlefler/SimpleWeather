@@ -181,6 +181,7 @@ export default class SimpleWeatherExtension extends Extension {
 
         // Some settings require the weather to be re-fetched
         this.#config!.onMainLocationChanged(this.#updateWeather.bind(this));
+        this.#config!.onMyLocationProviderChanged(this.#updateWeather.bind(this));
         this.#config!.onWeatherProviderChanged(() => {
             this.#provider = createProvider(this.#libsoup!, this.#config!);
             this.#updateWeather();
