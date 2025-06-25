@@ -17,7 +17,7 @@
 
 import { IDetails } from "./details.js";
 import { Location } from "./location.js";
-import { Direction, Pressure, RainMeasurement, Speed, SpeedAndDir, Temp } from "./units.js";
+import { Direction, Humidity, Pressure, RainMeasurement, Speed, SpeedAndDir, Temp } from "./units.js";
 
 export interface Weather extends IDetails {
 
@@ -45,7 +45,7 @@ export interface Weather extends IDetails {
 
     windDir : Direction,
 
-    humidity: number;
+    humidity: Humidity;
 
     pressure : Pressure;
 

@@ -27,7 +27,7 @@ import { Forecast, Weather } from "./weather.js";
 import { displayDayOfWeek, displayDirection, displayPressure, displayRainMeasurement, displaySpeed, displayTemp, displayTime } from "./lang.js";
 import { gettext as _g } from "./gettext.js";
 import { detailFormat, Details } from "./details.js";
-import { Pressure, RainMeasurement, Speed, SpeedAndDir, Temp } from "./units.js";
+import { Displayable, Pressure, RainMeasurement, Speed, SpeedAndDir, Temp } from "./units.js";
 
 interface ForecastCard {
     card : St.BoxLayout;
@@ -384,31 +384,15 @@ export class Popup {
 
             const value = w[deet];
             
-            let fmt : string[];
-            if(value instanceof Date) {
-                fmt = [ displayTime(value, this.#config) ];
-            }
-            else if(value instanceof Temp) {
-                fmt = [ displayTemp(value, this.#config) ];
-            }
-            else if(value instanceof Speed) {
-                fmt = [ displaySpeed(value, this.#config) ];
-            }
-            else if(value instanceof Pressure) {
-                fmt = [ displayPressure(value, this.#config) ];
-            }
-            else if(value instanceof RainMeasurement) {
-                fmt = [ displayRainMeasurement(value, this.#config) ];
-            }
-            else if(value instanceof SpeedAndDir) {
-                fmt = [ value.display(this.#config) ];
+            let fmt : string;
+            if(typeof (value as any).display === "function") {
+                fmt = (value as Displayable).display(this.#config);
             }
             else if(typeof value === "number") {
-                if(deet === Details.HUMIDITY) fmt = [ `${Math.round(value)}%` ];
-                else fmt = [ `${Math.round(value)}` ];
+                fmt = `${Math.round(value)}`;
             }
-            else throw new Error("Unexpected type.");
-            label.text = _g(detailFormat[deet] as string).format(...fmt);
+            else throw new Error("Detail must implement Displayable or be a number.");
+            label.text = _g(detailFormat[deet] as string).format(fmt);
         }
         /*const inf = this.#curInfo;
         inf.temp.text = _g("Temp: %s").format(displayTemp(w.temp, this.#config));

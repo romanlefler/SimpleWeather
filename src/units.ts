@@ -17,19 +17,24 @@
 
 import { Config } from "./config.js";
 import { UnitError } from "./errors.js";
-import { displayDirection, displaySpeed } from "./lang.js";
+import { displayDirection, displayPressure, displayRainMeasurement, displaySpeed, displayTemp } from "./lang.js";
 
 /*
     The measures are classes.
     This is to make it harder to make unit mistakes.
+    There is also a Displayable interface to abstract displaying them.
 */
+
+export interface Displayable {
+    display : (cfg : Config) => string;
+}
 
 export enum TempUnits {
     Fahrenheit = 1,
     Celsius = 2
 }
 
-export class Temp {
+export class Temp implements Displayable {
 
     #fahrenheit : number;
 
@@ -47,6 +52,10 @@ export class Temp {
                 throw new UnitError("Temperature unit invalid.");
         }
     }
+
+    display(cfg : Config) : string {
+        return displayTemp(this, cfg);
+    }
 }
 
 export enum SpeedUnits {
@@ -58,7 +67,7 @@ export enum SpeedUnits {
     Beaufort = 6
 }
 
-export class Speed {
+export class Speed implements Displayable {
 
     #mph : number;
 
@@ -91,6 +100,10 @@ export class Speed {
                 throw new UnitError("Speed unit invalid.");
         }
     }
+
+    display(cfg : Config) : string {
+        return displaySpeed(this, cfg);
+    }
 }
 
 export enum DirectionUnits {
@@ -98,7 +111,7 @@ export enum DirectionUnits {
     EightPoint = 2
 }
 
-export class Direction {
+export class Direction implements Displayable {
 
     #degrees : number;
 
@@ -122,6 +135,10 @@ export class Direction {
                 throw new UnitError("Direction unit invalid.");
         }
     }
+
+    display(cfg : Config) : string {
+        return displayDirection(this, cfg);
+    }
 }
 
 export enum PressureUnits {
@@ -130,7 +147,7 @@ export enum PressureUnits {
     MmHg = 3
 }
 
-export class Pressure {
+export class Pressure implements Displayable {
 
     #inHg : number;
 
@@ -150,6 +167,10 @@ export class Pressure {
                 throw new UnitError("Pressure unit invalid.");
         }
     }
+
+    display(cfg : Config) : string {
+        return displayPressure(this, cfg);
+    }
 }
 
 export enum RainMeasurementUnits {
@@ -159,7 +180,7 @@ export enum RainMeasurementUnits {
     Pt = 4
 }
 
-export class RainMeasurement {
+export class RainMeasurement implements Displayable {
 
     #inches : number;
 
@@ -182,6 +203,9 @@ export class RainMeasurement {
         }
     }
 
+    display(cfg : Config) : string {
+        return displayRainMeasurement(this, cfg);
+    }
 }
 
 export enum DistanceUnits {
@@ -191,7 +215,7 @@ export enum DistanceUnits {
     M = 4
 }
 
-export class Distance {
+export class Distance implements Displayable {
 
     #miles : number;
 
@@ -213,10 +237,16 @@ export class Distance {
                 throw new UnitError("Distance unit invalid.");
         }
     }
+
+    display(cfg : Config) : string {
+        const suffices = [ "mi", "km", "ft", "m" ];
+        const unit = cfg.getDistanceUnit();
+        return `${this.get(unit)} ${suffices[unit]}`;
+    }
 }
 
 
-export class SpeedAndDir {
+export class SpeedAndDir implements Displayable {
 
     #speed : Speed;
     #dir : Direction;
@@ -231,4 +261,14 @@ export class SpeedAndDir {
             displaySpeed(this.#speed, cfg);
     }
 
+}
+
+export class Humidity implements Displayable {
+    #percentage : number;
+    constructor(zeroToOneHundred : number) {
+        this.#percentage = zeroToOneHundred;
+    }
+    display(_cfg : Config) : string {
+        return `${Math.round(this.#percentage)}%`;
+    }
 }
