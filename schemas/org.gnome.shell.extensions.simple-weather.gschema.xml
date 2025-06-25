@@ -134,5 +134,10 @@
             <summary>Show sunrise/sunset in panel</summary>
         </key>
 
+        <key name="details-list" type="as">
+            <default>[ 'temp', 'windSpeedAndDir', 'gusts', 'pressure', 'feelsLike', 'humidity', 'uvIndex', 'precipitation' ]</default>
+            <summary>Current weather details in pop-up</summary>
+        </key>
+
     </schema>
 </schemalist>

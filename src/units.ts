@@ -15,7 +15,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import { Config } from "./config.js";
 import { UnitError } from "./errors.js";
+import { displayDirection, displaySpeed } from "./lang.js";
 
 /*
     The measures are classes.
@@ -211,4 +213,22 @@ export class Distance {
                 throw new UnitError("Distance unit invalid.");
         }
     }
+}
+
+
+export class SpeedAndDir {
+
+    #speed : Speed;
+    #dir : Direction;
+
+    constructor(speed : Speed, dir : Direction) {
+        this.#speed = speed;
+        this.#dir = dir;
+    }
+
+    display(cfg : Config) : string {
+        return displayDirection(this.#dir, cfg) + ", " +
+            displaySpeed(this.#speed, cfg);
+    }
+
 }

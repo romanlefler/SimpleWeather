@@ -26,6 +26,8 @@ import { Config } from "./config.js";
 import { Forecast, Weather } from "./weather.js";
 import { displayDayOfWeek, displayDirection, displayPressure, displayRainMeasurement, displaySpeed, displayTemp, displayTime } from "./lang.js";
 import { gettext as _g } from "./gettext.js";
+import { detailFormat, Details } from "./details.js";
+import { Pressure, RainMeasurement, Speed, SpeedAndDir, Temp } from "./units.js";
 
 interface ForecastCard {
     card : St.BoxLayout;
@@ -92,17 +94,6 @@ function createForecastCard() : ForecastCard {
     };
 }
 
-interface CurInfo {
-    temp : St.Label;
-    feelsLike : St.Label;
-    wind : St.Label,
-    gusts: St.Label,
-    humidity: St.Label;
-    pressure: St.Label;
-    uvIndex : St.Label;
-    precipitation : St.Label;
-}
-
 function addChildren(parent : Clutter.Actor, ...children : Clutter.Actor[]) {
     children.forEach(m => parent.add_child(m));
 }
@@ -128,35 +119,19 @@ function evenLabel(opts : Partial<St.Label.ConstructorProps> = {}) {
     return { label, box };
 }
 
-function createCurInfo(parent : Clutter.Actor) : CurInfo {
+function createCurInfo(parent : Clutter.Actor) : St.Label[] {
     const cols = new St.BoxLayout({ vertical: true, x_expand: true });
     const row1 = new St.BoxLayout({ vertical: false, x_expand: true, y_expand: true, x_align: Clutter.ActorAlign.FILL });
     const row2 = new St.BoxLayout({ vertical: false, x_expand: true, y_expand: true, x_align: Clutter.ActorAlign.FILL });
     addChildren(cols, row1, row2);
 
-    const temp = evenLabel();
-    const feelsLike = evenLabel();
-    const wind = evenLabel();
-    const gusts = evenLabel();
-    const humidity = evenLabel();
-    const pressure = evenLabel();
-    const uvIndex = evenLabel();
-    const precipitation = evenLabel();
-    const c : CurInfo = {
-        temp: temp.label,
-        feelsLike: feelsLike.label,
-        wind: wind.label,
-        gusts: gusts.label,
-        humidity: humidity.label,
-        pressure: pressure.label,
-        uvIndex: uvIndex.label,
-        precipitation: precipitation.label
-    };
-    addChildren(row1, temp.box, wind.box, gusts.box, pressure.box);
-    addChildren(row2, feelsLike.box, humidity.box, uvIndex.box, precipitation.box);
+    const list = Array.from({ length: 8 }, evenLabel);
+    const boxes = list.map(l => l.box);
+    addChildren(row1, ...boxes.slice(0, 4));
+    addChildren(row2, ...boxes.slice(4, 8));
 
     parent.add_child(cols);
-    return c;
+    return list.map(l => l.label);
 }
 
 function copyrightText(provName : string) : string {
@@ -182,7 +157,7 @@ export class Popup {
     readonly #temp : St.Label;
     readonly #forecastCards : ForecastCard[];
     readonly #copyright : St.Label;
-    readonly #curInfo : CurInfo;
+    readonly #currentLabels : St.Label[];
     readonly #placeLabel : St.Label;
     readonly #placeBtn : St.Button;
 
@@ -244,7 +219,8 @@ export class Popup {
             this.#forecastCards.push(c);
         }
         rightVBox.add_child(forecasts);
-        this.#curInfo = createCurInfo(rightVBox);
+        this.#currentLabels = createCurInfo(rightVBox);
+        if(this.#currentLabels.length !== 8) throw new Error("Incorrect cur len.");
         hbox.add_child(rightVBox);
 
         forecasts.connect("button-press-event", () => {
@@ -396,7 +372,45 @@ export class Popup {
 
         this.#placeLabel.text = w.loc.getName();
 
-        const inf = this.#curInfo;
+        const details = this.#config.getDetailsList();
+        const detailPossibilities = Object.values(details);
+        for(let i = 0; i < 8; i++) {
+            const label = this.#currentLabels[i];
+            if(!detailPossibilities.includes(details[i])) {
+                label.text = _g("Invalid");
+                continue;
+            }
+            const deet = details[i] as Details;
+
+            const value = w[deet];
+            
+            let fmt : string[];
+            if(value instanceof Date) {
+                fmt = [ displayTime(value, this.#config) ];
+            }
+            else if(value instanceof Temp) {
+                fmt = [ displayTemp(value, this.#config) ];
+            }
+            else if(value instanceof Speed) {
+                fmt = [ displaySpeed(value, this.#config) ];
+            }
+            else if(value instanceof Pressure) {
+                fmt = [ displayPressure(value, this.#config) ];
+            }
+            else if(value instanceof RainMeasurement) {
+                fmt = [ displayRainMeasurement(value, this.#config) ];
+            }
+            else if(value instanceof SpeedAndDir) {
+                fmt = [ value.display(this.#config) ];
+            }
+            else if(typeof value === "number") {
+                if(deet === Details.HUMIDITY) fmt = [ `${Math.round(value)}%` ];
+                else fmt = [ `${Math.round(value)}` ];
+            }
+            else throw new Error("Unexpected type.");
+            label.text = _g(detailFormat[deet] as string).format(...fmt);
+        }
+        /*const inf = this.#curInfo;
         inf.temp.text = _g("Temp: %s").format(displayTemp(w.temp, this.#config));
         inf.feelsLike.text = _g("Feels Like: %s").format(displayTemp(w.feelsLike, this.#config));
         inf.wind.text = _g("Wind: %s, %s").format(
@@ -409,14 +423,14 @@ export class Popup {
         inf.uvIndex.text = _g("UV High: %s").format(String(Math.round(w.uvIndex)));
         inf.precipitation.text = _g("Precipitation: %s").format(
             displayRainMeasurement(w.precipitation, this.#config)
-        );
+        );*/
 
         // This only performs the updates if necessary
         if(this.#config.getHighContrast()) {
             if(!this.#wasHiContrast) {
                 this.#wasHiContrast = true;
                 const color = getTextColor();
-                const affected = [ this.#copyright, ...Object.values(inf) ];
+                const affected = [ this.#copyright, ...Object.values(this.#currentLabels) ];
                 for(const w of affected) {
                     if(w instanceof St.Widget) w.style = `color:${color};`;
                 }
@@ -425,7 +439,7 @@ export class Popup {
         else {
             if(this.#wasHiContrast) {
                 this.#wasHiContrast = false;
-                const affected = [ this.#copyright, ...Object.values(inf) ];
+                const affected = [ this.#copyright, ...Object.values(this.#currentLabels) ];
                 for(const w of affected) {
                     if(w instanceof St.Widget) w.style = "";
                 }

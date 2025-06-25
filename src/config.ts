@@ -21,6 +21,7 @@ import { DirectionUnits, DistanceUnits, PressureUnits, RainMeasurementUnits, Spe
 import { Location } from "./location.js";
 import { MyLocationProvider } from "./myLocation.js";
 import { WeatherProviderNames } from "./providers/provider.js";
+import { Details } from "./details.js";
 
 export enum UnitPreset {
     Custom = 0,
@@ -244,6 +245,26 @@ export class Config {
             }
         });
         this.#handlerIds.push(id);
+    }
+
+    /**
+     * Gets the details list.
+     * Items are not sanitized and may not be in Details.
+     * If value is severely malformed a string full of
+     * "invalid" will be returned.
+     * @returns Guaranteed to be an 8 item string array.
+     */
+    getDetailsList() : string[] {
+        const gval = this.#settings!.get_value("details-list");
+        const strarr = readGTypeAS(gval);
+        if(strarr.length !== 8) {
+            const defVal = this.#settings!.get_default_value("details-list");
+            if(!defVal) return new Array(8).fill("invalid");
+            const defStrarr = readGTypeAS(defVal);
+            if(defStrarr.length !== 8) return new Array(8).fill("invalid");
+            return defStrarr;
+        }
+        else return strarr;
     }
 
 

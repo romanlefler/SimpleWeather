@@ -17,7 +17,7 @@
 
 import { Config } from "../config.js";
 import { LibSoup } from "../libsoup.js";
-import { Direction, Pressure, RainMeasurement, RainMeasurementUnits, Speed, Temp } from "../units.js";
+import { Direction, Pressure, RainMeasurement, RainMeasurementUnits, Speed, SpeedAndDir, Temp } from "../units.js";
 import { Forecast, Weather } from "../weather.js";
 import { getGIconName, Icons } from "../icons.js"
 import { Provider } from "./provider.js";
@@ -157,6 +157,7 @@ export class OpenMeteo implements Provider {
             pressure,
             uvIndex,
             precipitation,
+            windSpeedAndDir: new SpeedAndDir(wind, windDir),
             providerName: this.nameKey,
             loc
         };

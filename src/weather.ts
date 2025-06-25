@@ -15,10 +15,11 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import { IDetails } from "./details.js";
 import { Location } from "./location.js";
-import { Direction, Pressure, RainMeasurement, Speed, Temp } from "./units.js";
+import { Direction, Pressure, RainMeasurement, Speed, SpeedAndDir, Temp } from "./units.js";
 
-export interface Weather {
+export interface Weather extends IDetails {
 
     temp : Temp;
 
@@ -55,6 +56,8 @@ export interface Weather {
     providerName : string;
 
     loc : Location;
+
+    windSpeedAndDir : SpeedAndDir;
 
 }
 
