@@ -49,7 +49,7 @@ export default class SimpleWeatherPreferences extends ExtensionPreferences {
         const gdkDisplay = Gdk.Display.get_default();
         if(!gdkDisplay) throw new Error("No GDK display detected.");
         const cssProv = new Gtk.CssProvider();
-        const cssFile = this.#metadata.dir.get_child("stylesheet.css");
+        const cssFile = this.#metadata.dir.get_child("prefs.css");
         cssProv.load_from_file(cssFile);
         Gtk.StyleContext.add_provider_for_display(
             gdkDisplay,

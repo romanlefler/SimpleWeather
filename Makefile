@@ -12,8 +12,7 @@ SCHEMAOUTDIR := $(BUILD)/schemas
 PO			 := ./po
 ICONS        := ./icons
 
-METADATA   := $(STATIC)/metadata.json
-STYLESHEET := $(STATIC)/stylesheet.css
+STATICSRCS := $(wildcard $(STATIC)/*)
 SCHEMASRC  := $(SCHEMAS)/org.gnome.shell.extensions.$(NAME).gschema.xml
 # This excludes .d.ts files
 SRCS       := $(shell find $(SRC) -type f -name '*.ts' ! -name '*.d.ts')
@@ -23,8 +22,7 @@ ICONSSRCS  := $(wildcard $(ICONS)/*)
 
 SCHEMAOUT    := $(SCHEMAOUTDIR)/gschemas.compiled
 SCHEMACP     := $(SCHEMAOUTDIR)/org.gnome.shell.extensions.$(NAME).gschema.xml
-METADATACP   := $(BUILD)/metadata.json
-STYLESHEETCP := $(BUILD)/stylesheet.css
+STATICOUT    := $(STATICSRCS:$(STATIC)/%=$(BUILD)/%)
 ZIP		     := $(DIST)/$(NAME)-v$(VERSION).zip
 POT			 := $(PO)/$(UUID).pot
 ICONSOUT	 := $(ICONSSRCS:$(ICONS)/%=$(BUILD)/icons/%)
@@ -32,7 +30,7 @@ MOS          := $(POFILES:$(PO)/%.po=$(BUILD)/locale/%/LC_MESSAGES/$(UUID).mo)
 
 .PHONY: out pack install clean copyicons ts
 
-out: $(POT) ts $(SCHEMAOUT) $(SCHEMACP) $(METADATACP) $(STYLESHEETCP) $(ICONSOUT) $(MOS)
+out: $(POT) ts $(SCHEMAOUT) $(SCHEMACP) $(STATICOUT) $(ICONSOUT) $(MOS)
 
 pack: $(ZIP)
 
@@ -66,13 +64,9 @@ $(SCHEMACP): $(SCHEMASRC)
 	mkdir -p $(SCHEMAOUTDIR)
 	cp $(SCHEMASRC) $(SCHEMACP)
 
-$(METADATACP): $(METADATA)
+$(STATICOUT): $(BUILD)/%: $(STATIC)/%
 	mkdir -p $(BUILD)
-	cp $(METADATA) $(METADATACP)
-
-$(STYLESHEETCP): $(STYLESHEET)
-	mkdir -p $(BUILD)
-	cp $(STYLESHEET) $(STYLESHEETCP)
+	cp $< $@
 
 $(POT): $(SRCS)
 	printf -- 'NEEDED: xgettext\n'
