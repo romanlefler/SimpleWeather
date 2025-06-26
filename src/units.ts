@@ -263,7 +263,7 @@ export class SpeedAndDir implements Displayable {
 
 }
 
-export class Humidity implements Displayable {
+export class Percentage implements Displayable {
     #percentage : number;
     constructor(zeroToOneHundred : number) {
         this.#percentage = zeroToOneHundred;

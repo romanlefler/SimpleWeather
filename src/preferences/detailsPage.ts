@@ -23,7 +23,7 @@ import Adw from "gi://Adw";
 import { gettext as _g } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
 import { Details, displayDetail } from "../details.js";
 import { Weather } from "../weather.js";
-import { Direction, Humidity, Pressure, RainMeasurement, Speed, SpeedAndDir, Temp } from "../units.js";
+import { Direction, Percentage, Pressure, RainMeasurement, Speed, SpeedAndDir, Temp } from "../units.js";
 import { Location } from "../location.js";
 import { Config, writeGTypeAS } from "../config.js";
 
@@ -39,7 +39,7 @@ const MOCK_WEATHER : Weather = {
     wind: new Speed(8),
     gusts: new Speed(14),
     windDir: new Direction(0),
-    humidity: new Humidity(87),
+    humidity: new Percentage(87),
     pressure: new Pressure(24),
     uvIndex: 7,
     precipitation: new RainMeasurement(0.0),

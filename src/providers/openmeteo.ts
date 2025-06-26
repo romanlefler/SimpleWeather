@@ -17,7 +17,7 @@
 
 import { Config } from "../config.js";
 import { LibSoup } from "../libsoup.js";
-import { Direction, Humidity, Pressure, RainMeasurement, RainMeasurementUnits, Speed, SpeedAndDir, Temp } from "../units.js";
+import { Direction, Percentage, Pressure, RainMeasurement, RainMeasurementUnits, Speed, SpeedAndDir, Temp } from "../units.js";
 import { Forecast, Weather } from "../weather.js";
 import { getGIconName, Icons } from "../icons.js"
 import { Provider } from "./provider.js";
@@ -83,7 +83,7 @@ export class OpenMeteo implements Provider {
         const wind = new Speed(cur.wind_speed_10m);
         const gusts = new Speed(cur.wind_gusts_10m);
         const windDir = new Direction(cur.wind_direction_10m);
-        const humidity = new Humidity(cur.relative_humidity_2m);
+        const humidity = new Percentage(cur.relative_humidity_2m);
         // hPa to inHg
         const pressure = new Pressure(cur.surface_pressure * 0.02953);
         const uvIndex = daily.uv_index_max[0];
