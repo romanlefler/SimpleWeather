@@ -18,7 +18,7 @@ on:
           - 'development'
 
 jobs:
-    build_translations:
+    build:
         runs-on: ubuntu-latest
         steps:
         - uses: actions/checkout@v3
