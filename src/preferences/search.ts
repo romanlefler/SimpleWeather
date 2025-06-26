@@ -95,6 +95,7 @@ export async function searchDialog(parent : Gtk.Window, soup : LibSoup, cfg : Co
     return new Promise<Location | null>((resolve, reject) => {
 
         searchButton.connect("clicked", () => {
+            searchButton.sensitive = false;
             const a : SearchArgs = {
                 search: searchField.text,
                 licenseLabel,
@@ -106,10 +107,12 @@ export async function searchDialog(parent : Gtk.Window, soup : LibSoup, cfg : Co
                 const oldLen = resultsLocList.length;
                 resultsLocList.splice(0, oldLen, ...locArr);
                 populateList(stringList, locArr);
+                searchButton.sensitive = true;
             }).catch(e => {
                 if(e instanceof Gio.ResolverError) {
                     console.error(e);
                     showNoInternetDialog(dialog);
+                    searchButton.sensitive = true;
                 }
                 else reject(e);
             });
