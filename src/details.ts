@@ -30,7 +30,8 @@ export enum Details {
     PRESSURE = "pressure",
     PRECIPITATION = "precipitation",
     SUNRISE = "sunrise",
-    SUNSET = "sunset"
+    SUNSET = "sunset",
+    CLOUD_COVER = "cloudCover"
 }
 
 /**
@@ -63,6 +64,7 @@ export const detailFormat : IDetails = {
     precipitation: _g("Precipitation: %s"),
     sunrise: _g("Sunrise: %s"),
     sunset: _g("Sunset: %s"),
+    cloudCover: _g("Cloud Cover: %s")
 }
 
 export function displayDetail(w : Weather, detail : Details, gettext : (s : string) => string, cfg : Config) {

@@ -268,6 +268,9 @@ export class Percentage implements Displayable {
     constructor(zeroToOneHundred : number) {
         this.#percentage = zeroToOneHundred;
     }
+    get() : number {
+        return this.#percentage;
+    }
     display(_cfg : Config) : string {
         return `${Math.round(this.#percentage)}%`;
     }

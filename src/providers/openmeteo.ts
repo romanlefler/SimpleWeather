@@ -89,8 +89,9 @@ export class OpenMeteo implements Provider {
         const uvIndex = daily.uv_index_max[0];
         const isNight = cur.is_day === 0;
         const precipitation = new RainMeasurement(cur.precipitation);
+        const cloudCover = new Percentage(cur.cloud_cover);
 
-        const weatherCode = fixWeatherCode(cur.weather_code, cur.cloud_cover, precipitation);
+        const weatherCode = fixWeatherCode(cur.weather_code, cloudCover, precipitation);
         const icon = codeToIcon[weatherCode];
         const gIconName = getGIconName(icon, isNight);
 
@@ -106,7 +107,7 @@ export class OpenMeteo implements Provider {
         for(let i = 0; i < dayCount; i++) {
             const fDateStr = daily.time[i];
             const fPrecipitation = new RainMeasurement(daily.precipitation_sum[i]);
-            const fCloudCover = daily.cloud_cover_mean[i];
+            const fCloudCover = new Percentage(daily.cloud_cover_mean[i]);
             // We always want day icons for day forecast
             const fWeatherCode = fixWeatherCode(daily.weather_code[i],
                 fCloudCover, fPrecipitation);
@@ -127,7 +128,7 @@ export class OpenMeteo implements Provider {
         for(let i = 0; i < hourCount; i++) {
             const fDateStr = hourly.time[i];
             const fPrecipitation = new RainMeasurement(hourly.precipitation[i]);
-            const fCloudCover = hourly.cloud_cover[i];
+            const fCloudCover = new Percentage(hourly.cloud_cover[i]);
             const fIsNight = hourly.is_day[i] === 0;
             const fWeatherCode = fixWeatherCode(hourly.weather_code[i],
                 fCloudCover, fPrecipitation);
@@ -157,6 +158,7 @@ export class OpenMeteo implements Provider {
             pressure,
             uvIndex,
             precipitation,
+            cloudCover,
             windSpeedAndDir: new SpeedAndDir(wind, windDir),
             providerName: this.nameKey,
             loc
@@ -165,9 +167,10 @@ export class OpenMeteo implements Provider {
 
 }
 
-function fixWeatherCode(code : number, cloudPercent : number, precip : RainMeasurement) : number {
+function fixWeatherCode(code : number, cloudCover : Percentage, precip : RainMeasurement) : number {
     // Compensate for https://github.com/open-meteo/open-meteo/issues/812
     // Often the CAPE might be over 3000 J/kg but it's completely sunny outside
+    const cloudPercent = cloudCover.get();
     if(code === 95) {
         if(cloudPercent < 40 && precip.get(RainMeasurementUnits.In) < 0.1) {
             // In Open-Meteo's WeatherCode.swift calculate function

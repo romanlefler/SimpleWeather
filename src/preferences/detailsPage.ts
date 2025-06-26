@@ -45,7 +45,8 @@ const MOCK_WEATHER : Weather = {
     precipitation: new RainMeasurement(0.0),
     providerName: "Open-Meteo",
     loc: Location.newCoords("Dallas", 32.7792, -96.8089),
-    windSpeedAndDir: new SpeedAndDir(new Speed(8), new Direction(0))
+    windSpeedAndDir: new SpeedAndDir(new Speed(8), new Direction(0)),
+    cloudCover: new Percentage(44)
 };
 
 export class DetailsPage extends Adw.PreferencesPage {

@@ -59,6 +59,8 @@ export interface Weather extends IDetails {
 
     windSpeedAndDir : SpeedAndDir;
 
+    cloudCover : Percentage;
+
 }
 
 export interface Forecast {
