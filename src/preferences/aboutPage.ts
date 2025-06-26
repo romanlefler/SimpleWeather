@@ -29,6 +29,7 @@ function md(s : string, classes? : string[]) : Gtk.Label {
     const props : Partial<Gtk.Label.ConstructorProps> = {
         label: s,
         use_markup: true,
+        css_classes: [ "simpleweather-margin" ]
     };
     if(classes) props.css_classes = classes;
     return new Gtk.Label(props);
@@ -107,9 +108,17 @@ export class AboutPage extends Adw.PreferencesPage {
         const bottomBox = new Gtk.Box({
             orientation: Gtk.Orientation.VERTICAL
         });
-        const owrLink = "<a href=\"https://github.com/penguin-teal/gnome-openweather\">OpenWeather Refined</a>";
+        const repoLink = "<a href=\"https://github.com/romanlefler/SimpleWeather\">GitHub</a>";
         bottomBox.append(md(
-            _g("This extension is a rewrite of the %s project.").format(owrLink)
+            _g("Contributions and translations are welcome! Read how on %s.").format(repoLink)
+        ));
+        bottomBox.append(md(
+            _g("If you like this extension, consider starring it on %s.").format("GitHub")
+        ));
+        const issuesLink = "<a href= \"https://github.com/romanlefler/SimpleWeather/issues/new/choose\">" +
+            _g("here") + "</a>";
+        bottomBox.append(md(
+            _g("Report bugs or request new features %s.").format(issuesLink)
         ));
         bottomGroup.add(bottomBox);
         this.add(bottomGroup);
