@@ -4,7 +4,7 @@ on:
     workflow_dispatch:
     pull_request:
         types: [ 'opened' ]
-        branches: [ 'master' ]
+        branches: [ 'master', 'development' ]
         paths:
         - '**.po'
         - '**.ts'
