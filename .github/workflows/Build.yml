@@ -15,7 +15,7 @@ on:
         - 'Makefile'
     push:
         branches:
-          - 'master'
+          - 'development'
 
 jobs:
     build_translations:
