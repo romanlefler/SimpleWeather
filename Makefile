@@ -45,13 +45,13 @@ clean:
 	rm -rf $(DIST)
 	rm -f $(POT)
 
-./node_modules: package.json
+./node_modules/.package-lock.json: package.json
 	printf -- 'NEEDED: npm\n'
 	npm install
 
 ts: $(BUILD)/extension.js
 
-$(BUILD)/extension.js: $(SRCS) ./node_modules
+$(BUILD)/extension.js: $(SRCS) ./node_modules/.package-lock.json
 	printf -- 'NEEDED: tsc\n'
 	tsc
 
