@@ -159,7 +159,6 @@ function setupListFactory(addBtn : Gtk.Button) : Gtk.SignalListItemFactory {
 
         const dblClick = new Gtk.GestureClick();
         dblClick.connect("pressed", (_g, nClicks, _x, _y) => {
-            print(`Clicked: ${nClicks}`);
             if(nClicks === 2) {
                 // Double-clicking is same as clicking add
                 addBtn.emit("clicked");
