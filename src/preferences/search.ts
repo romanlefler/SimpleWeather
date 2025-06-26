@@ -66,10 +66,16 @@ export async function searchDialog(parent : Gtk.Window, soup : LibSoup, cfg : Co
         can_unselect: false,
         model: stringList
     });
+
+    // Added later
+    const addBtn = new Gtk.Button({
+        label: _g("Add")
+    });
+
     const resultsView = new Gtk.ListView({
         orientation: Gtk.Orientation.VERTICAL,
         model: selModel,
-        factory: setupListFactory(),
+        factory: setupListFactory(addBtn),
         margin_top: 20,
         margin_bottom: 20
     });
@@ -81,9 +87,6 @@ export async function searchDialog(parent : Gtk.Window, soup : LibSoup, cfg : Co
     });
     group.add(licenseLabel);
 
-    const addBtn = new Gtk.Button({
-        label: _g("Add")
-    });
     group.add(addBtn);
 
     return new Promise<Location | null>((resolve, reject) => {
@@ -145,7 +148,7 @@ function showNoInternetDialog(parent : Gtk.Window) {
     alert.show(parent);
 }
 
-function setupListFactory() : Gtk.SignalListItemFactory {
+function setupListFactory(addBtn : Gtk.Button) : Gtk.SignalListItemFactory {
     const f = new Gtk.SignalListItemFactory();
     f.connect("setup", (_, item : Gtk.ListItem) => {
         const label = new Gtk.Label({
@@ -153,6 +156,16 @@ function setupListFactory() : Gtk.SignalListItemFactory {
             margin_bottom: 5
         });
         item.set_child(label);
+
+        const dblClick = new Gtk.GestureClick();
+        dblClick.connect("pressed", (_g, nClicks, _x, _y) => {
+            print(`Clicked: ${nClicks}`);
+            if(nClicks === 2) {
+                // Double-clicking is same as clicking add
+                addBtn.emit("clicked");
+            }
+        });
+        label.add_controller(dblClick);
     });
     f.connect("bind", (_, item : Gtk.ListItem) => {
         const label = item.get_child() as Gtk.Label;
