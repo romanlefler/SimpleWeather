@@ -189,6 +189,8 @@ export default class SimpleWeatherExtension extends Extension {
         // Some settings just require a GUI update
         this.#config!.onAnyUnitChanged(this.#updateGui.bind(this));
         this.#config!.onHighContrastChanged(this.#updateGui.bind(this));
+        this.#config!.onDetailsListChanged(this.#updateGui.bind(this));
+
         this.#config!.onShowSunTimeChanged(b => {
             if (b) {
                 layout.add_child(this.#sunTimeLabel!);

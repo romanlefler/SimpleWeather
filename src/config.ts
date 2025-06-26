@@ -267,6 +267,15 @@ export class Config {
         else return strarr;
     }
 
+    onDetailsListChanged(callback : () => void) : void {
+        const id = this.#settings!.connect("changed", (_, key) => {
+            if(key === "details-list") {
+                callback();
+            }
+        });
+        this.#handlerIds.push(id);
+    }
+
 
 
     getUnitPreset() : UnitPreset {
