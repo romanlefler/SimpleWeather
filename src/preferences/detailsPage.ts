@@ -52,6 +52,8 @@ export class DetailsPage extends Adw.PreferencesPage {
 
     readonly #settings : Gio.Settings;
     readonly #config : Config;
+    #clickedDeet? : Details;
+    #clickedWidget? : Gtk.Widget;
 
     static {
         GObject.registerClass(this);
@@ -90,6 +92,7 @@ export class DetailsPage extends Adw.PreferencesPage {
                 label: displayDetail(MOCK_WEATHER, initialDeet, _g, this.#config)
             });
             selection.child = selLabel;
+
             const dropTarget = new Gtk.DropTarget({
                 formats: stringFmt,
                 actions: Gdk.DragAction.COPY
@@ -104,6 +107,17 @@ export class DetailsPage extends Adw.PreferencesPage {
             });
             selection.add_controller(dropTarget);
             selection.add_controller(new Gtk.DropControllerMotion());
+            
+            // This is for 
+            const gesture = new Gtk.GestureClick();
+            gesture.connect("pressed", (_s, _n, _x, _y) => {
+                if(!this.#clickedDeet) return;
+
+                this.#setDetail(selLabel, i, this.#clickedDeet);
+                this.#unsetClickedDetail();
+            });
+            selection.add_controller(gesture);
+
             curBox.append(selection);
         }
 
@@ -115,8 +129,11 @@ export class DetailsPage extends Adw.PreferencesPage {
         for(const d of items) {
             const btn = new Gtk.Button({
                 label: displayDetail(MOCK_WEATHER, d, _g, this.#config),
-                can_focus: true
+                can_focus: true,
             });
+            // get_data/set_data not supported in GJS
+            (btn as any)["simpleweather-detail"] = d;
+
             const dragSrc = new Gtk.DragSource({
                 actions: Gdk.DragAction.COPY
             });
@@ -127,6 +144,13 @@ export class DetailsPage extends Adw.PreferencesPage {
                 return Gdk.ContentProvider.new_for_value(gval);
             });
             btn.add_controller(dragSrc);
+
+            btn.connect("clicked", () => {
+                this.#setClickedDetail(d, btn);
+                // HACK: Fixes no longer draggable after click
+                btn.remove_controller(dragSrc);
+                btn.add_controller(dragSrc);
+            });
             pool.append(btn);
         }
 
@@ -142,12 +166,26 @@ export class DetailsPage extends Adw.PreferencesPage {
         this.add(curGroup);
     }
 
-    #setDetail(lbl : Gtk.Label, idx : number, detail : Details) {
+    #setDetail(lbl : Gtk.Label, idx : number, detail : Details) : void {
         lbl.label = displayDetail(MOCK_WEATHER, detail, _g, this.#config);
 
         const arr = this.#config.getDetailsList();
         arr[idx] = detail;
         this.#settings.set_value("details-list", writeGTypeAS(arr));
         this.#settings.apply();
+    }
+
+    #setClickedDetail(deet : Details, widget : Gtk.Widget) : void {
+        this.#unsetClickedDetail();
+
+        this.#clickedDeet = deet;
+        widget.add_css_class("simpleweather-selected");
+        this.#clickedWidget = widget;
+    }
+
+    #unsetClickedDetail() : void {
+        this.#clickedDeet = undefined;
+        this.#clickedWidget?.remove_css_class("simpleweather-selected");
+        this.#clickedWidget = undefined;
     }
 }
