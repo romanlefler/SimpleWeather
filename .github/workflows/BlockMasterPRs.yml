@@ -1,0 +1,17 @@
+name: Block PRs to master
+
+on:
+    pull_request:
+        branches:
+          - master
+
+jobs:
+    block-master-prs:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Block PRs to master
+            run: |
+                if [ "${{ github.actor }}" != "${{ github.repository_owner }}" ]; then
+                    echo 'Please open PRs to the development branch instead.'
+                    exit 1
+                fi
