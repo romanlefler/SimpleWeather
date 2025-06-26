@@ -66,6 +66,8 @@ export const detailFormat : IDetails = {
 }
 
 export function displayDetail(w : Weather, detail : Details, gettext : (s : string) => string, cfg : Config) {
+    if(detail as string === "invalid") return _g("Invalid");
+
     const value = w[detail];
     let fmt: string;
     if (typeof (value as any).display === "function") {
