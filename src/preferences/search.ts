@@ -59,6 +59,9 @@ export async function searchDialog(parent : Gtk.Window, soup : LibSoup, cfg : Co
         label: _g("Search")
     });
     group.add(searchButton);
+    searchField.connect("activate", () => {
+        searchButton.emit("clicked");
+    })
 
     const resultsLocList : SelLoc[] = [ ];
     const stringList = new Gtk.StringList();
