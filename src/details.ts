@@ -15,6 +15,11 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import { Config } from "./config.js";
+import { displayTime } from "./lang.js";
+import { Displayable } from "./units.js";
+import { Weather } from "./weather.js";
+
 export enum Details {
     TEMP = "temp",
     FEELS_LIKE = "feelsLike",
@@ -58,4 +63,18 @@ export const detailFormat : IDetails = {
     precipitation: _g("Precipitation: %s"),
     sunrise: _g("Sunrise: %s"),
     sunset: _g("Sunset: %s"),
+}
+
+export function displayDetail(w : Weather, detail : Details, gettext : (s : string) => string, cfg : Config) {
+    const value = w[detail];
+    let fmt: string;
+    if (typeof (value as any).display === "function") {
+        fmt = (value as Displayable).display(cfg);
+    } else if(value instanceof Date) {
+        fmt = displayTime(value, cfg);
+    } else if (typeof value === "number") {
+        fmt = `${Math.round(value)}`;
+    }
+    else throw new Error("Detail must implement Displayable or be a number.");
+    return gettext(detailFormat[detail] as string).format(fmt);
 }

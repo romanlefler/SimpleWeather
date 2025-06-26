@@ -26,7 +26,7 @@ import { Config } from "./config.js";
 import { Forecast, Weather } from "./weather.js";
 import { displayDayOfWeek, displayDirection, displayPressure, displayRainMeasurement, displaySpeed, displayTemp, displayTime } from "./lang.js";
 import { gettext as _g } from "./gettext.js";
-import { detailFormat, Details } from "./details.js";
+import { detailFormat, Details, displayDetail } from "./details.js";
 import { Displayable, Pressure, RainMeasurement, Speed, SpeedAndDir, Temp } from "./units.js";
 
 interface ForecastCard {
@@ -382,18 +382,7 @@ export class Popup {
                 continue;
             }
             const deet = details[i] as Details;
-
-            const value = w[deet];
-            
-            let fmt : string;
-            if(typeof (value as any).display === "function") {
-                fmt = (value as Displayable).display(this.#config);
-            }
-            else if(typeof value === "number") {
-                fmt = `${Math.round(value)}`;
-            }
-            else throw new Error("Detail must implement Displayable or be a number.");
-            label.text = _g(detailFormat[deet] as string).format(fmt);
+            label.text = displayDetail(w, deet, _g, this.#config);
         }
         /*const inf = this.#curInfo;
         inf.temp.text = _g("Temp: %s").format(displayTemp(w.temp, this.#config));
