@@ -82,7 +82,12 @@ export async function searchDialog(parent : Gtk.Window, soup : LibSoup, cfg : Co
         margin_top: 20,
         margin_bottom: 20
     });
-    group.add(resultsView);
+    const resultsScroll = new Gtk.ScrolledWindow({
+        child: resultsView,
+        vexpand: true,
+        hexpand: true
+    });
+    group.add(resultsScroll);
 
     const licenseLabel = new Gtk.Label({
         wrap: true,
