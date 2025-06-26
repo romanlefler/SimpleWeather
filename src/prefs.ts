@@ -17,6 +17,7 @@
 
 import Adw from "gi://Adw";
 import Gio from "gi://Gio";
+import Gdk from "gi://Gdk";
 import Gtk from "gi://Gtk";
 
 import { ExtensionPreferences } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
@@ -44,6 +45,17 @@ export default class SimpleWeatherPreferences extends ExtensionPreferences {
         const settings = this.getSettings();
         settings.delay();
         this.checkLocales(window, settings);
+
+        const gdkDisplay = Gdk.Display.get_default();
+        if(!gdkDisplay) throw new Error("No GDK display detected.");
+        const cssProv = new Gtk.CssProvider();
+        const cssFile = this.#metadata.dir.get_child("stylesheet.css");
+        cssProv.load_from_file(cssFile);
+        Gtk.StyleContext.add_provider_for_display(
+            gdkDisplay,
+            cssProv,
+            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+        );
 
         window.add(new GeneralPage(settings));
         window.add(new LocationsPage(settings, window));
