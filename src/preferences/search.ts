@@ -91,7 +91,8 @@ export async function searchDialog(parent : Gtk.Window, soup : LibSoup, cfg : Co
 
     const licenseLabel = new Gtk.Label({
         wrap: true,
-        wrap_mode: Pango.WrapMode.WORD_CHAR
+        wrap_mode: Pango.WrapMode.WORD_CHAR,
+        css_classes: [ "simpleweather-small", "simpleweather-center" ]
     });
     group.add(licenseLabel);
 

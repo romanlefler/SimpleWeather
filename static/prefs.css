@@ -7,6 +7,14 @@
     font-size: 1.5em;
 }
 
+.simpleweather-small {
+    font-size: 0.75em;
+}
+
+.simpleweather-center {
+    text-align: center;
+}
+
 .simpleweather-selected {
     font-style: italic;
 }
