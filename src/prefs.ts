@@ -28,6 +28,7 @@ import { setUpGettext } from "./gettext.js";
 import { gettext as prefsGettext } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
 import { initLocales } from "./lang.js";
 import { gettext as _g } from "./gettext.js";
+import { DetailsPage } from "./preferences/detailsPage.js";
 
 export default class SimpleWeatherPreferences extends ExtensionPreferences {
 
@@ -46,6 +47,7 @@ export default class SimpleWeatherPreferences extends ExtensionPreferences {
 
         window.add(new GeneralPage(settings));
         window.add(new LocationsPage(settings, window));
+        window.add(new DetailsPage(settings));
         window.add(new AboutPage(settings, this.#metadata, window));
 
     }
