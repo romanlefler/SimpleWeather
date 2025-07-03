@@ -38,7 +38,7 @@ export interface PanelPosition {
 
 export class Config {
 
-    #settings? : Gio.Settings;
+    #settings : Gio.Settings;
     #handlerIds : number[];
 
     constructor(settings : Gio.Settings) {
@@ -51,6 +51,7 @@ export class Config {
             const id = this.#handlerIds.pop()!;
             this.#settings?.disconnect(id);
         }
+        // @ts-ignore
         this.#settings = undefined;
     }
 
@@ -62,14 +63,14 @@ export class Config {
     }
 
     onTempUnitChanged(callback : () => void) {
-        const id = this.#settings!.connect("changed", (_, key) => {
+        const id = this.#settings.connect("changed", (_, key) => {
             if(key === "temp-unit" || key === "unit-preset") callback();
         });
         this.#handlerIds.push(id);
     }
 
     getLocations() : Location[] {
-        const gVariant = this.#settings!.get_value("locations");
+        const gVariant = this.#settings.get_value("locations");
         const stringArr = readGTypeAS(gVariant);
         const locArr = stringArr.map(k => Location.parse(k));
 
@@ -82,14 +83,14 @@ export class Config {
     }
 
     onLocationsChanged(callback : () => void) {
-        const id = this.#settings!.connect("changed", (_, key) => {
+        const id = this.#settings.connect("changed", (_, key) => {
             if(key === "locations") callback();
         });
         this.#handlerIds.push(id);
     }
 
     getMainLocation() : Location {
-        const inx = this.#settings!.get_int64("main-location-index");
+        const inx = this.#settings.get_int64("main-location-index");
         const arr = this.getLocations();
         return arr[inx] ?? arr[0];
     }
@@ -98,7 +99,7 @@ export class Config {
         // Using change-event instead of changed makes sure
         // that the callback isn't double-fired since either
         // key causes a change
-        const id = this.#settings!.connect("change-event", (_, quarks) => {
+        const id = this.#settings.connect("change-event", (_, quarks) => {
             // Returning false continues to call changed events
             if(!quarks) return false;
 
@@ -116,47 +117,47 @@ export class Config {
     }
 
     getMainLocationIndex() : number {
-        return this.#settings!.get_int64("main-location-index");
+        return this.#settings.get_int64("main-location-index");
     }
 
     onMainLocationIndexChanged(callback : () => void) {
-        const id = this.#settings!.connect("changed", (_, key) => {
+        const id = this.#settings.connect("changed", (_, key) => {
             if(key === "main-location-index") callback();
         });
         this.#handlerIds.push(id);
     }
 
     getMyLocationProvider() : MyLocationProvider {
-        const val = this.#settings!.get_enum("my-loc-provider");
+        const val = this.#settings.get_enum("my-loc-provider");
         if(val > 2 || val < 1) return 1;
         else return val;
     }
 
     onMyLocationProviderChanged(callback : () => void) {
-        const id = this.#settings!.connect("changed", (_, key) => {
+        const id = this.#settings.connect("changed", (_, key) => {
             if(key === "my-loc-provider") callback();
         });
         this.#handlerIds.push(id);
     }
 
     getMyLocationRefreshMin() : number {
-        const val = this.#settings!.get_double("my-loc-refresh-min");
+        const val = this.#settings.get_double("my-loc-refresh-min");
         if(val < 10.0) return 10.0;
         else return val;
     }
 
     getDontCheckLocales() : boolean {
-        return this.#settings!.get_boolean("dont-check-locales");
+        return this.#settings.get_boolean("dont-check-locales");
     }
 
     getWeatherProvider() : number {
-        const val = this.#settings!.get_enum("weather-provider");
+        const val = this.#settings.get_enum("weather-provider");
         if(val < 1 || val > WeatherProviderNames.length) return 1;
         else return val;
     }
 
     onWeatherProviderChanged(callback : () => void) {
-        const id = this.#settings!.connect("changed", (_, key) => {
+        const id = this.#settings.connect("changed", (_, key) => {
             if(key === "weather-provider") callback();
         });
         this.#handlerIds.push(id);
@@ -170,18 +171,18 @@ export class Config {
     }
 
     onSpeedUnitChanged(callback : () => void) {
-        const id = this.#settings!.connect("changed", (_, key) => {
+        const id = this.#settings.connect("changed", (_, key) => {
             if(key === "speed-unit" || key === "unit-preset") callback();
         });
         this.#handlerIds.push(id);
     }
 
     getDirectionUnit(): DirectionUnits {
-        return this.#settings!.get_enum("direction-unit");
+        return this.#settings.get_enum("direction-unit");
     }
 
     onDirectionUnitChanged(callback : () => void) {
-        const id = this.#settings!.connect("changed", (_, key) => {
+        const id = this.#settings.connect("changed", (_, key) => {
             if(key === "direction-unit" || key === "unit-preset") callback();
         });
         this.#handlerIds.push(id);
@@ -195,7 +196,7 @@ export class Config {
     }
 
     onPressureUnitChanged(callback : () => void) {
-        const id = this.#settings!.connect("changed", (_, key) => {
+        const id = this.#settings.connect("changed", (_, key) => {
             if(key === "pressure-unit" || key === "unit-preset") callback();
         });
         this.#handlerIds.push(id);
@@ -209,7 +210,7 @@ export class Config {
     }
 
     onRainMeasurementUnitChanged(callback : () => void) {
-        const id = this.#settings!.connect("changed", (_, key) => {
+        const id = this.#settings.connect("changed", (_, key) => {
             if(key === "rain-measurement-unit" || key === "unit-preset") callback();
         });
         this.#handlerIds.push(id);
@@ -223,31 +224,31 @@ export class Config {
     }
 
     onDistanceUnitChanged(callback : () => void) {
-        const id = this.#settings!.connect("changed", (_, key) => {
+        const id = this.#settings.connect("changed", (_, key) => {
             if(key === "distance-unit" || key === "unit-preset") callback();
         });
         this.#handlerIds.push(id);
     }
 
     getHighContrast() : boolean {
-        return this.#settings!.get_boolean("high-contrast");
+        return this.#settings.get_boolean("high-contrast");
     }
 
     onHighContrastChanged(callback : () => void) {
-        const id = this.#settings!.connect("changed", (_, key) => {
+        const id = this.#settings.connect("changed", (_, key) => {
             if(key === "high-contrast") callback();
         });
         this.#handlerIds.push(id);
     }
 
     getShowSunTime() : boolean {
-        return this.#settings!.get_boolean("show-suntime");
+        return this.#settings.get_boolean("show-suntime");
     }
 
     onShowSunTimeChanged(callback : (val : boolean) => void) {
-        const id = this.#settings!.connect("changed", (_, key) => {
+        const id = this.#settings.connect("changed", (_, key) => {
             if(key === "show-suntime") {
-                callback(this.#settings!.get_boolean("show-suntime"));
+                callback(this.#settings.get_boolean("show-suntime"));
             }
         });
         this.#handlerIds.push(id);
@@ -261,10 +262,10 @@ export class Config {
      * @returns Guaranteed to be an 8 item string array.
      */
     getDetailsList() : string[] {
-        const gval = this.#settings!.get_value("details-list");
+        const gval = this.#settings.get_value("details-list");
         const strarr = readGTypeAS(gval);
         if(strarr.length !== 8) {
-            const defVal = this.#settings!.get_default_value("details-list");
+            const defVal = this.#settings.get_default_value("details-list");
             if(!defVal) return new Array(8).fill("invalid");
             const defStrarr = readGTypeAS(defVal);
             if(defStrarr.length !== 8) return new Array(8).fill("invalid");
@@ -274,7 +275,7 @@ export class Config {
     }
 
     onDetailsListChanged(callback : () => void) : void {
-        const id = this.#settings!.connect("changed", (_, key) => {
+        const id = this.#settings.connect("changed", (_, key) => {
             if(key === "details-list") {
                 callback();
             }
@@ -283,9 +284,9 @@ export class Config {
     }
 
     getPanelPosition() : PanelPosition {
-        const boxNum = this.#settings!.get_enum("panel-box");
+        const boxNum = this.#settings.get_enum("panel-box");
         const box = (["right", "center", "left"])[boxNum] ?? "right";
-        const priority = this.#settings!.get_int64("panel-priority");
+        const priority = this.#settings.get_int64("panel-priority");
         return {
             box: box as PanelBox,
             priority
@@ -293,7 +294,7 @@ export class Config {
     }
 
     onPanelPositionChanged(callback : () => void) {
-        const id = this.#settings!.connect("changed", (_, key) => {
+        const id = this.#settings.connect("changed", (_, key) => {
             if(key === "panel-box" || key === "panel-priority") callback();
         });
         this.#handlerIds.push(id);
@@ -302,11 +303,11 @@ export class Config {
 
 
     getUnitPreset() : UnitPreset {
-        return this.#settings!.get_enum("unit-preset");
+        return this.#settings.get_enum("unit-preset");
     }
 
     onAnyUnitChanged(callback : () => void) {
-        const id = this.#settings!.connect("changed", (_, key) => {
+        const id = this.#settings.connect("changed", (_, key) => {
             const unitKeys = [
                 "unit-preset", "temp-unit", "speed-unit", "pressure-unit",
                 "rain-measurement-unit", "distance-unit", "direction-unit"
@@ -342,7 +343,7 @@ export class Config {
                 if(args.metric !== undefined) return args.metric;
                 else break;
         }
-        return this.#settings!.get_enum(getEnumKey);
+        return this.#settings.get_enum(getEnumKey);
     }
 }
 
