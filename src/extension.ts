@@ -129,16 +129,13 @@ export default class SimpleWeatherExtension extends Extension {
         setUpMyLocation(this.#libsoup, this.#config);
     }
 
-    #enablePastWelcome() {
-        // This is normal extension enabling now
-        
-        // Add the menu into the top bar
-        this.#indicator = new PanelMenu.Button(0, "Weather", false);
+    #createIndicator() : PanelMenu.Button {
+        const indic = new PanelMenu.Button(0, "Weather", false);
         this.#popup = new Popup(
             this.#config!,
             this.metadata,
             this.openPreferences.bind(this),
-            this.#indicator.menu as PopupMenu,
+            indic.menu as PopupMenu,
             this.#gsettings!
         );
 
@@ -170,7 +167,16 @@ export default class SimpleWeatherExtension extends Extension {
             layout.add_child(this.#sunTimeLabel);
             layout.add_child(this.#sunTimeIcon);
         }
-        this.#indicator.add_child(layout);
+        indic.add_child(layout);
+        return indic;
+    }
+
+    #enablePastWelcome() {
+        // This is normal extension enabling now
+        
+        // Add the menu into the top bar
+        this.#indicator = this.#createIndicator();
+        // #indicator is added to panel in #updateGui
 
         // Set up a timer to refresh the weather on repeat
         this.#fetchLoopId = GLib.timeout_add_seconds(
@@ -190,8 +196,10 @@ export default class SimpleWeatherExtension extends Extension {
         this.#config!.onAnyUnitChanged(this.#updateGui.bind(this));
         this.#config!.onHighContrastChanged(this.#updateGui.bind(this));
         this.#config!.onDetailsListChanged(this.#updateGui.bind(this));
-
+        // Some require extra stuff
         this.#config!.onShowSunTimeChanged(b => {
+            if(!this.#indicator) return;
+            const layout = this.#indicator!.get_first_child()!;
             if (b) {
                 layout.add_child(this.#sunTimeLabel!);
                 layout.add_child(this.#sunTimeIcon!);
@@ -200,6 +208,12 @@ export default class SimpleWeatherExtension extends Extension {
                 layout.remove_child(this.#sunTimeLabel!);
                 layout.remove_child(this.#sunTimeIcon!);
             }
+        });
+        this.#config!.onPanelPositionChanged(() => {
+            this.#indicator?.destroy();
+            this.#indicator = this.#createIndicator();
+            this.#hasAddedIndicator = false;
+            this.#updateGui();
         });
 
         // First weather fetch
@@ -240,13 +254,7 @@ export default class SimpleWeatherExtension extends Extension {
     }
 
     #updateWeather() {
-        this.#updateWeatherAsync().then(() => {
-            if(!this.#hasAddedIndicator) {
-                this.#hasAddedIndicator = true;
-                Main.panel.addToStatusArea(this.uuid, this.#indicator!);
-            }
-
-        }).catch(err => {
+        this.#updateWeatherAsync().catch(err => {
             console.error(err);
             // This happens on boot presumably when things are loaded
             // out of order, try max 10 times
@@ -288,6 +296,12 @@ export default class SimpleWeatherExtension extends Extension {
         this.#sunTimeIcon!.icon_name = `daytime-${showSunset ? "sunset" : "sunrise"}-symbolic`;
 
         this.#popup!.updateGui(w);
+
+        if (!this.#hasAddedIndicator) {
+            this.#hasAddedIndicator = true;
+            const pos = this.#config!.getPanelPosition();
+            Main.panel.addToStatusArea(this.uuid, this.#indicator!, pos.priority, pos.box);
+        }
     }
 
 }

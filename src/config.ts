@@ -30,6 +30,12 @@ export enum UnitPreset {
     Metric = 3
 }
 
+export type PanelBox = "right" | "center" | "left";
+export interface PanelPosition {
+    box: PanelBox;
+    priority: number;
+}
+
 export class Config {
 
     #settings? : Gio.Settings;
@@ -272,6 +278,23 @@ export class Config {
             if(key === "details-list") {
                 callback();
             }
+        });
+        this.#handlerIds.push(id);
+    }
+
+    getPanelPosition() : PanelPosition {
+        const boxNum = this.#settings!.get_enum("panel-box");
+        const box = (["right", "center", "left"])[boxNum] ?? "right";
+        const priority = this.#settings!.get_int64("panel-priority");
+        return {
+            box: box as PanelBox,
+            priority
+        };
+    }
+
+    onPanelPositionChanged(callback : () => void) {
+        const id = this.#settings!.connect("changed", (_, key) => {
+            if(key === "panel-box" || key === "panel-priority") callback();
         });
         this.#handlerIds.push(id);
     }

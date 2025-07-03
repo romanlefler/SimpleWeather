@@ -206,7 +206,7 @@ export class GeneralPage extends Adw.PreferencesPage {
                 step_increment: 5.0,
                 page_increment: 30.0,
                 value: settings.get_double("my-loc-refresh-min")
-            }),
+            })
         });
         myLocRefresh.connect("notify::value", () => {
             settings.set_double("my-loc-refresh-min", myLocRefresh.value);
@@ -235,6 +235,35 @@ export class GeneralPage extends Adw.PreferencesPage {
             title: _g("Panel"),
             description: _g("Configure the panel and pop-up")
         });
+        const panelBoxModel = new Gtk.StringList({ strings: [
+            _g("Right"), _g("Center"), _g("Left")
+        ]});
+        const panelBoxRow = new Adw.ComboRow({
+            title: _g("Side of Panel"),
+            model: panelBoxModel,
+            selected: settings.get_enum("panel-box")
+        });
+        panelBoxRow.connect("notify::selected", () => {
+            settings.set_enum("panel-box", panelBoxRow.selected);
+            settings.apply();
+        });
+        panelGroup.add(panelBoxRow);
+        const panelPriorityRow = new Adw.SpinRow({
+            title: _g("Order in Panel"),
+            adjustment: new Gtk.Adjustment({
+                lower: -10000,
+                upper: 10000,
+                step_increment: 1,
+                page_increment: 3,
+                value: settings.get_int64("panel-priority")
+            })
+        });
+        panelPriorityRow.connect("notify::value", () => {
+            const int64 = Math.round(panelPriorityRow.value);
+            settings.set_int64("panel-priority", int64);
+            settings.apply();
+        });
+        panelGroup.add(panelPriorityRow);
         const showSunTimeRow = new Adw.SwitchRow({
             title: _g("Show Sunrise/Sunset"),
             active: settings.get_boolean("show-suntime")
