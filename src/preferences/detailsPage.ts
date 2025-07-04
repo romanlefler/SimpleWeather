@@ -94,8 +94,8 @@ export class DetailsPage extends Adw.PreferencesPage {
         this.add(panelGroup);
 
         const curGroup = new Adw.PreferencesGroup({
-            title: _g("Current Weather"),
-            description: _g("Drag-and-drop from bottom to configure the panel")
+            title: _g("Pop-Up"),
+            description: _g("Drag-and-drop from bottom to configure the pop-up")
         });
 
         const stringFmt = Gdk.ContentFormats.new_for_gtype(GObject.TYPE_STRING);
