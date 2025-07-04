@@ -134,7 +134,7 @@ function createCurInfo(parent : Clutter.Actor) : St.Label[] {
 }
 
 function copyrightText(provName : string) : string {
-    return `${_g("Weather Data")} \u00A9 ${provName} 2025`;
+    return `${_g("Weather Data")} \u00A9 ${provName} ${new Date().getFullYear()}`;
 }
 
 // Widget must have reactive and track_hover true
