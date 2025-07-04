@@ -28,6 +28,16 @@ POT			 := $(PO)/$(UUID).pot
 ICONSOUT	 := $(ICONSSRCS:$(ICONS)/%=$(BUILD)/icons/%)
 MOS          := $(POFILES:$(PO)/%.po=$(BUILD)/locale/%/LC_MESSAGES/$(UUID).mo)
 
+# Packages should use make DESTDIR=... for packaging
+ifeq ($(strip $(DESTDIR)),)
+	INSTALLTYPE = local
+	INSTALLBASE = $(HOME)/.local/share/gnome-shell/extensions
+else
+	INSTALLTYPE = system
+	SHARE_PREFIX = $(DESTDIR)/usr/share
+	INSTALLBASE = $(SHARE_PREFIX)/gnome-shell/extensions
+endif
+
 .PHONY: out pack install clean copyicons ts
 
 out: $(POT) ts $(SCHEMAOUT) $(SCHEMACP) $(STATICOUT) $(ICONSOUT) $(MOS)
@@ -40,6 +50,15 @@ install: out
 	rm -rf ~/.local/share/gnome-shell/extensions/$(UUID)
 	mkdir -p ~/.local/share/gnome-shell/extensions
 	cp -r $(BUILD) ~/.local/share/gnome-shell/extensions/$(UUID)
+ifeq ($(INSTALLTYPE),system)
+	rm -r $(addprefix $(INSTALLBASE)/$(UUID)/, schemas locale LICENSE)
+	mkdir -p $(SHARE_PREFIX)/glib-2.0/schemas \
+		$(SHARE_PREFIX)/locale \
+		$(SHARE_PREFIX)/licenses/$(UUID)
+	cp -r $(BUILD)/schemas/*gschema.xml $(SHARE_PREFIX)/glib-2.0/schemas
+	cp -r $(BUILD)/locale/* $(SHARE_PREFIX)/locale
+	cp -r $(BUILD)/LICENSE $(SHARE_PREFIX)/licenses/$(UUID)
+endif
 
 clean:
 	rm -rf $(DIST)
