@@ -55,7 +55,9 @@ export class AboutPage extends Adw.PreferencesPage {
         topBox.append(md("SimpleWeather for GNOME", [ "simpleweather-h1" ]));
         topBox.append(md("Roman Lefler", [ "simpleweather-h2" ]));
         topBox.append(md(
-            `<a href=\"https://github.com/romanlefler/SimpleWeather\">${_g("GitHub Repository")}</a>`,
+            `<a href=\"https://github.com/romanlefler/SimpleWeather\">${_g("GitHub Repository")}</a>` +
+            " | " +
+            `<a href=\"https://ko-fi.com/romanlefler\">${_g("Support Me")}</a>`,
         ));
         topGroup.add(topBox);
         this.add(topGroup);
