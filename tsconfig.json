@@ -6,6 +6,8 @@
         "sourceMap": false,
         "strict": true,
         "target": "ES2022",
+        "incremental": true,
+        "tsBuildInfoFile": "./dist/.tsbuildinfo",
         "lib": [
             "ES2022"
         ]
