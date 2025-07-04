@@ -53,7 +53,7 @@ function createForecastCard() : ForecastCard {
     });
 
     const day = new St.Label({
-        text: displayDayOfWeek(new Date()),
+        text: _g("Today"),
         x_align: Clutter.ActorAlign.CENTER
     });
 
@@ -335,7 +335,7 @@ export class Popup {
             const c = this.#forecastCards[i];
 
             let dateText : string;
-            if(this.#foreMode === ForecastMode.Week) dateText = displayDayOfWeek(fore[i].date);
+            if(this.#foreMode === ForecastMode.Week) dateText = displayDayOfWeek(fore[i].date, true);
             else dateText = displayTime(fore[i].date, this.#config, true);
 
             c.day.text = dateText;
