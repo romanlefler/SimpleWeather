@@ -12,6 +12,7 @@ SCHEMAOUTDIR := $(BUILD)/schemas
 PO			 := ./po
 ICONS        := ./icons
 THEMES       := ./themes
+AUTHORS	     := ./AUTHORS
 
 STATICSRCS := $(wildcard $(STATIC)/*)
 SCHEMASRC  := $(SCHEMAS)/org.gnome.shell.extensions.$(NAME).gschema.xml
@@ -73,9 +74,19 @@ clean:
 
 ts: $(BUILD)/extension.js
 
-$(BUILD)/extension.js: $(SRCS) ./node_modules/.package-lock.json
+# Build files with tsc
+# Also inserts "const authors=FILE" into resources.js
+$(BUILD)/extension.js $(BUILD)/resource.js: $(SRCS) $(AUTHORS) ./node_modules/.package-lock.json
 	printf -- 'NEEDED: tsc\n'
 	tsc
+	@touch $(BUILD)/extension.js
+
+	@if ! grep -q '// Inserted' $(BUILD)/resource.js; then \
+		printf '// Inserted\n\nconst authors = `' >> $(BUILD)/resource.js; \
+		cat $(AUTHORS) >> $(BUILD)/resource.js; \
+	else \
+		touch $(BUILD)/resource.js; \
+	fi
 
 $(SCHEMAOUT): $(SCHEMASRC)
 	printf -- 'NEEDED: glib-compile-schemas\n'

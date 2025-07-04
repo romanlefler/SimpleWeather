@@ -24,3 +24,7 @@
 .simpleweather-margin {
     margin: 8px;
 }
+
+.simpleweather-margin-wide {
+    margin: 8px 16px;
+}

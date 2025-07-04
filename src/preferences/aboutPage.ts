@@ -24,6 +24,7 @@ import { gettext as _g } from "resource:///org/gnome/Shell/Extensions/js/extensi
 // @ts-ignore
 import { PACKAGE_VERSION } from "resource:///org/gnome/Shell/Extensions/js/misc/config.js";
 import { getLocales } from "../lang.js";
+import { AUTHORS } from "../resource.js";
 
 function md(s : string, classes? : string[]) : Gtk.Label {
     const props : Partial<Gtk.Label.ConstructorProps> = {
@@ -122,6 +123,24 @@ export class AboutPage extends Adw.PreferencesPage {
         bottomBox.append(md(
             _g("Report bugs or request new features %s.").format(issuesLink)
         ));
+        const credits = new Gtk.Button({
+            child: new Gtk.Label({
+                label: "Credits",
+                // This effectively is the padding on the button
+                css_classes: [ "simpleweather-margin-wide" ]
+            }),
+            hexpand: false,
+            halign: Gtk.Align.CENTER,
+            css_classes: [ "simpleweather-margin" ]
+        });
+        credits.connect("clicked", () => {
+            const dialog = new Gtk.AlertDialog({
+                message: _g("Credits"),
+                detail: AUTHORS()
+            })
+            dialog.show(window);
+        });
+        bottomBox.append(credits);
         bottomGroup.add(bottomBox);
         this.add(bottomGroup);
     }
