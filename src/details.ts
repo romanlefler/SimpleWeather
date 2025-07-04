@@ -53,25 +53,6 @@ function _g(s : string) : string {
  * THE CALLER MUST TRANSLATE THE VALUE.
  * THESE ARE NOT PASSED INTO GETTEXT.
  */
-export const detailFormat : IDetails = {
-    temp: _g("Temp: %s"),
-    feelsLike: _g("Feels Like: %s"),
-    windSpeedAndDir: _g("Wind: %s"),
-    humidity: _g("Humidity: %s"),
-    gusts: _g("Gusts: %s"),
-    uvIndex: _g("UV High: %s"),
-    pressure: _g("Pressure: %s"),
-    precipitation: _g("Precipitation: %s"),
-    sunrise: _g("Sunrise: %s"),
-    sunset: _g("Sunset: %s"),
-    cloudCover: _g("Cloud Cover: %s")
-};
-
-/**
- * Gets a string that should be passed into gettext.
- * THE CALLER MUST TRANSLATE THE VALUE.
- * THESE ARE NOT PASSED INTO GETTEXT.
- */
 export const detailName : IDetails = {
     temp: _g("Temperature"),
     feelsLike: _g("Feels Like"),
@@ -102,5 +83,6 @@ export function displayDetail(w : Weather, detail : Details, gettext : (s : stri
     else throw new Error("Detail must implement Displayable or be a number.");
 
     if(onlyValue) return fmt;
-    else return gettext(detailFormat[detail] as string).format(fmt);
+    const name = detailName[detail] as string;
+    return `${_g(name)}: ${fmt}`;
 }

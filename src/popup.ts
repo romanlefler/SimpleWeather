@@ -24,10 +24,9 @@ import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as PopupMenu from "resource:///org/gnome/shell/ui/popupMenu.js";
 import { Config } from "./config.js";
 import { Forecast, Weather } from "./weather.js";
-import { displayDayOfWeek, displayDirection, displayPressure, displayRainMeasurement, displaySpeed, displayTemp, displayTime } from "./lang.js";
+import { displayDayOfWeek, displayTemp, displayTime } from "./lang.js";
 import { gettext as _g } from "./gettext.js";
-import { detailFormat, Details, displayDetail } from "./details.js";
-import { Displayable, Pressure, RainMeasurement, Speed, SpeedAndDir, Temp } from "./units.js";
+import { Details, displayDetail } from "./details.js";
 
 interface ForecastCard {
     card : St.BoxLayout;
