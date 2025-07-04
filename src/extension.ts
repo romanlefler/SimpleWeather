@@ -30,12 +30,13 @@ import { Weather } from "./weather.js";
 import { delayTask, removeSourceIfTruthy } from "./utils.js";
 import { displayTemp, displayTime, initLocales } from "./lang.js";
 import { freeMyLocation, setUpMyLocation } from "./myLocation.js";
-import { setUpGettext } from "./gettext.js";
+import { setUpGettext, gettext as _g } from "./gettext.js";
 import { gettext as shellGettext } from "resource:///org/gnome/shell/extensions/extension.js";
 import { Popup } from "./popup.js";
 import { PopupMenu } from "resource:///org/gnome/shell/ui/popupMenu.js";
 import { showWelcome } from "./welcome.js";
 import { setFirstTimeConfig } from "./autoConfig.js";
+import { displayDetail } from "./details.js";
 
 export default class SimpleWeatherExtension extends Extension {
 
@@ -196,6 +197,7 @@ export default class SimpleWeatherExtension extends Extension {
         this.#config!.onAnyUnitChanged(this.#updateGui.bind(this));
         this.#config!.onHighContrastChanged(this.#updateGui.bind(this));
         this.#config!.onDetailsListChanged(this.#updateGui.bind(this));
+        this.#config!.onPanelDetailChanged(this.#updateGui.bind(this));
         // Some require extra stuff
         this.#config!.onShowSunTimeChanged(b => {
             if(!this.#indicator) return;
@@ -285,7 +287,9 @@ export default class SimpleWeatherExtension extends Extension {
         const w = this.#cachedWeather;
         if(!w) return;
 
-        this.#panelLabel!.text = displayTemp(w.temp, this.#config!);
+        const panelDetail = this.#config!.getPanelDetail();
+        const panelText = displayDetail(w, panelDetail, _g, this.#config!, true);
+        this.#panelLabel!.text = panelText;
 
         this.#panelIcon!.icon_name = w.gIconName;
 

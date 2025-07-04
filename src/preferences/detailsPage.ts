@@ -21,7 +21,7 @@ import Gtk from "gi://Gtk";
 import Gio from "gi://Gio";
 import Adw from "gi://Adw";
 import { gettext as _g } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
-import { Details, displayDetail } from "../details.js";
+import { detailName, Details, displayDetail } from "../details.js";
 import { Weather } from "../weather.js";
 import { Direction, Percentage, Pressure, RainMeasurement, Speed, SpeedAndDir, Temp } from "../units.js";
 import { Location } from "../location.js";
@@ -67,6 +67,31 @@ export class DetailsPage extends Adw.PreferencesPage {
             icon_name: "view-list-symbolic"
         });
         this.#settings = settings;
+
+        const panelGroup = new Adw.PreferencesGroup({
+            title: _g("Panel")
+        });
+        const detailsArr = Object.values(Details);
+        const detailsNames = [ ];
+        for(let d of detailsArr) {
+            detailsNames.push(_g(detailName[d] as string));
+        }
+
+        const detailsModel = new Gtk.StringList({
+            strings: detailsNames
+        });
+        const panelDetailSel = detailsArr.indexOf(this.#settings.get_string("panel-detail") as Details);
+        const panelDetailRow = new Adw.ComboRow({
+            title: _g("Panel Detail"),
+            model: detailsModel,
+            selected: Math.max(0, panelDetailSel)
+        });
+        panelDetailRow.connect("notify::selected", (widget : Adw.ComboRow) => {
+            settings.set_string("panel-detail", detailsArr[widget.selected]);
+            settings.apply();
+        });
+        panelGroup.add(panelDetailRow);
+        this.add(panelGroup);
 
         const curGroup = new Adw.PreferencesGroup({
             title: _g("Current Weather"),

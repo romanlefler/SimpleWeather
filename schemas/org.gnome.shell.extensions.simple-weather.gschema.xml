@@ -154,5 +154,10 @@
             <summary>Priority of button in panel box</summary>
         </key>
 
+        <key name="panel-detail" type="s">
+            <default>'temp'</default>
+            <summary>Detail to show in the panel</summary>
+        </key>
+
     </schema>
 </schemalist>

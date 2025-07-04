@@ -65,9 +65,29 @@ export const detailFormat : IDetails = {
     sunrise: _g("Sunrise: %s"),
     sunset: _g("Sunset: %s"),
     cloudCover: _g("Cloud Cover: %s")
-}
+};
 
-export function displayDetail(w : Weather, detail : Details, gettext : (s : string) => string, cfg : Config) {
+/**
+ * Gets a string that should be passed into gettext.
+ * THE CALLER MUST TRANSLATE THE VALUE.
+ * THESE ARE NOT PASSED INTO GETTEXT.
+ */
+export const detailName : IDetails = {
+    temp: _g("Temperature"),
+    feelsLike: _g("Feels Like"),
+    windSpeedAndDir: _g("Wind"),
+    humidity: _g("Humidity"),
+    gusts: _g("Gusts"),
+    uvIndex: _g("UV High"),
+    pressure: _g("Pressure"),
+    precipitation: _g("Precipitation"),
+    sunrise: _g("Sunrise"),
+    sunset: _g("Sunset"),
+    cloudCover: _g("Cloud Cover")
+};
+
+export function displayDetail(w : Weather, detail : Details, gettext : (s : string) => string,
+    cfg : Config, onlyValue = false) {
     if(detail as string === "invalid") return _g("Invalid");
 
     const value = w[detail];
@@ -80,5 +100,7 @@ export function displayDetail(w : Weather, detail : Details, gettext : (s : stri
         fmt = `${Math.round(value)}`;
     }
     else throw new Error("Detail must implement Displayable or be a number.");
-    return gettext(detailFormat[detail] as string).format(fmt);
+
+    if(onlyValue) return fmt;
+    else return gettext(detailFormat[detail] as string).format(fmt);
 }

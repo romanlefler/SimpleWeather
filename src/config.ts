@@ -293,9 +293,24 @@ export class Config {
         };
     }
 
-    onPanelPositionChanged(callback : () => void) {
+    onPanelPositionChanged(callback : () => void) : void {
         const id = this.#settings.connect("changed", (_, key) => {
             if(key === "panel-box" || key === "panel-priority") callback();
+        });
+        this.#handlerIds.push(id);
+    }
+
+    getPanelDetail() : Details {
+        const detail = this.#settings.get_string("panel-detail");
+        if(!Object.values(Details).includes(detail as Details)) {
+            return Details.TEMP;
+        }
+        else return detail as Details;
+    }
+
+    onPanelDetailChanged(callback : () => void) : void {
+        const id = this.#settings.connect("changed", (_, key) => {
+            if(key === "panel-detail") callback();
         });
         this.#handlerIds.push(id);
     }
