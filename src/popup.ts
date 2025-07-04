@@ -24,7 +24,7 @@ import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as PopupMenu from "resource:///org/gnome/shell/ui/popupMenu.js";
 import { Config } from "./config.js";
 import { Forecast, Weather } from "./weather.js";
-import { displayDayOfWeek, displayTemp, displayTime } from "./lang.js";
+import { displayDayOfWeek, displayTime } from "./lang.js";
 import { gettext as _g } from "./gettext.js";
 import { Details, displayDetail } from "./details.js";
 
@@ -313,7 +313,7 @@ export class Popup {
 
     updateGui(w : Weather) {
         this.#condition.gicon = this.#createIcon(w.gIconName);
-        this.#temp.text = displayTemp(w.temp, this.#config);
+        this.#temp.text = w.temp.display(this.#config);
         this.#copyright.text = copyrightText(w.providerName);
 
         this.#updateForecast(w);
@@ -348,11 +348,11 @@ export class Popup {
             const tempMin = fore[i].tempMin;
             const tempMax = fore[i].tempMax;
             if(temp !== undefined) {
-                text.push(displayTemp(temp, this.#config));
+                text.push(temp.display(this.#config));
             }
             else if(tempMax !== undefined && tempMin !== undefined) {
-                text.push(_g("H: %s").format(displayTemp(tempMax, this.#config)));
-                text.push(_g("L: %s").format(displayTemp(tempMin, this.#config)));
+                text.push(_g("H: %s").format(tempMax.display(this.#config)));
+                text.push(_g("L: %s").format(tempMin.display(this.#config)));
             }
             
             const rainChance = fore[i].precipChancePercent;
@@ -383,20 +383,6 @@ export class Popup {
             const deet = details[i] as Details;
             label.text = displayDetail(w, deet, _g, this.#config);
         }
-        /*const inf = this.#curInfo;
-        inf.temp.text = _g("Temp: %s").format(displayTemp(w.temp, this.#config));
-        inf.feelsLike.text = _g("Feels Like: %s").format(displayTemp(w.feelsLike, this.#config));
-        inf.wind.text = _g("Wind: %s, %s").format(
-            displayDirection(w.windDir, this.#config),
-            displaySpeed(w.wind, this.#config)
-        );
-        inf.gusts.text = _g("Gusts: %s").format(displaySpeed(w.gusts, this.#config));
-        inf.humidity.text = _g("Humidity: %s").format(`${Math.round(w.humidity)}%`);
-        inf.pressure.text = _g("Pressure: %s").format(displayPressure(w.pressure, this.#config));
-        inf.uvIndex.text = _g("UV High: %s").format(String(Math.round(w.uvIndex)));
-        inf.precipitation.text = _g("Precipitation: %s").format(
-            displayRainMeasurement(w.precipitation, this.#config)
-        );*/
 
         // This only performs the updates if necessary
         if(this.#config.getHighContrast()) {
