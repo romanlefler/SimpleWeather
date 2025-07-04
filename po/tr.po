@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
 "POT-Creation-Date: 2025-06-23 19:40-0500\n"
-"PO-Revision-Date: 2025-06-24 00:49\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2025-07-04 10:49\n"
+"Last-Translator: Ahmet Ala\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
 "MIME-Version: 1.0\n"
@@ -20,372 +20,376 @@ msgstr ""
 #: src/autoConfig.ts:49 src/location.ts:48 src/location.ts:56
 #: src/preferences/generalPage.ts:179
 msgid "My Location"
-msgstr ""
+msgstr "Konumum"
 
 #: src/location.ts:74
 #, javascript-format
 msgid "%f°N"
-msgstr ""
+msgstr "%f°K"
 
 #: src/location.ts:74
 #, javascript-format
 msgid "%f°S"
-msgstr ""
+msgstr "%f°G"
 
 #: src/location.ts:75
 #, javascript-format
 msgid "%f°E"
-msgstr ""
+msgstr "%f°D"
 
 #: src/location.ts:75
 #, javascript-format
 msgid "%f°W"
-msgstr ""
+msgstr "%f°B"
 
 #: src/popup.ts:163
 msgid "Weather Data"
-msgstr ""
+msgstr "Hava Durumu Verileri"
 
 #: src/popup.ts:307
 msgid "Settings"
-msgstr ""
+msgstr "Ayarlar"
 
 #: src/popup.ts:378
 #, javascript-format
 msgid "H: %s"
-msgstr ""
+msgstr "Y: %s"
 
 #: src/popup.ts:379
 #, javascript-format
 msgid "L: %s"
-msgstr ""
+msgstr "D: %s"
 
 #: src/popup.ts:400
 #, javascript-format
 msgid "Temp: %s"
-msgstr ""
+msgstr "Sıcaklık: %s"
 
 #: src/popup.ts:401
 #, javascript-format
 msgid "Feels Like: %s"
-msgstr ""
+msgstr "Hissedilen: %s"
 
 #: src/popup.ts:402
 #, javascript-format
 msgid "Wind: %s, %s"
-msgstr ""
+msgstr "Rüzgar: %s, %s"
 
 #: src/popup.ts:406
 #, javascript-format
 msgid "Gusts: %s"
-msgstr ""
+msgstr "Bora: %s"
 
 #: src/popup.ts:407
 #, javascript-format
 msgid "Humidity: %s"
-msgstr ""
+msgstr "Nem: %s"
 
 #: src/popup.ts:408
 #, javascript-format
 msgid "Pressure: %s"
-msgstr ""
+msgstr "Basınç: %s"
 
 #: src/popup.ts:409
 #, javascript-format
 msgid "UV High: %s"
-msgstr ""
+msgstr "Yüksek UV: %s"
 
 #: src/popup.ts:410
 #, javascript-format
 msgid "Precipitation: %s"
-msgstr ""
+msgstr "Yağış: %s"
 
 #: src/preferences/aboutPage.ts:43
 msgid "About"
-msgstr ""
+msgstr "Hakkında"
 
 #: src/preferences/aboutPage.ts:54
 msgid "GitHub Repository"
-msgstr ""
+msgstr "GitHub Deposu"
 
 #: src/preferences/aboutPage.ts:61
 msgid "SimpleWeather Version"
-msgstr ""
+msgstr "SimpleWeather Sürümü"
 
 #: src/preferences/aboutPage.ts:64
 msgid "Unknown"
-msgstr ""
+msgstr "Bilinmiyor"
 
 #: src/preferences/aboutPage.ts:75
 #, javascript-format
 msgid "This extension is a rewrite of the %s project."
-msgstr ""
+msgstr "Bu eklenti, %s projesinin yeniden yazılmış halidir."
 
 #: src/preferences/editLocation.ts:33
 #, javascript-format
 msgid "Edit %s"
-msgstr ""
+msgstr "%s'yi Düzenle"
 
 #: src/preferences/editLocation.ts:33
 msgid "New Location"
-msgstr ""
+msgstr "Yeni Konum"
 
 #: src/preferences/editLocation.ts:41
 msgid "Name"
-msgstr ""
+msgstr "Ad"
 
 #: src/preferences/editLocation.ts:56
 msgid "Coordinates"
-msgstr ""
+msgstr "Koordinatlar"
 
 #: src/preferences/editLocation.ts:66
 msgid "Save"
-msgstr ""
+msgstr "Kaydet"
 
 #: src/preferences/editLocation.ts:87
 msgid "Name is required."
-msgstr ""
+msgstr "Ad gerekli."
 
 #: src/preferences/editLocation.ts:92
 msgid "Invalid coordinates entry."
-msgstr ""
+msgstr "Geçersiz koordinat girişi."
 
 #: src/preferences/generalPage.ts:38
 msgid "General"
-msgstr ""
+msgstr "Genel"
 
 #: src/preferences/generalPage.ts:43 src/preferences/generalPage.ts:53
 msgid "Units"
-msgstr ""
+msgstr "Birimler"
 
 #: src/preferences/generalPage.ts:44
 msgid "Configure units of measurement"
-msgstr ""
+msgstr "Ölçü birimlerini yapılandırın"
 
 #: src/preferences/generalPage.ts:48
 msgid "Custom"
-msgstr ""
+msgstr "Özel"
 
 #: src/preferences/generalPage.ts:48
 msgid "Metric"
-msgstr ""
+msgstr "Metrik"
 
 #: src/preferences/generalPage.ts:48
 msgid "UK"
-msgstr ""
+msgstr "İngiltere"
 
 #: src/preferences/generalPage.ts:48
 msgid "US"
-msgstr ""
+msgstr "ABD"
 
 #: src/preferences/generalPage.ts:61
 msgid "Fahrenheit"
-msgstr ""
+msgstr "Fahrenheit"
 
 #: src/preferences/generalPage.ts:62
 msgid "Celsius"
-msgstr ""
+msgstr "Celsius"
 
 #: src/preferences/generalPage.ts:64
 msgid "Temperature"
-msgstr ""
+msgstr "Sıcaklık"
 
 #: src/preferences/generalPage.ts:78
 msgid "Speed"
-msgstr ""
+msgstr "Hız"
 
 #: src/preferences/generalPage.ts:92
 msgid "Pressure"
-msgstr ""
+msgstr "Basınç"
 
 #: src/preferences/generalPage.ts:106
 msgid "Rain Measurement"
-msgstr ""
+msgstr "Yağmur Ölçümü"
 
 #: src/preferences/generalPage.ts:120
 msgid "Distance"
-msgstr ""
+msgstr "Mesafe"
 
 #: src/preferences/generalPage.ts:144
 msgid "Degrees"
-msgstr ""
+msgstr "Derece"
 
 #: src/preferences/generalPage.ts:144
 msgid "Eight-Point Compass"
-msgstr ""
+msgstr "Sekiz Yönlü Pusula"
 
 #: src/preferences/generalPage.ts:147
 msgid "Direction"
-msgstr ""
+msgstr "Yön"
 
 #: src/preferences/generalPage.ts:159
 msgid "Weather Service"
-msgstr ""
+msgstr "Hava Durumu Servisi"
 
 #: src/preferences/generalPage.ts:160
 msgid "Configure how the weather is attained"
-msgstr ""
+msgstr "Hava durumunun nasıl alındığını yapılandırın"
 
 #: src/preferences/generalPage.ts:167
 msgid "Weather Provider"
-msgstr ""
+msgstr "Hava Durumu Sağlayıcısı"
 
 #: src/preferences/generalPage.ts:180
 msgid "Configure how your location is found"
-msgstr ""
+msgstr "Konumunuzun nasıl bulunduğunu yapılandırın"
 
 #: src/preferences/generalPage.ts:184
 msgid "Online"
-msgstr ""
+msgstr "Çevrimiçi"
 
 #: src/preferences/generalPage.ts:185
 msgid "System"
-msgstr ""
+msgstr "Sistem"
 
 #: src/preferences/generalPage.ts:186
 msgid "Disable"
-msgstr ""
+msgstr "Devre Dışı Bırak"
 
 #: src/preferences/generalPage.ts:188
 msgid "Provider"
-msgstr ""
+msgstr "Sağlayıcı"
 
 #: src/preferences/generalPage.ts:199
 msgid "Refresh Interval (Minutes)"
-msgstr ""
+msgstr "Yenileme Aralığı (Dakika)"
 
 #: src/preferences/generalPage.ts:217
 msgid "Accessibility"
-msgstr ""
+msgstr "Erişilebilirlik"
 
 #: src/preferences/generalPage.ts:218
 msgid "Configure accessibility features"
-msgstr ""
+msgstr "Erişilebilirlik özelliklerini yapılandırın"
 
 #: src/preferences/generalPage.ts:221
 msgid "High Contrast"
-msgstr ""
+msgstr "Yüksek Kontrast"
 
 #: src/preferences/generalPage.ts:232
 msgid "Panel"
-msgstr ""
+msgstr "Panel"
 
 #: src/preferences/generalPage.ts:233
 msgid "Configure the panel and pop-up"
-msgstr ""
+msgstr "Paneli ve açılır pencereyi yapılandırın"
 
 #: src/preferences/generalPage.ts:236
 msgid "Show Sunrise/Sunset"
-msgstr ""
+msgstr "Gün Doğumu/Batımı Göster"
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
-msgstr ""
+msgstr "Konumlar"
 
 #: src/preferences/locationsPage.ts:70
 msgid "Add"
-msgstr ""
+msgstr "Ekle"
 
 #: src/preferences/locationsPage.ts:97
 msgid "Move Up"
-msgstr ""
+msgstr "Yukarı Taşı"
 
 #: src/preferences/locationsPage.ts:112
 msgid "Move Down"
-msgstr ""
+msgstr "Aşağı Taşı"
 
 #: src/preferences/locationsPage.ts:128
 msgid "Add Here"
-msgstr ""
+msgstr "Buraya Ekle"
 
 #: src/preferences/locationsPage.ts:193
 #, javascript-format
 msgid "Are you sure you want delete %s?"
-msgstr ""
+msgstr "%s'yi silmek istediğinize emin misiniz?"
 
 #: src/preferences/locationsPage.ts:194
 msgid "Cancel"
-msgstr ""
+msgstr "İptal"
 
 #: src/preferences/locationsPage.ts:194
 msgid "Delete"
-msgstr ""
+msgstr "Sil"
 
 #: src/preferences/locationsPage.ts:235
 #, javascript-format
 msgid "Internal Error: %s"
-msgstr ""
+msgstr "Dahili Hata: %s"
 
 #: src/preferences/locationsPage.ts:236
 msgid "Internal Error"
-msgstr ""
+msgstr "Dahili Hata"
 
 #: src/preferences/locationsPage.ts:261
 msgid "Something else edited the locations."
-msgstr ""
+msgstr "Başka bir şey konumları düzenledi."
 
 #: src/preferences/search.ts:45
 msgid "Search Location"
-msgstr ""
+msgstr "Konum Ara"
 
 #: src/preferences/search.ts:54
 msgid "City, Neighborhood, etc."
-msgstr ""
+msgstr "Şehir, Mahalle, vb."
 
 #: src/preferences/search.ts:59
 msgid "Search"
-msgstr ""
+msgstr "Ara"
 
 #: src/preferences/search.ts:143
 msgid "No Internet"
-msgstr ""
+msgstr "İnternet Yok"
 
 #: src/preferences/search.ts:182
 msgid "No results."
-msgstr ""
+msgstr "Sonuç bulunamadı."
 
 #: src/preferences/search.ts:187
 msgid "No copyright information available."
-msgstr ""
+msgstr "Telif hakkı bilgisi mevcut değil."
 
 #: src/prefs.ts:60
 #, javascript-format
 msgid "SimpleWeather doesn't know how to handle your locale.\n"
 "\tError - %s\n"
 "Please consider submitting a bug report on GitHub."
-msgstr ""
+msgstr "SimpleWeather yerel ayarınızı işleyemiyor.\n"
+"\tHata - %s\n"
+"Lütfen GitHub'da bir hata raporu göndermeyi düşünün."
 
 #: src/prefs.ts:63
 msgid "Don't Show Again"
-msgstr ""
+msgstr "Tekrar Gösterme"
 
 #: src/prefs.ts:63
 msgid "Ignore"
-msgstr ""
+msgstr "Yoksay"
 
 #: src/prefs.ts:63
 msgid "Open GitHub"
-msgstr ""
+msgstr "GitHub'ı Aç"
 
 #: src/welcome.ts:53
 #, javascript-format
 msgid "Welcome to %s"
-msgstr ""
+msgstr "%s'e Hoş Geldiniz"
 
 #: src/welcome.ts:74
 #, javascript-format
 msgid "%s occasionally connects to the selected weather service. By default, it will use the Internet to connect to:\n"
-"  •  %s, an %s service for weather\n"
-"  •  %s, optional for resolving the current location\n"
-"  •  %s, for searching locations by name\n\n"
-msgstr ""
+"  •  %s, an %s service for weather\n"
+"  •  %s, optional for resolving the current location\n"
+"  •  %s, for searching locations by name\n\n"
+msgstr "%s zaman zaman seçilen hava durumu servisine bağlanır. Varsayılan olarak, interneti kullanarak şunlara bağlanır:\n"
+"  •  %s, hava durumu için bir %s servisi\n"
+"  •  %s, mevcut konumu çözmek için (isteğe bağlı)\n"
+"  •  %s, konumu ada göre aramak için\n\n"
 
 #: src/welcome.ts:83
 #, javascript-format
 msgid "Thank you for installing %s!"
-msgstr ""
+msgstr "%s'i yüklediğiniz için teşekkür ederiz!"
 
 #: src/welcome.ts:99
 msgid "Abort"
-msgstr ""
-
+msgstr "İptal Et"
