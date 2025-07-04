@@ -11,6 +11,7 @@ BUILD        := $(DIST)/build
 SCHEMAOUTDIR := $(BUILD)/schemas
 PO			 := ./po
 ICONS        := ./icons
+THEMES       := ./themes
 
 STATICSRCS := $(wildcard $(STATIC)/*)
 SCHEMASRC  := $(SCHEMAS)/org.gnome.shell.extensions.$(NAME).gschema.xml
@@ -19,6 +20,7 @@ SRCS       := $(shell find $(SRC) -type f -name '*.ts' ! -name '*.d.ts')
 POFILES	   := $(wildcard $(PO)/*.po)
 # This intentionally includes the license file
 ICONSSRCS  := $(wildcard $(ICONS)/*)
+CSSSRCS    := $(wildcard $(THEMES)/*.css)
 
 SCHEMAOUT    := $(SCHEMAOUTDIR)/gschemas.compiled
 SCHEMACP     := $(SCHEMAOUTDIR)/org.gnome.shell.extensions.$(NAME).gschema.xml
@@ -26,6 +28,7 @@ STATICOUT    := $(STATICSRCS:$(STATIC)/%=$(BUILD)/%)
 ZIP		     := $(DIST)/$(NAME)-v$(VERSION).zip
 POT			 := $(PO)/$(UUID).pot
 ICONSOUT	 := $(ICONSSRCS:$(ICONS)/%=$(BUILD)/icons/%)
+CSSOUT		 := $(BUILD)/stylesheet.css
 MOS          := $(POFILES:$(PO)/%.po=$(BUILD)/locale/%/LC_MESSAGES/$(UUID).mo)
 
 # Packages should use make DESTDIR=... for packaging
@@ -40,7 +43,7 @@ endif
 
 .PHONY: out pack install clean copyicons ts
 
-out: $(POT) ts $(SCHEMAOUT) $(SCHEMACP) $(STATICOUT) $(ICONSOUT) $(MOS)
+out: $(POT) ts $(SCHEMAOUT) $(SCHEMACP) $(STATICOUT) $(ICONSOUT) $(MOS) $(CSSOUT)
 
 pack: $(ZIP)
 
@@ -105,6 +108,11 @@ $(BUILD)/icons:
 
 $(BUILD)/icons/%: $(ICONS)/% $(BUILD)/icons
 	cp $< $@
+
+# Explicitly putting stylesheet.css here makes it
+# first in the outputted file
+$(CSSOUT): $(THEMES)/stylesheet.css $(CSSSRCS)
+	cat $^ > $@
 
 $(ZIP): out
 	printf -- 'NEEDED: zip\n'

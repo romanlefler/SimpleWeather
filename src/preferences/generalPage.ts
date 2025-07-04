@@ -235,6 +235,20 @@ export class GeneralPage extends Adw.PreferencesPage {
             title: _g("Panel"),
             description: _g("Configure the panel and pop-up")
         });
+        const themes = [ "", "sky", "coffee" ];
+        const themeModel = new Gtk.StringList({ strings: [
+            _g("System"), _g("Sky"), _g("Coffee")
+        ]});
+        const themeRow = new Adw.ComboRow({
+            title: _g("Theme"),
+            model: themeModel,
+            selected: Math.max(themes.indexOf(settings.get_string("theme")), 0)
+        });
+        themeRow.connect("notify::selected", (w : Adw.ComboRow) => {
+            settings.set_string("theme", themes[w.selected]);
+            settings.apply();
+        });
+        panelGroup.add(themeRow);
         const panelBoxModel = new Gtk.StringList({ strings: [
             _g("Right"), _g("Center"), _g("Left")
         ]});

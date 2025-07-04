@@ -1,0 +1,21 @@
+
+/* coffee theme */
+
+.sw-style-coffee {
+    color: white;
+}
+
+.sw-style-coffee-menu {
+    background-color: #6F4E37;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+}
+
+.sw-style-coffee-faded {
+    color: lightgray;
+}
+
+.sw-style-coffee-bg {
+    background: #6F4E37;
+}

@@ -159,5 +159,10 @@
             <summary>Detail to show in the panel</summary>
         </key>
 
+        <key name="theme" type="s">
+            <default>''</default>
+            <summary>The theme or a blank string</summary>
+        </key>
+
     </schema>
 </schemalist>

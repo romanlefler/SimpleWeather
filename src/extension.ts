@@ -16,6 +16,7 @@
 */
 
 import Clutter from "gi://Clutter";
+import Cogl from "gi://Cogl";
 import Gio from "gi://Gio";
 import GLib from "gi://GLib";
 import St from 'gi://St';
@@ -37,6 +38,7 @@ import { PopupMenu } from "resource:///org/gnome/shell/ui/popupMenu.js";
 import { showWelcome } from "./welcome.js";
 import { setFirstTimeConfig } from "./autoConfig.js";
 import { displayDetail } from "./details.js";
+import { theme, themeInitAll, themeRemoveAll } from "./theme.js";
 
 export default class SimpleWeatherExtension extends Extension {
 
@@ -169,6 +171,10 @@ export default class SimpleWeatherExtension extends Extension {
             layout.add_child(this.#sunTimeIcon);
         }
         indic.add_child(layout);
+
+        theme((indic.menu as PopupMenu).box, "menu");
+        const themeName = this.#config!.getTheme();
+        if(themeName) themeInitAll(indic.menu.actor, themeName);
         return indic;
     }
 
@@ -216,6 +222,12 @@ export default class SimpleWeatherExtension extends Extension {
             this.#indicator = this.#createIndicator();
             this.#hasAddedIndicator = false;
             this.#updateGui();
+        });
+        this.#config!.onThemeChanged(() => {
+            if(!this.#indicator) return;
+            themeRemoveAll(this.#indicator.menu.actor);
+            const themeName = this.#config!.getTheme();
+            if(themeName) themeInitAll(this.#indicator.menu.actor, themeName);
         });
 
         // First weather fetch

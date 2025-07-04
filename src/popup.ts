@@ -27,6 +27,7 @@ import { Forecast, Weather } from "./weather.js";
 import { displayDayOfWeek, displayTime } from "./lang.js";
 import { gettext as _g } from "./gettext.js";
 import { Details, displayDetail } from "./details.js";
+import { theme, themeInitAll } from "./theme.js";
 
 interface ForecastCard {
     card : St.BoxLayout;
@@ -110,6 +111,7 @@ function evenLabel(opts : Partial<St.Label.ConstructorProps> = {}) {
         style_class: "simpleweather-current-item",
         ...opts
     });
+    theme(label, "faded");
     const box = new St.BoxLayout({
         x_expand: true,
         x_align: Clutter.ActorAlign.FILL,
@@ -195,6 +197,7 @@ export class Popup {
             vertical: true,
             style_class: "modal-dialog simpleweather-current"
         });
+        theme(leftVBox, "menu");
         leftVBox.add_child(this.#condition);
         leftVBox.add_child(this.#temp);
 
@@ -211,6 +214,7 @@ export class Popup {
             reactive: true,
             style_class: "button simpleweather-card-row"
         });
+        theme(forecasts, "forecast-box");
         this.#forecastCards = [ ];
         for(let i = 0; i < 7; i++) {
             const c = createForecastCard();
@@ -231,6 +235,7 @@ export class Popup {
         });
 
         const childItem = new PopupMenu.PopupBaseMenuItem({ reactive: false });
+        theme(childItem, "bg");
         childItem.actor.add_child(hbox);
 
         const textRect = new St.BoxLayout({
@@ -245,6 +250,7 @@ export class Popup {
         textRect.add_child(this.#copyright);
 
         const baseText = new PopupMenu.PopupBaseMenuItem({ reactive: false });
+        theme(baseText, "bg");
         baseText.actor.add_child(textRect);
 
         this.#placeLabel = new St.Label();

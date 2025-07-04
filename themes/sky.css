@@ -1,0 +1,25 @@
+
+/* sky theme */
+
+.sw-style-sky {
+    color: black;
+}
+
+.sw-style-sky-menu {
+    background-color: #C2DAE6;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+}
+
+.sw-style-sky-faded {
+    color: #505050;
+}
+
+.sw-style-sky-bg {
+    background: #C2DAE6;
+}
+
+.sw-style-sky-forecast-box:hover {
+    background: #DAEBF2;
+}
