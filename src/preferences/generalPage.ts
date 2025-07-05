@@ -235,9 +235,9 @@ export class GeneralPage extends Adw.PreferencesPage {
             title: _g("Panel"),
             description: _g("Configure the panel and pop-up")
         });
-        const themes = [ "", "sky", "coffee" ];
+        const themes = [ "", "light" ];
         const themeModel = new Gtk.StringList({ strings: [
-            _g("System"), _g("Sky"), _g("Coffee")
+            _g("System"), _g("Light")
         ]});
         const themeRow = new Adw.ComboRow({
             title: _g("Theme"),

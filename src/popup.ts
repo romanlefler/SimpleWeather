@@ -195,9 +195,10 @@ export class Popup {
 
         const leftVBox = new St.BoxLayout({
             vertical: true,
-            style_class: "modal-dialog simpleweather-current"
+            style_class: "simpleweather-current"
         });
-        theme(leftVBox, "menu");
+        if(!this.#config.getTheme()) leftVBox.add_style_class_name("modal-dialog");
+        theme(leftVBox, "left-box");
         leftVBox.add_child(this.#condition);
         leftVBox.add_child(this.#temp);
 
@@ -214,7 +215,7 @@ export class Popup {
             reactive: true,
             style_class: "button simpleweather-card-row"
         });
-        theme(forecasts, "forecast-box");
+        theme(forecasts, "forecast-box button");
         this.#forecastCards = [ ];
         for(let i = 0; i < 7; i++) {
             const c = createForecastCard();
@@ -263,6 +264,7 @@ export class Popup {
             opacity: 255,
             x_expand: true
         });
+        theme(this.#placeBtn, "button");
         this.#placeBtn.connect("clicked", () => {
             const placeCount = config.getLocations().length;
             if(placeCount === 1) return;
@@ -292,6 +294,7 @@ export class Popup {
             y_align: Clutter.ActorAlign.CENTER,
             style_class: "message-list-clear-button button",
         });
+        theme(configBtn, "button");
         configBtn.connect("clicked", () => {
             menu.toggle();
             openPreferences();

@@ -1,0 +1,27 @@
+
+/* light theme */
+
+.sw-style-light-menu {
+    border: 4px solid #CACCD2;
+}
+
+.sw-style-light-left-box {
+    background: #CACCD2;
+    border-radius: 20px;
+}
+
+.sw-style-light-bg, .sw-style-light-menu, .sw-style-light-forecast-box {
+    background-color: #D2D4DA;
+}
+
+.sw-style-light-menu * {
+    color: #101223;
+}
+
+.sw-style-light-faded {
+    color: #282A3A;
+}
+
+.sw-style-light-button:hover {
+    background: #CACCD2;
+}

@@ -24,7 +24,8 @@ Example of a "sky" theme in `themes/sky.css`:
 }
 ```
 
-Any widget which does not have a specific class will have the `sw-style-<name>` CSS class.
+> **Note**
+> `light` is a good example of a theme.
 
 ### Notes
 
@@ -35,7 +36,14 @@ Prefer `background` over `background-color` in case a GTK style uses a backgroun
 ```
 menu
 |--- bg
+|    |--- left-box
 |    |--- forecast-box
 |    |--- faded
+```
+
+Additional clases:
+
+```
+button
 ```
 

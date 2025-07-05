@@ -24,9 +24,11 @@ export function theme(widget : St.Widget, klassName : string) {
 
 export function themeInitAll(parent : Clutter.Actor, theme : string) {
     if(parent instanceof St.Widget) {
-        const klass : string | undefined = (parent as any).dataSwClass;
-        if(klass) parent.add_style_class_name(`sw-style-${theme}-${klass}`);
-        else parent.add_style_class_name(`sw-style-${theme}`);
+        const classStr : string | undefined = (parent as any).dataSwClass;
+        const classes = classStr ? classStr.split(" ") : [ ];
+        for(const klass of classes) {
+            parent.add_style_class_name(`sw-style-${theme}-${klass}`);
+        }
     }
 
     for(const child of parent.get_children()) {
@@ -35,7 +37,7 @@ export function themeInitAll(parent : Clutter.Actor, theme : string) {
 }
 
 export function themeRemoveAll(parent : Clutter.Actor) {
-    if(parent instanceof St.Widget) {
+    if(parent instanceof St.Widget && parent.style_class) {
         const classes : string[] = parent.style_class.split(" ");
         const removeList : string[] = [ ];
         for(const klass of classes) {

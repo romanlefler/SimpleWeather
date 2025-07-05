@@ -217,21 +217,18 @@ export default class SimpleWeatherExtension extends Extension {
                 layout.remove_child(this.#sunTimeIcon!);
             }
         });
-        this.#config!.onPanelPositionChanged(() => {
-            this.#indicator?.destroy();
-            this.#indicator = this.#createIndicator();
-            this.#hasAddedIndicator = false;
-            this.#updateGui();
-        });
-        this.#config!.onThemeChanged(() => {
-            if(!this.#indicator) return;
-            themeRemoveAll(this.#indicator.menu.actor);
-            const themeName = this.#config!.getTheme();
-            if(themeName) themeInitAll(this.#indicator.menu.actor, themeName);
-        });
+        this.#config!.onPanelPositionChanged(this.#rebuildIndicator.bind(this));
+        this.#config!.onThemeChanged(this.#rebuildIndicator.bind(this));
 
         // First weather fetch
         this.#updateWeather();
+    }
+
+    #rebuildIndicator() {
+        this.#indicator?.destroy();
+        this.#indicator = this.#createIndicator();
+        this.#hasAddedIndicator = false;
+        this.#updateGui();
     }
 
     /**
