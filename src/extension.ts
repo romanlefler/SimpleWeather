@@ -172,7 +172,14 @@ export default class SimpleWeatherExtension extends Extension {
         }
         indic.add_child(layout);
 
-        theme((indic.menu as PopupMenu).box, "menu");
+        const actor = (indic.menu as PopupMenu).box;
+        theme(actor, "menu");
+        // @ts-ignore
+        indic.menu.connect("open-state-changed", (_, isOpen : boolean) => {
+            if(isOpen) actor.add_style_class_name("swa-open");
+            else actor.remove_style_class_name("swa-open");
+        });
+
         const themeName = this.#config!.getTheme();
         if(themeName) themeInitAll(indic.menu.actor, themeName);
         return indic;
