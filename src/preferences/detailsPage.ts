@@ -22,12 +22,13 @@ import Gio from "gi://Gio";
 import Adw from "gi://Adw";
 import { gettext as _g } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
 import { detailName, Details, displayDetail } from "../details.js";
-import { Weather } from "../weather.js";
+import { Condition, Weather } from "../weather.js";
 import { Direction, Percentage, Pressure, RainMeasurement, Speed, SpeedAndDir, Temp } from "../units.js";
 import { Location } from "../location.js";
 import { Config, writeGTypeAS } from "../config.js";
 
 const MOCK_WEATHER : Weather = {
+    condit: Condition.CLEAR,
     temp: new Temp(71),
     gIconName: "weather-clear-symbolic",
     isNight: false,

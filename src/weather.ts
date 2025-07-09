@@ -21,6 +21,8 @@ import { Direction, Percentage, Pressure, RainMeasurement, Speed, SpeedAndDir, T
 
 export interface Weather extends IDetails {
 
+    condit : Condition;
+
     temp : Temp;
 
     gIconName : string;
@@ -61,6 +63,15 @@ export interface Weather extends IDetails {
 
     cloudCover : Percentage;
 
+}
+
+export enum Condition {
+    CLEAR = "clear",
+    CLOUDY = "cloudy",
+    RAINY = "rainy",
+    SNOWY = "snowy",
+    STORMY = "stormy",
+    WINDY = "windy"
 }
 
 export interface Forecast {

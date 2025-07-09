@@ -47,3 +47,22 @@ Additional clases:
 button
 ```
 
+### "Attributes"
+
+There are "attribute" classes which show some kind of logic in the program.
+They look like `swa-<name>`.
+Attributes should be in selectors in conjunction with the normal classes.
+
+The `menu` can have the following:
+
+- `open` when pop-up is open
+- any of the following for weather conditions: `clear`, `cloudy`, `rainy`, `snowy`, `stormy`, `windy`
+- either `day` or `night`
+
+For example, this selector makes the faded text yellow on a sunny day:
+
+```css
+.sw-style-<theme>-menu.swa-clear.swa-day .sw-style-<theme>-faded {
+    color: yellow;
+}
+```

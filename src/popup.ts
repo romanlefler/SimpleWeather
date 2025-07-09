@@ -23,7 +23,7 @@ import { ExtensionMetadata, gettext as _ } from "resource:///org/gnome/shell/ext
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as PopupMenu from "resource:///org/gnome/shell/ui/popupMenu.js";
 import { Config } from "./config.js";
-import { Forecast, Weather } from "./weather.js";
+import { Condition, Forecast, Weather } from "./weather.js";
 import { displayDayOfWeek, displayTime } from "./lang.js";
 import { gettext as _g } from "./gettext.js";
 import { Details, displayDetail } from "./details.js";
@@ -163,6 +163,7 @@ export class Popup {
     readonly #placeBtn : St.Button;
 
     readonly #menuItems : PopupMenu.PopupBaseMenuItem[];
+    readonly #menuBox : St.BoxLayout;
 
     #foreMode : ForecastMode;
     #cachedWeather? : Weather;
@@ -306,6 +307,7 @@ export class Popup {
         setPointer(configBtn);
 
         this.#menuItems = [ childItem, baseText ];
+        this.#menuBox = menu.box;
         menu.addMenuItem(childItem);
         menu.addMenuItem(baseText);
     }
@@ -321,9 +323,20 @@ export class Popup {
     }
 
     updateGui(w : Weather) {
+        const old = this.#cachedWeather;
+
         this.#condition.gicon = this.#createIcon(w.gIconName);
         this.#temp.text = w.temp.display(this.#config);
         this.#copyright.text = copyrightText(w.providerName);
+
+        if(old) this.#menuBox.remove_style_class_name(`swa-${old.condit}`);
+        this.#menuBox.add_style_class_name(`swa-${w.condit}`);
+
+        if(old && old.isNight !== w.isNight) {
+            const names = w.isNight ? [ "day", "night" ] : [ "night", "day" ];
+            this.#menuBox.remove_style_class_name(`swa-${names[0]}`);
+            this.#menuBox.add_style_class_name(`swa-${names[1]}`);
+        }
 
         this.#updateForecast(w);
     }
