@@ -84,6 +84,7 @@ $(BUILD)/extension.js $(BUILD)/resource.js: $(SRCS) $(AUTHORS) ./node_modules/.p
 	@if ! grep -q '// Inserted' $(BUILD)/resource.js; then \
 		printf '// Inserted\n\nconst authors = `' >> $(BUILD)/resource.js; \
 		cat $(AUTHORS) >> $(BUILD)/resource.js; \
+		printf '`;' >> $(BUILD)/resource.js; \
 	else \
 		touch $(BUILD)/resource.js; \
 	fi
