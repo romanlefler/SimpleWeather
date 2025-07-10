@@ -4,9 +4,9 @@ A highly configurable GNOME shell extension for viewing the weather.
 
 ![Screenshot](./docs/screenshot.png)
 
-Also has support for translations (albeit translations are probably poor).
+Support for themes, the following screenshot uses the *Immersive* theme:
 
-![International Screenshot](./docs/intlscreenshot.png)
+![Immersive Theme Screenshot](./docs/immersivescreenshot.png)
 
 ## Features
 
