@@ -332,11 +332,13 @@ export class Popup {
         if(old) this.#menuBox.remove_style_class_name(`swa-${old.condit}`);
         this.#menuBox.add_style_class_name(`swa-${w.condit}`);
 
-        if(old && old.isNight !== w.isNight) {
-            const names = w.isNight ? [ "day", "night" ] : [ "night", "day" ];
-            this.#menuBox.remove_style_class_name(`swa-${names[0]}`);
-            this.#menuBox.add_style_class_name(`swa-${names[1]}`);
-        }
+        if(old) {
+            if(old.isNight !== w.isNight) {
+                const names = w.isNight ? [ "day", "night" ] : [ "night", "day" ];
+                this.#menuBox.remove_style_class_name(`swa-${names[0]}`);
+                this.#menuBox.add_style_class_name(`swa-${names[1]}`);
+            }
+        } else this.#menuBox.add_style_class_name(`swa-${w.isNight ? "night" : "day"}`);
 
         this.#updateForecast(w);
     }
