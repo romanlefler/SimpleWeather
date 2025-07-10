@@ -238,12 +238,14 @@ export class GeneralPage extends Adw.PreferencesPage {
         const themes = [
             "",
             "light",
-            "afterdark"
+            "afterdark",
+            "immersive"
         ];
         const themeModel = new Gtk.StringList({ strings: [
             _g("System"),
             _g("Light"),
-            _g("Afterdark")
+            _g("Afterdark"),
+            _g("Immersive")
         ]});
         const themeRow = new Adw.ComboRow({
             title: _g("Theme"),

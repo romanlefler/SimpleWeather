@@ -1,0 +1,76 @@
+
+/* begin theme immersive */
+
+
+.sw-style-immersive-menu {
+    border: none;
+    box-shadow: none;
+    background: orange;
+}
+
+.sw-style-immersive-left-box {
+    background: transparent;
+    border-radius: 20px;
+}
+
+.sw-style-immersive-bg, .sw-style-immersive-forecast-box {
+    background: transparent;
+}
+
+.sw-style-immersive-menu * {
+    color: #DCEDEF;
+}
+
+.sw-style-immersive-menu.swa-clear.swa-day *,
+.sw-style-immersive-menu.swa-windy.swa-day *,
+.sw-style-immersive-menu.swa-cloudy *,
+.sw-style-immersive-menu.swa-snowy * {
+    color: #101223;
+}
+
+.sw-style-immersive-faded {
+    color: #C5D5D7;
+}
+
+.swa-clear.swa-day .sw-style-immersive-faded,
+.swa-windy.swa-day .sw-style-immersive-faded,
+.swa-cloudy .sw-style-immersive-faded,
+.swa-snowy .sw-style-immserive-faded {
+    color: #282A3A;
+}
+
+.sw-style-immersive-button:hover {
+    background: rgba(0, 10, 0, 0.15);
+}
+
+.sw-style-immersive-menu.swa-clear.swa-day, .sw-style-immersive-menu.swa-windy.swa-day {
+    background: url("./sunny-moinzon.jpg");
+    background-size: cover;
+}
+
+.sw-style-immersive-menu.swa-clear.swa-night, .sw-style-immersive-menu.swa-windy.swa-night {
+    background: url("./clear-night-pexels.jpg");
+    background-size: cover;
+}
+
+.sw-style-immersive-menu.swa-cloudy {
+    background: url("./cloudy-pexels.jpg");
+    background-size: cover;
+}
+
+.sw-style-immersive-menu.swa-rainy {
+    background: url("./rainy-gam-ol.jpg");
+    background-size: cover;
+}
+
+.sw-style-immersive-menu.swa-snowy {
+    background: url("./snowy-public-domain-pictures.jpg");
+    background-size: cover;
+}
+
+.sw-style-immersive-menu.swa-stormy {
+    background: url("./stormy-aiac-pl.jpg");
+    background-size: cover;
+}
+
+/* end theme immersive */
