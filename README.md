@@ -8,6 +8,10 @@ Support for themes, the following screenshot uses the *Immersive* theme:
 
 ![Immersive Theme Screenshot](./docs/immersivescreenshot.png)
 
+## Installation
+
+[![Get on GNOME Extensions](./docs/ego.png)](https://extensions.gnome.org/extension/8261/simpleweather/)
+
 ## Features
 
 - Display temperature and conditions in top bar
