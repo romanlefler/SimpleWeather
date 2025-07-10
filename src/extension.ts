@@ -208,7 +208,6 @@ export default class SimpleWeatherExtension extends Extension {
         });
         // Some settings just require a GUI update
         this.#config!.onAnyUnitChanged(this.#updateGui.bind(this));
-        this.#config!.onHighContrastChanged(this.#updateGui.bind(this));
         this.#config!.onDetailsListChanged(this.#updateGui.bind(this));
         this.#config!.onPanelDetailChanged(this.#updateGui.bind(this));
         // Some require extra stuff
@@ -226,6 +225,7 @@ export default class SimpleWeatherExtension extends Extension {
         });
         this.#config!.onPanelPositionChanged(this.#rebuildIndicator.bind(this));
         this.#config!.onThemeChanged(this.#rebuildIndicator.bind(this));
+        this.#config!.onHighContrastChanged(this.#rebuildIndicator.bind(this));
 
         // First weather fetch
         this.#updateWeather();

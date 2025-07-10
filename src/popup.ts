@@ -103,7 +103,7 @@ function getTextColor() : `rgba(${number}, ${number}, ${number}, ${number})` {
     return `rgba(${color.red}, ${color.green}, ${color.blue}, ${color.alpha / 255})`;
 }
 
-function evenLabel(opts : Partial<St.Label.ConstructorProps> = {}) {
+function evenLabel(cfg : Config, opts : Partial<St.Label.ConstructorProps> = {}) {
     const label = new St.Label({
         x_expand: true,
         y_align: Clutter.ActorAlign.CENTER,
@@ -111,7 +111,11 @@ function evenLabel(opts : Partial<St.Label.ConstructorProps> = {}) {
         style_class: "simpleweather-current-item",
         ...opts
     });
-    theme(label, "faded");
+
+    if(cfg.getHighContrast()) {
+        if(cfg.getTheme() === "") label.style = `color:${getTextColor()}`;
+    } else theme(label, "faded");
+
     const box = new St.BoxLayout({
         x_expand: true,
         x_align: Clutter.ActorAlign.FILL,
@@ -120,13 +124,13 @@ function evenLabel(opts : Partial<St.Label.ConstructorProps> = {}) {
     return { label, box };
 }
 
-function createCurInfo(parent : Clutter.Actor) : St.Label[] {
+function createCurInfo(cfg : Config, parent : Clutter.Actor) : St.Label[] {
     const cols = new St.BoxLayout({ vertical: true, x_expand: true });
     const row1 = new St.BoxLayout({ vertical: false, x_expand: true, y_expand: true, x_align: Clutter.ActorAlign.FILL });
     const row2 = new St.BoxLayout({ vertical: false, x_expand: true, y_expand: true, x_align: Clutter.ActorAlign.FILL });
     addChildren(cols, row1, row2);
 
-    const list = Array.from({ length: 8 }, evenLabel);
+    const list = Array.from({ length: 8 }, evenLabel.bind(null, cfg));
     const boxes = list.map(l => l.box);
     addChildren(row1, ...boxes.slice(0, 4));
     addChildren(row2, ...boxes.slice(4, 8));
@@ -167,7 +171,6 @@ export class Popup {
 
     #foreMode : ForecastMode;
     #cachedWeather? : Weather;
-    #wasHiContrast : boolean = false;
 
     constructor(
         config : Config,
@@ -224,7 +227,7 @@ export class Popup {
             this.#forecastCards.push(c);
         }
         rightVBox.add_child(forecasts);
-        this.#currentLabels = createCurInfo(rightVBox);
+        this.#currentLabels = createCurInfo(this.#config, rightVBox);
         if(this.#currentLabels.length !== 8) throw new Error("Incorrect cur len.");
         hbox.add_child(rightVBox);
 
@@ -406,27 +409,6 @@ export class Popup {
             }
             const deet = details[i] as Details;
             label.text = displayDetail(w, deet, _g, this.#config);
-        }
-
-        // This only performs the updates if necessary
-        if(this.#config.getHighContrast()) {
-            if(!this.#wasHiContrast) {
-                this.#wasHiContrast = true;
-                const color = getTextColor();
-                const affected = [ this.#copyright, ...Object.values(this.#currentLabels) ];
-                for(const w of affected) {
-                    if(w instanceof St.Widget) w.style = `color:${color};`;
-                }
-            }
-        }
-        else {
-            if(this.#wasHiContrast) {
-                this.#wasHiContrast = false;
-                const affected = [ this.#copyright, ...Object.values(this.#currentLabels) ];
-                for(const w of affected) {
-                    if(w instanceof St.Widget) w.style = "";
-                }
-            }
         }
 
         this.#placeBtn.reactive = true;
