@@ -6,7 +6,7 @@
     "settings-schema": "org.gnome.shell.extensions.simple-weather",
     "gettext-domain": "simple-weather@romanlefler.com",
     "shell-version": [
-        "48"
+        "46", "48"
     ],
     "version-name": "48.1.0-dev"
 }

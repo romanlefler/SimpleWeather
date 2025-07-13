@@ -143,7 +143,7 @@ export default class SimpleWeatherExtension extends Extension {
         );
 
         const layout = new St.BoxLayout({
-            orientation: Clutter.Orientation.HORIZONTAL
+            vertical: false
         });
         this.#panelLabel = new St.Label({
             text: "...",
