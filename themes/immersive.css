@@ -39,6 +39,10 @@
     color: #282A3A;
 }
 
+.sw-style-immersive-button {
+    background: transparent;
+}
+
 .sw-style-immersive-button:hover {
     background: rgba(0, 10, 0, 0.15);
 }

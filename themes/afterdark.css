@@ -22,6 +22,10 @@
     color: #D7D5C5;
 }
 
+.sw-style-immersive-button {
+    background: transparent;
+}
+
 .sw-style-afterdark-button:hover {
     background: #35332D;
 }
