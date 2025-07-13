@@ -145,12 +145,14 @@ function copyrightText(provName : string) : string {
 
 // Widget must have reactive and track_hover true
 function setPointer(widget : Clutter.Actor) : void {
-    widget.connect("enter-event", () => {
-        global.display.set_cursor(Meta.Cursor.POINTER);
-    });
-    widget.connect("leave-event", () => {
-        global.display.set_cursor(Meta.Cursor.DEFAULT);
-    });
+    if(Meta.Cursor.POINTER && Meta.Cursor.DEFAULT) {
+        widget.connect("enter-event", () => {
+            global.display.set_cursor(Meta.Cursor.POINTER);
+        });
+        widget.connect("leave-event", () => {
+            global.display.set_cursor(Meta.Cursor.DEFAULT);
+        });
+    }
 }
 
 export class Popup {
