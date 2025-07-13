@@ -22,6 +22,7 @@ import { Weather } from "./weather.js";
 
 export enum Details {
     TEMP = "temp",
+    CONDITION_TEXT = "conditionText",
     FEELS_LIKE = "feelsLike",
     WIND_SPEED_AND_DIR = "windSpeedAndDir",
     HUMIDITY = "humidity",
@@ -31,8 +32,7 @@ export enum Details {
     PRECIPITATION = "precipitation",
     SUNRISE = "sunrise",
     SUNSET = "sunset",
-    CLOUD_COVER = "cloudCover",
-    CONDITION_TEXT = "conditionText"
+    CLOUD_COVER = "cloudCover"
 }
 
 /**
@@ -56,6 +56,7 @@ function _g(s : string) : string {
  */
 export const detailName : IDetails = {
     temp: _g("Temperature"),
+    conditionText: _g("Condition"),
     feelsLike: _g("Feels Like"),
     windSpeedAndDir: _g("Wind"),
     humidity: _g("Humidity"),
@@ -66,7 +67,6 @@ export const detailName : IDetails = {
     sunrise: _g("Sunrise"),
     sunset: _g("Sunset"),
     cloudCover: _g("Cloud Cover"),
-    conditionText: _g("Condition")
 };
 
 export function displayDetail(w : Weather, detail : Details, gettext : (s : string) => string,
