@@ -18,6 +18,7 @@
 import { Config } from "./config.js";
 import { UnitError } from "./errors.js";
 import { displayDirection, displayPressure, displayRainMeasurement, displaySpeed, displayTemp } from "./lang.js";
+import { gettext as _g } from "./gettext.js";
 
 /*
     The measures are classes.
@@ -275,3 +276,14 @@ export class Percentage implements Displayable {
         return `${Math.round(this.#percentage)}%`;
     }
 }
+
+export class GettextKey implements Displayable {
+    #key : string;
+    constructor(key : string) {
+        this.#key = key;
+    }
+    display(_cfg : Config) : string {
+        return _g(this.#key);
+    }
+}
+

@@ -20,9 +20,9 @@ import Gdk from "gi://Gdk";
 import Gtk from "gi://Gtk";
 import Gio from "gi://Gio";
 import Adw from "gi://Adw";
-import { gettext as _g } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
+import { gettext as _g } from "../gettext.js";
 import { detailName, Details, displayDetail } from "../details.js";
-import { Condition, Weather } from "../weather.js";
+import { Condition, Weather, gettextCondit } from "../weather.js";
 import { Direction, Percentage, Pressure, RainMeasurement, Speed, SpeedAndDir, Temp } from "../units.js";
 import { Location } from "../location.js";
 import { Config, writeGTypeAS } from "../config.js";
@@ -47,7 +47,8 @@ const MOCK_WEATHER : Weather = {
     providerName: "Open-Meteo",
     loc: Location.newCoords("Dallas", 32.7792, -96.8089),
     windSpeedAndDir: new SpeedAndDir(new Speed(8), new Direction(0)),
-    cloudCover: new Percentage(44)
+    cloudCover: new Percentage(44),
+    conditionText: gettextCondit(Condition.CLEAR, false)
 };
 
 export class DetailsPage extends Adw.PreferencesPage {

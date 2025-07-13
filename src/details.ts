@@ -31,7 +31,8 @@ export enum Details {
     PRECIPITATION = "precipitation",
     SUNRISE = "sunrise",
     SUNSET = "sunset",
-    CLOUD_COVER = "cloudCover"
+    CLOUD_COVER = "cloudCover",
+    CONDITION_TEXT = "conditionText"
 }
 
 /**
@@ -64,7 +65,8 @@ export const detailName : IDetails = {
     precipitation: _g("Precipitation"),
     sunrise: _g("Sunrise"),
     sunset: _g("Sunset"),
-    cloudCover: _g("Cloud Cover")
+    cloudCover: _g("Cloud Cover"),
+    conditionText: _g("Condition")
 };
 
 export function displayDetail(w : Weather, detail : Details, gettext : (s : string) => string,
@@ -79,8 +81,7 @@ export function displayDetail(w : Weather, detail : Details, gettext : (s : stri
         fmt = displayTime(value, cfg);
     } else if (typeof value === "number") {
         fmt = `${Math.round(value)}`;
-    }
-    else throw new Error("Detail must implement Displayable or be a number.");
+    } else throw new Error("Detail must implement Displayable or be a Date or number.");
 
     if(onlyValue) return fmt;
     const name = detailName[detail] as string;

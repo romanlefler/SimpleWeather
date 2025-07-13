@@ -18,7 +18,7 @@
 import { Config } from "../config.js";
 import { LibSoup } from "../libsoup.js";
 import { Direction, Percentage, Pressure, RainMeasurement, RainMeasurementUnits, Speed, SpeedAndDir, Temp } from "../units.js";
-import { Condition, Forecast, Weather } from "../weather.js";
+import { Condition, Forecast, Weather, gettextCondit } from "../weather.js";
 import { getGIconName, Icons } from "../icons.js"
 import { Provider } from "./provider.js";
 import { getTimezoneName } from "../utils.js";
@@ -160,6 +160,7 @@ export class OpenMeteo implements Provider {
             uvIndex,
             precipitation,
             cloudCover,
+            conditionText: gettextCondit(condit, isNight),
             windSpeedAndDir: new SpeedAndDir(wind, windDir),
             providerName: this.nameKey,
             loc
