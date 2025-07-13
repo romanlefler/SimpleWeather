@@ -254,6 +254,30 @@ export class Config {
         this.#handlerIds.push(id);
     }
 
+    getSecondaryPanelDetail() : Details | null {
+        const detail = this.#settings.get_string("secondary-panel-detail");
+        if(!Object.values(Details).includes(detail as Details)) return null;
+        else return detail as Details;
+    }
+
+    onSecondaryPanelDetailChanged(callback : () => void) : void {
+        const id = this.#settings.connect("changed", (_, key) => {
+            if(key === "secondary-panel-detail") callback();
+        });
+        this.#handlerIds.push(id);
+    }
+
+    getShowPanelIcon() : boolean {
+        return this.#settings.get_boolean("show-panel-icon");
+    }
+
+    onShowPanelIconChanged(callback : () => void) : void {
+        const id = this.#settings.connect("changed", (_, key) => {
+            if(key === "show-panel-icon") callback();
+        });
+        this.#handlerIds.push(id);
+    }
+
     /**
      * Gets the details list.
      * Items are not sanitized and may not be in Details.
@@ -300,11 +324,9 @@ export class Config {
         this.#handlerIds.push(id);
     }
 
-    getPanelDetail() : Details {
+    getPanelDetail() : Details | null {
         const detail = this.#settings.get_string("panel-detail");
-        if(!Object.values(Details).includes(detail as Details)) {
-            return Details.TEMP;
-        }
+        if(!Object.values(Details).includes(detail as Details)) return null;
         else return detail as Details;
     }
 

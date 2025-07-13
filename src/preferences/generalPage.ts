@@ -286,15 +286,7 @@ export class GeneralPage extends Adw.PreferencesPage {
             settings.apply();
         });
         panelGroup.add(panelPriorityRow);
-        const showSunTimeRow = new Adw.SwitchRow({
-            title: _g("Show Sunrise/Sunset"),
-            active: settings.get_boolean("show-suntime")
-        });
-        showSunTimeRow.connect("notify::active", () => {
-            settings.set_boolean("show-suntime", showSunTimeRow.active);
-            settings.apply();
-        });
-        panelGroup.add(showSunTimeRow);
+
         this.add(panelGroup);
     }
 

@@ -159,6 +159,16 @@
             <summary>Detail to show in the panel</summary>
         </key>
 
+        <key name="secondary-panel-detail" type="s">
+            <default>''</default>
+            <summary>Second detail to show in the panel</summary>
+        </key>
+
+        <key name="show-panel-icon" type="b">
+            <default>true</default>
+            <summary>Show condition icon in the panel</summary>
+        </key>
+
         <key name="theme" type="s">
             <default>''</default>
             <summary>The theme or a blank string</summary>

@@ -69,31 +69,6 @@ export class DetailsPage extends Adw.PreferencesPage {
         });
         this.#settings = settings;
 
-        const panelGroup = new Adw.PreferencesGroup({
-            title: _g("Panel")
-        });
-        const detailsArr = Object.values(Details);
-        const detailsNames = [ ];
-        for(let d of detailsArr) {
-            detailsNames.push(_g(detailName[d] as string));
-        }
-
-        const detailsModel = new Gtk.StringList({
-            strings: detailsNames
-        });
-        const panelDetailSel = detailsArr.indexOf(this.#settings.get_string("panel-detail") as Details);
-        const panelDetailRow = new Adw.ComboRow({
-            title: _g("Panel Detail"),
-            model: detailsModel,
-            selected: Math.max(0, panelDetailSel)
-        });
-        panelDetailRow.connect("notify::selected", (widget : Adw.ComboRow) => {
-            settings.set_string("panel-detail", detailsArr[widget.selected]);
-            settings.apply();
-        });
-        panelGroup.add(panelDetailRow);
-        this.add(panelGroup);
-
         const curGroup = new Adw.PreferencesGroup({
             title: _g("Pop-Up"),
             description: _g("Drag-and-drop from bottom to configure the pop-up")
@@ -191,6 +166,74 @@ export class DetailsPage extends Adw.PreferencesPage {
         
         curGroup.add(vbox);
         this.add(curGroup);
+
+
+        const panelGroup = new Adw.PreferencesGroup({
+            title: _g("Panel")
+        });
+        const detailsArr = Object.values(Details);
+        const detailsNames = [ _g("None") ];
+        for(let d of detailsArr) {
+            detailsNames.push(_g(detailName[d] as string));
+        }
+        detailsArr.unshift("" as Details);
+
+        const detailsModel = new Gtk.StringList({
+            strings: detailsNames
+        });
+
+        const panelDetailSel = detailsArr.indexOf(this.#settings.get_string("panel-detail") as Details);
+        const panelDetailRow = new Adw.ComboRow({
+            title: _g("Panel Detail"),
+            model: detailsModel,
+            selected: Math.max(0, panelDetailSel)
+        });
+        panelDetailRow.connect("notify::selected", (widget : Adw.ComboRow) => {
+            settings.set_string("panel-detail", detailsArr[widget.selected]);
+            settings.apply();
+
+            if(widget.selected === 0 && secondPanelDetailRow.selected !== 0) {
+                widget.selected = secondPanelDetailRow.selected;
+                secondPanelDetailRow.selected = 0;
+            }
+            secondPanelDetailRow.sensitive = widget.selected !== 0;
+        });
+        panelGroup.add(panelDetailRow);
+
+        const secondPanelDetailSel = detailsArr.indexOf(this.#settings.get_string("secondary-panel-detail") as Details);
+        const secondPanelDetailRow = new Adw.ComboRow({
+            title: _g("Secondary Panel Detail"),
+            model: detailsModel,
+            selected: Math.max(0, secondPanelDetailSel),
+            sensitive: panelDetailSel !== 0
+        });
+        secondPanelDetailRow.connect("notify::selected", (widget : Adw.ComboRow) => {
+            settings.set_string("secondary-panel-detail", detailsArr[widget.selected]);
+            settings.apply();
+        });
+        panelGroup.add(secondPanelDetailRow);
+
+        const showIconRow = new Adw.SwitchRow({
+            title: _g("Show Condition Icon"),
+            active: settings.get_boolean("show-panel-icon")
+        });
+        showIconRow.connect("notify::active", () => {
+            settings.set_boolean("show-panel-icon", showIconRow.active);
+            settings.apply();
+        });
+        panelGroup.add(showIconRow);
+
+        const showSunTimeRow = new Adw.SwitchRow({
+            title: _g("Show Sunrise/Sunset"),
+            active: settings.get_boolean("show-suntime")
+        });
+        showSunTimeRow.connect("notify::active", () => {
+            settings.set_boolean("show-suntime", showSunTimeRow.active);
+            settings.apply();
+        });
+        panelGroup.add(showSunTimeRow);
+
+        this.add(panelGroup);
     }
 
     #setDetail(lbl : Gtk.Label, idx : number, detail : Details) : void {

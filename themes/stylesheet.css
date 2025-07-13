@@ -28,3 +28,7 @@
 .simpleweather-settings-icon {
     icon-size: 16px;
 }
+
+.simpleweather-second-panel-label {
+    margin-left: 8px;
+}

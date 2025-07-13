@@ -45,6 +45,7 @@ export default class SimpleWeatherExtension extends Extension {
     #gsettings? : Gio.Settings;
     #indicator? : PanelMenu.Button;
     #panelLabel? : St.Label;
+    #secondPanelLabel? : St.Label;
     #panelIcon? : St.Icon;
     #popup? : Popup;
     #hasAddedIndicator : boolean = false;
@@ -145,15 +146,26 @@ export default class SimpleWeatherExtension extends Extension {
         const layout = new St.BoxLayout({
             vertical: false
         });
-        this.#panelLabel = new St.Label({
+
+        const hasDetail1 = this.#config!.getPanelDetail() != null;
+        const hasDetail2 = this.#config!.getSecondaryPanelDetail() !== null;
+        const showIcon = this.#config!.getShowPanelIcon();
+
+        this.#panelLabel = hasDetail1 ? new St.Label({
             text: "...",
             y_align: Clutter.ActorAlign.CENTER,
             y_expand: true
-        });
-        this.#panelIcon = new St.Icon({
+        }) : undefined;
+        this.#secondPanelLabel = hasDetail2 ? new St.Label({
+            text: "...",
+            y_align: Clutter.ActorAlign.CENTER,
+            y_expand: true,
+            style_class: "simpleweather-second-panel-label"
+        }) : undefined;
+        this.#panelIcon = showIcon ? new St.Icon({
             icon_name: "view-refresh-symbolic",
             style_class: "system-status-icon"
-        });
+        }) : undefined;
         this.#sunTimeLabel = new St.Label({
             text: "...",
             y_align: Clutter.ActorAlign.CENTER,
@@ -164,8 +176,10 @@ export default class SimpleWeatherExtension extends Extension {
             icon_name: "daytime-sunset-symbolic",
             style_class: "system-status-icon"
         });
-        layout.add_child(this.#panelLabel);
-        layout.add_child(this.#panelIcon);
+
+        if(this.#panelLabel) layout.add_child(this.#panelLabel);
+        if(this.#secondPanelLabel) layout.add_child(this.#secondPanelLabel);
+        if(this.#panelIcon) layout.add_child(this.#panelIcon);
         if(this.#config!.getShowSunTime()) {
             layout.add_child(this.#sunTimeLabel);
             layout.add_child(this.#sunTimeIcon);
@@ -209,7 +223,6 @@ export default class SimpleWeatherExtension extends Extension {
         // Some settings just require a GUI update
         this.#config!.onAnyUnitChanged(this.#updateGui.bind(this));
         this.#config!.onDetailsListChanged(this.#updateGui.bind(this));
-        this.#config!.onPanelDetailChanged(this.#updateGui.bind(this));
         // Some require extra stuff
         this.#config!.onShowSunTimeChanged(b => {
             if(!this.#indicator) return;
@@ -223,6 +236,9 @@ export default class SimpleWeatherExtension extends Extension {
                 layout.remove_child(this.#sunTimeIcon!);
             }
         });
+        this.#config!.onPanelDetailChanged(this.#rebuildIndicator.bind(this));
+        this.#config!.onSecondaryPanelDetailChanged(this.#rebuildIndicator.bind(this));
+        this.#config!.onShowPanelIconChanged(this.#rebuildIndicator.bind(this));
         this.#config!.onPanelPositionChanged(this.#rebuildIndicator.bind(this));
         this.#config!.onThemeChanged(this.#rebuildIndicator.bind(this));
         this.#config!.onHighContrastChanged(this.#rebuildIndicator.bind(this));
@@ -257,6 +273,7 @@ export default class SimpleWeatherExtension extends Extension {
         this.#hasAddedIndicator = false;
         this.#panelIcon = undefined;
         this.#panelLabel = undefined;
+        this.#secondPanelLabel = undefined;
         this.#indicator?.destroy();
         this.#indicator = undefined;
 
@@ -304,16 +321,24 @@ export default class SimpleWeatherExtension extends Extension {
         if(!w) return;
 
         const panelDetail = this.#config!.getPanelDetail();
-        const panelText = displayDetail(w, panelDetail, _g, this.#config!, true);
-        this.#panelLabel!.text = panelText;
+        if(panelDetail !== null && this.#panelLabel) {
+            const panelText = displayDetail(w, panelDetail, _g, this.#config!, true);
+            this.#panelLabel.text = panelText;
+        }
 
-        this.#panelIcon!.icon_name = w.gIconName;
+        const secondPanelDetail = this.#config!.getSecondaryPanelDetail();
+        if(secondPanelDetail !== null && this.#secondPanelLabel) {
+            const secondPanelText = displayDetail(w, secondPanelDetail, _g, this.#config!, true);
+            this.#secondPanelLabel.text = secondPanelText;
+        }
+
+        if(this.#panelIcon) this.#panelIcon.icon_name = w.gIconName;
 
         const showSunset = w.sunset < w.sunrise;
         const sunTime = showSunset ? w.sunset : w.sunrise;
-        this.#sunTimeLabel!.text = displayTime(sunTime, this.#config!);
 
-        this.#sunTimeIcon!.icon_name = `daytime-${showSunset ? "sunset" : "sunrise"}-symbolic`;
+        if(this.#sunTimeLabel) this.#sunTimeLabel.text = displayTime(sunTime, this.#config!);
+        if(this.#sunTimeIcon) this.#sunTimeIcon.icon_name = `daytime-${showSunset ? "sunset" : "sunrise"}-symbolic`;
 
         this.#popup!.updateGui(w);
 
