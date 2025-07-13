@@ -1,10 +1,10 @@
-name: 'Translation Build'
+name: 'Build'
 
 on:
     workflow_dispatch:
     pull_request:
         types: [ 'opened' ]
-        branches: [ 'master' ]
+        branches: [ 'master', 'development' ]
         paths:
         - '**.po'
         - '**.ts'
@@ -15,10 +15,10 @@ on:
         - 'Makefile'
     push:
         branches:
-          - 'master'
+          - 'development'
 
 jobs:
-    build_translations:
+    build:
         runs-on: ubuntu-latest
         steps:
         - uses: actions/checkout@v3

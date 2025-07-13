@@ -59,6 +59,9 @@ export async function searchDialog(parent : Gtk.Window, soup : LibSoup, cfg : Co
         label: _g("Search")
     });
     group.add(searchButton);
+    searchField.connect("activate", () => {
+        searchButton.emit("clicked");
+    })
 
     const resultsLocList : SelLoc[] = [ ];
     const stringList = new Gtk.StringList();
@@ -66,29 +69,39 @@ export async function searchDialog(parent : Gtk.Window, soup : LibSoup, cfg : Co
         can_unselect: false,
         model: stringList
     });
-    const resultsView = new Gtk.ListView({
-        orientation: Gtk.Orientation.VERTICAL,
-        model: selModel,
-        factory: setupListFactory(),
-        margin_top: 20,
-        margin_bottom: 20
-    });
-    group.add(resultsView);
 
-    const licenseLabel = new Gtk.Label({
-        wrap: true,
-        wrap_mode: Pango.WrapMode.WORD_CHAR
-    });
-    group.add(licenseLabel);
-
+    // Added later
     const addBtn = new Gtk.Button({
         label: _g("Add")
     });
+
+    const resultsView = new Gtk.ListView({
+        orientation: Gtk.Orientation.VERTICAL,
+        model: selModel,
+        factory: setupListFactory(addBtn),
+        margin_top: 20,
+        margin_bottom: 20
+    });
+    const resultsScroll = new Gtk.ScrolledWindow({
+        child: resultsView,
+        vexpand: true,
+        hexpand: true
+    });
+    group.add(resultsScroll);
+
+    const licenseLabel = new Gtk.Label({
+        wrap: true,
+        wrap_mode: Pango.WrapMode.WORD_CHAR,
+        css_classes: [ "simpleweather-small", "simpleweather-center" ]
+    });
+    group.add(licenseLabel);
+
     group.add(addBtn);
 
     return new Promise<Location | null>((resolve, reject) => {
 
         searchButton.connect("clicked", () => {
+            searchButton.sensitive = false;
             const a : SearchArgs = {
                 search: searchField.text,
                 licenseLabel,
@@ -100,10 +113,12 @@ export async function searchDialog(parent : Gtk.Window, soup : LibSoup, cfg : Co
                 const oldLen = resultsLocList.length;
                 resultsLocList.splice(0, oldLen, ...locArr);
                 populateList(stringList, locArr);
+                searchButton.sensitive = true;
             }).catch(e => {
                 if(e instanceof Gio.ResolverError) {
                     console.error(e);
                     showNoInternetDialog(dialog);
+                    searchButton.sensitive = true;
                 }
                 else reject(e);
             });
@@ -145,7 +160,7 @@ function showNoInternetDialog(parent : Gtk.Window) {
     alert.show(parent);
 }
 
-function setupListFactory() : Gtk.SignalListItemFactory {
+function setupListFactory(addBtn : Gtk.Button) : Gtk.SignalListItemFactory {
     const f = new Gtk.SignalListItemFactory();
     f.connect("setup", (_, item : Gtk.ListItem) => {
         const label = new Gtk.Label({
@@ -153,6 +168,15 @@ function setupListFactory() : Gtk.SignalListItemFactory {
             margin_bottom: 5
         });
         item.set_child(label);
+
+        const dblClick = new Gtk.GestureClick();
+        dblClick.connect("pressed", (_g, nClicks, _x, _y) => {
+            if(nClicks === 2) {
+                // Double-clicking is same as clicking add
+                addBtn.emit("clicked");
+            }
+        });
+        label.add_controller(dblClick);
     });
     f.connect("bind", (_, item : Gtk.ListItem) => {
         const label = item.get_child() as Gtk.Label;

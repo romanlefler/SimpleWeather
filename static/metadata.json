@@ -1,12 +1,12 @@
 {
     "name": "SimpleWeather",
-    "description": "Shows the weather on the top bar. Doesn't use GNOME weather.",
+    "description": "A highly configurable weather indicator. Doesn't use GNOME Weather.",
     "uuid": "simple-weather@romanlefler.com",
     "url": "https://github.com/romanlefler/SimpleWeather",
     "settings-schema": "org.gnome.shell.extensions.simple-weather",
     "gettext-domain": "simple-weather@romanlefler.com",
     "shell-version": [
-        "48"
+        "46", "48"
     ],
-    "version-name": "48.0.0"
+    "version-name": "48.1.0"
 }

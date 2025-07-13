@@ -17,8 +17,8 @@
 
 import { Config } from "../config.js";
 import { LibSoup } from "../libsoup.js";
-import { Direction, Pressure, RainMeasurement, RainMeasurementUnits, Speed, Temp } from "../units.js";
-import { Forecast, Weather } from "../weather.js";
+import { Direction, Percentage, Pressure, RainMeasurement, RainMeasurementUnits, Speed, SpeedAndDir, Temp } from "../units.js";
+import { Condition, Forecast, Weather, gettextCondit } from "../weather.js";
 import { getGIconName, Icons } from "../icons.js"
 import { Provider } from "./provider.js";
 import { getTimezoneName } from "../utils.js";
@@ -83,15 +83,16 @@ export class OpenMeteo implements Provider {
         const wind = new Speed(cur.wind_speed_10m);
         const gusts = new Speed(cur.wind_gusts_10m);
         const windDir = new Direction(cur.wind_direction_10m);
-        const humidity : number = cur.relative_humidity_2m;
+        const humidity = new Percentage(cur.relative_humidity_2m);
         // hPa to inHg
         const pressure = new Pressure(cur.surface_pressure * 0.02953);
         const uvIndex = daily.uv_index_max[0];
         const isNight = cur.is_day === 0;
         const precipitation = new RainMeasurement(cur.precipitation);
+        const cloudCover = new Percentage(cur.cloud_cover);
 
-        const weatherCode = fixWeatherCode(cur.weather_code, cur.cloud_cover, precipitation);
-        const icon = codeToIcon[weatherCode];
+        const weatherCode = fixWeatherCode(cur.weather_code, cloudCover, precipitation);
+        const { c: condit, i: icon } = codeToIcon[weatherCode];
         const gIconName = getGIconName(icon, isNight);
 
         // If sunrise/sunset have already happened, take the next day's
@@ -106,12 +107,12 @@ export class OpenMeteo implements Provider {
         for(let i = 0; i < dayCount; i++) {
             const fDateStr = daily.time[i];
             const fPrecipitation = new RainMeasurement(daily.precipitation_sum[i]);
-            const fCloudCover = daily.cloud_cover_mean[i];
+            const fCloudCover = new Percentage(daily.cloud_cover_mean[i]);
             // We always want day icons for day forecast
             const fWeatherCode = fixWeatherCode(daily.weather_code[i],
                 fCloudCover, fPrecipitation);
             const fIcon = codeToIcon[fWeatherCode];
-            const fIconName = getGIconName(fIcon, false);
+            const fIconName = getGIconName(fIcon.i, false);
             dayForecast.push({
                 // This T00 thing tells the parser to assume local time (which we must do)
                 date: new Date(`${fDateStr}T00:00:00`),
@@ -127,12 +128,12 @@ export class OpenMeteo implements Provider {
         for(let i = 0; i < hourCount; i++) {
             const fDateStr = hourly.time[i];
             const fPrecipitation = new RainMeasurement(hourly.precipitation[i]);
-            const fCloudCover = hourly.cloud_cover[i];
+            const fCloudCover = new Percentage(hourly.cloud_cover[i]);
             const fIsNight = hourly.is_day[i] === 0;
             const fWeatherCode = fixWeatherCode(hourly.weather_code[i],
                 fCloudCover, fPrecipitation);
             const fIcon = codeToIcon[fWeatherCode];
-            const fIconName = getGIconName(fIcon, fIsNight);
+            const fIconName = getGIconName(fIcon.i, fIsNight);
             hourForecast.push({
                 date: new Date(fDateStr),
                 gIconName: fIconName,
@@ -142,6 +143,7 @@ export class OpenMeteo implements Provider {
         }
 
         return {
+            condit,
             temp,
             gIconName,
             isNight,
@@ -157,6 +159,9 @@ export class OpenMeteo implements Provider {
             pressure,
             uvIndex,
             precipitation,
+            cloudCover,
+            conditionText: gettextCondit(condit, isNight),
+            windSpeedAndDir: new SpeedAndDir(wind, windDir),
             providerName: this.nameKey,
             loc
         };
@@ -164,9 +169,10 @@ export class OpenMeteo implements Provider {
 
 }
 
-function fixWeatherCode(code : number, cloudPercent : number, precip : RainMeasurement) : number {
+function fixWeatherCode(code : number, cloudCover : Percentage, precip : RainMeasurement) : number {
     // Compensate for https://github.com/open-meteo/open-meteo/issues/812
     // Often the CAPE might be over 3000 J/kg but it's completely sunny outside
+    const cloudPercent = cloudCover.get();
     if(code === 95) {
         if(cloudPercent < 40 && precip.get(RainMeasurementUnits.In) < 0.1) {
             // In Open-Meteo's WeatherCode.swift calculate function
@@ -180,45 +186,45 @@ function fixWeatherCode(code : number, cloudPercent : number, precip : RainMeasu
 }
 
 // https://open-meteo.com/en/docs#weather_variable_documentation
-const codeToIcon : Record<number, string> = {
-    0: Icons.Clear,
+const codeToIcon : Record<number, { c : Condition, i : string }> = {
+    0: { c: Condition.CLEAR, i: Icons.Clear },
 
-    1: Icons.Clear,
-    2: Icons.Cloudy,
-    3: Icons.Overcast,
+    1: { c : Condition.CLEAR, i: Icons.Clear },
+    2: { c : Condition.CLOUDY, i: Icons.Cloudy },
+    3: { c : Condition.CLOUDY, i: Icons.Overcast },
 
-    45: Icons.Foggy,
-    48: Icons.Foggy,
+    45: { c : Condition.CLOUDY, i: Icons.Foggy },
+    48: { c : Condition.CLOUDY, i: Icons.Foggy },
 
-    51: Icons.RainScattered,
-    53: Icons.Rainy,
-    55: Icons.Rainy,
+    51: { c : Condition.RAINY, i: Icons.RainScattered },
+    53: { c : Condition.RAINY, i: Icons.Rainy },
+    55: { c : Condition.RAINY, i: Icons.Rainy },
 
-    56: Icons.FreezingRain,
-    57: Icons.FreezingRain,
+    56: { c : Condition.RAINY, i: Icons.FreezingRain },
+    57: { c : Condition.RAINY, i: Icons.FreezingRain },
 
-    61: Icons.RainScattered,
-    63: Icons.Rainy,
-    65: Icons.Rainy,
+    61: { c : Condition.RAINY, i: Icons.RainScattered },
+    63: { c : Condition.RAINY, i: Icons.Rainy },
+    65: { c : Condition.RAINY, i: Icons.Rainy },
 
-    66: Icons.FreezingRain,
-    67: Icons.FreezingRain,
+    66: { c : Condition.RAINY, i: Icons.FreezingRain },
+    67: { c : Condition.RAINY, i: Icons.FreezingRain },
 
-    71: Icons.Snowy,
-    73: Icons.Snowy,
-    75: Icons.Snowy,
+    71: { c : Condition.SNOWY, i: Icons.Snowy },
+    73: { c : Condition.SNOWY, i: Icons.Snowy },
+    75: { c : Condition.SNOWY, i: Icons.Snowy },
 
-    77: Icons.Snowy,
+    77: { c : Condition.SNOWY, i: Icons.Snowy },
 
-    80: Icons.RainScattered,
-    81: Icons.Rainy,
-    82: Icons.Rainy,
+    80: { c : Condition.RAINY, i: Icons.RainScattered },
+    81: { c : Condition.RAINY, i: Icons.Rainy },
+    82: { c : Condition.RAINY, i: Icons.Rainy },
 
-    85: Icons.Snowy,
-    86: Icons.Snowy,
+    85: { c : Condition.SNOWY, i: Icons.Snowy },
+    86: { c : Condition.SNOWY, i: Icons.Snowy },
 
-    95: Icons.Stormy,
+    95: { c : Condition.STORMY, i: Icons.Stormy },
 
-    96: Icons.Hail,
-    99: Icons.Hail
+    96: { c : Condition.SNOWY, i: Icons.Hail },
+    99: { c : Condition.SNOWY, i: Icons.Hail }
 };

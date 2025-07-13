@@ -15,10 +15,13 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import { IDetails } from "./details.js";
 import { Location } from "./location.js";
-import { Direction, Pressure, RainMeasurement, Speed, Temp } from "./units.js";
+import { Direction, Percentage, Pressure, RainMeasurement, Speed, SpeedAndDir, Temp, GettextKey } from "./units.js";
 
-export interface Weather {
+export interface Weather extends IDetails {
+
+    condit : Condition;
 
     temp : Temp;
 
@@ -44,7 +47,7 @@ export interface Weather {
 
     windDir : Direction,
 
-    humidity: number;
+    humidity: Percentage;
 
     pressure : Pressure;
 
@@ -55,6 +58,12 @@ export interface Weather {
     providerName : string;
 
     loc : Location;
+
+    windSpeedAndDir : SpeedAndDir;
+
+    cloudCover : Percentage;
+
+    conditionText : GettextKey;
 
 }
 
@@ -72,5 +81,38 @@ export interface Forecast {
 
     // Should be 0 - 100
     precipChancePercent : number;
-
 }
+
+export enum Condition {
+    CLEAR = "clear",
+    CLOUDY = "cloudy",
+    RAINY = "rainy",
+    SNOWY = "snowy",
+    STORMY = "stormy",
+    WINDY = "windy"
+}
+
+// Fake gettext to trick xgettext
+export function _g(s : string) : string {
+    return s;
+}
+// This is done like this so that xgettext understands it
+export function gettextCondit(condit : Condition, isNight : boolean) : GettextKey {
+    switch(condit) {
+        case Condition.CLEAR:
+            return new GettextKey(_g(isNight ? "Clear" : "Sunny"));
+        case Condition.CLOUDY:
+            return new GettextKey(_g("Cloudy"));
+        case Condition.RAINY:
+            return new GettextKey(_g("Rainy"));
+        case Condition.SNOWY:
+            return new GettextKey(_g("Snowy"));
+        case Condition.STORMY:
+            return new GettextKey(_g("Stormy"));
+        case Condition.WINDY:
+            return new GettextKey(_g("Windy"));
+        default:
+            throw new Error(`Unknown condition: ${condit}`);
+    }
+}
+

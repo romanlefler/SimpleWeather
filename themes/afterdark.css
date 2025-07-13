@@ -1,0 +1,33 @@
+
+/* begin theme afterdark */
+
+.sw-style-afterdark-menu {
+    border: 4px solid #35332D;
+}
+
+.sw-style-afterdark-left-box {
+    background: #35332D;
+    border-radius: 20px;
+}
+
+.sw-style-afterdark-bg, .sw-style-afterdark-menu, .sw-style-afterdark-forecast-box {
+    background-color: #2D2B25;
+}
+
+.sw-style-afterdark-menu * {
+    color: #EFEDDC;
+}
+
+.sw-style-afterdark-faded {
+    color: #D7D5C5;
+}
+
+.sw-style-immersive-button {
+    background: transparent;
+}
+
+.sw-style-afterdark-button:hover {
+    background: #35332D;
+}
+
+/* end theme afterdark */

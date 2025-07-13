@@ -72,6 +72,13 @@ export async function editLocation(parent : Gtk.Window, loc? : Location) : Promi
     dialog.set_child(page);
     dialog.set_default_widget(save);
 
+    nameRow.connect("entry-activated", () => {
+        save.emit("clicked");
+    });
+    coordsRow.connect("entry-activated", () => {
+        save.emit("clicked");
+    });
+
     const prom = new Promise<Location | null>((resolve, reject) => {
         save.connect("clicked", () => {
             const name = nameRow.text;

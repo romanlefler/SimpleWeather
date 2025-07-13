@@ -48,6 +48,11 @@
         <value value="3" nick="ft" />
         <value value="4" nick="meter" />
     </enum>
+    <enum id="org.gnome.shell.extensions.simple-weather.panel-box">
+        <value value="0" nick="right" />
+        <value value="1" nick="center" />
+        <value value="2" nick="left" />
+    </enum>
     <schema id="org.gnome.shell.extensions.simple-weather" path="/org/gnome/shell/extensions/simple-weather/">
 
         <key name="is-activated" type="b">
@@ -132,6 +137,41 @@
         <key name="show-suntime" type="b">
             <default>false</default>
             <summary>Show sunrise/sunset in panel</summary>
+        </key>
+
+        <key name="details-list" type="as">
+            <default>[ 'temp', 'windSpeedAndDir', 'gusts', 'pressure', 'feelsLike', 'humidity', 'uvIndex', 'precipitation' ]</default>
+            <summary>Current weather details in pop-up</summary>
+        </key>
+
+        <key name="panel-box" enum="org.gnome.shell.extensions.simple-weather.panel-box">
+            <default>'right'</default>
+            <summary>Which box to put the button into in the panel</summary>
+        </key>
+
+        <key name="panel-priority" type="x">
+            <default>1</default>
+            <summary>Priority of button in panel box</summary>
+        </key>
+
+        <key name="panel-detail" type="s">
+            <default>'temp'</default>
+            <summary>Detail to show in the panel</summary>
+        </key>
+
+        <key name="secondary-panel-detail" type="s">
+            <default>''</default>
+            <summary>Second detail to show in the panel</summary>
+        </key>
+
+        <key name="show-panel-icon" type="b">
+            <default>true</default>
+            <summary>Show condition icon in the panel</summary>
+        </key>
+
+        <key name="theme" type="s">
+            <default>''</default>
+            <summary>The theme or a blank string</summary>
         </key>
 
     </schema>

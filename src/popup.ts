@@ -23,9 +23,11 @@ import { ExtensionMetadata, gettext as _ } from "resource:///org/gnome/shell/ext
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as PopupMenu from "resource:///org/gnome/shell/ui/popupMenu.js";
 import { Config } from "./config.js";
-import { Forecast, Weather } from "./weather.js";
-import { displayDayOfWeek, displayDirection, displayPressure, displayRainMeasurement, displaySpeed, displayTemp, displayTime } from "./lang.js";
+import { Condition, Forecast, Weather } from "./weather.js";
+import { displayDayOfWeek, displayTime } from "./lang.js";
 import { gettext as _g } from "./gettext.js";
+import { Details, displayDetail } from "./details.js";
+import { theme, themeInitAll } from "./theme.js";
 
 interface ForecastCard {
     card : St.BoxLayout;
@@ -52,7 +54,7 @@ function createForecastCard() : ForecastCard {
     });
 
     const day = new St.Label({
-        text: displayDayOfWeek(new Date()),
+        text: _g("Today"),
         x_align: Clutter.ActorAlign.CENTER
     });
 
@@ -92,17 +94,6 @@ function createForecastCard() : ForecastCard {
     };
 }
 
-interface CurInfo {
-    temp : St.Label;
-    feelsLike : St.Label;
-    wind : St.Label,
-    gusts: St.Label,
-    humidity: St.Label;
-    pressure: St.Label;
-    uvIndex : St.Label;
-    precipitation : St.Label;
-}
-
 function addChildren(parent : Clutter.Actor, ...children : Clutter.Actor[]) {
     children.forEach(m => parent.add_child(m));
 }
@@ -112,7 +103,7 @@ function getTextColor() : `rgba(${number}, ${number}, ${number}, ${number})` {
     return `rgba(${color.red}, ${color.green}, ${color.blue}, ${color.alpha / 255})`;
 }
 
-function evenLabel(opts : Partial<St.Label.ConstructorProps> = {}) {
+function evenLabel(cfg : Config, opts : Partial<St.Label.ConstructorProps> = {}) {
     const label = new St.Label({
         x_expand: true,
         y_align: Clutter.ActorAlign.CENTER,
@@ -120,6 +111,11 @@ function evenLabel(opts : Partial<St.Label.ConstructorProps> = {}) {
         style_class: "simpleweather-current-item",
         ...opts
     });
+
+    if(cfg.getHighContrast()) {
+        if(cfg.getTheme() === "") label.style = `color:${getTextColor()}`;
+    } else theme(label, "faded");
+
     const box = new St.BoxLayout({
         x_expand: true,
         x_align: Clutter.ActorAlign.FILL,
@@ -128,49 +124,35 @@ function evenLabel(opts : Partial<St.Label.ConstructorProps> = {}) {
     return { label, box };
 }
 
-function createCurInfo(parent : Clutter.Actor) : CurInfo {
+function createCurInfo(cfg : Config, parent : Clutter.Actor) : St.Label[] {
     const cols = new St.BoxLayout({ vertical: true, x_expand: true });
     const row1 = new St.BoxLayout({ vertical: false, x_expand: true, y_expand: true, x_align: Clutter.ActorAlign.FILL });
     const row2 = new St.BoxLayout({ vertical: false, x_expand: true, y_expand: true, x_align: Clutter.ActorAlign.FILL });
     addChildren(cols, row1, row2);
 
-    const temp = evenLabel();
-    const feelsLike = evenLabel();
-    const wind = evenLabel();
-    const gusts = evenLabel();
-    const humidity = evenLabel();
-    const pressure = evenLabel();
-    const uvIndex = evenLabel();
-    const precipitation = evenLabel();
-    const c : CurInfo = {
-        temp: temp.label,
-        feelsLike: feelsLike.label,
-        wind: wind.label,
-        gusts: gusts.label,
-        humidity: humidity.label,
-        pressure: pressure.label,
-        uvIndex: uvIndex.label,
-        precipitation: precipitation.label
-    };
-    addChildren(row1, temp.box, wind.box, gusts.box, pressure.box);
-    addChildren(row2, feelsLike.box, humidity.box, uvIndex.box, precipitation.box);
+    const list = Array.from({ length: 8 }, evenLabel.bind(null, cfg));
+    const boxes = list.map(l => l.box);
+    addChildren(row1, ...boxes.slice(0, 4));
+    addChildren(row2, ...boxes.slice(4, 8));
 
     parent.add_child(cols);
-    return c;
+    return list.map(l => l.label);
 }
 
 function copyrightText(provName : string) : string {
-    return `${_g("Weather Data")} \u00A9 ${provName} 2025`;
+    return `${_g("Weather Data")} \u00A9 ${provName} ${new Date().getFullYear()}`;
 }
 
 // Widget must have reactive and track_hover true
 function setPointer(widget : Clutter.Actor) : void {
-    widget.connect("enter-event", () => {
-        global.display.set_cursor(Meta.Cursor.POINTER);
-    });
-    widget.connect("leave-event", () => {
-        global.display.set_cursor(Meta.Cursor.DEFAULT);
-    });
+    if(Meta.Cursor.POINTER && Meta.Cursor.DEFAULT) {
+        widget.connect("enter-event", () => {
+            global.display.set_cursor(Meta.Cursor.POINTER);
+        });
+        widget.connect("leave-event", () => {
+            global.display.set_cursor(Meta.Cursor.DEFAULT);
+        });
+    }
 }
 
 export class Popup {
@@ -182,15 +164,15 @@ export class Popup {
     readonly #temp : St.Label;
     readonly #forecastCards : ForecastCard[];
     readonly #copyright : St.Label;
-    readonly #curInfo : CurInfo;
+    readonly #currentLabels : St.Label[];
     readonly #placeLabel : St.Label;
     readonly #placeBtn : St.Button;
 
     readonly #menuItems : PopupMenu.PopupBaseMenuItem[];
+    readonly #menuBox : St.BoxLayout;
 
     #foreMode : ForecastMode;
     #cachedWeather? : Weather;
-    #wasHiContrast : boolean = false;
 
     constructor(
         config : Config,
@@ -219,8 +201,10 @@ export class Popup {
 
         const leftVBox = new St.BoxLayout({
             vertical: true,
-            style_class: "modal-dialog simpleweather-current"
+            style_class: "simpleweather-current"
         });
+        if(!this.#config.getTheme()) leftVBox.add_style_class_name("modal-dialog");
+        theme(leftVBox, "left-box");
         leftVBox.add_child(this.#condition);
         leftVBox.add_child(this.#temp);
 
@@ -237,6 +221,7 @@ export class Popup {
             reactive: true,
             style_class: "button simpleweather-card-row"
         });
+        theme(forecasts, "forecast-box button");
         this.#forecastCards = [ ];
         for(let i = 0; i < 7; i++) {
             const c = createForecastCard();
@@ -244,7 +229,8 @@ export class Popup {
             this.#forecastCards.push(c);
         }
         rightVBox.add_child(forecasts);
-        this.#curInfo = createCurInfo(rightVBox);
+        this.#currentLabels = createCurInfo(this.#config, rightVBox);
+        if(this.#currentLabels.length !== 8) throw new Error("Incorrect cur len.");
         hbox.add_child(rightVBox);
 
         forecasts.connect("button-press-event", () => {
@@ -256,6 +242,7 @@ export class Popup {
         });
 
         const childItem = new PopupMenu.PopupBaseMenuItem({ reactive: false });
+        theme(childItem, "bg");
         childItem.actor.add_child(hbox);
 
         const textRect = new St.BoxLayout({
@@ -270,6 +257,7 @@ export class Popup {
         textRect.add_child(this.#copyright);
 
         const baseText = new PopupMenu.PopupBaseMenuItem({ reactive: false });
+        theme(baseText, "bg");
         baseText.actor.add_child(textRect);
 
         this.#placeLabel = new St.Label();
@@ -282,13 +270,15 @@ export class Popup {
             opacity: 255,
             x_expand: true
         });
+        theme(this.#placeBtn, "button");
         this.#placeBtn.connect("clicked", () => {
+            const placeCount = config.getLocations().length;
+            if(placeCount === 1) return;
             // These will be restored in the #updateGUI method
             this.#placeBtn.reactive = false;
             this.#placeBtn.opacity = 127;
 
             const index = config.getMainLocationIndex();
-            const placeCount = config.getLocations().length;
             let newIndex;
             if(index === placeCount - 1) newIndex = 0;
             else newIndex = index + 1;
@@ -310,6 +300,7 @@ export class Popup {
             y_align: Clutter.ActorAlign.CENTER,
             style_class: "message-list-clear-button button",
         });
+        theme(configBtn, "button");
         configBtn.connect("clicked", () => {
             menu.toggle();
             openPreferences();
@@ -321,6 +312,7 @@ export class Popup {
         setPointer(configBtn);
 
         this.#menuItems = [ childItem, baseText ];
+        this.#menuBox = menu.box;
         menu.addMenuItem(childItem);
         menu.addMenuItem(baseText);
     }
@@ -336,9 +328,22 @@ export class Popup {
     }
 
     updateGui(w : Weather) {
+        const old = this.#cachedWeather;
+
         this.#condition.gicon = this.#createIcon(w.gIconName);
-        this.#temp.text = displayTemp(w.temp, this.#config);
+        this.#temp.text = w.temp.display(this.#config);
         this.#copyright.text = copyrightText(w.providerName);
+
+        if(old) this.#menuBox.remove_style_class_name(`swa-${old.condit}`);
+        this.#menuBox.add_style_class_name(`swa-${w.condit}`);
+
+        if(old) {
+            if(old.isNight !== w.isNight) {
+                const names = w.isNight ? [ "day", "night" ] : [ "night", "day" ];
+                this.#menuBox.remove_style_class_name(`swa-${names[0]}`);
+                this.#menuBox.add_style_class_name(`swa-${names[1]}`);
+            }
+        } else this.#menuBox.add_style_class_name(`swa-${w.isNight ? "night" : "day"}`);
 
         this.#updateForecast(w);
     }
@@ -359,7 +364,7 @@ export class Popup {
             const c = this.#forecastCards[i];
 
             let dateText : string;
-            if(this.#foreMode === ForecastMode.Week) dateText = displayDayOfWeek(fore[i].date);
+            if(this.#foreMode === ForecastMode.Week) dateText = displayDayOfWeek(fore[i].date, true);
             else dateText = displayTime(fore[i].date, this.#config, true);
 
             c.day.text = dateText;
@@ -372,11 +377,11 @@ export class Popup {
             const tempMin = fore[i].tempMin;
             const tempMax = fore[i].tempMax;
             if(temp !== undefined) {
-                text.push(displayTemp(temp, this.#config));
+                text.push(temp.display(this.#config));
             }
             else if(tempMax !== undefined && tempMin !== undefined) {
-                text.push(_g("H: %s").format(displayTemp(tempMax, this.#config)));
-                text.push(_g("L: %s").format(displayTemp(tempMin, this.#config)));
+                text.push(_g("H: %s").format(tempMax.display(this.#config)));
+                text.push(_g("L: %s").format(tempMin.display(this.#config)));
             }
             
             const rainChance = fore[i].precipChancePercent;
@@ -396,40 +401,16 @@ export class Popup {
 
         this.#placeLabel.text = w.loc.getName();
 
-        const inf = this.#curInfo;
-        inf.temp.text = _g("Temp: %s").format(displayTemp(w.temp, this.#config));
-        inf.feelsLike.text = _g("Feels Like: %s").format(displayTemp(w.feelsLike, this.#config));
-        inf.wind.text = _g("Wind: %s, %s").format(
-            displayDirection(w.windDir, this.#config),
-            displaySpeed(w.wind, this.#config)
-        );
-        inf.gusts.text = _g("Gusts: %s").format(displaySpeed(w.gusts, this.#config));
-        inf.humidity.text = _g("Humidity: %s").format(`${Math.round(w.humidity)}%`);
-        inf.pressure.text = _g("Pressure: %s").format(displayPressure(w.pressure, this.#config));
-        inf.uvIndex.text = _g("UV High: %s").format(String(Math.round(w.uvIndex)));
-        inf.precipitation.text = _g("Precipitation: %s").format(
-            displayRainMeasurement(w.precipitation, this.#config)
-        );
-
-        // This only performs the updates if necessary
-        if(this.#config.getHighContrast()) {
-            if(!this.#wasHiContrast) {
-                this.#wasHiContrast = true;
-                const color = getTextColor();
-                const affected = [ this.#copyright, ...Object.values(inf) ];
-                for(const w of affected) {
-                    if(w instanceof St.Widget) w.style = `color:${color};`;
-                }
+        const details = this.#config.getDetailsList();
+        const detailPossibilities = Object.values(details);
+        for(let i = 0; i < 8; i++) {
+            const label = this.#currentLabels[i];
+            if(!detailPossibilities.includes(details[i])) {
+                label.text = _g("Invalid");
+                continue;
             }
-        }
-        else {
-            if(this.#wasHiContrast) {
-                this.#wasHiContrast = false;
-                const affected = [ this.#copyright, ...Object.values(inf) ];
-                for(const w of affected) {
-                    if(w instanceof St.Widget) w.style = "";
-                }
-            }
+            const deet = details[i] as Details;
+            label.text = displayDetail(w, deet, _g, this.#config);
         }
 
         this.#placeBtn.reactive = true;

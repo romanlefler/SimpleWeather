@@ -19,6 +19,8 @@ import GLib from "gi://GLib";
 import { Weather } from "./weather.js";
 import { Config } from "./config.js";
 import { Direction, DirectionUnits, Pressure, RainMeasurement, RainMeasurementUnits, Speed, Temp } from "./units.js";
+import { sameDate } from "./utils.js";
+import { gettext as _g } from "./gettext.js"
 
 let locales : string[] | undefined;
 
@@ -102,11 +104,15 @@ export function displayTime(d : Date, cfg : Config, showAmPm : boolean = true) :
     return str;
 }
 
-export function displayDayOfWeek(d : Date) : string {
-    const locales = getLocales();
-    return d.toLocaleDateString(locales, {
-        weekday: "long"
-    });
+export function displayDayOfWeek(d : Date, useToday = false) : string {
+    if(useToday && sameDate(new Date(), d)) return _g("Today");
+
+    const map = [
+        _g("Sunday"), _g("Monday"), _g("Tuesday"), _g("Wednesday"),
+        _g("Thursday"), _g("Friday"), _g("Saturday")
+    ];
+    const idx = d.getDay();
+    return map[idx];
 };
 
 export function displaySpeed(s : Speed, cfg : Config) {

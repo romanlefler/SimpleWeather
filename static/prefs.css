@@ -1,0 +1,30 @@
+
+.simpleweather-h1 {
+    font-size: 1.75em;
+    margin: 20px;
+}
+
+.simpleweather-h2 {
+    font-size: 1.5em;
+    margin: 15px;
+}
+
+.simpleweather-small {
+    font-size: 0.85em;
+}
+
+.simpleweather-center {
+    text-align: center;
+}
+
+.simpleweather-selected {
+    font-style: italic;
+}
+
+.simpleweather-margin {
+    margin: 8px;
+}
+
+.simpleweather-margin-wide {
+    margin: 8px 16px;
+}

@@ -16,6 +16,7 @@
 */
 
 import Clutter from "gi://Clutter";
+import Cogl from "gi://Cogl";
 import Gio from "gi://Gio";
 import GLib from "gi://GLib";
 import St from 'gi://St';
@@ -30,18 +31,21 @@ import { Weather } from "./weather.js";
 import { delayTask, removeSourceIfTruthy } from "./utils.js";
 import { displayTemp, displayTime, initLocales } from "./lang.js";
 import { freeMyLocation, setUpMyLocation } from "./myLocation.js";
-import { setUpGettext } from "./gettext.js";
+import { setUpGettext, gettext as _g } from "./gettext.js";
 import { gettext as shellGettext } from "resource:///org/gnome/shell/extensions/extension.js";
 import { Popup } from "./popup.js";
 import { PopupMenu } from "resource:///org/gnome/shell/ui/popupMenu.js";
 import { showWelcome } from "./welcome.js";
 import { setFirstTimeConfig } from "./autoConfig.js";
+import { displayDetail } from "./details.js";
+import { theme, themeInitAll, themeRemoveAll } from "./theme.js";
 
 export default class SimpleWeatherExtension extends Extension {
 
     #gsettings? : Gio.Settings;
     #indicator? : PanelMenu.Button;
     #panelLabel? : St.Label;
+    #secondPanelLabel? : St.Label;
     #panelIcon? : St.Icon;
     #popup? : Popup;
     #hasAddedIndicator : boolean = false;
@@ -129,31 +133,39 @@ export default class SimpleWeatherExtension extends Extension {
         setUpMyLocation(this.#libsoup, this.#config);
     }
 
-    #enablePastWelcome() {
-        // This is normal extension enabling now
-        
-        // Add the menu into the top bar
-        this.#indicator = new PanelMenu.Button(0, "Weather", false);
+    #createIndicator() : PanelMenu.Button {
+        const indic = new PanelMenu.Button(0, "Weather", false);
         this.#popup = new Popup(
             this.#config!,
             this.metadata,
             this.openPreferences.bind(this),
-            this.#indicator.menu as PopupMenu,
+            indic.menu as PopupMenu,
             this.#gsettings!
         );
 
         const layout = new St.BoxLayout({
-            orientation: Clutter.Orientation.HORIZONTAL
+            vertical: false
         });
-        this.#panelLabel = new St.Label({
+
+        const hasDetail1 = this.#config!.getPanelDetail() != null;
+        const hasDetail2 = this.#config!.getSecondaryPanelDetail() !== null;
+        const showIcon = this.#config!.getShowPanelIcon();
+
+        this.#panelLabel = hasDetail1 ? new St.Label({
             text: "...",
             y_align: Clutter.ActorAlign.CENTER,
             y_expand: true
-        });
-        this.#panelIcon = new St.Icon({
+        }) : undefined;
+        this.#secondPanelLabel = hasDetail2 ? new St.Label({
+            text: "...",
+            y_align: Clutter.ActorAlign.CENTER,
+            y_expand: true,
+            style_class: "simpleweather-second-panel-label"
+        }) : undefined;
+        this.#panelIcon = showIcon ? new St.Icon({
             icon_name: "view-refresh-symbolic",
             style_class: "system-status-icon"
-        });
+        }) : undefined;
         this.#sunTimeLabel = new St.Label({
             text: "...",
             y_align: Clutter.ActorAlign.CENTER,
@@ -164,13 +176,35 @@ export default class SimpleWeatherExtension extends Extension {
             icon_name: "daytime-sunset-symbolic",
             style_class: "system-status-icon"
         });
-        layout.add_child(this.#panelLabel);
-        layout.add_child(this.#panelIcon);
+
+        if(this.#panelLabel) layout.add_child(this.#panelLabel);
+        if(this.#secondPanelLabel) layout.add_child(this.#secondPanelLabel);
+        if(this.#panelIcon) layout.add_child(this.#panelIcon);
         if(this.#config!.getShowSunTime()) {
             layout.add_child(this.#sunTimeLabel);
             layout.add_child(this.#sunTimeIcon);
         }
-        this.#indicator.add_child(layout);
+        indic.add_child(layout);
+
+        const actor = (indic.menu as PopupMenu).box;
+        theme(actor, "menu");
+        // @ts-ignore
+        indic.menu.connect("open-state-changed", (_, isOpen : boolean) => {
+            if(isOpen) actor.add_style_class_name("swa-open");
+            else actor.remove_style_class_name("swa-open");
+        });
+
+        const themeName = this.#config!.getTheme();
+        if(themeName) themeInitAll(indic.menu.actor, themeName);
+        return indic;
+    }
+
+    #enablePastWelcome() {
+        // This is normal extension enabling now
+        
+        // Add the menu into the top bar
+        this.#indicator = this.#createIndicator();
+        // #indicator is added to panel in #updateGui
 
         // Set up a timer to refresh the weather on repeat
         this.#fetchLoopId = GLib.timeout_add_seconds(
@@ -188,8 +222,11 @@ export default class SimpleWeatherExtension extends Extension {
         });
         // Some settings just require a GUI update
         this.#config!.onAnyUnitChanged(this.#updateGui.bind(this));
-        this.#config!.onHighContrastChanged(this.#updateGui.bind(this));
+        this.#config!.onDetailsListChanged(this.#updateGui.bind(this));
+        // Some require extra stuff
         this.#config!.onShowSunTimeChanged(b => {
+            if(!this.#indicator) return;
+            const layout = this.#indicator!.get_first_child()!;
             if (b) {
                 layout.add_child(this.#sunTimeLabel!);
                 layout.add_child(this.#sunTimeIcon!);
@@ -199,9 +236,22 @@ export default class SimpleWeatherExtension extends Extension {
                 layout.remove_child(this.#sunTimeIcon!);
             }
         });
+        this.#config!.onPanelDetailChanged(this.#rebuildIndicator.bind(this));
+        this.#config!.onSecondaryPanelDetailChanged(this.#rebuildIndicator.bind(this));
+        this.#config!.onShowPanelIconChanged(this.#rebuildIndicator.bind(this));
+        this.#config!.onPanelPositionChanged(this.#rebuildIndicator.bind(this));
+        this.#config!.onThemeChanged(this.#rebuildIndicator.bind(this));
+        this.#config!.onHighContrastChanged(this.#rebuildIndicator.bind(this));
 
         // First weather fetch
         this.#updateWeather();
+    }
+
+    #rebuildIndicator() {
+        this.#indicator?.destroy();
+        this.#indicator = this.#createIndicator();
+        this.#hasAddedIndicator = false;
+        this.#updateGui();
     }
 
     /**
@@ -223,6 +273,7 @@ export default class SimpleWeatherExtension extends Extension {
         this.#hasAddedIndicator = false;
         this.#panelIcon = undefined;
         this.#panelLabel = undefined;
+        this.#secondPanelLabel = undefined;
         this.#indicator?.destroy();
         this.#indicator = undefined;
 
@@ -238,13 +289,7 @@ export default class SimpleWeatherExtension extends Extension {
     }
 
     #updateWeather() {
-        this.#updateWeatherAsync().then(() => {
-            if(!this.#hasAddedIndicator) {
-                this.#hasAddedIndicator = true;
-                Main.panel.addToStatusArea(this.uuid, this.#indicator!);
-            }
-
-        }).catch(err => {
+        this.#updateWeatherAsync().catch(err => {
             console.error(err);
             // This happens on boot presumably when things are loaded
             // out of order, try max 10 times
@@ -275,17 +320,33 @@ export default class SimpleWeatherExtension extends Extension {
         const w = this.#cachedWeather;
         if(!w) return;
 
-        this.#panelLabel!.text = displayTemp(w.temp, this.#config!);
+        const panelDetail = this.#config!.getPanelDetail();
+        if(panelDetail !== null && this.#panelLabel) {
+            const panelText = displayDetail(w, panelDetail, _g, this.#config!, true);
+            this.#panelLabel.text = panelText;
+        }
 
-        this.#panelIcon!.icon_name = w.gIconName;
+        const secondPanelDetail = this.#config!.getSecondaryPanelDetail();
+        if(secondPanelDetail !== null && this.#secondPanelLabel) {
+            const secondPanelText = displayDetail(w, secondPanelDetail, _g, this.#config!, true);
+            this.#secondPanelLabel.text = secondPanelText;
+        }
+
+        if(this.#panelIcon) this.#panelIcon.icon_name = w.gIconName;
 
         const showSunset = w.sunset < w.sunrise;
         const sunTime = showSunset ? w.sunset : w.sunrise;
-        this.#sunTimeLabel!.text = displayTime(sunTime, this.#config!);
 
-        this.#sunTimeIcon!.icon_name = `daytime-${showSunset ? "sunset" : "sunrise"}-symbolic`;
+        if(this.#sunTimeLabel) this.#sunTimeLabel.text = displayTime(sunTime, this.#config!);
+        if(this.#sunTimeIcon) this.#sunTimeIcon.icon_name = `daytime-${showSunset ? "sunset" : "sunrise"}-symbolic`;
 
         this.#popup!.updateGui(w);
+
+        if (!this.#hasAddedIndicator) {
+            this.#hasAddedIndicator = true;
+            const pos = this.#config!.getPanelPosition();
+            Main.panel.addToStatusArea(this.uuid, this.#indicator!, pos.priority, pos.box);
+        }
     }
 
 }

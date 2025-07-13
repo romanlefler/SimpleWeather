@@ -37,3 +37,15 @@ export function removeSourceIfTruthy(id : number | null | undefined) : undefined
 export function getTimezoneName() : string {
     return Intl.DateTimeFormat(getLocales()).resolvedOptions().timeZone;
 }
+
+export function noTime(d : Date) : Date {
+    const dup = new Date(d);
+    dup.setHours(0, 0, 0, 0);
+    return dup;
+}
+
+export function sameDate(d1 : Date, d2 : Date) : boolean {
+    const dup1 = noTime(d1);
+    const dup2 = noTime(d2);
+    return dup1.getTime() === dup2.getTime();
+}

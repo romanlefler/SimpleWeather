@@ -29,10 +29,6 @@
     icon-size: 16px;
 }
 
-.simpleweather-h1 {
-    font-size: 1.75em;
-}
-
-.simpleweather-h2 {
-    font-size: 1.5em;
+.simpleweather-second-panel-label {
+    margin-left: 8px;
 }
