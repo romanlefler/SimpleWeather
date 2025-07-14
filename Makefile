@@ -118,7 +118,7 @@ $(BUILD)/locale/%/LC_MESSAGES/$(UUID).mo: $(PO)/%.po
 $(BUILD)/icons:
 	mkdir -p $@
 
-$(BUILD)/icons/%: $(ICONS)/% $(BUILD)/icons
+$(BUILD)/icons/%: $(ICONS)/% | $(BUILD)/icons
 	cp $< $@
 
 # Explicitly putting stylesheet.css here makes it
