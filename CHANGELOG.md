@@ -1,4 +1,10 @@
 
+# Development
+
+## Translations
+
+- Chinese (thanks know-nothing-but-123)
+
 # v48.1.0
 
 ## Features
