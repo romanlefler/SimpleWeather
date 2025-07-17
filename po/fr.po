@@ -68,7 +68,7 @@ msgstr "Temps: %s"
 #: src/popup.ts:401
 #, javascript-format
 msgid "Feels Like: %s"
-msgstr "J'aime : %s"
+msgstr "Ressenti : %s"
 
 #: src/popup.ts:402
 #, javascript-format
@@ -78,7 +78,7 @@ msgstr "Vent : %s, %s"
 #: src/popup.ts:406
 #, javascript-format
 msgid "Gusts: %s"
-msgstr "Gustes: %s"
+msgstr "Rafales: %s"
 
 #: src/popup.ts:407
 #, javascript-format
@@ -93,7 +93,7 @@ msgstr "Pression : %s"
 #: src/popup.ts:409
 #, javascript-format
 msgid "UV High: %s"
-msgstr "UV Haut: %s"
+msgstr "Indice UV: %s"
 
 #: src/popup.ts:410
 #, javascript-format
@@ -106,11 +106,11 @@ msgstr "À propos de"
 
 #: src/preferences/aboutPage.ts:54
 msgid "GitHub Repository"
-msgstr "GitHub Repository"
+msgstr "Dépôt GitHub"
 
 #: src/preferences/aboutPage.ts:61
 msgid "SimpleWeather Version"
-msgstr "Version SimpleWeather"
+msgstr "Version de SimpleWeather"
 
 #: src/preferences/aboutPage.ts:64
 msgid "Unknown"
@@ -148,11 +148,11 @@ msgstr "Le nom est requis."
 
 #: src/preferences/editLocation.ts:92
 msgid "Invalid coordinates entry."
-msgstr "Entrée de coordonnées invalide."
+msgstr "Coordonnées invalides."
 
 #: src/preferences/generalPage.ts:38
 msgid "General"
-msgstr "Généraux"
+msgstr "Général"
 
 #: src/preferences/generalPage.ts:43 src/preferences/generalPage.ts:53
 msgid "Units"
@@ -164,7 +164,7 @@ msgstr "Configurer les unités de mesure"
 
 #: src/preferences/generalPage.ts:48
 msgid "Custom"
-msgstr "Personnalisé"
+msgstr "Personnaliser"
 
 #: src/preferences/generalPage.ts:48
 msgid "Metric"
@@ -172,7 +172,7 @@ msgstr "Métrique"
 
 #: src/preferences/generalPage.ts:48
 msgid "UK"
-msgstr "RU"
+msgstr "UK"
 
 #: src/preferences/generalPage.ts:48
 msgid "US"
@@ -192,7 +192,7 @@ msgstr "Température"
 
 #: src/preferences/generalPage.ts:78
 msgid "Speed"
-msgstr "Rapidité"
+msgstr "Vitesse"
 
 #: src/preferences/generalPage.ts:92
 msgid "Pressure"
@@ -200,7 +200,7 @@ msgstr "Pression"
 
 #: src/preferences/generalPage.ts:106
 msgid "Rain Measurement"
-msgstr "Mesure de la pluie"
+msgstr "Pluie"
 
 #: src/preferences/generalPage.ts:120
 msgid "Distance"
@@ -212,7 +212,7 @@ msgstr "Degrés"
 
 #: src/preferences/generalPage.ts:144
 msgid "Eight-Point Compass"
-msgstr "Boussole à huit points"
+msgstr "Boussole"
 
 #: src/preferences/generalPage.ts:147
 msgid "Direction"
@@ -224,7 +224,7 @@ msgstr "Service Météo"
 
 #: src/preferences/generalPage.ts:160
 msgid "Configure how the weather is attained"
-msgstr "Configurer comment la météo est atteinte"
+msgstr "Configurer le fournisseur météo"
 
 #: src/preferences/generalPage.ts:167
 msgid "Weather Provider"
@@ -232,7 +232,7 @@ msgstr "Fournisseur Météo"
 
 #: src/preferences/generalPage.ts:180
 msgid "Configure how your location is found"
-msgstr "Configurer comment votre localisation est trouvée"
+msgstr "Configurer comment votre position est trouvée"
 
 #: src/preferences/generalPage.ts:184
 msgid "Online"
@@ -276,7 +276,7 @@ msgstr "Configurer le panneau et la fenêtre pop-up"
 
 #: src/preferences/generalPage.ts:236
 msgid "Show Sunrise/Sunset"
-msgstr "Afficher le lever du soleil/coucher du soleil"
+msgstr "Afficher le lever/coucher du soleil"
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
@@ -305,11 +305,11 @@ msgstr "Êtes-vous sûr de vouloir supprimer %s?"
 
 #: src/preferences/locationsPage.ts:194
 msgid "Cancel"
-msgstr "Abandonner"
+msgstr "Annuler"
 
 #: src/preferences/locationsPage.ts:194
 msgid "Delete"
-msgstr "Supprimez"
+msgstr "Supprimer"
 
 #: src/preferences/locationsPage.ts:235
 #, javascript-format
@@ -334,11 +334,11 @@ msgstr "Ville, quartier, etc."
 
 #: src/preferences/search.ts:59
 msgid "Search"
-msgstr "Chercher"
+msgstr "Rechercher"
 
 #: src/preferences/search.ts:143
 msgid "No Internet"
-msgstr "Pas d'Internet"
+msgstr "Pas de connexion à Internet"
 
 #: src/preferences/search.ts:182
 msgid "No results."
@@ -353,7 +353,7 @@ msgstr "Aucune information sur les droits d'auteur disponible."
 msgid "SimpleWeather doesn't know how to handle your locale.\n"
 "\tError - %s\n"
 "Please consider submitting a bug report on GitHub."
-msgstr "SimpleWeather ne sait pas comment gérer votre locale.\n"
+msgstr "SimpleWeather ne sait pas comment gérer votre langue.\n"
 "\tErreur - %s\n"
 "Veuillez envisager de soumettre un rapport de bug sur GitHub."
 
@@ -367,7 +367,7 @@ msgstr "Ignorer"
 
 #: src/prefs.ts:63
 msgid "Open GitHub"
-msgstr "Open GitHub"
+msgstr "Ouvrir GitHub"
 
 #: src/welcome.ts:53
 #, javascript-format
@@ -380,7 +380,10 @@ msgid "%s occasionally connects to the selected weather service. By default, it 
 "  •  %s, an %s service for weather\n"
 "  •  %s, optional for resolving the current location\n"
 "  •  %s, for searching locations by name\n\n"
-msgstr ""
+msgstr "%s se connecte occasionnellement au serveur météo choisi. Par défaut, Internet est utilisé pour se connecter à:\n"
+"  •  %s, un fournisseur de service météo %s\n"
+"  •  %s, optionnel pour trouver l'emplacement présent\n"
+"  •  %s, pour trouver un endroit par noms\n\n"
 
 #: src/welcome.ts:83
 #, javascript-format
@@ -390,4 +393,3 @@ msgstr "Merci d'avoir installé %s!"
 #: src/welcome.ts:99
 msgid "Abort"
 msgstr "Abandonner"
-
