@@ -100,7 +100,7 @@ export function _g(s : string) : string {
 export function gettextCondit(condit : Condition, isNight : boolean) : GettextKey {
     switch(condit) {
         case Condition.CLEAR:
-            return new GettextKey(_g(isNight ? "Clear" : "Sunny"));
+            return new GettextKey(isNight ? _g("Clear") : _g("Sunny"));
         case Condition.CLOUDY:
             return new GettextKey(_g("Cloudy"));
         case Condition.RAINY:
