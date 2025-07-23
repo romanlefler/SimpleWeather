@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
-"POT-Creation-Date: 2025-07-13 01:58-0500\n"
-"PO-Revision-Date: 2025-07-23 02:33\n"
+"POT-Creation-Date: 2025-07-23 16:59-0500\n"
+"PO-Revision-Date: 2025-07-23 22:06\n"
 "Last-Translator: \n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
@@ -22,55 +22,55 @@ msgstr ""
 msgid "My Location"
 msgstr "Moje poloha"
 
-#: src/details.ts:58 src/preferences/generalPage.ts:64
+#: src/details.ts:59 src/preferences/generalPage.ts:64
 msgid "Temperature"
 msgstr "Teplota"
 
-#: src/details.ts:59
+#: src/details.ts:60
 msgid "Condition"
 msgstr "Podmínka"
 
-#: src/details.ts:60
+#: src/details.ts:61
 msgid "Feels Like"
 msgstr "Cítí se"
 
-#: src/details.ts:61
+#: src/details.ts:62
 msgid "Wind"
 msgstr "Větrný"
 
-#: src/details.ts:62
+#: src/details.ts:63
 msgid "Humidity"
 msgstr "Vlhkost"
 
-#: src/details.ts:63
+#: src/details.ts:64
 msgid "Gusts"
 msgstr "Chody"
 
-#: src/details.ts:64
+#: src/details.ts:65
 msgid "UV High"
 msgstr "UV vysoké"
 
-#: src/details.ts:65 src/preferences/generalPage.ts:92
+#: src/details.ts:66 src/preferences/generalPage.ts:92
 msgid "Pressure"
 msgstr "Tlak"
 
-#: src/details.ts:66
+#: src/details.ts:67
 msgid "Precipitation"
 msgstr "Srážky"
 
-#: src/details.ts:67
+#: src/details.ts:68
 msgid "Sunrise"
 msgstr "Vzestup slunce"
 
-#: src/details.ts:68
+#: src/details.ts:69
 msgid "Sunset"
 msgstr "Západ slunce"
 
-#: src/details.ts:69
+#: src/details.ts:70
 msgid "Cloud Cover"
 msgstr "Obal Cloudu"
 
-#: src/details.ts:74 src/popup.ts:409
+#: src/details.ts:75 src/popup.ts:409
 msgid "Invalid"
 msgstr "Neplatné"
 
@@ -502,6 +502,10 @@ msgstr "Open GitHub"
 #: src/weather.ts:103
 msgid "Clear"
 msgstr "Vyčistit"
+
+#: src/weather.ts:103
+msgid "Sunny"
+msgstr "Sunny"
 
 #: src/weather.ts:105
 msgid "Cloudy"

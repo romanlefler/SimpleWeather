@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
-"POT-Creation-Date: 2025-07-13 01:58-0500\n"
-"PO-Revision-Date: 2025-07-23 02:33\n"
+"POT-Creation-Date: 2025-07-23 16:59-0500\n"
+"PO-Revision-Date: 2025-07-23 22:06\n"
 "Last-Translator: \n"
 "Language-Team: Danish\n"
 "Language: da_DK\n"
@@ -22,55 +22,55 @@ msgstr ""
 msgid "My Location"
 msgstr "Min Placering"
 
-#: src/details.ts:58 src/preferences/generalPage.ts:64
+#: src/details.ts:59 src/preferences/generalPage.ts:64
 msgid "Temperature"
 msgstr "Temperatur"
 
-#: src/details.ts:59
+#: src/details.ts:60
 msgid "Condition"
 msgstr "Tilstand"
 
-#: src/details.ts:60
+#: src/details.ts:61
 msgid "Feels Like"
 msgstr "Føler Synes Som"
 
-#: src/details.ts:61
+#: src/details.ts:62
 msgid "Wind"
 msgstr "Vind"
 
-#: src/details.ts:62
+#: src/details.ts:63
 msgid "Humidity"
 msgstr "Luftfugtighed"
 
-#: src/details.ts:63
+#: src/details.ts:64
 msgid "Gusts"
 msgstr "Gusts"
 
-#: src/details.ts:64
+#: src/details.ts:65
 msgid "UV High"
 msgstr "UV Høj"
 
-#: src/details.ts:65 src/preferences/generalPage.ts:92
+#: src/details.ts:66 src/preferences/generalPage.ts:92
 msgid "Pressure"
 msgstr "Tryk"
 
-#: src/details.ts:66
+#: src/details.ts:67
 msgid "Precipitation"
 msgstr "Nedbør"
 
-#: src/details.ts:67
+#: src/details.ts:68
 msgid "Sunrise"
 msgstr "Solopgang"
 
-#: src/details.ts:68
+#: src/details.ts:69
 msgid "Sunset"
 msgstr "Solnedgang"
 
-#: src/details.ts:69
+#: src/details.ts:70
 msgid "Cloud Cover"
 msgstr "Sky-omslag"
 
-#: src/details.ts:74 src/popup.ts:409
+#: src/details.ts:75 src/popup.ts:409
 msgid "Invalid"
 msgstr "Ugyldig"
 
@@ -502,6 +502,10 @@ msgstr "Open GitHub"
 #: src/weather.ts:103
 msgid "Clear"
 msgstr "Ryd"
+
+#: src/weather.ts:103
+msgid "Sunny"
+msgstr "Sunny"
 
 #: src/weather.ts:105
 msgid "Cloudy"
