@@ -19,6 +19,7 @@ import { Config } from "./config.js";
 import { displayTime } from "./lang.js";
 import { Displayable } from "./units.js";
 import { Weather } from "./weather.js";
+import { gettext as realGettext } from "./gettext.js";
 
 export enum Details {
     TEMP = "temp",
@@ -85,5 +86,5 @@ export function displayDetail(w : Weather, detail : Details, gettext : (s : stri
 
     if(onlyValue) return fmt;
     const name = detailName[detail] as string;
-    return `${_g(name)}: ${fmt}`;
+    return `${realGettext(name)}: ${fmt}`;
 }
