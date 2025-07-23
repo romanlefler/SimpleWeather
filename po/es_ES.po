@@ -5,111 +5,111 @@ msgstr ""
 "POT-Creation-Date: 2025-07-13 01:58-0500\n"
 "PO-Revision-Date: 2025-07-23 02:33\n"
 "Last-Translator: \n"
-"Language-Team: Czech\n"
-"Language: cs_CZ\n"
+"Language-Team: Spanish\n"
+"Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 3;\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Crowdin-Project: simpleweather\n"
 "X-Crowdin-Project-ID: 798380\n"
-"X-Crowdin-Language: cs\n"
+"X-Crowdin-Language: es-ES\n"
 "X-Crowdin-File: simple-weather@romanlefler.com.pot\n"
 "X-Crowdin-File-ID: 2\n"
 
 #: src/autoConfig.ts:49 src/location.ts:53 src/location.ts:63
 #: src/preferences/generalPage.ts:179
 msgid "My Location"
-msgstr "Moje poloha"
+msgstr "Mi ubicación"
 
 #: src/details.ts:58 src/preferences/generalPage.ts:64
 msgid "Temperature"
-msgstr "Teplota"
+msgstr "Temperatura"
 
 #: src/details.ts:59
 msgid "Condition"
-msgstr "Podmínka"
+msgstr "Condición"
 
 #: src/details.ts:60
 msgid "Feels Like"
-msgstr "Cítí se"
+msgstr "Sentirse como"
 
 #: src/details.ts:61
 msgid "Wind"
-msgstr "Větrný"
+msgstr "Viento"
 
 #: src/details.ts:62
 msgid "Humidity"
-msgstr "Vlhkost"
+msgstr "Humedad"
 
 #: src/details.ts:63
 msgid "Gusts"
-msgstr "Chody"
+msgstr "Gustos"
 
 #: src/details.ts:64
 msgid "UV High"
-msgstr "UV vysoké"
+msgstr "UV alto"
 
 #: src/details.ts:65 src/preferences/generalPage.ts:92
 msgid "Pressure"
-msgstr "Tlak"
+msgstr "Presión"
 
 #: src/details.ts:66
 msgid "Precipitation"
-msgstr "Srážky"
+msgstr "Precipitación"
 
 #: src/details.ts:67
 msgid "Sunrise"
-msgstr "Vzestup slunce"
+msgstr "Aislamiento"
 
 #: src/details.ts:68
 msgid "Sunset"
-msgstr "Západ slunce"
+msgstr "Aislamiento"
 
 #: src/details.ts:69
 msgid "Cloud Cover"
-msgstr "Obal Cloudu"
+msgstr "Carátula de la nube"
 
 #: src/details.ts:74 src/popup.ts:409
 msgid "Invalid"
-msgstr "Neplatné"
+msgstr "Inválido"
 
 #: src/lang.ts:108 src/popup.ts:57
 msgid "Today"
-msgstr "Dnes"
+msgstr "Hoy"
 
 #: src/lang.ts:111
 msgid "Monday"
-msgstr "Pondělí"
+msgstr "Lunes"
 
 #: src/lang.ts:111
 msgid "Sunday"
-msgstr "Neděle"
+msgstr "Domingo"
 
 #: src/lang.ts:111
 msgid "Tuesday"
-msgstr "úterý"
+msgstr "Martes"
 
 #: src/lang.ts:111
 msgid "Wednesday"
-msgstr "Středa"
+msgstr "Miércoles"
 
 #: src/lang.ts:112
 msgid "Friday"
-msgstr "Pátek"
+msgstr "Viernes"
 
 #: src/lang.ts:112
 msgid "Saturday"
-msgstr "Sobota"
+msgstr "Sábado"
 
 #: src/lang.ts:112
 msgid "Thursday"
-msgstr "Čtvrtek"
+msgstr "Jueves"
 
 #: src/location.ts:82
 #, javascript-format
 msgid "%f°N"
-msgstr "%f°s. š."
+msgstr "%f°N"
 
 #: src/location.ts:82
 #, javascript-format
@@ -128,11 +128,11 @@ msgstr "%f°W"
 
 #: src/popup.ts:143
 msgid "Weather Data"
-msgstr "Data počasí"
+msgstr "Datos meteorológicos"
 
 #: src/popup.ts:297 src/preferences/aboutPage.ts:76
 msgid "Settings"
-msgstr "Nastavení"
+msgstr "Ajustes"
 
 #: src/popup.ts:383
 #, javascript-format
@@ -142,11 +142,11 @@ msgstr "H: %s"
 #: src/popup.ts:384
 #, javascript-format
 msgid "L: %s"
-msgstr ""
+msgstr "L: %s"
 
 #: src/preferences/aboutPage.ts:48
 msgid "About"
-msgstr "O aplikaci"
+msgstr "Acerca de"
 
 #: src/preferences/aboutPage.ts:59
 msgid "GitHub Repository"
@@ -154,58 +154,58 @@ msgstr "GitHub Repository"
 
 #: src/preferences/aboutPage.ts:61
 msgid "Support Me"
-msgstr "Podpoř mě"
+msgstr "Sígueme"
 
 #: src/preferences/aboutPage.ts:68
 msgid "SimpleWeather Version"
-msgstr "Verze SimpleWeather"
+msgstr "Versión de simpleWeather"
 
 #: src/preferences/aboutPage.ts:71
 msgid "Unknown"
-msgstr "Neznámý"
+msgstr "Desconocido"
 
 #: src/preferences/aboutPage.ts:79
 msgid "Copy"
-msgstr "Kopírovat"
+msgstr "Copiar"
 
 #: src/preferences/aboutPage.ts:102
 msgid "Copied settings JSON to clipboard."
-msgstr "Nastavení JSON zkopírováno do schránky."
+msgstr "Configuración JSON copiada al portapapeles."
 
 #: src/preferences/aboutPage.ts:116
 #, javascript-format
 msgid "Contributions and translations are welcome! Read how on %s."
-msgstr "Příspěvky a překlady jsou vítány! Přečtěte si jak na %s."
+msgstr "¡Las contribuciones y traducciones son bienvenidas! Lee cómo en %s."
 
 #: src/preferences/aboutPage.ts:119
 #, javascript-format
 msgid "If you like this extension, consider starring it on %s."
-msgstr "Pokud se vám toto rozšíření líbí, zvažte jeho hvězdu na %s."
+msgstr "Si te gusta esta extensión, considera destacarla en %s."
 
 #: src/preferences/aboutPage.ts:122
 msgid "here"
-msgstr "zde"
+msgstr "aqui"
 
 #: src/preferences/aboutPage.ts:124
 #, javascript-format
 msgid "Report bugs or request new features %s."
-msgstr "Nahlásit chyby nebo požádat o nové funkce %s."
+msgstr "Informar errores o solicitar nuevas características %s."
 
 #: src/preferences/aboutPage.ts:138
 msgid "Credits"
-msgstr "Kredity"
+msgstr "Crédito"
 
 #: src/preferences/detailsPage.ts:68
 msgid "Details"
-msgstr "Detaily"
+msgstr "Detalles"
 
 #: src/preferences/detailsPage.ts:74
 msgid "Pop-Up"
-msgstr "Vyskakovací okno"
+msgstr "Arriba"
 
 #: src/preferences/detailsPage.ts:75
 msgid "Drag-and-drop from bottom to configure the pop-up"
-msgstr "Přetažením dolů nastavíte vyskakovací okno"
+msgstr "Arrastre y suelte desde la parte inferior para configurar el pop-up"
 
 #: src/preferences/detailsPage.ts:173 src/preferences/generalPage.ts:235
 msgid "Panel"
@@ -213,80 +213,80 @@ msgstr "Panel"
 
 #: src/preferences/detailsPage.ts:176
 msgid "None"
-msgstr "Nic"
+msgstr "Ninguna"
 
 #: src/preferences/detailsPage.ts:188
 msgid "Panel Detail"
-msgstr "Detail dílce"
+msgstr "Detalle del Panel"
 
 #: src/preferences/detailsPage.ts:206
 msgid "Secondary Panel Detail"
-msgstr "Detail sekundárního panelu"
+msgstr "Detalle del Panel Secundario"
 
 #: src/preferences/detailsPage.ts:218
 msgid "Show Condition Icon"
-msgstr "Zobrazit ikonu podmínky"
+msgstr "Mostrar icono de condición"
 
 #: src/preferences/detailsPage.ts:228
 msgid "Show Sunrise/Sunset"
-msgstr "Zobrazit sluneční svíčky/sluneční svit"
+msgstr "Mostrar Sunrise/Sunset"
 
 #: src/preferences/editLocation.ts:33
 #, javascript-format
 msgid "Edit %s"
-msgstr "Upravit %s"
+msgstr "Editar %s"
 
 #: src/preferences/editLocation.ts:33
 msgid "New Location"
-msgstr "Nové místo"
+msgstr "Nueva ubicación"
 
 #: src/preferences/editLocation.ts:41
 msgid "Name"
-msgstr "Název"
+msgstr "Nombre"
 
 #: src/preferences/editLocation.ts:56
 msgid "Coordinates"
-msgstr "Souřadnice"
+msgstr "Coordenadas"
 
 #: src/preferences/editLocation.ts:66
 msgid "Save"
-msgstr "Uložit"
+msgstr "Guardar"
 
 #: src/preferences/editLocation.ts:94
 msgid "Name is required."
-msgstr "Název je povinný."
+msgstr "Se requiere un nombre."
 
 #: src/preferences/editLocation.ts:99
 msgid "Invalid coordinates entry."
-msgstr "Neplatný záznam souřadnic."
+msgstr "Entrada de coordenadas no válida."
 
 #: src/preferences/generalPage.ts:38
 msgid "General"
-msgstr "Obecná ustanovení"
+msgstr "General"
 
 #: src/preferences/generalPage.ts:43 src/preferences/generalPage.ts:53
 msgid "Units"
-msgstr "Jednotky"
+msgstr "Unidades"
 
 #: src/preferences/generalPage.ts:44
 msgid "Configure units of measurement"
-msgstr "Konfigurace jednotek měření"
+msgstr "Configurar unidades de medida"
 
 #: src/preferences/generalPage.ts:48
 msgid "Custom"
-msgstr "Vlastní"
+msgstr "Personalizado"
 
 #: src/preferences/generalPage.ts:48
 msgid "Metric"
-msgstr "Metrické"
+msgstr "Métrica"
 
 #: src/preferences/generalPage.ts:48
 msgid "UK"
-msgstr "Spojené království"
+msgstr "Reino Unido"
 
 #: src/preferences/generalPage.ts:48
 msgid "US"
-msgstr "Spojené státy"
+msgstr "SUS"
 
 #: src/preferences/generalPage.ts:61
 msgid "Fahrenheit"
@@ -294,206 +294,206 @@ msgstr "Fahrenheit"
 
 #: src/preferences/generalPage.ts:62
 msgid "Celsius"
-msgstr "Celsia"
+msgstr "Celsius"
 
 #: src/preferences/generalPage.ts:78
 msgid "Speed"
-msgstr "Rychlost"
+msgstr "Velocidad"
 
 #: src/preferences/generalPage.ts:106
 msgid "Rain Measurement"
-msgstr "Měření deště"
+msgstr "Medida de lluvia"
 
 #: src/preferences/generalPage.ts:120
 msgid "Distance"
-msgstr "Vzdálenost"
+msgstr "Distancia"
 
 #: src/preferences/generalPage.ts:144
 msgid "Degrees"
-msgstr "Stupně"
+msgstr "Grados"
 
 #: src/preferences/generalPage.ts:144
 msgid "Eight-Point Compass"
-msgstr "Osbodový kompas"
+msgstr "Brújula de ocho puntos"
 
 #: src/preferences/generalPage.ts:147
 msgid "Direction"
-msgstr "Směr"
+msgstr "Dirección"
 
 #: src/preferences/generalPage.ts:159
 msgid "Weather Service"
-msgstr "Služba počasí"
+msgstr "Servicio meteorológico"
 
 #: src/preferences/generalPage.ts:160
 msgid "Configure how the weather is attained"
-msgstr "Nakonfigurujte, jak je počasí dosaženo."
+msgstr "Configurar cómo se alcanza el clima"
 
 #: src/preferences/generalPage.ts:167
 msgid "Weather Provider"
-msgstr "Poskytovatel počasí"
+msgstr "Proveedor de tiempo"
 
 #: src/preferences/generalPage.ts:180
 msgid "Configure how your location is found"
-msgstr "Nakonfigurujte, jak je vaše poloha nalezena"
+msgstr "Configurar cómo se encuentra tu ubicación"
 
 #: src/preferences/generalPage.ts:184 src/preferences/generalPage.ts:185
 msgid "Online"
-msgstr "Online"
+msgstr "En línea"
 
 #: src/preferences/generalPage.ts:186 src/preferences/generalPage.ts:245
 msgid "System"
-msgstr "Systém"
+msgstr "Sistema"
 
 #: src/preferences/generalPage.ts:187
 msgid "Disable"
-msgstr "Zakázat"
+msgstr "Desactivar"
 
 #: src/preferences/generalPage.ts:190
 msgid "Provider"
-msgstr "Poskytovatel"
+msgstr "Proveedor"
 
 #: src/preferences/generalPage.ts:202
 msgid "Refresh Interval (Minutes)"
-msgstr "Interval obnovení (minuty)"
+msgstr "Intervalo de actualización (minutos)"
 
 #: src/preferences/generalPage.ts:220
 msgid "Accessibility"
-msgstr "Přístupnost"
+msgstr "Accesibilidad"
 
 #: src/preferences/generalPage.ts:221
 msgid "Configure accessibility features"
-msgstr "Konfigurace funkcí usnadnění přístupu"
+msgstr "Configurar características de accesibilidad"
 
 #: src/preferences/generalPage.ts:224
 msgid "High Contrast"
-msgstr "Vysoký kontrast"
+msgstr "Alto contrato"
 
 #: src/preferences/generalPage.ts:236
 msgid "Configure the panel and pop-up"
-msgstr "Nastavit panel a vyskakovací okno"
+msgstr "Configurar el panel y emerger"
 
 #: src/preferences/generalPage.ts:246
 msgid "Light"
-msgstr "Světlý"
+msgstr "Claro"
 
 #: src/preferences/generalPage.ts:247
 msgid "Afterdark"
-msgstr "Potterdark"
+msgstr "Después de oscuro"
 
 #: src/preferences/generalPage.ts:248
 msgid "Immersive"
-msgstr "Pohlcující"
+msgstr "Inmersivo"
 
 #: src/preferences/generalPage.ts:251
 msgid "Theme"
-msgstr "Téma"
+msgstr "Tema"
 
 #: src/preferences/generalPage.ts:261
 msgid "Center"
-msgstr "Střed"
+msgstr "Centrar"
 
 #: src/preferences/generalPage.ts:261
 msgid "Left"
-msgstr "Vlevo"
+msgstr "Queda"
 
 #: src/preferences/generalPage.ts:261
 msgid "Right"
-msgstr "Vpravo"
+msgstr "Derecha"
 
 #: src/preferences/generalPage.ts:264
 msgid "Side of Panel"
-msgstr "Strana panelu"
+msgstr "Lado del Panel"
 
 #: src/preferences/generalPage.ts:274
 msgid "Order in Panel"
-msgstr "Pořadí v panelu"
+msgstr "Pedido en Panel"
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
-msgstr "Místa"
+msgstr "Ubicaciones"
 
 #: src/preferences/locationsPage.ts:70 src/preferences/search.ts:75
 msgid "Add"
-msgstr "Přidat"
+msgstr "Añadir"
 
 #: src/preferences/locationsPage.ts:97
 msgid "Move Up"
-msgstr "Přesunout nahoru"
+msgstr "Subir"
 
 #: src/preferences/locationsPage.ts:112
 msgid "Move Down"
-msgstr "Posunout dolů"
+msgstr "Mover abajo"
 
 #: src/preferences/locationsPage.ts:128
 msgid "Add Here"
-msgstr "Přidat sem"
+msgstr "Añadir aquí"
 
 #: src/preferences/locationsPage.ts:193
 #, javascript-format
 msgid "Are you sure you want delete %s?"
-msgstr "Jste si jisti, že chcete odstranit %s?"
+msgstr "¿Está seguro que desea eliminar %s?"
 
 #: src/preferences/locationsPage.ts:194
 msgid "Cancel"
-msgstr "Zrušit"
+msgstr "Cancelar"
 
 #: src/preferences/locationsPage.ts:194
 msgid "Delete"
-msgstr "Vymazat"
+msgstr "Eliminar"
 
 #: src/preferences/locationsPage.ts:235
 #, javascript-format
 msgid "Internal Error: %s"
-msgstr "Vnitřní chyba: %s"
+msgstr "Error interno: %s"
 
 #: src/preferences/locationsPage.ts:236
 msgid "Internal Error"
-msgstr "Vnitřní chyba"
+msgstr "Error interno"
 
 #: src/preferences/locationsPage.ts:261
 msgid "Something else edited the locations."
-msgstr "Něco jiného upravilo umístění."
+msgstr "Algo más editó las ubicaciones."
 
 #: src/preferences/search.ts:45
 msgid "Search Location"
-msgstr "Hledat umístění"
+msgstr "Buscar ubicación"
 
 #: src/preferences/search.ts:54
 msgid "City, Neighborhood, etc."
-msgstr "Město, soused atd."
+msgstr "Ciudad, Neighborhood, etc."
 
 #: src/preferences/search.ts:59
 msgid "Search"
-msgstr "Hledat"
+msgstr "Buscar"
 
 #: src/preferences/search.ts:158
 msgid "No Internet"
-msgstr "Žádný internet"
+msgstr "Sin Internet"
 
 #: src/preferences/search.ts:206
 msgid "No results."
-msgstr "Žádné výsledky."
+msgstr "Sin resultados."
 
 #: src/preferences/search.ts:211
 msgid "No copyright information available."
-msgstr "Nejsou k dispozici žádné informace o autorských právech."
+msgstr "No hay información de derechos de autor disponible."
 
 #: src/prefs.ts:74
 #, javascript-format
 msgid "SimpleWeather doesn't know how to handle your locale.\n"
 "\tError - %s\n"
 "Please consider submitting a bug report on GitHub."
-msgstr "SimpleWeather neví, jak nakládat s vaší locale.\n"
-"\tChyba - %s\n"
-"Zvažte prosím odeslání hlášení o chybě na GitHub."
+msgstr "SimpleWeather no sabe cómo manejar su locale.\n"
+"\tError - %s\n"
+"Por favor, considere enviar un informe de error en GitHub."
 
 #: src/prefs.ts:77
 msgid "Don't Show Again"
-msgstr "Nezobrazovat znovu"
+msgstr "No mostrar de nuevo"
 
 #: src/prefs.ts:77
 msgid "Ignore"
-msgstr "Ignorovat"
+msgstr "Ignorar"
 
 #: src/prefs.ts:77
 msgid "Open GitHub"
@@ -501,11 +501,11 @@ msgstr "Open GitHub"
 
 #: src/weather.ts:103
 msgid "Clear"
-msgstr "Vyčistit"
+msgstr "Claro"
 
 #: src/weather.ts:105
 msgid "Cloudy"
-msgstr "Zataženo"
+msgstr "Nublado"
 
 #: src/weather.ts:107
 msgid "Rainy"
@@ -521,12 +521,12 @@ msgstr "Stormy"
 
 #: src/weather.ts:113
 msgid "Windy"
-msgstr "Větrnost"
+msgstr "Viento"
 
 #: src/welcome.ts:53
 #, javascript-format
 msgid "Welcome to %s"
-msgstr "Vítejte v %s"
+msgstr "Bienvenido a %s"
 
 #: src/welcome.ts:74
 #, javascript-format
@@ -534,17 +534,17 @@ msgid "%s occasionally connects to the selected weather service. By default, it 
 "  •  %s, an %s service for weather\n"
 "  •  %s, optional for resolving the current location\n"
 "  •  %s, for searching locations by name\n\n"
-msgstr "%s se občas připojuje k vybrané službě počasí. Ve výchozím nastavení použije internet k připojení k:\n"
-"  •  %s, služba %s pro počasí\n"
-"  •  %svolitelné pro řešení aktuální polohy\n"
-"  •  %s, pro vyhledávání lokací podle jména\n\n"
+msgstr "%s se conecta ocasionalmente al servicio meteorológico seleccionado. Por defecto, usará Internet para conectarse a:\n"
+"  •  %s, un servicio %s para el tiempo\n"
+"  •  %s, opcional para resolver la ubicación actual\n"
+"  •  %s, para buscar ubicaciones por nombre\n\n"
 
 #: src/welcome.ts:83
 #, javascript-format
 msgid "Thank you for installing %s!"
-msgstr "Děkujeme vám za instalaci %s!"
+msgstr "¡Gracias por instalar %s!"
 
 #: src/welcome.ts:99
 msgid "Abort"
-msgstr "Zrušit"
+msgstr "Abordar"
 

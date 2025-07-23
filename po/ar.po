@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
-"POT-Creation-Date: 2025-06-23 19:40-0500\n"
-"PO-Revision-Date: 2025-06-24 00:49\n"
+"POT-Creation-Date: 2025-07-13 01:58-0500\n"
+"PO-Revision-Date: 2025-07-23 02:33\n"
 "Last-Translator: \n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
@@ -17,109 +17,219 @@ msgstr ""
 "X-Crowdin-File: simple-weather@romanlefler.com.pot\n"
 "X-Crowdin-File-ID: 2\n"
 
-#: src/autoConfig.ts:49 src/location.ts:48 src/location.ts:56
+#: src/autoConfig.ts:49 src/location.ts:53 src/location.ts:63
 #: src/preferences/generalPage.ts:179
 msgid "My Location"
 msgstr "موقعي"
 
-#: src/location.ts:74
+#: src/details.ts:58 src/preferences/generalPage.ts:64
+msgid "Temperature"
+msgstr "درجة"
+
+#: src/details.ts:59
+msgid "Condition"
+msgstr "الحالة"
+
+#: src/details.ts:60
+msgid "Feels Like"
+msgstr "يشعر بالإعجاب"
+
+#: src/details.ts:61
+msgid "Wind"
+msgstr "الريح"
+
+#: src/details.ts:62
+msgid "Humidity"
+msgstr "الرطوبة"
+
+#: src/details.ts:63
+msgid "Gusts"
+msgstr "الغاز"
+
+#: src/details.ts:64
+msgid "UV High"
+msgstr "UV عالي"
+
+#: src/details.ts:65 src/preferences/generalPage.ts:92
+msgid "Pressure"
+msgstr "الضغط"
+
+#: src/details.ts:66
+msgid "Precipitation"
+msgstr "التهطال"
+
+#: src/details.ts:67
+msgid "Sunrise"
+msgstr "الشروق"
+
+#: src/details.ts:68
+msgid "Sunset"
+msgstr "غروب"
+
+#: src/details.ts:69
+msgid "Cloud Cover"
+msgstr "غلاف سحابي"
+
+#: src/details.ts:74 src/popup.ts:409
+msgid "Invalid"
+msgstr "غير صالح"
+
+#: src/lang.ts:108 src/popup.ts:57
+msgid "Today"
+msgstr "اليوم"
+
+#: src/lang.ts:111
+msgid "Monday"
+msgstr "الاثنين"
+
+#: src/lang.ts:111
+msgid "Sunday"
+msgstr "الأحد"
+
+#: src/lang.ts:111
+msgid "Tuesday"
+msgstr "الثلاثاء"
+
+#: src/lang.ts:111
+msgid "Wednesday"
+msgstr "الأربعاء"
+
+#: src/lang.ts:112
+msgid "Friday"
+msgstr "الجمعة"
+
+#: src/lang.ts:112
+msgid "Saturday"
+msgstr "السبت"
+
+#: src/lang.ts:112
+msgid "Thursday"
+msgstr "الخميس"
+
+#: src/location.ts:82
 #, javascript-format
 msgid "%f°N"
 msgstr "%f°N"
 
-#: src/location.ts:74
+#: src/location.ts:82
 #, javascript-format
 msgid "%f°S"
 msgstr "%f°S"
 
-#: src/location.ts:75
+#: src/location.ts:83
 #, javascript-format
 msgid "%f°E"
 msgstr "%f°E"
 
-#: src/location.ts:75
+#: src/location.ts:83
 #, javascript-format
 msgid "%f°W"
 msgstr "%f°W"
 
-#: src/popup.ts:163
+#: src/popup.ts:143
 msgid "Weather Data"
 msgstr "بيانات الطقس"
 
-#: src/popup.ts:307
+#: src/popup.ts:297 src/preferences/aboutPage.ts:76
 msgid "Settings"
 msgstr "الإعدادات"
 
-#: src/popup.ts:378
+#: src/popup.ts:383
 #, javascript-format
 msgid "H: %s"
 msgstr ""
 
-#: src/popup.ts:379
+#: src/popup.ts:384
 #, javascript-format
 msgid "L: %s"
 msgstr ""
 
-#: src/popup.ts:400
-#, javascript-format
-msgid "Temp: %s"
-msgstr "إمبراطور: %s"
-
-#: src/popup.ts:401
-#, javascript-format
-msgid "Feels Like: %s"
-msgstr "يشعر بالإعجاب: %s"
-
-#: src/popup.ts:402
-#, javascript-format
-msgid "Wind: %s, %s"
-msgstr "الرياح: %s، %s"
-
-#: src/popup.ts:406
-#, javascript-format
-msgid "Gusts: %s"
-msgstr "الغازات: %s"
-
-#: src/popup.ts:407
-#, javascript-format
-msgid "Humidity: %s"
-msgstr "الرطوبة: %s"
-
-#: src/popup.ts:408
-#, javascript-format
-msgid "Pressure: %s"
-msgstr "الضغط: %s"
-
-#: src/popup.ts:409
-#, javascript-format
-msgid "UV High: %s"
-msgstr "UV عالي: %s"
-
-#: src/popup.ts:410
-#, javascript-format
-msgid "Precipitation: %s"
-msgstr "هطول الأمطار: %s"
-
-#: src/preferences/aboutPage.ts:43
+#: src/preferences/aboutPage.ts:48
 msgid "About"
 msgstr "حول"
 
-#: src/preferences/aboutPage.ts:54
+#: src/preferences/aboutPage.ts:59
 msgid "GitHub Repository"
 msgstr "GitHub Repository"
 
 #: src/preferences/aboutPage.ts:61
+msgid "Support Me"
+msgstr "دعم لي"
+
+#: src/preferences/aboutPage.ts:68
 msgid "SimpleWeather Version"
 msgstr "نسخة الطقس البسيطة"
 
-#: src/preferences/aboutPage.ts:64
+#: src/preferences/aboutPage.ts:71
 msgid "Unknown"
 msgstr "غير معروف"
 
-#: src/preferences/aboutPage.ts:75
+#: src/preferences/aboutPage.ts:79
+msgid "Copy"
+msgstr "نسخ"
+
+#: src/preferences/aboutPage.ts:102
+msgid "Copied settings JSON to clipboard."
+msgstr "تم نسخ الإعدادات JSON إلى الحافظة."
+
+#: src/preferences/aboutPage.ts:116
 #, javascript-format
-msgid "This extension is a rewrite of the %s project."
-msgstr "هذا الملحق هو إعادة كتابة لمشروع %s."
+msgid "Contributions and translations are welcome! Read how on %s."
+msgstr "المساهمات والترجمات مرحب بها! اقرأ كيف على %s."
+
+#: src/preferences/aboutPage.ts:119
+#, javascript-format
+msgid "If you like this extension, consider starring it on %s."
+msgstr "إذا أعجبك هذا التمديد، فكر في بدئه على %s."
+
+#: src/preferences/aboutPage.ts:122
+msgid "here"
+msgstr "هنا"
+
+#: src/preferences/aboutPage.ts:124
+#, javascript-format
+msgid "Report bugs or request new features %s."
+msgstr "الإبلاغ عن الأخطاء أو طلب ميزات جديدة %s."
+
+#: src/preferences/aboutPage.ts:138
+msgid "Credits"
+msgstr "الاعتمادات"
+
+#: src/preferences/detailsPage.ts:68
+msgid "Details"
+msgstr "التفاصيل"
+
+#: src/preferences/detailsPage.ts:74
+msgid "Pop-Up"
+msgstr "أعلى"
+
+#: src/preferences/detailsPage.ts:75
+msgid "Drag-and-drop from bottom to configure the pop-up"
+msgstr "السحب والإسقاط من الأسفل لتكوين النوافذ المنبثقة"
+
+#: src/preferences/detailsPage.ts:173 src/preferences/generalPage.ts:235
+msgid "Panel"
+msgstr "لوحة"
+
+#: src/preferences/detailsPage.ts:176
+msgid "None"
+msgstr "لا"
+
+#: src/preferences/detailsPage.ts:188
+msgid "Panel Detail"
+msgstr "تفاصيل اللوحة"
+
+#: src/preferences/detailsPage.ts:206
+msgid "Secondary Panel Detail"
+msgstr "تفاصيل اللوحة الثانوية"
+
+#: src/preferences/detailsPage.ts:218
+msgid "Show Condition Icon"
+msgstr "إظهار أيقونة الحالة"
+
+#: src/preferences/detailsPage.ts:228
+msgid "Show Sunrise/Sunset"
+msgstr "إظهار الشمس/الغطاء الشمسي"
 
 #: src/preferences/editLocation.ts:33
 #, javascript-format
@@ -142,11 +252,11 @@ msgstr "الإحداثيات"
 msgid "Save"
 msgstr "حفظ"
 
-#: src/preferences/editLocation.ts:87
+#: src/preferences/editLocation.ts:94
 msgid "Name is required."
 msgstr "الاسم مطلوب."
 
-#: src/preferences/editLocation.ts:92
+#: src/preferences/editLocation.ts:99
 msgid "Invalid coordinates entry."
 msgstr "إدخال إحداثيات غير صالحة."
 
@@ -186,17 +296,9 @@ msgstr "Fahrenheit"
 msgid "Celsius"
 msgstr "سيلسيوس"
 
-#: src/preferences/generalPage.ts:64
-msgid "Temperature"
-msgstr "درجة"
-
 #: src/preferences/generalPage.ts:78
 msgid "Speed"
 msgstr "السرعة"
-
-#: src/preferences/generalPage.ts:92
-msgid "Pressure"
-msgstr "الضغط"
 
 #: src/preferences/generalPage.ts:106
 msgid "Rain Measurement"
@@ -234,55 +336,83 @@ msgstr "موفر الطقس"
 msgid "Configure how your location is found"
 msgstr "تكوين كيفية العثور على موقعك"
 
-#: src/preferences/generalPage.ts:184
+#: src/preferences/generalPage.ts:184 src/preferences/generalPage.ts:185
 msgid "Online"
 msgstr "متصل"
 
-#: src/preferences/generalPage.ts:185
+#: src/preferences/generalPage.ts:186 src/preferences/generalPage.ts:245
 msgid "System"
 msgstr "النظام"
 
-#: src/preferences/generalPage.ts:186
+#: src/preferences/generalPage.ts:187
 msgid "Disable"
 msgstr "تعطيل"
 
-#: src/preferences/generalPage.ts:188
+#: src/preferences/generalPage.ts:190
 msgid "Provider"
 msgstr "موفر"
 
-#: src/preferences/generalPage.ts:199
+#: src/preferences/generalPage.ts:202
 msgid "Refresh Interval (Minutes)"
 msgstr "الفاصل الزمني للتحديث (دقائق)"
 
-#: src/preferences/generalPage.ts:217
+#: src/preferences/generalPage.ts:220
 msgid "Accessibility"
 msgstr "إمكانية الوصول"
 
-#: src/preferences/generalPage.ts:218
+#: src/preferences/generalPage.ts:221
 msgid "Configure accessibility features"
 msgstr "تهيئة ميزات إمكانية الوصول"
 
-#: src/preferences/generalPage.ts:221
+#: src/preferences/generalPage.ts:224
 msgid "High Contrast"
 msgstr "تباين عالي"
 
-#: src/preferences/generalPage.ts:232
-msgid "Panel"
-msgstr "لوحة"
-
-#: src/preferences/generalPage.ts:233
+#: src/preferences/generalPage.ts:236
 msgid "Configure the panel and pop-up"
 msgstr "تكوين اللوحة والنوافذ المنبثقة"
 
-#: src/preferences/generalPage.ts:236
-msgid "Show Sunrise/Sunset"
-msgstr "إظهار الشمس/الغطاء الشمسي"
+#: src/preferences/generalPage.ts:246
+msgid "Light"
+msgstr "فاتح"
+
+#: src/preferences/generalPage.ts:247
+msgid "Afterdark"
+msgstr "بعد الظلام"
+
+#: src/preferences/generalPage.ts:248
+msgid "Immersive"
+msgstr "غامر"
+
+#: src/preferences/generalPage.ts:251
+msgid "Theme"
+msgstr "السمة"
+
+#: src/preferences/generalPage.ts:261
+msgid "Center"
+msgstr "الوسط"
+
+#: src/preferences/generalPage.ts:261
+msgid "Left"
+msgstr "اليسار"
+
+#: src/preferences/generalPage.ts:261
+msgid "Right"
+msgstr "يمين"
+
+#: src/preferences/generalPage.ts:264
+msgid "Side of Panel"
+msgstr "جانب الفريق"
+
+#: src/preferences/generalPage.ts:274
+msgid "Order in Panel"
+msgstr "الترتيب في اللوحة"
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
 msgstr "المواقع"
 
-#: src/preferences/locationsPage.ts:70
+#: src/preferences/locationsPage.ts:70 src/preferences/search.ts:75
 msgid "Add"
 msgstr "إضافة"
 
@@ -336,36 +466,60 @@ msgstr "المدينة، الجوار، إلخ."
 msgid "Search"
 msgstr "البحث"
 
-#: src/preferences/search.ts:143
+#: src/preferences/search.ts:158
 msgid "No Internet"
 msgstr "لا يوجد إنترنت"
 
-#: src/preferences/search.ts:182
+#: src/preferences/search.ts:206
 msgid "No results."
 msgstr "لا توجد نتائج."
 
-#: src/preferences/search.ts:187
+#: src/preferences/search.ts:211
 msgid "No copyright information available."
 msgstr "لا تتوفر معلومات عن حقوق التأليف والنشر."
 
-#: src/prefs.ts:60
+#: src/prefs.ts:74
 #, javascript-format
 msgid "SimpleWeather doesn't know how to handle your locale.\n"
 "\tError - %s\n"
 "Please consider submitting a bug report on GitHub."
 msgstr ""
 
-#: src/prefs.ts:63
+#: src/prefs.ts:77
 msgid "Don't Show Again"
 msgstr "لا تظهر مرة أخرى"
 
-#: src/prefs.ts:63
+#: src/prefs.ts:77
 msgid "Ignore"
 msgstr "تجاهل"
 
-#: src/prefs.ts:63
+#: src/prefs.ts:77
 msgid "Open GitHub"
 msgstr "Open GitHub"
+
+#: src/weather.ts:103
+msgid "Clear"
+msgstr "مسح"
+
+#: src/weather.ts:105
+msgid "Cloudy"
+msgstr "غيوم"
+
+#: src/weather.ts:107
+msgid "Rainy"
+msgstr "Rainy"
+
+#: src/weather.ts:109
+msgid "Snowy"
+msgstr "Snowy"
+
+#: src/weather.ts:111
+msgid "Stormy"
+msgstr "Stormy"
+
+#: src/weather.ts:113
+msgid "Windy"
+msgstr "الرياب"
 
 #: src/welcome.ts:53
 #, javascript-format
