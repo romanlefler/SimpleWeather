@@ -4,6 +4,7 @@
 ## Translations
 
 - Chinese (thanks know-nothing-but-123)
+- French (thanks Samuel St. Jean)
 
 # v48.1.0
 
