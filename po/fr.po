@@ -28,11 +28,11 @@ msgstr "Température"
 
 #: src/details.ts:59
 msgid "Condition"
-msgstr "Condition"
+msgstr "Conditions"
 
 #: src/details.ts:60
 msgid "Feels Like"
-msgstr "Se sent comme"
+msgstr "Température ressentie"
 
 #: src/details.ts:61
 msgid "Wind"
@@ -146,7 +146,7 @@ msgstr "L: %s"
 
 #: src/preferences/aboutPage.ts:48
 msgid "About"
-msgstr "À propos de"
+msgstr "À propos"
 
 #: src/preferences/aboutPage.ts:59
 msgid "GitHub Repository"
@@ -205,7 +205,7 @@ msgstr "Pop-Up"
 
 #: src/preferences/detailsPage.ts:75
 msgid "Drag-and-drop from bottom to configure the pop-up"
-msgstr "Glisser-déposer depuis le bas pour configurer le pop-up"
+msgstr "Glisser-déposer depuis le bas pour configurer la pop-up"
 
 #: src/preferences/detailsPage.ts:173 src/preferences/generalPage.ts:235
 msgid "Panel"
@@ -225,7 +225,7 @@ msgstr "Détail du panneau secondaire"
 
 #: src/preferences/detailsPage.ts:218
 msgid "Show Condition Icon"
-msgstr "Afficher l'icône de la condition"
+msgstr "Afficher l'icône des conditions"
 
 #: src/preferences/detailsPage.ts:228
 msgid "Show Sunrise/Sunset"
@@ -378,7 +378,7 @@ msgstr "Lumière"
 
 #: src/preferences/generalPage.ts:247
 msgid "Afterdark"
-msgstr "Après la nuit"
+msgstr "A la nuit tombée"
 
 #: src/preferences/generalPage.ts:248
 msgid "Immersive"
@@ -476,7 +476,7 @@ msgstr "Aucun résultat."
 
 #: src/preferences/search.ts:211
 msgid "No copyright information available."
-msgstr "Aucune information sur les droits d'auteur disponible."
+msgstr "Aucune information sur les droits d'auteur n'est disponible."
 
 #: src/prefs.ts:74
 #, javascript-format
@@ -513,15 +513,15 @@ msgstr "Rainy"
 
 #: src/weather.ts:109
 msgid "Snowy"
-msgstr "Snowy"
+msgstr "Il neige"
 
 #: src/weather.ts:111
 msgid "Stormy"
-msgstr "Stormy"
+msgstr "Tempête"
 
 #: src/weather.ts:113
 msgid "Windy"
-msgstr "Vent"
+msgstr "Venteux"
 
 #: src/welcome.ts:53
 #, javascript-format
