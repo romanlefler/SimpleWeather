@@ -1,10 +1,14 @@
 
 # Development
 
+## Bug Fixes
+
+- Fix some of pop-up not being translated
+
 ## Translations
 
 - Chinese (thanks know-nothing-but-123)
-- French (thanks Samuel St. Jean & mdouchin)
+- French (thanks Samuel St. Jean, mdouchin, & Neo-29)
 
 # v48.1.0
 
