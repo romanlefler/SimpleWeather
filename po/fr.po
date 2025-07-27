@@ -501,7 +501,7 @@ msgstr "Ouvrir GitHub"
 
 #: src/weather.ts:103
 msgid "Clear"
-msgstr "Nettoyer"
+msgstr "Clair"
 
 #: src/weather.ts:103
 msgid "Sunny"
