@@ -32,7 +32,7 @@ msgstr "Condição"
 
 #: src/details.ts:61
 msgid "Feels Like"
-msgstr "Sensação Como"
+msgstr "Sensação Térmica"
 
 #: src/details.ts:62
 msgid "Wind"
@@ -84,7 +84,7 @@ msgstr "Segunda-Feira"
 
 #: src/lang.ts:111
 msgid "Sunday"
-msgstr "domingo"
+msgstr "Domingo"
 
 #: src/lang.ts:111
 msgid "Tuesday"
@@ -92,7 +92,7 @@ msgstr "Terça-feira"
 
 #: src/lang.ts:111
 msgid "Wednesday"
-msgstr "quarta-feira"
+msgstr "Quarta-feira"
 
 #: src/lang.ts:112
 msgid "Friday"
@@ -100,11 +100,11 @@ msgstr "Sexta-feira"
 
 #: src/lang.ts:112
 msgid "Saturday"
-msgstr "sábado"
+msgstr "Sábado"
 
 #: src/lang.ts:112
 msgid "Thursday"
-msgstr "quinta-feira"
+msgstr "Quinta-feira"
 
 #: src/location.ts:82
 #, javascript-format
@@ -132,7 +132,7 @@ msgstr "Dados meteorológicos"
 
 #: src/popup.ts:297 src/preferences/aboutPage.ts:76
 msgid "Settings"
-msgstr "Confirgurações"
+msgstr "Configurações"
 
 #: src/popup.ts:383
 #, javascript-format
@@ -166,7 +166,7 @@ msgstr "Desconhecido"
 
 #: src/preferences/aboutPage.ts:79
 msgid "Copy"
-msgstr "copiar"
+msgstr "Copiar"
 
 #: src/preferences/aboutPage.ts:102
 msgid "Copied settings JSON to clipboard."
@@ -193,11 +193,11 @@ msgstr "Reporte erros ou solicite novos recursos %s."
 
 #: src/preferences/aboutPage.ts:138
 msgid "Credits"
-msgstr "créditos"
+msgstr "Créditos"
 
 #: src/preferences/detailsPage.ts:68
 msgid "Details"
-msgstr "detalhes"
+msgstr "Detalhes"
 
 #: src/preferences/detailsPage.ts:74
 msgid "Pop-Up"
@@ -406,7 +406,7 @@ msgstr "Lado do Painel"
 
 #: src/preferences/generalPage.ts:274
 msgid "Order in Panel"
-msgstr "Pedido no Painel"
+msgstr "Pedido no painel"
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
@@ -422,7 +422,7 @@ msgstr "Mover para cima"
 
 #: src/preferences/locationsPage.ts:112
 msgid "Move Down"
-msgstr "Mover para Baixo"
+msgstr "Mover para baixo"
 
 #: src/preferences/locationsPage.ts:128
 msgid "Add Here"
@@ -435,11 +435,11 @@ msgstr "Tem certeza que deseja excluir %s?"
 
 #: src/preferences/locationsPage.ts:194
 msgid "Cancel"
-msgstr "cancelar"
+msgstr "Cancelar"
 
 #: src/preferences/locationsPage.ts:194
 msgid "Delete"
-msgstr "excluir"
+msgstr "Excluir"
 
 #: src/preferences/locationsPage.ts:235
 #, javascript-format
@@ -489,7 +489,7 @@ msgstr "SimpleWeather não sabe como lidar com a sua localidade.\n"
 
 #: src/prefs.ts:77
 msgid "Don't Show Again"
-msgstr "Não Mostrar Novamente"
+msgstr "Não mostrar novamente"
 
 #: src/prefs.ts:77
 msgid "Ignore"
@@ -497,7 +497,7 @@ msgstr "Ignorar"
 
 #: src/prefs.ts:77
 msgid "Open GitHub"
-msgstr "Open GitHub"
+msgstr "Abrir GitHub"
 
 #: src/weather.ts:103
 msgid "Clear"
@@ -505,7 +505,7 @@ msgstr "Limpar"
 
 #: src/weather.ts:103
 msgid "Sunny"
-msgstr "Sunny"
+msgstr "Ensolarado"
 
 #: src/weather.ts:105
 msgid "Cloudy"
@@ -513,15 +513,15 @@ msgstr "Nublado"
 
 #: src/weather.ts:107
 msgid "Rainy"
-msgstr "Rainy"
+msgstr "Chovendo"
 
 #: src/weather.ts:109
 msgid "Snowy"
-msgstr "Snowy"
+msgstr "Nevando"
 
 #: src/weather.ts:111
 msgid "Stormy"
-msgstr "Stormy"
+msgstr "Tempestade"
 
 #: src/weather.ts:113
 msgid "Windy"
