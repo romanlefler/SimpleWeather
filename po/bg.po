@@ -1,0 +1,560 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: simpleweather\n"
+"Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
+"POT-Creation-Date: 2025-07-23 16:59-0500\n"
+"PO-Revision-Date: 2025-07-31 17:05+0300\n"
+"Last-Translator: \n"
+"Language-Team: Bulgarian\n"
+"Language: bg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Crowdin-Project: simpleweather\n"
+"X-Crowdin-Project-ID: 798380\n"
+"X-Crowdin-Language: en\n"
+"X-Crowdin-File: simple-weather@romanlefler.com.pot\n"
+"X-Crowdin-File-ID: 2\n"
+"X-Generator: Poedit 3.5\n"
+
+#: src/autoConfig.ts:49 src/location.ts:53 src/location.ts:63
+#: src/preferences/generalPage.ts:179
+msgid "My Location"
+msgstr "Моето местоположение"
+
+#: src/details.ts:59 src/preferences/generalPage.ts:64
+msgid "Temperature"
+msgstr "Температура"
+
+#: src/details.ts:60
+msgid "Condition"
+msgstr "Състояние"
+
+#: src/details.ts:61
+msgid "Feels Like"
+msgstr "Усеща се като"
+
+#: src/details.ts:62
+msgid "Wind"
+msgstr "Вятър"
+
+#: src/details.ts:63
+msgid "Humidity"
+msgstr "Влажност"
+
+#: src/details.ts:64
+msgid "Gusts"
+msgstr "Пориви"
+
+#: src/details.ts:65
+msgid "UV High"
+msgstr "Високо UV"
+
+#: src/details.ts:66 src/preferences/generalPage.ts:92
+msgid "Pressure"
+msgstr "Налягане"
+
+#: src/details.ts:67
+msgid "Precipitation"
+msgstr "Валежи"
+
+#: src/details.ts:68
+msgid "Sunrise"
+msgstr "Изгрев"
+
+#: src/details.ts:69
+msgid "Sunset"
+msgstr "Залез"
+
+#: src/details.ts:70
+msgid "Cloud Cover"
+msgstr "Облачно покритие"
+
+#: src/details.ts:75 src/popup.ts:409
+msgid "Invalid"
+msgstr "Невалидно"
+
+#: src/lang.ts:108 src/popup.ts:57
+msgid "Today"
+msgstr "Днес"
+
+#: src/lang.ts:111
+msgid "Monday"
+msgstr "Понеделник"
+
+#: src/lang.ts:111
+msgid "Sunday"
+msgstr "Неделя"
+
+#: src/lang.ts:111
+msgid "Tuesday"
+msgstr "Вторник"
+
+#: src/lang.ts:111
+msgid "Wednesday"
+msgstr "Сряда"
+
+#: src/lang.ts:112
+msgid "Friday"
+msgstr "Петък"
+
+#: src/lang.ts:112
+msgid "Saturday"
+msgstr "Събота"
+
+#: src/lang.ts:112
+msgid "Thursday"
+msgstr "Четвъртък"
+
+#: src/location.ts:82
+#, javascript-format
+msgid "%f°N"
+msgstr "%f°С"
+
+#: src/location.ts:82
+#, javascript-format
+msgid "%f°S"
+msgstr "%f°Ю"
+
+#: src/location.ts:83
+#, javascript-format
+msgid "%f°E"
+msgstr "%f°И"
+
+#: src/location.ts:83
+#, javascript-format
+msgid "%f°W"
+msgstr "%f°З"
+
+#: src/popup.ts:143
+msgid "Weather Data"
+msgstr "Метеорологични данни"
+
+#: src/popup.ts:297 src/preferences/aboutPage.ts:76
+msgid "Settings"
+msgstr "Настройки"
+
+#: src/popup.ts:383
+#, javascript-format
+msgid "H: %s"
+msgstr "В: %s"
+
+#: src/popup.ts:384
+#, javascript-format
+msgid "L: %s"
+msgstr "Н: %s"
+
+#: src/preferences/aboutPage.ts:48
+msgid "About"
+msgstr "Относно"
+
+#: src/preferences/aboutPage.ts:59
+msgid "GitHub Repository"
+msgstr "Хранилище в GitHub"
+
+#: src/preferences/aboutPage.ts:61
+msgid "Support Me"
+msgstr "Подкрепете ме"
+
+#: src/preferences/aboutPage.ts:68
+msgid "SimpleWeather Version"
+msgstr "Версия на SimpleWeather"
+
+#: src/preferences/aboutPage.ts:71
+msgid "Unknown"
+msgstr "Подробности"
+
+#: src/preferences/aboutPage.ts:79
+msgid "Copy"
+msgstr "Копиране"
+
+#: src/preferences/aboutPage.ts:102
+msgid "Copied settings JSON to clipboard."
+msgstr "Настройките са копирани в буфера във формат JSON."
+
+#: src/preferences/aboutPage.ts:116
+#, javascript-format
+msgid "Contributions and translations are welcome! Read how on %s."
+msgstr "Помощта в разработката и превода е винаги добре дошла! Прочетете как можете да помогнете тук: %s."
+
+#: src/preferences/aboutPage.ts:119
+#, javascript-format
+msgid "If you like this extension, consider starring it on %s."
+msgstr "Ако това разширение Ви харесва, може да му сложите звезда в %s."
+
+#: src/preferences/aboutPage.ts:122
+msgid "here"
+msgstr "тук"
+
+#: src/preferences/aboutPage.ts:124
+#, javascript-format
+msgid "Report bugs or request new features %s."
+msgstr "Докладвайте проблеми или предложете подобрения %s."
+
+#: src/preferences/aboutPage.ts:138
+msgid "Credits"
+msgstr "Заслуги"
+
+#: src/preferences/detailsPage.ts:68
+msgid "Details"
+msgstr "Подробности"
+
+#: src/preferences/detailsPage.ts:74
+msgid "Pop-Up"
+msgstr "Изскачащ прозорец"
+
+#: src/preferences/detailsPage.ts:75
+msgid "Drag-and-drop from bottom to configure the pop-up"
+msgstr "Изберете и подредете елементите по-долу, за да настроите какво искате да виждате в изскачащия прозорец"
+
+#: src/preferences/detailsPage.ts:173 src/preferences/generalPage.ts:235
+msgid "Panel"
+msgstr "Панел"
+
+#: src/preferences/detailsPage.ts:176
+msgid "None"
+msgstr "Нищо"
+
+#: src/preferences/detailsPage.ts:188
+msgid "Panel Detail"
+msgstr "Данни в панела"
+
+#: src/preferences/detailsPage.ts:206
+msgid "Secondary Panel Detail"
+msgstr "Вторични данни в панела"
+
+#: src/preferences/detailsPage.ts:218
+msgid "Show Condition Icon"
+msgstr "Иконка за текущото състояние"
+
+#: src/preferences/detailsPage.ts:228
+msgid "Show Sunrise/Sunset"
+msgstr "Показване на изгрев/залез"
+
+#: src/preferences/editLocation.ts:33
+#, javascript-format
+msgid "Edit %s"
+msgstr "Редактиране на %s"
+
+#: src/preferences/editLocation.ts:33
+msgid "New Location"
+msgstr "Ново местоположение"
+
+#: src/preferences/editLocation.ts:41
+msgid "Name"
+msgstr "Име"
+
+#: src/preferences/editLocation.ts:56
+msgid "Coordinates"
+msgstr "Координати"
+
+#: src/preferences/editLocation.ts:66
+msgid "Save"
+msgstr "Запазване"
+
+#: src/preferences/editLocation.ts:94
+msgid "Name is required."
+msgstr "Името е задължително."
+
+#: src/preferences/editLocation.ts:99
+msgid "Invalid coordinates entry."
+msgstr "Въведените координати са неправилни."
+
+#: src/preferences/generalPage.ts:38
+msgid "General"
+msgstr "Общи"
+
+#: src/preferences/generalPage.ts:43 src/preferences/generalPage.ts:53
+msgid "Units"
+msgstr "Мерни единици"
+
+#: src/preferences/generalPage.ts:44
+msgid "Configure units of measurement"
+msgstr "Настройки за мерните единици"
+
+#: src/preferences/generalPage.ts:48
+msgid "Custom"
+msgstr "Персонализирано"
+
+#: src/preferences/generalPage.ts:48
+msgid "Metric"
+msgstr "Метрични"
+
+#: src/preferences/generalPage.ts:48
+msgid "UK"
+msgstr "Обединено Кралство"
+
+#: src/preferences/generalPage.ts:48
+msgid "US"
+msgstr "САЩ"
+
+#: src/preferences/generalPage.ts:61
+msgid "Fahrenheit"
+msgstr "Фаренхайт"
+
+#: src/preferences/generalPage.ts:62
+msgid "Celsius"
+msgstr "Целзий"
+
+#: src/preferences/generalPage.ts:78
+msgid "Speed"
+msgstr "Скорост"
+
+#: src/preferences/generalPage.ts:106
+msgid "Rain Measurement"
+msgstr "Количество дъжд"
+
+#: src/preferences/generalPage.ts:120
+msgid "Distance"
+msgstr "Разстояние"
+
+#: src/preferences/generalPage.ts:144
+msgid "Degrees"
+msgstr "Градуси"
+
+#: src/preferences/generalPage.ts:144
+msgid "Eight-Point Compass"
+msgstr "Компас с осем посоки"
+
+#: src/preferences/generalPage.ts:147
+msgid "Direction"
+msgstr "Направление"
+
+#: src/preferences/generalPage.ts:159
+msgid "Weather Service"
+msgstr "Услуга за метеорологични данни"
+
+#: src/preferences/generalPage.ts:160
+msgid "Configure how the weather is attained"
+msgstr "Настройки за това от къде се получават данните за времето"
+
+#: src/preferences/generalPage.ts:167
+msgid "Weather Provider"
+msgstr "Доставчик на метеорологични данни"
+
+#: src/preferences/generalPage.ts:180
+msgid "Configure how your location is found"
+msgstr "Настройки за това как се установява местоположението Ви"
+
+#: src/preferences/generalPage.ts:184 src/preferences/generalPage.ts:185
+msgid "Online"
+msgstr "Интернет"
+
+#: src/preferences/generalPage.ts:186 src/preferences/generalPage.ts:245
+msgid "System"
+msgstr "Системно"
+
+#: src/preferences/generalPage.ts:187
+msgid "Disable"
+msgstr "Изключено"
+
+#: src/preferences/generalPage.ts:190
+msgid "Provider"
+msgstr "Доставчик"
+
+#: src/preferences/generalPage.ts:202
+msgid "Refresh Interval (Minutes)"
+msgstr "Интервал на опресняване (минути)"
+
+#: src/preferences/generalPage.ts:220
+msgid "Accessibility"
+msgstr "Улеснен достъп"
+
+#: src/preferences/generalPage.ts:221
+msgid "Configure accessibility features"
+msgstr "Настройки за улеснен достъп"
+
+#: src/preferences/generalPage.ts:224
+msgid "High Contrast"
+msgstr "Висок контраст"
+
+#: src/preferences/generalPage.ts:236
+msgid "Configure the panel and pop-up"
+msgstr "Настройки за панела и изскачащия прозорец"
+
+#: src/preferences/generalPage.ts:246
+msgid "Light"
+msgstr "Светла"
+
+#: src/preferences/generalPage.ts:247
+msgid "Afterdark"
+msgstr "След залез"
+
+#: src/preferences/generalPage.ts:248
+msgid "Immersive"
+msgstr "Потапяне"
+
+#: src/preferences/generalPage.ts:251
+msgid "Theme"
+msgstr "Тема"
+
+#: src/preferences/generalPage.ts:261
+msgid "Center"
+msgstr "В средата"
+
+#: src/preferences/generalPage.ts:261
+msgid "Left"
+msgstr "Вляво"
+
+#: src/preferences/generalPage.ts:261
+msgid "Right"
+msgstr "Вдясно"
+
+#: src/preferences/generalPage.ts:264
+msgid "Side of Panel"
+msgstr "Място в панела"
+
+#: src/preferences/generalPage.ts:274
+msgid "Order in Panel"
+msgstr "Позиция в панела"
+
+#: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
+msgid "Locations"
+msgstr "Местоположения"
+
+#: src/preferences/locationsPage.ts:70 src/preferences/search.ts:75
+msgid "Add"
+msgstr "Добавяне"
+
+#: src/preferences/locationsPage.ts:97
+msgid "Move Up"
+msgstr "Нагоре"
+
+#: src/preferences/locationsPage.ts:112
+msgid "Move Down"
+msgstr "Надолу"
+
+#: src/preferences/locationsPage.ts:128
+msgid "Add Here"
+msgstr "Добавяне тук"
+
+#: src/preferences/locationsPage.ts:193
+#, javascript-format
+msgid "Are you sure you want delete %s?"
+msgstr "Наистина ли искате да изтриете %s?"
+
+#: src/preferences/locationsPage.ts:194
+msgid "Cancel"
+msgstr "Отказ"
+
+#: src/preferences/locationsPage.ts:194
+msgid "Delete"
+msgstr "ИЗтриване"
+
+#: src/preferences/locationsPage.ts:235
+#, javascript-format
+msgid "Internal Error: %s"
+msgstr "Вътрешна грешка: %s"
+
+#: src/preferences/locationsPage.ts:236
+msgid "Internal Error"
+msgstr "Вътрешна грешка"
+
+#: src/preferences/locationsPage.ts:261
+msgid "Something else edited the locations."
+msgstr "Нещо друго е редактирало местоположенията."
+
+#: src/preferences/search.ts:45
+msgid "Search Location"
+msgstr "Търсене на местоположение"
+
+#: src/preferences/search.ts:54
+msgid "City, Neighborhood, etc."
+msgstr "Град, квартал, …"
+
+#: src/preferences/search.ts:59
+msgid "Search"
+msgstr "Търсене"
+
+#: src/preferences/search.ts:158
+msgid "No Internet"
+msgstr "Няма връзка с Интернет"
+
+#: src/preferences/search.ts:206
+msgid "No results."
+msgstr "Няма резултати."
+
+#: src/preferences/search.ts:211
+msgid "No copyright information available."
+msgstr "Няма информация за авторско право."
+
+#: src/prefs.ts:74
+#, javascript-format
+msgid ""
+"SimpleWeather doesn't know how to handle your locale.\n"
+"\tError - %s\n"
+"Please consider submitting a bug report on GitHub."
+msgstr ""
+"SimpleWeather не знае как да работи с регионалните настройки.\n"
+"\tГрешка – %s\n"
+"Ако е възможно, моля, докладвайте проблема в GitHub."
+
+#: src/prefs.ts:77
+msgid "Don't Show Again"
+msgstr "Да не се показва повече"
+
+#: src/prefs.ts:77
+msgid "Ignore"
+msgstr "Пренебрегване"
+
+#: src/prefs.ts:77
+msgid "Open GitHub"
+msgstr "Отваряне на GitHub"
+
+#: src/weather.ts:103
+msgid "Clear"
+msgstr "Изчистване"
+
+#: src/weather.ts:103
+msgid "Sunny"
+msgstr "Слънчево"
+
+#: src/weather.ts:105
+msgid "Cloudy"
+msgstr "Облачно"
+
+#: src/weather.ts:107
+msgid "Rainy"
+msgstr "Дъжд"
+
+#: src/weather.ts:109
+msgid "Snowy"
+msgstr "Сняг"
+
+#: src/weather.ts:111
+msgid "Stormy"
+msgstr "Буря"
+
+#: src/weather.ts:113
+msgid "Windy"
+msgstr "Вятър"
+
+#: src/welcome.ts:53
+#, javascript-format
+msgid "Welcome to %s"
+msgstr "Добре дошли в %s"
+
+#: src/welcome.ts:74
+#, javascript-format
+msgid ""
+"%s occasionally connects to the selected weather service. By default, it will use the Internet to connect to:\n"
+"  •  %s, an %s service for weather\n"
+"  •  %s, optional for resolving the current location\n"
+"  •  %s, for searching locations by name\n"
+"\n"
+msgstr ""
+"%s периодично се свързва с избраната услуга за метеорологични данни. По подразбиране, ще се използва връзката с Интернет за достъп до:\n"
+"  •  %s, услуга (с лиценз %s) за метеорологични данни;\n"
+"  •  %s, незадължително, за установяване на текущото местоположение;\n"
+"  •  %s, за търсене на местоположения по име.\n"
+"\n"
+
+#: src/welcome.ts:83
+#, javascript-format
+msgid "Thank you for installing %s!"
+msgstr "Благодарности за инсталирането на %s!"
+
+#: src/welcome.ts:99
+msgid "Abort"
+msgstr "Отказ"
