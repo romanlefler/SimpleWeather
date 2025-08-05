@@ -398,7 +398,7 @@ msgstr "Sol"
 
 #: src/preferences/generalPage.ts:261
 msgid "Right"
-msgstr Sağ""
+msgstr "Sağ"
 
 #: src/preferences/generalPage.ts:264
 msgid "Side of Panel"
