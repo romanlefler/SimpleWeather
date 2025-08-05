@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
 "POT-Creation-Date: 2025-07-23 16:59-0500\n"
 "PO-Revision-Date: 2025-07-23 22:06\n"
-"Last-Translator: \n"
+"Last-Translator: alaahmet\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
 "MIME-Version: 1.0\n"
@@ -28,27 +28,27 @@ msgstr "Sıcaklık"
 
 #: src/details.ts:60
 msgid "Condition"
-msgstr ""
+msgstr "Hava Durumu"
 
 #: src/details.ts:61
 msgid "Feels Like"
-msgstr ""
+msgstr "Hissedilen Sıcaklık"
 
 #: src/details.ts:62
 msgid "Wind"
-msgstr ""
+msgstr "Rüzgar"
 
 #: src/details.ts:63
 msgid "Humidity"
-msgstr ""
+msgstr "Nem Oranı"
 
 #: src/details.ts:64
 msgid "Gusts"
-msgstr ""
+msgstr "Ani Rüzgar"
 
 #: src/details.ts:65
 msgid "UV High"
-msgstr ""
+msgstr "Yüksek UV"
 
 #: src/details.ts:66 src/preferences/generalPage.ts:92
 msgid "Pressure"
@@ -56,55 +56,55 @@ msgstr "Basınç"
 
 #: src/details.ts:67
 msgid "Precipitation"
-msgstr ""
+msgstr "Yağış"
 
 #: src/details.ts:68
 msgid "Sunrise"
-msgstr ""
+msgstr "Gündoğumu"
 
 #: src/details.ts:69
 msgid "Sunset"
-msgstr ""
+msgstr "Günbatımı"
 
 #: src/details.ts:70
 msgid "Cloud Cover"
-msgstr ""
+msgstr "Bulut Oranı"
 
 #: src/details.ts:75 src/popup.ts:409
 msgid "Invalid"
-msgstr ""
+msgstr "Geçersiz"
 
 #: src/lang.ts:108 src/popup.ts:57
 msgid "Today"
-msgstr ""
+msgstr "Bugün"
 
 #: src/lang.ts:111
 msgid "Monday"
-msgstr ""
+msgstr "Pazartesi"
 
 #: src/lang.ts:111
 msgid "Sunday"
-msgstr ""
+msgstr "Pazar"
 
 #: src/lang.ts:111
 msgid "Tuesday"
-msgstr ""
+msgstr "Salı"
 
 #: src/lang.ts:111
 msgid "Wednesday"
-msgstr ""
+msgstr "Çarşamba"
 
 #: src/lang.ts:112
 msgid "Friday"
-msgstr ""
+msgstr "Cuma"
 
 #: src/lang.ts:112
 msgid "Saturday"
-msgstr ""
+msgstr "Cumartesi"
 
 #: src/lang.ts:112
 msgid "Thursday"
-msgstr ""
+msgstr "Perşembe"
 
 #: src/location.ts:82
 #, javascript-format
@@ -154,7 +154,7 @@ msgstr "GitHub Deposu"
 
 #: src/preferences/aboutPage.ts:61
 msgid "Support Me"
-msgstr ""
+msgstr "Beni Destekle"
 
 #: src/preferences/aboutPage.ts:68
 msgid "SimpleWeather Version"
@@ -166,66 +166,66 @@ msgstr "Bilinmiyor"
 
 #: src/preferences/aboutPage.ts:79
 msgid "Copy"
-msgstr ""
+msgstr "Kopyala"
 
 #: src/preferences/aboutPage.ts:102
 msgid "Copied settings JSON to clipboard."
-msgstr ""
+msgstr "Ayarlar JSON'u panoya kopyalandı."
 
 #: src/preferences/aboutPage.ts:116
 #, javascript-format
 msgid "Contributions and translations are welcome! Read how on %s."
-msgstr ""
+msgstr "Katkı ve çeviriler memnuniyetle karşılanır! Detaylar için %s."
 
 #: src/preferences/aboutPage.ts:119
 #, javascript-format
 msgid "If you like this extension, consider starring it on %s."
-msgstr ""
+msgstr "Eklentiyi beğendiyseniz, %s üzerinden yıldızlamayı düşünebilirsiniz."
 
 #: src/preferences/aboutPage.ts:122
 msgid "here"
-msgstr ""
+msgstr "burada"
 
 #: src/preferences/aboutPage.ts:124
 #, javascript-format
 msgid "Report bugs or request new features %s."
-msgstr ""
+msgstr "Hata bildirmek veya yeni özellik önermek için %s."
 
 #: src/preferences/aboutPage.ts:138
 msgid "Credits"
-msgstr ""
+msgstr "Katkıda Bulunanlar"
 
 #: src/preferences/detailsPage.ts:68
 msgid "Details"
-msgstr ""
+msgstr "Ayrıntılar"
 
 #: src/preferences/detailsPage.ts:74
 msgid "Pop-Up"
-msgstr ""
+msgstr "Açılır Pencere"
 
 #: src/preferences/detailsPage.ts:75
 msgid "Drag-and-drop from bottom to configure the pop-up"
-msgstr ""
+msgstr "Açılır pencereyi yapılandırmak için alttan sürükleyip bırakın"
 
 #: src/preferences/detailsPage.ts:173 src/preferences/generalPage.ts:235
 msgid "Panel"
-msgstr ""
+msgstr "Panel"
 
 #: src/preferences/detailsPage.ts:176
 msgid "None"
-msgstr ""
+msgstr "Yok"
 
 #: src/preferences/detailsPage.ts:188
 msgid "Panel Detail"
-msgstr ""
+msgstr "Panel Ayrıntısı"
 
 #: src/preferences/detailsPage.ts:206
 msgid "Secondary Panel Detail"
-msgstr ""
+msgstr "İkincil Panel Ayrıntısı"
 
 #: src/preferences/detailsPage.ts:218
 msgid "Show Condition Icon"
-msgstr ""
+msgstr "Durum Simgesini Göster"
 
 #: src/preferences/detailsPage.ts:228
 msgid "Show Sunrise/Sunset"
@@ -290,11 +290,11 @@ msgstr "ABD"
 
 #: src/preferences/generalPage.ts:61
 msgid "Fahrenheit"
-msgstr ""
+msgstr "Fahrenheit"
 
 #: src/preferences/generalPage.ts:62
 msgid "Celsius"
-msgstr ""
+msgstr "Celcius"
 
 #: src/preferences/generalPage.ts:78
 msgid "Speed"
@@ -374,39 +374,39 @@ msgstr "Paneli ve açılır pencereyi yapılandırın"
 
 #: src/preferences/generalPage.ts:246
 msgid "Light"
-msgstr ""
+msgstr "Açık"
 
 #: src/preferences/generalPage.ts:247
 msgid "Afterdark"
-msgstr ""
+msgstr "Gece"
 
 #: src/preferences/generalPage.ts:248
 msgid "Immersive"
-msgstr ""
+msgstr "Dinamik"
 
 #: src/preferences/generalPage.ts:251
 msgid "Theme"
-msgstr ""
+msgstr "Tema"
 
 #: src/preferences/generalPage.ts:261
 msgid "Center"
-msgstr ""
+msgstr "Orta"
 
 #: src/preferences/generalPage.ts:261
 msgid "Left"
-msgstr ""
+msgstr "Sol"
 
 #: src/preferences/generalPage.ts:261
 msgid "Right"
-msgstr ""
+msgstr Sağ""
 
 #: src/preferences/generalPage.ts:264
 msgid "Side of Panel"
-msgstr ""
+msgstr "Panel Konumu"
 
 #: src/preferences/generalPage.ts:274
 msgid "Order in Panel"
-msgstr ""
+msgstr "Paneldeki Sıralama"
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
@@ -431,11 +431,11 @@ msgstr "Buraya Ekle"
 #: src/preferences/locationsPage.ts:193
 #, javascript-format
 msgid "Are you sure you want delete %s?"
-msgstr "%s'yi silmek istediğinize emin misiniz?"
+msgstr "%s lokasyonunu silmek istediğinize emin misiniz?"
 
 #: src/preferences/locationsPage.ts:194
 msgid "Cancel"
-msgstr "İptal"
+msgstr "İptal Et"
 
 #: src/preferences/locationsPage.ts:194
 msgid "Delete"
@@ -501,36 +501,36 @@ msgstr "GitHub'ı Aç"
 
 #: src/weather.ts:103
 msgid "Clear"
-msgstr ""
+msgstr "Açık"
 
 #: src/weather.ts:103
 msgid "Sunny"
-msgstr ""
+msgstr "Güneşli"
 
 #: src/weather.ts:105
 msgid "Cloudy"
-msgstr ""
+msgstr "Bulutlu"
 
 #: src/weather.ts:107
 msgid "Rainy"
-msgstr ""
+msgstr "Yağmurlu"
 
 #: src/weather.ts:109
 msgid "Snowy"
-msgstr ""
+msgstr "Karlı"
 
 #: src/weather.ts:111
 msgid "Stormy"
-msgstr ""
+msgstr "Fırtınalı"
 
 #: src/weather.ts:113
 msgid "Windy"
-msgstr ""
+msgstr "Rüzgarlı"
 
 #: src/welcome.ts:53
 #, javascript-format
 msgid "Welcome to %s"
-msgstr "%s'e Hoş Geldiniz"
+msgstr "%s'a Hoş Geldiniz"
 
 #: src/welcome.ts:74
 #, javascript-format
@@ -543,7 +543,7 @@ msgstr ""
 #: src/welcome.ts:83
 #, javascript-format
 msgid "Thank you for installing %s!"
-msgstr "%s'i yüklediğiniz için teşekkür ederiz!"
+msgstr "%s eklentisini yüklediğiniz için teşekkür ederiz!"
 
 #: src/welcome.ts:99
 msgid "Abort"
