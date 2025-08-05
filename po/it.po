@@ -431,7 +431,7 @@ msgstr "Aggiungi qui"
 #: src/preferences/locationsPage.ts:193
 #, javascript-format
 msgid "Are you sure you want delete %s?"
-msgstr "Sei sicuro di voler eliminare %s?"
+msgstr "Confermi di voler eliminare %s?"
 
 #: src/preferences/locationsPage.ts:194
 msgid "Cancel"
@@ -498,6 +498,38 @@ msgstr "Ignora"
 #: src/prefs.ts:77
 msgid "Open GitHub"
 msgstr "Apri GitHub"
+
+#: src/units.ts:133
+msgid "N"
+msgstr "N"
+
+#: src/units.ts:133
+msgid "NE"
+msgstr "NE"
+
+#: src/units.ts:133
+msgid "E"
+msgstr "E"
+
+#: src/units.ts:133
+msgid "SE"
+msgstr "SE"
+
+#: src/units.ts:133
+msgid "S"
+msgstr "S"
+
+#: src/units.ts:133
+msgid "SW"
+msgstr "SO"
+
+#: src/units.ts:133
+msgid "W"
+msgstr "O"
+
+#: src/units.ts:133
+msgid "NW"
+msgstr "NO"
 
 #: src/weather.ts:103
 msgid "Clear"
