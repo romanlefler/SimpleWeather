@@ -131,7 +131,7 @@ export class Direction implements Displayable {
                 // While it's not possible to be exactly 8 (second N),
                 // We could round up to 8 since 7.9 and others are valid inputs
                 const map = [ "N", "NE", "E", "SE", "S", "SW", "W", "NW", "N" ];
-                return map[point];
+                return _g(map[point]);
             default:
                 throw new UnitError("Direction unit invalid.");
         }
