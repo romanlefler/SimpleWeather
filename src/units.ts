@@ -130,8 +130,8 @@ export class Direction implements Displayable {
                 const point = Math.round(this.#degrees / (360 / 8));
                 // While it's not possible to be exactly 8 (second N),
                 // We could round up to 8 since 7.9 and others are valid inputs
-                const map = [ "N", "NE", "E", "SE", "S", "SW", "W", "NW", "N" ];
-                return _g(map[point]);
+                const map = [ _g("N"), _g("NE"), _g("E"), _g("SE"), _g("S"), _g("SW"), _g("W"), _g("NW"), _g("N") ];
+                return map[point];
             default:
                 throw new UnitError("Direction unit invalid.");
         }
