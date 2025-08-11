@@ -15,8 +15,10 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-// @ts-ignore - no typescript declarations for Geoclue
+// @ts-ignore - no typescript declarations for Geoclue or Geocode
 import Geoclue from "gi://Geoclue";
+// @ts-ignore
+import Geocode from "gi://GeocodeGlib";
 
 import { LatLon } from "./location.js";
 import { NoLocServiceError } from "./errors.js";
@@ -131,8 +133,36 @@ async function ipapiGetLoc() : Promise<MyLocResult> {
     };
 }
 
+async function reverseGeocode(lat : number, lon : number) : Promise<MyLocResult> {
+    return new Promise<MyLocResult>((resolve, reject) => {
+        console.error(`Reverse geocoding ${lat}, ${lon}`);
+        const loc = new Geocode.Location({
+            latitude: lat,
+            longitude: lon
+        });
+        const rev = Geocode.Reverse.new_for_location(loc);
+        rev.resolve_async(
+            null,
+            (_rev : any, result : any) => {
+                try {
+                    const place = rev.resolve_finish(result);
+                    const ret : MyLocResult = {
+                        lat,
+                        lon,
+                        city: place.get_town() || null,
+                        country: place.get_country() || null
+                    }
+                    resolve(ret);
+                } catch(e) {
+                    reject(e);
+                }
+            }
+        );
+    });
+}
+
 // Geoclue will no longer work for most users since Mozilla
-// has disconitnued their geolocation service
+// has discontinued their geolocation service
 async function geoclueGetLoc() : Promise <MyLocResult> {
     return new Promise<MyLocResult>((resolve, reject) => {
         Geoclue.Simple.new(
@@ -140,12 +170,11 @@ async function geoclueGetLoc() : Promise <MyLocResult> {
             Geoclue.AccuracyLevel.NEIGHBORHOOD,
             null,
             (_ : any, result : any) => {
-                let loc;
+                let loc : any;
                 try {
-                    let simple = Geoclue.Simple.new_finish(result);
+                    const simple = Geoclue.Simple.new_finish(result);
                     loc = simple.get_location();
-                }
-                catch (e : any) {
+                } catch (e : any) {
                     if (e.message &&
                         e.message.includes("org.freedesktop.DBus.Error.AccessDenied")) {
                         reject(new NoLocServiceError());
@@ -154,14 +183,21 @@ async function geoclueGetLoc() : Promise <MyLocResult> {
                     reject(e);
                     return;
                 }
-
-                let ret : MyLocResult = {
-                    lat: loc.latitude,
-                    lon: loc.longitude,
-                    city: null,
-                    country: null
-                };
-                resolve(ret);
+                reverseGeocode(loc.latitude, loc.longitude).then(
+                    res => {
+                        resolve(res);
+                    },
+                    err => {
+                        console.error(`Failed to reverse geocode location from Geoclue: ${err}`);
+                        const ret : MyLocResult = {
+                            lat: loc.latitude,
+                            lon: loc.longitude,
+                            city: null,
+                            country: null
+                        };
+                        resolve(ret);
+                    }
+                );
             }
         );
     });
