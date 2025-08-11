@@ -38,7 +38,7 @@ export class UserInputError extends Error {
 export class NoLocServiceError extends Error {
 
     constructor(msg? : string) {
-        super(msg);
+        super(msg ?? "Location unavailable or permission not granted.");
         this.name = "NoLocServiceError";
     }
 
