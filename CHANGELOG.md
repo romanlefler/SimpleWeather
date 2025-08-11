@@ -4,11 +4,17 @@
 ## Bug Fixes
 
 - Fix some of pop-up not being translated
+- Fix cardinal directions not being translated (thanks Davide Murtas)
 
 ## Translations
 
+- Brazilian Portugese (thanks Alzemand)
+- Bulgarian (thanks Lyubomir Vasilev)
 - Chinese (thanks know-nothing-but-123)
 - French (thanks Samuel St. Jean, mdouchin, & Neo-29)
+- German (thanks Ahmet Ala)
+- Italian (thanks Davide Murtas)
+- Turkish (thanks Ahmet Ala)
 
 # v48.1.0
 
