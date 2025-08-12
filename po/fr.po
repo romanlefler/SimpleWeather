@@ -499,6 +499,21 @@ msgstr "Ignorer"
 msgid "Open GitHub"
 msgstr "Ouvrir GitHub"
 
+#: src/units.ts:133
+#, javascript-format
+msgid "W"
+msgstr "O"
+
+#: src/units.ts:133
+#, javascript-format
+msgid "SW"
+msgstr "SO"
+
+#: src/units.ts:133
+#, javascript-format
+msgid "NW"
+msgstr "NO"
+
 #: src/weather.ts:103
 msgid "Clear"
 msgstr "Clair"
