@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
-"POT-Creation-Date: 2025-07-23 16:59-0500\n"
-"PO-Revision-Date: 2025-07-23 22:06\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2025-08-12 21:31+0200\n"
+"PO-Revision-Date: 2025-08-12 21:43+0200\n"
+"Last-Translator: Davide Murtas\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
 "MIME-Version: 1.0\n"
@@ -16,6 +16,7 @@ msgstr ""
 "X-Crowdin-Language: es-ES\n"
 "X-Crowdin-File: simple-weather@romanlefler.com.pot\n"
 "X-Crowdin-File-ID: 2\n"
+"X-Generator: Poedit 3.6\n"
 
 #: src/autoConfig.ts:49 src/location.ts:53 src/location.ts:63
 #: src/preferences/generalPage.ts:179
@@ -32,7 +33,7 @@ msgstr "Condición"
 
 #: src/details.ts:61
 msgid "Feels Like"
-msgstr "Sentirse como"
+msgstr "Sensación"
 
 #: src/details.ts:62
 msgid "Wind"
@@ -44,11 +45,11 @@ msgstr "Humedad"
 
 #: src/details.ts:64
 msgid "Gusts"
-msgstr "Gustos"
+msgstr "Ráfagas"
 
 #: src/details.ts:65
 msgid "UV High"
-msgstr "UV alto"
+msgstr "Índice UV"
 
 #: src/details.ts:66 src/preferences/generalPage.ts:92
 msgid "Pressure"
@@ -56,19 +57,19 @@ msgstr "Presión"
 
 #: src/details.ts:67
 msgid "Precipitation"
-msgstr "Precipitación"
+msgstr "Precipitaciones"
 
 #: src/details.ts:68
 msgid "Sunrise"
-msgstr "Aislamiento"
+msgstr "Amanecer"
 
 #: src/details.ts:69
 msgid "Sunset"
-msgstr "Aislamiento"
+msgstr "Puesta de sol"
 
 #: src/details.ts:70
 msgid "Cloud Cover"
-msgstr "Carátula de la nube"
+msgstr "Cobertura nubosa"
 
 #: src/details.ts:75 src/popup.ts:409
 msgid "Invalid"
@@ -124,7 +125,7 @@ msgstr "%f°E"
 #: src/location.ts:83
 #, javascript-format
 msgid "%f°W"
-msgstr "%f°W"
+msgstr "%f°O"
 
 #: src/popup.ts:143
 msgid "Weather Data"
@@ -137,12 +138,12 @@ msgstr "Ajustes"
 #: src/popup.ts:383
 #, javascript-format
 msgid "H: %s"
-msgstr "H: %s"
+msgstr "Máx: %s"
 
 #: src/popup.ts:384
 #, javascript-format
 msgid "L: %s"
-msgstr "L: %s"
+msgstr "Mín: %s"
 
 #: src/preferences/aboutPage.ts:48
 msgid "About"
@@ -150,15 +151,15 @@ msgstr "Acerca de"
 
 #: src/preferences/aboutPage.ts:59
 msgid "GitHub Repository"
-msgstr "GitHub Repository"
+msgstr "Repositorio GitHub"
 
 #: src/preferences/aboutPage.ts:61
 msgid "Support Me"
-msgstr "Sígueme"
+msgstr "Apóyeme"
 
 #: src/preferences/aboutPage.ts:68
 msgid "SimpleWeather Version"
-msgstr "Versión de simpleWeather"
+msgstr "Versión de SimpleWeather"
 
 #: src/preferences/aboutPage.ts:71
 msgid "Unknown"
@@ -180,20 +181,20 @@ msgstr "¡Las contribuciones y traducciones son bienvenidas! Lee cómo en %s."
 #: src/preferences/aboutPage.ts:119
 #, javascript-format
 msgid "If you like this extension, consider starring it on %s."
-msgstr "Si te gusta esta extensión, considera destacarla en %s."
+msgstr "Si le gusta esta extensión, considere guardarla con una estrella en %s."
 
 #: src/preferences/aboutPage.ts:122
 msgid "here"
-msgstr "aqui"
+msgstr "aquí"
 
 #: src/preferences/aboutPage.ts:124
 #, javascript-format
 msgid "Report bugs or request new features %s."
-msgstr "Informar errores o solicitar nuevas características %s."
+msgstr "Informe de errores o solicite nuevas características %s."
 
 #: src/preferences/aboutPage.ts:138
 msgid "Credits"
-msgstr "Crédito"
+msgstr "Créditos"
 
 #: src/preferences/detailsPage.ts:68
 msgid "Details"
@@ -201,11 +202,11 @@ msgstr "Detalles"
 
 #: src/preferences/detailsPage.ts:74
 msgid "Pop-Up"
-msgstr "Arriba"
+msgstr "Ventana emergente"
 
 #: src/preferences/detailsPage.ts:75
 msgid "Drag-and-drop from bottom to configure the pop-up"
-msgstr "Arrastre y suelte desde la parte inferior para configurar el pop-up"
+msgstr "Arrastre y suelte desde la parte inferior para configurar la ventana emergente"
 
 #: src/preferences/detailsPage.ts:173 src/preferences/generalPage.ts:235
 msgid "Panel"
@@ -213,15 +214,15 @@ msgstr "Panel"
 
 #: src/preferences/detailsPage.ts:176
 msgid "None"
-msgstr "Ninguna"
+msgstr "Ninguno"
 
 #: src/preferences/detailsPage.ts:188
 msgid "Panel Detail"
-msgstr "Detalle del Panel"
+msgstr "Detalle del panel"
 
 #: src/preferences/detailsPage.ts:206
 msgid "Secondary Panel Detail"
-msgstr "Detalle del Panel Secundario"
+msgstr "Detalle secundario del panel"
 
 #: src/preferences/detailsPage.ts:218
 msgid "Show Condition Icon"
@@ -229,12 +230,12 @@ msgstr "Mostrar icono de condición"
 
 #: src/preferences/detailsPage.ts:228
 msgid "Show Sunrise/Sunset"
-msgstr "Mostrar Sunrise/Sunset"
+msgstr "Mostrar amanecer/puesta de sol"
 
 #: src/preferences/editLocation.ts:33
 #, javascript-format
 msgid "Edit %s"
-msgstr "Editar %s"
+msgstr "Modificar %s"
 
 #: src/preferences/editLocation.ts:33
 msgid "New Location"
@@ -258,7 +259,7 @@ msgstr "Se requiere un nombre."
 
 #: src/preferences/editLocation.ts:99
 msgid "Invalid coordinates entry."
-msgstr "Entrada de coordenadas no válida."
+msgstr "Entrada de coordenadas inválida."
 
 #: src/preferences/generalPage.ts:38
 msgid "General"
@@ -278,15 +279,15 @@ msgstr "Personalizado"
 
 #: src/preferences/generalPage.ts:48
 msgid "Metric"
-msgstr "Métrica"
+msgstr "Métricas"
 
 #: src/preferences/generalPage.ts:48
 msgid "UK"
-msgstr "Reino Unido"
+msgstr "Imperiales"
 
 #: src/preferences/generalPage.ts:48
 msgid "US"
-msgstr "SUS"
+msgstr "EE. UU."
 
 #: src/preferences/generalPage.ts:61
 msgid "Fahrenheit"
@@ -326,11 +327,11 @@ msgstr "Servicio meteorológico"
 
 #: src/preferences/generalPage.ts:160
 msgid "Configure how the weather is attained"
-msgstr "Configurar cómo se alcanza el clima"
+msgstr "Configurar el proveedor del tiempo"
 
 #: src/preferences/generalPage.ts:167
 msgid "Weather Provider"
-msgstr "Proveedor de tiempo"
+msgstr "Proveedor del tiempo"
 
 #: src/preferences/generalPage.ts:180
 msgid "Configure how your location is found"
@@ -366,11 +367,11 @@ msgstr "Configurar características de accesibilidad"
 
 #: src/preferences/generalPage.ts:224
 msgid "High Contrast"
-msgstr "Alto contrato"
+msgstr "Alto contraste"
 
 #: src/preferences/generalPage.ts:236
 msgid "Configure the panel and pop-up"
-msgstr "Configurar el panel y emerger"
+msgstr "Configurar el panel y la ventana emergente"
 
 #: src/preferences/generalPage.ts:246
 msgid "Light"
@@ -378,7 +379,7 @@ msgstr "Claro"
 
 #: src/preferences/generalPage.ts:247
 msgid "Afterdark"
-msgstr "Después de oscuro"
+msgstr "Afterdark"
 
 #: src/preferences/generalPage.ts:248
 msgid "Immersive"
@@ -390,11 +391,11 @@ msgstr "Tema"
 
 #: src/preferences/generalPage.ts:261
 msgid "Center"
-msgstr "Centrar"
+msgstr "Centro"
 
 #: src/preferences/generalPage.ts:261
 msgid "Left"
-msgstr "Queda"
+msgstr "Izquierda"
 
 #: src/preferences/generalPage.ts:261
 msgid "Right"
@@ -402,11 +403,11 @@ msgstr "Derecha"
 
 #: src/preferences/generalPage.ts:264
 msgid "Side of Panel"
-msgstr "Lado del Panel"
+msgstr "Posición en el panel"
 
 #: src/preferences/generalPage.ts:274
 msgid "Order in Panel"
-msgstr "Pedido en Panel"
+msgstr "Orden en el panel"
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
@@ -418,7 +419,7 @@ msgstr "Añadir"
 
 #: src/preferences/locationsPage.ts:97
 msgid "Move Up"
-msgstr "Subir"
+msgstr "Mover arriba"
 
 #: src/preferences/locationsPage.ts:112
 msgid "Move Down"
@@ -431,7 +432,7 @@ msgstr "Añadir aquí"
 #: src/preferences/locationsPage.ts:193
 #, javascript-format
 msgid "Are you sure you want delete %s?"
-msgstr "¿Está seguro que desea eliminar %s?"
+msgstr "¿Confirma que desea eliminar %s?"
 
 #: src/preferences/locationsPage.ts:194
 msgid "Cancel"
@@ -452,7 +453,7 @@ msgstr "Error interno"
 
 #: src/preferences/locationsPage.ts:261
 msgid "Something else edited the locations."
-msgstr "Algo más editó las ubicaciones."
+msgstr "Otra cosa modificó las ubicaciones."
 
 #: src/preferences/search.ts:45
 msgid "Search Location"
@@ -460,7 +461,7 @@ msgstr "Buscar ubicación"
 
 #: src/preferences/search.ts:54
 msgid "City, Neighborhood, etc."
-msgstr "Ciudad, Neighborhood, etc."
+msgstr "Ciudad, barrio, etc."
 
 #: src/preferences/search.ts:59
 msgid "Search"
@@ -468,22 +469,24 @@ msgstr "Buscar"
 
 #: src/preferences/search.ts:158
 msgid "No Internet"
-msgstr "Sin Internet"
+msgstr "Sin conexión a Internet"
 
 #: src/preferences/search.ts:206
 msgid "No results."
-msgstr "Sin resultados."
+msgstr "No hay resultados."
 
 #: src/preferences/search.ts:211
 msgid "No copyright information available."
-msgstr "No hay información de derechos de autor disponible."
+msgstr "No está disponible alguna información sobre los derechos de autor."
 
 #: src/prefs.ts:74
 #, javascript-format
-msgid "SimpleWeather doesn't know how to handle your locale.\n"
+msgid ""
+"SimpleWeather doesn't know how to handle your locale.\n"
 "\tError - %s\n"
 "Please consider submitting a bug report on GitHub."
-msgstr "SimpleWeather no sabe cómo manejar su locale.\n"
+msgstr ""
+"SimpleWeather no sabe cómo manejar su locale.\n"
 "\tError - %s\n"
 "Por favor, considere enviar un informe de error en GitHub."
 
@@ -497,15 +500,47 @@ msgstr "Ignorar"
 
 #: src/prefs.ts:77
 msgid "Open GitHub"
-msgstr "Open GitHub"
+msgstr "Abrir GitHub"
+
+#: src/units.ts:133
+msgid "E"
+msgstr "E"
+
+#: src/units.ts:133
+msgid "N"
+msgstr "N"
+
+#: src/units.ts:133
+msgid "NE"
+msgstr "NE"
+
+#: src/units.ts:133
+msgid "NW"
+msgstr "NO"
+
+#: src/units.ts:133
+msgid "S"
+msgstr "S"
+
+#: src/units.ts:133
+msgid "SE"
+msgstr "SE"
+
+#: src/units.ts:133
+msgid "SW"
+msgstr "SO"
+
+#: src/units.ts:133
+msgid "W"
+msgstr "O"
 
 #: src/weather.ts:103
 msgid "Clear"
-msgstr "Claro"
+msgstr "Despejado"
 
 #: src/weather.ts:103
 msgid "Sunny"
-msgstr "Sunny"
+msgstr "Soleado"
 
 #: src/weather.ts:105
 msgid "Cloudy"
@@ -513,15 +548,15 @@ msgstr "Nublado"
 
 #: src/weather.ts:107
 msgid "Rainy"
-msgstr "Rainy"
+msgstr "Lluvia"
 
 #: src/weather.ts:109
 msgid "Snowy"
-msgstr "Snowy"
+msgstr "Nieve"
 
 #: src/weather.ts:111
 msgid "Stormy"
-msgstr "Stormy"
+msgstr "Tormenta"
 
 #: src/weather.ts:113
 msgid "Windy"
@@ -534,21 +569,26 @@ msgstr "Bienvenido a %s"
 
 #: src/welcome.ts:74
 #, javascript-format
-msgid "%s occasionally connects to the selected weather service. By default, it will use the Internet to connect to:\n"
+msgid ""
+"%s occasionally connects to the selected weather service. By default, it "
+"will use the Internet to connect to:\n"
 "  •  %s, an %s service for weather\n"
 "  •  %s, optional for resolving the current location\n"
-"  •  %s, for searching locations by name\n\n"
-msgstr "%s se conecta ocasionalmente al servicio meteorológico seleccionado. Por defecto, usará Internet para conectarse a:\n"
+"  •  %s, for searching locations by name\n"
+"\n"
+msgstr ""
+"%s se conecta ocasionalmente al servicio meteorológico seleccionado. Por "
+"defecto, usará Internet para conectarse a:\n"
 "  •  %s, un servicio %s para el tiempo\n"
-"  •  %s, opcional para resolver la ubicación actual\n"
-"  •  %s, para buscar ubicaciones por nombre\n\n"
+"  •  %s, de manera opcional, para determinar la ubicación actual\n"
+"  •  %s, para buscar ubicaciones por nombre\n"
+"\n"
 
 #: src/welcome.ts:83
 #, javascript-format
 msgid "Thank you for installing %s!"
-msgstr "¡Gracias por instalar %s!"
+msgstr "¡Gracias por haber instalado %s!"
 
 #: src/welcome.ts:99
 msgid "Abort"
-msgstr "Abordar"
-
+msgstr "Cancelar"
