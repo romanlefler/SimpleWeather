@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
-"POT-Creation-Date: 2025-07-23 16:59-0500\n"
+"POT-Creation-Date: 2025-08-11 14:10+0200\n"
 "PO-Revision-Date: 2025-07-23 22:06\n"
-"Last-Translator: \n"
+"Last-Translator: Davide Murtas\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
 "MIME-Version: 1.0\n"
@@ -221,7 +221,7 @@ msgstr "Dettaglio del pannello"
 
 #: src/preferences/detailsPage.ts:206
 msgid "Secondary Panel Detail"
-msgstr "Dettaglio del pannello secondario"
+msgstr "Dettaglio secondario del pannello"
 
 #: src/preferences/detailsPage.ts:218
 msgid "Show Condition Icon"
@@ -254,7 +254,7 @@ msgstr "Salva"
 
 #: src/preferences/editLocation.ts:94
 msgid "Name is required."
-msgstr "Il nome è richiesto."
+msgstr "È richiesto un nome."
 
 #: src/preferences/editLocation.ts:99
 msgid "Invalid coordinates entry."
@@ -278,11 +278,11 @@ msgstr "Personalizzato"
 
 #: src/preferences/generalPage.ts:48
 msgid "Metric"
-msgstr "Metrico"
+msgstr "Metriche"
 
 #: src/preferences/generalPage.ts:48
 msgid "UK"
-msgstr "UK"
+msgstr "Imperiali"
 
 #: src/preferences/generalPage.ts:48
 msgid "US"
@@ -480,10 +480,12 @@ msgstr "Nessuna informazione sul copyright disponibile."
 
 #: src/prefs.ts:74
 #, javascript-format
-msgid "SimpleWeather doesn't know how to handle your locale.\n"
+msgid ""
+"SimpleWeather doesn't know how to handle your locale.\n"
 "\tError - %s\n"
 "Please consider submitting a bug report on GitHub."
-msgstr "SimpleWeather non sa come gestire la tua localizzazione.\n"
+msgstr ""
+"SimpleWeather non sa come gestire la tua localizzazione.\n"
 "\t<unk> Errore - %s\n"
 "Si consideri la possibilità di inviare una segnalazione di bug su GitHub."
 
@@ -498,6 +500,38 @@ msgstr "Ignora"
 #: src/prefs.ts:77
 msgid "Open GitHub"
 msgstr "Apri GitHub"
+
+#: src/units.ts:133
+msgid "E"
+msgstr "E"
+
+#: src/units.ts:133
+msgid "N"
+msgstr "N"
+
+#: src/units.ts:133
+msgid "NE"
+msgstr "NE"
+
+#: src/units.ts:133
+msgid "NW"
+msgstr "NO"
+
+#: src/units.ts:133
+msgid "S"
+msgstr "S"
+
+#: src/units.ts:133
+msgid "SE"
+msgstr "SE"
+
+#: src/units.ts:133
+msgid "SW"
+msgstr "SO"
+
+#: src/units.ts:133
+msgid "W"
+msgstr "O"
 
 #: src/weather.ts:103
 msgid "Clear"
@@ -534,14 +568,20 @@ msgstr "Benvenuto in %s"
 
 #: src/welcome.ts:74
 #, javascript-format
-msgid "%s occasionally connects to the selected weather service. By default, it will use the Internet to connect to:\n"
+msgid ""
+"%s occasionally connects to the selected weather service. By default, it "
+"will use the Internet to connect to:\n"
 "  •  %s, an %s service for weather\n"
 "  •  %s, optional for resolving the current location\n"
-"  •  %s, for searching locations by name\n\n"
-msgstr "%s si connette occasionalmente al servizio meteo selezionato. Per impostazione predefinita, utilizzerà Internet per connettersi a:\n"
+"  •  %s, for searching locations by name\n"
+"\n"
+msgstr ""
+"%s si connette occasionalmente al servizio meteo selezionato. Per "
+"impostazione predefinita, utilizzerà Internet per connettersi a:\n"
 "  •  %s, un servizio %s per il meteo\n"
 "  •  %s, opzionalmente, per la determinazione della posizione corrente\n"
-"  •  %s, per la ricerca di località per nome\n\n"
+"  •  %s, per la ricerca di località per nome\n"
+"\n"
 
 #: src/welcome.ts:83
 #, javascript-format
@@ -551,4 +591,3 @@ msgstr "Grazie per aver installato %s!"
 #: src/welcome.ts:99
 msgid "Abort"
 msgstr "Interrompi"
-
