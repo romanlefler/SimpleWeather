@@ -189,7 +189,7 @@ msgstr "ici"
 #: src/preferences/aboutPage.ts:124
 #, javascript-format
 msgid "Report bugs or request new features %s."
-msgstr "Signaler des bugs ou demander de nouvelles fonctionnalités %s."
+msgstr "Signalez des bugs ou demandez de nouvelles fonctionnalités %s."
 
 #: src/preferences/aboutPage.ts:138
 msgid "Credits"
