@@ -114,12 +114,12 @@ msgstr "%f°N"
 #: src/location.ts:82
 #, javascript-format
 msgid "%f°S"
-msgstr ""
+msgstr "%f°S"
 
 #: src/location.ts:83
 #, javascript-format
 msgid "%f°E"
-msgstr ""
+msgstr "%f°E"
 
 #: src/location.ts:83
 #, javascript-format
@@ -548,11 +548,11 @@ msgstr "Nuageux"
 
 #: src/weather.ts:107
 msgid "Rainy"
-msgstr "Il pleut"
+msgstr "Pluvieux"
 
 #: src/weather.ts:109
 msgid "Snowy"
-msgstr "Il neige"
+msgstr "Neigeux"
 
 #: src/weather.ts:111
 msgid "Stormy"
