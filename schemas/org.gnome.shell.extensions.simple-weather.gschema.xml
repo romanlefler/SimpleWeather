@@ -139,6 +139,11 @@
             <summary>Show sunrise/sunset in panel</summary>
         </key>
 
+        <key name="show-suntime-as-countdown" type="b">
+            <default>false</default>
+            <summary>Show sunrise/sunset as countdown in panel</summary>
+        </key>
+
         <key name="details-list" type="as">
             <default>[ 'temp', 'windSpeedAndDir', 'gusts', 'pressure', 'feelsLike', 'humidity', 'uvIndex', 'precipitation' ]</default>
             <summary>Current weather details in pop-up</summary>

@@ -23,17 +23,28 @@ import Adw from "gi://Adw";
 import { gettext as _g } from "../gettext.js";
 import { detailName, Details, displayDetail } from "../details.js";
 import { Condition, Weather, gettextCondit } from "../weather.js";
-import { Direction, Percentage, Pressure, RainMeasurement, Speed, SpeedAndDir, Temp } from "../units.js";
+import { Direction, Percentage, Pressure, RainMeasurement, Speed, SpeedAndDir, Temp, Countdown } from "../units.js";
 import { Location } from "../location.js";
 import { Config, writeGTypeAS } from "../config.js";
+
+function fromTime(hr : number, day : Date | null = null) : Date {
+    if(day === null) day = new Date();
+    const d = new Date(day);
+    d.setHours(hr, 0, 0, 0);
+    if(new Date() > d) {
+        const dt = new Date();
+        dt.setDate(day.getDate() + 1);
+        return fromTime(hr, dt);
+    } else return d;
+}
 
 const MOCK_WEATHER : Weather = {
     condit: Condition.CLEAR,
     temp: new Temp(71),
     gIconName: "weather-clear-symbolic",
     isNight: false,
-    sunset: new Date(),
-    sunrise: new Date(),
+    sunset: fromTime(12 + 8),
+    sunrise: fromTime(6),
     forecast: [ ],
     hourForecast: [ ],
     feelsLike: new Temp(77),
@@ -48,7 +59,8 @@ const MOCK_WEATHER : Weather = {
     loc: Location.newCoords("Dallas", 32.7792, -96.8089),
     windSpeedAndDir: new SpeedAndDir(new Speed(8), new Direction(0)),
     cloudCover: new Percentage(44),
-    conditionText: gettextCondit(Condition.CLEAR, false)
+    conditionText: gettextCondit(Condition.CLEAR, false),
+    sunEventCountdown: new Countdown(fromTime(6))
 };
 
 export class DetailsPage extends Adw.PreferencesPage {
@@ -231,8 +243,20 @@ export class DetailsPage extends Adw.PreferencesPage {
         showSunTimeRow.connect("notify::active", () => {
             settings.set_boolean("show-suntime", showSunTimeRow.active);
             settings.apply();
+            asCountdownRow.sensitive = showSunTimeRow.active;
         });
         panelGroup.add(showSunTimeRow);
+
+        const asCountdownRow = new Adw.SwitchRow({
+            title: _g("Use Countdown for Sun"),
+            active: settings.get_boolean("show-suntime-as-countdown"),
+            sensitive: settings.get_boolean("show-suntime")
+        });
+        asCountdownRow.connect("notify::active", () => {
+            settings.set_boolean("show-suntime-as-countdown", asCountdownRow.active);
+            settings.apply();
+        });
+        panelGroup.add(asCountdownRow);
 
         this.add(panelGroup);
     }

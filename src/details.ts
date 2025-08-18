@@ -33,7 +33,8 @@ export enum Details {
     PRECIPITATION = "precipitation",
     SUNRISE = "sunrise",
     SUNSET = "sunset",
-    CLOUD_COVER = "cloudCover"
+    CLOUD_COVER = "cloudCover",
+    SUN_EVENT_COUNTDOWN = "sunEventCountdown"
 }
 
 /**
@@ -68,6 +69,7 @@ export const detailName : IDetails = {
     sunrise: _g("Sunrise"),
     sunset: _g("Sunset"),
     cloudCover: _g("Cloud Cover"),
+    sunEventCountdown: _g("Sun Countdown")
 };
 
 export function displayDetail(w : Weather, detail : Details, gettext : (s : string) => string,

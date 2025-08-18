@@ -236,6 +236,7 @@ export default class SimpleWeatherExtension extends Extension {
                 layout.remove_child(this.#sunTimeIcon!);
             }
         });
+        this.#config!.onShowSunTimeAsCountdownChanged(this.#rebuildIndicator.bind(this));
         this.#config!.onPanelDetailChanged(this.#rebuildIndicator.bind(this));
         this.#config!.onSecondaryPanelDetailChanged(this.#rebuildIndicator.bind(this));
         this.#config!.onShowPanelIconChanged(this.#rebuildIndicator.bind(this));
@@ -337,7 +338,11 @@ export default class SimpleWeatherExtension extends Extension {
         const showSunset = w.sunset < w.sunrise;
         const sunTime = showSunset ? w.sunset : w.sunrise;
 
-        if(this.#sunTimeLabel) this.#sunTimeLabel.text = displayTime(sunTime, this.#config!);
+        if(this.#sunTimeLabel) {
+            const useAbs = !this.#config!.getShowSunTimeAsCountdown();
+            if(useAbs) this.#sunTimeLabel.text = displayTime(sunTime, this.#config!);
+            else this.#sunTimeLabel.text = w.sunEventCountdown.display(this.#config!);
+        }
         if(this.#sunTimeIcon) this.#sunTimeIcon.icon_name = `daytime-${showSunset ? "sunset" : "sunrise"}-symbolic`;
 
         this.#popup!.updateGui(w);

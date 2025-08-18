@@ -17,7 +17,7 @@
 
 import { IDetails } from "./details.js";
 import { Location } from "./location.js";
-import { Direction, Percentage, Pressure, RainMeasurement, Speed, SpeedAndDir, Temp, GettextKey } from "./units.js";
+import { Direction, Percentage, Pressure, RainMeasurement, Speed, SpeedAndDir, Temp, GettextKey, Countdown } from "./units.js";
 
 export interface Weather extends IDetails {
 
@@ -64,6 +64,8 @@ export interface Weather extends IDetails {
     cloudCover : Percentage;
 
     conditionText : GettextKey;
+
+    sunEventCountdown : Countdown;
 
 }
 
