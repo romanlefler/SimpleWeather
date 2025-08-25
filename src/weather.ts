@@ -17,7 +17,7 @@
 
 import { IDetails } from "./details.js";
 import { Location } from "./location.js";
-import { Direction, Percentage, Pressure, RainMeasurement, Speed, SpeedAndDir, Temp, GettextKey } from "./units.js";
+import { Direction, Percentage, Pressure, RainMeasurement, Speed, SpeedAndDir, Temp, GettextKey, Countdown } from "./units.js";
 
 export interface Weather extends IDetails {
 
@@ -65,6 +65,8 @@ export interface Weather extends IDetails {
 
     conditionText : GettextKey;
 
+    sunEventCountdown : Countdown;
+
 }
 
 export interface Forecast {
@@ -100,7 +102,7 @@ export function _g(s : string) : string {
 export function gettextCondit(condit : Condition, isNight : boolean) : GettextKey {
     switch(condit) {
         case Condition.CLEAR:
-            return new GettextKey(_g(isNight ? "Clear" : "Sunny"));
+            return new GettextKey(isNight ? _g("Clear") : _g("Sunny"));
         case Condition.CLOUDY:
             return new GettextKey(_g("Cloudy"));
         case Condition.RAINY:

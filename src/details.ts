@@ -19,6 +19,7 @@ import { Config } from "./config.js";
 import { displayTime } from "./lang.js";
 import { Displayable } from "./units.js";
 import { Weather } from "./weather.js";
+import { gettext as realGettext } from "./gettext.js";
 
 export enum Details {
     TEMP = "temp",
@@ -32,7 +33,8 @@ export enum Details {
     PRECIPITATION = "precipitation",
     SUNRISE = "sunrise",
     SUNSET = "sunset",
-    CLOUD_COVER = "cloudCover"
+    CLOUD_COVER = "cloudCover",
+    SUN_EVENT_COUNTDOWN = "sunEventCountdown"
 }
 
 /**
@@ -67,6 +69,7 @@ export const detailName : IDetails = {
     sunrise: _g("Sunrise"),
     sunset: _g("Sunset"),
     cloudCover: _g("Cloud Cover"),
+    sunEventCountdown: _g("Sun Countdown")
 };
 
 export function displayDetail(w : Weather, detail : Details, gettext : (s : string) => string,
@@ -85,5 +88,5 @@ export function displayDetail(w : Weather, detail : Details, gettext : (s : stri
 
     if(onlyValue) return fmt;
     const name = detailName[detail] as string;
-    return `${_g(name)}: ${fmt}`;
+    return `${realGettext(name)}: ${fmt}`;
 }
