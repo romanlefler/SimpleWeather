@@ -29,6 +29,8 @@ Many languages or dialects also do not exist in the project.
 Everybody is encouraged to make pull requests to add or fix
 translations.
 
+Check [AUTHORS](./AUTHORS) for a list of contributors.
+
 ## Building
 
 Consult [`docs/building.md`](./docs/building.md).
@@ -43,3 +45,6 @@ to the source code. If you plan to add a feature, it is a good
 idea to make an [issue](https://github.com/romanlefler/SimpleWeather/issues)
 first and label it as a feature request and add that you are willing
 to do it (and perhaps how).
+
+Check [AUTHORS](./AUTHORS) for a list of contributors.
+

@@ -125,7 +125,7 @@ export class AboutPage extends Adw.PreferencesPage {
         ));
         const credits = new Gtk.Button({
             child: new Gtk.Label({
-                label: "Credits",
+                label: _g("Credits"),
                 // This effectively is the padding on the button
                 css_classes: [ "simpleweather-margin-wide" ]
             }),

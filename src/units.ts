@@ -130,7 +130,7 @@ export class Direction implements Displayable {
                 const point = Math.round(this.#degrees / (360 / 8));
                 // While it's not possible to be exactly 8 (second N),
                 // We could round up to 8 since 7.9 and others are valid inputs
-                const map = [ "N", "NE", "E", "SE", "S", "SW", "W", "NW", "N" ];
+                const map = [ _g("N"), _g("NE"), _g("E"), _g("SE"), _g("S"), _g("SW"), _g("W"), _g("NW"), _g("N") ];
                 return map[point];
             default:
                 throw new UnitError("Direction unit invalid.");
@@ -284,6 +284,23 @@ export class GettextKey implements Displayable {
     }
     display(_cfg : Config) : string {
         return _g(this.#key);
+    }
+}
+
+export class Countdown implements Displayable {
+    #date : Date;
+    constructor(date : Date) {
+        this.#date = date;
+    }
+    display(cfg : Config) : string {
+        const now = new Date();
+        const diff = this.#date.getTime() - now.getTime();
+        if(diff <= 0) return _g("Now");
+        const seconds = Math.floor(diff / 1000);
+        const minutes = Math.floor(seconds / 60);
+        const hours = Math.floor(minutes / 60);
+        if(hours >= 1) return _g("%d h").format(hours % 60);
+        else return _g("%d min").format(minutes % 60);
     }
 }
 

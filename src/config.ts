@@ -254,6 +254,19 @@ export class Config {
         this.#handlerIds.push(id);
     }
 
+    getShowSunTimeAsCountdown() : boolean {
+        return this.#settings.get_boolean("show-suntime-as-countdown");
+    }
+
+    onShowSunTimeAsCountdownChanged(callback : (val : boolean) => void) {
+        const id = this.#settings.connect("changed", (_, key) => {
+            if(key === "show-suntime-as-countdown") {
+                callback(this.#settings.get_boolean("show-suntime-as-countdown"));
+            }
+        });
+        this.#handlerIds.push(id);
+    }
+
     getSecondaryPanelDetail() : Details | null {
         const detail = this.#settings.get_string("secondary-panel-detail");
         if(!Object.values(Details).includes(detail as Details)) return null;
