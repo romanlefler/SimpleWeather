@@ -1,6 +1,11 @@
 
 # Development
 
+## Features
+
+- Option to show sun countdown instead of times in the pop-up
+- Sun countdown detail
+
 ## Bug Fixes
 
 - Fix some of pop-up not being translated
@@ -13,6 +18,7 @@
 - Chinese (thanks know-nothing-but-123)
 - French (thanks Samuel St. Jean, mdouchin, & Neo-29)
 - German (thanks Ahmet Ala)
+- Indonesian (thanks Fakhrul Rijal)
 - Italian (thanks Davide Murtas)
 - Turkish (thanks Ahmet Ala)
 
