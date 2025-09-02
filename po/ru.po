@@ -211,7 +211,7 @@ msgstr "Перетащите из нижней части, чтобы настр
 msgid "Panel"
 msgstr "Панель"
 
-#: src/preferences/detailsPage.ts:176ч
+#: src/preferences/detailsPage.ts:176
 msgid "None"
 msgstr "Нет"
 
