@@ -286,6 +286,26 @@ export class GeneralPage extends Adw.PreferencesPage {
             settings.apply();
         });
         panelGroup.add(panelPriorityRow);
+        const useSymbolicRow = new Adw.SwitchRow({
+            title: _g("Use Symbolic Icons in Panel"),
+            active: settings.get_boolean("symbolic-icons-panel")
+        });
+        useSymbolicRow.connect("notify::active", () => {
+            const val = useSymbolicRow.active;
+            settings.set_boolean("symbolic-icons-panel", val);
+            settings.apply();
+        });
+        panelGroup.add(useSymbolicRow);
+        const alwaysPackagedRow = new Adw.SwitchRow({
+            title: _g("Always Use Packaged Icons"),
+            active: settings.get_boolean("always-packaged-icons")
+        });
+        alwaysPackagedRow.connect("notify::active", () => {
+            const val = alwaysPackagedRow.active;
+            settings.set_boolean("always-packaged-icons", val);
+            settings.apply();
+        });
+        panelGroup.add(alwaysPackagedRow);
 
         this.add(panelGroup);
     }

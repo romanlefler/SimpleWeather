@@ -223,6 +223,8 @@ export default class SimpleWeatherExtension extends Extension {
         // Some settings just require a GUI update
         this.#config!.onAnyUnitChanged(this.#updateGui.bind(this));
         this.#config!.onDetailsListChanged(this.#updateGui.bind(this));
+        this.#config!.onSymbolicIconsChanged(this.#updateGui.bind(this));
+        this.#config!.onAlwaysPackagedIconsChanged(this.#updateGui.bind(this));
         // Some require extra stuff
         this.#config!.onShowSunTimeChanged(b => {
             if(!this.#indicator) return;
@@ -333,7 +335,10 @@ export default class SimpleWeatherExtension extends Extension {
             this.#secondPanelLabel.text = secondPanelText;
         }
 
-        if(this.#panelIcon) this.#panelIcon.icon_name = w.gIconName;
+        if(this.#panelIcon) {
+            const suffix = this.#config!.getSymbolicIcons() ? "-symbolic" : "";
+            this.#panelIcon.icon_name = w.gIconName + suffix;
+        }
 
         const showSunset = w.sunset < w.sunrise;
         const sunTime = showSunset ? w.sunset : w.sunrise;

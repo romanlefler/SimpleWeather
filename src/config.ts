@@ -361,6 +361,28 @@ export class Config {
         this.#handlerIds.push(id);
     }
 
+    getSymbolicIcons() : boolean {
+        return this.#settings.get_boolean("symbolic-icons-panel");
+    }
+
+    onSymbolicIconsChanged(callback : () => void) : void {
+        const id = this.#settings.connect("changed", (_, key) => {
+            if(key === "symbolic-icons-panel") callback();
+        });
+        this.#handlerIds.push(id);
+    }
+
+    getAlwaysPackagedIcons() : boolean {
+        return this.#settings.get_boolean("always-packaged-icons");
+    }
+
+    onAlwaysPackagedIconsChanged(callback : () => void) : void {
+        const id = this.#settings.connect("changed", (_, key) => {
+            if(key === "always-packaged-icons") callback();
+        });
+        this.#handlerIds.push(id);
+    }
+
 
 
     getUnitPreset() : UnitPreset {
