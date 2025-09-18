@@ -1,4 +1,17 @@
 
+# v49.0.0 dev
+
+## Features
+
+- Option to use packaged icons in panel
+- Option to use symbolic or realistic icons
+
+## Translations
+
+- Dutch (thanks koenraad-verv)
+- Japanese (thanks hidenosuke)
+- Russian (thanks Valetss)
+
 # v48.2.0
 
 ## Features
