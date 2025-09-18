@@ -40,11 +40,11 @@ msgstr "風"
 
 #: src/details.ts:63
 msgid "Humidity"
-msgstr "Humidity"
+msgstr "湿度"
 
 #: src/details.ts:64
 msgid "Gusts"
-msgstr "ガスト"
+msgstr "風速"
 
 #: src/details.ts:65
 msgid "UV High"
@@ -52,15 +52,15 @@ msgstr "紫外線高"
 
 #: src/details.ts:66 src/preferences/generalPage.ts:92
 msgid "Pressure"
-msgstr "<unk>"
+msgstr "気圧"
 
 #: src/details.ts:67
 msgid "Precipitation"
-msgstr "<unk>"
+msgstr "降水量"
 
 #: src/details.ts:68
 msgid "Sunrise"
-msgstr "日の出（サンライズ）"
+msgstr "日の出"
 
 #: src/details.ts:69
 msgid "Sunset"
@@ -68,11 +68,11 @@ msgstr "日没"
 
 #: src/details.ts:70
 msgid "Cloud Cover"
-msgstr "雲のカバー"
+msgstr "雲量"
 
 #: src/details.ts:75 src/popup.ts:409
 msgid "Invalid"
-msgstr "無効です"
+msgstr "無効"
 
 #: src/lang.ts:108 src/popup.ts:57
 msgid "Today"
@@ -217,11 +217,11 @@ msgstr "なし"
 
 #: src/preferences/detailsPage.ts:188
 msgid "Panel Detail"
-msgstr "部品の詳細"
+msgstr "パネルの詳細"
 
 #: src/preferences/detailsPage.ts:206
 msgid "Secondary Panel Detail"
-msgstr "セカンダリパネル詳細"
+msgstr "セカンダリパネルの詳細"
 
 #: src/preferences/detailsPage.ts:218
 msgid "Show Condition Icon"
@@ -290,11 +290,11 @@ msgstr "米国"
 
 #: src/preferences/generalPage.ts:61
 msgid "Fahrenheit"
-msgstr "Fahrenheit"
+msgstr "華氏"
 
 #: src/preferences/generalPage.ts:62
 msgid "Celsius"
-msgstr "摂氏度"
+msgstr "摂氏"
 
 #: src/preferences/generalPage.ts:78
 msgid "Speed"
@@ -326,7 +326,7 @@ msgstr "天気サービス"
 
 #: src/preferences/generalPage.ts:160
 msgid "Configure how the weather is attained"
-msgstr "天気の達成方法を設定する"
+msgstr "天気の取得方法を設定する"
 
 #: src/preferences/generalPage.ts:167
 msgid "Weather Provider"
@@ -334,7 +334,7 @@ msgstr "天気プロバイダー"
 
 #: src/preferences/generalPage.ts:180
 msgid "Configure how your location is found"
-msgstr "位置情報がどのように見つかるかを設定します"
+msgstr "位置情報がどのように見つけるかを設定します"
 
 #: src/preferences/generalPage.ts:184 src/preferences/generalPage.ts:185
 msgid "Online"
@@ -366,7 +366,7 @@ msgstr "ユーザー補助機能を設定"
 
 #: src/preferences/generalPage.ts:224
 msgid "High Contrast"
-msgstr "ハイコントラスト（ハイコントラスト）"
+msgstr "ハイコントラスト"
 
 #: src/preferences/generalPage.ts:236
 msgid "Configure the panel and pop-up"
@@ -378,7 +378,7 @@ msgstr "ライト"
 
 #: src/preferences/generalPage.ts:247
 msgid "Afterdark"
-msgstr "Afterdark"
+msgstr "日没"
 
 #: src/preferences/generalPage.ts:248
 msgid "Immersive"
@@ -402,7 +402,7 @@ msgstr "右"
 
 #: src/preferences/generalPage.ts:264
 msgid "Side of Panel"
-msgstr "サイドオブパネル"
+msgstr "パネルの水平位置"
 
 #: src/preferences/generalPage.ts:274
 msgid "Order in Panel"
@@ -497,7 +497,7 @@ msgstr "無視"
 
 #: src/prefs.ts:77
 msgid "Open GitHub"
-msgstr "Open GitHub"
+msgstr "GitHubを開く"
 
 #: src/weather.ts:103
 msgid "Clear"
@@ -505,7 +505,7 @@ msgstr "クリア"
 
 #: src/weather.ts:103
 msgid "Sunny"
-msgstr "Sunny"
+msgstr "晴れ"
 
 #: src/weather.ts:105
 msgid "Cloudy"
@@ -513,19 +513,19 @@ msgstr "曇り"
 
 #: src/weather.ts:107
 msgid "Rainy"
-msgstr "Rainy"
+msgstr "雨"
 
 #: src/weather.ts:109
 msgid "Snowy"
-msgstr "Snowy"
+msgstr "雪"
 
 #: src/weather.ts:111
 msgid "Stormy"
-msgstr "Stormy"
+msgstr "嵐"
 
 #: src/weather.ts:113
 msgid "Windy"
-msgstr "<unk>"
+msgstr "強風"
 
 #: src/welcome.ts:53
 #, javascript-format
