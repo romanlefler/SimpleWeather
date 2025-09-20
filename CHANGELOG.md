@@ -8,6 +8,7 @@
 
 ## Translations
 
+- Chinese (thanks JiaoxianDu)
 - Dutch (thanks koenraad-verv)
 - Japanese (thanks hidenosuke)
 - Russian (thanks Valetss)
