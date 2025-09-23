@@ -9,4 +9,13 @@ make install
 # export G_MESSAGES_DEBUG=all
 export MUTTER_DEBUG_DUMMY_MODE_SPECS=1280x1024
 export SHELL_DEBUG=all
-dbus-run-session -- gnome-shell --nested --wayland
+
+echo
+v="$(gnome-shell --version 2>/dev/null | grep -oE '[0-9]+(\.[0-9]+)*' || true)"
+echo "Testing on $v."
+if [[ "${VERSION%%.*}" -lt 49 ]]; then
+    dbus-run-session -- gnome-shell --nested --wayland
+else
+    printf "\033[44mMutter dev package is required.\033[0m\n"
+    dbus-run-session -- gnome-shell --devkit
+fi
