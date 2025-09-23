@@ -13,7 +13,7 @@ export SHELL_DEBUG=all
 echo
 v="$(gnome-shell --version 2>/dev/null | grep -oE '[0-9]+(\.[0-9]+)*' || true)"
 echo "Testing on $v."
-if [[ "${VERSION%%.*}" -lt 49 ]]; then
+if [[ "${v%%.*}" -lt 49 ]]; then
     dbus-run-session -- gnome-shell --nested --wayland
 else
     printf "\033[44mMutter dev package is required.\033[0m\n"
