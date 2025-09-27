@@ -3,6 +3,8 @@
 
 ## Testing
 
+Running a test in GNOME 49+ requires the mutter development package to be intalled. [See below for directions on common distros.](#mutter-dev-package)
+
 Build extension and launch shell window for testing:
 
 ```shell
@@ -40,3 +42,28 @@ Remove build files:
 ```shell
 make clean
 ```
+
+## Mutter Dev Package
+
+### Arch Linux (Pacman)
+
+```shell
+sudo pacman -S mutter-devkit
+```
+
+### Debian (Apt)
+
+```shell
+sudo apt install mutter-dev-bin
+```
+
+### Fedora (DNF)
+
+```shell
+
+### Fedora (DNF)
+
+```shell
+sudo dnf install mutter-devel
+```
+
