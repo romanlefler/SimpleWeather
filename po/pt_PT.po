@@ -20,7 +20,7 @@ msgstr ""
 #: src/autoConfig.ts:49 src/location.ts:53 src/location.ts:63
 #: src/preferences/generalPage.ts:179
 msgid "My Location"
-msgstr "Minha Localização"
+msgstr "A minha Localização"
 
 #: src/details.ts:59 src/preferences/generalPage.ts:64
 msgid "Temperature"
@@ -32,7 +32,7 @@ msgstr "Condição"
 
 #: src/details.ts:61
 msgid "Feels Like"
-msgstr "Sensação Como"
+msgstr "Sensação térmica"
 
 #: src/details.ts:62
 msgid "Wind"
@@ -40,15 +40,15 @@ msgstr "Vento"
 
 #: src/details.ts:63
 msgid "Humidity"
-msgstr "Umidade"
+msgstr "Humidade"
 
 #: src/details.ts:64
 msgid "Gusts"
-msgstr "Convidados"
+msgstr "Rajadas"
 
 #: src/details.ts:65
 msgid "UV High"
-msgstr "UV Alta"
+msgstr "UV Alto"
 
 #: src/details.ts:66 src/preferences/generalPage.ts:92
 msgid "Pressure"
@@ -60,11 +60,11 @@ msgstr "Precipitação"
 
 #: src/details.ts:68
 msgid "Sunrise"
-msgstr "Amanhecer"
+msgstr "Nascer do sol"
 
 #: src/details.ts:69
 msgid "Sunset"
-msgstr "Ensolarado"
+msgstr "Pôr do sol"
 
 #: src/details.ts:70
 msgid "Cloud Cover"
@@ -76,7 +76,7 @@ msgstr "Inválido"
 
 #: src/lang.ts:108 src/popup.ts:57
 msgid "Today"
-msgstr "hoje"
+msgstr "Hoje"
 
 #: src/lang.ts:111
 msgid "Monday"
@@ -84,7 +84,7 @@ msgstr "Segunda-Feira"
 
 #: src/lang.ts:111
 msgid "Sunday"
-msgstr "domingo"
+msgstr "Domingo"
 
 #: src/lang.ts:111
 msgid "Tuesday"
@@ -92,7 +92,7 @@ msgstr "Terça-feira"
 
 #: src/lang.ts:111
 msgid "Wednesday"
-msgstr "quarta-feira"
+msgstr "Quarta-feira"
 
 #: src/lang.ts:112
 msgid "Friday"
@@ -100,11 +100,11 @@ msgstr "Sexta-feira"
 
 #: src/lang.ts:112
 msgid "Saturday"
-msgstr "sábado"
+msgstr "Sábado"
 
 #: src/lang.ts:112
 msgid "Thursday"
-msgstr "quinta-feira"
+msgstr "Quinta-feira"
 
 #: src/location.ts:82
 #, javascript-format
@@ -124,7 +124,7 @@ msgstr "%f° E"
 #: src/location.ts:83
 #, javascript-format
 msgid "%f°W"
-msgstr "%f°W"
+msgstr "%f°O"
 
 #: src/popup.ts:143
 msgid "Weather Data"
@@ -132,29 +132,29 @@ msgstr "Dados meteorológicos"
 
 #: src/popup.ts:297 src/preferences/aboutPage.ts:76
 msgid "Settings"
-msgstr "Confirgurações"
+msgstr "Configurações"
 
 #: src/popup.ts:383
 #, javascript-format
 msgid "H: %s"
-msgstr "H: %s"
+msgstr "Máx: %s"
 
 #: src/popup.ts:384
 #, javascript-format
 msgid "L: %s"
-msgstr "L: %s"
+msgstr "Mín: %s"
 
 #: src/preferences/aboutPage.ts:48
 msgid "About"
-msgstr "SOBRE"
+msgstr "Sobre"
 
 #: src/preferences/aboutPage.ts:59
 msgid "GitHub Repository"
-msgstr "GitHub Repository"
+msgstr "Repositório GitHub"
 
 #: src/preferences/aboutPage.ts:61
 msgid "Support Me"
-msgstr "Me apoie"
+msgstr "Apoie-me"
 
 #: src/preferences/aboutPage.ts:68
 msgid "SimpleWeather Version"
@@ -166,46 +166,46 @@ msgstr "Desconhecido"
 
 #: src/preferences/aboutPage.ts:79
 msgid "Copy"
-msgstr "copiar"
+msgstr "Copiar"
 
 #: src/preferences/aboutPage.ts:102
 msgid "Copied settings JSON to clipboard."
-msgstr "Copiado as configurações JSON para a área de transferência."
+msgstr "JSON das configurações copiado para a área de transferência."
 
 #: src/preferences/aboutPage.ts:116
 #, javascript-format
 msgid "Contributions and translations are welcome! Read how on %s."
-msgstr "Contribuições e traduções são bem vindas! Leia como em %s."
+msgstr "Contribuições e traduções são bem vindas! Lê como em %s."
 
 #: src/preferences/aboutPage.ts:119
 #, javascript-format
 msgid "If you like this extension, consider starring it on %s."
-msgstr "Se você gosta dessa extensão, considere marcar sua estrela em %s."
+msgstr "Se gosta da extensão, considere dar uma estrela em %s."
 
 #: src/preferences/aboutPage.ts:122
 msgid "here"
-msgstr "Aqui"
+msgstr "aqui"
 
 #: src/preferences/aboutPage.ts:124
 #, javascript-format
 msgid "Report bugs or request new features %s."
-msgstr "Reporte erros ou solicite novos recursos %s."
+msgstr "Reporte erros ou solicite novas funcionalidades %s."
 
 #: src/preferences/aboutPage.ts:138
 msgid "Credits"
-msgstr "créditos"
+msgstr "Créditos"
 
 #: src/preferences/detailsPage.ts:68
 msgid "Details"
-msgstr "detalhes"
+msgstr "Detalhes"
 
 #: src/preferences/detailsPage.ts:74
 msgid "Pop-Up"
-msgstr "Pop-Up"
+msgstr "Janela emergente"
 
 #: src/preferences/detailsPage.ts:75
 msgid "Drag-and-drop from bottom to configure the pop-up"
-msgstr "Arrastar-e-soltar da parte inferior para configurar a janela"
+msgstr "Arraste de baixo para cima para configurar a janela emergente"
 
 #: src/preferences/detailsPage.ts:173 src/preferences/generalPage.ts:235
 msgid "Panel"
@@ -221,15 +221,15 @@ msgstr "Detalhe do painel"
 
 #: src/preferences/detailsPage.ts:206
 msgid "Secondary Panel Detail"
-msgstr "Detalhes do Painel Secundário"
+msgstr "Detalhes do painel secundário"
 
 #: src/preferences/detailsPage.ts:218
 msgid "Show Condition Icon"
-msgstr "Mostrar ícone de condição"
+msgstr "Mostrar ícone meteorológico"
 
 #: src/preferences/detailsPage.ts:228
 msgid "Show Sunrise/Sunset"
-msgstr "Mostrar pôr do sol/pôr do sol"
+msgstr "Mostrar nascer/pôr do sol"
 
 #: src/preferences/editLocation.ts:33
 #, javascript-format
@@ -242,7 +242,7 @@ msgstr "Nova localização"
 
 #: src/preferences/editLocation.ts:41
 msgid "Name"
-msgstr "Nome:"
+msgstr "Nome"
 
 #: src/preferences/editLocation.ts:56
 msgid "Coordinates"
@@ -258,11 +258,11 @@ msgstr "O nome é obrigatório."
 
 #: src/preferences/editLocation.ts:99
 msgid "Invalid coordinates entry."
-msgstr "Entrada de coordenadas inválida."
+msgstr "Coordenadas inválidas."
 
 #: src/preferences/generalPage.ts:38
 msgid "General"
-msgstr "Gerais"
+msgstr "Geral"
 
 #: src/preferences/generalPage.ts:43 src/preferences/generalPage.ts:53
 msgid "Units"
@@ -270,7 +270,7 @@ msgstr "Unidades"
 
 #: src/preferences/generalPage.ts:44
 msgid "Configure units of measurement"
-msgstr "Configurar unidades de medição"
+msgstr "Configurar unidades de medida"
 
 #: src/preferences/generalPage.ts:48
 msgid "Custom"
@@ -282,11 +282,11 @@ msgstr "Métrico"
 
 #: src/preferences/generalPage.ts:48
 msgid "UK"
-msgstr "RU"
+msgstr "Reino Unido"
 
 #: src/preferences/generalPage.ts:48
 msgid "US"
-msgstr "EUA"
+msgstr "Estados Unidos da América"
 
 #: src/preferences/generalPage.ts:61
 msgid "Fahrenheit"
@@ -302,7 +302,7 @@ msgstr "Velocidade"
 
 #: src/preferences/generalPage.ts:106
 msgid "Rain Measurement"
-msgstr "Medição da Chuva"
+msgstr "Medição da chuva"
 
 #: src/preferences/generalPage.ts:120
 msgid "Distance"
@@ -314,7 +314,7 @@ msgstr "Graus"
 
 #: src/preferences/generalPage.ts:144
 msgid "Eight-Point Compass"
-msgstr "Oita-Ponto Bússola"
+msgstr "Rosa dos ventos"
 
 #: src/preferences/generalPage.ts:147
 msgid "Direction"
@@ -326,27 +326,27 @@ msgstr "Serviço meteorológico"
 
 #: src/preferences/generalPage.ts:160
 msgid "Configure how the weather is attained"
-msgstr "Configure como o tempo é atingido"
+msgstr "Configurar como os dados meteorológicos são obtidos"
 
 #: src/preferences/generalPage.ts:167
 msgid "Weather Provider"
-msgstr "Provedor de Clima"
+msgstr "Fornecedor meteorológico"
 
 #: src/preferences/generalPage.ts:180
 msgid "Configure how your location is found"
-msgstr "Configure como sua localização é encontrada"
+msgstr "Configurar como a sua localização é determinada"
 
 #: src/preferences/generalPage.ts:184 src/preferences/generalPage.ts:185
 msgid "Online"
-msgstr "Disponível"
+msgstr "Online"
 
 #: src/preferences/generalPage.ts:186 src/preferences/generalPage.ts:245
 msgid "System"
-msgstr "SISTEMA"
+msgstr "Sistema"
 
 #: src/preferences/generalPage.ts:187
 msgid "Disable"
-msgstr "Desligado"
+msgstr "Desativar"
 
 #: src/preferences/generalPage.ts:190
 msgid "Provider"
@@ -354,7 +354,7 @@ msgstr "Fornecedor"
 
 #: src/preferences/generalPage.ts:202
 msgid "Refresh Interval (Minutes)"
-msgstr "Intervalo de atualização (Minutos)"
+msgstr "Intervalo de atualização (minutos)"
 
 #: src/preferences/generalPage.ts:220
 msgid "Accessibility"
@@ -362,23 +362,23 @@ msgstr "Acessibilidade"
 
 #: src/preferences/generalPage.ts:221
 msgid "Configure accessibility features"
-msgstr "Configurar recursos de acessibilidade"
+msgstr "Configurar funcionalidades de acessibilidade"
 
 #: src/preferences/generalPage.ts:224
 msgid "High Contrast"
-msgstr "Alto Contraste"
+msgstr "Alto contraste"
 
 #: src/preferences/generalPage.ts:236
 msgid "Configure the panel and pop-up"
-msgstr "Configurar o painel e pop-up"
+msgstr "Configurar o painel e a janela emergente"
 
 #: src/preferences/generalPage.ts:246
 msgid "Light"
-msgstr "Fino"
+msgstr "Claro"
 
 #: src/preferences/generalPage.ts:247
 msgid "Afterdark"
-msgstr "Escuridão"
+msgstr "Escuro"
 
 #: src/preferences/generalPage.ts:248
 msgid "Immersive"
@@ -390,27 +390,27 @@ msgstr "Tema"
 
 #: src/preferences/generalPage.ts:261
 msgid "Center"
-msgstr "Centralizar"
+msgstr "Central"
 
 #: src/preferences/generalPage.ts:261
 msgid "Left"
-msgstr "Esquerda"
+msgstr "Esquerdo"
 
 #: src/preferences/generalPage.ts:261
 msgid "Right"
-msgstr "Direita"
+msgstr "Direito"
 
 #: src/preferences/generalPage.ts:264
 msgid "Side of Panel"
-msgstr "Lado do Painel"
+msgstr "Lado do painel"
 
 #: src/preferences/generalPage.ts:274
 msgid "Order in Panel"
-msgstr "Pedido no Painel"
+msgstr "Ordem no painel"
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
-msgstr "Alocações"
+msgstr "Locais"
 
 #: src/preferences/locationsPage.ts:70 src/preferences/search.ts:75
 msgid "Add"
@@ -422,24 +422,24 @@ msgstr "Mover para cima"
 
 #: src/preferences/locationsPage.ts:112
 msgid "Move Down"
-msgstr "Mover para Baixo"
+msgstr "Mover para baixo"
 
 #: src/preferences/locationsPage.ts:128
 msgid "Add Here"
-msgstr "Adicione Aqui"
+msgstr "Adicionar aqui"
 
 #: src/preferences/locationsPage.ts:193
 #, javascript-format
 msgid "Are you sure you want delete %s?"
-msgstr "Tem certeza que deseja excluir %s?"
+msgstr "Tem a certeza de que pretende remover %s?"
 
 #: src/preferences/locationsPage.ts:194
 msgid "Cancel"
-msgstr "cancelar"
+msgstr "Cancelar"
 
 #: src/preferences/locationsPage.ts:194
 msgid "Delete"
-msgstr "excluir"
+msgstr "Remover"
 
 #: src/preferences/locationsPage.ts:235
 #, javascript-format
@@ -448,23 +448,23 @@ msgstr "Erro interno: %s"
 
 #: src/preferences/locationsPage.ts:236
 msgid "Internal Error"
-msgstr "Erro Interno"
+msgstr "Erro interno"
 
 #: src/preferences/locationsPage.ts:261
 msgid "Something else edited the locations."
-msgstr "Algo mais editou as localizações."
+msgstr "Outra ação editou as localizações."
 
 #: src/preferences/search.ts:45
 msgid "Search Location"
-msgstr "Procurar Local"
+msgstr "Procurar localização"
 
 #: src/preferences/search.ts:54
 msgid "City, Neighborhood, etc."
-msgstr "Cidade, Vizinhança, etc."
+msgstr "Cidade, bairro, etc."
 
 #: src/preferences/search.ts:59
 msgid "Search"
-msgstr "Pesquisa"
+msgstr "Pesquisar"
 
 #: src/preferences/search.ts:158
 msgid "No Internet"
@@ -476,7 +476,7 @@ msgstr "Nenhum resultado."
 
 #: src/preferences/search.ts:211
 msgid "No copyright information available."
-msgstr "Nenhuma informação de direitos autorais disponível."
+msgstr "Informação de direitos de autor indisponível."
 
 #: src/prefs.ts:74
 #, javascript-format
@@ -484,12 +484,12 @@ msgid "SimpleWeather doesn't know how to handle your locale.\n"
 "\tError - %s\n"
 "Please consider submitting a bug report on GitHub."
 msgstr "SimpleWeather não sabe como lidar com a sua localidade.\n"
-"\tCommon Error - %s\n"
+"\tErro - %s\n"
 "Por favor, considere enviar um relatório de erros no GitHub."
 
 #: src/prefs.ts:77
 msgid "Don't Show Again"
-msgstr "Não Mostrar Novamente"
+msgstr "Não mostrar novamente"
 
 #: src/prefs.ts:77
 msgid "Ignore"
@@ -497,40 +497,40 @@ msgstr "Ignorar"
 
 #: src/prefs.ts:77
 msgid "Open GitHub"
-msgstr "Open GitHub"
+msgstr "Abrir GitHub"
 
 #: src/weather.ts:103
 msgid "Clear"
-msgstr "Limpar"
+msgstr "Céu limpo"
 
 #: src/weather.ts:103
 msgid "Sunny"
-msgstr "Sunny"
+msgstr "Sol"
 
 #: src/weather.ts:105
 msgid "Cloudy"
-msgstr "Nublado"
+msgstr "Nuvens"
 
 #: src/weather.ts:107
 msgid "Rainy"
-msgstr "Rainy"
+msgstr "Chuva"
 
 #: src/weather.ts:109
 msgid "Snowy"
-msgstr "Snowy"
+msgstr "Neve"
 
 #: src/weather.ts:111
 msgid "Stormy"
-msgstr "Stormy"
+msgstr "Tempestade"
 
 #: src/weather.ts:113
 msgid "Windy"
-msgstr "Ventando"
+msgstr "Vento"
 
 #: src/welcome.ts:53
 #, javascript-format
 msgid "Welcome to %s"
-msgstr "Bem-vindo à %s"
+msgstr "Bem-vindo ao %s"
 
 #: src/welcome.ts:74
 #, javascript-format
@@ -538,10 +538,10 @@ msgid "%s occasionally connects to the selected weather service. By default, it 
 "  •  %s, an %s service for weather\n"
 "  •  %s, optional for resolving the current location\n"
 "  •  %s, for searching locations by name\n\n"
-msgstr "%s conecta-se ocasionalmente ao serviço de tempo selecionado. Por padrão, ele usará a Internet para se conectar a:\n"
-"  •  %s, um serviço %s para o tempo\n"
-"  •  %s, opcional para resolver a localização atual\n"
-"  •  %s, para procurar locais pelo nome\n\n"
+msgstr "%s liga-se ocasionalmente ao serviço meteorológico selecionado. Por defeito, recorre à Internet para se ligar a:\n"
+"  •  %s, um serviço %s de meteorologia\n"
+"  •  %s, opcional para determinar a localização atual\n"
+"  •  %s, para pesquisar locais pelo nome\n\n"
 
 #: src/welcome.ts:83
 #, javascript-format
