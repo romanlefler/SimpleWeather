@@ -60,10 +60,6 @@ sudo apt install mutter-dev-bin
 ### Fedora (DNF)
 
 ```shell
-
-### Fedora (DNF)
-
-```shell
 sudo dnf install mutter-devel
 ```
 
