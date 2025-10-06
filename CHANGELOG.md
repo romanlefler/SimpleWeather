@@ -1,11 +1,15 @@
 
-# v49.0.0 dev
+# v49.0.0
 
 ## Features
 
 - GNOME 49 support
 - Option to use packaged icons in panel
 - Option to use symbolic or realistic icons
+
+## Bug Fixes
+
+- Crash on first launch with no Internet
 
 ## Translations
 
