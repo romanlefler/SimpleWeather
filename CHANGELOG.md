@@ -1,4 +1,10 @@
 
+# v49.1.0 (dev)
+
+## Improvements
+
+- More clear coordinate format for editing a location
+
 # v49.0.0
 
 ## Features
