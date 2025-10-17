@@ -179,5 +179,15 @@
             <summary>The theme or a blank string</summary>
         </key>
 
+        <key name="symbolic-icons-panel" type="b">
+            <default>false</default>
+            <summary>Use symbolic icons</summary>
+        </key>
+
+        <key name="always-packaged-icons" type="b">
+            <default>false</default>
+            <summary>Always use the icons packaged with the extension</summary>
+        </key>
+
     </schema>
 </schemalist>

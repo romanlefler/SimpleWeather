@@ -1,4 +1,25 @@
 
+# v49.0.0
+
+## Features
+
+- GNOME 49 support
+- Option to use packaged icons in panel
+- Option to use symbolic or realistic icons
+
+## Bug Fixes
+
+- Crash on first launch with no Internet
+
+## Translations
+
+- Brazilian Portugese (thanks André Fernandes)
+- Chinese (thanks JiaoxianDu)
+- Dutch (thanks koenraad-verv)
+- Japanese (thanks hidenosuke)
+- Portugese (thanks André Fernandes)
+- Russian (thanks Valetss)
+
 # v48.2.0
 
 ## Features

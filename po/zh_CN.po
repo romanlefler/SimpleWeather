@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
 "POT-Creation-Date: 2025-07-23 16:59-0500\n"
-"PO-Revision-Date: 2025-07-23 22:06\n"
+"PO-Revision-Date: 2025-09-18 16:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -28,15 +28,15 @@ msgstr "温度"
 
 #: src/details.ts:60
 msgid "Condition"
-msgstr "条件"
+msgstr "天气状况"
 
 #: src/details.ts:61
 msgid "Feels Like"
-msgstr "感觉赞"
+msgstr "体感温度"
 
 #: src/details.ts:62
 msgid "Wind"
-msgstr "向导"
+msgstr "风向/速"
 
 #: src/details.ts:63
 msgid "Humidity"
@@ -44,11 +44,11 @@ msgstr "湿度"
 
 #: src/details.ts:64
 msgid "Gusts"
-msgstr "古斯"
+msgstr "阵风"
 
 #: src/details.ts:65
 msgid "UV High"
-msgstr "紫外线高"
+msgstr "紫外线指数"
 
 #: src/details.ts:66 src/preferences/generalPage.ts:92
 msgid "Pressure"
@@ -60,15 +60,15 @@ msgstr "降水"
 
 #: src/details.ts:68
 msgid "Sunrise"
-msgstr "日出模式"
+msgstr "日出时间"
 
 #: src/details.ts:69
 msgid "Sunset"
-msgstr "日落模式"
+msgstr "日落时间"
 
 #: src/details.ts:70
 msgid "Cloud Cover"
-msgstr "云封面"
+msgstr "云量"
 
 #: src/details.ts:75 src/popup.ts:409
 msgid "Invalid"
@@ -76,7 +76,7 @@ msgstr "无效的"
 
 #: src/lang.ts:108 src/popup.ts:57
 msgid "Today"
-msgstr "今日："
+msgstr "今日"
 
 #: src/lang.ts:111
 msgid "Monday"
@@ -88,15 +88,15 @@ msgstr "周日"
 
 #: src/lang.ts:111
 msgid "Tuesday"
-msgstr "星期二"
+msgstr "周二"
 
 #: src/lang.ts:111
 msgid "Wednesday"
-msgstr "星期三"
+msgstr "周三"
 
 #: src/lang.ts:112
 msgid "Friday"
-msgstr "星期五"
+msgstr "周五"
 
 #: src/lang.ts:112
 msgid "Saturday"
@@ -104,7 +104,7 @@ msgstr "周六"
 
 #: src/lang.ts:112
 msgid "Thursday"
-msgstr "星期四"
+msgstr "周四"
 
 #: src/location.ts:82
 #, javascript-format
@@ -128,7 +128,7 @@ msgstr "%f°W"
 
 #: src/popup.ts:143
 msgid "Weather Data"
-msgstr "天气"
+msgstr "天气数据"
 
 #: src/popup.ts:297 src/preferences/aboutPage.ts:76
 msgid "Settings"
@@ -170,17 +170,17 @@ msgstr "复制"
 
 #: src/preferences/aboutPage.ts:102
 msgid "Copied settings JSON to clipboard."
-msgstr "复制了JSON设置到剪贴板。"
+msgstr "已复制设定JSON到剪贴板。"
 
 #: src/preferences/aboutPage.ts:116
 #, javascript-format
 msgid "Contributions and translations are welcome! Read how on %s."
-msgstr "欢迎贡献和翻译！请阅读如何在 %s 上。"
+msgstr "欢迎贡献和翻译！请在 %s 上阅读如何实现。"
 
 #: src/preferences/aboutPage.ts:119
 #, javascript-format
 msgid "If you like this extension, consider starring it on %s."
-msgstr "如果您喜欢这个扩展，请考虑在 %s 上启动它。"
+msgstr "如果您喜欢这个扩展，请考虑在 %s 上为该项目加星。"
 
 #: src/preferences/aboutPage.ts:122
 msgid "here"
@@ -225,11 +225,11 @@ msgstr "二级面板细节"
 
 #: src/preferences/detailsPage.ts:218
 msgid "Show Condition Icon"
-msgstr "显示条件图标"
+msgstr "显示天气状况图标"
 
 #: src/preferences/detailsPage.ts:228
 msgid "Show Sunrise/Sunset"
-msgstr "显示日落/未集"
+msgstr "显示日出/日落"
 
 #: src/preferences/editLocation.ts:33
 #, javascript-format
@@ -262,7 +262,7 @@ msgstr "无效的坐标项。"
 
 #: src/preferences/generalPage.ts:38
 msgid "General"
-msgstr "A. 概况"
+msgstr "概况"
 
 #: src/preferences/generalPage.ts:43 src/preferences/generalPage.ts:53
 msgid "Units"
@@ -282,15 +282,15 @@ msgstr "公制"
 
 #: src/preferences/generalPage.ts:48
 msgid "UK"
-msgstr "联合王国"
+msgstr "英制"
 
 #: src/preferences/generalPage.ts:48
 msgid "US"
-msgstr "美国"
+msgstr "美制"
 
 #: src/preferences/generalPage.ts:61
 msgid "Fahrenheit"
-msgstr "Fahrenheit"
+msgstr "华氏度"
 
 #: src/preferences/generalPage.ts:62
 msgid "Celsius"
@@ -314,7 +314,7 @@ msgstr "度"
 
 #: src/preferences/generalPage.ts:144
 msgid "Eight-Point Compass"
-msgstr "八点指南针"
+msgstr "八方位指南针"
 
 #: src/preferences/generalPage.ts:147
 msgid "Direction"
@@ -326,7 +326,7 @@ msgstr "天气服务"
 
 #: src/preferences/generalPage.ts:160
 msgid "Configure how the weather is attained"
-msgstr "配置天气是如何实现的"
+msgstr "配置天气获取方式"
 
 #: src/preferences/generalPage.ts:167
 msgid "Weather Provider"
@@ -334,7 +334,7 @@ msgstr "天气提供商"
 
 #: src/preferences/generalPage.ts:180
 msgid "Configure how your location is found"
-msgstr "配置如何找到您的位置"
+msgstr "配置定位获取方式"
 
 #: src/preferences/generalPage.ts:184 src/preferences/generalPage.ts:185
 msgid "Online"
@@ -350,7 +350,7 @@ msgstr "禁用"
 
 #: src/preferences/generalPage.ts:190
 msgid "Provider"
-msgstr "提供商"
+msgstr "定位提供商"
 
 #: src/preferences/generalPage.ts:202
 msgid "Refresh Interval (Minutes)"
@@ -358,11 +358,11 @@ msgstr "刷新间隔 (分钟)"
 
 #: src/preferences/generalPage.ts:220
 msgid "Accessibility"
-msgstr "无障碍环境"
+msgstr "无障碍"
 
 #: src/preferences/generalPage.ts:221
 msgid "Configure accessibility features"
-msgstr "配置辅助功能"
+msgstr "配置无障碍功能"
 
 #: src/preferences/generalPage.ts:224
 msgid "High Contrast"
@@ -378,7 +378,7 @@ msgstr "亮色的"
 
 #: src/preferences/generalPage.ts:247
 msgid "Afterdark"
-msgstr "后"
+msgstr "午夜色的"
 
 #: src/preferences/generalPage.ts:248
 msgid "Immersive"
@@ -394,19 +394,19 @@ msgstr "居中"
 
 #: src/preferences/generalPage.ts:261
 msgid "Left"
-msgstr "左侧"
+msgstr "靠左"
 
 #: src/preferences/generalPage.ts:261
 msgid "Right"
-msgstr "右侧"
+msgstr "靠右"
 
 #: src/preferences/generalPage.ts:264
 msgid "Side of Panel"
-msgstr "面板的侧面"
+msgstr "面板位置"
 
 #: src/preferences/generalPage.ts:274
 msgid "Order in Panel"
-msgstr "在面板中的顺序"
+msgstr "面板顺序"
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
@@ -483,7 +483,7 @@ msgstr "没有可用的版权信息。"
 msgid "SimpleWeather doesn't know how to handle your locale.\n"
 "\tError - %s\n"
 "Please consider submitting a bug report on GitHub."
-msgstr "SimpleWeather 不知道如何处理您的本地。\n"
+msgstr "SimpleWeather 不知道如何处理您的地区。\n"
 "\t错误 - %s\n"
 "请考虑在 GitHub 上提交错误报告。"
 
@@ -501,11 +501,11 @@ msgstr "Open GitHub"
 
 #: src/weather.ts:103
 msgid "Clear"
-msgstr "清空"
+msgstr "无云"
 
 #: src/weather.ts:103
 msgid "Sunny"
-msgstr "Sunny"
+msgstr "天晴"
 
 #: src/weather.ts:105
 msgid "Cloudy"
@@ -513,19 +513,19 @@ msgstr "多云"
 
 #: src/weather.ts:107
 msgid "Rainy"
-msgstr "Rainy"
+msgstr "有雨"
 
 #: src/weather.ts:109
 msgid "Snowy"
-msgstr "Snowy"
+msgstr "有雪"
 
 #: src/weather.ts:111
 msgid "Stormy"
-msgstr "Stormy"
+msgstr "暴风"
 
 #: src/weather.ts:113
 msgid "Windy"
-msgstr "风风"
+msgstr "多风"
 
 #: src/welcome.ts:53
 #, javascript-format

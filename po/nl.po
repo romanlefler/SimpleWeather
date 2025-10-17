@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
 "POT-Creation-Date: 2025-07-23 16:59-0500\n"
-"PO-Revision-Date: 2025-07-23 22:06\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2025-08-28 16:56\n"
+"Last-Translator: koenraad-verv\n"
 "Language-Team: Dutch\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
@@ -44,7 +44,7 @@ msgstr "Luchtvochtigheid"
 
 #: src/details.ts:64
 msgid "Gusts"
-msgstr "Gasten"
+msgstr "Windstoten"
 
 #: src/details.ts:65
 msgid "UV High"
@@ -52,7 +52,7 @@ msgstr "UV hoog"
 
 #: src/details.ts:66 src/preferences/generalPage.ts:92
 msgid "Pressure"
-msgstr "Drukdruk"
+msgstr "Luchtdruk"
 
 #: src/details.ts:67
 msgid "Precipitation"
@@ -68,7 +68,7 @@ msgstr "Zonsondergang"
 
 #: src/details.ts:70
 msgid "Cloud Cover"
-msgstr "Cloud Cover"
+msgstr "Bewolking"
 
 #: src/details.ts:75 src/popup.ts:409
 msgid "Invalid"
@@ -114,12 +114,12 @@ msgstr "%f°N"
 #: src/location.ts:82
 #, javascript-format
 msgid "%f°S"
-msgstr "%f°S"
+msgstr "%f°Z"
 
 #: src/location.ts:83
 #, javascript-format
 msgid "%f°E"
-msgstr "%f°E"
+msgstr "%f°O"
 
 #: src/location.ts:83
 #, javascript-format
@@ -201,7 +201,7 @@ msgstr "Beschrijving"
 
 #: src/preferences/detailsPage.ts:74
 msgid "Pop-Up"
-msgstr "Beurswand"
+msgstr "Pop-Up"
 
 #: src/preferences/detailsPage.ts:75
 msgid "Drag-and-drop from bottom to configure the pop-up"
@@ -406,7 +406,7 @@ msgstr "Zijkant van paneel"
 
 #: src/preferences/generalPage.ts:274
 msgid "Order in Panel"
-msgstr "Bestellen in paneel"
+msgstr "Plaats op het paneelSimpleWeather weet niet hoe het met uw taal moet omgaan."
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
@@ -483,8 +483,8 @@ msgstr "Geen auteursrechtgegevens beschikbaar."
 msgid "SimpleWeather doesn't know how to handle your locale.\n"
 "\tError - %s\n"
 "Please consider submitting a bug report on GitHub."
-msgstr "SimpleWeather weet niet hoe u met uw taal moet omgaan.\n"
-"\t● Error - %s\n"
+msgstr "SimpleWeather weet niet hoe het met uw taal moet omgaan.\n"
+"\tError - %s\n"
 "Overweeg om een bugrapport in te dienen op GitHub."
 
 #: src/prefs.ts:77
@@ -505,7 +505,7 @@ msgstr "Verwijderen"
 
 #: src/weather.ts:103
 msgid "Sunny"
-msgstr "Sunny"
+msgstr "Zonnig"
 
 #: src/weather.ts:105
 msgid "Cloudy"
@@ -513,19 +513,19 @@ msgstr "Bewolkt"
 
 #: src/weather.ts:107
 msgid "Rainy"
-msgstr "Rainy"
+msgstr "Regenachtig"
 
 #: src/weather.ts:109
 msgid "Snowy"
-msgstr "Snowy"
+msgstr "Sneeuwachtig"
 
 #: src/weather.ts:111
 msgid "Stormy"
-msgstr "Stormy"
+msgstr "Stormachtig"
 
 #: src/weather.ts:113
 msgid "Windy"
-msgstr "Windvol"
+msgstr "Winderig"
 
 #: src/welcome.ts:53
 #, javascript-format

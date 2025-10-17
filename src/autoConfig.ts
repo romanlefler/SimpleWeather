@@ -42,7 +42,13 @@ function isDesktop() : boolean {
  */
 export async function setFirstTimeConfig(settings : Gio.Settings) {
 
-    const myLoc = await getMyLocation();
+    let myLoc;
+    try {
+        myLoc = await getMyLocation();
+    } catch(e) {
+        console.log("Caught get my location error in autoconfig.");
+        return;
+    }
 
     // If it isn't a laptop then set your location once and never query the server again
     if(isDesktop()) {
