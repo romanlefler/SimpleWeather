@@ -53,7 +53,8 @@ export async function editLocation(parent : Gtk.Window, loc? : Location) : Promi
         coordsText = `${latLon.lat} ${latLon.lon}`;
     }
     const coordsRow = new Adw.EntryRow({
-        title: _g("Coordinates"),
+        // This is done kind of goofy since Coordinates is already translated
+        title: _g("%s (e.g. \"%s\")").format(_g("Coordinates"), "40.7 -73.97"),
         text: coordsText
     });
 
