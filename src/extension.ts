@@ -307,6 +307,9 @@ export default class SimpleWeatherExtension extends Extension {
                     this.#delayFetchId = undefined;
                     this.#updateWeather();
                 });
+            } else if(!this.#cachedWeather) {
+                if(this.#panelIcon) this.#panelIcon.icon_name = "error-app-symbolic";
+                if(this.#panelLabel) this.#panelLabel.text = "Error!";
             }
         });
         return GLib.SOURCE_CONTINUE;
