@@ -88,13 +88,12 @@ export function displayTemp(t : Temp, cfg : Config) : string {
 
 export function displayTime(d : Date, cfg : Config, showAmPm : boolean = true) : string {
     const locale = getLocales();
+    const is24 = cfg.is24HourClock();
     const opts : Intl.DateTimeFormatOptions = {
         hour: "numeric",
-        minute: "2-digit"
+        minute: "2-digit",
+        hour12: is24 === null ? undefined : !is24
     };
-
-    // Locale should take care of 24-hour preference, but
-    // TODO: Make 12 hour preference match GNOME setting
     let str = d.toLocaleTimeString(locale, opts);
     
     if(!showAmPm && (str.endsWith(" AM") || str.endsWith(" PM"))) {
