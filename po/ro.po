@@ -24,15 +24,15 @@ msgstr "Locația mea"
 
 #: src/details.ts:59 src/preferences/generalPage.ts:64
 msgid "Temperature"
-msgstr "Temperatură"
+msgstr "Temperatura"
 
 #: src/details.ts:60
 msgid "Condition"
-msgstr "Condiție"
+msgstr "Condiții"
 
 #: src/details.ts:61
 msgid "Feels Like"
-msgstr "Sentimente ca"
+msgstr "Se simte ca"
 
 #: src/details.ts:62
 msgid "Wind"
@@ -44,7 +44,7 @@ msgstr "Umiditate"
 
 #: src/details.ts:64
 msgid "Gusts"
-msgstr "Gusturi"
+msgstr "Rafale"
 
 #: src/details.ts:65
 msgid "UV High"
@@ -64,11 +64,11 @@ msgstr "Răsărit"
 
 #: src/details.ts:69
 msgid "Sunset"
-msgstr "Amortizor"
+msgstr "Apus"
 
 #: src/details.ts:70
 msgid "Cloud Cover"
-msgstr "Copertă Nor"
+msgstr "Nori"
 
 #: src/details.ts:75 src/popup.ts:409
 msgid "Invalid"
@@ -150,7 +150,7 @@ msgstr "Despre"
 
 #: src/preferences/aboutPage.ts:59
 msgid "GitHub Repository"
-msgstr "GitHub Repository"
+msgstr "Depozitul GitHub"
 
 #: src/preferences/aboutPage.ts:61
 msgid "Support Me"
@@ -158,7 +158,7 @@ msgstr "Susține-mă"
 
 #: src/preferences/aboutPage.ts:68
 msgid "SimpleWeather Version"
-msgstr "Versiunea meteo Simplă"
+msgstr "Versiunea SimpleWeather"
 
 #: src/preferences/aboutPage.ts:71
 msgid "Unknown"
@@ -175,12 +175,12 @@ msgstr "Setările JSON copiate în clipboard."
 #: src/preferences/aboutPage.ts:116
 #, javascript-format
 msgid "Contributions and translations are welcome! Read how on %s."
-msgstr "Contribuțiile și traducerile sunt binevenite! Citiți pe %s."
+msgstr "Contribuțiile și traducerile sunt binevenite! Citește cum s-o faci pe %s."
 
 #: src/preferences/aboutPage.ts:119
 #, javascript-format
 msgid "If you like this extension, consider starring it on %s."
-msgstr "Dacă vă place această extensie, gândiți-o la %s."
+msgstr "Dacă îți place această extensie, adaugă o stea pe %s."
 
 #: src/preferences/aboutPage.ts:122
 msgid "here"
@@ -193,7 +193,7 @@ msgstr "Raportează erori sau solicită noi caracteristici %s."
 
 #: src/preferences/aboutPage.ts:138
 msgid "Credits"
-msgstr "Credite"
+msgstr "Mulțumiri"
 
 #: src/preferences/detailsPage.ts:68
 msgid "Details"
@@ -205,7 +205,7 @@ msgstr "Pop-Up"
 
 #: src/preferences/detailsPage.ts:75
 msgid "Drag-and-drop from bottom to configure the pop-up"
-msgstr "Drag-and-drop din partea de jos pentru a configura pop-up"
+msgstr "Trage-și-plasează din partea de jos pentru a configura fereastra pop-up"
 
 #: src/preferences/detailsPage.ts:173 src/preferences/generalPage.ts:235
 msgid "Panel"
@@ -217,19 +217,19 @@ msgstr "Niciunul"
 
 #: src/preferences/detailsPage.ts:188
 msgid "Panel Detail"
-msgstr "Detalii piesă"
+msgstr "Detalii panou"
 
 #: src/preferences/detailsPage.ts:206
 msgid "Secondary Panel Detail"
-msgstr "Detalii piesă secundară"
+msgstr "Detalii panou secundar"
 
 #: src/preferences/detailsPage.ts:218
 msgid "Show Condition Icon"
-msgstr "Arată iconița Stării"
+msgstr "Arată pictograma stării"
 
 #: src/preferences/detailsPage.ts:228
 msgid "Show Sunrise/Sunset"
-msgstr "Arată Soarel/Sunset"
+msgstr "Arată Răsărit/Apus"
 
 #: src/preferences/editLocation.ts:33
 #, javascript-format
@@ -258,7 +258,7 @@ msgstr "Numele este necesar."
 
 #: src/preferences/editLocation.ts:99
 msgid "Invalid coordinates entry."
-msgstr "Intrare coordonate nevalidă."
+msgstr "Coordonate greșite."
 
 #: src/preferences/generalPage.ts:38
 msgid "General"
@@ -270,7 +270,7 @@ msgstr "Unități"
 
 #: src/preferences/generalPage.ts:44
 msgid "Configure units of measurement"
-msgstr "Configuraţi unităţile de măsură"
+msgstr "Configurează unităţile de măsură"
 
 #: src/preferences/generalPage.ts:48
 msgid "Custom"
@@ -302,7 +302,7 @@ msgstr "Viteză"
 
 #: src/preferences/generalPage.ts:106
 msgid "Rain Measurement"
-msgstr "Măsurarea ploii"
+msgstr "Măsurare precipitații"
 
 #: src/preferences/generalPage.ts:120
 msgid "Distance"
@@ -326,19 +326,19 @@ msgstr "Serviciu meteo"
 
 #: src/preferences/generalPage.ts:160
 msgid "Configure how the weather is attained"
-msgstr "Configurați modul în care s-a obținut vremea"
+msgstr "Configurează modul în care se obține vremea"
 
 #: src/preferences/generalPage.ts:167
 msgid "Weather Provider"
-msgstr "Furnizor vreme"
+msgstr "Furnizor date meteo"
 
 #: src/preferences/generalPage.ts:180
 msgid "Configure how your location is found"
-msgstr "Configurați modul în care este găsită locația dvs."
+msgstr "Configurează modul în care este găsită locația"
 
 #: src/preferences/generalPage.ts:184 src/preferences/generalPage.ts:185
 msgid "Online"
-msgstr "Online"
+msgstr "On-line"
 
 #: src/preferences/generalPage.ts:186 src/preferences/generalPage.ts:245
 msgid "System"
@@ -354,7 +354,7 @@ msgstr "Furnizor"
 
 #: src/preferences/generalPage.ts:202
 msgid "Refresh Interval (Minutes)"
-msgstr "Interval Reîmprospătare (Minute)"
+msgstr "Interval reîmprospătare (minute)"
 
 #: src/preferences/generalPage.ts:220
 msgid "Accessibility"
@@ -362,7 +362,7 @@ msgstr "Accesibilitate"
 
 #: src/preferences/generalPage.ts:221
 msgid "Configure accessibility features"
-msgstr "Configurați funcțiile de accesibilitate"
+msgstr "Configuraează funcțiile de accesibilitate"
 
 #: src/preferences/generalPage.ts:224
 msgid "High Contrast"
@@ -370,19 +370,19 @@ msgstr "Contrast ridicat"
 
 #: src/preferences/generalPage.ts:236
 msgid "Configure the panel and pop-up"
-msgstr "Configuraţi panoul şi pop-up"
+msgstr "Configurează panoul şi fereastra pop-up"
 
 #: src/preferences/generalPage.ts:246
 msgid "Light"
-msgstr "Lumină"
+msgstr "Luminoasă"
 
 #: src/preferences/generalPage.ts:247
 msgid "Afterdark"
-msgstr "După-întunecat"
+msgstr "întunecată"
 
 #: src/preferences/generalPage.ts:248
 msgid "Immersive"
-msgstr "Imersiv"
+msgstr "Imersivă"
 
 #: src/preferences/generalPage.ts:251
 msgid "Theme"
@@ -402,11 +402,11 @@ msgstr "Dreapta"
 
 #: src/preferences/generalPage.ts:264
 msgid "Side of Panel"
-msgstr "Componenta panoului"
+msgstr "Aranjarea panoului"
 
 #: src/preferences/generalPage.ts:274
 msgid "Order in Panel"
-msgstr "Ordine în Panou"
+msgstr "Ordine în panou"
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
@@ -414,7 +414,7 @@ msgstr "Locații"
 
 #: src/preferences/locationsPage.ts:70 src/preferences/search.ts:75
 msgid "Add"
-msgstr "Adăugare"
+msgstr "Adaugă"
 
 #: src/preferences/locationsPage.ts:97
 msgid "Move Up"
@@ -422,7 +422,7 @@ msgstr "Mută în sus"
 
 #: src/preferences/locationsPage.ts:112
 msgid "Move Down"
-msgstr "Mută jos"
+msgstr "Mută în jos"
 
 #: src/preferences/locationsPage.ts:128
 msgid "Add Here"
@@ -431,7 +431,7 @@ msgstr "Adaugă aici"
 #: src/preferences/locationsPage.ts:193
 #, javascript-format
 msgid "Are you sure you want delete %s?"
-msgstr "Sunteţi sigur că doriţi să ştergeţi %s?"
+msgstr "Ești sigur că dorești să ştergi %s?"
 
 #: src/preferences/locationsPage.ts:194
 msgid "Cancel"
@@ -439,7 +439,7 @@ msgstr "Anulează"
 
 #: src/preferences/locationsPage.ts:194
 msgid "Delete"
-msgstr "Ștergere"
+msgstr "Șterge"
 
 #: src/preferences/locationsPage.ts:235
 #, javascript-format
@@ -452,11 +452,11 @@ msgstr "Eroare internă"
 
 #: src/preferences/locationsPage.ts:261
 msgid "Something else edited the locations."
-msgstr "Altfel am editat locațiile."
+msgstr "Altceva a editat locațiile."
 
 #: src/preferences/search.ts:45
 msgid "Search Location"
-msgstr "Căutare Locație"
+msgstr "Căutare locație"
 
 #: src/preferences/search.ts:54
 msgid "City, Neighborhood, etc."
@@ -483,9 +483,9 @@ msgstr "Nu sunt disponibile informații privind drepturile de autor."
 msgid "SimpleWeather doesn't know how to handle your locale.\n"
 "\tError - %s\n"
 "Please consider submitting a bug report on GitHub."
-msgstr "SimpleWeather nu știe cum să se ocupe de localizarea ta.\n"
-"\t<unk> Error - %s\n"
-"Vă rugăm să luați în considerare trimiterea unui raport de eroare pe GitHub."
+msgstr "SimpleWeather nu știe cum să gestioneze localizarea.\n"
+"\tEroare - %s\n"
+"Ia în considerare crearea unui raport de eroare pe GitHub."
 
 #: src/prefs.ts:77
 msgid "Don't Show Again"
@@ -497,15 +497,15 @@ msgstr "Ignoră"
 
 #: src/prefs.ts:77
 msgid "Open GitHub"
-msgstr "Open GitHub"
+msgstr "Deschide GitHub"
 
 #: src/weather.ts:103
 msgid "Clear"
-msgstr "Curăță"
+msgstr "Senin"
 
 #: src/weather.ts:103
 msgid "Sunny"
-msgstr "Sunny"
+msgstr "Însorit"
 
 #: src/weather.ts:105
 msgid "Cloudy"
@@ -513,15 +513,15 @@ msgstr "Înnorat"
 
 #: src/weather.ts:107
 msgid "Rainy"
-msgstr "Rainy"
+msgstr "Ploaie"
 
 #: src/weather.ts:109
 msgid "Snowy"
-msgstr "Snowy"
+msgstr "Zăpadă"
 
 #: src/weather.ts:111
 msgid "Stormy"
-msgstr "Stormy"
+msgstr "Furtună"
 
 #: src/weather.ts:113
 msgid "Windy"
@@ -539,16 +539,16 @@ msgid "%s occasionally connects to the selected weather service. By default, it 
 "  •  %s, optional for resolving the current location\n"
 "  •  %s, for searching locations by name\n\n"
 msgstr "%s se conectează ocazional la serviciul meteo selectat. În mod implicit, va utiliza Internetul pentru a se conecta la:\n"
-"  •  %s, un serviciu %s pentru vremea\n"
-"  •  %sopțional pentru rezolvarea locației curente\n"
-"  •  %s, pentru căutarea locațiilor după numele\n\n"
+"  •  %s, un serviciu %s pentru vreme\n"
+"  •  %s, opțional pentru gestionarea locației curente\n"
+"  •  %s, pentru căutarea locațiilor după nume\n\n"
 
 #: src/welcome.ts:83
 #, javascript-format
 msgid "Thank you for installing %s!"
-msgstr "Vă mulțumim că ați instalat %s!"
+msgstr "Îți mulțumim că ai instalat %s!"
 
 #: src/welcome.ts:99
 msgid "Abort"
-msgstr "Abandonare"
+msgstr "Renunță"
 
