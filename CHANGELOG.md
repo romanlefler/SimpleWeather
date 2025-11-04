@@ -4,6 +4,13 @@
 ## Improvements
 
 - More clear coordinate format for editing a location
+- Show error icon in panel on error
+
+## Translations
+
+- Romanian (ygorigor)
+- Hungarian (Adamyno)
+- Turkish (Samo)
 
 # v49.0.0
 
