@@ -611,6 +611,12 @@ msgid ""
 "  •  %s, for searching locations by name\n"
 "\n"
 msgstr ""
+"%s zaman zaman seçilen hava durumu hizmetine bağlanır. Varsayılan olarak, "
+"bağlanmak için İnternet'i kullanacaktır:\n"
+"  - %s, hava durumu için bir %s hizmeti\n"
+"  - %s, geçerli konumu çözümlemek için isteğe bağlı\n"
+"  - %s, konumları ada göre aramak için\n"
+"\n"
 
 #: src/welcome.ts:83
 #, javascript-format
