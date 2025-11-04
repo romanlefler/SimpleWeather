@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
-"POT-Creation-Date: 2025-07-23 16:59-0500\n"
+"POT-Creation-Date: 2025-10-23 00:19-0500\n"
 "PO-Revision-Date: 2025-08-28 16:56\n"
 "Last-Translator: koenraad-verv\n"
 "Language-Team: Dutch\n"
@@ -17,92 +17,96 @@ msgstr ""
 "X-Crowdin-File: simple-weather@romanlefler.com.pot\n"
 "X-Crowdin-File-ID: 2\n"
 
-#: src/autoConfig.ts:49 src/location.ts:53 src/location.ts:63
+#: src/autoConfig.ts:55 src/location.ts:53 src/location.ts:63
 #: src/preferences/generalPage.ts:179
 msgid "My Location"
 msgstr "Mijn locatie"
 
-#: src/details.ts:59 src/preferences/generalPage.ts:64
+#: src/details.ts:60 src/preferences/generalPage.ts:64
 msgid "Temperature"
 msgstr "Temperatuur"
 
-#: src/details.ts:60
+#: src/details.ts:61
 msgid "Condition"
 msgstr "Voorwaarde"
 
-#: src/details.ts:61
+#: src/details.ts:62
 msgid "Feels Like"
 msgstr "Voelt als"
 
-#: src/details.ts:62
+#: src/details.ts:63
 msgid "Wind"
 msgstr "Wind"
 
-#: src/details.ts:63
+#: src/details.ts:64
 msgid "Humidity"
 msgstr "Luchtvochtigheid"
 
-#: src/details.ts:64
+#: src/details.ts:65
 msgid "Gusts"
 msgstr "Windstoten"
 
-#: src/details.ts:65
+#: src/details.ts:66
 msgid "UV High"
 msgstr "UV hoog"
 
-#: src/details.ts:66 src/preferences/generalPage.ts:92
+#: src/details.ts:67 src/preferences/generalPage.ts:92
 msgid "Pressure"
 msgstr "Luchtdruk"
 
-#: src/details.ts:67
+#: src/details.ts:68
 msgid "Precipitation"
 msgstr "Neerslag"
 
-#: src/details.ts:68
+#: src/details.ts:69
 msgid "Sunrise"
 msgstr "Zonsopgang"
 
-#: src/details.ts:69
+#: src/details.ts:70
 msgid "Sunset"
 msgstr "Zonsondergang"
 
-#: src/details.ts:70
+#: src/details.ts:71
 msgid "Cloud Cover"
 msgstr "Bewolking"
 
-#: src/details.ts:75 src/popup.ts:409
+#: src/details.ts:72
+msgid "Sun Countdown"
+msgstr ""
+
+#: src/details.ts:77 src/popup.ts:409
 msgid "Invalid"
 msgstr "Ongeldig"
 
-#: src/lang.ts:108 src/popup.ts:57
+#: src/lang.ts:107 src/popup.ts:57
 msgid "Today"
 msgstr "vandaag"
 
-#: src/lang.ts:111
+#: src/lang.ts:110
 msgid "Monday"
 msgstr "maandag"
 
-#: src/lang.ts:111
+#: src/lang.ts:110
 msgid "Sunday"
 msgstr "zondag"
 
-#: src/lang.ts:111
+#: src/lang.ts:110
 msgid "Tuesday"
 msgstr "dinsdag"
 
-#: src/lang.ts:111
+#: src/lang.ts:110
 msgid "Wednesday"
 msgstr "woensdag"
 
-#: src/lang.ts:112
+#: src/lang.ts:111
 msgid "Friday"
 msgstr "vrijdag"
 
-#: src/lang.ts:112
+#: src/lang.ts:111
 msgid "Saturday"
 msgstr "zaterdag"
 
-#: src/lang.ts:112
+#: src/lang.ts:111
 msgid "Thursday"
 msgstr "donderdag"
 
@@ -191,45 +195,49 @@ msgstr "Hier"
 msgid "Report bugs or request new features %s."
 msgstr "Rapporteer bugs of verzoek nieuwe functies %s."
 
-#: src/preferences/aboutPage.ts:138
+#: src/preferences/aboutPage.ts:128 src/preferences/aboutPage.ts:138
 msgid "Credits"
 msgstr "Kredieten"
 
-#: src/preferences/detailsPage.ts:68
+#: src/preferences/detailsPage.ts:80
 msgid "Details"
 msgstr "Beschrijving"
 
-#: src/preferences/detailsPage.ts:74
+#: src/preferences/detailsPage.ts:86
 msgid "Pop-Up"
 msgstr "Pop-Up"
 
-#: src/preferences/detailsPage.ts:75
+#: src/preferences/detailsPage.ts:87
 msgid "Drag-and-drop from bottom to configure the pop-up"
 msgstr "Slepen en neerzetten van onder om de pop-up te configureren"
 
-#: src/preferences/detailsPage.ts:173 src/preferences/generalPage.ts:235
+#: src/preferences/detailsPage.ts:185 src/preferences/generalPage.ts:235
 msgid "Panel"
 msgstr "Paneel"
 
-#: src/preferences/detailsPage.ts:176
+#: src/preferences/detailsPage.ts:188
 msgid "None"
 msgstr "geen"
 
-#: src/preferences/detailsPage.ts:188
+#: src/preferences/detailsPage.ts:200
 msgid "Panel Detail"
 msgstr "Paneel Detail"
 
-#: src/preferences/detailsPage.ts:206
+#: src/preferences/detailsPage.ts:218
 msgid "Secondary Panel Detail"
 msgstr "Secundaire Paneel Detail"
 
-#: src/preferences/detailsPage.ts:218
+#: src/preferences/detailsPage.ts:230
 msgid "Show Condition Icon"
 msgstr "Toon Voorwaarde Icoon"
 
-#: src/preferences/detailsPage.ts:228
+#: src/preferences/detailsPage.ts:240
 msgid "Show Sunrise/Sunset"
 msgstr "Toon zonsopgang/Zonsondergang"
+
+#: src/preferences/detailsPage.ts:251
+msgid "Use Countdown for Sun"
+msgstr ""
 
 #: src/preferences/editLocation.ts:33
 #, javascript-format
@@ -244,19 +252,24 @@ msgstr "Nieuwe locatie"
 msgid "Name"
 msgstr "naam"
 
-#: src/preferences/editLocation.ts:56
+#: src/preferences/editLocation.ts:57
+#, javascript-format
+msgid "%s (e.g. \"%s\")"
+msgstr ""
+
+#: src/preferences/editLocation.ts:57
 msgid "Coordinates"
 msgstr "Coördinaten"
 
-#: src/preferences/editLocation.ts:66
+#: src/preferences/editLocation.ts:67
 msgid "Save"
 msgstr "Opslaan"
 
-#: src/preferences/editLocation.ts:94
+#: src/preferences/editLocation.ts:95
 msgid "Name is required."
 msgstr "Naam is vereist."
 
-#: src/preferences/editLocation.ts:99
+#: src/preferences/editLocation.ts:100
 msgid "Invalid coordinates entry."
 msgstr "Ongeldige coördinaten ingevoerd."
 
@@ -406,7 +419,16 @@ msgstr "Zijkant van paneel"
 
 #: src/preferences/generalPage.ts:274
 msgid "Order in Panel"
-msgstr "Plaats op het paneelSimpleWeather weet niet hoe het met uw taal moet omgaan."
+msgstr ""
+"Plaats op het paneelSimpleWeather weet niet hoe het met uw taal moet omgaan."
+
+#: src/preferences/generalPage.ts:290
+msgid "Use Symbolic Icons in Panel"
+msgstr ""
+
+#: src/preferences/generalPage.ts:300
+msgid "Always Use Packaged Icons"
+msgstr ""
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
@@ -480,10 +502,12 @@ msgstr "Geen auteursrechtgegevens beschikbaar."
 
 #: src/prefs.ts:74
 #, javascript-format
-msgid "SimpleWeather doesn't know how to handle your locale.\n"
+msgid ""
+"SimpleWeather doesn't know how to handle your locale.\n"
 "\tError - %s\n"
 "Please consider submitting a bug report on GitHub."
-msgstr "SimpleWeather weet niet hoe het met uw taal moet omgaan.\n"
+msgstr ""
+"SimpleWeather weet niet hoe het met uw taal moet omgaan.\n"
 "\tError - %s\n"
 "Overweeg om een bugrapport in te dienen op GitHub."
 
@@ -499,31 +523,77 @@ msgstr "Negeren"
 msgid "Open GitHub"
 msgstr "Open GitHub"
 
-#: src/weather.ts:103
+#: src/units.ts:133
+msgid "E"
+msgstr ""
+
+#: src/units.ts:133
+msgid "N"
+msgstr ""
+
+#: src/units.ts:133
+msgid "NE"
+msgstr ""
+
+#: src/units.ts:133
+msgid "NW"
+msgstr ""
+
+#: src/units.ts:133
+msgid "S"
+msgstr ""
+
+#: src/units.ts:133
+msgid "SE"
+msgstr ""
+
+#: src/units.ts:133
+msgid "SW"
+msgstr ""
+
+#: src/units.ts:133
+msgid "W"
+msgstr ""
+
+#: src/units.ts:298
+msgid "Now"
+msgstr ""
+
+#: src/units.ts:302
+#, javascript-format
+msgid "%d h"
+msgstr ""
+
+#: src/units.ts:303
+#, javascript-format
+msgid "%d min"
+msgstr ""
+
+#: src/weather.ts:105
 msgid "Clear"
 msgstr "Verwijderen"
 
-#: src/weather.ts:103
+#: src/weather.ts:105
 msgid "Sunny"
 msgstr "Zonnig"
 
-#: src/weather.ts:105
+#: src/weather.ts:107
 msgid "Cloudy"
 msgstr "Bewolkt"
 
-#: src/weather.ts:107
+#: src/weather.ts:109
 msgid "Rainy"
 msgstr "Regenachtig"
 
-#: src/weather.ts:109
+#: src/weather.ts:111
 msgid "Snowy"
 msgstr "Sneeuwachtig"
 
-#: src/weather.ts:111
+#: src/weather.ts:113
 msgid "Stormy"
 msgstr "Stormachtig"
 
-#: src/weather.ts:113
+#: src/weather.ts:115
 msgid "Windy"
 msgstr "Winderig"
 
@@ -534,14 +604,20 @@ msgstr "Welkom bij %s"
 
 #: src/welcome.ts:74
 #, javascript-format
-msgid "%s occasionally connects to the selected weather service. By default, it will use the Internet to connect to:\n"
+msgid ""
+"%s occasionally connects to the selected weather service. By default, it "
+"will use the Internet to connect to:\n"
 "  •  %s, an %s service for weather\n"
 "  •  %s, optional for resolving the current location\n"
-"  •  %s, for searching locations by name\n\n"
-msgstr "%s maakt af en toe verbinding met de geselecteerde weerservice. Standaard gebruikt het internet om verbinding te maken met:\n"
+"  •  %s, for searching locations by name\n"
+"\n"
+msgstr ""
+"%s maakt af en toe verbinding met de geselecteerde weerservice. Standaard "
+"gebruikt het internet om verbinding te maken met:\n"
 "  •  %s, een %s service voor het weer\n"
 "  •  %s, optioneel voor het oplossen van de huidige locatie\n"
-"  •  %s, voor het zoeken van locaties op naam\n\n"
+"  •  %s, voor het zoeken van locaties op naam\n"
+"\n"
 
 #: src/welcome.ts:83
 #, javascript-format
@@ -551,4 +627,3 @@ msgstr "Bedankt voor het installeren van %s!"
 #: src/welcome.ts:99
 msgid "Abort"
 msgstr "Annuleren"
-

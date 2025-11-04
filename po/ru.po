@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
-"POT-Creation-Date: 2025-07-23 16:59-0500\n"
+"POT-Creation-Date: 2025-10-23 00:19-0500\n"
 "PO-Revision-Date: 2025-07-23 22:06\n"
 "Last-Translator: \n"
 "Language-Team: Russian\n"
@@ -10,99 +10,105 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=((n%10==1 && n%100!=11) ? 0 : ((n%10 >= 2 && n%10 <=4 && (n%100 < 12 || n%100 > 14)) ? 1 : ((n%10 == 0 || (n%10 >= 5 && n%10 <=9)) || (n%100 >= 11 && n%100 <= 14)) ? 2 : 3));\n"
+"Plural-Forms: nplurals=4; plural=((n%10==1 && n%100!=11) ? 0 : ((n%10 >= 2 "
+"&& n%10 <=4 && (n%100 < 12 || n%100 > 14)) ? 1 : ((n%10 == 0 || (n%10 >= 5 "
+"&& n%10 <=9)) || (n%100 >= 11 && n%100 <= 14)) ? 2 : 3));\n"
 "X-Crowdin-Project: simpleweather\n"
 "X-Crowdin-Project-ID: 798380\n"
 "X-Crowdin-Language: ru\n"
 "X-Crowdin-File: simple-weather@romanlefler.com.pot\n"
 "X-Crowdin-File-ID: 2\n"
 
-#: src/autoConfig.ts:49 src/location.ts:53 src/location.ts:63
+#: src/autoConfig.ts:55 src/location.ts:53 src/location.ts:63
 #: src/preferences/generalPage.ts:179
 msgid "My Location"
 msgstr "Текущее местоположение"
 
-#: src/details.ts:59 src/preferences/generalPage.ts:64
+#: src/details.ts:60 src/preferences/generalPage.ts:64
 msgid "Temperature"
 msgstr "Температура"
 
-#: src/details.ts:60
+#: src/details.ts:61
 msgid "Condition"
 msgstr "Погода"
 
-#: src/details.ts:61
+#: src/details.ts:62
 msgid "Feels Like"
 msgstr "Ощущается как"
 
-#: src/details.ts:62
+#: src/details.ts:63
 msgid "Wind"
 msgstr "Ветер"
 
-#: src/details.ts:63
+#: src/details.ts:64
 msgid "Humidity"
 msgstr "Влажность"
 
-#: src/details.ts:64
+#: src/details.ts:65
 msgid "Gusts"
 msgstr "Порывы ветра"
 
-#: src/details.ts:65
+#: src/details.ts:66
 msgid "UV High"
 msgstr "УФ-индекс"
 
-#: src/details.ts:66 src/preferences/generalPage.ts:92
+#: src/details.ts:67 src/preferences/generalPage.ts:92
 msgid "Pressure"
 msgstr "Давление"
 
-#: src/details.ts:67
+#: src/details.ts:68
 msgid "Precipitation"
 msgstr "Осадки"
 
-#: src/details.ts:68
+#: src/details.ts:69
 msgid "Sunrise"
 msgstr "Восход"
 
-#: src/details.ts:69
+#: src/details.ts:70
 msgid "Sunset"
 msgstr "Закат"
 
-#: src/details.ts:70
+#: src/details.ts:71
 msgid "Cloud Cover"
 msgstr "Облачность"
 
-#: src/details.ts:75 src/popup.ts:409
+#: src/details.ts:72
+msgid "Sun Countdown"
+msgstr ""
+
+#: src/details.ts:77 src/popup.ts:409
 msgid "Invalid"
 msgstr "Недействительно"
 
-#: src/lang.ts:108 src/popup.ts:57
+#: src/lang.ts:107 src/popup.ts:57
 msgid "Today"
 msgstr "Сегодня"
 
-#: src/lang.ts:111
+#: src/lang.ts:110
 msgid "Monday"
 msgstr "Понедельник"
 
-#: src/lang.ts:111
+#: src/lang.ts:110
 msgid "Sunday"
 msgstr "Воскресенье"
 
-#: src/lang.ts:111
+#: src/lang.ts:110
 msgid "Tuesday"
 msgstr "Вторник"
 
-#: src/lang.ts:111
+#: src/lang.ts:110
 msgid "Wednesday"
 msgstr "Среда"
 
-#: src/lang.ts:112
+#: src/lang.ts:111
 msgid "Friday"
 msgstr "Пятница"
 
-#: src/lang.ts:112
+#: src/lang.ts:111
 msgid "Saturday"
 msgstr "Суббота"
 
-#: src/lang.ts:112
+#: src/lang.ts:111
 msgid "Thursday"
 msgstr "Четверг"
 
@@ -180,7 +186,9 @@ msgstr "Пожертвования и помощь в переводе прив�
 #: src/preferences/aboutPage.ts:119
 #, javascript-format
 msgid "If you like this extension, consider starring it on %s."
-msgstr "Если вам понравилось это расширение, пожалуйста, поставьте ему звездочку на %s."
+msgstr ""
+"Если вам понравилось это расширение, пожалуйста, поставьте ему звездочку на "
+"%s."
 
 #: src/preferences/aboutPage.ts:122
 msgid "here"
@@ -191,45 +199,49 @@ msgstr "здесь"
 msgid "Report bugs or request new features %s."
 msgstr "Сообщить об ошибках или предложить новые функции можно %s."
 
-#: src/preferences/aboutPage.ts:138
+#: src/preferences/aboutPage.ts:128 src/preferences/aboutPage.ts:138
 msgid "Credits"
 msgstr "Благодарности"
 
-#: src/preferences/detailsPage.ts:68
+#: src/preferences/detailsPage.ts:80
 msgid "Details"
 msgstr "Вид"
 
-#: src/preferences/detailsPage.ts:74
+#: src/preferences/detailsPage.ts:86
 msgid "Pop-Up"
 msgstr "Всплывающее окно"
 
-#: src/preferences/detailsPage.ts:75
+#: src/preferences/detailsPage.ts:87
 msgid "Drag-and-drop from bottom to configure the pop-up"
 msgstr "Перетащите из нижней части, чтобы настроить всплывающее окно"
 
-#: src/preferences/detailsPage.ts:173 src/preferences/generalPage.ts:235
+#: src/preferences/detailsPage.ts:185 src/preferences/generalPage.ts:235
 msgid "Panel"
 msgstr "Панель"
 
-#: src/preferences/detailsPage.ts:176
+#: src/preferences/detailsPage.ts:188
 msgid "None"
 msgstr "Нет"
 
-#: src/preferences/detailsPage.ts:188
+#: src/preferences/detailsPage.ts:200
 msgid "Panel Detail"
 msgstr "Информация в панели"
 
-#: src/preferences/detailsPage.ts:206
+#: src/preferences/detailsPage.ts:218
 msgid "Secondary Panel Detail"
 msgstr "Дополнительная информация в панели"
 
-#: src/preferences/detailsPage.ts:218
+#: src/preferences/detailsPage.ts:230
 msgid "Show Condition Icon"
 msgstr "Показывать значок погоды"
 
-#: src/preferences/detailsPage.ts:228
+#: src/preferences/detailsPage.ts:240
 msgid "Show Sunrise/Sunset"
 msgstr "Показывать восход/закат"
+
+#: src/preferences/detailsPage.ts:251
+msgid "Use Countdown for Sun"
+msgstr ""
 
 #: src/preferences/editLocation.ts:33
 #, javascript-format
@@ -244,19 +256,24 @@ msgstr "Новое местоположение"
 msgid "Name"
 msgstr "Название"
 
-#: src/preferences/editLocation.ts:56
+#: src/preferences/editLocation.ts:57
+#, javascript-format
+msgid "%s (e.g. \"%s\")"
+msgstr ""
+
+#: src/preferences/editLocation.ts:57
 msgid "Coordinates"
 msgstr "Координаты"
 
-#: src/preferences/editLocation.ts:66
+#: src/preferences/editLocation.ts:67
 msgid "Save"
 msgstr "Сохранить"
 
-#: src/preferences/editLocation.ts:94
+#: src/preferences/editLocation.ts:95
 msgid "Name is required."
 msgstr "Требуется указать название."
 
-#: src/preferences/editLocation.ts:99
+#: src/preferences/editLocation.ts:100
 msgid "Invalid coordinates entry."
 msgstr "Недопустимые координаты."
 
@@ -408,6 +425,14 @@ msgstr "Расположение на панели"
 msgid "Order in Panel"
 msgstr "Порядок на панели"
 
+#: src/preferences/generalPage.ts:290
+msgid "Use Symbolic Icons in Panel"
+msgstr ""
+
+#: src/preferences/generalPage.ts:300
+msgid "Always Use Packaged Icons"
+msgstr ""
+
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
 msgstr "Местоположения"
@@ -480,10 +505,12 @@ msgstr "Информация об авторских правах отсутст
 
 #: src/prefs.ts:74
 #, javascript-format
-msgid "SimpleWeather doesn't know how to handle your locale.\n"
+msgid ""
+"SimpleWeather doesn't know how to handle your locale.\n"
 "\tError - %s\n"
 "Please consider submitting a bug report on GitHub."
-msgstr "SimpleWeather не может обработать ваши региональные настройки.\n"
+msgstr ""
+"SimpleWeather не может обработать ваши региональные настройки.\n"
 "\tОшибка: %s\n"
 "Пожалуйста, сообщите об этой ошибке на GitHub."
 
@@ -499,31 +526,77 @@ msgstr "Пропустить"
 msgid "Open GitHub"
 msgstr "Открыть GitHub"
 
-#: src/weather.ts:103
+#: src/units.ts:133
+msgid "E"
+msgstr ""
+
+#: src/units.ts:133
+msgid "N"
+msgstr ""
+
+#: src/units.ts:133
+msgid "NE"
+msgstr ""
+
+#: src/units.ts:133
+msgid "NW"
+msgstr ""
+
+#: src/units.ts:133
+msgid "S"
+msgstr ""
+
+#: src/units.ts:133
+msgid "SE"
+msgstr ""
+
+#: src/units.ts:133
+msgid "SW"
+msgstr ""
+
+#: src/units.ts:133
+msgid "W"
+msgstr ""
+
+#: src/units.ts:298
+msgid "Now"
+msgstr ""
+
+#: src/units.ts:302
+#, javascript-format
+msgid "%d h"
+msgstr ""
+
+#: src/units.ts:303
+#, javascript-format
+msgid "%d min"
+msgstr ""
+
+#: src/weather.ts:105
 msgid "Clear"
 msgstr "Ясно"
 
-#: src/weather.ts:103
+#: src/weather.ts:105
 msgid "Sunny"
 msgstr "Солнечно"
 
-#: src/weather.ts:105
+#: src/weather.ts:107
 msgid "Cloudy"
 msgstr "Облачно"
 
-#: src/weather.ts:107
+#: src/weather.ts:109
 msgid "Rainy"
 msgstr "Дождь"
 
-#: src/weather.ts:109
+#: src/weather.ts:111
 msgid "Snowy"
 msgstr "Снег"
 
-#: src/weather.ts:111
+#: src/weather.ts:113
 msgid "Stormy"
 msgstr "Гроза"
 
-#: src/weather.ts:113
+#: src/weather.ts:115
 msgid "Windy"
 msgstr "Ветрено"
 
@@ -534,14 +607,20 @@ msgstr "Добро пожаловать в %s"
 
 #: src/welcome.ts:74
 #, javascript-format
-msgid "%s occasionally connects to the selected weather service. By default, it will use the Internet to connect to:\n"
+msgid ""
+"%s occasionally connects to the selected weather service. By default, it "
+"will use the Internet to connect to:\n"
 "  •  %s, an %s service for weather\n"
 "  •  %s, optional for resolving the current location\n"
-"  •  %s, for searching locations by name\n\n"
-msgstr "%s периодически соединяется с выбранной службой погоды. По умолчанию для подключения к интернету используются:\n"
+"  •  %s, for searching locations by name\n"
+"\n"
+msgstr ""
+"%s периодически соединяется с выбранной службой погоды. По умолчанию для "
+"подключения к интернету используются:\n"
 "  •  %s — %s служба для получения погодных данных\n"
 "  •  %s — для определения текущего местоположения (опционально)\n"
-"  •  %s — для поиска местоположений по названию\n\n"
+"  •  %s — для поиска местоположений по названию\n"
+"\n"
 
 #: src/welcome.ts:83
 #, javascript-format
@@ -551,4 +630,3 @@ msgstr "Спасибо за установку %s!"
 #: src/welcome.ts:99
 msgid "Abort"
 msgstr "Прервать"
-
