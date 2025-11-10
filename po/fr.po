@@ -424,11 +424,11 @@ msgstr "Ordre dans le panneau"
 
 #: src/preferences/generalPage.ts:290
 msgid "Use Symbolic Icons in Panel"
-msgstr ""
+msgstr "Utiliser des icônes symboliques dans le panneau"
 
 #: src/preferences/generalPage.ts:300
 msgid "Always Use Packaged Icons"
-msgstr ""
+msgstr "Toujours utiliser les icônes du système"
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
