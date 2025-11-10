@@ -238,7 +238,7 @@ msgstr "Afficher le lever/coucher du soleil"
 
 #: src/preferences/detailsPage.ts:251
 msgid "Use Countdown for Sun"
-msgstr ""
+msgstr "Utiliser un compte à rebours pour le soleil"
 
 #: src/preferences/editLocation.ts:33
 #, javascript-format
