@@ -24,15 +24,15 @@ msgstr "自分の場所"
 
 #: src/details.ts:60 src/preferences/generalPage.ts:64
 msgid "Temperature"
-msgstr "温度"
+msgstr "気温"
 
 #: src/details.ts:61
 msgid "Condition"
-msgstr "条件"
+msgstr "状況"
 
 #: src/details.ts:62
 msgid "Feels Like"
-msgstr "気に入ったよ"
+msgstr "体感温度"
 
 #: src/details.ts:63
 msgid "Wind"
@@ -44,11 +44,11 @@ msgstr "湿度"
 
 #: src/details.ts:65
 msgid "Gusts"
-msgstr "風速"
+msgstr "突風"
 
 #: src/details.ts:66
 msgid "UV High"
-msgstr "紫外線高"
+msgstr "UVインデックス"
 
 #: src/details.ts:67 src/preferences/generalPage.ts:92
 msgid "Pressure"
@@ -72,7 +72,7 @@ msgstr "雲量"
 
 #: src/details.ts:72
 msgid "Sun Countdown"
-msgstr ""
+msgstr "日没までの時間"
 
 #: src/details.ts:77 src/popup.ts:409
 msgid "Invalid"
@@ -113,22 +113,22 @@ msgstr "木曜日"
 #: src/location.ts:82
 #, javascript-format
 msgid "%f°N"
-msgstr "%f°N"
+msgstr "北緯 %f°"
 
 #: src/location.ts:82
 #, javascript-format
 msgid "%f°S"
-msgstr "%f°S"
+msgstr "南緯 %f°"
 
 #: src/location.ts:83
 #, javascript-format
 msgid "%f°E"
-msgstr "%f°E"
+msgstr "東経 %f°"
 
 #: src/location.ts:83
 #, javascript-format
 msgid "%f°W"
-msgstr "%f°W"
+msgstr "西経 %f°"
 
 #: src/popup.ts:143
 msgid "Weather Data"
@@ -141,12 +141,12 @@ msgstr "設定"
 #: src/popup.ts:383
 #, javascript-format
 msgid "H: %s"
-msgstr "H: %s"
+msgstr "最高: %s"
 
 #: src/popup.ts:384
 #, javascript-format
 msgid "L: %s"
-msgstr "L: %s"
+msgstr "最低: %s"
 
 #: src/preferences/aboutPage.ts:48
 msgid "About"
@@ -158,11 +158,11 @@ msgstr "GitHub Repository"
 
 #: src/preferences/aboutPage.ts:61
 msgid "Support Me"
-msgstr "応援してください"
+msgstr "支援してください"
 
 #: src/preferences/aboutPage.ts:68
 msgid "SimpleWeather Version"
-msgstr "シンプルな天気バージョン"
+msgstr "SimpleWeather バージョン"
 
 #: src/preferences/aboutPage.ts:71
 msgid "Unknown"
@@ -184,7 +184,7 @@ msgstr "貢献と翻訳を歓迎します! %s の方法をお読みください�
 #: src/preferences/aboutPage.ts:119
 #, javascript-format
 msgid "If you like this extension, consider starring it on %s."
-msgstr "この拡張機能が気に入った場合は、 %s で主演することを検討してください。"
+msgstr "この拡張機能が気に入った場合は、 %s で酒量な役割を果たすことを検討してください。"
 
 #: src/preferences/aboutPage.ts:122
 msgid "here"
@@ -229,7 +229,7 @@ msgstr "セカンダリパネルの詳細"
 
 #: src/preferences/detailsPage.ts:230
 msgid "Show Condition Icon"
-msgstr "条件アイコンを表示"
+msgstr "状況アイコンを表示"
 
 #: src/preferences/detailsPage.ts:240
 msgid "Show Sunrise/Sunset"
@@ -237,7 +237,7 @@ msgstr "日の出/日没を表示"
 
 #: src/preferences/detailsPage.ts:251
 msgid "Use Countdown for Sun"
-msgstr ""
+msgstr "日没までの時間を表示"
 
 #: src/preferences/editLocation.ts:33
 #, javascript-format
@@ -315,7 +315,7 @@ msgstr "速度"
 
 #: src/preferences/generalPage.ts:106
 msgid "Rain Measurement"
-msgstr "雨の測定"
+msgstr "雨量"
 
 #: src/preferences/generalPage.ts:120
 msgid "Distance"
@@ -327,7 +327,7 @@ msgstr "度"
 
 #: src/preferences/generalPage.ts:144
 msgid "Eight-Point Compass"
-msgstr "8点コンパス（8点）"
+msgstr "方位（8点）"
 
 #: src/preferences/generalPage.ts:147
 msgid "Direction"
@@ -419,15 +419,15 @@ msgstr "パネルの水平位置"
 
 #: src/preferences/generalPage.ts:274
 msgid "Order in Panel"
-msgstr "部品の順序"
+msgstr "パネルの順序"
 
 #: src/preferences/generalPage.ts:290
 msgid "Use Symbolic Icons in Panel"
-msgstr ""
+msgstr "シンボリックなアイコンを使用する"
 
 #: src/preferences/generalPage.ts:300
 msgid "Always Use Packaged Icons"
-msgstr ""
+msgstr "常にパッケージ内のアイコンを使用する"
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
@@ -524,53 +524,53 @@ msgstr "GitHubを開く"
 
 #: src/units.ts:133
 msgid "E"
-msgstr ""
+msgstr "東"
 
 #: src/units.ts:133
 msgid "N"
-msgstr ""
+msgstr "北"
 
 #: src/units.ts:133
 msgid "NE"
-msgstr ""
+msgstr "北東"
 
 #: src/units.ts:133
 msgid "NW"
-msgstr ""
+msgstr "北西"
 
 #: src/units.ts:133
 msgid "S"
-msgstr ""
+msgstr "南"
 
 #: src/units.ts:133
 msgid "SE"
-msgstr ""
+msgstr "南東"
 
 #: src/units.ts:133
 msgid "SW"
-msgstr ""
+msgstr "南西"
 
 #: src/units.ts:133
 msgid "W"
-msgstr ""
+msgstr "西"
 
 #: src/units.ts:298
 msgid "Now"
-msgstr ""
+msgstr "現在"
 
 #: src/units.ts:302
 #, javascript-format
 msgid "%d h"
-msgstr ""
+msgstr "%d 時間"
 
 #: src/units.ts:303
 #, javascript-format
 msgid "%d min"
-msgstr ""
+msgstr "%d 分"
 
 #: src/weather.ts:105
 msgid "Clear"
-msgstr "クリア"
+msgstr "快晴"
 
 #: src/weather.ts:105
 msgid "Sunny"
