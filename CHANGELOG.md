@@ -6,11 +6,17 @@
 - More clear coordinate format for editing a location
 - Show error icon in panel on error
 
+## Bug Fixes
+
+- Fixes an error message that appeared if your locale ended with ".utf8" with no dashes
+
 ## Translations
 
+- French (Neo-29)
 - Romanian (ygorigor)
 - Hungarian (Adamyno)
 - Turkish (Samo)
+- Japanese (hidenosuke)
 
 # v49.0.0
 
