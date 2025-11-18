@@ -40,6 +40,7 @@ export function initLocales() : string | undefined {
         // "en.UTF-8" is valid system locale but in JS
         // it is not
         if(strcaseeq(k.slice(-6), ".UTF-8")) continue;
+        if(strcaseeq(k.slice(-6), ".utf8")) continue;
         // "en_US" is system locale but JS locale should be "en-US"
         // or Intl will throw
         k = k.replace(/_/g, "-");
