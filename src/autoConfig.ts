@@ -21,6 +21,7 @@ import { UnitPreset, writeGTypeAS } from "./config.js";
 import { getMyLocation } from "./myLocation.js";
 import { Location } from "./location.js";
 import { gettext as _g } from "./gettext.js"
+import { AutoConfigFailError } from "./errors.js";
 
 /**
  * Tests if this computer is a desktop.
@@ -47,7 +48,7 @@ export async function setFirstTimeConfig(settings : Gio.Settings) {
         myLoc = await getMyLocation();
     } catch(e) {
         console.log("Caught get my location error in autoconfig.");
-        return;
+        throw new AutoConfigFailError();
     }
 
     // If it isn't a laptop then set your location once and never query the server again

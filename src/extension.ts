@@ -35,10 +35,11 @@ import { setUpGettext, gettext as _g } from "./gettext.js";
 import { gettext as shellGettext } from "resource:///org/gnome/shell/extensions/extension.js";
 import { Popup } from "./popup.js";
 import { PopupMenu } from "resource:///org/gnome/shell/ui/popupMenu.js";
-import { showWelcome } from "./welcome.js";
+import { showWelcome, showManualConfig } from "./welcome.js";
 import { setFirstTimeConfig } from "./autoConfig.js";
 import { displayDetail } from "./details.js";
 import { theme, themeInitAll, themeRemoveAll } from "./theme.js";
+import { AutoConfigFailError } from "./errors.js";
 
 export default class SimpleWeatherExtension extends Extension {
 
@@ -117,7 +118,14 @@ export default class SimpleWeatherExtension extends Extension {
             // They both need basic setup, but set first time config
             // requires basic setup before running
             this.#basicSetup();
-            await setFirstTimeConfig(this.#gsettings!);
+            try {
+                await setFirstTimeConfig(this.#gsettings!);
+            } catch(e) {
+                if(e instanceof AutoConfigFailError) {
+                    console.warn("Automatic configuration failed during first-time setup.");
+                    await showManualConfig(this.openPreferences.bind(this));
+                } else throw e;
+            }
         }
         else this.#basicSetup();
 
