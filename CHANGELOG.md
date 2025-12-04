@@ -1,10 +1,11 @@
 
-# v49.1.0 (dev)
+# v49.1.0
 
 ## Improvements
 
 - More clear coordinate format for editing a location
 - Show error icon in panel on error
+- Message telling you to manually configure if location detection fails
 
 ## Bug Fixes
 
@@ -13,10 +14,11 @@
 ## Translations
 
 - French (Neo-29)
-- Romanian (ygorigor)
 - Hungarian (Adamyno)
-- Turkish (Samo)
 - Japanese (hidenosuke)
+- Korean (Jerry Hyun)
+- Romanian (ygorigor)
+- Turkish (Samo)
 
 # v49.0.0
 
