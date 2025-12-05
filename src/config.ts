@@ -38,10 +38,12 @@ export interface PanelPosition {
 
 export class Config {
 
+    #systemSettings : Gio.Settings | null;
     #settings : Gio.Settings;
     #handlerIds : number[];
 
-    constructor(settings : Gio.Settings) {
+    constructor(settings : Gio.Settings, systemSettings : Gio.Settings | null = null) {
+        this.#systemSettings = systemSettings;
         this.#settings = settings;
         this.#handlerIds = [ ];
     }
@@ -287,6 +289,19 @@ export class Config {
     onShowPanelIconChanged(callback : () => void) : void {
         const id = this.#settings.connect("changed", (_, key) => {
             if(key === "show-panel-icon") callback();
+        });
+        this.#handlerIds.push(id);
+    }
+
+    is24HourClock() : boolean | null {
+        if(!this.#systemSettings) return null;
+        return this.#systemSettings.get_enum("clock-format") === 0;
+    }
+
+    onIs24HourClockChanged(callback : () => void) : void {
+        if(!this.#systemSettings) return;
+        const id = this.#systemSettings.connect("changed", (_, key) => {
+            if(key === "clock-format") callback();
         });
         this.#handlerIds.push(id);
     }

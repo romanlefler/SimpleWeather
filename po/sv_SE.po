@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
-"POT-Creation-Date: 2025-07-23 16:59-0500\n"
+"POT-Creation-Date: 2025-10-23 00:19-0500\n"
 "PO-Revision-Date: 2025-07-23 22:06\n"
 "Last-Translator: \n"
 "Language-Team: Swedish\n"
@@ -17,92 +17,96 @@ msgstr ""
 "X-Crowdin-File: simple-weather@romanlefler.com.pot\n"
 "X-Crowdin-File-ID: 2\n"
 
-#: src/autoConfig.ts:49 src/location.ts:53 src/location.ts:63
+#: src/autoConfig.ts:55 src/location.ts:53 src/location.ts:63
 #: src/preferences/generalPage.ts:179
 msgid "My Location"
 msgstr "Min plats"
 
-#: src/details.ts:59 src/preferences/generalPage.ts:64
+#: src/details.ts:60 src/preferences/generalPage.ts:64
 msgid "Temperature"
 msgstr "Temperatur"
 
-#: src/details.ts:60
+#: src/details.ts:61
 msgid "Condition"
 msgstr "Skick"
 
-#: src/details.ts:61
+#: src/details.ts:62
 msgid "Feels Like"
 msgstr "Känns som som"
 
-#: src/details.ts:62
+#: src/details.ts:63
 msgid "Wind"
 msgstr "Vind"
 
-#: src/details.ts:63
+#: src/details.ts:64
 msgid "Humidity"
 msgstr "Luftfuktighet"
 
-#: src/details.ts:64
+#: src/details.ts:65
 msgid "Gusts"
 msgstr "Gusts"
 
-#: src/details.ts:65
+#: src/details.ts:66
 msgid "UV High"
 msgstr "UV hög"
 
-#: src/details.ts:66 src/preferences/generalPage.ts:92
+#: src/details.ts:67 src/preferences/generalPage.ts:92
 msgid "Pressure"
 msgstr "Tryck"
 
-#: src/details.ts:67
+#: src/details.ts:68
 msgid "Precipitation"
 msgstr "Nederbörd"
 
-#: src/details.ts:68
+#: src/details.ts:69
 msgid "Sunrise"
 msgstr "Soluppgång"
 
-#: src/details.ts:69
+#: src/details.ts:70
 msgid "Sunset"
 msgstr "Solnedgång"
 
-#: src/details.ts:70
+#: src/details.ts:71
 msgid "Cloud Cover"
 msgstr "Moln omslag"
 
-#: src/details.ts:75 src/popup.ts:409
+#: src/details.ts:72
+msgid "Sun Countdown"
+msgstr ""
+
+#: src/details.ts:77 src/popup.ts:409
 msgid "Invalid"
 msgstr "Ogiltig"
 
-#: src/lang.ts:108 src/popup.ts:57
+#: src/lang.ts:107 src/popup.ts:57
 msgid "Today"
 msgstr "Idag"
 
-#: src/lang.ts:111
+#: src/lang.ts:110
 msgid "Monday"
 msgstr "Måndag"
 
-#: src/lang.ts:111
+#: src/lang.ts:110
 msgid "Sunday"
 msgstr "Söndag"
 
-#: src/lang.ts:111
+#: src/lang.ts:110
 msgid "Tuesday"
 msgstr "Tisdag"
 
-#: src/lang.ts:111
+#: src/lang.ts:110
 msgid "Wednesday"
 msgstr "Onsdag"
 
-#: src/lang.ts:112
+#: src/lang.ts:111
 msgid "Friday"
 msgstr "Fredag"
 
-#: src/lang.ts:112
+#: src/lang.ts:111
 msgid "Saturday"
 msgstr "Lördag"
 
-#: src/lang.ts:112
+#: src/lang.ts:111
 msgid "Thursday"
 msgstr "Torsdag"
 
@@ -191,45 +195,49 @@ msgstr "här"
 msgid "Report bugs or request new features %s."
 msgstr "Rapportera buggar eller begär nya funktioner %s."
 
-#: src/preferences/aboutPage.ts:138
+#: src/preferences/aboutPage.ts:128 src/preferences/aboutPage.ts:138
 msgid "Credits"
 msgstr "Medverkande"
 
-#: src/preferences/detailsPage.ts:68
+#: src/preferences/detailsPage.ts:80
 msgid "Details"
 msgstr "Detaljer"
 
-#: src/preferences/detailsPage.ts:74
+#: src/preferences/detailsPage.ts:86
 msgid "Pop-Up"
 msgstr "Popup-fönster"
 
-#: src/preferences/detailsPage.ts:75
+#: src/preferences/detailsPage.ts:87
 msgid "Drag-and-drop from bottom to configure the pop-up"
 msgstr "Dra och släpp från botten för att konfigurera popup-fönstret"
 
-#: src/preferences/detailsPage.ts:173 src/preferences/generalPage.ts:235
+#: src/preferences/detailsPage.ts:185 src/preferences/generalPage.ts:235
 msgid "Panel"
 msgstr "Panelen"
 
-#: src/preferences/detailsPage.ts:176
+#: src/preferences/detailsPage.ts:188
 msgid "None"
 msgstr "Ingen"
 
-#: src/preferences/detailsPage.ts:188
+#: src/preferences/detailsPage.ts:200
 msgid "Panel Detail"
 msgstr "Panelens detalj"
 
-#: src/preferences/detailsPage.ts:206
+#: src/preferences/detailsPage.ts:218
 msgid "Secondary Panel Detail"
 msgstr "Sekundär panel Detalj"
 
-#: src/preferences/detailsPage.ts:218
+#: src/preferences/detailsPage.ts:230
 msgid "Show Condition Icon"
 msgstr "Visa villkorsikonen"
 
-#: src/preferences/detailsPage.ts:228
+#: src/preferences/detailsPage.ts:240
 msgid "Show Sunrise/Sunset"
 msgstr "Visa soluppgång/solnedgång"
+
+#: src/preferences/detailsPage.ts:251
+msgid "Use Countdown for Sun"
+msgstr ""
 
 #: src/preferences/editLocation.ts:33
 #, javascript-format
@@ -244,19 +252,24 @@ msgstr "Ny plats"
 msgid "Name"
 msgstr "Namn"
 
-#: src/preferences/editLocation.ts:56
+#: src/preferences/editLocation.ts:57
+#, javascript-format
+msgid "%s (e.g. \"%s\")"
+msgstr ""
+
+#: src/preferences/editLocation.ts:57
 msgid "Coordinates"
 msgstr "Koordinater"
 
-#: src/preferences/editLocation.ts:66
+#: src/preferences/editLocation.ts:67
 msgid "Save"
 msgstr "Spara"
 
-#: src/preferences/editLocation.ts:94
+#: src/preferences/editLocation.ts:95
 msgid "Name is required."
 msgstr "Namn måste fyllas i."
 
-#: src/preferences/editLocation.ts:99
+#: src/preferences/editLocation.ts:100
 msgid "Invalid coordinates entry."
 msgstr "Ogiltig koordinatpost."
 
@@ -408,6 +421,14 @@ msgstr "Sida av panelen"
 msgid "Order in Panel"
 msgstr "Ordna i panelen"
 
+#: src/preferences/generalPage.ts:290
+msgid "Use Symbolic Icons in Panel"
+msgstr ""
+
+#: src/preferences/generalPage.ts:300
+msgid "Always Use Packaged Icons"
+msgstr ""
+
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
 msgstr "Platser"
@@ -480,10 +501,12 @@ msgstr "Ingen information om upphovsrätt finns tillgänglig."
 
 #: src/prefs.ts:74
 #, javascript-format
-msgid "SimpleWeather doesn't know how to handle your locale.\n"
+msgid ""
+"SimpleWeather doesn't know how to handle your locale.\n"
 "\tError - %s\n"
 "Please consider submitting a bug report on GitHub."
-msgstr "SimpleWeather vet inte hur du hanterar din lokal.\n"
+msgstr ""
+"SimpleWeather vet inte hur du hanterar din lokal.\n"
 "\t<unk> Error - %s\n"
 "Överväg att skicka in en felrapport på GitHub."
 
@@ -499,31 +522,77 @@ msgstr "Ignorera"
 msgid "Open GitHub"
 msgstr "Open GitHub"
 
-#: src/weather.ts:103
+#: src/units.ts:133
+msgid "E"
+msgstr ""
+
+#: src/units.ts:133
+msgid "N"
+msgstr ""
+
+#: src/units.ts:133
+msgid "NE"
+msgstr ""
+
+#: src/units.ts:133
+msgid "NW"
+msgstr ""
+
+#: src/units.ts:133
+msgid "S"
+msgstr ""
+
+#: src/units.ts:133
+msgid "SE"
+msgstr ""
+
+#: src/units.ts:133
+msgid "SW"
+msgstr ""
+
+#: src/units.ts:133
+msgid "W"
+msgstr ""
+
+#: src/units.ts:298
+msgid "Now"
+msgstr ""
+
+#: src/units.ts:302
+#, javascript-format
+msgid "%d h"
+msgstr ""
+
+#: src/units.ts:303
+#, javascript-format
+msgid "%d min"
+msgstr ""
+
+#: src/weather.ts:105
 msgid "Clear"
 msgstr "Rensa"
 
-#: src/weather.ts:103
+#: src/weather.ts:105
 msgid "Sunny"
 msgstr "Sunny"
 
-#: src/weather.ts:105
+#: src/weather.ts:107
 msgid "Cloudy"
 msgstr "Molnigt"
 
-#: src/weather.ts:107
+#: src/weather.ts:109
 msgid "Rainy"
 msgstr "Rainy"
 
-#: src/weather.ts:109
+#: src/weather.ts:111
 msgid "Snowy"
 msgstr "Snowy"
 
-#: src/weather.ts:111
+#: src/weather.ts:113
 msgid "Stormy"
 msgstr "Stormy"
 
-#: src/weather.ts:113
+#: src/weather.ts:115
 msgid "Windy"
 msgstr "Blåsigt"
 
@@ -534,14 +603,20 @@ msgstr "Välkommen till %s"
 
 #: src/welcome.ts:74
 #, javascript-format
-msgid "%s occasionally connects to the selected weather service. By default, it will use the Internet to connect to:\n"
+msgid ""
+"%s occasionally connects to the selected weather service. By default, it "
+"will use the Internet to connect to:\n"
 "  •  %s, an %s service for weather\n"
 "  •  %s, optional for resolving the current location\n"
-"  •  %s, for searching locations by name\n\n"
-msgstr "%s ansluter ibland till den valda vädertjänsten. Som standard kommer det att använda Internet för att ansluta till:\n"
+"  •  %s, for searching locations by name\n"
+"\n"
+msgstr ""
+"%s ansluter ibland till den valda vädertjänsten. Som standard kommer det att "
+"använda Internet för att ansluta till:\n"
 "  •  %s, en %s tjänst för väder\n"
 "  •  %s, valfritt för att lösa den aktuella platsen\n"
-"  •  %s, för att söka efter platser med namn\n\n"
+"  •  %s, för att söka efter platser med namn\n"
+"\n"
 
 #: src/welcome.ts:83
 #, javascript-format
@@ -551,4 +626,3 @@ msgstr "Tack för att du installerade %s!"
 #: src/welcome.ts:99
 msgid "Abort"
 msgstr "Avbryt"
-

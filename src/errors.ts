@@ -43,3 +43,11 @@ export class NoLocServiceError extends Error {
     }
 
 }
+
+export class AutoConfigFailError extends Error {
+    constructor(msg? : string) {
+        super(msg ?? "Automatic configuration failed.");
+        this.name = "AutoConfigFailError";
+    }
+}
+

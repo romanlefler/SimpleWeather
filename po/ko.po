@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
-"POT-Creation-Date: 2025-07-23 16:59-0500\n"
-"PO-Revision-Date: 2025-07-23 22:06\n"
+"POT-Creation-Date: 2025-10-23 00:19-0500\n"
+"PO-Revision-Date: 2025-11-28 00:00\n"
 "Last-Translator: \n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
@@ -17,533 +17,612 @@ msgstr ""
 "X-Crowdin-File: simple-weather@romanlefler.com.pot\n"
 "X-Crowdin-File-ID: 2\n"
 
-#: src/autoConfig.ts:49 src/location.ts:53 src/location.ts:63
+#: src/autoConfig.ts:55 src/location.ts:53 src/location.ts:63
 #: src/preferences/generalPage.ts:179
 msgid "My Location"
-msgstr ""
+msgstr "내 위치"
 
-#: src/details.ts:59 src/preferences/generalPage.ts:64
+#: src/details.ts:60 src/preferences/generalPage.ts:64
 msgid "Temperature"
-msgstr ""
-
-#: src/details.ts:60
-msgid "Condition"
-msgstr ""
+msgstr "기온"
 
 #: src/details.ts:61
-msgid "Feels Like"
-msgstr ""
+msgid "Condition"
+msgstr "날씨"
 
 #: src/details.ts:62
-msgid "Wind"
-msgstr ""
+msgid "Feels Like"
+msgstr "체감온도"
 
 #: src/details.ts:63
-msgid "Humidity"
-msgstr ""
+msgid "Wind"
+msgstr "바람"
 
 #: src/details.ts:64
-msgid "Gusts"
-msgstr ""
+msgid "Humidity"
+msgstr "습도"
 
 #: src/details.ts:65
+msgid "Gusts"
+msgstr "돌풍"
+
+#: src/details.ts:66
 msgid "UV High"
-msgstr ""
+msgstr "자외선지수"
 
-#: src/details.ts:66 src/preferences/generalPage.ts:92
+#: src/details.ts:67 src/preferences/generalPage.ts:92
 msgid "Pressure"
-msgstr ""
-
-#: src/details.ts:67
-msgid "Precipitation"
-msgstr ""
+msgstr "기압"
 
 #: src/details.ts:68
-msgid "Sunrise"
-msgstr ""
+msgid "Precipitation"
+msgstr "강수량"
 
 #: src/details.ts:69
-msgid "Sunset"
-msgstr ""
+msgid "Sunrise"
+msgstr "일출"
 
 #: src/details.ts:70
+msgid "Sunset"
+msgstr "일몰"
+
+#: src/details.ts:71
 msgid "Cloud Cover"
-msgstr ""
+msgstr "구름량"
 
-#: src/details.ts:75 src/popup.ts:409
+#: src/details.ts:72
+msgid "Sun Countdown"
+msgstr "일출/일몰까지"
+
+#: src/details.ts:77 src/popup.ts:409
 msgid "Invalid"
-msgstr ""
+msgstr "유효하지 않음"
 
-#: src/lang.ts:108 src/popup.ts:57
+#: src/lang.ts:107 src/popup.ts:57
 msgid "Today"
-msgstr ""
+msgstr "오늘"
 
-#: src/lang.ts:111
+#: src/lang.ts:110
 msgid "Monday"
-msgstr ""
+msgstr "월요일"
 
-#: src/lang.ts:111
+#: src/lang.ts:110
 msgid "Sunday"
-msgstr ""
+msgstr "일요일"
 
-#: src/lang.ts:111
+#: src/lang.ts:110
 msgid "Tuesday"
-msgstr ""
+msgstr "화요일"
+
+#: src/lang.ts:110
+msgid "Wednesday"
+msgstr "수요일"
 
 #: src/lang.ts:111
-msgid "Wednesday"
-msgstr ""
-
-#: src/lang.ts:112
 msgid "Friday"
-msgstr ""
+msgstr "금요일"
 
-#: src/lang.ts:112
+#: src/lang.ts:111
 msgid "Saturday"
-msgstr ""
+msgstr "토요일"
 
-#: src/lang.ts:112
+#: src/lang.ts:111
 msgid "Thursday"
-msgstr ""
+msgstr "목요일"
 
 #: src/location.ts:82
 #, javascript-format
 msgid "%f°N"
-msgstr ""
+msgstr "북위 %f°"
 
 #: src/location.ts:82
 #, javascript-format
 msgid "%f°S"
-msgstr ""
+msgstr "남위 %f°"
 
 #: src/location.ts:83
 #, javascript-format
 msgid "%f°E"
-msgstr ""
+msgstr "동경 %f°"
 
 #: src/location.ts:83
 #, javascript-format
 msgid "%f°W"
-msgstr ""
+msgstr "서경 %f°"
 
 #: src/popup.ts:143
 msgid "Weather Data"
-msgstr ""
+msgstr "날씨 정보"
 
 #: src/popup.ts:297 src/preferences/aboutPage.ts:76
 msgid "Settings"
-msgstr ""
+msgstr "설정"
 
 #: src/popup.ts:383
 #, javascript-format
 msgid "H: %s"
-msgstr ""
+msgstr "최고: %s"
 
 #: src/popup.ts:384
 #, javascript-format
 msgid "L: %s"
-msgstr ""
+msgstr "최저: %s"
 
 #: src/preferences/aboutPage.ts:48
 msgid "About"
-msgstr ""
+msgstr "정보"
 
 #: src/preferences/aboutPage.ts:59
 msgid "GitHub Repository"
-msgstr ""
+msgstr "GitHub 저장소"
 
 #: src/preferences/aboutPage.ts:61
 msgid "Support Me"
-msgstr ""
+msgstr "후원하기"
 
 #: src/preferences/aboutPage.ts:68
 msgid "SimpleWeather Version"
-msgstr ""
+msgstr "SimpleWeather 버전"
 
 #: src/preferences/aboutPage.ts:71
 msgid "Unknown"
-msgstr ""
+msgstr "알 수 없음"
 
 #: src/preferences/aboutPage.ts:79
 msgid "Copy"
-msgstr ""
+msgstr "복사"
 
 #: src/preferences/aboutPage.ts:102
 msgid "Copied settings JSON to clipboard."
-msgstr ""
+msgstr "설정 JSON을 클립보드에 복사했습니다."
 
 #: src/preferences/aboutPage.ts:116
 #, javascript-format
 msgid "Contributions and translations are welcome! Read how on %s."
-msgstr ""
+msgstr "기여와 번역을 환영합니다! %s에서 방법을 확인하세요."
 
 #: src/preferences/aboutPage.ts:119
 #, javascript-format
 msgid "If you like this extension, consider starring it on %s."
-msgstr ""
+msgstr "이 확장 기능이 마음에 드시면 %s에서 별표를 눌러주세요."
 
 #: src/preferences/aboutPage.ts:122
 msgid "here"
-msgstr ""
+msgstr "여기"
 
 #: src/preferences/aboutPage.ts:124
 #, javascript-format
 msgid "Report bugs or request new features %s."
-msgstr ""
+msgstr "버그 신고 또는 새 기능 요청은 %s에서 해주세요."
 
-#: src/preferences/aboutPage.ts:138
+#: src/preferences/aboutPage.ts:128 src/preferences/aboutPage.ts:138
 msgid "Credits"
-msgstr ""
+msgstr "크레딧"
 
-#: src/preferences/detailsPage.ts:68
+#: src/preferences/detailsPage.ts:80
 msgid "Details"
-msgstr ""
+msgstr "상세 정보"
 
-#: src/preferences/detailsPage.ts:74
+#: src/preferences/detailsPage.ts:86
 msgid "Pop-Up"
-msgstr ""
+msgstr "팝업"
 
-#: src/preferences/detailsPage.ts:75
+#: src/preferences/detailsPage.ts:87
 msgid "Drag-and-drop from bottom to configure the pop-up"
-msgstr ""
+msgstr "아래에서 드래그 앤 드롭하여 팝업을 구성하세요"
 
-#: src/preferences/detailsPage.ts:173 src/preferences/generalPage.ts:235
+#: src/preferences/detailsPage.ts:185 src/preferences/generalPage.ts:235
 msgid "Panel"
-msgstr ""
-
-#: src/preferences/detailsPage.ts:176
-msgid "None"
-msgstr ""
+msgstr "패널"
 
 #: src/preferences/detailsPage.ts:188
-msgid "Panel Detail"
-msgstr ""
+msgid "None"
+msgstr "없음"
 
-#: src/preferences/detailsPage.ts:206
-msgid "Secondary Panel Detail"
-msgstr ""
+#: src/preferences/detailsPage.ts:200
+msgid "Panel Detail"
+msgstr "패널 세부 정보"
 
 #: src/preferences/detailsPage.ts:218
-msgid "Show Condition Icon"
-msgstr ""
+msgid "Secondary Panel Detail"
+msgstr "보조 패널 세부 정보"
 
-#: src/preferences/detailsPage.ts:228
+#: src/preferences/detailsPage.ts:230
+msgid "Show Condition Icon"
+msgstr "날씨 아이콘 표시"
+
+#: src/preferences/detailsPage.ts:240
 msgid "Show Sunrise/Sunset"
-msgstr ""
+msgstr "일출/일몰 표시"
+
+#: src/preferences/detailsPage.ts:251
+msgid "Use Countdown for Sun"
+msgstr "일출/일몰 카운트다운 사용"
 
 #: src/preferences/editLocation.ts:33
 #, javascript-format
 msgid "Edit %s"
-msgstr ""
+msgstr "%s 편집"
 
 #: src/preferences/editLocation.ts:33
 msgid "New Location"
-msgstr ""
+msgstr "새 위치"
 
 #: src/preferences/editLocation.ts:41
 msgid "Name"
-msgstr ""
+msgstr "이름"
 
-#: src/preferences/editLocation.ts:56
+#: src/preferences/editLocation.ts:57
+#, javascript-format
+msgid "%s (e.g. \"%s\")"
+msgstr "%s (예: \"%s\")"
+
+#: src/preferences/editLocation.ts:57
 msgid "Coordinates"
-msgstr ""
+msgstr "좌표"
 
-#: src/preferences/editLocation.ts:66
+#: src/preferences/editLocation.ts:67
 msgid "Save"
-msgstr ""
+msgstr "저장"
 
-#: src/preferences/editLocation.ts:94
+#: src/preferences/editLocation.ts:95
 msgid "Name is required."
-msgstr ""
+msgstr "이름을 입력해야 합니다."
 
-#: src/preferences/editLocation.ts:99
+#: src/preferences/editLocation.ts:100
 msgid "Invalid coordinates entry."
-msgstr ""
+msgstr "잘못된 좌표 입력입니다."
 
 #: src/preferences/generalPage.ts:38
 msgid "General"
-msgstr ""
+msgstr "일반"
 
 #: src/preferences/generalPage.ts:43 src/preferences/generalPage.ts:53
 msgid "Units"
-msgstr ""
+msgstr "단위"
 
 #: src/preferences/generalPage.ts:44
 msgid "Configure units of measurement"
-msgstr ""
+msgstr "측정 단위 설정"
 
 #: src/preferences/generalPage.ts:48
 msgid "Custom"
-msgstr ""
+msgstr "사용자 지정"
 
 #: src/preferences/generalPage.ts:48
 msgid "Metric"
-msgstr ""
+msgstr "미터법"
 
 #: src/preferences/generalPage.ts:48
 msgid "UK"
-msgstr ""
+msgstr "영국"
 
 #: src/preferences/generalPage.ts:48
 msgid "US"
-msgstr ""
+msgstr "미국"
 
 #: src/preferences/generalPage.ts:61
 msgid "Fahrenheit"
-msgstr ""
+msgstr "화씨"
 
 #: src/preferences/generalPage.ts:62
 msgid "Celsius"
-msgstr ""
+msgstr "섭씨"
 
 #: src/preferences/generalPage.ts:78
 msgid "Speed"
-msgstr ""
+msgstr "풍속"
 
 #: src/preferences/generalPage.ts:106
 msgid "Rain Measurement"
-msgstr ""
+msgstr "강수량 단위"
 
 #: src/preferences/generalPage.ts:120
 msgid "Distance"
-msgstr ""
+msgstr "거리"
 
 #: src/preferences/generalPage.ts:144
 msgid "Degrees"
-msgstr ""
+msgstr "도"
 
 #: src/preferences/generalPage.ts:144
 msgid "Eight-Point Compass"
-msgstr ""
+msgstr "8방위"
 
 #: src/preferences/generalPage.ts:147
 msgid "Direction"
-msgstr ""
+msgstr "풍향"
 
 #: src/preferences/generalPage.ts:159
 msgid "Weather Service"
-msgstr ""
+msgstr "날씨 서비스"
 
 #: src/preferences/generalPage.ts:160
 msgid "Configure how the weather is attained"
-msgstr ""
+msgstr "날씨 정보 가져오기 설정"
 
 #: src/preferences/generalPage.ts:167
 msgid "Weather Provider"
-msgstr ""
+msgstr "날씨 제공자"
 
 #: src/preferences/generalPage.ts:180
 msgid "Configure how your location is found"
-msgstr ""
+msgstr "위치 확인 방법 설정"
 
 #: src/preferences/generalPage.ts:184 src/preferences/generalPage.ts:185
 msgid "Online"
-msgstr ""
+msgstr "온라인"
 
 #: src/preferences/generalPage.ts:186 src/preferences/generalPage.ts:245
 msgid "System"
-msgstr ""
+msgstr "시스템"
 
 #: src/preferences/generalPage.ts:187
 msgid "Disable"
-msgstr ""
+msgstr "비활성화"
 
 #: src/preferences/generalPage.ts:190
 msgid "Provider"
-msgstr ""
+msgstr "제공자"
 
 #: src/preferences/generalPage.ts:202
 msgid "Refresh Interval (Minutes)"
-msgstr ""
+msgstr "새로고침 간격 (분)"
 
 #: src/preferences/generalPage.ts:220
 msgid "Accessibility"
-msgstr ""
+msgstr "접근성"
 
 #: src/preferences/generalPage.ts:221
 msgid "Configure accessibility features"
-msgstr ""
+msgstr "접근성 기능 설정"
 
 #: src/preferences/generalPage.ts:224
 msgid "High Contrast"
-msgstr ""
+msgstr "고대비"
 
 #: src/preferences/generalPage.ts:236
 msgid "Configure the panel and pop-up"
-msgstr ""
+msgstr "패널 및 팝업 설정"
 
 #: src/preferences/generalPage.ts:246
 msgid "Light"
-msgstr ""
+msgstr "밝게"
 
 #: src/preferences/generalPage.ts:247
 msgid "Afterdark"
-msgstr ""
+msgstr "야간 모드"
 
 #: src/preferences/generalPage.ts:248
 msgid "Immersive"
-msgstr ""
+msgstr "몰입형"
 
 #: src/preferences/generalPage.ts:251
 msgid "Theme"
-msgstr ""
+msgstr "테마"
 
 #: src/preferences/generalPage.ts:261
 msgid "Center"
-msgstr ""
+msgstr "가운데"
 
 #: src/preferences/generalPage.ts:261
 msgid "Left"
-msgstr ""
+msgstr "왼쪽"
 
 #: src/preferences/generalPage.ts:261
 msgid "Right"
-msgstr ""
+msgstr "오른쪽"
 
 #: src/preferences/generalPage.ts:264
 msgid "Side of Panel"
-msgstr ""
+msgstr "패널 위치"
 
 #: src/preferences/generalPage.ts:274
 msgid "Order in Panel"
-msgstr ""
+msgstr "패널 내 순서"
+
+#: src/preferences/generalPage.ts:290
+msgid "Use Symbolic Icons in Panel"
+msgstr "패널에 심볼 아이콘 사용"
+
+#: src/preferences/generalPage.ts:300
+msgid "Always Use Packaged Icons"
+msgstr "항상 패키지 아이콘 사용"
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
-msgstr ""
+msgstr "위치"
 
 #: src/preferences/locationsPage.ts:70 src/preferences/search.ts:75
 msgid "Add"
-msgstr ""
+msgstr "추가"
 
 #: src/preferences/locationsPage.ts:97
 msgid "Move Up"
-msgstr ""
+msgstr "위로 이동"
 
 #: src/preferences/locationsPage.ts:112
 msgid "Move Down"
-msgstr ""
+msgstr "아래로 이동"
 
 #: src/preferences/locationsPage.ts:128
 msgid "Add Here"
-msgstr ""
+msgstr "여기에 추가"
 
 #: src/preferences/locationsPage.ts:193
 #, javascript-format
 msgid "Are you sure you want delete %s?"
-msgstr ""
+msgstr "%s을(를) 삭제하시겠습니까?"
 
 #: src/preferences/locationsPage.ts:194
 msgid "Cancel"
-msgstr ""
+msgstr "취소"
 
 #: src/preferences/locationsPage.ts:194
 msgid "Delete"
-msgstr ""
+msgstr "삭제"
 
 #: src/preferences/locationsPage.ts:235
 #, javascript-format
 msgid "Internal Error: %s"
-msgstr ""
+msgstr "내부 오류: %s"
 
 #: src/preferences/locationsPage.ts:236
 msgid "Internal Error"
-msgstr ""
+msgstr "내부 오류"
 
 #: src/preferences/locationsPage.ts:261
 msgid "Something else edited the locations."
-msgstr ""
+msgstr "다른 곳에서 위치가 수정되었습니다."
 
 #: src/preferences/search.ts:45
 msgid "Search Location"
-msgstr ""
+msgstr "위치 검색"
 
 #: src/preferences/search.ts:54
 msgid "City, Neighborhood, etc."
-msgstr ""
+msgstr "도시, 동네 등"
 
 #: src/preferences/search.ts:59
 msgid "Search"
-msgstr ""
+msgstr "검색"
 
 #: src/preferences/search.ts:158
 msgid "No Internet"
-msgstr ""
+msgstr "인터넷 연결 없음"
 
 #: src/preferences/search.ts:206
 msgid "No results."
-msgstr ""
+msgstr "검색 결과가 없습니다."
 
 #: src/preferences/search.ts:211
 msgid "No copyright information available."
-msgstr ""
+msgstr "저작권 정보가 없습니다."
 
 #: src/prefs.ts:74
 #, javascript-format
-msgid "SimpleWeather doesn't know how to handle your locale.\n"
+msgid ""
+"SimpleWeather doesn't know how to handle your locale.\n"
 "\tError - %s\n"
 "Please consider submitting a bug report on GitHub."
 msgstr ""
+"SimpleWeather에서 지원하지 않는 언어입니다.\n"
+"\t오류 - %s\n"
+"GitHub에 버그 리포트를 제출해 주세요."
 
 #: src/prefs.ts:77
 msgid "Don't Show Again"
-msgstr ""
+msgstr "다시 표시 안 함"
 
 #: src/prefs.ts:77
 msgid "Ignore"
-msgstr ""
+msgstr "무시"
 
 #: src/prefs.ts:77
 msgid "Open GitHub"
-msgstr ""
+msgstr "GitHub 열기"
 
-#: src/weather.ts:103
-msgid "Clear"
-msgstr ""
+#: src/units.ts:133
+msgid "E"
+msgstr "동"
 
-#: src/weather.ts:103
-msgid "Sunny"
-msgstr ""
+#: src/units.ts:133
+msgid "N"
+msgstr "북"
+
+#: src/units.ts:133
+msgid "NE"
+msgstr "북동"
+
+#: src/units.ts:133
+msgid "NW"
+msgstr "북서"
+
+#: src/units.ts:133
+msgid "S"
+msgstr "남"
+
+#: src/units.ts:133
+msgid "SE"
+msgstr "남동"
+
+#: src/units.ts:133
+msgid "SW"
+msgstr "남서"
+
+#: src/units.ts:133
+msgid "W"
+msgstr "서"
+
+#: src/units.ts:298
+msgid "Now"
+msgstr "지금"
+
+#: src/units.ts:302
+#, javascript-format
+msgid "%d h"
+msgstr "%d시간"
+
+#: src/units.ts:303
+#, javascript-format
+msgid "%d min"
+msgstr "%d분"
 
 #: src/weather.ts:105
-msgid "Cloudy"
-msgstr ""
+msgid "Clear"
+msgstr "맑음"
+
+#: src/weather.ts:105
+msgid "Sunny"
+msgstr "맑음"
 
 #: src/weather.ts:107
-msgid "Rainy"
-msgstr ""
+msgid "Cloudy"
+msgstr "흐림"
 
 #: src/weather.ts:109
-msgid "Snowy"
-msgstr ""
+msgid "Rainy"
+msgstr "비"
 
 #: src/weather.ts:111
-msgid "Stormy"
-msgstr ""
+msgid "Snowy"
+msgstr "눈"
 
 #: src/weather.ts:113
+msgid "Stormy"
+msgstr "뇌우"
+
+#: src/weather.ts:115
 msgid "Windy"
-msgstr ""
+msgstr "강풍"
 
 #: src/welcome.ts:53
 #, javascript-format
 msgid "Welcome to %s"
-msgstr ""
+msgstr "%s에 오신 것을 환영합니다"
 
 #: src/welcome.ts:74
 #, javascript-format
-msgid "%s occasionally connects to the selected weather service. By default, it will use the Internet to connect to:\n"
+msgid ""
+"%s occasionally connects to the selected weather service. By default, it "
+"will use the Internet to connect to:\n"
 "  •  %s, an %s service for weather\n"
 "  •  %s, optional for resolving the current location\n"
-"  •  %s, for searching locations by name\n\n"
+"  •  %s, for searching locations by name\n"
+"\n"
 msgstr ""
+"%s은(는) 선택된 날씨 서비스에 주기적으로 연결합니다. 기본적으로 인터넷을 "
+"통해 다음에 연결합니다:\n"
+"  •  %s, %s 날씨 서비스\n"
+"  •  %s, 현재 위치 확인용 (선택 사항)\n"
+"  •  %s, 위치 이름 검색용\n"
+"\n"
 
 #: src/welcome.ts:83
 #, javascript-format
 msgid "Thank you for installing %s!"
-msgstr ""
+msgstr "%s을(를) 설치해 주셔서 감사합니다!"
 
 #: src/welcome.ts:99
 msgid "Abort"
-msgstr ""
-
+msgstr "중단"

@@ -53,7 +53,8 @@ export async function editLocation(parent : Gtk.Window, loc? : Location) : Promi
         coordsText = `${latLon.lat} ${latLon.lon}`;
     }
     const coordsRow = new Adw.EntryRow({
-        title: _g("Coordinates"),
+        // This is done kind of goofy since Coordinates is already translated
+        title: _g("%s (e.g. \"%s\")").format(_g("Coordinates"), "40.7 -73.97"),
         text: coordsText
     });
 
@@ -115,9 +116,16 @@ function parseCoords(s : string) : [number, number] | null {
     // e.g. replaces 5,43 with 5.43 for l10n
     s = s.replace(/(\d)(,)(\d)/g, "$1.$2");
 
+    // If someone puts a comma separator, replace it with a space
+    s = s.replace(/^\s*(-?[0-9.]+)\s*,\s*(-?[0-9.]+)\s*$/, "$1 $2");
+
+    // Disallow garbage at end (e.g. Deg W)
+    if(!s.match(/^\s*-?[0-9.]+\s+-?[0-9.]+\s*$/)) return null;
+
     const split = s.split(" ");
     if(split.length !== 2) return null;
 
+    // Parse float handles trimming
     const lat = parseFloat(split[0]);
     const lon = parseFloat(split[1]);
     if(isNaN(lat) || isNaN(lon)) return null;

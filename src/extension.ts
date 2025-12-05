@@ -35,10 +35,11 @@ import { setUpGettext, gettext as _g } from "./gettext.js";
 import { gettext as shellGettext } from "resource:///org/gnome/shell/extensions/extension.js";
 import { Popup } from "./popup.js";
 import { PopupMenu } from "resource:///org/gnome/shell/ui/popupMenu.js";
-import { showWelcome } from "./welcome.js";
+import { showWelcome, showManualConfig } from "./welcome.js";
 import { setFirstTimeConfig } from "./autoConfig.js";
 import { displayDetail } from "./details.js";
 import { theme, themeInitAll, themeRemoveAll } from "./theme.js";
+import { AutoConfigFailError } from "./errors.js";
 
 export default class SimpleWeatherExtension extends Extension {
 
@@ -62,6 +63,7 @@ export default class SimpleWeatherExtension extends Extension {
     #waitLayoutId? : number;
 
     #resolverFailCount : number = 0;
+    #indicIsErrored : boolean = false;
 
     /**
      * Waits for the layout manager's starting up property to be false.
@@ -116,7 +118,14 @@ export default class SimpleWeatherExtension extends Extension {
             // They both need basic setup, but set first time config
             // requires basic setup before running
             this.#basicSetup();
-            await setFirstTimeConfig(this.#gsettings!);
+            try {
+                await setFirstTimeConfig(this.#gsettings!);
+            } catch(e) {
+                if(e instanceof AutoConfigFailError) {
+                    console.warn("Automatic configuration failed during first-time setup.");
+                    await showManualConfig(this.openPreferences.bind(this));
+                } else throw e;
+            }
         }
         else this.#basicSetup();
 
@@ -127,7 +136,8 @@ export default class SimpleWeatherExtension extends Extension {
     #basicSetup() {
         // Set everything up
         // Gettext and gsettings are already set up
-        this.#config = new Config(this.#gsettings!);
+        const sysSettings = Gio.Settings.new("org.gnome.desktop.interface");
+        this.#config = new Config(this.#gsettings!, sysSettings);
         this.#libsoup = new LibSoup();
         this.#provider = createProvider(this.#libsoup, this.#config);
         setUpMyLocation(this.#libsoup, this.#config);
@@ -246,6 +256,9 @@ export default class SimpleWeatherExtension extends Extension {
         this.#config!.onThemeChanged(this.#rebuildIndicator.bind(this));
         this.#config!.onHighContrastChanged(this.#rebuildIndicator.bind(this));
 
+        // GNOME Settings
+        this.#config!.onIs24HourClockChanged(this.#updateGui.bind(this));
+
         // First weather fetch
         this.#updateWeather();
     }
@@ -285,6 +298,7 @@ export default class SimpleWeatherExtension extends Extension {
         this.#libsoup = undefined;
         this.#config?.free();
         this.#config = undefined;
+        this.#updateWeather();
 
         freeMyLocation();
         this.#provider = undefined;
@@ -307,6 +321,15 @@ export default class SimpleWeatherExtension extends Extension {
                     this.#delayFetchId = undefined;
                     this.#updateWeather();
                 });
+            // Maybe this error happened because of failed fetch or going over fail count
+            } else if(!this.#cachedWeather) {
+                this.#indicator = this.#createIndicator();
+                if(this.#panelIcon) this.#panelIcon.icon_name = "error-app-symbolic";
+                if(this.#panelLabel) this.#panelLabel.text = "Error!";
+                if(this.#secondPanelLabel) this.#secondPanelLabel.visible = false;
+                if(this.#sunTimeLabel) this.#sunTimeLabel.visible = false;
+                if(this.#sunTimeIcon) this.#sunTimeIcon.visible = false;
+                this.#addIndicIfNeeded();
             }
         });
         return GLib.SOURCE_CONTINUE;
@@ -317,6 +340,14 @@ export default class SimpleWeatherExtension extends Extension {
         if(!this.#provider) throw new Error("Provider was undefined!");
         this.#cachedWeather = await this.#provider!.fetchWeather();
         this.#updateGui();
+    }
+
+    #addIndicIfNeeded() {
+        if (!this.#hasAddedIndicator) {
+            this.#hasAddedIndicator = true;
+            const pos = this.#config!.getPanelPosition();
+            Main.panel.addToStatusArea(this.uuid, this.#indicator!, pos.priority, pos.box);
+        }
     }
 
     #updateGui() {
@@ -332,6 +363,7 @@ export default class SimpleWeatherExtension extends Extension {
         const secondPanelDetail = this.#config!.getSecondaryPanelDetail();
         if(secondPanelDetail !== null && this.#secondPanelLabel) {
             const secondPanelText = displayDetail(w, secondPanelDetail, _g, this.#config!, true);
+            this.#secondPanelLabel.visible = true;
             this.#secondPanelLabel.text = secondPanelText;
         }
 
@@ -344,19 +376,19 @@ export default class SimpleWeatherExtension extends Extension {
         const sunTime = showSunset ? w.sunset : w.sunrise;
 
         if(this.#sunTimeLabel) {
+            this.#sunTimeLabel.visible = true;
             const useAbs = !this.#config!.getShowSunTimeAsCountdown();
             if(useAbs) this.#sunTimeLabel.text = displayTime(sunTime, this.#config!);
             else this.#sunTimeLabel.text = w.sunEventCountdown.display(this.#config!);
         }
-        if(this.#sunTimeIcon) this.#sunTimeIcon.icon_name = `daytime-${showSunset ? "sunset" : "sunrise"}-symbolic`;
+        if(this.#sunTimeIcon) {
+            this.#sunTimeIcon.visible = true;
+            this.#sunTimeIcon.icon_name = `daytime-${showSunset ? "sunset" : "sunrise"}-symbolic`;
+        }
 
         this.#popup!.updateGui(w);
 
-        if (!this.#hasAddedIndicator) {
-            this.#hasAddedIndicator = true;
-            const pos = this.#config!.getPanelPosition();
-            Main.panel.addToStatusArea(this.uuid, this.#indicator!, pos.priority, pos.box);
-        }
+        this.#addIndicIfNeeded();
     }
 
 }

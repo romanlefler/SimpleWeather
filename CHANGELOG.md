@@ -1,4 +1,25 @@
 
+# v49.1.0
+
+## Improvements
+
+- More clear coordinate format for editing a location
+- Show error icon in panel on error
+- Message telling you to manually configure if location detection fails
+
+## Bug Fixes
+
+- Fixes an error message that appeared if your locale ended with ".utf8" with no dashes
+
+## Translations
+
+- French (Neo-29)
+- Hungarian (Adamyno)
+- Japanese (hidenosuke)
+- Korean (Jerry Hyun)
+- Romanian (ygorigor)
+- Turkish (Samo)
+
 # v49.0.0
 
 ## Features

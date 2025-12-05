@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
-"POT-Creation-Date: 2025-07-23 16:59-0500\n"
+"POT-Creation-Date: 2025-10-23 00:19-0500\n"
 "PO-Revision-Date: 2025-07-23 22:06\n"
 "Last-Translator: \n"
 "Language-Team: Ukrainian\n"
@@ -10,99 +10,105 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=((n%10==1 && n%100!=11) ? 0 : ((n%10 >= 2 && n%10 <=4 && (n%100 < 12 || n%100 > 14)) ? 1 : ((n%10 == 0 || (n%10 >= 5 && n%10 <=9)) || (n%100 >= 11 && n%100 <= 14)) ? 2 : 3));\n"
+"Plural-Forms: nplurals=4; plural=((n%10==1 && n%100!=11) ? 0 : ((n%10 >= 2 "
+"&& n%10 <=4 && (n%100 < 12 || n%100 > 14)) ? 1 : ((n%10 == 0 || (n%10 >= 5 "
+"&& n%10 <=9)) || (n%100 >= 11 && n%100 <= 14)) ? 2 : 3));\n"
 "X-Crowdin-Project: simpleweather\n"
 "X-Crowdin-Project-ID: 798380\n"
 "X-Crowdin-Language: uk\n"
 "X-Crowdin-File: simple-weather@romanlefler.com.pot\n"
 "X-Crowdin-File-ID: 2\n"
 
-#: src/autoConfig.ts:49 src/location.ts:53 src/location.ts:63
+#: src/autoConfig.ts:55 src/location.ts:53 src/location.ts:63
 #: src/preferences/generalPage.ts:179
 msgid "My Location"
 msgstr "Моє місцезнаходження"
 
-#: src/details.ts:59 src/preferences/generalPage.ts:64
+#: src/details.ts:60 src/preferences/generalPage.ts:64
 msgid "Temperature"
 msgstr "Температура"
 
-#: src/details.ts:60
+#: src/details.ts:61
 msgid "Condition"
 msgstr "Стан"
 
-#: src/details.ts:61
+#: src/details.ts:62
 msgid "Feels Like"
 msgstr "Відчувається як"
 
-#: src/details.ts:62
+#: src/details.ts:63
 msgid "Wind"
 msgstr "Вітер"
 
-#: src/details.ts:63
+#: src/details.ts:64
 msgid "Humidity"
 msgstr "Вологість"
 
-#: src/details.ts:64
+#: src/details.ts:65
 msgid "Gusts"
 msgstr "Гюстс"
 
-#: src/details.ts:65
+#: src/details.ts:66
 msgid "UV High"
 msgstr "УФ-фах"
 
-#: src/details.ts:66 src/preferences/generalPage.ts:92
+#: src/details.ts:67 src/preferences/generalPage.ts:92
 msgid "Pressure"
 msgstr "Тиск"
 
-#: src/details.ts:67
+#: src/details.ts:68
 msgid "Precipitation"
 msgstr "Атмосферні опади"
 
-#: src/details.ts:68
+#: src/details.ts:69
 msgid "Sunrise"
 msgstr "Схід сонця"
 
-#: src/details.ts:69
+#: src/details.ts:70
 msgid "Sunset"
 msgstr "Захід Сонця"
 
-#: src/details.ts:70
+#: src/details.ts:71
 msgid "Cloud Cover"
 msgstr "Хмарна обкладинка"
 
-#: src/details.ts:75 src/popup.ts:409
+#: src/details.ts:72
+msgid "Sun Countdown"
+msgstr ""
+
+#: src/details.ts:77 src/popup.ts:409
 msgid "Invalid"
 msgstr "Недійсний"
 
-#: src/lang.ts:108 src/popup.ts:57
+#: src/lang.ts:107 src/popup.ts:57
 msgid "Today"
 msgstr "Сьогодні"
 
-#: src/lang.ts:111
+#: src/lang.ts:110
 msgid "Monday"
 msgstr "Понеділок"
 
-#: src/lang.ts:111
+#: src/lang.ts:110
 msgid "Sunday"
 msgstr "Неділя"
 
-#: src/lang.ts:111
+#: src/lang.ts:110
 msgid "Tuesday"
 msgstr "Вівторок"
 
-#: src/lang.ts:111
+#: src/lang.ts:110
 msgid "Wednesday"
 msgstr "Середа"
 
-#: src/lang.ts:112
+#: src/lang.ts:111
 msgid "Friday"
 msgstr "П'ятниця"
 
-#: src/lang.ts:112
+#: src/lang.ts:111
 msgid "Saturday"
 msgstr "Субота"
 
-#: src/lang.ts:112
+#: src/lang.ts:111
 msgid "Thursday"
 msgstr "Четвер"
 
@@ -180,7 +186,8 @@ msgstr "Запрошуємо внески та переклади! Прочит�
 #: src/preferences/aboutPage.ts:119
 #, javascript-format
 msgid "If you like this extension, consider starring it on %s."
-msgstr "Якщо вам подобається це розширення, спробуйте поставити за руку разом з %s."
+msgstr ""
+"Якщо вам подобається це розширення, спробуйте поставити за руку разом з %s."
 
 #: src/preferences/aboutPage.ts:122
 msgid "here"
@@ -191,45 +198,49 @@ msgstr "сюди"
 msgid "Report bugs or request new features %s."
 msgstr "Повідомити про помилку або попросити нові функції %s."
 
-#: src/preferences/aboutPage.ts:138
+#: src/preferences/aboutPage.ts:128 src/preferences/aboutPage.ts:138
 msgid "Credits"
 msgstr "Автори"
 
-#: src/preferences/detailsPage.ts:68
+#: src/preferences/detailsPage.ts:80
 msgid "Details"
 msgstr "Подробиці"
 
-#: src/preferences/detailsPage.ts:74
+#: src/preferences/detailsPage.ts:86
 msgid "Pop-Up"
 msgstr "Спливаюче вікно"
 
-#: src/preferences/detailsPage.ts:75
+#: src/preferences/detailsPage.ts:87
 msgid "Drag-and-drop from bottom to configure the pop-up"
 msgstr "Перетягніть знизу для налаштування спливаючого вікна"
 
-#: src/preferences/detailsPage.ts:173 src/preferences/generalPage.ts:235
+#: src/preferences/detailsPage.ts:185 src/preferences/generalPage.ts:235
 msgid "Panel"
 msgstr "Панель"
 
-#: src/preferences/detailsPage.ts:176
+#: src/preferences/detailsPage.ts:188
 msgid "None"
 msgstr "Без ефекту"
 
-#: src/preferences/detailsPage.ts:188
+#: src/preferences/detailsPage.ts:200
 msgid "Panel Detail"
 msgstr "Деталі панелі"
 
-#: src/preferences/detailsPage.ts:206
+#: src/preferences/detailsPage.ts:218
 msgid "Secondary Panel Detail"
 msgstr "Деталі другої панелі"
 
-#: src/preferences/detailsPage.ts:218
+#: src/preferences/detailsPage.ts:230
 msgid "Show Condition Icon"
 msgstr "Показати піктограму стану"
 
-#: src/preferences/detailsPage.ts:228
+#: src/preferences/detailsPage.ts:240
 msgid "Show Sunrise/Sunset"
 msgstr "Показати захід сонця/захід"
+
+#: src/preferences/detailsPage.ts:251
+msgid "Use Countdown for Sun"
+msgstr ""
 
 #: src/preferences/editLocation.ts:33
 #, javascript-format
@@ -244,19 +255,24 @@ msgstr "Нове розташування"
 msgid "Name"
 msgstr "Ім'я"
 
-#: src/preferences/editLocation.ts:56
+#: src/preferences/editLocation.ts:57
+#, javascript-format
+msgid "%s (e.g. \"%s\")"
+msgstr ""
+
+#: src/preferences/editLocation.ts:57
 msgid "Coordinates"
 msgstr "Координати"
 
-#: src/preferences/editLocation.ts:66
+#: src/preferences/editLocation.ts:67
 msgid "Save"
 msgstr "Зберегти"
 
-#: src/preferences/editLocation.ts:94
+#: src/preferences/editLocation.ts:95
 msgid "Name is required."
 msgstr "Потрібне ім'я."
 
-#: src/preferences/editLocation.ts:99
+#: src/preferences/editLocation.ts:100
 msgid "Invalid coordinates entry."
 msgstr "Неприпустимий запис координат."
 
@@ -408,6 +424,14 @@ msgstr "Біля панелі"
 msgid "Order in Panel"
 msgstr "Замовлення на панелі"
 
+#: src/preferences/generalPage.ts:290
+msgid "Use Symbolic Icons in Panel"
+msgstr ""
+
+#: src/preferences/generalPage.ts:300
+msgid "Always Use Packaged Icons"
+msgstr ""
+
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
 msgstr "Місцезнаходження"
@@ -480,10 +504,12 @@ msgstr "Немає інформації про авторські права."
 
 #: src/prefs.ts:74
 #, javascript-format
-msgid "SimpleWeather doesn't know how to handle your locale.\n"
+msgid ""
+"SimpleWeather doesn't know how to handle your locale.\n"
 "\tError - %s\n"
 "Please consider submitting a bug report on GitHub."
-msgstr "SimpleWeather не знає, як впоратися з вашою локальністю.\n"
+msgstr ""
+"SimpleWeather не знає, як впоратися з вашою локальністю.\n"
 "\tПомилка - %s\n"
 "Будь ласка, розгляньте можливість надсилання звіту про помилку на GitHub."
 
@@ -499,31 +525,77 @@ msgstr "Ігнорувати"
 msgid "Open GitHub"
 msgstr "Open GitHub"
 
-#: src/weather.ts:103
+#: src/units.ts:133
+msgid "E"
+msgstr ""
+
+#: src/units.ts:133
+msgid "N"
+msgstr ""
+
+#: src/units.ts:133
+msgid "NE"
+msgstr ""
+
+#: src/units.ts:133
+msgid "NW"
+msgstr ""
+
+#: src/units.ts:133
+msgid "S"
+msgstr ""
+
+#: src/units.ts:133
+msgid "SE"
+msgstr ""
+
+#: src/units.ts:133
+msgid "SW"
+msgstr ""
+
+#: src/units.ts:133
+msgid "W"
+msgstr ""
+
+#: src/units.ts:298
+msgid "Now"
+msgstr ""
+
+#: src/units.ts:302
+#, javascript-format
+msgid "%d h"
+msgstr ""
+
+#: src/units.ts:303
+#, javascript-format
+msgid "%d min"
+msgstr ""
+
+#: src/weather.ts:105
 msgid "Clear"
 msgstr "Очистити"
 
-#: src/weather.ts:103
+#: src/weather.ts:105
 msgid "Sunny"
 msgstr "Sunny"
 
-#: src/weather.ts:105
+#: src/weather.ts:107
 msgid "Cloudy"
 msgstr "Хмарно"
 
-#: src/weather.ts:107
+#: src/weather.ts:109
 msgid "Rainy"
 msgstr "Rainy"
 
-#: src/weather.ts:109
+#: src/weather.ts:111
 msgid "Snowy"
 msgstr "Snowy"
 
-#: src/weather.ts:111
+#: src/weather.ts:113
 msgid "Stormy"
 msgstr "Stormy"
 
-#: src/weather.ts:113
+#: src/weather.ts:115
 msgid "Windy"
 msgstr "Вітряно"
 
@@ -534,10 +606,13 @@ msgstr "Ласкаво просимо до %s"
 
 #: src/welcome.ts:74
 #, javascript-format
-msgid "%s occasionally connects to the selected weather service. By default, it will use the Internet to connect to:\n"
+msgid ""
+"%s occasionally connects to the selected weather service. By default, it "
+"will use the Internet to connect to:\n"
 "  •  %s, an %s service for weather\n"
 "  •  %s, optional for resolving the current location\n"
-"  •  %s, for searching locations by name\n\n"
+"  •  %s, for searching locations by name\n"
+"\n"
 msgstr ""
 
 #: src/welcome.ts:83
@@ -548,4 +623,3 @@ msgstr "Дякуємо Вам за встановлення %s!"
 #: src/welcome.ts:99
 msgid "Abort"
 msgstr "Відміна"
-

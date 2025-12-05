@@ -136,3 +136,82 @@ export async function showWelcome() : Promise<boolean> {
     const dialog = new WelcomeDialog();
     return dialog.choose();
 }
+
+class ManualConfigDialog extends ModalDialog {
+
+    readonly #okay : St.Button;
+
+    static {
+        GObject.registerClass(this);
+    }
+
+    constructor() {
+        super();
+
+        const title = _g("Manual Configuration");
+        const titleLabel = new St.Label({
+            text: title,
+            style_class: "modal-dialog-title",
+            style: "font-weight: bold;",
+            x_align: Clutter.ActorAlign.CENTER,
+            y_align: Clutter.ActorAlign.CENTER,
+            margin_bottom: 25
+        });
+        this.contentLayout.add_child(titleLabel);
+
+        const box = new St.BoxLayout({
+            vertical: true,
+            style_class: "dialog-content",
+            x_expand: true,
+            y_expand: true,
+            x_align: Clutter.ActorAlign.FILL,
+            y_align: Clutter.ActorAlign.CENTER
+        });
+
+        const msg = paragraph(_g("Failed to detect location."));
+        box.add_child(msg);
+
+        const directions = paragraph(_g("Please configure your location and units manually."));
+        box.add_child(directions);
+
+        const spacer = new St.Widget({ height: 30 });
+        box.add_child(spacer);
+
+        const buttonBox = new St.BoxLayout({
+            vertical: false,
+            x_expand: true,
+            y_expand: false,
+            x_align: Clutter.ActorAlign.FILL,
+            margin_top: 25
+        });
+
+        const okay = new St.Button({ 
+            label: "OK",
+            x_expand: true,
+            style_class: "modal-dialog-button",
+        });
+        buttonBox.add_child(okay);
+        box.add_child(buttonBox);
+
+        this.contentLayout.add_child(box);
+        okay.grab_key_focus();
+
+        this.#okay = okay;
+    }
+
+    choose() : Promise<void> {
+        return new Promise<void>((resolve) => {
+            this.#okay.connect("clicked", () => {
+                this.close();
+                resolve();
+            });
+            this.open();
+        });
+    }
+}
+
+export async function showManualConfig(openPrefs : () => void) : Promise<void> {
+    const dialog = new ManualConfigDialog();
+    return dialog.choose().then(() => openPrefs());
+}
+
