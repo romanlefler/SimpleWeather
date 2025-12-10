@@ -1,4 +1,11 @@
 
+# v49.2.0-dev
+
+## Translations
+
+- Dutch (thanks Ontrack16)
+- Romanian (thanks Igor Sorocean)
+
 # v49.1.0
 
 ## Improvements
