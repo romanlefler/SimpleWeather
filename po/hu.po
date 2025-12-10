@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
-"POT-Creation-Date: 2025-07-23 16:59-0500\n"
+"POT-Creation-Date: 2025-11-20 21:18-0600\n"
 "PO-Revision-Date: 2025-11-04 19:23\n"
 "Last-Translator: \n"
 "Language-Team: Hungarian\n"
@@ -17,60 +17,64 @@ msgstr ""
 "X-Crowdin-File: simple-weather@romanlefler.com.pot\n"
 "X-Crowdin-File-ID: 2\n"
 
-#: src/autoConfig.ts:49 src/location.ts:53 src/location.ts:63
+#: src/autoConfig.ts:56 src/location.ts:53 src/location.ts:63
 #: src/preferences/generalPage.ts:179
 msgid "My Location"
 msgstr "Saját pozícióm"
 
-#: src/details.ts:59 src/preferences/generalPage.ts:64
+#: src/details.ts:60 src/preferences/generalPage.ts:64
 msgid "Temperature"
 msgstr "Hőmérséklet"
 
-#: src/details.ts:60
+#: src/details.ts:61
 msgid "Condition"
 msgstr "Állapot"
 
-#: src/details.ts:61
+#: src/details.ts:62
 msgid "Feels Like"
 msgstr "Hőérzet"
 
-#: src/details.ts:62
+#: src/details.ts:63
 msgid "Wind"
 msgstr "Szél"
 
-#: src/details.ts:63
+#: src/details.ts:64
 msgid "Humidity"
 msgstr "Páratartalom"
 
-#: src/details.ts:64
+#: src/details.ts:65
 msgid "Gusts"
 msgstr "Széllökés"
 
-#: src/details.ts:65
+#: src/details.ts:66
 msgid "UV High"
 msgstr "UV index"
 
-#: src/details.ts:66 src/preferences/generalPage.ts:92
+#: src/details.ts:67 src/preferences/generalPage.ts:92
 msgid "Pressure"
 msgstr "Légnyomás"
 
-#: src/details.ts:67
+#: src/details.ts:68
 msgid "Precipitation"
 msgstr "Csapadék"
 
-#: src/details.ts:68
+#: src/details.ts:69
 msgid "Sunrise"
 msgstr "Napkelte"
 
-#: src/details.ts:69
+#: src/details.ts:70
 msgid "Sunset"
 msgstr "Napnyugta"
 
-#: src/details.ts:70
+#: src/details.ts:71
 msgid "Cloud Cover"
 msgstr "Felhőtakaró"
 
-#: src/details.ts:75 src/popup.ts:409
+#: src/details.ts:72
+msgid "Sun Countdown"
+msgstr ""
+
+#: src/details.ts:77 src/popup.ts:409
 msgid "Invalid"
 msgstr "Érvénytelen"
 
@@ -192,45 +196,49 @@ msgstr "itt"
 msgid "Report bugs or request new features %s."
 msgstr "Hibák jelentése vagy új funkciók kérése %s."
 
-#: src/preferences/aboutPage.ts:138
+#: src/preferences/aboutPage.ts:128 src/preferences/aboutPage.ts:138
 msgid "Credits"
 msgstr "Készítők"
 
-#: src/preferences/detailsPage.ts:68
+#: src/preferences/detailsPage.ts:80
 msgid "Details"
 msgstr "Részletek"
 
-#: src/preferences/detailsPage.ts:74
+#: src/preferences/detailsPage.ts:86
 msgid "Pop-Up"
 msgstr "Felugró"
 
-#: src/preferences/detailsPage.ts:75
+#: src/preferences/detailsPage.ts:87
 msgid "Drag-and-drop from bottom to configure the pop-up"
 msgstr "A felugró ablak konfigurálásához húzza ide a lenti elemeket"
 
-#: src/preferences/detailsPage.ts:173 src/preferences/generalPage.ts:235
+#: src/preferences/detailsPage.ts:185 src/preferences/generalPage.ts:235
 msgid "Panel"
 msgstr "Panel"
 
-#: src/preferences/detailsPage.ts:176
+#: src/preferences/detailsPage.ts:188
 msgid "None"
 msgstr "Üres"
 
-#: src/preferences/detailsPage.ts:188
+#: src/preferences/detailsPage.ts:200
 msgid "Panel Detail"
 msgstr "Panel kijelző"
 
-#: src/preferences/detailsPage.ts:206
+#: src/preferences/detailsPage.ts:218
 msgid "Secondary Panel Detail"
 msgstr "Másodlagos panel kijelző"
 
-#: src/preferences/detailsPage.ts:218
+#: src/preferences/detailsPage.ts:230
 msgid "Show Condition Icon"
 msgstr "Mutassa az állapot ikont"
 
-#: src/preferences/detailsPage.ts:228
+#: src/preferences/detailsPage.ts:240
 msgid "Show Sunrise/Sunset"
 msgstr "Napkelte/Napnyugta mutatása"
+
+#: src/preferences/detailsPage.ts:251
+msgid "Use Countdown for Sun"
+msgstr ""
 
 #: src/preferences/editLocation.ts:33
 #, javascript-format
@@ -245,19 +253,24 @@ msgstr "Új helyszín"
 msgid "Name"
 msgstr "Elnevezés"
 
-#: src/preferences/editLocation.ts:56
+#: src/preferences/editLocation.ts:57
+#, javascript-format
+msgid "%s (e.g. \"%s\")"
+msgstr ""
+
+#: src/preferences/editLocation.ts:57
 msgid "Coordinates"
 msgstr "Koordináták"
 
-#: src/preferences/editLocation.ts:66
+#: src/preferences/editLocation.ts:67
 msgid "Save"
 msgstr "Mentés"
 
-#: src/preferences/editLocation.ts:94
+#: src/preferences/editLocation.ts:95
 msgid "Name is required."
 msgstr "Elnevezés szükséges."
 
-#: src/preferences/editLocation.ts:99
+#: src/preferences/editLocation.ts:100
 msgid "Invalid coordinates entry."
 msgstr "Érvénytelen koordináták."
 
@@ -409,6 +422,14 @@ msgstr "Elhelyezés a panelen"
 msgid "Order in Panel"
 msgstr "Sorrend a panelen"
 
+#: src/preferences/generalPage.ts:290
+msgid "Use Symbolic Icons in Panel"
+msgstr ""
+
+#: src/preferences/generalPage.ts:300
+msgid "Always Use Packaged Icons"
+msgstr ""
+
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
 msgstr "Helyszínek"
@@ -502,86 +523,6 @@ msgstr "Kihagyás"
 msgid "Open GitHub"
 msgstr "GitHub megnyitása"
 
-#: src/weather.ts:103
-msgid "Clear"
-msgstr "Tiszta"
-
-#: src/weather.ts:103
-msgid "Sunny"
-msgstr "Napos"
-
-#: src/weather.ts:105
-msgid "Cloudy"
-msgstr "Felhős"
-
-#: src/weather.ts:107
-msgid "Rainy"
-msgstr "Esős"
-
-#: src/weather.ts:109
-msgid "Snowy"
-msgstr "Havazás"
-
-#: src/weather.ts:111
-msgid "Stormy"
-msgstr "Zivatar"
-
-#: src/weather.ts:113
-msgid "Windy"
-msgstr "Szeles"
-
-#: src/welcome.ts:53
-#, javascript-format
-msgid "Welcome to %s"
-msgstr "Üdvözli Önt %s "
-
-#: src/welcome.ts:74
-#, javascript-format
-msgid ""
-"%s occasionally connects to the selected weather service. By default, it "
-"will use the Internet to connect to:\n"
-"  •  %s, an %s service for weather\n"
-"  •  %s, optional for resolving the current location\n"
-"  •  %s, for searching locations by name\n"
-"\n"
-msgstr ""
-"%s időnként csatlakozik a kiválasztott időjárási szolgáltatáshoz. "
-"Alapértelmezés szerint az internetet használja a csatlakozáshoz:\n"
-"• %s, %s szolgáltatás az időjáráshoz\n"
-"• %s, opcionális az aktuális hely meghatározásához\n"
-"• %s, a helyek név szerinti kereséséhez\n"
-"\n"
-
-#: src/welcome.ts:83
-#, javascript-format
-msgid "Thank you for installing %s!"
-msgstr "Köszönjük, hogy telepítette: %s!"
-
-#: src/welcome.ts:99
-msgid "Abort"
-msgstr "Megszakítás"
-
-#: src/details.ts:72
-msgid "Sun Countdown"
-msgstr ""
-
-#: src/preferences/detailsPage.ts:251
-msgid "Use Countdown for Sun"
-msgstr ""
-
-#: src/preferences/editLocation.ts:57
-#, javascript-format
-msgid "%s (e.g. \"%s\")"
-msgstr ""
-
-#: src/preferences/generalPage.ts:290
-msgid "Use Symbolic Icons in Panel"
-msgstr ""
-
-#: src/preferences/generalPage.ts:300
-msgid "Always Use Packaged Icons"
-msgstr ""
-
 #: src/units.ts:133
 msgid "E"
 msgstr ""
@@ -626,4 +567,75 @@ msgstr ""
 #: src/units.ts:303
 #, javascript-format
 msgid "%d min"
+msgstr ""
+
+#: src/weather.ts:105
+msgid "Clear"
+msgstr "Tiszta"
+
+#: src/weather.ts:105
+msgid "Sunny"
+msgstr "Napos"
+
+#: src/weather.ts:107
+msgid "Cloudy"
+msgstr "Felhős"
+
+#: src/weather.ts:109
+msgid "Rainy"
+msgstr "Esős"
+
+#: src/weather.ts:111
+msgid "Snowy"
+msgstr "Havazás"
+
+#: src/weather.ts:113
+msgid "Stormy"
+msgstr "Zivatar"
+
+#: src/weather.ts:115
+msgid "Windy"
+msgstr "Szeles"
+
+#: src/welcome.ts:53
+#, javascript-format
+msgid "Welcome to %s"
+msgstr "Üdvözli Önt %s "
+
+#: src/welcome.ts:74
+#, javascript-format
+msgid ""
+"%s occasionally connects to the selected weather service. By default, it "
+"will use the Internet to connect to:\n"
+"  •  %s, an %s service for weather\n"
+"  •  %s, optional for resolving the current location\n"
+"  •  %s, for searching locations by name\n"
+"\n"
+msgstr ""
+"%s időnként csatlakozik a kiválasztott időjárási szolgáltatáshoz. "
+"Alapértelmezés szerint az internetet használja a csatlakozáshoz:\n"
+"• %s, %s szolgáltatás az időjáráshoz\n"
+"• %s, opcionális az aktuális hely meghatározásához\n"
+"• %s, a helyek név szerinti kereséséhez\n"
+"\n"
+
+#: src/welcome.ts:83
+#, javascript-format
+msgid "Thank you for installing %s!"
+msgstr "Köszönjük, hogy telepítette: %s!"
+
+#: src/welcome.ts:99
+msgid "Abort"
+msgstr "Megszakítás"
+
+#: src/welcome.ts:151
+msgid "Manual Configuration"
+msgstr ""
+
+#: src/welcome.ts:171
+msgid "Failed to detect location."
+msgstr ""
+
+#: src/welcome.ts:174
+msgid "Please configure your location and units manually."
 msgstr ""

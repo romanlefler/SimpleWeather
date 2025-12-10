@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
-"POT-Creation-Date: 2025-10-23 00:19-0500\n"
+"POT-Creation-Date: 2025-11-20 21:18-0600\n"
 "PO-Revision-Date: 2025-11-28 00:00\n"
 "Last-Translator: \n"
 "Language-Team: Korean\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Crowdin-File: simple-weather@romanlefler.com.pot\n"
 "X-Crowdin-File-ID: 2\n"
 
-#: src/autoConfig.ts:55 src/location.ts:53 src/location.ts:63
+#: src/autoConfig.ts:56 src/location.ts:53 src/location.ts:63
 #: src/preferences/generalPage.ts:179
 msgid "My Location"
 msgstr "내 위치"
@@ -78,35 +78,35 @@ msgstr "일출/일몰까지"
 msgid "Invalid"
 msgstr "유효하지 않음"
 
-#: src/lang.ts:107 src/popup.ts:57
+#: src/lang.ts:108 src/popup.ts:57
 msgid "Today"
 msgstr "오늘"
 
-#: src/lang.ts:110
+#: src/lang.ts:111
 msgid "Monday"
 msgstr "월요일"
 
-#: src/lang.ts:110
+#: src/lang.ts:111
 msgid "Sunday"
 msgstr "일요일"
 
-#: src/lang.ts:110
+#: src/lang.ts:111
 msgid "Tuesday"
 msgstr "화요일"
 
-#: src/lang.ts:110
+#: src/lang.ts:111
 msgid "Wednesday"
 msgstr "수요일"
 
-#: src/lang.ts:111
+#: src/lang.ts:112
 msgid "Friday"
 msgstr "금요일"
 
-#: src/lang.ts:111
+#: src/lang.ts:112
 msgid "Saturday"
 msgstr "토요일"
 
-#: src/lang.ts:111
+#: src/lang.ts:112
 msgid "Thursday"
 msgstr "목요일"
 
@@ -611,8 +611,8 @@ msgid ""
 "  •  %s, for searching locations by name\n"
 "\n"
 msgstr ""
-"%s은(는) 선택된 날씨 서비스에 주기적으로 연결합니다. 기본적으로 인터넷을 "
-"통해 다음에 연결합니다:\n"
+"%s은(는) 선택된 날씨 서비스에 주기적으로 연결합니다. 기본적으로 인터넷을 통"
+"해 다음에 연결합니다:\n"
 "  •  %s, %s 날씨 서비스\n"
 "  •  %s, 현재 위치 확인용 (선택 사항)\n"
 "  •  %s, 위치 이름 검색용\n"
@@ -626,3 +626,15 @@ msgstr "%s을(를) 설치해 주셔서 감사합니다!"
 #: src/welcome.ts:99
 msgid "Abort"
 msgstr "중단"
+
+#: src/welcome.ts:151
+msgid "Manual Configuration"
+msgstr ""
+
+#: src/welcome.ts:171
+msgid "Failed to detect location."
+msgstr ""
+
+#: src/welcome.ts:174
+msgid "Please configure your location and units manually."
+msgstr ""
