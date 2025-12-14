@@ -55,13 +55,13 @@ install: out
 	mkdir -p ~/.local/share/gnome-shell/extensions
 	cp -r $(BUILD) ~/.local/share/gnome-shell/extensions/$(UUID)
 ifeq ($(INSTALLTYPE),system)
-	rm -r $(addprefix $(INSTALLBASE)/$(UUID)/, schemas locale LICENSE)
+	rm -rf $(addprefix $(INSTALLBASE)/$(UUID)/, schemas locale LICENSE)
 	mkdir -p $(SHARE_PREFIX)/glib-2.0/schemas \
 		$(SHARE_PREFIX)/locale \
 		$(SHARE_PREFIX)/licenses/$(UUID)
 	cp -r $(BUILD)/schemas/*gschema.xml $(SHARE_PREFIX)/glib-2.0/schemas
 	cp -r $(BUILD)/locale/* $(SHARE_PREFIX)/locale
-	cp -r $(BUILD)/LICENSE $(SHARE_PREFIX)/licenses/$(UUID)
+	cp -r ./LICENSE $(SHARE_PREFIX)/licenses/$(UUID)
 endif
 
 clean:
