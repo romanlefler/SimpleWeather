@@ -15,8 +15,8 @@ Support for themes, the following screenshot uses the *Immersive* theme:
 ## Features
 
 - Display temperature and conditions in top bar
-- Configure units
-- Get current location or add any number of locations
+- Configure units (US, UK, Metric, mix and match...)
+- Get current location or add any number of locations and easily cycle through
 - Show hourly and weekly forecast
 - Configurable details like Rain Chance, Humidity, Wind Speed, UV, etc.
 

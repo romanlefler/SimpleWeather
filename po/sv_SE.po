@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
-"POT-Creation-Date: 2025-10-23 00:19-0500\n"
+"POT-Creation-Date: 2025-11-20 21:18-0600\n"
 "PO-Revision-Date: 2025-07-23 22:06\n"
 "Last-Translator: \n"
 "Language-Team: Swedish\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Crowdin-File: simple-weather@romanlefler.com.pot\n"
 "X-Crowdin-File-ID: 2\n"
 
-#: src/autoConfig.ts:55 src/location.ts:53 src/location.ts:63
+#: src/autoConfig.ts:56 src/location.ts:53 src/location.ts:63
 #: src/preferences/generalPage.ts:179
 msgid "My Location"
 msgstr "Min plats"
@@ -78,35 +78,35 @@ msgstr ""
 msgid "Invalid"
 msgstr "Ogiltig"
 
-#: src/lang.ts:107 src/popup.ts:57
+#: src/lang.ts:108 src/popup.ts:57
 msgid "Today"
 msgstr "Idag"
 
-#: src/lang.ts:110
+#: src/lang.ts:111
 msgid "Monday"
 msgstr "Måndag"
 
-#: src/lang.ts:110
+#: src/lang.ts:111
 msgid "Sunday"
 msgstr "Söndag"
 
-#: src/lang.ts:110
+#: src/lang.ts:111
 msgid "Tuesday"
 msgstr "Tisdag"
 
-#: src/lang.ts:110
+#: src/lang.ts:111
 msgid "Wednesday"
 msgstr "Onsdag"
 
-#: src/lang.ts:111
+#: src/lang.ts:112
 msgid "Friday"
 msgstr "Fredag"
 
-#: src/lang.ts:111
+#: src/lang.ts:112
 msgid "Saturday"
 msgstr "Lördag"
 
-#: src/lang.ts:111
+#: src/lang.ts:112
 msgid "Thursday"
 msgstr "Torsdag"
 
@@ -626,3 +626,15 @@ msgstr "Tack för att du installerade %s!"
 #: src/welcome.ts:99
 msgid "Abort"
 msgstr "Avbryt"
+
+#: src/welcome.ts:151
+msgid "Manual Configuration"
+msgstr ""
+
+#: src/welcome.ts:171
+msgid "Failed to detect location."
+msgstr ""
+
+#: src/welcome.ts:174
+msgid "Please configure your location and units manually."
+msgstr ""

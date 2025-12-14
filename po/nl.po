@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
-"POT-Creation-Date: 2025-10-23 00:19-0500\n"
+"POT-Creation-Date: 2025-11-20 21:18-0600\n"
 "PO-Revision-Date: 2025-08-28 16:56\n"
 "Last-Translator: koenraad-verv\n"
 "Language-Team: Dutch\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Crowdin-File: simple-weather@romanlefler.com.pot\n"
 "X-Crowdin-File-ID: 2\n"
 
-#: src/autoConfig.ts:55 src/location.ts:53 src/location.ts:63
+#: src/autoConfig.ts:56 src/location.ts:53 src/location.ts:63
 #: src/preferences/generalPage.ts:179
 msgid "My Location"
 msgstr "Mijn locatie"
@@ -44,7 +44,7 @@ msgstr "Luchtvochtigheid"
 
 #: src/details.ts:65
 msgid "Gusts"
-msgstr "Windstoten"
+msgstr "Windsnelheid"
 
 #: src/details.ts:66
 msgid "UV High"
@@ -72,41 +72,41 @@ msgstr "Bewolking"
 
 #: src/details.ts:72
 msgid "Sun Countdown"
-msgstr ""
+msgstr "Max aantal uren zon"
 
 #: src/details.ts:77 src/popup.ts:409
 msgid "Invalid"
 msgstr "Ongeldig"
 
-#: src/lang.ts:107 src/popup.ts:57
+#: src/lang.ts:108 src/popup.ts:57
 msgid "Today"
 msgstr "vandaag"
 
-#: src/lang.ts:110
+#: src/lang.ts:111
 msgid "Monday"
 msgstr "maandag"
 
-#: src/lang.ts:110
+#: src/lang.ts:111
 msgid "Sunday"
 msgstr "zondag"
 
-#: src/lang.ts:110
+#: src/lang.ts:111
 msgid "Tuesday"
 msgstr "dinsdag"
 
-#: src/lang.ts:110
+#: src/lang.ts:111
 msgid "Wednesday"
 msgstr "woensdag"
 
-#: src/lang.ts:111
+#: src/lang.ts:112
 msgid "Friday"
 msgstr "vrijdag"
 
-#: src/lang.ts:111
+#: src/lang.ts:112
 msgid "Saturday"
 msgstr "zaterdag"
 
-#: src/lang.ts:111
+#: src/lang.ts:112
 msgid "Thursday"
 msgstr "donderdag"
 
@@ -184,7 +184,7 @@ msgstr "Bijdrages en vertalingen zijn welkom! Lees hoe %s."
 #: src/preferences/aboutPage.ts:119
 #, javascript-format
 msgid "If you like this extension, consider starring it on %s."
-msgstr "Als deze extensie u bevalt, overweeg dan om het te staren op %s."
+msgstr "Als deze extensie u bevalt, overweeg dan om sterren te geven op %s."
 
 #: src/preferences/aboutPage.ts:122
 msgid "here"
@@ -197,7 +197,7 @@ msgstr "Rapporteer bugs of verzoek nieuwe functies %s."
 
 #: src/preferences/aboutPage.ts:128 src/preferences/aboutPage.ts:138
 msgid "Credits"
-msgstr "Kredieten"
+msgstr "Met dank aan"
 
 #: src/preferences/detailsPage.ts:80
 msgid "Details"
@@ -221,15 +221,15 @@ msgstr "geen"
 
 #: src/preferences/detailsPage.ts:200
 msgid "Panel Detail"
-msgstr "Paneel Detail"
+msgstr "Detail primair paneel"
 
 #: src/preferences/detailsPage.ts:218
 msgid "Secondary Panel Detail"
-msgstr "Secundaire Paneel Detail"
+msgstr "Detail Secundair paneel"
 
 #: src/preferences/detailsPage.ts:230
 msgid "Show Condition Icon"
-msgstr "Toon Voorwaarde Icoon"
+msgstr "Toon situatie als Icoon"
 
 #: src/preferences/detailsPage.ts:240
 msgid "Show Sunrise/Sunset"
@@ -237,7 +237,7 @@ msgstr "Toon zonsopgang/Zonsondergang"
 
 #: src/preferences/detailsPage.ts:251
 msgid "Use Countdown for Sun"
-msgstr ""
+msgstr "Gebruik max aantal uren zon"
 
 #: src/preferences/editLocation.ts:33
 #, javascript-format
@@ -250,7 +250,7 @@ msgstr "Nieuwe locatie"
 
 #: src/preferences/editLocation.ts:41
 msgid "Name"
-msgstr "naam"
+msgstr "Naam"
 
 #: src/preferences/editLocation.ts:57
 #, javascript-format
@@ -287,7 +287,7 @@ msgstr "Eenheid van meting configureren"
 
 #: src/preferences/generalPage.ts:48
 msgid "Custom"
-msgstr "Aangepaste"
+msgstr "Aangepast"
 
 #: src/preferences/generalPage.ts:48
 msgid "Metric"
@@ -307,7 +307,7 @@ msgstr "Fahrenheit"
 
 #: src/preferences/generalPage.ts:62
 msgid "Celsius"
-msgstr "Celsius"
+msgstr "Celcius"
 
 #: src/preferences/generalPage.ts:78
 msgid "Speed"
@@ -315,7 +315,7 @@ msgstr "Snelheid"
 
 #: src/preferences/generalPage.ts:106
 msgid "Rain Measurement"
-msgstr "Meting van de regen"
+msgstr "Hoeveelheid neerslag"
 
 #: src/preferences/generalPage.ts:120
 msgid "Distance"
@@ -327,7 +327,7 @@ msgstr "Graden"
 
 #: src/preferences/generalPage.ts:144
 msgid "Eight-Point Compass"
-msgstr "Achtpuntenkompas"
+msgstr "Acht punten kompas"
 
 #: src/preferences/generalPage.ts:147
 msgid "Direction"
@@ -335,19 +335,19 @@ msgstr "Richting"
 
 #: src/preferences/generalPage.ts:159
 msgid "Weather Service"
-msgstr "Weer Service"
+msgstr "Weer dienst"
 
 #: src/preferences/generalPage.ts:160
 msgid "Configure how the weather is attained"
-msgstr "Stel in hoe het weer wordt bereikt"
+msgstr "Stel in hoe gegevens worden opgehaald"
 
 #: src/preferences/generalPage.ts:167
 msgid "Weather Provider"
-msgstr "Weer Provider"
+msgstr "Bron van weer gegevens"
 
 #: src/preferences/generalPage.ts:180
 msgid "Configure how your location is found"
-msgstr "Configureer hoe uw locatie wordt gevonden"
+msgstr "Configureer hoe uw locatie wordt bepaald"
 
 #: src/preferences/generalPage.ts:184 src/preferences/generalPage.ts:185
 msgid "Online"
@@ -391,7 +391,7 @@ msgstr "Licht"
 
 #: src/preferences/generalPage.ts:247
 msgid "Afterdark"
-msgstr "Naverdonker"
+msgstr "Na zonsondergang"
 
 #: src/preferences/generalPage.ts:248
 msgid "Immersive"
@@ -407,11 +407,11 @@ msgstr "Gecentreerd"
 
 #: src/preferences/generalPage.ts:261
 msgid "Left"
-msgstr "Linkerkant"
+msgstr "Links"
 
 #: src/preferences/generalPage.ts:261
 msgid "Right"
-msgstr "Rechterkant"
+msgstr "Rechts"
 
 #: src/preferences/generalPage.ts:264
 msgid "Side of Panel"
@@ -419,16 +419,15 @@ msgstr "Zijkant van paneel"
 
 #: src/preferences/generalPage.ts:274
 msgid "Order in Panel"
-msgstr ""
-"Plaats op het paneelSimpleWeather weet niet hoe het met uw taal moet omgaan."
+msgstr "Plaats op het paneel"
 
 #: src/preferences/generalPage.ts:290
 msgid "Use Symbolic Icons in Panel"
-msgstr ""
+msgstr "Gebruik iconen in paneel"
 
 #: src/preferences/generalPage.ts:300
 msgid "Always Use Packaged Icons"
-msgstr ""
+msgstr "Altijd meegeleverde iconen gebruiken"
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
@@ -457,7 +456,7 @@ msgstr "Weet u zeker dat u wilt verwijderen %s?"
 
 #: src/preferences/locationsPage.ts:194
 msgid "Cancel"
-msgstr "annuleren"
+msgstr "Annuleren"
 
 #: src/preferences/locationsPage.ts:194
 msgid "Delete"
@@ -478,11 +477,11 @@ msgstr "Iets anders wijzigde de locaties."
 
 #: src/preferences/search.ts:45
 msgid "Search Location"
-msgstr "Locatie zoeken"
+msgstr "Plaats zoeken"
 
 #: src/preferences/search.ts:54
 msgid "City, Neighborhood, etc."
-msgstr "Stad, naburige etc."
+msgstr "Stad, omgeving enz."
 
 #: src/preferences/search.ts:59
 msgid "Search"
@@ -498,7 +497,7 @@ msgstr "Geen resultaten."
 
 #: src/preferences/search.ts:211
 msgid "No copyright information available."
-msgstr "Geen auteursrechtgegevens beschikbaar."
+msgstr "Geen auteursrecht gegevens beschikbaar."
 
 #: src/prefs.ts:74
 #, javascript-format
@@ -508,7 +507,7 @@ msgid ""
 "Please consider submitting a bug report on GitHub."
 msgstr ""
 "SimpleWeather weet niet hoe het met uw taal moet omgaan.\n"
-"\tError - %s\n"
+"\tFout - %s\n"
 "Overweeg om een bugrapport in te dienen op GitHub."
 
 #: src/prefs.ts:77
@@ -525,7 +524,7 @@ msgstr "Open GitHub"
 
 #: src/units.ts:133
 msgid "E"
-msgstr ""
+msgstr "O"
 
 #: src/units.ts:133
 msgid "N"
@@ -533,7 +532,7 @@ msgstr ""
 
 #: src/units.ts:133
 msgid "NE"
-msgstr ""
+msgstr "NO"
 
 #: src/units.ts:133
 msgid "NW"
@@ -541,15 +540,15 @@ msgstr ""
 
 #: src/units.ts:133
 msgid "S"
-msgstr ""
+msgstr "Z"
 
 #: src/units.ts:133
 msgid "SE"
-msgstr ""
+msgstr "ZO"
 
 #: src/units.ts:133
 msgid "SW"
-msgstr ""
+msgstr "ZW"
 
 #: src/units.ts:133
 msgid "W"
@@ -557,12 +556,12 @@ msgstr ""
 
 #: src/units.ts:298
 msgid "Now"
-msgstr ""
+msgstr "Nu"
 
 #: src/units.ts:302
 #, javascript-format
 msgid "%d h"
-msgstr ""
+msgstr "%d u"
 
 #: src/units.ts:303
 #, javascript-format
@@ -571,7 +570,7 @@ msgstr ""
 
 #: src/weather.ts:105
 msgid "Clear"
-msgstr "Verwijderen"
+msgstr "Wissen"
 
 #: src/weather.ts:105
 msgid "Sunny"
@@ -612,7 +611,7 @@ msgid ""
 "  •  %s, for searching locations by name\n"
 "\n"
 msgstr ""
-"%s maakt af en toe verbinding met de geselecteerde weerservice. Standaard "
+"%s maakt af en toe verbinding met de geselecteerde weerdienst. Standaard "
 "gebruikt het internet om verbinding te maken met:\n"
 "  •  %s, een %s service voor het weer\n"
 "  •  %s, optioneel voor het oplossen van de huidige locatie\n"
@@ -627,3 +626,15 @@ msgstr "Bedankt voor het installeren van %s!"
 #: src/welcome.ts:99
 msgid "Abort"
 msgstr "Annuleren"
+
+#: src/welcome.ts:151
+msgid "Manual Configuration"
+msgstr ""
+
+#: src/welcome.ts:171
+msgid "Failed to detect location."
+msgstr ""
+
+#: src/welcome.ts:174
+msgid "Please configure your location and units manually."
+msgstr ""

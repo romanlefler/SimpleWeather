@@ -39,8 +39,8 @@ export function initLocales() : string | undefined {
         if(strcaseeq(k, "C") || strcaseeq(k, "POSIX")) continue;
         // "en.UTF-8" is valid system locale but in JS
         // it is not
-        if(strcaseeq(k.slice(-6), ".UTF-8")) continue;
-        if(strcaseeq(k.slice(-6), ".utf8")) continue;
+        if(strcaseends(k, ".UTF-8")) continue;
+        if(strcaseends(k, ".utf8")) continue;
         // "en_US" is system locale but JS locale should be "en-US"
         // or Intl will throw
         k = k.replace(/_/g, "-");
@@ -76,6 +76,10 @@ export function initLocales() : string | undefined {
 export function strcaseeq(s1 : string, s2 : string) : boolean {
     // We'll only be doing this for ASCII chars so this is fine
     return s1.toUpperCase() === s2.toUpperCase();
+}
+
+export function strcaseends(s1 : string, suffix : string) : boolean {
+    return s1.toUpperCase().endsWith(suffix.toUpperCase());
 }
 
 export function getLocales() : string[] | undefined {

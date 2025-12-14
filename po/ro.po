@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
-"POT-Creation-Date: 2025-10-23 00:19-0500\n"
+"POT-Creation-Date: 2025-11-20 21:18-0600\n"
 "PO-Revision-Date: 2025-07-23 22:06\n"
-"Last-Translator: \n"
+"Last-Translator: Igor Sorocean\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Crowdin-File: simple-weather@romanlefler.com.pot\n"
 "X-Crowdin-File-ID: 2\n"
 
-#: src/autoConfig.ts:55 src/location.ts:53 src/location.ts:63
+#: src/autoConfig.ts:56 src/location.ts:53 src/location.ts:63
 #: src/preferences/generalPage.ts:179
 msgid "My Location"
 msgstr "Locația mea"
@@ -73,41 +73,41 @@ msgstr "Nori"
 
 #: src/details.ts:72
 msgid "Sun Countdown"
-msgstr ""
+msgstr "Numărătoare inversă"
 
 #: src/details.ts:77 src/popup.ts:409
 msgid "Invalid"
 msgstr "Nevalid"
 
-#: src/lang.ts:107 src/popup.ts:57
+#: src/lang.ts:108 src/popup.ts:57
 msgid "Today"
 msgstr "Astăzi"
 
-#: src/lang.ts:110
+#: src/lang.ts:111
 msgid "Monday"
 msgstr "Luni"
 
-#: src/lang.ts:110
+#: src/lang.ts:111
 msgid "Sunday"
 msgstr "Duminică"
 
-#: src/lang.ts:110
+#: src/lang.ts:111
 msgid "Tuesday"
 msgstr "Marţi"
 
-#: src/lang.ts:110
+#: src/lang.ts:111
 msgid "Wednesday"
 msgstr "Miercuri"
 
-#: src/lang.ts:111
+#: src/lang.ts:112
 msgid "Friday"
 msgstr "Vineri"
 
-#: src/lang.ts:111
+#: src/lang.ts:112
 msgid "Saturday"
 msgstr "Sâmbătă"
 
-#: src/lang.ts:111
+#: src/lang.ts:112
 msgid "Thursday"
 msgstr "Joi"
 
@@ -240,7 +240,7 @@ msgstr "Arată Răsărit/Apus"
 
 #: src/preferences/detailsPage.ts:251
 msgid "Use Countdown for Sun"
-msgstr ""
+msgstr "Folosește numărătoarea inversă pentru Soare"
 
 #: src/preferences/editLocation.ts:33
 #, javascript-format
@@ -258,7 +258,7 @@ msgstr "Nume"
 #: src/preferences/editLocation.ts:57
 #, javascript-format
 msgid "%s (e.g. \"%s\")"
-msgstr ""
+msgstr "%s (de ex. \"%s\")"
 
 #: src/preferences/editLocation.ts:57
 msgid "Coordinates"
@@ -426,11 +426,11 @@ msgstr "Ordine în panou"
 
 #: src/preferences/generalPage.ts:290
 msgid "Use Symbolic Icons in Panel"
-msgstr ""
+msgstr "Folosește pictograme simbolice în panou"
 
 #: src/preferences/generalPage.ts:300
 msgid "Always Use Packaged Icons"
-msgstr ""
+msgstr "Utilizează întotdeauna pictograme împachetate"
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
@@ -527,49 +527,49 @@ msgstr "Deschide GitHub"
 
 #: src/units.ts:133
 msgid "E"
-msgstr ""
+msgstr "E"
 
 #: src/units.ts:133
 msgid "N"
-msgstr ""
+msgstr "N"
 
 #: src/units.ts:133
 msgid "NE"
-msgstr ""
+msgstr "NE"
 
 #: src/units.ts:133
 msgid "NW"
-msgstr ""
+msgstr "NV"
 
 #: src/units.ts:133
 msgid "S"
-msgstr ""
+msgstr "S"
 
 #: src/units.ts:133
 msgid "SE"
-msgstr ""
+msgstr "SE"
 
 #: src/units.ts:133
 msgid "SW"
-msgstr ""
+msgstr "SV"
 
 #: src/units.ts:133
 msgid "W"
-msgstr ""
+msgstr "V"
 
 #: src/units.ts:298
 msgid "Now"
-msgstr ""
+msgstr "Acum"
 
 #: src/units.ts:302
 #, javascript-format
 msgid "%d h"
-msgstr ""
+msgstr "%d h"
 
 #: src/units.ts:303
 #, javascript-format
 msgid "%d min"
-msgstr ""
+msgstr "%d min"
 
 #: src/weather.ts:105
 msgid "Clear"
@@ -629,3 +629,15 @@ msgstr "Îți mulțumim că ai instalat %s!"
 #: src/welcome.ts:99
 msgid "Abort"
 msgstr "Renunță"
+
+#: src/welcome.ts:151
+msgid "Manual Configuration"
+msgstr ""
+
+#: src/welcome.ts:171
+msgid "Failed to detect location."
+msgstr ""
+
+#: src/welcome.ts:174
+msgid "Please configure your location and units manually."
+msgstr ""

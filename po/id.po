@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
-"POT-Creation-Date: 2025-10-23 00:19-0500\n"
+"POT-Creation-Date: 2025-11-20 21:18-0600\n"
 "PO-Revision-Date: 2025-08-24 14:37+0800\n"
 "Last-Translator: Fakhrul Rijal <frijal@gmail.com>\n"
 "Language-Team: English\n"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Crowdin-File-ID: 2\n"
 "X-Generator: Poedit 3.6\n"
 
-#: src/autoConfig.ts:55 src/location.ts:53 src/location.ts:63
+#: src/autoConfig.ts:56 src/location.ts:53 src/location.ts:63
 #: src/preferences/generalPage.ts:179
 msgid "My Location"
 msgstr "Lokasi Saya"
@@ -79,35 +79,35 @@ msgstr ""
 msgid "Invalid"
 msgstr "Gagal"
 
-#: src/lang.ts:107 src/popup.ts:57
+#: src/lang.ts:108 src/popup.ts:57
 msgid "Today"
 msgstr "Hari ini"
 
-#: src/lang.ts:110
+#: src/lang.ts:111
 msgid "Monday"
 msgstr "Senin"
 
-#: src/lang.ts:110
+#: src/lang.ts:111
 msgid "Sunday"
 msgstr "Minggu"
 
-#: src/lang.ts:110
+#: src/lang.ts:111
 msgid "Tuesday"
 msgstr "Selasa"
 
-#: src/lang.ts:110
+#: src/lang.ts:111
 msgid "Wednesday"
 msgstr "Rabu"
 
-#: src/lang.ts:111
+#: src/lang.ts:112
 msgid "Friday"
 msgstr "Jumat"
 
-#: src/lang.ts:111
+#: src/lang.ts:112
 msgid "Saturday"
 msgstr "Sabtu"
 
-#: src/lang.ts:111
+#: src/lang.ts:112
 msgid "Thursday"
 msgstr "Kamis"
 
@@ -627,3 +627,15 @@ msgstr "Terima kasih telah memasang ini! %s!"
 #: src/welcome.ts:99
 msgid "Abort"
 msgstr "Batalkan"
+
+#: src/welcome.ts:151
+msgid "Manual Configuration"
+msgstr ""
+
+#: src/welcome.ts:171
+msgid "Failed to detect location."
+msgstr ""
+
+#: src/welcome.ts:174
+msgid "Please configure your location and units manually."
+msgstr ""
