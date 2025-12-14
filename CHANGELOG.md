@@ -1,5 +1,10 @@
 
-# v49.2.0-dev
+# v49.1.1
+
+## Bug Fixes
+
+- Fixes a Makefile bug where system-wide installations would fail
+- For sure now fixes an error message that appeared if your locale ended with ".utf8" with no dashes
 
 ## Translations
 
