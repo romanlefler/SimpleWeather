@@ -1,4 +1,10 @@
 
+# v49.2.0-dev
+
+## Translations
+
+- Polish (thanks Szymon Zielonka)
+
 # v49.1.1
 
 ## Bug Fixes
