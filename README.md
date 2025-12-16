@@ -33,6 +33,8 @@ translations.
 
 Check [AUTHORS](./AUTHORS) for a list of contributors.
 
+![Translation Progress Chart](./docs/transl.png)
+
 ## Building
 
 Consult [`docs/building.md`](./docs/building.md).
