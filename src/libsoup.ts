@@ -57,26 +57,30 @@ export class LibSoup {
         msg.request_headers.append("Accept", "application/json");
 
         return new Promise((resolve, reject) => {
-            sess.send_and_read_async(
-                msg,
+            GLib.idle_add(
                 GLib.PRIORITY_DEFAULT,
-                null,
-                (_, result) => {
+                () => {
                     let gBytes : GLib.Bytes;
                     try {
-                        gBytes = sess.send_and_read_finish(result);
+                        gBytes = sess.send_and_read(msg, null);
                     }
                     catch(e) {
                         reject(e);
-                        return;
+                        return false;
                     }
 
                     const byteArray = gBytes.get_data();
-                    if(!byteArray) return reject("Failed to get byte stream from server response.");
+                    if(!byteArray) {
+                        reject("Failed to get byte stream from server response.");
+                        return false;
+                    }
                     
 
                     const json = new TextDecoder().decode(byteArray);
-                    if(!json) return reject("Server response was empty.");
+                    if(!json) {
+                        reject("Server response was empty.");
+                        return false;
+                    }
 
                     const status = msg.statusCode;
                     const is2xx = Math.floor(status / 100) === 2;
@@ -93,10 +97,14 @@ export class LibSoup {
                                 { cause: e }
                             ));
                         }
-                        else return reject(e);
+                        else {
+                            reject(e);
+                            return false;
+                        }
                     }
 
                     resolve({ status, body, is2xx: is2xx });
+                    return false;
                 }
             );
         });
