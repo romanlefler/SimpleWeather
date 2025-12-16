@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
 "POT-Creation-Date: 2025-11-20 21:18-0600\n"
 "PO-Revision-Date: 2025-07-23 22:06\n"
-"Last-Translator: \n"
+"Last-Translator: Szymon Zielonka\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
 "MIME-Version: 1.0\n"
@@ -30,11 +30,11 @@ msgstr "Temperatura"
 
 #: src/details.ts:61
 msgid "Condition"
-msgstr "Stan"
+msgstr "Warunki pogodowe"
 
 #: src/details.ts:62
 msgid "Feels Like"
-msgstr "Polubione"
+msgstr "Temperatura odczuwalna"
 
 #: src/details.ts:63
 msgid "Wind"
@@ -46,11 +46,11 @@ msgstr "Wilgotność"
 
 #: src/details.ts:65
 msgid "Gusts"
-msgstr "Pusty"
+msgstr "Porywy wiatru"
 
 #: src/details.ts:66
 msgid "UV High"
-msgstr "Wysokie UV"
+msgstr "Indeks UV"
 
 #: src/details.ts:67 src/preferences/generalPage.ts:92
 msgid "Pressure"
@@ -66,15 +66,15 @@ msgstr "Wschód słońca"
 
 #: src/details.ts:70
 msgid "Sunset"
-msgstr "Słońce"
+msgstr "Zachód słońca"
 
 #: src/details.ts:71
 msgid "Cloud Cover"
-msgstr "Pokrycie chmury"
+msgstr "Zachmurzenie"
 
 #: src/details.ts:72
 msgid "Sun Countdown"
-msgstr ""
+msgstr "Czas do wschodu/zachodu słońca"
 
 #: src/details.ts:77 src/popup.ts:409
 msgid "Invalid"
@@ -176,7 +176,7 @@ msgstr "Kopiuj"
 
 #: src/preferences/aboutPage.ts:102
 msgid "Copied settings JSON to clipboard."
-msgstr "Skopiowano ustawienia JSON do schowka."
+msgstr "Skopiowano ustawienia do schowka (JSON)."
 
 #: src/preferences/aboutPage.ts:116
 #, javascript-format
@@ -199,7 +199,7 @@ msgstr "Zgłoś błędy lub poproś o nowe funkcje %s."
 
 #: src/preferences/aboutPage.ts:128 src/preferences/aboutPage.ts:138
 msgid "Credits"
-msgstr "Kredyty"
+msgstr "Autorzy"
 
 #: src/preferences/detailsPage.ts:80
 msgid "Details"
@@ -231,7 +231,7 @@ msgstr "Szczegóły panelu pomocniczego"
 
 #: src/preferences/detailsPage.ts:230
 msgid "Show Condition Icon"
-msgstr "Pokaż ikonę warunku"
+msgstr "Pokaż ikonę warunków pogodowych"
 
 #: src/preferences/detailsPage.ts:240
 msgid "Show Sunrise/Sunset"
@@ -239,7 +239,7 @@ msgstr "Pokaż wschod/zachód słońca"
 
 #: src/preferences/detailsPage.ts:251
 msgid "Use Countdown for Sun"
-msgstr ""
+msgstr "Pokazuj czas do wschodu/zachodu słońca"
 
 #: src/preferences/editLocation.ts:33
 #, javascript-format
@@ -252,12 +252,12 @@ msgstr "Nowa lokalizacja"
 
 #: src/preferences/editLocation.ts:41
 msgid "Name"
-msgstr "Nazwisko"
+msgstr "Nazwa"
 
 #: src/preferences/editLocation.ts:57
 #, javascript-format
 msgid "%s (e.g. \"%s\")"
-msgstr ""
+msgstr "%s (n.p. \"%s\")"
 
 #: src/preferences/editLocation.ts:57
 msgid "Coordinates"
@@ -273,11 +273,11 @@ msgstr "Nazwa jest wymagana."
 
 #: src/preferences/editLocation.ts:100
 msgid "Invalid coordinates entry."
-msgstr "Nieprawidłowy wpis współrzędnych."
+msgstr "Nieprawidłowe współrzędne."
 
 #: src/preferences/generalPage.ts:38
 msgid "General"
-msgstr "Ogólny"
+msgstr "Ogólne"
 
 #: src/preferences/generalPage.ts:43 src/preferences/generalPage.ts:53
 msgid "Units"
@@ -289,11 +289,11 @@ msgstr "Skonfiguruj jednostki miary"
 
 #: src/preferences/generalPage.ts:48
 msgid "Custom"
-msgstr "Własny"
+msgstr "Własne"
 
 #: src/preferences/generalPage.ts:48
 msgid "Metric"
-msgstr "Metryka"
+msgstr "Metryczne"
 
 #: src/preferences/generalPage.ts:48
 msgid "UK"
@@ -309,7 +309,7 @@ msgstr "Fahrenheit"
 
 #: src/preferences/generalPage.ts:62
 msgid "Celsius"
-msgstr "Celsjusza"
+msgstr "Celsjusz"
 
 #: src/preferences/generalPage.ts:78
 msgid "Speed"
@@ -341,7 +341,7 @@ msgstr "Usługa pogodowa"
 
 #: src/preferences/generalPage.ts:160
 msgid "Configure how the weather is attained"
-msgstr "Skonfiguruj sposób osiągnięcia pogody"
+msgstr "Skonfiguruj sposób pobierania danych pogodowych"
 
 #: src/preferences/generalPage.ts:167
 msgid "Weather Provider"
@@ -349,7 +349,7 @@ msgstr "Dostawca pogody"
 
 #: src/preferences/generalPage.ts:180
 msgid "Configure how your location is found"
-msgstr "Skonfiguruj lokalizację"
+msgstr "Wybierz jak ma zostać znaleziona Twoja lokalizacja"
 
 #: src/preferences/generalPage.ts:184 src/preferences/generalPage.ts:185
 msgid "Online"
@@ -389,11 +389,11 @@ msgstr "Skonfiguruj panel i wyskakujące okienko"
 
 #: src/preferences/generalPage.ts:246
 msgid "Light"
-msgstr "Światło"
+msgstr "Jasny"
 
 #: src/preferences/generalPage.ts:247
 msgid "Afterdark"
-msgstr "Po ciemności"
+msgstr "Ciemny"
 
 #: src/preferences/generalPage.ts:248
 msgid "Immersive"
@@ -405,31 +405,31 @@ msgstr "Motyw"
 
 #: src/preferences/generalPage.ts:261
 msgid "Center"
-msgstr "Środkowy"
+msgstr "Na środku"
 
 #: src/preferences/generalPage.ts:261
 msgid "Left"
-msgstr "W lewo"
+msgstr "Po lewej"
 
 #: src/preferences/generalPage.ts:261
 msgid "Right"
-msgstr "Prawy"
+msgstr "Po prawej"
 
 #: src/preferences/generalPage.ts:264
 msgid "Side of Panel"
-msgstr "Strona panelu"
+msgstr "Położenie na panelu"
 
 #: src/preferences/generalPage.ts:274
 msgid "Order in Panel"
-msgstr "Zamów w Panelu"
+msgstr "Kolejność na panelu"
 
 #: src/preferences/generalPage.ts:290
 msgid "Use Symbolic Icons in Panel"
-msgstr ""
+msgstr "Użyj ikon symbolicznych na panelu"
 
 #: src/preferences/generalPage.ts:300
 msgid "Always Use Packaged Icons"
-msgstr ""
+msgstr "Zawsze używaj ikon wbudowanych"
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
@@ -508,7 +508,7 @@ msgid ""
 "\tError - %s\n"
 "Please consider submitting a bug report on GitHub."
 msgstr ""
-"SimpleWeather nie wie, jak zarządzać Twoim językiem.\n"
+"SimpleWeather nie wie, jak obsłużyć Twoją lokalizację.\n"
 "\tBłąd - %s\n"
 "Rozważ przesłanie raportu o błędzie na GitHub."
 
@@ -526,49 +526,49 @@ msgstr "Open GitHub"
 
 #: src/units.ts:133
 msgid "E"
-msgstr ""
+msgstr "E"
 
 #: src/units.ts:133
 msgid "N"
-msgstr ""
+msgstr "N"
 
 #: src/units.ts:133
 msgid "NE"
-msgstr ""
+msgstr "NE"
 
 #: src/units.ts:133
 msgid "NW"
-msgstr ""
+msgstr "NW"
 
 #: src/units.ts:133
 msgid "S"
-msgstr ""
+msgstr "S"
 
 #: src/units.ts:133
 msgid "SE"
-msgstr ""
+msgstr "SE"
 
 #: src/units.ts:133
 msgid "SW"
-msgstr ""
+msgstr "SW"
 
 #: src/units.ts:133
 msgid "W"
-msgstr ""
+msgstr "W"
 
 #: src/units.ts:298
 msgid "Now"
-msgstr ""
+msgstr "Teraz"
 
 #: src/units.ts:302
 #, javascript-format
 msgid "%d h"
-msgstr ""
+msgstr "%d h"
 
 #: src/units.ts:303
 #, javascript-format
 msgid "%d min"
-msgstr ""
+msgstr "%d min"
 
 #: src/weather.ts:105
 msgid "Clear"
@@ -576,23 +576,23 @@ msgstr "Wyczyść"
 
 #: src/weather.ts:105
 msgid "Sunny"
-msgstr "Sunny"
+msgstr "Słonecznie"
 
 #: src/weather.ts:107
 msgid "Cloudy"
-msgstr "Chmura"
+msgstr "Pochmurnie"
 
 #: src/weather.ts:109
 msgid "Rainy"
-msgstr "Rainy"
+msgstr "Opady deszczu"
 
 #: src/weather.ts:111
 msgid "Snowy"
-msgstr "Snowy"
+msgstr "Opady śniegu"
 
 #: src/weather.ts:113
 msgid "Stormy"
-msgstr "Stormy"
+msgstr "Burza"
 
 #: src/weather.ts:115
 msgid "Windy"
@@ -613,6 +613,12 @@ msgid ""
 "  •  %s, for searching locations by name\n"
 "\n"
 msgstr ""
+"%s nawiązuje połączenia przez Internet do różnych dostawców danych. "
+"Domyślnie są to:\n"
+"  •  %s, %s do danych pogodowych\n"
+"  •  %s, opcjonalnie do wykrycia lokalizacji\n"
+"  •  %s, do znalezienia lokalizacji po nazwie\n"
+"\n"
 
 #: src/welcome.ts:83
 #, javascript-format
@@ -625,12 +631,12 @@ msgstr "Przerwij"
 
 #: src/welcome.ts:151
 msgid "Manual Configuration"
-msgstr ""
+msgstr "Konfiguracja manualna"
 
 #: src/welcome.ts:171
 msgid "Failed to detect location."
-msgstr ""
+msgstr "Nie udało się wykryć lokalizacji."
 
 #: src/welcome.ts:174
 msgid "Please configure your location and units manually."
-msgstr ""
+msgstr "Proszę skonfigurować lokalizację i jednostki manualnie."
