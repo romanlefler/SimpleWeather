@@ -3,6 +3,7 @@
 
 ## Translations
 
+- Japanese (thanks hidenosuke)
 - Polish (thanks Szymon Zielonka)
 
 # v49.1.1
