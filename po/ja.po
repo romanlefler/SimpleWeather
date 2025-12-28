@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
 "POT-Creation-Date: 2025-11-20 21:18-0600\n"
-"PO-Revision-Date: 2025-07-23 22:06\n"
+"PO-Revision-Date: 2025-12-23 10:55+0900\n"
 "Last-Translator: \n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
@@ -185,7 +185,7 @@ msgstr "貢献と翻訳を歓迎します! %s の方法をお読みください�
 #, javascript-format
 msgid "If you like this extension, consider starring it on %s."
 msgstr ""
-"この拡張機能が気に入った場合は、 %s で酒量な役割を果たすことを検討してくださ"
+"この拡張機能が気に入った場合は、 %s で主要な役割を果たすことを検討してくださ"
 "い。"
 
 #: src/preferences/aboutPage.ts:122
@@ -257,7 +257,7 @@ msgstr "名前"
 #: src/preferences/editLocation.ts:57
 #, javascript-format
 msgid "%s (e.g. \"%s\")"
-msgstr ""
+msgstr "%s (例えば \"%s\")""
 
 #: src/preferences/editLocation.ts:57
 msgid "Coordinates"
@@ -341,7 +341,7 @@ msgstr "天気サービス"
 
 #: src/preferences/generalPage.ts:160
 msgid "Configure how the weather is attained"
-msgstr "天気の取得方法を設定する"
+msgstr "天気の取得方法を設定します"
 
 #: src/preferences/generalPage.ts:167
 msgid "Weather Provider"
@@ -349,7 +349,7 @@ msgstr "天気プロバイダー"
 
 #: src/preferences/generalPage.ts:180
 msgid "Configure how your location is found"
-msgstr "位置情報がどのように見つけるかを設定します"
+msgstr "場所をどのように見つけるかを設定します"
 
 #: src/preferences/generalPage.ts:184 src/preferences/generalPage.ts:185
 msgid "Online"
@@ -613,6 +613,12 @@ msgid ""
 "  •  %s, for searching locations by name\n"
 "\n"
 msgstr ""
+"%sは時折選択された天気サービスに接続します。デフォルトでは、"
+"以下に接続するためにインターネットを使います。\n"
+"  •  %s、%s天気サービス\n"
+"  •  %s、現在の場所を解決するためのオプション\n"
+"  •  %s、名前による場所検索\n"
+"\n"
 
 #: src/welcome.ts:83
 #, javascript-format
@@ -625,12 +631,12 @@ msgstr "中止する"
 
 #: src/welcome.ts:151
 msgid "Manual Configuration"
-msgstr ""
+msgstr "手動設定"
 
 #: src/welcome.ts:171
 msgid "Failed to detect location."
-msgstr ""
+msgstr "場所の検知に失敗しました。"
 
 #: src/welcome.ts:174
 msgid "Please configure your location and units manually."
-msgstr ""
+msgstr "手動で場所と単位を設定してください。"
