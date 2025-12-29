@@ -257,7 +257,7 @@ msgstr "名前"
 #: src/preferences/editLocation.ts:57
 #, javascript-format
 msgid "%s (e.g. \"%s\")"
-msgstr "%s (例えば \"%s\")""
+msgstr "%s (例えば \"%s\")"
 
 #: src/preferences/editLocation.ts:57
 msgid "Coordinates"
