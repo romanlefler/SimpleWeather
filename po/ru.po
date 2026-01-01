@@ -30,7 +30,7 @@ msgstr "Температура"
 
 #: src/details.ts:61
 msgid "Condition"
-msgstr "Погода"
+msgstr "Условия"
 
 #: src/details.ts:62
 msgid "Feels Like"
@@ -74,7 +74,7 @@ msgstr "Облачность"
 
 #: src/details.ts:72
 msgid "Sun Countdown"
-msgstr ""
+msgstr "До восхода/заката"
 
 #: src/details.ts:77 src/popup.ts:409
 msgid "Invalid"
@@ -186,9 +186,7 @@ msgstr "Пожертвования и помощь в переводе прив�
 #: src/preferences/aboutPage.ts:119
 #, javascript-format
 msgid "If you like this extension, consider starring it on %s."
-msgstr ""
-"Если вам понравилось это расширение, пожалуйста, поставьте ему звездочку на "
-"%s."
+msgstr "Если вам нравится это расширение, поставьте ему звездочку на %s."
 
 #: src/preferences/aboutPage.ts:122
 msgid "here"
@@ -225,11 +223,11 @@ msgstr "Нет"
 
 #: src/preferences/detailsPage.ts:200
 msgid "Panel Detail"
-msgstr "Информация в панели"
+msgstr "Информация на панели"
 
 #: src/preferences/detailsPage.ts:218
 msgid "Secondary Panel Detail"
-msgstr "Дополнительная информация в панели"
+msgstr "Дополнительная информация на панели"
 
 #: src/preferences/detailsPage.ts:230
 msgid "Show Condition Icon"
@@ -241,7 +239,7 @@ msgstr "Показывать восход/закат"
 
 #: src/preferences/detailsPage.ts:251
 msgid "Use Countdown for Sun"
-msgstr ""
+msgstr "Использовать обратный отсчёт до восхода/заката"
 
 #: src/preferences/editLocation.ts:33
 #, javascript-format
@@ -259,7 +257,7 @@ msgstr "Название"
 #: src/preferences/editLocation.ts:57
 #, javascript-format
 msgid "%s (e.g. \"%s\")"
-msgstr ""
+msgstr "%s (например, \"%s\")"
 
 #: src/preferences/editLocation.ts:57
 msgid "Coordinates"
@@ -427,11 +425,11 @@ msgstr "Порядок на панели"
 
 #: src/preferences/generalPage.ts:290
 msgid "Use Symbolic Icons in Panel"
-msgstr ""
+msgstr "Использовать символические значки на панели"
 
 #: src/preferences/generalPage.ts:300
 msgid "Always Use Packaged Icons"
-msgstr ""
+msgstr "Всегда использовать встроенные значки"
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
@@ -528,49 +526,49 @@ msgstr "Открыть GitHub"
 
 #: src/units.ts:133
 msgid "E"
-msgstr ""
+msgstr "В"
 
 #: src/units.ts:133
 msgid "N"
-msgstr ""
+msgstr "С"
 
 #: src/units.ts:133
 msgid "NE"
-msgstr ""
+msgstr "СВ"
 
 #: src/units.ts:133
 msgid "NW"
-msgstr ""
+msgstr "СЗ"
 
 #: src/units.ts:133
 msgid "S"
-msgstr ""
+msgstr "Ю"
 
 #: src/units.ts:133
 msgid "SE"
-msgstr ""
+msgstr "ЮВ"
 
 #: src/units.ts:133
 msgid "SW"
-msgstr ""
+msgstr "ЮЗ"
 
 #: src/units.ts:133
 msgid "W"
-msgstr ""
+msgstr "З"
 
 #: src/units.ts:298
 msgid "Now"
-msgstr ""
+msgstr "Сейчас"
 
 #: src/units.ts:302
 #, javascript-format
 msgid "%d h"
-msgstr ""
+msgstr "%d ч"
 
 #: src/units.ts:303
 #, javascript-format
 msgid "%d min"
-msgstr ""
+msgstr "%d мин"
 
 #: src/weather.ts:105
 msgid "Clear"
@@ -633,12 +631,12 @@ msgstr "Прервать"
 
 #: src/welcome.ts:151
 msgid "Manual Configuration"
-msgstr ""
+msgstr "Ручная настройка"
 
 #: src/welcome.ts:171
 msgid "Failed to detect location."
-msgstr ""
+msgstr "Не удалось определить местоположение."
 
 #: src/welcome.ts:174
 msgid "Please configure your location and units manually."
-msgstr ""
+msgstr "Пожалуйста, укажите местоположение и единицы измерения вручную."
