@@ -239,7 +239,7 @@ msgstr "Показывать восход/закат"
 
 #: src/preferences/detailsPage.ts:251
 msgid "Use Countdown for Sun"
-msgstr "Использовать обратный отсчёт до восхода/заката"
+msgstr "Использовать обратный отсчет до восхода/заката"
 
 #: src/preferences/editLocation.ts:33
 #, javascript-format
