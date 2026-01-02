@@ -3,19 +3,20 @@ msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
 "POT-Creation-Date: 2025-11-20 21:18-0600\n"
-"PO-Revision-Date: 2025-07-23 22:06\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2026-01-02 15:25+0100\n"
+"Last-Translator: Ludek Vydra <lvtran@u.k2.cz>\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 3;\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
 "X-Crowdin-Project: simpleweather\n"
 "X-Crowdin-Project-ID: 798380\n"
 "X-Crowdin-Language: cs\n"
 "X-Crowdin-File: simple-weather@romanlefler.com.pot\n"
 "X-Crowdin-File-ID: 2\n"
+"X-Generator: Poedit 3.8\n"
 
 #: src/autoConfig.ts:56 src/location.ts:53 src/location.ts:63
 #: src/preferences/generalPage.ts:179
@@ -28,15 +29,15 @@ msgstr "Teplota"
 
 #: src/details.ts:61
 msgid "Condition"
-msgstr "Podmínka"
+msgstr "Počasí"
 
 #: src/details.ts:62
 msgid "Feels Like"
-msgstr "Cítí se"
+msgstr "Pocitově"
 
 #: src/details.ts:63
 msgid "Wind"
-msgstr "Větrný"
+msgstr "Vítr"
 
 #: src/details.ts:64
 msgid "Humidity"
@@ -44,11 +45,11 @@ msgstr "Vlhkost"
 
 #: src/details.ts:65
 msgid "Gusts"
-msgstr "Chody"
+msgstr "Poryvy"
 
 #: src/details.ts:66
 msgid "UV High"
-msgstr "UV vysoké"
+msgstr "UV"
 
 #: src/details.ts:67 src/preferences/generalPage.ts:92
 msgid "Pressure"
@@ -60,7 +61,7 @@ msgstr "Srážky"
 
 #: src/details.ts:69
 msgid "Sunrise"
-msgstr "Vzestup slunce"
+msgstr "Východ slunce"
 
 #: src/details.ts:70
 msgid "Sunset"
@@ -68,11 +69,11 @@ msgstr "Západ slunce"
 
 #: src/details.ts:71
 msgid "Cloud Cover"
-msgstr "Obal Cloudu"
+msgstr "Oblačnost"
 
 #: src/details.ts:72
 msgid "Sun Countdown"
-msgstr ""
+msgstr "Do setmění"
 
 #: src/details.ts:77 src/popup.ts:409
 msgid "Invalid"
@@ -92,7 +93,7 @@ msgstr "Neděle"
 
 #: src/lang.ts:111
 msgid "Tuesday"
-msgstr "úterý"
+msgstr "Úterý"
 
 #: src/lang.ts:111
 msgid "Wednesday"
@@ -113,22 +114,22 @@ msgstr "Čtvrtek"
 #: src/location.ts:82
 #, javascript-format
 msgid "%f°N"
-msgstr "%f°s. š."
+msgstr "%f°S"
 
 #: src/location.ts:82
 #, javascript-format
 msgid "%f°S"
-msgstr "%f°S"
+msgstr "%f°J"
 
 #: src/location.ts:83
 #, javascript-format
 msgid "%f°E"
-msgstr "%f°E"
+msgstr "%f°V"
 
 #: src/location.ts:83
 #, javascript-format
 msgid "%f°W"
-msgstr "%f°W"
+msgstr "%f°Z"
 
 #: src/popup.ts:143
 msgid "Weather Data"
@@ -141,12 +142,12 @@ msgstr "Nastavení"
 #: src/popup.ts:383
 #, javascript-format
 msgid "H: %s"
-msgstr "H: %s"
+msgstr "↑: %s"
 
 #: src/popup.ts:384
 #, javascript-format
 msgid "L: %s"
-msgstr ""
+msgstr "↓: %s"
 
 #: src/preferences/aboutPage.ts:48
 msgid "About"
@@ -184,7 +185,7 @@ msgstr "Příspěvky a překlady jsou vítány! Přečtěte si jak na %s."
 #: src/preferences/aboutPage.ts:119
 #, javascript-format
 msgid "If you like this extension, consider starring it on %s."
-msgstr "Pokud se vám toto rozšíření líbí, zvažte jeho hvězdu na %s."
+msgstr "Pokud se vám toto rozšíření líbí, dejte mu hvězdičku na %s."
 
 #: src/preferences/aboutPage.ts:122
 msgid "here"
@@ -193,11 +194,11 @@ msgstr "zde"
 #: src/preferences/aboutPage.ts:124
 #, javascript-format
 msgid "Report bugs or request new features %s."
-msgstr "Nahlásit chyby nebo požádat o nové funkce %s."
+msgstr "Nahlaste chyby nebo požádejte o nové funkce %s."
 
 #: src/preferences/aboutPage.ts:128 src/preferences/aboutPage.ts:138
 msgid "Credits"
-msgstr "Kredity"
+msgstr "Zásluhy"
 
 #: src/preferences/detailsPage.ts:80
 msgid "Details"
@@ -209,7 +210,7 @@ msgstr "Vyskakovací okno"
 
 #: src/preferences/detailsPage.ts:87
 msgid "Drag-and-drop from bottom to configure the pop-up"
-msgstr "Přetažením dolů nastavíte vyskakovací okno"
+msgstr "Přetažením zdola nastavíte zobrazení ve vyskakovacím oknu"
 
 #: src/preferences/detailsPage.ts:185 src/preferences/generalPage.ts:235
 msgid "Panel"
@@ -221,23 +222,23 @@ msgstr "Nic"
 
 #: src/preferences/detailsPage.ts:200
 msgid "Panel Detail"
-msgstr "Detail dílce"
+msgstr "Zobraz na první pozici"
 
 #: src/preferences/detailsPage.ts:218
 msgid "Secondary Panel Detail"
-msgstr "Detail sekundárního panelu"
+msgstr "Zobraz na druhé pozici"
 
 #: src/preferences/detailsPage.ts:230
 msgid "Show Condition Icon"
-msgstr "Zobrazit ikonu podmínky"
+msgstr "Zobrazit ikonu počasí"
 
 #: src/preferences/detailsPage.ts:240
 msgid "Show Sunrise/Sunset"
-msgstr "Zobrazit sluneční svíčky/sluneční svit"
+msgstr "Zobrazit východ/západ slunce"
 
 #: src/preferences/detailsPage.ts:251
 msgid "Use Countdown for Sun"
-msgstr ""
+msgstr "Zobraz čas do západu slunce"
 
 #: src/preferences/editLocation.ts:33
 #, javascript-format
@@ -255,7 +256,7 @@ msgstr "Název"
 #: src/preferences/editLocation.ts:57
 #, javascript-format
 msgid "%s (e.g. \"%s\")"
-msgstr ""
+msgstr "%s (např. \"%s\")"
 
 #: src/preferences/editLocation.ts:57
 msgid "Coordinates"
@@ -263,7 +264,7 @@ msgstr "Souřadnice"
 
 #: src/preferences/editLocation.ts:67
 msgid "Save"
-msgstr "Uložit"
+msgstr "Ulož"
 
 #: src/preferences/editLocation.ts:95
 msgid "Name is required."
@@ -271,7 +272,7 @@ msgstr "Název je povinný."
 
 #: src/preferences/editLocation.ts:100
 msgid "Invalid coordinates entry."
-msgstr "Neplatný záznam souřadnic."
+msgstr "Neplatné souřadnice."
 
 #: src/preferences/generalPage.ts:38
 msgid "General"
@@ -299,7 +300,7 @@ msgstr "Spojené království"
 
 #: src/preferences/generalPage.ts:48
 msgid "US"
-msgstr "Spojené státy"
+msgstr "USA"
 
 #: src/preferences/generalPage.ts:61
 msgid "Fahrenheit"
@@ -307,7 +308,7 @@ msgstr "Fahrenheit"
 
 #: src/preferences/generalPage.ts:62
 msgid "Celsius"
-msgstr "Celsia"
+msgstr "Celsius"
 
 #: src/preferences/generalPage.ts:78
 msgid "Speed"
@@ -315,7 +316,7 @@ msgstr "Rychlost"
 
 #: src/preferences/generalPage.ts:106
 msgid "Rain Measurement"
-msgstr "Měření deště"
+msgstr "Měření srážek"
 
 #: src/preferences/generalPage.ts:120
 msgid "Distance"
@@ -327,7 +328,7 @@ msgstr "Stupně"
 
 #: src/preferences/generalPage.ts:144
 msgid "Eight-Point Compass"
-msgstr "Osbodový kompas"
+msgstr "8-větrný kompas"
 
 #: src/preferences/generalPage.ts:147
 msgid "Direction"
@@ -335,19 +336,19 @@ msgstr "Směr"
 
 #: src/preferences/generalPage.ts:159
 msgid "Weather Service"
-msgstr "Služba počasí"
+msgstr "Počasí"
 
 #: src/preferences/generalPage.ts:160
 msgid "Configure how the weather is attained"
-msgstr "Nakonfigurujte, jak je počasí dosaženo."
+msgstr "Nakonfigurujte poskytovatele předpovědi počasí"
 
 #: src/preferences/generalPage.ts:167
 msgid "Weather Provider"
-msgstr "Poskytovatel počasí"
+msgstr "Poskytovatel předpovědi počasí"
 
 #: src/preferences/generalPage.ts:180
 msgid "Configure how your location is found"
-msgstr "Nakonfigurujte, jak je vaše poloha nalezena"
+msgstr "Nakonfigurujte způsob nalezení vaší polohy"
 
 #: src/preferences/generalPage.ts:184 src/preferences/generalPage.ts:185
 msgid "Online"
@@ -391,11 +392,11 @@ msgstr "Světlý"
 
 #: src/preferences/generalPage.ts:247
 msgid "Afterdark"
-msgstr "Potterdark"
+msgstr "Tmavý"
 
 #: src/preferences/generalPage.ts:248
 msgid "Immersive"
-msgstr "Pohlcující"
+msgstr "Průhledný"
 
 #: src/preferences/generalPage.ts:251
 msgid "Theme"
@@ -423,11 +424,11 @@ msgstr "Pořadí v panelu"
 
 #: src/preferences/generalPage.ts:290
 msgid "Use Symbolic Icons in Panel"
-msgstr ""
+msgstr "Použij v panelu symbolické ikony"
 
 #: src/preferences/generalPage.ts:300
 msgid "Always Use Packaged Icons"
-msgstr ""
+msgstr "Vždy užij ikony programu"
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
@@ -452,7 +453,7 @@ msgstr "Přidat sem"
 #: src/preferences/locationsPage.ts:193
 #, javascript-format
 msgid "Are you sure you want delete %s?"
-msgstr "Jste si jisti, že chcete odstranit %s?"
+msgstr "Opravdu chcete odstranit %s?"
 
 #: src/preferences/locationsPage.ts:194
 msgid "Cancel"
@@ -481,7 +482,7 @@ msgstr "Hledat umístění"
 
 #: src/preferences/search.ts:54
 msgid "City, Neighborhood, etc."
-msgstr "Město, soused atd."
+msgstr "Město, soused, atd."
 
 #: src/preferences/search.ts:59
 msgid "Search"
@@ -489,7 +490,7 @@ msgstr "Hledat"
 
 #: src/preferences/search.ts:158
 msgid "No Internet"
-msgstr "Žádný internet"
+msgstr "Bez internetu"
 
 #: src/preferences/search.ts:206
 msgid "No results."
@@ -506,7 +507,7 @@ msgid ""
 "\tError - %s\n"
 "Please consider submitting a bug report on GitHub."
 msgstr ""
-"SimpleWeather neví, jak nakládat s vaší locale.\n"
+"SimpleWeather neví, jak zacházet s vaším místním nastavením.\n"
 "\tChyba - %s\n"
 "Zvažte prosím odeslání hlášení o chybě na GitHub."
 
@@ -524,77 +525,77 @@ msgstr "Open GitHub"
 
 #: src/units.ts:133
 msgid "E"
-msgstr ""
+msgstr "V"
 
 #: src/units.ts:133
 msgid "N"
-msgstr ""
+msgstr "S"
 
 #: src/units.ts:133
 msgid "NE"
-msgstr ""
+msgstr "SV"
 
 #: src/units.ts:133
 msgid "NW"
-msgstr ""
+msgstr "SZ"
 
 #: src/units.ts:133
 msgid "S"
-msgstr ""
+msgstr "J"
 
 #: src/units.ts:133
 msgid "SE"
-msgstr ""
+msgstr "JV"
 
 #: src/units.ts:133
 msgid "SW"
-msgstr ""
+msgstr "JZ"
 
 #: src/units.ts:133
 msgid "W"
-msgstr ""
+msgstr "Z"
 
 #: src/units.ts:298
 msgid "Now"
-msgstr ""
+msgstr "Teď"
 
 #: src/units.ts:302
 #, javascript-format
 msgid "%d h"
-msgstr ""
+msgstr "%d h"
 
 #: src/units.ts:303
 #, javascript-format
 msgid "%d min"
-msgstr ""
+msgstr "%d min"
 
 #: src/weather.ts:105
 msgid "Clear"
-msgstr "Vyčistit"
+msgstr "Jasno"
 
 #: src/weather.ts:105
 msgid "Sunny"
-msgstr "Sunny"
+msgstr "Slunečno"
 
 #: src/weather.ts:107
 msgid "Cloudy"
-msgstr "Zataženo"
+msgstr "Oblačno"
 
 #: src/weather.ts:109
 msgid "Rainy"
-msgstr "Rainy"
+msgstr "Deštivo"
 
 #: src/weather.ts:111
 msgid "Snowy"
-msgstr "Snowy"
+msgstr "Sněžení"
 
 #: src/weather.ts:113
 msgid "Stormy"
-msgstr "Stormy"
+msgstr "Bouřlivo"
 
 #: src/weather.ts:115
 msgid "Windy"
-msgstr "Větrnost"
+msgstr "Větrno"
 
 #: src/welcome.ts:53
 #, javascript-format
@@ -611,10 +612,10 @@ msgid ""
 "  •  %s, for searching locations by name\n"
 "\n"
 msgstr ""
-"%s se občas připojuje k vybrané službě počasí. Ve výchozím nastavení použije "
-"internet k připojení k:\n"
+"%s se občas připojuje k vybrané službě předpovědi počasí. Ve výchozím "
+"nastavení použije internet k připojení k:\n"
 "  •  %s, služba %s pro počasí\n"
-"  •  %svolitelné pro řešení aktuální polohy\n"
+"  •  %s, volitelně pro řešení aktuální polohy\n"
 "  •  %s, pro vyhledávání lokací podle jména\n"
 "\n"
 
@@ -629,12 +630,12 @@ msgstr "Zrušit"
 
 #: src/welcome.ts:151
 msgid "Manual Configuration"
-msgstr ""
+msgstr "Ruční konfigurace"
 
 #: src/welcome.ts:171
 msgid "Failed to detect location."
-msgstr ""
+msgstr "Chyba detekce umístění."
 
 #: src/welcome.ts:174
 msgid "Please configure your location and units manually."
-msgstr ""
+msgstr "Konfigurujte vaše umístění a jednotky měření ručně."
