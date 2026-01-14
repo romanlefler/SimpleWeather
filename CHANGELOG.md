@@ -8,6 +8,10 @@
 - Option to still hide indicator instead of displaying "Error!"
 - "Nordic" unit preset using speed in `m/s` that is selected by default in Nordic countries
 
+## Improvements
+
+- Better place name formatting in location search results; works internationally
+
 ## Bug Fixes
 
 - Fixed a rare but possible crash if you start with Internet but then lose it
