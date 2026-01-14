@@ -155,6 +155,15 @@ function setPointer(widget : Clutter.Actor) : void {
     }
 }
 
+export interface PopupCtorArgs {
+    config : Config;
+    metadata : ExtensionMetadata;
+    openPreferences : () => void;
+    menu : PopupMenu.PopupMenu;
+    settings : Gio.Settings;
+    refreshWeather : () => Promise<void>;
+}
+
 export class Popup {
 
     readonly #config : Config;
@@ -177,18 +186,11 @@ export class Popup {
     #err : string | null;
     #refreshWeather : () => Promise<void>;
 
-    constructor(
-        config : Config,
-        metadata : ExtensionMetadata,
-        openPreferences : () => void,
-        menu : PopupMenu.PopupMenu,
-        settings : Gio.Settings,
-        refreshWeather : () => Promise<void>
-    ) {
+    constructor(a: PopupCtorArgs) {
         this.#err = null;
-        this.#refreshWeather = refreshWeather;
-        this.#config = config;
-        this.#metadata = metadata;
+        this.#refreshWeather = a.refreshWeather;
+        this.#config = a.config;
+        this.#metadata = a.metadata;
         this.#foreMode = ForecastMode.Week;
 
         this.#condition = new St.Icon({
@@ -290,17 +292,17 @@ export class Popup {
                 return;
             }
 
-            const placeCount = config.getLocations().length;
+            const placeCount = a.config.getLocations().length;
             if(placeCount === 1) return;
             // These will be restored in the #updateGUI method
             this.#placeBtn.reactive = false;
             this.#placeBtn.opacity = 127;
 
-            const index = config.getMainLocationIndex();
+            const index = a.config.getMainLocationIndex();
             let newIndex;
             if(index === placeCount - 1) newIndex = 0;
             else newIndex = index + 1;
-            settings.set_int64("main-location-index", newIndex);
+            a.settings.set_int64("main-location-index", newIndex);
         });
         baseText.actor.add_child(this.#placeBtn);
 
@@ -320,8 +322,8 @@ export class Popup {
         });
         theme(configBtn, "button");
         configBtn.connect("clicked", () => {
-            menu.toggle();
-            openPreferences();
+            a.menu.toggle();
+            a.openPreferences();
         });
         baseText.actor.add_child(configBtn);
 
@@ -330,9 +332,9 @@ export class Popup {
         setPointer(configBtn);
 
         this.#menuItems = [ childItem, baseText ];
-        this.#menuBox = menu.box;
-        menu.addMenuItem(childItem);
-        menu.addMenuItem(baseText);
+        this.#menuBox = a.menu.box;
+        a.menu.addMenuItem(childItem);
+        a.menu.addMenuItem(baseText);
     }
 
     setError(msg : string | null) {

@@ -147,14 +147,14 @@ export default class SimpleWeatherExtension extends Extension {
 
     #createIndicator() : PanelMenu.Button {
         const indic = new PanelMenu.Button(0, "Weather", false);
-        this.#popup = new Popup(
-            this.#config!,
-            this.metadata,
-            this.openPreferences.bind(this),
-            indic.menu as PopupMenu,
-            this.#gsettings!,
-            this.#updateWeatherAsync.bind(this)
-        );
+        this.#popup = new Popup({
+            config: this.#config!,
+            metadata: this.metadata,
+            openPreferences: this.openPreferences.bind(this),
+            menu: indic.menu as PopupMenu,
+            settings: this.#gsettings!,
+            refreshWeather: this.#updateWeatherAsync.bind(this)
+        });
 
         const layout = new St.BoxLayout({
             vertical: false
