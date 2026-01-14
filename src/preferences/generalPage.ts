@@ -307,6 +307,18 @@ export class GeneralPage extends Adw.PreferencesPage {
         });
         panelGroup.add(alwaysPackagedRow);
 
+        const hideErrPopupRow = new Adw.SwitchRow({
+            title: _g("Hide Error Popup"),
+            subtitle: _g("If the popup just says Error, don't even show it."),
+            active: settings.get_boolean("hide-err-popup")
+        });
+        hideErrPopupRow.connect("notify::active", w => {
+            const val = w.active;
+            settings.set_boolean("hide-err-popup", val);
+            settings.apply();
+        });
+        panelGroup.add(hideErrPopupRow);
+
         this.add(panelGroup);
     }
 

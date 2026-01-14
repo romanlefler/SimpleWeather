@@ -398,6 +398,10 @@ export class Config {
         this.#handlerIds.push(id);
     }
 
+    getHideErrPopup() : boolean {
+        return this.#settings.get_boolean("hide-err-popup");
+    }
+
 
 
     getUnitPreset() : UnitPreset {

@@ -189,5 +189,10 @@
             <summary>Always use the icons packaged with the extension</summary>
         </key>
 
+        <key name="hide-err-popup" type="b">
+            <default>false</default>
+            <summary>Don't show the popup if it's just showing an error</summary>
+        </key>
+
     </schema>
 </schemalist>
