@@ -54,12 +54,12 @@ function createForecastCard() : ForecastCard {
     });
 
     const day = new St.Label({
-        text: _g("Today"),
+        text: "",
         x_align: Clutter.ActorAlign.CENTER
     });
 
     const icon = new St.Icon({
-        icon_name: "view-refresh-symbolic",
+        icon_name: "",
         style_class: "simpleweather-card-icon",
         x_align: Clutter.ActorAlign.CENTER
     });
@@ -174,14 +174,19 @@ export class Popup {
     #foreMode : ForecastMode;
     #cachedWeather? : Weather;
 
+    #err : string | null;
+    #refreshWeather : () => Promise<void>;
+
     constructor(
         config : Config,
         metadata : ExtensionMetadata,
         openPreferences : () => void,
         menu : PopupMenu.PopupMenu,
-        settings : Gio.Settings
+        settings : Gio.Settings,
+        refreshWeather : () => Promise<void>
     ) {
-
+        this.#err = null;
+        this.#refreshWeather = refreshWeather;
         this.#config = config;
         this.#metadata = metadata;
         this.#foreMode = ForecastMode.Week;
@@ -192,7 +197,7 @@ export class Popup {
             x_align: Clutter.ActorAlign.CENTER
         });
         this.#temp = new St.Label({
-            text: "0\u00B0",
+            text: "",
             style_class: "simpleweather-popup-temp",
             x_align: Clutter.ActorAlign.CENTER
         });
@@ -272,6 +277,19 @@ export class Popup {
         });
         theme(this.#placeBtn, "button");
         this.#placeBtn.connect("clicked", () => {
+            if(this.#err) {
+                // These will be restored in the #updateGUI method
+                this.#placeBtn.reactive = false;
+                this.#placeBtn.opacity = 127;
+
+                this.setError(null);
+                this.#refreshWeather().then(() => {
+                    this.#placeBtn.reactive = true;
+                    this.#placeBtn.opacity = 255;
+                });
+                return;
+            }
+
             const placeCount = config.getLocations().length;
             if(placeCount === 1) return;
             // These will be restored in the #updateGUI method
@@ -317,6 +335,14 @@ export class Popup {
         menu.addMenuItem(baseText);
     }
 
+    setError(msg : string | null) {
+        this.#err = msg;
+    }
+
+    #getErrMsg() : string {
+        return this.#err ?? "";
+    }
+
     destroy(menu : PopupMenu.PopupMenu) {
         this.#menuItems.forEach(m => m.destroy());
     }
@@ -327,12 +353,23 @@ export class Popup {
         return new Gio.FileIcon({ file: iconFile });
     }
 
-    updateGui(w : Weather) {
+    updateGui(w : Weather | undefined) {
+        if(!w) {
+            this.#placeLabel.text = _g("Retry");
+            this.#copyright.text = this.#getErrMsg();
+            this.#placeBtn.reactive = true;
+            this.#placeBtn.opacity = 255;
+            return;
+        }
+
         const old = this.#cachedWeather;
 
         this.#condition.gicon = this.#createIcon(w.gIconName);
         this.#temp.text = w.temp.display(this.#config);
-        this.#copyright.text = copyrightText(w.providerName);
+
+        const c = copyrightText(w.providerName);
+        if(this.#err) this.#copyright.text = `${c} | ${this.#getErrMsg()}`;
+        else this.#copyright.text = c;
 
         if(old) this.#menuBox.remove_style_class_name(`swa-${old.condit}`);
         this.#menuBox.add_style_class_name(`swa-${w.condit}`);
