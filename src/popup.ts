@@ -355,9 +355,12 @@ export class Popup {
         return new Gio.FileIcon({ file: iconFile });
     }
 
-    #displayErr() : void {
+    #displayErr(copyrightText : string | undefined = undefined) : void {
+        const c = copyrightText;
+        if(c) this.#copyright.text = `${c} | ${this.#getErrMsg()}`;
+        else this.#copyright.text = this.#getErrMsg();
+
         this.#placeLabel.text = _g("Retry");
-        this.#copyright.text = this.#getErrMsg();
         this.#placeBtn.reactive = true;
         this.#placeBtn.opacity = 255;
     }
@@ -391,7 +394,7 @@ export class Popup {
         this.#updateForecast(w);
 
         if(this.#getErrMsg()) {
-            this.#displayErr();
+            this.#displayErr(c);
         }
     }
 
