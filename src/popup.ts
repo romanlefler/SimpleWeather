@@ -355,12 +355,16 @@ export class Popup {
         return new Gio.FileIcon({ file: iconFile });
     }
 
+    #displayErr() : void {
+        this.#placeLabel.text = _g("Retry");
+        this.#copyright.text = this.#getErrMsg();
+        this.#placeBtn.reactive = true;
+        this.#placeBtn.opacity = 255;
+    }
+
     updateGui(w : Weather | undefined) {
         if(!w) {
-            this.#placeLabel.text = _g("Retry");
-            this.#copyright.text = this.#getErrMsg();
-            this.#placeBtn.reactive = true;
-            this.#placeBtn.opacity = 255;
+            this.#displayErr();
             return;
         }
 
@@ -385,6 +389,10 @@ export class Popup {
         } else this.#menuBox.add_style_class_name(`swa-${w.isNight ? "night" : "day"}`);
 
         this.#updateForecast(w);
+
+        if(this.#getErrMsg()) {
+            this.#displayErr();
+        }
     }
 
     #updateForecast(w : Weather) {
