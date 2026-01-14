@@ -62,41 +62,38 @@ export class LibSoup {
                 GLib.PRIORITY_DEFAULT,
                 null,
                 (_, result) => {
-                    let gBytes : GLib.Bytes;
                     try {
-                        gBytes = sess.send_and_read_finish(result);
-                    }
-                    catch(e) {
-                        reject(e);
+                        let gBytes = sess.send_and_read_finish(result);
+
+                        const byteArray = gBytes.get_data();
+                        if(!byteArray) return reject("Failed to get byte stream from server response.");
+                        
+                        const json = new TextDecoder().decode(byteArray);
+                        if(!json) return reject("Server response was empty.");
+
+                        const status = msg.statusCode;
+                        const is2xx = Math.floor(status / 100) === 2;
+
+                        let body : any;
+                        try {
+                            body = JSON.parse(json);
+                        }
+                        catch(e) {
+                            if(e instanceof SyntaxError) {
+                                return reject(new SyntaxError(
+                                    "Couldn't parse body JSON. " +
+                                    `User-Agent: ${sess.userAgent}, Status: ${status}, Text: "${json}"`,
+                                    { cause: e }
+                                ));
+                            }
+                            else return reject(e);
+                        }
+
+                        resolve({ status, body, is2xx: is2xx });
+                    } catch(err) {
+                        reject(err);
                         return;
                     }
-
-                    const byteArray = gBytes.get_data();
-                    if(!byteArray) return reject("Failed to get byte stream from server response.");
-                    
-
-                    const json = new TextDecoder().decode(byteArray);
-                    if(!json) return reject("Server response was empty.");
-
-                    const status = msg.statusCode;
-                    const is2xx = Math.floor(status / 100) === 2;
-
-                    let body : any;
-                    try {
-                        body = JSON.parse(json);
-                    }
-                    catch(e) {
-                        if(e instanceof SyntaxError) {
-                            reject(new SyntaxError(
-                                "Couldn't parse body JSON. " +
-                                `User-Agent: ${sess.userAgent}, Status: ${status}, Text: "${json}"`,
-                                { cause: e }
-                            ));
-                        }
-                        else return reject(e);
-                    }
-
-                    resolve({ status, body, is2xx: is2xx });
                 }
             );
         });
