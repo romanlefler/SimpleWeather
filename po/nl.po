@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
-"POT-Creation-Date: 2025-11-20 21:18-0600\n"
+"POT-Creation-Date: 2026-01-13 23:08-0600\n"
 "PO-Revision-Date: 2025-08-28 16:56\n"
 "Last-Translator: koenraad-verv\n"
 "Language-Team: Dutch\n"
@@ -17,8 +17,8 @@ msgstr ""
 "X-Crowdin-File: simple-weather@romanlefler.com.pot\n"
 "X-Crowdin-File-ID: 2\n"
 
-#: src/autoConfig.ts:56 src/location.ts:53 src/location.ts:63
-#: src/preferences/generalPage.ts:179
+#: src/autoConfig.ts:59 src/location.ts:53 src/location.ts:63
+#: src/preferences/generalPage.ts:183
 msgid "My Location"
 msgstr "Mijn locatie"
 
@@ -74,39 +74,43 @@ msgstr "Bewolking"
 msgid "Sun Countdown"
 msgstr "Max aantal uren zon"
 
-#: src/details.ts:77 src/popup.ts:409
+#: src/details.ts:77 src/popup.ts:459
 msgid "Invalid"
 msgstr "Ongeldig"
 
-#: src/lang.ts:108 src/popup.ts:57
+#: src/extension.ts:357 src/preferences/search.ts:159
+msgid "No Internet"
+msgstr "Geen internet"
+
+#: src/lang.ts:112
 msgid "Today"
 msgstr "vandaag"
 
-#: src/lang.ts:111
+#: src/lang.ts:115
 msgid "Monday"
 msgstr "maandag"
 
-#: src/lang.ts:111
+#: src/lang.ts:115
 msgid "Sunday"
 msgstr "zondag"
 
-#: src/lang.ts:111
+#: src/lang.ts:115
 msgid "Tuesday"
 msgstr "dinsdag"
 
-#: src/lang.ts:111
+#: src/lang.ts:115
 msgid "Wednesday"
 msgstr "woensdag"
 
-#: src/lang.ts:112
+#: src/lang.ts:116
 msgid "Friday"
 msgstr "vrijdag"
 
-#: src/lang.ts:112
+#: src/lang.ts:116
 msgid "Saturday"
 msgstr "zaterdag"
 
-#: src/lang.ts:112
+#: src/lang.ts:116
 msgid "Thursday"
 msgstr "donderdag"
 
@@ -134,16 +138,20 @@ msgstr "%f°W"
 msgid "Weather Data"
 msgstr "Weer gegevens"
 
-#: src/popup.ts:297 src/preferences/aboutPage.ts:76
+#: src/popup.ts:317 src/preferences/aboutPage.ts:76
 msgid "Settings"
 msgstr "Instellingen"
 
-#: src/popup.ts:383
+#: src/popup.ts:363
+msgid "Retry"
+msgstr ""
+
+#: src/popup.ts:433
 #, javascript-format
 msgid "H: %s"
 msgstr "H: %s"
 
-#: src/popup.ts:384
+#: src/popup.ts:434
 #, javascript-format
 msgid "L: %s"
 msgstr "L: %s"
@@ -211,7 +219,7 @@ msgstr "Pop-Up"
 msgid "Drag-and-drop from bottom to configure the pop-up"
 msgstr "Slepen en neerzetten van onder om de pop-up te configureren"
 
-#: src/preferences/detailsPage.ts:185 src/preferences/generalPage.ts:235
+#: src/preferences/detailsPage.ts:185 src/preferences/generalPage.ts:239
 msgid "Panel"
 msgstr "Paneel"
 
@@ -294,6 +302,10 @@ msgid "Metric"
 msgstr "Metrisch"
 
 #: src/preferences/generalPage.ts:48
+msgid "Nordic"
+msgstr ""
+
+#: src/preferences/generalPage.ts:48
 msgid "UK"
 msgstr "VK"
 
@@ -321,119 +333,127 @@ msgstr "Hoeveelheid neerslag"
 msgid "Distance"
 msgstr "Afstand"
 
-#: src/preferences/generalPage.ts:144
+#: src/preferences/generalPage.ts:148
 msgid "Degrees"
 msgstr "Graden"
 
-#: src/preferences/generalPage.ts:144
+#: src/preferences/generalPage.ts:148
 msgid "Eight-Point Compass"
 msgstr "Acht punten kompas"
 
-#: src/preferences/generalPage.ts:147
+#: src/preferences/generalPage.ts:151
 msgid "Direction"
 msgstr "Richting"
 
-#: src/preferences/generalPage.ts:159
+#: src/preferences/generalPage.ts:163
 msgid "Weather Service"
 msgstr "Weer dienst"
 
-#: src/preferences/generalPage.ts:160
+#: src/preferences/generalPage.ts:164
 msgid "Configure how the weather is attained"
 msgstr "Stel in hoe gegevens worden opgehaald"
 
-#: src/preferences/generalPage.ts:167
+#: src/preferences/generalPage.ts:171
 msgid "Weather Provider"
 msgstr "Bron van weer gegevens"
 
-#: src/preferences/generalPage.ts:180
+#: src/preferences/generalPage.ts:184
 msgid "Configure how your location is found"
 msgstr "Configureer hoe uw locatie wordt bepaald"
 
-#: src/preferences/generalPage.ts:184 src/preferences/generalPage.ts:185
+#: src/preferences/generalPage.ts:188 src/preferences/generalPage.ts:189
 msgid "Online"
 msgstr "Online"
 
-#: src/preferences/generalPage.ts:186 src/preferences/generalPage.ts:245
+#: src/preferences/generalPage.ts:190 src/preferences/generalPage.ts:249
 msgid "System"
 msgstr "Systeem"
 
-#: src/preferences/generalPage.ts:187
+#: src/preferences/generalPage.ts:191
 msgid "Disable"
 msgstr "Uitschakelen"
 
-#: src/preferences/generalPage.ts:190
+#: src/preferences/generalPage.ts:194
 msgid "Provider"
 msgstr "Leverancier"
 
-#: src/preferences/generalPage.ts:202
+#: src/preferences/generalPage.ts:206
 msgid "Refresh Interval (Minutes)"
 msgstr "Interval vernieuwen (minuten)"
 
-#: src/preferences/generalPage.ts:220
+#: src/preferences/generalPage.ts:224
 msgid "Accessibility"
 msgstr "Toegankelijkheid"
 
-#: src/preferences/generalPage.ts:221
+#: src/preferences/generalPage.ts:225
 msgid "Configure accessibility features"
 msgstr "Toegankelijkheidsfuncties configureren"
 
-#: src/preferences/generalPage.ts:224
+#: src/preferences/generalPage.ts:228
 msgid "High Contrast"
 msgstr "Hoog contrast"
 
-#: src/preferences/generalPage.ts:236
+#: src/preferences/generalPage.ts:240
 msgid "Configure the panel and pop-up"
 msgstr "Configureer het paneel en pop-up"
 
-#: src/preferences/generalPage.ts:246
+#: src/preferences/generalPage.ts:250
 msgid "Light"
 msgstr "Licht"
 
-#: src/preferences/generalPage.ts:247
+#: src/preferences/generalPage.ts:251
 msgid "Afterdark"
 msgstr "Na zonsondergang"
 
-#: src/preferences/generalPage.ts:248
+#: src/preferences/generalPage.ts:252
 msgid "Immersive"
 msgstr "Meeslepend"
 
-#: src/preferences/generalPage.ts:251
+#: src/preferences/generalPage.ts:255
 msgid "Theme"
 msgstr "Thema"
 
-#: src/preferences/generalPage.ts:261
+#: src/preferences/generalPage.ts:265
 msgid "Center"
 msgstr "Gecentreerd"
 
-#: src/preferences/generalPage.ts:261
+#: src/preferences/generalPage.ts:265
 msgid "Left"
 msgstr "Links"
 
-#: src/preferences/generalPage.ts:261
+#: src/preferences/generalPage.ts:265
 msgid "Right"
 msgstr "Rechts"
 
-#: src/preferences/generalPage.ts:264
+#: src/preferences/generalPage.ts:268
 msgid "Side of Panel"
 msgstr "Zijkant van paneel"
 
-#: src/preferences/generalPage.ts:274
+#: src/preferences/generalPage.ts:278
 msgid "Order in Panel"
 msgstr "Plaats op het paneel"
 
-#: src/preferences/generalPage.ts:290
+#: src/preferences/generalPage.ts:294
 msgid "Use Symbolic Icons in Panel"
 msgstr "Gebruik iconen in paneel"
 
-#: src/preferences/generalPage.ts:300
+#: src/preferences/generalPage.ts:304
 msgid "Always Use Packaged Icons"
 msgstr "Altijd meegeleverde iconen gebruiken"
+
+#: src/preferences/generalPage.ts:315
+msgid "Hide Error Popup"
+msgstr ""
+
+#: src/preferences/generalPage.ts:316
+msgid "If the popup just says Error, don't even show it."
+msgstr ""
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
 msgstr "Locaties"
 
-#: src/preferences/locationsPage.ts:70 src/preferences/search.ts:75
+#: src/preferences/locationsPage.ts:70 src/preferences/search.ts:76
 msgid "Add"
 msgstr "Toevoegen"
 
@@ -475,27 +495,23 @@ msgstr "Interne fout"
 msgid "Something else edited the locations."
 msgstr "Iets anders wijzigde de locaties."
 
-#: src/preferences/search.ts:45
+#: src/preferences/search.ts:46
 msgid "Search Location"
 msgstr "Plaats zoeken"
 
-#: src/preferences/search.ts:54
+#: src/preferences/search.ts:55
 msgid "City, Neighborhood, etc."
 msgstr "Stad, omgeving enz."
 
-#: src/preferences/search.ts:59
+#: src/preferences/search.ts:60
 msgid "Search"
 msgstr "Zoeken"
 
-#: src/preferences/search.ts:158
-msgid "No Internet"
-msgstr "Geen internet"
-
-#: src/preferences/search.ts:206
+#: src/preferences/search.ts:207
 msgid "No results."
 msgstr "Geen resultaten."
 
-#: src/preferences/search.ts:211
+#: src/preferences/search.ts:212
 msgid "No copyright information available."
 msgstr "Geen auteursrecht gegevens beschikbaar."
 
