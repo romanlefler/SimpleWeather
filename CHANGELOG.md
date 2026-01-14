@@ -1,10 +1,23 @@
 
 # v49.2.0-dev
 
+## Features
+
+- Extension now shows "Error!" if no Internet instead of just showing nothing
+- Retry button if you start without Internet or lose Internet at any point
+- Option to still hide indicator instead of displaying "Error!"
+- "Nordic" unit preset using speed in `m/s` that is selected by default in Nordic countries
+
+## Bug Fixes
+
+- Fixed a rare but possible crash if you start with Internet but then lose it
+
 ## Translations
 
+- Czech (thanks lev741)
 - Japanese (thanks hidenosuke)
 - Polish (thanks Szymon Zielonka)
+- Russian (thanks Valetss)
 
 # v49.1.1
 
