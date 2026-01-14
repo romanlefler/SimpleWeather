@@ -24,6 +24,7 @@ import { Location } from "../location.js";
 import { gettext as _g } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
 import { LibSoup } from "../libsoup.js";
 import { Config } from "../config.js";
+import { isNoInternet } from "../utils.js";
 
 const SEARCH_BASE = "https://nominatim.openstreetmap.org";
 const SEARCH_ENDPOINT = `${SEARCH_BASE}/search`;
@@ -115,7 +116,7 @@ export async function searchDialog(parent : Gtk.Window, soup : LibSoup, cfg : Co
                 populateList(stringList, locArr);
                 searchButton.sensitive = true;
             }).catch(e => {
-                if(e instanceof Gio.ResolverError) {
+                if(isNoInternet(e)) {
                     console.error(e);
                     showNoInternetDialog(dialog);
                     searchButton.sensitive = true;

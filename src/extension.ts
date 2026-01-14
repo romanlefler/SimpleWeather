@@ -28,7 +28,7 @@ import { OpenMeteo } from "./providers/openmeteo.js";
 import { LibSoup } from "./libsoup.js";
 import { Config } from "./config.js";
 import { Weather } from "./weather.js";
-import { delayTask, removeSourceIfTruthy } from "./utils.js";
+import { delayTask, removeSourceIfTruthy, isNoInternet } from "./utils.js";
 import { displayTemp, displayTime, initLocales } from "./lang.js";
 import { freeMyLocation, setUpMyLocation } from "./myLocation.js";
 import { setUpGettext, gettext as _g } from "./gettext.js";
@@ -313,14 +313,47 @@ export default class SimpleWeatherExtension extends Extension {
         return GLib.SOURCE_CONTINUE;
     }
 
+    #handleErr(err : unknown) {
+        // This happens on boot presumably when things are loaded
+        // out of order, try max 10 times
+        //
+        // This tries for just over a minute, which should be plenty of time for
+        // Wi-Fi to start
+        //
+        // Fail count never resets so that if repeatedly trying to connect fails once
+        // we don't constantly retry for a minute every time the timer goes off
+        if(isNoInternet(err) && ++this.#resolverFailCount <= FAIL_RETRIES) {
+            if(this.#resolverFailCount === FAIL_RETRIES) console.error(err);
+
+            // We need to stop updateGUI from running because otherwise it calls
+            // addInficIfNeeded which we don't want on boot until we've given up
+            return new Promise<void>(resolve => {
+                this.#delayFetchId = delayTask(7.5, () => {
+                    this.#delayFetchId = undefined;
+                    this.#updateWeatherAsync().then(resolve);
+                });
+            });
+        // Maybe this error happened because of failed fetch or going over fail count
+        } else {
+            if(this.#config?.getHideErrPopup()) return;
+
+            if(!this.#indicator) this.#indicator = this.#createIndicator();
+            if(this.#panelIcon) this.#panelIcon.icon_name = "error-app-symbolic";
+            if(this.#panelLabel) this.#panelLabel.text = "Error!";
+            if(this.#secondPanelLabel) this.#secondPanelLabel.visible = false;
+            if(this.#sunTimeLabel) this.#sunTimeLabel.visible = false;
+            if(this.#sunTimeIcon) this.#sunTimeIcon.visible = false;
+            this.#addIndicIfNeeded();
+        }
+    }
+
     async #updateWeatherAsync() {
-        console.error(`Trying: ${new Date()}`);
         if(!this.#provider) throw new Error("Provider was undefined!");
         let errStr : string | null = null;
         try {
             this.#cachedWeather = await this.#provider!.fetchWeather();
         } catch(err) {
-            if(err instanceof Gio.ResolverError) {
+            if(isNoInternet(err)) {
                 errStr = _g("No Internet");
             } else {
                 console.error(err);
@@ -328,35 +361,8 @@ export default class SimpleWeatherExtension extends Extension {
                 errStr = err && err.toString ? err.toString() : String(err);
                 if(errStr.length > 25) errStr = errStr.substring(0, 25) + "...";
             }
-            // This happens on boot presumably when things are loaded
-            // out of order, try max 10 times
-            //
-            // This tries for just over a minute, which should be plenty of time for
-            // Wi-Fi to start
-            //
-            // Fail count never resets so that if repeatedly trying to connect fails once
-            // we don't constantly retry for a minute every time the timer goes off
-            if(err instanceof Gio.ResolverError && ++this.#resolverFailCount <= FAIL_RETRIES) {
-                if(this.#resolverFailCount === FAIL_RETRIES) console.error(err);
 
-                // We need to stop updateGUI from running because otherwise it calls
-                // addInficIfNeeded which we don't want on boot until we've given up
-                return new Promise<void>(resolve => {
-                    this.#delayFetchId = delayTask(7.5, () => {
-                        this.#delayFetchId = undefined;
-                        this.#updateWeatherAsync().then(resolve);
-                    });
-                });
-            // Maybe this error happened because of failed fetch or going over fail count
-            } else if(!this.#cachedWeather) {
-                if(!this.#indicator) this.#indicator = this.#createIndicator();
-                if(this.#panelIcon) this.#panelIcon.icon_name = "error-app-symbolic";
-                if(this.#panelLabel) this.#panelLabel.text = "Error!";
-                if(this.#secondPanelLabel) this.#secondPanelLabel.visible = false;
-                if(this.#sunTimeLabel) this.#sunTimeLabel.visible = false;
-                if(this.#sunTimeIcon) this.#sunTimeIcon.visible = false;
-                this.#addIndicIfNeeded();
-            }
+            if(!this.#cachedWeather) this.#handleErr(err);
         }
         if(this.#popup) this.#popup.setError(errStr);
         else console.error(`No popup to notify of error (${errStr})`);
