@@ -18,6 +18,7 @@
         <value value="1" nick="us" />
         <value value="2" nick="uk" />
         <value value="3" nick="metric" />
+        <value value="4" nick="nordic" />
     </enum>
     <enum id="org.gnome.shell.extensions.simple-weather.speed-unit">
         <value value="1" nick="mph" />

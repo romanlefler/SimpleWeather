@@ -45,9 +45,9 @@ export class GeneralPage extends Adw.PreferencesPage {
         });
 
         const unitPresetUnits = new Gtk.StringList({ strings: [
-            _g("US"), _g("UK"), _g("Metric"), _g("Custom")
+            _g("US"), _g("UK"), _g("Metric"), _g("Nordic"), _g("Custom")
         ]});
-        const unitPresetFromEnumMap = [ 3, 0, 1, 2 ];
+        const unitPresetFromEnumMap = [ 4, 0, 1, 2, 3 ];
         const curUnitPreset = settings.get_enum("unit-preset");
         const unitPresetRow = new Adw.ComboRow({
             title: _g("Units"),
@@ -130,9 +130,13 @@ export class GeneralPage extends Adw.PreferencesPage {
         // If unit preset is not custom, most unit rows shouldn't be shown
         setVisibilites(curUnitPreset === 0, tempRow, speedRow, pressureRow,
             rainMeasurementRow, distanceRow);
+
+        // This line automatically reverses the mapping from enum to menu
+        const unitPresetInverse = unitPresetFromEnumMap.reduce<number[]>(
+            (out, v, i) => (out[v] = i, out), []
+        );
         unitPresetRow.connect("notify::selected", () => {
-            const toEnumMap = [ 1, 2, 3, 0 ];
-            const val = toEnumMap[unitPresetRow.selected];
+            const val = unitPresetInverse[unitPresetRow.selected];
             setVisibilites(val === 0, tempRow, speedRow, pressureRow,
                 rainMeasurementRow, distanceRow);
 

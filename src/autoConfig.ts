@@ -23,6 +23,9 @@ import { Location } from "./location.js";
 import { gettext as _g } from "./gettext.js"
 import { AutoConfigFailError } from "./errors.js";
 
+// Denmark, Finland, Sweden, Norway, Iceland, Faroe Islands, Greenland
+const NORDIC : string[] = [ "DK", "FI", "SE", "NO", "IS", "FO", "GL" ];
+
 /**
  * Tests if this computer is a desktop.
  * @returns True if a desktop, otherwise false if not or unknown.
@@ -58,11 +61,15 @@ export async function setFirstTimeConfig(settings : Gio.Settings) {
         settings.set_value("locations", writeGTypeAS(strArr));
     }
 
-    if(myLoc.country === "US") {
+    const cc = myLoc.country;
+    if(cc === "US") {
         settings.set_enum("unit-preset", UnitPreset.US);
     }
-    else if(myLoc.country === "UK" || myLoc.country === "GB") {
+    else if(cc === "UK" || cc === "GB") {
         settings.set_enum("unit-preset", UnitPreset.UK);
+    }
+    else if(cc && NORDIC.includes(cc)) {
+        settings.set_enum("unit-preset", UnitPreset.Nordic);
     }
     else {
         settings.set_enum("unit-preset", UnitPreset.Metric);

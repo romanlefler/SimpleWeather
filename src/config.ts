@@ -27,7 +27,8 @@ export enum UnitPreset {
     Custom = 0,
     US = 1,
     UK = 2,
-    Metric = 3
+    Metric = 3,
+    Nordic = 4
 }
 
 export type PanelBox = "right" | "center" | "left";
@@ -168,7 +169,12 @@ export class Config {
     getSpeedUnit() : SpeedUnits {
         return this.#returnUnit(
             "speed-unit",
-            { us: SpeedUnits.Mph, uk: SpeedUnits.Mph, metric: SpeedUnits.Kph }
+            {
+                us: SpeedUnits.Mph,
+                uk: SpeedUnits.Mph,
+                metric: SpeedUnits.Kph,
+                nordic: SpeedUnits.Mps
+            }
         );
     }
 
@@ -431,7 +437,7 @@ export class Config {
      * 
      * @param getEnumKey Backup get_enum string key
      */
-    #returnUnit(getEnumKey : string, args : { us? : number, uk? : number, metric? : number }) : number {
+    #returnUnit(getEnumKey : string, args : { us? : number, uk? : number, metric? : number, nordic? : number }) : number {
         const preset = this.getUnitPreset();
         switch(preset) {
             case UnitPreset.US:
@@ -440,8 +446,14 @@ export class Config {
             case UnitPreset.UK:
                 if(args.uk !== undefined) return args.uk;
                 // Fall back to metric.
-                // FALL THRU
+                if(args.metric !== undefined) return args.metric;
+                else break;
             case UnitPreset.Metric:
+                if(args.metric !== undefined) return args.metric;
+                else break;
+            case UnitPreset.Nordic:
+                if(args.nordic !== undefined) return args.nordic;
+                // Fall back to metric.
                 if(args.metric !== undefined) return args.metric;
                 else break;
         }
