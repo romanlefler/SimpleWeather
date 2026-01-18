@@ -146,7 +146,8 @@ export default class SimpleWeatherExtension extends Extension {
     }
 
     #createIndicator() : PanelMenu.Button {
-        const indic = new PanelMenu.Button(0, "Weather", false);
+        const menuOffset = this.#config!.getPanelOffset();
+        const indic = new PanelMenu.Button(menuOffset, "Weather", false);
         this.#popup = new Popup({
             config: this.#config!,
             metadata: this.metadata,
@@ -256,6 +257,7 @@ export default class SimpleWeatherExtension extends Extension {
         this.#config!.onSecondaryPanelDetailChanged(this.#rebuildIndicator.bind(this));
         this.#config!.onShowPanelIconChanged(this.#rebuildIndicator.bind(this));
         this.#config!.onPanelPositionChanged(this.#rebuildIndicator.bind(this));
+        this.#config!.onPanelOffsetChanged(this.#rebuildIndicator.bind(this));
         this.#config!.onThemeChanged(this.#rebuildIndicator.bind(this));
         this.#config!.onHighContrastChanged(this.#rebuildIndicator.bind(this));
 

@@ -160,6 +160,12 @@
             <summary>Priority of button in panel box</summary>
         </key>
 
+        <key name="panel-offset" type="d">
+            <default>0.0</default>
+            <summary>Panel Offset</summary>
+            <description>Offset of popup menu relative to panel button (0 to 100)</description>
+        </key>
+
         <key name="panel-detail" type="s">
             <default>'temp'</default>
             <summary>Detail to show in the panel</summary>
