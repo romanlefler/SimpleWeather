@@ -3,7 +3,7 @@
 
 ## Building
 
-Use `./nest-test.sh` to easily test changes.
+Use `./debug.sh` to easily test changes.
 (This script runs `make install` among other things.)
 
 For some major renaming/deleting or Makefile changes, you may need to run `make clean`.
