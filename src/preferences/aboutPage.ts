@@ -24,7 +24,7 @@ import { gettext as _g } from "resource:///org/gnome/Shell/Extensions/js/extensi
 // @ts-ignore
 import { PACKAGE_VERSION } from "resource:///org/gnome/Shell/Extensions/js/misc/config.js";
 import { getLocales } from "../lang.js";
-import { AUTHORS } from "../resource.js";
+import { AUTHORS, GITHASH } from "../resource.js";
 
 function md(s : string, classes? : string[]) : Gtk.Label {
     const props : Partial<Gtk.Label.ConstructorProps> = {
@@ -64,13 +64,27 @@ export class AboutPage extends Adw.PreferencesPage {
         this.add(topGroup);
 
         const infoGroup = new Adw.PreferencesGroup();
+
+        const versionName = metadata["version-name"];
         const versionRow = new Adw.ActionRow({
             title: _g("SimpleWeather Version")
         });
         versionRow.add_suffix(new Gtk.Label({
-            label: metadata["version-name"] ?? _g("Unknown")
+            label: versionName ?? _g("Unknown")
         }));
         infoGroup.add(versionRow);
+
+        const gitHash = GITHASH();
+        // Only show git hash if it's not the release version
+        if(versionName?.endsWith("-dev") && gitHash) {
+            const gitHashRow = new Adw.ActionRow({
+                title: _g("Git Hash")
+            });
+            gitHashRow.add_suffix(new Gtk.Label({
+                label: gitHash
+            }));
+            infoGroup.add(gitHashRow);
+        }
 
         const settingsRow = new Adw.ActionRow({
             title: _g("Settings")
