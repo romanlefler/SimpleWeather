@@ -56,9 +56,9 @@ pack: $(ZIP)
 pot: $(POT)
 
 install: out
-	rm -rf ~/.local/share/gnome-shell/extensions/$(UUID)
-	mkdir -p ~/.local/share/gnome-shell/extensions
-	cp -r $(BUILD) ~/.local/share/gnome-shell/extensions/$(UUID)
+	rm -rf $(INSTALLBASE)/$(UUID)
+	mkdir -p $(INSTALLBASE)
+	cp -r $(BUILD) $(INSTALLBASE)/$(UUID)
 ifeq ($(INSTALLTYPE),system)
 	rm -rf $(addprefix $(INSTALLBASE)/$(UUID)/, schemas locale LICENSE)
 	mkdir -p $(SHARE_PREFIX)/glib-2.0/schemas \
