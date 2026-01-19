@@ -293,28 +293,48 @@ export class GeneralPage extends Adw.PreferencesPage {
             settings.apply();
         });
         panelGroup.add(panelPriorityRow);
-        const panelOffsetRow = new Adw.SpinRow({
-            title: _g("Panel Offset"),
+
+        const panelOffsetRow = new Adw.ActionRow({
+            title: _g("Pop-Up Offset"),
+            subtitle: _g("Horizontal pop-up offset from 0\u2013100.")
+        });
+        const OFFSET_STEP = 5;
+        const panelOffsetScale = new Gtk.Scale({
+            orientation: Gtk.Orientation.HORIZONTAL,
             adjustment: new Gtk.Adjustment({
-                lower: 0.0,
-                upper: 100.0,
+                lower: -100.0,
+                upper: 0.0,
                 step_increment: 5.0,
                 page_increment: 10.0,
                 value: settings.get_double("panel-offset")
             }),
-            digits: 0
+            digits: 0,
+            round_digits: OFFSET_STEP,
+            draw_value: true, // show the number bubble/value
+            hexpand: true
         });
-        panelOffsetRow.connect("notify::value", () => {
-            settings.set_double("panel-offset", panelOffsetRow.value);
+        for(const i of [ 0, -50, -100 ]) {
+            panelOffsetScale.add_mark(i, Gtk.PositionType.BOTTOM, null);
+        }
+
+        panelOffsetRow.add_suffix(panelOffsetScale);
+        panelOffsetRow.set_activatable_widget(panelOffsetScale);
+        panelOffsetScale.adjustment.connect("notify::value", a => {
+            if(a.value % OFFSET_STEP !== 0) {
+                a.value = Math.round(a.value / OFFSET_STEP) * OFFSET_STEP;
+            }
+            settings.set_double("panel-offset", -a.value);
             settings.apply();
         });
         // Update UI when offset is changed by panel position setting
         settings.connect("changed", (_, key) => {
             if(key === "panel-offset") {
-                panelOffsetRow.value = settings.get_double("panel-offset");
+                const v = settings.get_double("panel-offset");
+                panelOffsetScale.adjustment.value = -v;
             }
         });
         panelGroup.add(panelOffsetRow);
+
         const useSymbolicRow = new Adw.SwitchRow({
             title: _g("Use Symbolic Icons in Panel"),
             active: settings.get_boolean("symbolic-icons-panel")
