@@ -271,6 +271,9 @@ export class GeneralPage extends Adw.PreferencesPage {
         });
         panelBoxRow.connect("notify::selected", () => {
             settings.set_enum("panel-box", panelBoxRow.selected);
+            // Auto-adjust panel offset based on panel position
+            const offsetValues = [0, 50, 100];
+            settings.set_double("panel-offset", offsetValues[panelBoxRow.selected]);
             settings.apply();
         });
         panelGroup.add(panelBoxRow);
@@ -290,6 +293,28 @@ export class GeneralPage extends Adw.PreferencesPage {
             settings.apply();
         });
         panelGroup.add(panelPriorityRow);
+        const panelOffsetRow = new Adw.SpinRow({
+            title: _g("Panel Offset"),
+            adjustment: new Gtk.Adjustment({
+                lower: 0.0,
+                upper: 100.0,
+                step_increment: 5.0,
+                page_increment: 10.0,
+                value: settings.get_double("panel-offset")
+            }),
+            digits: 0
+        });
+        panelOffsetRow.connect("notify::value", () => {
+            settings.set_double("panel-offset", panelOffsetRow.value);
+            settings.apply();
+        });
+        // Update UI when offset is changed by panel position setting
+        settings.connect("changed", (_, key) => {
+            if(key === "panel-offset") {
+                panelOffsetRow.value = settings.get_double("panel-offset");
+            }
+        });
+        panelGroup.add(panelOffsetRow);
         const useSymbolicRow = new Adw.SwitchRow({
             title: _g("Use Symbolic Icons in Panel"),
             active: settings.get_boolean("symbolic-icons-panel")

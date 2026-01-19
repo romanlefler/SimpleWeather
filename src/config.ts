@@ -358,6 +358,17 @@ export class Config {
         this.#handlerIds.push(id);
     }
 
+    getPanelOffset() : number {
+        return this.#settings.get_double("panel-offset") / 100;
+    }
+
+    onPanelOffsetChanged(callback : () => void) : void {
+        const id = this.#settings.connect("changed", (_, key) => {
+            if(key === "panel-offset") callback();
+        });
+        this.#handlerIds.push(id);
+    }
+
     getPanelDetail() : Details | null {
         const detail = this.#settings.get_string("panel-detail");
         if(!Object.values(Details).includes(detail as Details)) return null;
