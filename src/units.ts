@@ -295,10 +295,11 @@ export class Countdown implements Displayable {
     display(cfg : Config) : string {
         const now = new Date();
         const diff = this.#date.getTime() - now.getTime();
-        if(diff <= 0) return _g("Now");
         const seconds = Math.floor(diff / 1000);
         const minutes = Math.floor(seconds / 60);
         const hours = Math.floor(minutes / 60);
+
+        if(minutes < 1) return _g("Now");
         if(hours >= 1) return _g("%d h").format(hours % 60);
         else return _g("%d min").format(minutes % 60);
     }

@@ -15,6 +15,7 @@
 
 ## Bug Fixes
 
+- Fixed "0 min" sometimes being displayed on the sun countdown (now always shows "Now")
 - Fixed a rare but possible crash if you start with Internet but then lose it
 - Fixed an install target in the build Makefile that didn't honor $INSTALLBASE (thanks Grzegorz Szymaszek)
 
