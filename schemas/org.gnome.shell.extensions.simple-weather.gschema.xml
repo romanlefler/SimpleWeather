@@ -201,5 +201,10 @@
             <summary>Don't show the popup if it's just showing an error</summary>
         </key>
 
+        <key name="show-refresh-button" type="b">
+            <default>false</default>
+            <summary>Show refresh button in the popup</summary>
+        </key>
+
     </schema>
 </schemalist>

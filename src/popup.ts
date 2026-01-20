@@ -176,6 +176,7 @@ export class Popup {
     readonly #currentLabels : St.Label[];
     readonly #placeLabel : St.Label;
     readonly #placeBtn : St.Button;
+    readonly #refreshBtn : St.Button | null;
 
     readonly #menuItems : PopupMenu.PopupBaseMenuItem[];
     readonly #menuBox : St.BoxLayout;
@@ -267,6 +268,32 @@ export class Popup {
         theme(baseText, "bg");
         baseText.actor.add_child(textRect);
 
+        if(a.config.getShowRefreshButton()) {
+            const refreshBtn = new St.Button({
+                child: new St.Icon({
+                    icon_name: "view-refresh-symbolic",
+                    style_class: "simpleweather-settings-icon"
+                }),
+                reactive: true,
+                can_focus: true,
+                track_hover: true,
+                accessible_name: _g("Refresh"),
+                x_expand: false,
+                x_align: Clutter.ActorAlign.END,
+                y_align: Clutter.ActorAlign.CENTER,
+                style_class: "message-list-clear-button button",
+            });
+            theme(refreshBtn, "button");
+            refreshBtn.connect("clicked", () => {
+                this.#triggerRefresh();
+            });
+            baseText.actor.add_child(refreshBtn);
+            setPointer(refreshBtn);
+            this.#refreshBtn = refreshBtn;
+        } else {
+            this.#refreshBtn = null;
+        }
+
         this.#placeLabel = new St.Label();
         this.#placeBtn = new St.Button({
             child: this.#placeLabel,
@@ -280,23 +307,14 @@ export class Popup {
         theme(this.#placeBtn, "button");
         this.#placeBtn.connect("clicked", () => {
             if(this.#err) {
-                // These will be restored in the #updateGUI method
-                this.#placeBtn.reactive = false;
-                this.#placeBtn.opacity = 127;
-
-                this.setError(null);
-                this.#refreshWeather().then(() => {
-                    this.#placeBtn.reactive = true;
-                    this.#placeBtn.opacity = 255;
-                });
+                this.#triggerRefresh();
                 return;
             }
 
             const placeCount = a.config.getLocations().length;
             if(placeCount === 1) return;
             // These will be restored in the #updateGUI method
-            this.#placeBtn.reactive = false;
-            this.#placeBtn.opacity = 127;
+            this.#setRefreshStatus(true);
 
             const index = a.config.getMainLocationIndex();
             let newIndex;
@@ -335,6 +353,26 @@ export class Popup {
         this.#menuBox = a.menu.box;
         a.menu.addMenuItem(childItem);
         a.menu.addMenuItem(baseText);
+    }
+
+    #setRefreshStatus(fetching : boolean) : void {
+        const op = fetching ? 127 : 255;
+
+        this.#placeBtn.reactive = !fetching;
+        this.#placeBtn.opacity = op;
+        if(this.#refreshBtn) {
+            this.#refreshBtn.reactive = !fetching;
+            this.#refreshBtn.opacity = op;
+        }
+    }
+
+    #triggerRefresh() : void {
+        this.#setRefreshStatus(true);
+        this.setError(null);
+        this.#refreshWeather().finally(() => {
+            this.#setRefreshStatus(false);
+        });
+        return;
     }
 
     setError(msg : string | null) {
@@ -463,8 +501,7 @@ export class Popup {
             label.text = displayDetail(w, deet, _g, this.#config);
         }
 
-        this.#placeBtn.reactive = true;
-        this.#placeBtn.opacity = 255;
+        this.#setRefreshStatus(false);
     }
 
 }

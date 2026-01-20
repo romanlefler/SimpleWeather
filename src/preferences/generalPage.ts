@@ -356,6 +356,17 @@ export class GeneralPage extends Adw.PreferencesPage {
         });
         panelGroup.add(alwaysPackagedRow);
 
+        const showRefreshButton = new Adw.SwitchRow({
+            title: _g("Show Refresh Button"),
+            active: settings.get_boolean("show-refresh-button")
+        });
+        showRefreshButton.connect("notify::active", w => {
+            const val = w.active;
+            settings.set_boolean("show-refresh-button", val);
+            settings.apply();
+        });
+        panelGroup.add(showRefreshButton);
+
         const hideErrPopupRow = new Adw.SwitchRow({
             title: _g("Hide Error Popup"),
             subtitle: _g("If the popup just says Error, don't even show it."),

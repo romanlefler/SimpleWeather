@@ -419,6 +419,17 @@ export class Config {
         return this.#settings.get_boolean("hide-err-popup");
     }
 
+    getShowRefreshButton() : boolean {
+        return this.#settings.get_boolean("show-refresh-button");
+    }
+
+    onShowRefreshButtonChanged(callback : () => void) : void {
+        const id = this.#settings.connect("changed", (_, key) => {
+            if(key === "show-refresh-button") callback();
+        });
+        this.#handlerIds.push(id);
+    }
+
 
 
     getUnitPreset() : UnitPreset {
