@@ -16,6 +16,7 @@
 ## Bug Fixes
 
 - Fixed a rare but possible crash if you start with Internet but then lose it
+- Fixed an install target in the build Makefile that didn't honor $INSTALLBASE (thanks Grzegorz Szymaszek)
 
 ## Translations
 
