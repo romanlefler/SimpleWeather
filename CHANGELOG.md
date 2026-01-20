@@ -19,6 +19,7 @@
 
 ## Translations
 
+- Chinese (thanks Davidasx)
 - Czech (thanks lev741)
 - Japanese (thanks hidenosuke)
 - Polish (thanks Szymon Zielonka)
