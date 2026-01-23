@@ -1,9 +1,12 @@
+#
+#  <>, 2026.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
 "POT-Creation-Date: 2026-01-13 23:08-0600\n"
-"PO-Revision-Date: 2025-12-23 10:55+0900\n"
+"PO-Revision-Date: 2026-01-22 10:58+0900\n"
 "Last-Translator: \n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
@@ -16,6 +19,7 @@ msgstr ""
 "X-Crowdin-Language: ja\n"
 "X-Crowdin-File: simple-weather@romanlefler.com.pot\n"
 "X-Crowdin-File-ID: 2\n"
+"X-Generator: Gtranslator 49.0\n"
 
 #: src/autoConfig.ts:59 src/location.ts:53 src/location.ts:63
 #: src/preferences/generalPage.ts:183
@@ -144,7 +148,7 @@ msgstr "設定"
 
 #: src/popup.ts:363
 msgid "Retry"
-msgstr ""
+msgstr "リトライ"
 
 #: src/popup.ts:433
 #, javascript-format
@@ -162,7 +166,7 @@ msgstr "About"
 
 #: src/preferences/aboutPage.ts:59
 msgid "GitHub Repository"
-msgstr "GitHub Repository"
+msgstr "GitHub リポジトリ"
 
 #: src/preferences/aboutPage.ts:61
 msgid "Support Me"
@@ -305,7 +309,7 @@ msgstr "メトリック"
 
 #: src/preferences/generalPage.ts:48
 msgid "Nordic"
-msgstr ""
+msgstr "ノルディック"
 
 #: src/preferences/generalPage.ts:48
 msgid "UK"
@@ -445,11 +449,11 @@ msgstr "常にパッケージ内のアイコンを使用する"
 
 #: src/preferences/generalPage.ts:315
 msgid "Hide Error Popup"
-msgstr ""
+msgstr "エラー・ポップアップを隠す"
 
 #: src/preferences/generalPage.ts:316
 msgid "If the popup just says Error, don't even show it."
-msgstr ""
+msgstr "ポップアップにエラーとだけ表示される場合は、表示しない。"
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
