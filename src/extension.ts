@@ -316,7 +316,7 @@ export default class SimpleWeatherExtension extends Extension {
         return GLib.SOURCE_CONTINUE;
     }
 
-    #handleErr(err : unknown) {
+    async #handleErr(err : unknown) : Promise<void> {
         // This happens on boot presumably when things are loaded
         // out of order, try max 10 times
         //
@@ -365,7 +365,7 @@ export default class SimpleWeatherExtension extends Extension {
                 if(errStr.length > 25) errStr = errStr.substring(0, 25) + "...";
             }
 
-            if(!this.#cachedWeather) this.#handleErr(err);
+            if(!this.#cachedWeather) await this.#handleErr(err);
         }
         if(this.#popup) this.#popup.setError(errStr);
         else console.error(`No popup to notify of error (${errStr})`);
