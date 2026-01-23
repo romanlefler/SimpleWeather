@@ -8,6 +8,7 @@
 - Option to still hide indicator instead of displaying "Error!"
 - "Nordic" unit preset using speed in `m/s` that is selected by default in Nordic countries
 - Option to adjust where menu appears relative to panel icon (thanks miyou379)
+- Option to always show a refresh button
 
 ## Improvements
 
