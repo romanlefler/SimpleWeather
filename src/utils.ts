@@ -16,6 +16,7 @@
 */
 
 import GLib from "gi://GLib";
+import Gio from "gi://Gio";
 import { getLocales } from "./lang.js";
 
 export function delayTask(seconds : number, callback : () => void) : number {
@@ -48,4 +49,9 @@ export function sameDate(d1 : Date, d2 : Date) : boolean {
     const dup1 = noTime(d1);
     const dup2 = noTime(d2);
     return dup1.getTime() === dup2.getTime();
+}
+
+export function isNoInternet(error : unknown) {
+    return error instanceof Gio.ResolverError ||
+        error instanceof Gio.IOErrorEnum;
 }

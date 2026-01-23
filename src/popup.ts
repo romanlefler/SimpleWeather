@@ -54,12 +54,12 @@ function createForecastCard() : ForecastCard {
     });
 
     const day = new St.Label({
-        text: _g("Today"),
+        text: "",
         x_align: Clutter.ActorAlign.CENTER
     });
 
     const icon = new St.Icon({
-        icon_name: "view-refresh-symbolic",
+        icon_name: "",
         style_class: "simpleweather-card-icon",
         x_align: Clutter.ActorAlign.CENTER
     });
@@ -155,6 +155,15 @@ function setPointer(widget : Clutter.Actor) : void {
     }
 }
 
+export interface PopupCtorArgs {
+    config : Config;
+    metadata : ExtensionMetadata;
+    openPreferences : () => void;
+    menu : PopupMenu.PopupMenu;
+    settings : Gio.Settings;
+    refreshWeather : () => Promise<void>;
+}
+
 export class Popup {
 
     readonly #config : Config;
@@ -167,6 +176,7 @@ export class Popup {
     readonly #currentLabels : St.Label[];
     readonly #placeLabel : St.Label;
     readonly #placeBtn : St.Button;
+    readonly #refreshBtn : St.Button | null;
 
     readonly #menuItems : PopupMenu.PopupBaseMenuItem[];
     readonly #menuBox : St.BoxLayout;
@@ -174,16 +184,14 @@ export class Popup {
     #foreMode : ForecastMode;
     #cachedWeather? : Weather;
 
-    constructor(
-        config : Config,
-        metadata : ExtensionMetadata,
-        openPreferences : () => void,
-        menu : PopupMenu.PopupMenu,
-        settings : Gio.Settings
-    ) {
+    #err : string | null;
+    #refreshWeather : () => Promise<void>;
 
-        this.#config = config;
-        this.#metadata = metadata;
+    constructor(a: PopupCtorArgs) {
+        this.#err = null;
+        this.#refreshWeather = a.refreshWeather;
+        this.#config = a.config;
+        this.#metadata = a.metadata;
         this.#foreMode = ForecastMode.Week;
 
         this.#condition = new St.Icon({
@@ -192,7 +200,7 @@ export class Popup {
             x_align: Clutter.ActorAlign.CENTER
         });
         this.#temp = new St.Label({
-            text: "0\u00B0",
+            text: "",
             style_class: "simpleweather-popup-temp",
             x_align: Clutter.ActorAlign.CENTER
         });
@@ -260,6 +268,32 @@ export class Popup {
         theme(baseText, "bg");
         baseText.actor.add_child(textRect);
 
+        if(a.config.getShowRefreshButton()) {
+            const refreshBtn = new St.Button({
+                child: new St.Icon({
+                    icon_name: "view-refresh-symbolic",
+                    style_class: "simpleweather-settings-icon"
+                }),
+                reactive: true,
+                can_focus: true,
+                track_hover: true,
+                accessible_name: _g("Refresh"),
+                x_expand: false,
+                x_align: Clutter.ActorAlign.END,
+                y_align: Clutter.ActorAlign.CENTER,
+                style_class: "message-list-clear-button button",
+            });
+            theme(refreshBtn, "button");
+            refreshBtn.connect("clicked", () => {
+                this.#triggerRefresh();
+            });
+            baseText.actor.add_child(refreshBtn);
+            setPointer(refreshBtn);
+            this.#refreshBtn = refreshBtn;
+        } else {
+            this.#refreshBtn = null;
+        }
+
         this.#placeLabel = new St.Label();
         this.#placeBtn = new St.Button({
             child: this.#placeLabel,
@@ -272,17 +306,21 @@ export class Popup {
         });
         theme(this.#placeBtn, "button");
         this.#placeBtn.connect("clicked", () => {
-            const placeCount = config.getLocations().length;
+            if(this.#err) {
+                this.#triggerRefresh();
+                return;
+            }
+
+            const placeCount = a.config.getLocations().length;
             if(placeCount === 1) return;
             // These will be restored in the #updateGUI method
-            this.#placeBtn.reactive = false;
-            this.#placeBtn.opacity = 127;
+            this.#setRefreshStatus(true);
 
-            const index = config.getMainLocationIndex();
+            const index = a.config.getMainLocationIndex();
             let newIndex;
             if(index === placeCount - 1) newIndex = 0;
             else newIndex = index + 1;
-            settings.set_int64("main-location-index", newIndex);
+            a.settings.set_int64("main-location-index", newIndex);
         });
         baseText.actor.add_child(this.#placeBtn);
 
@@ -302,8 +340,8 @@ export class Popup {
         });
         theme(configBtn, "button");
         configBtn.connect("clicked", () => {
-            menu.toggle();
-            openPreferences();
+            a.menu.toggle();
+            a.openPreferences();
         });
         baseText.actor.add_child(configBtn);
 
@@ -312,9 +350,37 @@ export class Popup {
         setPointer(configBtn);
 
         this.#menuItems = [ childItem, baseText ];
-        this.#menuBox = menu.box;
-        menu.addMenuItem(childItem);
-        menu.addMenuItem(baseText);
+        this.#menuBox = a.menu.box;
+        a.menu.addMenuItem(childItem);
+        a.menu.addMenuItem(baseText);
+    }
+
+    #setRefreshStatus(fetching : boolean) : void {
+        const op = fetching ? 127 : 255;
+
+        this.#placeBtn.reactive = !fetching;
+        this.#placeBtn.opacity = op;
+        if(this.#refreshBtn) {
+            this.#refreshBtn.reactive = !fetching;
+            this.#refreshBtn.opacity = op;
+        }
+    }
+
+    #triggerRefresh() : void {
+        this.#setRefreshStatus(true);
+        this.setError(null);
+        this.#refreshWeather().finally(() => {
+            this.#setRefreshStatus(false);
+        });
+        return;
+    }
+
+    setError(msg : string | null) {
+        this.#err = msg;
+    }
+
+    #getErrMsg() : string {
+        return this.#err ?? "";
     }
 
     destroy(menu : PopupMenu.PopupMenu) {
@@ -327,12 +393,30 @@ export class Popup {
         return new Gio.FileIcon({ file: iconFile });
     }
 
-    updateGui(w : Weather) {
+    #displayErr(copyrightText : string | undefined = undefined) : void {
+        const c = copyrightText;
+        if(c) this.#copyright.text = `${c} | ${this.#getErrMsg()}`;
+        else this.#copyright.text = this.#getErrMsg();
+
+        this.#placeLabel.text = _g("Retry");
+        this.#placeBtn.reactive = true;
+        this.#placeBtn.opacity = 255;
+    }
+
+    updateGui(w : Weather | undefined) {
+        if(!w) {
+            this.#displayErr();
+            return;
+        }
+
         const old = this.#cachedWeather;
 
         this.#condition.gicon = this.#createIcon(w.gIconName);
         this.#temp.text = w.temp.display(this.#config);
-        this.#copyright.text = copyrightText(w.providerName);
+
+        const c = copyrightText(w.providerName);
+        if(this.#err) this.#copyright.text = `${c} | ${this.#getErrMsg()}`;
+        else this.#copyright.text = c;
 
         if(old) this.#menuBox.remove_style_class_name(`swa-${old.condit}`);
         this.#menuBox.add_style_class_name(`swa-${w.condit}`);
@@ -346,6 +430,10 @@ export class Popup {
         } else this.#menuBox.add_style_class_name(`swa-${w.isNight ? "night" : "day"}`);
 
         this.#updateForecast(w);
+
+        if(this.#getErrMsg()) {
+            this.#displayErr(c);
+        }
     }
 
     #updateForecast(w : Weather) {
@@ -413,8 +501,7 @@ export class Popup {
             label.text = displayDetail(w, deet, _g, this.#config);
         }
 
-        this.#placeBtn.reactive = true;
-        this.#placeBtn.opacity = 255;
+        this.#setRefreshStatus(false);
     }
 
 }

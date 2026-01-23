@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
-"POT-Creation-Date: 2025-11-20 21:18-0600\n"
-"PO-Revision-Date: 2025-09-18 16:58\n"
+"POT-Creation-Date: 2026-01-13 23:08-0600\n"
+"PO-Revision-Date: 2026-01-20 18:10+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -17,8 +17,8 @@ msgstr ""
 "X-Crowdin-File: simple-weather@romanlefler.com.pot\n"
 "X-Crowdin-File-ID: 2\n"
 
-#: src/autoConfig.ts:56 src/location.ts:53 src/location.ts:63
-#: src/preferences/generalPage.ts:179
+#: src/autoConfig.ts:59 src/location.ts:53 src/location.ts:63
+#: src/preferences/generalPage.ts:183
 msgid "My Location"
 msgstr "我的位置"
 
@@ -72,41 +72,45 @@ msgstr "云量"
 
 #: src/details.ts:72
 msgid "Sun Countdown"
-msgstr ""
+msgstr "太阳倒计时"
 
-#: src/details.ts:77 src/popup.ts:409
+#: src/details.ts:77 src/popup.ts:459
 msgid "Invalid"
 msgstr "无效的"
 
-#: src/lang.ts:108 src/popup.ts:57
+#: src/extension.ts:357 src/preferences/search.ts:159
+msgid "No Internet"
+msgstr "无网络"
+
+#: src/lang.ts:112
 msgid "Today"
 msgstr "今日"
 
-#: src/lang.ts:111
+#: src/lang.ts:115
 msgid "Monday"
 msgstr "周一"
 
-#: src/lang.ts:111
+#: src/lang.ts:115
 msgid "Sunday"
 msgstr "周日"
 
-#: src/lang.ts:111
+#: src/lang.ts:115
 msgid "Tuesday"
 msgstr "周二"
 
-#: src/lang.ts:111
+#: src/lang.ts:115
 msgid "Wednesday"
 msgstr "周三"
 
-#: src/lang.ts:112
+#: src/lang.ts:116
 msgid "Friday"
 msgstr "周五"
 
-#: src/lang.ts:112
+#: src/lang.ts:116
 msgid "Saturday"
 msgstr "周六"
 
-#: src/lang.ts:112
+#: src/lang.ts:116
 msgid "Thursday"
 msgstr "周四"
 
@@ -134,16 +138,20 @@ msgstr "%f°W"
 msgid "Weather Data"
 msgstr "天气数据"
 
-#: src/popup.ts:297 src/preferences/aboutPage.ts:76
+#: src/popup.ts:317 src/preferences/aboutPage.ts:76
 msgid "Settings"
 msgstr "设置"
 
-#: src/popup.ts:383
+#: src/popup.ts:363
+msgid "Retry"
+msgstr "重试"
+
+#: src/popup.ts:433
 #, javascript-format
 msgid "H: %s"
 msgstr "H: %s"
 
-#: src/popup.ts:384
+#: src/popup.ts:434
 #, javascript-format
 msgid "L: %s"
 msgstr "L: %s"
@@ -154,7 +162,7 @@ msgstr "关于"
 
 #: src/preferences/aboutPage.ts:59
 msgid "GitHub Repository"
-msgstr "GitHub Repository"
+msgstr "GitHub 仓库"
 
 #: src/preferences/aboutPage.ts:61
 msgid "Support Me"
@@ -211,7 +219,7 @@ msgstr "弹出窗口"
 msgid "Drag-and-drop from bottom to configure the pop-up"
 msgstr "从底部拖放来配置弹出窗口"
 
-#: src/preferences/detailsPage.ts:185 src/preferences/generalPage.ts:235
+#: src/preferences/detailsPage.ts:185 src/preferences/generalPage.ts:239
 msgid "Panel"
 msgstr "面板"
 
@@ -237,7 +245,7 @@ msgstr "显示日出/日落"
 
 #: src/preferences/detailsPage.ts:251
 msgid "Use Countdown for Sun"
-msgstr ""
+msgstr "使用太阳倒计时"
 
 #: src/preferences/editLocation.ts:33
 #, javascript-format
@@ -294,6 +302,10 @@ msgid "Metric"
 msgstr "公制"
 
 #: src/preferences/generalPage.ts:48
+msgid "Nordic"
+msgstr "北欧制"
+
+#: src/preferences/generalPage.ts:48
 msgid "UK"
 msgstr "英制"
 
@@ -321,119 +333,127 @@ msgstr "降雨量计算"
 msgid "Distance"
 msgstr "距离"
 
-#: src/preferences/generalPage.ts:144
+#: src/preferences/generalPage.ts:148
 msgid "Degrees"
 msgstr "度"
 
-#: src/preferences/generalPage.ts:144
+#: src/preferences/generalPage.ts:148
 msgid "Eight-Point Compass"
 msgstr "八方位指南针"
 
-#: src/preferences/generalPage.ts:147
+#: src/preferences/generalPage.ts:151
 msgid "Direction"
 msgstr "方向"
 
-#: src/preferences/generalPage.ts:159
+#: src/preferences/generalPage.ts:163
 msgid "Weather Service"
 msgstr "天气服务"
 
-#: src/preferences/generalPage.ts:160
+#: src/preferences/generalPage.ts:164
 msgid "Configure how the weather is attained"
 msgstr "配置天气获取方式"
 
-#: src/preferences/generalPage.ts:167
+#: src/preferences/generalPage.ts:171
 msgid "Weather Provider"
 msgstr "天气提供商"
 
-#: src/preferences/generalPage.ts:180
+#: src/preferences/generalPage.ts:184
 msgid "Configure how your location is found"
 msgstr "配置定位获取方式"
 
-#: src/preferences/generalPage.ts:184 src/preferences/generalPage.ts:185
+#: src/preferences/generalPage.ts:188 src/preferences/generalPage.ts:189
 msgid "Online"
 msgstr "在线"
 
-#: src/preferences/generalPage.ts:186 src/preferences/generalPage.ts:245
+#: src/preferences/generalPage.ts:190 src/preferences/generalPage.ts:249
 msgid "System"
 msgstr "系统"
 
-#: src/preferences/generalPage.ts:187
+#: src/preferences/generalPage.ts:191
 msgid "Disable"
 msgstr "禁用"
 
-#: src/preferences/generalPage.ts:190
+#: src/preferences/generalPage.ts:194
 msgid "Provider"
 msgstr "定位提供商"
 
-#: src/preferences/generalPage.ts:202
+#: src/preferences/generalPage.ts:206
 msgid "Refresh Interval (Minutes)"
 msgstr "刷新间隔 (分钟)"
 
-#: src/preferences/generalPage.ts:220
+#: src/preferences/generalPage.ts:224
 msgid "Accessibility"
 msgstr "无障碍"
 
-#: src/preferences/generalPage.ts:221
+#: src/preferences/generalPage.ts:225
 msgid "Configure accessibility features"
 msgstr "配置无障碍功能"
 
-#: src/preferences/generalPage.ts:224
+#: src/preferences/generalPage.ts:228
 msgid "High Contrast"
 msgstr "高对比度"
 
-#: src/preferences/generalPage.ts:236
+#: src/preferences/generalPage.ts:240
 msgid "Configure the panel and pop-up"
 msgstr "配置面板和弹出窗口"
 
-#: src/preferences/generalPage.ts:246
+#: src/preferences/generalPage.ts:250
 msgid "Light"
-msgstr "亮色的"
-
-#: src/preferences/generalPage.ts:247
-msgid "Afterdark"
-msgstr "午夜色的"
-
-#: src/preferences/generalPage.ts:248
-msgid "Immersive"
-msgstr "沉浸式的"
+msgstr "亮色"
 
 #: src/preferences/generalPage.ts:251
+msgid "Afterdark"
+msgstr "深色"
+
+#: src/preferences/generalPage.ts:252
+msgid "Immersive"
+msgstr "沉浸式"
+
+#: src/preferences/generalPage.ts:255
 msgid "Theme"
 msgstr "主题"
 
-#: src/preferences/generalPage.ts:261
+#: src/preferences/generalPage.ts:265
 msgid "Center"
 msgstr "居中"
 
-#: src/preferences/generalPage.ts:261
+#: src/preferences/generalPage.ts:265
 msgid "Left"
 msgstr "靠左"
 
-#: src/preferences/generalPage.ts:261
+#: src/preferences/generalPage.ts:265
 msgid "Right"
 msgstr "靠右"
 
-#: src/preferences/generalPage.ts:264
+#: src/preferences/generalPage.ts:268
 msgid "Side of Panel"
 msgstr "面板位置"
 
-#: src/preferences/generalPage.ts:274
+#: src/preferences/generalPage.ts:278
 msgid "Order in Panel"
 msgstr "面板顺序"
 
-#: src/preferences/generalPage.ts:290
+#: src/preferences/generalPage.ts:294
 msgid "Use Symbolic Icons in Panel"
-msgstr ""
+msgstr "在面板中使用符号图标"
 
-#: src/preferences/generalPage.ts:300
+#: src/preferences/generalPage.ts:304
 msgid "Always Use Packaged Icons"
-msgstr ""
+msgstr "始终使用打包图标"
+
+#: src/preferences/generalPage.ts:315
+msgid "Hide Error Popup"
+msgstr "隐藏错误弹出窗口"
+
+#: src/preferences/generalPage.ts:316
+msgid "If the popup just says Error, don't even show it."
+msgstr "如果弹出窗口只显示错误，则不显示它。"
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
 msgstr "地点"
 
-#: src/preferences/locationsPage.ts:70 src/preferences/search.ts:75
+#: src/preferences/locationsPage.ts:70 src/preferences/search.ts:76
 msgid "Add"
 msgstr "添加"
 
@@ -447,7 +467,7 @@ msgstr "向下移动"
 
 #: src/preferences/locationsPage.ts:128
 msgid "Add Here"
-msgstr "添加到这里"
+msgstr "添加当前位置"
 
 #: src/preferences/locationsPage.ts:193
 #, javascript-format
@@ -473,29 +493,25 @@ msgstr "内部错误"
 
 #: src/preferences/locationsPage.ts:261
 msgid "Something else edited the locations."
-msgstr "其他地方编辑."
+msgstr "其它东西编辑了这些地点。"
 
-#: src/preferences/search.ts:45
+#: src/preferences/search.ts:46
 msgid "Search Location"
 msgstr "搜索位置"
 
-#: src/preferences/search.ts:54
+#: src/preferences/search.ts:55
 msgid "City, Neighborhood, etc."
 msgstr "城市、邻里等"
 
-#: src/preferences/search.ts:59
+#: src/preferences/search.ts:60
 msgid "Search"
 msgstr "搜索"
 
-#: src/preferences/search.ts:158
-msgid "No Internet"
-msgstr "无网络"
-
-#: src/preferences/search.ts:206
+#: src/preferences/search.ts:207
 msgid "No results."
 msgstr "没有结果。"
 
-#: src/preferences/search.ts:211
+#: src/preferences/search.ts:212
 msgid "No copyright information available."
 msgstr "没有可用的版权信息。"
 
@@ -520,7 +536,7 @@ msgstr "忽略"
 
 #: src/prefs.ts:77
 msgid "Open GitHub"
-msgstr "Open GitHub"
+msgstr "打开 GitHub"
 
 #: src/units.ts:133
 msgid "E"
@@ -611,6 +627,11 @@ msgid ""
 "  •  %s, for searching locations by name\n"
 "\n"
 msgstr ""
+"偶尔，%s 会连接到所选的天气服务。默认情况下，它将使用互联网连接到：\n"
+"  •  %s， 一个 %s 天气服务\n"
+"  •  %s，可选的用于解析当前位置\n"
+"  •  %s，用于按名称搜索位置\n"
+"\n"
 
 #: src/welcome.ts:83
 #, javascript-format
@@ -623,12 +644,12 @@ msgstr "中止"
 
 #: src/welcome.ts:151
 msgid "Manual Configuration"
-msgstr ""
+msgstr "手动配置"
 
 #: src/welcome.ts:171
 msgid "Failed to detect location."
-msgstr ""
+msgstr "无法检测到位置。"
 
 #: src/welcome.ts:174
 msgid "Please configure your location and units manually."
-msgstr ""
+msgstr "请手动配置您的位置和单位。"

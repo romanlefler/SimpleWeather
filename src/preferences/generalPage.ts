@@ -45,9 +45,9 @@ export class GeneralPage extends Adw.PreferencesPage {
         });
 
         const unitPresetUnits = new Gtk.StringList({ strings: [
-            _g("US"), _g("UK"), _g("Metric"), _g("Custom")
+            _g("US"), _g("UK"), _g("Metric"), _g("Nordic"), _g("Custom")
         ]});
-        const unitPresetFromEnumMap = [ 3, 0, 1, 2 ];
+        const unitPresetFromEnumMap = [ 4, 0, 1, 2, 3 ];
         const curUnitPreset = settings.get_enum("unit-preset");
         const unitPresetRow = new Adw.ComboRow({
             title: _g("Units"),
@@ -130,9 +130,13 @@ export class GeneralPage extends Adw.PreferencesPage {
         // If unit preset is not custom, most unit rows shouldn't be shown
         setVisibilites(curUnitPreset === 0, tempRow, speedRow, pressureRow,
             rainMeasurementRow, distanceRow);
+
+        // This line automatically reverses the mapping from enum to menu
+        const unitPresetInverse = unitPresetFromEnumMap.reduce<number[]>(
+            (out, v, i) => (out[v] = i, out), []
+        );
         unitPresetRow.connect("notify::selected", () => {
-            const toEnumMap = [ 1, 2, 3, 0 ];
-            const val = toEnumMap[unitPresetRow.selected];
+            const val = unitPresetInverse[unitPresetRow.selected];
             setVisibilites(val === 0, tempRow, speedRow, pressureRow,
                 rainMeasurementRow, distanceRow);
 
@@ -267,6 +271,9 @@ export class GeneralPage extends Adw.PreferencesPage {
         });
         panelBoxRow.connect("notify::selected", () => {
             settings.set_enum("panel-box", panelBoxRow.selected);
+            // Auto-adjust panel offset based on panel position
+            const offsetValues = [0, 50, 100];
+            settings.set_double("panel-offset", offsetValues[panelBoxRow.selected]);
             settings.apply();
         });
         panelGroup.add(panelBoxRow);
@@ -286,6 +293,48 @@ export class GeneralPage extends Adw.PreferencesPage {
             settings.apply();
         });
         panelGroup.add(panelPriorityRow);
+
+        const panelOffsetRow = new Adw.ActionRow({
+            title: _g("Pop-Up Offset"),
+            subtitle: _g("Horizontal pop-up offset from 0\u2013100.")
+        });
+        const OFFSET_STEP = 5;
+        const panelOffsetScale = new Gtk.Scale({
+            orientation: Gtk.Orientation.HORIZONTAL,
+            adjustment: new Gtk.Adjustment({
+                lower: -100.0,
+                upper: 0.0,
+                step_increment: 5.0,
+                page_increment: 10.0,
+                value: settings.get_double("panel-offset")
+            }),
+            digits: 0,
+            round_digits: OFFSET_STEP,
+            draw_value: true, // show the number bubble/value
+            hexpand: true
+        });
+        for(const i of [ 0, -50, -100 ]) {
+            panelOffsetScale.add_mark(i, Gtk.PositionType.BOTTOM, null);
+        }
+
+        panelOffsetRow.add_suffix(panelOffsetScale);
+        panelOffsetRow.set_activatable_widget(panelOffsetScale);
+        panelOffsetScale.adjustment.connect("notify::value", a => {
+            if(a.value % OFFSET_STEP !== 0) {
+                a.value = Math.round(a.value / OFFSET_STEP) * OFFSET_STEP;
+            }
+            settings.set_double("panel-offset", -a.value);
+            settings.apply();
+        });
+        // Update UI when offset is changed by panel position setting
+        settings.connect("changed", (_, key) => {
+            if(key === "panel-offset") {
+                const v = settings.get_double("panel-offset");
+                panelOffsetScale.adjustment.value = -v;
+            }
+        });
+        panelGroup.add(panelOffsetRow);
+
         const useSymbolicRow = new Adw.SwitchRow({
             title: _g("Use Symbolic Icons in Panel"),
             active: settings.get_boolean("symbolic-icons-panel")
@@ -306,6 +355,29 @@ export class GeneralPage extends Adw.PreferencesPage {
             settings.apply();
         });
         panelGroup.add(alwaysPackagedRow);
+
+        const showRefreshButton = new Adw.SwitchRow({
+            title: _g("Show Refresh Button"),
+            active: settings.get_boolean("show-refresh-button")
+        });
+        showRefreshButton.connect("notify::active", w => {
+            const val = w.active;
+            settings.set_boolean("show-refresh-button", val);
+            settings.apply();
+        });
+        panelGroup.add(showRefreshButton);
+
+        const hideErrPopupRow = new Adw.SwitchRow({
+            title: _g("Hide Error Popup"),
+            subtitle: _g("If the popup just says Error, don't even show it."),
+            active: settings.get_boolean("hide-err-popup")
+        });
+        hideErrPopupRow.connect("notify::active", w => {
+            const val = w.active;
+            settings.set_boolean("hide-err-popup", val);
+            settings.apply();
+        });
+        panelGroup.add(hideErrPopupRow);
 
         this.add(panelGroup);
     }

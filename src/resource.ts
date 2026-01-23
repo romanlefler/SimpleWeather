@@ -21,3 +21,9 @@ export function AUTHORS() : string {
     // @ts-ignore
     return authors;
 }
+
+export function GITHASH() : string {
+    // @ts-ignore
+    return gitHash;
+}
+

@@ -1,4 +1,34 @@
 
+# v49.2.0-dev
+
+## Features
+
+- Extension now shows "Error!" if no Internet instead of just showing nothing
+- Retry button if you start without Internet or lose Internet at any point
+- Option to still hide indicator instead of displaying "Error!"
+- "Nordic" unit preset using speed in `m/s` that is selected by default in Nordic countries
+- Option to adjust where menu appears relative to panel icon (thanks miyou379)
+- Option to always show a refresh button
+
+## Improvements
+
+- Better place name formatting in location search results; works internationally
+
+## Bug Fixes
+
+- Fixed Light and Afterdark themes not changing buttons
+- Fixed "0 min" sometimes being displayed on the sun countdown (now always shows "Now")
+- Fixed a rare but possible crash if you start with Internet but then lose it
+- Fixed an install target in the build Makefile that didn't honor $INSTALLBASE (thanks Grzegorz Szymaszek)
+
+## Translations
+
+- Chinese (thanks Davidasx)
+- Czech (thanks lev741)
+- Japanese (thanks hidenosuke)
+- Polish (thanks Szymon Zielonka)
+- Russian (thanks Valetss)
+
 # v49.1.1
 
 ## Bug Fixes

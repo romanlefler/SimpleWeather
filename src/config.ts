@@ -27,7 +27,8 @@ export enum UnitPreset {
     Custom = 0,
     US = 1,
     UK = 2,
-    Metric = 3
+    Metric = 3,
+    Nordic = 4
 }
 
 export type PanelBox = "right" | "center" | "left";
@@ -168,7 +169,12 @@ export class Config {
     getSpeedUnit() : SpeedUnits {
         return this.#returnUnit(
             "speed-unit",
-            { us: SpeedUnits.Mph, uk: SpeedUnits.Mph, metric: SpeedUnits.Kph }
+            {
+                us: SpeedUnits.Mph,
+                uk: SpeedUnits.Mph,
+                metric: SpeedUnits.Kph,
+                nordic: SpeedUnits.Mps
+            }
         );
     }
 
@@ -352,6 +358,17 @@ export class Config {
         this.#handlerIds.push(id);
     }
 
+    getPanelOffset() : number {
+        return this.#settings.get_double("panel-offset") / 100;
+    }
+
+    onPanelOffsetChanged(callback : () => void) : void {
+        const id = this.#settings.connect("changed", (_, key) => {
+            if(key === "panel-offset") callback();
+        });
+        this.#handlerIds.push(id);
+    }
+
     getPanelDetail() : Details | null {
         const detail = this.#settings.get_string("panel-detail");
         if(!Object.values(Details).includes(detail as Details)) return null;
@@ -398,6 +415,21 @@ export class Config {
         this.#handlerIds.push(id);
     }
 
+    getHideErrPopup() : boolean {
+        return this.#settings.get_boolean("hide-err-popup");
+    }
+
+    getShowRefreshButton() : boolean {
+        return this.#settings.get_boolean("show-refresh-button");
+    }
+
+    onShowRefreshButtonChanged(callback : () => void) : void {
+        const id = this.#settings.connect("changed", (_, key) => {
+            if(key === "show-refresh-button") callback();
+        });
+        this.#handlerIds.push(id);
+    }
+
 
 
     getUnitPreset() : UnitPreset {
@@ -427,7 +459,7 @@ export class Config {
      * 
      * @param getEnumKey Backup get_enum string key
      */
-    #returnUnit(getEnumKey : string, args : { us? : number, uk? : number, metric? : number }) : number {
+    #returnUnit(getEnumKey : string, args : { us? : number, uk? : number, metric? : number, nordic? : number }) : number {
         const preset = this.getUnitPreset();
         switch(preset) {
             case UnitPreset.US:
@@ -436,8 +468,14 @@ export class Config {
             case UnitPreset.UK:
                 if(args.uk !== undefined) return args.uk;
                 // Fall back to metric.
-                // FALL THRU
+                if(args.metric !== undefined) return args.metric;
+                else break;
             case UnitPreset.Metric:
+                if(args.metric !== undefined) return args.metric;
+                else break;
+            case UnitPreset.Nordic:
+                if(args.nordic !== undefined) return args.nordic;
+                // Fall back to metric.
                 if(args.metric !== undefined) return args.metric;
                 else break;
         }

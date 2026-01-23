@@ -8,7 +8,7 @@ Running a test in GNOME 49+ requires the mutter development package to be intall
 Build extension and launch shell window for testing:
 
 ```shell
-./nest-test.sh
+./debug.sh
 ```
 
 ## Build to Build Directory

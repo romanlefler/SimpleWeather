@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
-"POT-Creation-Date: 2025-11-20 21:18-0600\n"
+"POT-Creation-Date: 2026-01-13 23:08-0600\n"
 "PO-Revision-Date: 2025-07-23 22:06\n"
 "Last-Translator: \n"
 "Language-Team: Ukrainian\n"
@@ -19,8 +19,8 @@ msgstr ""
 "X-Crowdin-File: simple-weather@romanlefler.com.pot\n"
 "X-Crowdin-File-ID: 2\n"
 
-#: src/autoConfig.ts:56 src/location.ts:53 src/location.ts:63
-#: src/preferences/generalPage.ts:179
+#: src/autoConfig.ts:59 src/location.ts:53 src/location.ts:63
+#: src/preferences/generalPage.ts:183
 msgid "My Location"
 msgstr "Моє місцезнаходження"
 
@@ -76,39 +76,43 @@ msgstr "Хмарна обкладинка"
 msgid "Sun Countdown"
 msgstr ""
 
-#: src/details.ts:77 src/popup.ts:409
+#: src/details.ts:77 src/popup.ts:459
 msgid "Invalid"
 msgstr "Недійсний"
 
-#: src/lang.ts:108 src/popup.ts:57
+#: src/extension.ts:357 src/preferences/search.ts:159
+msgid "No Internet"
+msgstr "Немає Інтернету"
+
+#: src/lang.ts:112
 msgid "Today"
 msgstr "Сьогодні"
 
-#: src/lang.ts:111
+#: src/lang.ts:115
 msgid "Monday"
 msgstr "Понеділок"
 
-#: src/lang.ts:111
+#: src/lang.ts:115
 msgid "Sunday"
 msgstr "Неділя"
 
-#: src/lang.ts:111
+#: src/lang.ts:115
 msgid "Tuesday"
 msgstr "Вівторок"
 
-#: src/lang.ts:111
+#: src/lang.ts:115
 msgid "Wednesday"
 msgstr "Середа"
 
-#: src/lang.ts:112
+#: src/lang.ts:116
 msgid "Friday"
 msgstr "П'ятниця"
 
-#: src/lang.ts:112
+#: src/lang.ts:116
 msgid "Saturday"
 msgstr "Субота"
 
-#: src/lang.ts:112
+#: src/lang.ts:116
 msgid "Thursday"
 msgstr "Четвер"
 
@@ -136,16 +140,20 @@ msgstr "%f°W"
 msgid "Weather Data"
 msgstr "Дані погоди"
 
-#: src/popup.ts:297 src/preferences/aboutPage.ts:76
+#: src/popup.ts:317 src/preferences/aboutPage.ts:76
 msgid "Settings"
 msgstr "Налаштування"
 
-#: src/popup.ts:383
+#: src/popup.ts:363
+msgid "Retry"
+msgstr ""
+
+#: src/popup.ts:433
 #, javascript-format
 msgid "H: %s"
 msgstr "H: %s"
 
-#: src/popup.ts:384
+#: src/popup.ts:434
 #, javascript-format
 msgid "L: %s"
 msgstr ""
@@ -214,7 +222,7 @@ msgstr "Спливаюче вікно"
 msgid "Drag-and-drop from bottom to configure the pop-up"
 msgstr "Перетягніть знизу для налаштування спливаючого вікна"
 
-#: src/preferences/detailsPage.ts:185 src/preferences/generalPage.ts:235
+#: src/preferences/detailsPage.ts:185 src/preferences/generalPage.ts:239
 msgid "Panel"
 msgstr "Панель"
 
@@ -297,6 +305,10 @@ msgid "Metric"
 msgstr "Метрична система"
 
 #: src/preferences/generalPage.ts:48
+msgid "Nordic"
+msgstr ""
+
+#: src/preferences/generalPage.ts:48
 msgid "UK"
 msgstr "Великобританія"
 
@@ -324,119 +336,127 @@ msgstr "Вимірювання дощу"
 msgid "Distance"
 msgstr "Відстань"
 
-#: src/preferences/generalPage.ts:144
+#: src/preferences/generalPage.ts:148
 msgid "Degrees"
 msgstr "Градуси"
 
-#: src/preferences/generalPage.ts:144
+#: src/preferences/generalPage.ts:148
 msgid "Eight-Point Compass"
 msgstr "Компас восьми точок"
 
-#: src/preferences/generalPage.ts:147
+#: src/preferences/generalPage.ts:151
 msgid "Direction"
 msgstr "Напрямок"
 
-#: src/preferences/generalPage.ts:159
+#: src/preferences/generalPage.ts:163
 msgid "Weather Service"
 msgstr "Служба погоди"
 
-#: src/preferences/generalPage.ts:160
+#: src/preferences/generalPage.ts:164
 msgid "Configure how the weather is attained"
 msgstr "Налаштувати досягнення прогнозу погоди"
 
-#: src/preferences/generalPage.ts:167
+#: src/preferences/generalPage.ts:171
 msgid "Weather Provider"
 msgstr "Провайдер погоди"
 
-#: src/preferences/generalPage.ts:180
+#: src/preferences/generalPage.ts:184
 msgid "Configure how your location is found"
 msgstr "Налаштуйте розташування"
 
-#: src/preferences/generalPage.ts:184 src/preferences/generalPage.ts:185
+#: src/preferences/generalPage.ts:188 src/preferences/generalPage.ts:189
 msgid "Online"
 msgstr "Онлайн"
 
-#: src/preferences/generalPage.ts:186 src/preferences/generalPage.ts:245
+#: src/preferences/generalPage.ts:190 src/preferences/generalPage.ts:249
 msgid "System"
 msgstr "Система"
 
-#: src/preferences/generalPage.ts:187
+#: src/preferences/generalPage.ts:191
 msgid "Disable"
 msgstr "Вимкнено"
 
-#: src/preferences/generalPage.ts:190
+#: src/preferences/generalPage.ts:194
 msgid "Provider"
 msgstr "Постачальник"
 
-#: src/preferences/generalPage.ts:202
+#: src/preferences/generalPage.ts:206
 msgid "Refresh Interval (Minutes)"
 msgstr "Інтервал оновлення (хвилини)"
 
-#: src/preferences/generalPage.ts:220
+#: src/preferences/generalPage.ts:224
 msgid "Accessibility"
 msgstr "Доступність"
 
-#: src/preferences/generalPage.ts:221
+#: src/preferences/generalPage.ts:225
 msgid "Configure accessibility features"
 msgstr "Налаштувати спеціальні можливості"
 
-#: src/preferences/generalPage.ts:224
+#: src/preferences/generalPage.ts:228
 msgid "High Contrast"
 msgstr "Висока контрастність"
 
-#: src/preferences/generalPage.ts:236
+#: src/preferences/generalPage.ts:240
 msgid "Configure the panel and pop-up"
 msgstr "Налаштування панелі та спливаючого вікна"
 
-#: src/preferences/generalPage.ts:246
+#: src/preferences/generalPage.ts:250
 msgid "Light"
 msgstr "Світла"
 
-#: src/preferences/generalPage.ts:247
+#: src/preferences/generalPage.ts:251
 msgid "Afterdark"
 msgstr "Афтертемний"
 
-#: src/preferences/generalPage.ts:248
+#: src/preferences/generalPage.ts:252
 msgid "Immersive"
 msgstr "Повноекранний"
 
-#: src/preferences/generalPage.ts:251
+#: src/preferences/generalPage.ts:255
 msgid "Theme"
 msgstr "Тема"
 
-#: src/preferences/generalPage.ts:261
+#: src/preferences/generalPage.ts:265
 msgid "Center"
 msgstr "Центр"
 
-#: src/preferences/generalPage.ts:261
+#: src/preferences/generalPage.ts:265
 msgid "Left"
 msgstr "Ліворуч"
 
-#: src/preferences/generalPage.ts:261
+#: src/preferences/generalPage.ts:265
 msgid "Right"
 msgstr "Праворуч"
 
-#: src/preferences/generalPage.ts:264
+#: src/preferences/generalPage.ts:268
 msgid "Side of Panel"
 msgstr "Біля панелі"
 
-#: src/preferences/generalPage.ts:274
+#: src/preferences/generalPage.ts:278
 msgid "Order in Panel"
 msgstr "Замовлення на панелі"
 
-#: src/preferences/generalPage.ts:290
+#: src/preferences/generalPage.ts:294
 msgid "Use Symbolic Icons in Panel"
 msgstr ""
 
-#: src/preferences/generalPage.ts:300
+#: src/preferences/generalPage.ts:304
 msgid "Always Use Packaged Icons"
+msgstr ""
+
+#: src/preferences/generalPage.ts:315
+msgid "Hide Error Popup"
+msgstr ""
+
+#: src/preferences/generalPage.ts:316
+msgid "If the popup just says Error, don't even show it."
 msgstr ""
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
 msgstr "Місцезнаходження"
 
-#: src/preferences/locationsPage.ts:70 src/preferences/search.ts:75
+#: src/preferences/locationsPage.ts:70 src/preferences/search.ts:76
 msgid "Add"
 msgstr "Додати"
 
@@ -478,27 +498,23 @@ msgstr "Внутрішня помилка"
 msgid "Something else edited the locations."
 msgstr "Щось інше відредагувало місце."
 
-#: src/preferences/search.ts:45
+#: src/preferences/search.ts:46
 msgid "Search Location"
 msgstr "Пошук розташування"
 
-#: src/preferences/search.ts:54
+#: src/preferences/search.ts:55
 msgid "City, Neighborhood, etc."
 msgstr "Місто, район, і так далі."
 
-#: src/preferences/search.ts:59
+#: src/preferences/search.ts:60
 msgid "Search"
 msgstr "Пошук"
 
-#: src/preferences/search.ts:158
-msgid "No Internet"
-msgstr "Немає Інтернету"
-
-#: src/preferences/search.ts:206
+#: src/preferences/search.ts:207
 msgid "No results."
 msgstr "Нічого не знайдено."
 
-#: src/preferences/search.ts:211
+#: src/preferences/search.ts:212
 msgid "No copyright information available."
 msgstr "Немає інформації про авторські права."
 

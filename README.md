@@ -8,30 +8,33 @@ Support for themes, the following screenshot uses the *Immersive* theme:
 
 ![Immersive Theme Screenshot](./docs/immersivescreenshot.png)
 
+SimpleWeather is highly configurable but has zero required setup.
+
 ## Installation
 
 [![Get on GNOME Extensions](./docs/ego.png)](https://extensions.gnome.org/extension/8261/simpleweather/)
 
 ## Features
 
+- Does not depend on GNOME Weather which eliminates location issues
 - Display temperature and conditions in top bar
-- Configure units (US, UK, Metric, mix and match...)
-- Get current location or add any number of locations and easily cycle through
+- Configure units (US, UK, Metric, Nordic, mix and match...)
+- Automatically configures units based on country
+- Use current location or add any number of locations and easily cycle through
 - Show hourly and weekly forecast
 - Configurable details like Rain Chance, Humidity, Wind Speed, UV, etc.
+- Location lookup with Nominatim or use latitude/longitude
 
 ## Translations
-
-Many translations have been auto-generated using CrowdIn.
-They are probably very bad; create pull requests to fix mistakes
-or add missing translations.
-
-Many languages or dialects also do not exist in the project.
 
 Everybody is encouraged to make pull requests to add or fix
 translations.
 
+Many languages or dialects also do not exist in the project.
+
 Check [AUTHORS](./AUTHORS) for a list of contributors.
+
+![Translation Progress Chart](./docs/transl.png)
 
 ## Building
 

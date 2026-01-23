@@ -20,10 +20,12 @@ import Gio from "gi://Gio";
 import GObject from "gi://GObject";
 import Gtk from "gi://Gtk";
 import Pango from "gi://Pango";
+import { NominatimPlace, getShortName, getDisplayName } from "./placenames.js";
 import { Location } from "../location.js";
 import { gettext as _g } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
 import { LibSoup } from "../libsoup.js";
 import { Config } from "../config.js";
+import { isNoInternet } from "../utils.js";
 
 const SEARCH_BASE = "https://nominatim.openstreetmap.org";
 const SEARCH_ENDPOINT = `${SEARCH_BASE}/search`;
@@ -115,7 +117,7 @@ export async function searchDialog(parent : Gtk.Window, soup : LibSoup, cfg : Co
                 populateList(stringList, locArr);
                 searchButton.sensitive = true;
             }).catch(e => {
-                if(e instanceof Gio.ResolverError) {
+                if(isNoInternet(e)) {
                     console.error(e);
                     showNoInternetDialog(dialog);
                     searchButton.sensitive = true;
@@ -214,11 +216,11 @@ async function fetchNominatim(a : SearchArgs) : Promise<SelLoc[]> {
     for(let result of b) {
         const place = result as NominatimPlace;
 
-        const name = fixDisplayName(place);
+        const name = getDisplayName(place);
         const lat = parseFloat(place.lat);
         const lon = parseFloat(place.lon);
 
-        let friendlyName = place.address.city ?? place.address.town ?? name;
+        let friendlyName = getShortName(place) ?? name;
         // If a duplicate name exists use the longer one
         if(a.currentLocNames.includes(friendlyName)) friendlyName = name;
 
@@ -232,45 +234,3 @@ async function fetchNominatim(a : SearchArgs) : Promise<SelLoc[]> {
     return list;
 }
 
-interface NominatimPlace {
-    // British spelling
-    licence : string;
-
-    lat : string,
-    lon : string,
-    addresstype: string;
-    name : string;
-    display_name : string;
-    address : NominatimAddress;
-}
-
-interface NominatimAddress {
-    town? : string;
-    city? : string,
-    state? : string,
-    country : string,
-    country_code : string;
-}
-
-function fixDisplayName(p : NominatimPlace) : string {
-    const addr = p.address;
-    // Fix display names being weird or too long
-    switch(p.addresstype) {
-        case "city":
-            switch (addr.country_code) {
-                case "us":
-                    // American cities should be City, State, U.S.
-                    return `${addr.city}, ${addr.state}, U.S.`;
-            }
-            break;
-        case "town":
-            switch(addr.country_code) {
-                case "us":
-                    // American towns should be Town, State, U.S.
-                    return `${addr.town}, ${addr.state}, U.S.`;
-            }
-            break;
-    }
-
-    return p.display_name;
-}

@@ -32,6 +32,11 @@ ICONSOUT	 := $(ICONSSRCS:$(ICONS)/%=$(BUILD)/icons/%)
 CSSOUT		 := $(BUILD)/stylesheet.css
 MOS          := $(POFILES:$(PO)/%.po=$(BUILD)/locale/%/LC_MESSAGES/$(UUID).mo)
 
+RESJS	     := $(BUILD)/resource.js
+GITHASH     := $(shell git rev-parse --short HEAD)
+jsvar         = printf "const $(1) = \`$(2)\`;\n"
+jsvarfile     = printf "const $(1) = \`%s\`;\n" "$$(cat $(2))"
+
 # Packages should use make DESTDIR=... for packaging
 ifeq ($(strip $(DESTDIR)),)
 	INSTALLTYPE = local
@@ -51,9 +56,9 @@ pack: $(ZIP)
 pot: $(POT)
 
 install: out
-	rm -rf ~/.local/share/gnome-shell/extensions/$(UUID)
-	mkdir -p ~/.local/share/gnome-shell/extensions
-	cp -r $(BUILD) ~/.local/share/gnome-shell/extensions/$(UUID)
+	rm -rf $(INSTALLBASE)/$(UUID)
+	mkdir -p $(INSTALLBASE)
+	cp -r $(BUILD) $(INSTALLBASE)/$(UUID)
 ifeq ($(INSTALLTYPE),system)
 	rm -rf $(addprefix $(INSTALLBASE)/$(UUID)/, schemas locale LICENSE)
 	mkdir -p $(SHARE_PREFIX)/glib-2.0/schemas \
@@ -81,10 +86,10 @@ $(BUILD)/extension.js $(BUILD)/resource.js: $(SRCS) $(AUTHORS) ./node_modules/.p
 	tsc
 	@touch $(BUILD)/extension.js
 
-	@if ! grep -q '// Inserted' $(BUILD)/resource.js; then \
-		printf '// Inserted\n\nconst authors = `' >> $(BUILD)/resource.js; \
-		cat $(AUTHORS) >> $(BUILD)/resource.js; \
-		printf '`;' >> $(BUILD)/resource.js; \
+	@if ! grep -q '// Inserted' $(RESJS); then \
+		printf '\n// Inserted\n\n' >> $(RESJS); \
+		$(call jsvarfile,authors,$(AUTHORS)) >> $(RESJS); \
+		$(call jsvar,gitHash,$(GITHASH)) >> $(RESJS); \
 	else \
 		touch $(BUILD)/resource.js; \
 	fi

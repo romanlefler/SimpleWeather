@@ -28,7 +28,7 @@ import { OpenMeteo } from "./providers/openmeteo.js";
 import { LibSoup } from "./libsoup.js";
 import { Config } from "./config.js";
 import { Weather } from "./weather.js";
-import { delayTask, removeSourceIfTruthy } from "./utils.js";
+import { delayTask, removeSourceIfTruthy, isNoInternet } from "./utils.js";
 import { displayTemp, displayTime, initLocales } from "./lang.js";
 import { freeMyLocation, setUpMyLocation } from "./myLocation.js";
 import { setUpGettext, gettext as _g } from "./gettext.js";
@@ -40,6 +40,8 @@ import { setFirstTimeConfig } from "./autoConfig.js";
 import { displayDetail } from "./details.js";
 import { theme, themeInitAll, themeRemoveAll } from "./theme.js";
 import { AutoConfigFailError } from "./errors.js";
+
+const FAIL_RETRIES : number = 10;
 
 export default class SimpleWeatherExtension extends Extension {
 
@@ -144,14 +146,16 @@ export default class SimpleWeatherExtension extends Extension {
     }
 
     #createIndicator() : PanelMenu.Button {
-        const indic = new PanelMenu.Button(0, "Weather", false);
-        this.#popup = new Popup(
-            this.#config!,
-            this.metadata,
-            this.openPreferences.bind(this),
-            indic.menu as PopupMenu,
-            this.#gsettings!
-        );
+        const menuOffset = this.#config!.getPanelOffset();
+        const indic = new PanelMenu.Button(menuOffset, "Weather", false);
+        this.#popup = new Popup({
+            config: this.#config!,
+            metadata: this.metadata,
+            openPreferences: this.openPreferences.bind(this),
+            menu: indic.menu as PopupMenu,
+            settings: this.#gsettings!,
+            refreshWeather: this.#updateWeatherAsync.bind(this)
+        });
 
         const layout = new St.BoxLayout({
             vertical: false
@@ -253,8 +257,10 @@ export default class SimpleWeatherExtension extends Extension {
         this.#config!.onSecondaryPanelDetailChanged(this.#rebuildIndicator.bind(this));
         this.#config!.onShowPanelIconChanged(this.#rebuildIndicator.bind(this));
         this.#config!.onPanelPositionChanged(this.#rebuildIndicator.bind(this));
+        this.#config!.onPanelOffsetChanged(this.#rebuildIndicator.bind(this));
         this.#config!.onThemeChanged(this.#rebuildIndicator.bind(this));
         this.#config!.onHighContrastChanged(this.#rebuildIndicator.bind(this));
+        this.#config!.onShowRefreshButtonChanged(this.#rebuildIndicator.bind(this));
 
         // GNOME Settings
         this.#config!.onIs24HourClockChanged(this.#updateGui.bind(this));
@@ -306,39 +312,63 @@ export default class SimpleWeatherExtension extends Extension {
     }
 
     #updateWeather() {
-        this.#updateWeatherAsync().catch(err => {
-            console.error(err);
-            // This happens on boot presumably when things are loaded
-            // out of order, try max 10 times
-            //
-            // This tries for just over a minute, which should be plenty of time for
-            // Wi-Fi to start
-            //
-            // Fail count never resets so that if repeatedly trying to connect fails once
-            // we don't constantly retry for a minute every time the timer goes off
-            if(err instanceof Gio.ResolverError && ++this.#resolverFailCount <= 10) {
-                this.#delayFetchId = delayTask(7.5, () => {
-                    this.#delayFetchId = undefined;
-                    this.#updateWeather();
-                });
-            // Maybe this error happened because of failed fetch or going over fail count
-            } else if(!this.#cachedWeather) {
-                this.#indicator = this.#createIndicator();
-                if(this.#panelIcon) this.#panelIcon.icon_name = "error-app-symbolic";
-                if(this.#panelLabel) this.#panelLabel.text = "Error!";
-                if(this.#secondPanelLabel) this.#secondPanelLabel.visible = false;
-                if(this.#sunTimeLabel) this.#sunTimeLabel.visible = false;
-                if(this.#sunTimeIcon) this.#sunTimeIcon.visible = false;
-                this.#addIndicIfNeeded();
-            }
-        });
+        this.#updateWeatherAsync();
         return GLib.SOURCE_CONTINUE;
     }
 
-    async #updateWeatherAsync() {
+    async #handleErr(err : unknown) : Promise<void> {
+        // This happens on boot presumably when things are loaded
+        // out of order, try max 10 times
+        //
+        // This tries for just over a minute, which should be plenty of time for
+        // Wi-Fi to start
+        //
+        // Fail count never resets so that if repeatedly trying to connect fails once
+        // we don't constantly retry for a minute every time the timer goes off
+        if(isNoInternet(err) && ++this.#resolverFailCount <= FAIL_RETRIES) {
+            if(this.#resolverFailCount === FAIL_RETRIES) console.error(err);
 
+            // We need to stop updateGUI from running because otherwise it calls
+            // addInficIfNeeded which we don't want on boot until we've given up
+            return new Promise<void>(resolve => {
+                this.#delayFetchId = delayTask(7.5, () => {
+                    this.#delayFetchId = undefined;
+                    this.#updateWeatherAsync().then(resolve);
+                });
+            });
+        // Maybe this error happened because of failed fetch or going over fail count
+        } else {
+            if(this.#config?.getHideErrPopup()) return;
+
+            if(!this.#indicator) this.#indicator = this.#createIndicator();
+            if(this.#panelIcon) this.#panelIcon.icon_name = "error-app-symbolic";
+            if(this.#panelLabel) this.#panelLabel.text = "Error!";
+            if(this.#secondPanelLabel) this.#secondPanelLabel.visible = false;
+            if(this.#sunTimeLabel) this.#sunTimeLabel.visible = false;
+            if(this.#sunTimeIcon) this.#sunTimeIcon.visible = false;
+            this.#addIndicIfNeeded();
+        }
+    }
+
+    async #updateWeatherAsync() {
         if(!this.#provider) throw new Error("Provider was undefined!");
-        this.#cachedWeather = await this.#provider!.fetchWeather();
+        let errStr : string | null = null;
+        try {
+            this.#cachedWeather = await this.#provider!.fetchWeather();
+        } catch(err) {
+            if(isNoInternet(err)) {
+                errStr = _g("No Internet");
+            } else {
+                console.error(err);
+
+                errStr = err && err.toString ? err.toString() : String(err);
+                if(errStr.length > 25) errStr = errStr.substring(0, 25) + "...";
+            }
+
+            if(!this.#cachedWeather) await this.#handleErr(err);
+        }
+        if(this.#popup) this.#popup.setError(errStr);
+        else console.error(`No popup to notify of error (${errStr})`);
         this.#updateGui();
     }
 
@@ -352,42 +382,41 @@ export default class SimpleWeatherExtension extends Extension {
 
     #updateGui() {
         const w = this.#cachedWeather;
-        if(!w) return;
+        if(w) {
+            const panelDetail = this.#config!.getPanelDetail();
+            if(panelDetail !== null && this.#panelLabel) {
+                const panelText = displayDetail(w, panelDetail, _g, this.#config!, true);
+                this.#panelLabel.text = panelText;
+            }
 
-        const panelDetail = this.#config!.getPanelDetail();
-        if(panelDetail !== null && this.#panelLabel) {
-            const panelText = displayDetail(w, panelDetail, _g, this.#config!, true);
-            this.#panelLabel.text = panelText;
-        }
+            const secondPanelDetail = this.#config!.getSecondaryPanelDetail();
+            if(secondPanelDetail !== null && this.#secondPanelLabel) {
+                const secondPanelText = displayDetail(w, secondPanelDetail, _g, this.#config!, true);
+                this.#secondPanelLabel.visible = true;
+                this.#secondPanelLabel.text = secondPanelText;
+            }
 
-        const secondPanelDetail = this.#config!.getSecondaryPanelDetail();
-        if(secondPanelDetail !== null && this.#secondPanelLabel) {
-            const secondPanelText = displayDetail(w, secondPanelDetail, _g, this.#config!, true);
-            this.#secondPanelLabel.visible = true;
-            this.#secondPanelLabel.text = secondPanelText;
-        }
+            if(this.#panelIcon) {
+                const suffix = this.#config!.getSymbolicIcons() ? "-symbolic" : "";
+                this.#panelIcon.icon_name = w.gIconName + suffix;
+            }
 
-        if(this.#panelIcon) {
-            const suffix = this.#config!.getSymbolicIcons() ? "-symbolic" : "";
-            this.#panelIcon.icon_name = w.gIconName + suffix;
-        }
+            const showSunset = w.sunset < w.sunrise;
+            const sunTime = showSunset ? w.sunset : w.sunrise;
 
-        const showSunset = w.sunset < w.sunrise;
-        const sunTime = showSunset ? w.sunset : w.sunrise;
-
-        if(this.#sunTimeLabel) {
-            this.#sunTimeLabel.visible = true;
-            const useAbs = !this.#config!.getShowSunTimeAsCountdown();
-            if(useAbs) this.#sunTimeLabel.text = displayTime(sunTime, this.#config!);
-            else this.#sunTimeLabel.text = w.sunEventCountdown.display(this.#config!);
-        }
-        if(this.#sunTimeIcon) {
-            this.#sunTimeIcon.visible = true;
-            this.#sunTimeIcon.icon_name = `daytime-${showSunset ? "sunset" : "sunrise"}-symbolic`;
+            if(this.#sunTimeLabel) {
+                this.#sunTimeLabel.visible = true;
+                const useAbs = !this.#config!.getShowSunTimeAsCountdown();
+                if(useAbs) this.#sunTimeLabel.text = displayTime(sunTime, this.#config!);
+                else this.#sunTimeLabel.text = w.sunEventCountdown.display(this.#config!);
+            }
+            if(this.#sunTimeIcon) {
+                this.#sunTimeIcon.visible = true;
+                this.#sunTimeIcon.icon_name = `daytime-${showSunset ? "sunset" : "sunrise"}-symbolic`;
+            }
         }
 
         this.#popup!.updateGui(w);
-
         this.#addIndicIfNeeded();
     }
 

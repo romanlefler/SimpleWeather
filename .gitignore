@@ -4,3 +4,6 @@ dist/
 
 node_modules/
 po/simple-weather@romanlefler.com.pot
+
+.readme-tools/
+

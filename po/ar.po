@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
-"POT-Creation-Date: 2025-11-20 21:18-0600\n"
+"POT-Creation-Date: 2026-01-13 23:08-0600\n"
 "PO-Revision-Date: 2025-07-23 22:06\n"
 "Last-Translator: \n"
 "Language-Team: Arabic\n"
@@ -18,8 +18,8 @@ msgstr ""
 "X-Crowdin-File: simple-weather@romanlefler.com.pot\n"
 "X-Crowdin-File-ID: 2\n"
 
-#: src/autoConfig.ts:56 src/location.ts:53 src/location.ts:63
-#: src/preferences/generalPage.ts:179
+#: src/autoConfig.ts:59 src/location.ts:53 src/location.ts:63
+#: src/preferences/generalPage.ts:183
 msgid "My Location"
 msgstr "موقعي"
 
@@ -75,39 +75,43 @@ msgstr "غلاف سحابي"
 msgid "Sun Countdown"
 msgstr ""
 
-#: src/details.ts:77 src/popup.ts:409
+#: src/details.ts:77 src/popup.ts:459
 msgid "Invalid"
 msgstr "غير صالح"
 
-#: src/lang.ts:108 src/popup.ts:57
+#: src/extension.ts:357 src/preferences/search.ts:159
+msgid "No Internet"
+msgstr "لا يوجد إنترنت"
+
+#: src/lang.ts:112
 msgid "Today"
 msgstr "اليوم"
 
-#: src/lang.ts:111
+#: src/lang.ts:115
 msgid "Monday"
 msgstr "الاثنين"
 
-#: src/lang.ts:111
+#: src/lang.ts:115
 msgid "Sunday"
 msgstr "الأحد"
 
-#: src/lang.ts:111
+#: src/lang.ts:115
 msgid "Tuesday"
 msgstr "الثلاثاء"
 
-#: src/lang.ts:111
+#: src/lang.ts:115
 msgid "Wednesday"
 msgstr "الأربعاء"
 
-#: src/lang.ts:112
+#: src/lang.ts:116
 msgid "Friday"
 msgstr "الجمعة"
 
-#: src/lang.ts:112
+#: src/lang.ts:116
 msgid "Saturday"
 msgstr "السبت"
 
-#: src/lang.ts:112
+#: src/lang.ts:116
 msgid "Thursday"
 msgstr "الخميس"
 
@@ -135,16 +139,20 @@ msgstr "%f°W"
 msgid "Weather Data"
 msgstr "بيانات الطقس"
 
-#: src/popup.ts:297 src/preferences/aboutPage.ts:76
+#: src/popup.ts:317 src/preferences/aboutPage.ts:76
 msgid "Settings"
 msgstr "الإعدادات"
 
-#: src/popup.ts:383
+#: src/popup.ts:363
+msgid "Retry"
+msgstr ""
+
+#: src/popup.ts:433
 #, javascript-format
 msgid "H: %s"
 msgstr ""
 
-#: src/popup.ts:384
+#: src/popup.ts:434
 #, javascript-format
 msgid "L: %s"
 msgstr ""
@@ -212,7 +220,7 @@ msgstr "أعلى"
 msgid "Drag-and-drop from bottom to configure the pop-up"
 msgstr "السحب والإسقاط من الأسفل لتكوين النوافذ المنبثقة"
 
-#: src/preferences/detailsPage.ts:185 src/preferences/generalPage.ts:235
+#: src/preferences/detailsPage.ts:185 src/preferences/generalPage.ts:239
 msgid "Panel"
 msgstr "لوحة"
 
@@ -295,6 +303,10 @@ msgid "Metric"
 msgstr "متري"
 
 #: src/preferences/generalPage.ts:48
+msgid "Nordic"
+msgstr ""
+
+#: src/preferences/generalPage.ts:48
 msgid "UK"
 msgstr "المملكة المتحدة"
 
@@ -322,119 +334,127 @@ msgstr "قياس الأمطار"
 msgid "Distance"
 msgstr "المسافة"
 
-#: src/preferences/generalPage.ts:144
+#: src/preferences/generalPage.ts:148
 msgid "Degrees"
 msgstr "الدرجات"
 
-#: src/preferences/generalPage.ts:144
+#: src/preferences/generalPage.ts:148
 msgid "Eight-Point Compass"
 msgstr "بوصلة من 8 نقاط"
 
-#: src/preferences/generalPage.ts:147
+#: src/preferences/generalPage.ts:151
 msgid "Direction"
 msgstr "الاتجاه"
 
-#: src/preferences/generalPage.ts:159
+#: src/preferences/generalPage.ts:163
 msgid "Weather Service"
 msgstr "خدمة الطقس"
 
-#: src/preferences/generalPage.ts:160
+#: src/preferences/generalPage.ts:164
 msgid "Configure how the weather is attained"
 msgstr "تكوين كيفية تحقيق الطقس"
 
-#: src/preferences/generalPage.ts:167
+#: src/preferences/generalPage.ts:171
 msgid "Weather Provider"
 msgstr "موفر الطقس"
 
-#: src/preferences/generalPage.ts:180
+#: src/preferences/generalPage.ts:184
 msgid "Configure how your location is found"
 msgstr "تكوين كيفية العثور على موقعك"
 
-#: src/preferences/generalPage.ts:184 src/preferences/generalPage.ts:185
+#: src/preferences/generalPage.ts:188 src/preferences/generalPage.ts:189
 msgid "Online"
 msgstr "متصل"
 
-#: src/preferences/generalPage.ts:186 src/preferences/generalPage.ts:245
+#: src/preferences/generalPage.ts:190 src/preferences/generalPage.ts:249
 msgid "System"
 msgstr "النظام"
 
-#: src/preferences/generalPage.ts:187
+#: src/preferences/generalPage.ts:191
 msgid "Disable"
 msgstr "تعطيل"
 
-#: src/preferences/generalPage.ts:190
+#: src/preferences/generalPage.ts:194
 msgid "Provider"
 msgstr "موفر"
 
-#: src/preferences/generalPage.ts:202
+#: src/preferences/generalPage.ts:206
 msgid "Refresh Interval (Minutes)"
 msgstr "الفاصل الزمني للتحديث (دقائق)"
 
-#: src/preferences/generalPage.ts:220
+#: src/preferences/generalPage.ts:224
 msgid "Accessibility"
 msgstr "إمكانية الوصول"
 
-#: src/preferences/generalPage.ts:221
+#: src/preferences/generalPage.ts:225
 msgid "Configure accessibility features"
 msgstr "تهيئة ميزات إمكانية الوصول"
 
-#: src/preferences/generalPage.ts:224
+#: src/preferences/generalPage.ts:228
 msgid "High Contrast"
 msgstr "تباين عالي"
 
-#: src/preferences/generalPage.ts:236
+#: src/preferences/generalPage.ts:240
 msgid "Configure the panel and pop-up"
 msgstr "تكوين اللوحة والنوافذ المنبثقة"
 
-#: src/preferences/generalPage.ts:246
+#: src/preferences/generalPage.ts:250
 msgid "Light"
 msgstr "فاتح"
 
-#: src/preferences/generalPage.ts:247
+#: src/preferences/generalPage.ts:251
 msgid "Afterdark"
 msgstr "بعد الظلام"
 
-#: src/preferences/generalPage.ts:248
+#: src/preferences/generalPage.ts:252
 msgid "Immersive"
 msgstr "غامر"
 
-#: src/preferences/generalPage.ts:251
+#: src/preferences/generalPage.ts:255
 msgid "Theme"
 msgstr "السمة"
 
-#: src/preferences/generalPage.ts:261
+#: src/preferences/generalPage.ts:265
 msgid "Center"
 msgstr "الوسط"
 
-#: src/preferences/generalPage.ts:261
+#: src/preferences/generalPage.ts:265
 msgid "Left"
 msgstr "اليسار"
 
-#: src/preferences/generalPage.ts:261
+#: src/preferences/generalPage.ts:265
 msgid "Right"
 msgstr "يمين"
 
-#: src/preferences/generalPage.ts:264
+#: src/preferences/generalPage.ts:268
 msgid "Side of Panel"
 msgstr "جانب الفريق"
 
-#: src/preferences/generalPage.ts:274
+#: src/preferences/generalPage.ts:278
 msgid "Order in Panel"
 msgstr "الترتيب في اللوحة"
 
-#: src/preferences/generalPage.ts:290
+#: src/preferences/generalPage.ts:294
 msgid "Use Symbolic Icons in Panel"
 msgstr ""
 
-#: src/preferences/generalPage.ts:300
+#: src/preferences/generalPage.ts:304
 msgid "Always Use Packaged Icons"
+msgstr ""
+
+#: src/preferences/generalPage.ts:315
+msgid "Hide Error Popup"
+msgstr ""
+
+#: src/preferences/generalPage.ts:316
+msgid "If the popup just says Error, don't even show it."
 msgstr ""
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
 msgstr "المواقع"
 
-#: src/preferences/locationsPage.ts:70 src/preferences/search.ts:75
+#: src/preferences/locationsPage.ts:70 src/preferences/search.ts:76
 msgid "Add"
 msgstr "إضافة"
 
@@ -476,27 +496,23 @@ msgstr "خطأ داخلي"
 msgid "Something else edited the locations."
 msgstr "شيء آخر قام بتحرير المواقع."
 
-#: src/preferences/search.ts:45
+#: src/preferences/search.ts:46
 msgid "Search Location"
 msgstr "موقع البحث"
 
-#: src/preferences/search.ts:54
+#: src/preferences/search.ts:55
 msgid "City, Neighborhood, etc."
 msgstr "المدينة، الجوار، إلخ."
 
-#: src/preferences/search.ts:59
+#: src/preferences/search.ts:60
 msgid "Search"
 msgstr "البحث"
 
-#: src/preferences/search.ts:158
-msgid "No Internet"
-msgstr "لا يوجد إنترنت"
-
-#: src/preferences/search.ts:206
+#: src/preferences/search.ts:207
 msgid "No results."
 msgstr "لا توجد نتائج."
 
-#: src/preferences/search.ts:211
+#: src/preferences/search.ts:212
 msgid "No copyright information available."
 msgstr "لا تتوفر معلومات عن حقوق التأليف والنشر."
 

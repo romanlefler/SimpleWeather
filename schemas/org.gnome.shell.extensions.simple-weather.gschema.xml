@@ -18,6 +18,7 @@
         <value value="1" nick="us" />
         <value value="2" nick="uk" />
         <value value="3" nick="metric" />
+        <value value="4" nick="nordic" />
     </enum>
     <enum id="org.gnome.shell.extensions.simple-weather.speed-unit">
         <value value="1" nick="mph" />
@@ -159,6 +160,12 @@
             <summary>Priority of button in panel box</summary>
         </key>
 
+        <key name="panel-offset" type="d">
+            <default>0.0</default>
+            <summary>Panel Offset</summary>
+            <description>Offset of popup menu relative to panel button (0 to 100)</description>
+        </key>
+
         <key name="panel-detail" type="s">
             <default>'temp'</default>
             <summary>Detail to show in the panel</summary>
@@ -187,6 +194,16 @@
         <key name="always-packaged-icons" type="b">
             <default>false</default>
             <summary>Always use the icons packaged with the extension</summary>
+        </key>
+
+        <key name="hide-err-popup" type="b">
+            <default>false</default>
+            <summary>Don't show the popup if it's just showing an error</summary>
+        </key>
+
+        <key name="show-refresh-button" type="b">
+            <default>false</default>
+            <summary>Show refresh button in the popup</summary>
         </key>
 
     </schema>
