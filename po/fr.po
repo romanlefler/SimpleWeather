@@ -444,11 +444,11 @@ msgstr "Toujours utiliser les icônes du système"
 
 #: src/preferences/generalPage.ts:315
 msgid "Hide Error Popup"
-msgstr ""
+msgstr "Masquer l'erreur de la fenêtre contextuelle"
 
 #: src/preferences/generalPage.ts:316
 msgid "If the popup just says Error, don't even show it."
-msgstr ""
+msgstr "Si la fenêtre contextuelle affiche Erreur, ne pas le montrer"
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
@@ -573,7 +573,7 @@ msgstr "O"
 
 #: src/units.ts:298
 msgid "Now"
-msgstr ""
+msgstr "Maintenant"
 
 #: src/units.ts:302
 #, javascript-format
@@ -646,12 +646,12 @@ msgstr "Abandonner"
 
 #: src/welcome.ts:151
 msgid "Manual Configuration"
-msgstr ""
+msgstr "Configuration manuelle"
 
 #: src/welcome.ts:171
 msgid "Failed to detect location."
-msgstr ""
+msgstr "Echec de la détection de l'emplacement"
 
 #: src/welcome.ts:174
 msgid "Please configure your location and units manually."
-msgstr ""
+msgstr "Merci de configurer votre emplacement et unités manuellement"
