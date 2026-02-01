@@ -18,7 +18,6 @@
 import GObject from "gi://GObject";
 import Gtk from "gi://Gtk";
 import Gio from "gi://Gio";
-import GLib from "gi://GLib";
 import Adw from "gi://Adw";
 import { gettext as _g } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
 import { WeatherProviderNames } from "../providers/provider.js";
