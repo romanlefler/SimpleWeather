@@ -18,9 +18,11 @@
 import GObject from "gi://GObject";
 import Gtk from "gi://Gtk";
 import Gio from "gi://Gio";
+import GLib from "gi://GLib";
 import Adw from "gi://Adw";
 import { gettext as _g } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
 import { WeatherProviderNames } from "../providers/provider.js";
+import { AVAILABLE_LANGUAGES, getLanguageIndex } from "../languages.js";
 
 function setVisibilites(value : boolean, ...widgets : Gtk.Widget[]) {
     for(let w of widgets) w.visible = value;
@@ -38,6 +40,50 @@ export class GeneralPage extends Adw.PreferencesPage {
             title: _g("General"),
             icon_name: "preferences-system-symbolic"
         });
+
+        // Language Selection Group
+        const languageGroup = new Adw.PreferencesGroup({
+            title: _g("Language"),
+            description: _g("Select the interface language")
+        });
+
+        const languageNames = AVAILABLE_LANGUAGES.map(lang => lang.name);
+        const languageModel = new Gtk.StringList({ strings: languageNames });
+        const currentLanguage = settings.get_string("language") || 'auto';
+        const languageRow = new Adw.ComboRow({
+            title: _g("Interface Language"),
+            subtitle: _g("Extension will reload after changing language"),
+            model: languageModel,
+            selected: getLanguageIndex(currentLanguage)
+        });
+        
+        languageRow.connect("notify::selected", () => {
+            const selectedLangCode = AVAILABLE_LANGUAGES[languageRow.selected].code;
+            settings.set_string("language", selectedLangCode);
+            settings.apply();
+            
+            // Show a dialog informing that logout is required
+            const dialog = new Gtk.AlertDialog({
+                message: _g("Language Changed"),
+                detail: _g("Please log out and log back in to apply the new language."),
+                buttons: [_g("OK")],
+                default_button: 0,
+                modal: true
+            });
+            
+            // Get the window from the row
+            let widget: Gtk.Widget | null = languageRow;
+            while (widget && !(widget instanceof Gtk.Window)) {
+                widget = widget.get_parent();
+            }
+            
+            if (widget instanceof Gtk.Window) {
+                dialog.choose(widget, null, null);
+            }
+        });
+        
+        languageGroup.add(languageRow);
+        this.add(languageGroup);
 
         const unitGroup = new Adw.PreferencesGroup({
             title: _g("Units"),

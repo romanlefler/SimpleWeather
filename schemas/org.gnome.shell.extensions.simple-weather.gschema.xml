@@ -206,5 +206,11 @@
             <summary>Show refresh button in the popup</summary>
         </key>
 
+        <key name="language" type="s">
+            <default>'auto'</default>
+            <summary>Language</summary>
+            <description>Language code for the extension interface (e.g., 'en', 'pt_BR', 'es_ES'). Use 'auto' for system default.</description>
+        </key>
+
     </schema>
 </schemalist>

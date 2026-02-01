@@ -31,8 +31,7 @@ import { Weather } from "./weather.js";
 import { delayTask, removeSourceIfTruthy, isNoInternet } from "./utils.js";
 import { displayTemp, displayTime, initLocales } from "./lang.js";
 import { freeMyLocation, setUpMyLocation } from "./myLocation.js";
-import { setUpGettext, gettext as _g } from "./gettext.js";
-import { gettext as shellGettext } from "resource:///org/gnome/shell/extensions/extension.js";
+import { setUpGettext, gettext as _g, setLanguage } from "./gettext.js";
 import { Popup } from "./popup.js";
 import { PopupMenu } from "resource:///org/gnome/shell/ui/popupMenu.js";
 import { showWelcome, showManualConfig } from "./welcome.js";
@@ -96,9 +95,23 @@ export default class SimpleWeatherExtension extends Extension {
      */
     enable() {
         // Set up a couple necessaary things already
-        setUpGettext(shellGettext);
         this.#gsettings = this.getSettings();
+        
+        // Load language setting and apply it BEFORE anything else
+        const languageCode = this.#gsettings.get_string("language");
+        setLanguage(languageCode);
+        
+        // Get locale directory and domain from metadata
+        const localeDir = this.metadata.dir.get_child('locale').get_path();
+        const domain = this.metadata['gettext-domain'] || this.metadata.uuid;
+        
+        setUpGettext(
+            this.gettext.bind(this), 
+            localeDir || undefined, 
+            domain
+        );
         initLocales();
+        
         // Call an async enable method
         this.#asyncEnable().catch(e => {
             console.error(e);
@@ -239,6 +252,10 @@ export default class SimpleWeatherExtension extends Extension {
         this.#config!.onDetailsListChanged(this.#updateGui.bind(this));
         this.#config!.onSymbolicIconsChanged(this.#updateGui.bind(this));
         this.#config!.onAlwaysPackagedIconsChanged(this.#updateGui.bind(this));
+        
+        // Note: Language changes are applied on next extension reload
+        // Gettext loads translation catalogs only once at initialization
+        
         // Some require extra stuff
         this.#config!.onShowSunTimeChanged(b => {
             if(!this.#indicator) return;

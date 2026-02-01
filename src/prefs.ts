@@ -25,7 +25,7 @@ import { GeneralPage } from "./preferences/generalPage.js";
 import { LocationsPage } from "./preferences/locationsPage.js";
 import { ExtensionMetadata } from "resource:///org/gnome/shell/extensions/extension.js";
 import { AboutPage } from "./preferences/aboutPage.js";
-import { setUpGettext } from "./gettext.js";
+import { setUpGettext, setLanguage } from "./gettext.js";
 import { gettext as prefsGettext } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
 import { initLocales } from "./lang.js";
 import { gettext as _g } from "./gettext.js";
@@ -41,8 +41,15 @@ export default class SimpleWeatherPreferences extends ExtensionPreferences {
     }
 
     async fillPreferencesWindow(window: Adw.PreferencesWindow): Promise<void> {
-        setUpGettext(prefsGettext);
         const settings = this.getSettings();
+        
+        // Load language setting and apply it before setting up gettext
+        const languageCode = settings.get_string("language");
+        if (languageCode) {
+            setLanguage(languageCode);
+        }
+        
+        setUpGettext(prefsGettext);
         settings.delay();
         this.checkLocales(window, settings);
 

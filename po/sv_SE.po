@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
-"POT-Creation-Date: 2026-01-13 23:08-0600\n"
+"POT-Creation-Date: 2026-02-01 12:48-0300\n"
 "PO-Revision-Date: 2025-07-23 22:06\n"
 "Last-Translator: \n"
 "Language-Team: Swedish\n"
@@ -18,11 +18,11 @@ msgstr ""
 "X-Crowdin-File-ID: 2\n"
 
 #: src/autoConfig.ts:59 src/location.ts:53 src/location.ts:63
-#: src/preferences/generalPage.ts:183
+#: src/preferences/generalPage.ts:229
 msgid "My Location"
 msgstr "Min plats"
 
-#: src/details.ts:60 src/preferences/generalPage.ts:64
+#: src/details.ts:60 src/preferences/generalPage.ts:110
 msgid "Temperature"
 msgstr "Temperatur"
 
@@ -50,7 +50,7 @@ msgstr "Gusts"
 msgid "UV High"
 msgstr "UV hög"
 
-#: src/details.ts:67 src/preferences/generalPage.ts:92
+#: src/details.ts:67 src/preferences/generalPage.ts:138
 msgid "Pressure"
 msgstr "Tryck"
 
@@ -74,11 +74,11 @@ msgstr "Moln omslag"
 msgid "Sun Countdown"
 msgstr ""
 
-#: src/details.ts:77 src/popup.ts:459
+#: src/details.ts:77 src/popup.ts:497
 msgid "Invalid"
 msgstr "Ogiltig"
 
-#: src/extension.ts:357 src/preferences/search.ts:159
+#: src/extension.ts:377 src/preferences/search.ts:160
 msgid "No Internet"
 msgstr "Inget Internet"
 
@@ -138,20 +138,24 @@ msgstr "%f°W"
 msgid "Weather Data"
 msgstr "Väder Data"
 
-#: src/popup.ts:317 src/preferences/aboutPage.ts:76
+#: src/popup.ts:280
+msgid "Refresh"
+msgstr ""
+
+#: src/popup.ts:335 src/preferences/aboutPage.ts:90
 msgid "Settings"
 msgstr "Inställningar"
 
-#: src/popup.ts:363
+#: src/popup.ts:401
 msgid "Retry"
 msgstr ""
 
-#: src/popup.ts:433
+#: src/popup.ts:471
 #, javascript-format
 msgid "H: %s"
 msgstr "H: %s"
 
-#: src/popup.ts:434
+#: src/popup.ts:472
 #, javascript-format
 msgid "L: %s"
 msgstr "L: %s"
@@ -168,42 +172,46 @@ msgstr "GitHub Repository"
 msgid "Support Me"
 msgstr "Stöd mig"
 
-#: src/preferences/aboutPage.ts:68
+#: src/preferences/aboutPage.ts:70
 msgid "SimpleWeather Version"
 msgstr "SimpleWeather version"
 
-#: src/preferences/aboutPage.ts:71
+#: src/preferences/aboutPage.ts:73
 msgid "Unknown"
 msgstr "Okänd"
 
-#: src/preferences/aboutPage.ts:79
+#: src/preferences/aboutPage.ts:81
+msgid "Git Hash"
+msgstr ""
+
+#: src/preferences/aboutPage.ts:93
 msgid "Copy"
 msgstr "Kopiera"
 
-#: src/preferences/aboutPage.ts:102
+#: src/preferences/aboutPage.ts:116
 msgid "Copied settings JSON to clipboard."
 msgstr "Kopierade inställningar JSON till urklipp."
 
-#: src/preferences/aboutPage.ts:116
+#: src/preferences/aboutPage.ts:130
 #, javascript-format
 msgid "Contributions and translations are welcome! Read how on %s."
 msgstr "Bidrag och översättningar är välkomna! Läs om %s."
 
-#: src/preferences/aboutPage.ts:119
+#: src/preferences/aboutPage.ts:133
 #, javascript-format
 msgid "If you like this extension, consider starring it on %s."
 msgstr "Om du gillar detta tillägg, överväga att huvudrollen på %s."
 
-#: src/preferences/aboutPage.ts:122
+#: src/preferences/aboutPage.ts:136
 msgid "here"
 msgstr "här"
 
-#: src/preferences/aboutPage.ts:124
+#: src/preferences/aboutPage.ts:138
 #, javascript-format
 msgid "Report bugs or request new features %s."
 msgstr "Rapportera buggar eller begär nya funktioner %s."
 
-#: src/preferences/aboutPage.ts:128 src/preferences/aboutPage.ts:138
+#: src/preferences/aboutPage.ts:142 src/preferences/aboutPage.ts:152
 msgid "Credits"
 msgstr "Medverkande"
 
@@ -219,7 +227,7 @@ msgstr "Popup-fönster"
 msgid "Drag-and-drop from bottom to configure the pop-up"
 msgstr "Dra och släpp från botten för att konfigurera popup-fönstret"
 
-#: src/preferences/detailsPage.ts:185 src/preferences/generalPage.ts:239
+#: src/preferences/detailsPage.ts:185 src/preferences/generalPage.ts:285
 msgid "Panel"
 msgstr "Panelen"
 
@@ -281,171 +289,212 @@ msgstr "Namn måste fyllas i."
 msgid "Invalid coordinates entry."
 msgstr "Ogiltig koordinatpost."
 
-#: src/preferences/generalPage.ts:38
+#: src/preferences/generalPage.ts:40
 msgid "General"
 msgstr "Allmänt"
 
-#: src/preferences/generalPage.ts:43 src/preferences/generalPage.ts:53
+#: src/preferences/generalPage.ts:46
+msgid "Language"
+msgstr "Språk"
+
+#: src/preferences/generalPage.ts:47
+msgid "Select the interface language"
+msgstr "Välj gränssnittspråk"
+
+#: src/preferences/generalPage.ts:54
+msgid "Interface Language"
+msgstr "Gränssnittspråk"
+
+#: src/preferences/generalPage.ts:55
+msgid "Extension will reload after changing language"
+msgstr "Kräver omladdning av tillägg"
+
+#: src/preferences/generalPage.ts:67
+msgid "Language Changed"
+msgstr "Språk ändrat"
+
+#: src/preferences/generalPage.ts:68
+msgid "Please log out and log back in to apply the new language."
+msgstr "Vänligen logga ut och logga in igen för att tillämpa det nya språket."
+
+#: src/preferences/generalPage.ts:69
+msgid "OK"
+msgstr ""
+
+#: src/preferences/generalPage.ts:89 src/preferences/generalPage.ts:99
 msgid "Units"
 msgstr "Enheter"
 
-#: src/preferences/generalPage.ts:44
+#: src/preferences/generalPage.ts:90
 msgid "Configure units of measurement"
 msgstr "Konfigurera måttenheter"
 
-#: src/preferences/generalPage.ts:48
+#: src/preferences/generalPage.ts:94
 msgid "Custom"
 msgstr "Anpassad"
 
-#: src/preferences/generalPage.ts:48
+#: src/preferences/generalPage.ts:94
 msgid "Metric"
 msgstr "Metrisk"
 
-#: src/preferences/generalPage.ts:48
+#: src/preferences/generalPage.ts:94
 msgid "Nordic"
 msgstr ""
 
-#: src/preferences/generalPage.ts:48
+#: src/preferences/generalPage.ts:94
 msgid "UK"
 msgstr "Storbritannien"
 
-#: src/preferences/generalPage.ts:48
+#: src/preferences/generalPage.ts:94
 msgid "US"
 msgstr "USA"
 
-#: src/preferences/generalPage.ts:61
+#: src/preferences/generalPage.ts:107
 msgid "Fahrenheit"
 msgstr "Fahrenheit"
 
-#: src/preferences/generalPage.ts:62
+#: src/preferences/generalPage.ts:108
 msgid "Celsius"
 msgstr "Celsius"
 
-#: src/preferences/generalPage.ts:78
+#: src/preferences/generalPage.ts:124
 msgid "Speed"
 msgstr "Hastighet"
 
-#: src/preferences/generalPage.ts:106
+#: src/preferences/generalPage.ts:152
 msgid "Rain Measurement"
 msgstr "Regnmätning"
 
-#: src/preferences/generalPage.ts:120
+#: src/preferences/generalPage.ts:166
 msgid "Distance"
 msgstr "Avstånd"
 
-#: src/preferences/generalPage.ts:148
+#: src/preferences/generalPage.ts:194
 msgid "Degrees"
 msgstr "Grader"
 
-#: src/preferences/generalPage.ts:148
+#: src/preferences/generalPage.ts:194
 msgid "Eight-Point Compass"
 msgstr "8-punktskompass"
 
-#: src/preferences/generalPage.ts:151
+#: src/preferences/generalPage.ts:197
 msgid "Direction"
 msgstr "Riktning"
 
-#: src/preferences/generalPage.ts:163
+#: src/preferences/generalPage.ts:209
 msgid "Weather Service"
 msgstr "Tjänster för väderlek"
 
-#: src/preferences/generalPage.ts:164
+#: src/preferences/generalPage.ts:210
 msgid "Configure how the weather is attained"
 msgstr "Konfigurera hur vädret uppnås"
 
-#: src/preferences/generalPage.ts:171
+#: src/preferences/generalPage.ts:217
 msgid "Weather Provider"
 msgstr "Väderleverantör"
 
-#: src/preferences/generalPage.ts:184
+#: src/preferences/generalPage.ts:230
 msgid "Configure how your location is found"
 msgstr "Konfigurera hur din plats hittas"
 
-#: src/preferences/generalPage.ts:188 src/preferences/generalPage.ts:189
+#: src/preferences/generalPage.ts:234 src/preferences/generalPage.ts:235
 msgid "Online"
 msgstr "Online"
 
-#: src/preferences/generalPage.ts:190 src/preferences/generalPage.ts:249
+#: src/preferences/generalPage.ts:236 src/preferences/generalPage.ts:295
 msgid "System"
 msgstr "System"
 
-#: src/preferences/generalPage.ts:191
+#: src/preferences/generalPage.ts:237
 msgid "Disable"
 msgstr "Inaktivera"
 
-#: src/preferences/generalPage.ts:194
+#: src/preferences/generalPage.ts:240
 msgid "Provider"
 msgstr "Leverantör"
 
-#: src/preferences/generalPage.ts:206
+#: src/preferences/generalPage.ts:252
 msgid "Refresh Interval (Minutes)"
 msgstr "Uppdatera intervall (protokoll)"
 
-#: src/preferences/generalPage.ts:224
+#: src/preferences/generalPage.ts:270
 msgid "Accessibility"
 msgstr "Tillgänglighet"
 
-#: src/preferences/generalPage.ts:225
+#: src/preferences/generalPage.ts:271
 msgid "Configure accessibility features"
 msgstr "Konfigurera tillgänglighetsfunktioner"
 
-#: src/preferences/generalPage.ts:228
+#: src/preferences/generalPage.ts:274
 msgid "High Contrast"
 msgstr "Hög kontrast"
 
-#: src/preferences/generalPage.ts:240
+#: src/preferences/generalPage.ts:286
 msgid "Configure the panel and pop-up"
 msgstr "Konfigurera panelen och pop-up"
 
-#: src/preferences/generalPage.ts:250
+#: src/preferences/generalPage.ts:296
 msgid "Light"
 msgstr "Ljus"
 
-#: src/preferences/generalPage.ts:251
+#: src/preferences/generalPage.ts:297
 msgid "Afterdark"
 msgstr "Eftermörk"
 
-#: src/preferences/generalPage.ts:252
+#: src/preferences/generalPage.ts:298
 msgid "Immersive"
 msgstr "Uppslukande"
 
-#: src/preferences/generalPage.ts:255
+#: src/preferences/generalPage.ts:301
 msgid "Theme"
 msgstr "Tema"
 
-#: src/preferences/generalPage.ts:265
+#: src/preferences/generalPage.ts:311
 msgid "Center"
 msgstr "Centrera"
 
-#: src/preferences/generalPage.ts:265
+#: src/preferences/generalPage.ts:311
 msgid "Left"
 msgstr "Vänster"
 
-#: src/preferences/generalPage.ts:265
+#: src/preferences/generalPage.ts:311
 msgid "Right"
 msgstr "Höger"
 
-#: src/preferences/generalPage.ts:268
+#: src/preferences/generalPage.ts:314
 msgid "Side of Panel"
 msgstr "Sida av panelen"
 
-#: src/preferences/generalPage.ts:278
+#: src/preferences/generalPage.ts:327
 msgid "Order in Panel"
 msgstr "Ordna i panelen"
 
-#: src/preferences/generalPage.ts:294
+#: src/preferences/generalPage.ts:344
+#, fuzzy
+msgid "Pop-Up Offset"
+msgstr "Popup-fönster"
+
+#: src/preferences/generalPage.ts:345
+msgid "Horizontal pop-up offset from 0–100."
+msgstr ""
+
+#: src/preferences/generalPage.ts:385
 msgid "Use Symbolic Icons in Panel"
 msgstr ""
 
-#: src/preferences/generalPage.ts:304
+#: src/preferences/generalPage.ts:395
 msgid "Always Use Packaged Icons"
 msgstr ""
 
-#: src/preferences/generalPage.ts:315
+#: src/preferences/generalPage.ts:406
+msgid "Show Refresh Button"
+msgstr ""
+
+#: src/preferences/generalPage.ts:417
 msgid "Hide Error Popup"
 msgstr ""
 
-#: src/preferences/generalPage.ts:316
+#: src/preferences/generalPage.ts:418
 msgid "If the popup just says Error, don't even show it."
 msgstr ""
 
@@ -453,7 +502,7 @@ msgstr ""
 msgid "Locations"
 msgstr "Platser"
 
-#: src/preferences/locationsPage.ts:70 src/preferences/search.ts:76
+#: src/preferences/locationsPage.ts:70 src/preferences/search.ts:77
 msgid "Add"
 msgstr "Lägg till"
 
@@ -495,27 +544,27 @@ msgstr "Internt fel"
 msgid "Something else edited the locations."
 msgstr "Något annat redigerade platserna."
 
-#: src/preferences/search.ts:46
+#: src/preferences/search.ts:47
 msgid "Search Location"
 msgstr "Sök plats"
 
-#: src/preferences/search.ts:55
+#: src/preferences/search.ts:56
 msgid "City, Neighborhood, etc."
 msgstr "Stad, grannskap etc."
 
-#: src/preferences/search.ts:60
+#: src/preferences/search.ts:61
 msgid "Search"
 msgstr "Sök"
 
-#: src/preferences/search.ts:207
+#: src/preferences/search.ts:208
 msgid "No results."
 msgstr "Inga resultat."
 
-#: src/preferences/search.ts:212
+#: src/preferences/search.ts:213
 msgid "No copyright information available."
 msgstr "Ingen information om upphovsrätt finns tillgänglig."
 
-#: src/prefs.ts:74
+#: src/prefs.ts:81
 #, javascript-format
 msgid ""
 "SimpleWeather doesn't know how to handle your locale.\n"
@@ -526,15 +575,15 @@ msgstr ""
 "\t<unk> Error - %s\n"
 "Överväg att skicka in en felrapport på GitHub."
 
-#: src/prefs.ts:77
+#: src/prefs.ts:84
 msgid "Don't Show Again"
 msgstr "Visa inte igen"
 
-#: src/prefs.ts:77
+#: src/prefs.ts:84
 msgid "Ignore"
 msgstr "Ignorera"
 
-#: src/prefs.ts:77
+#: src/prefs.ts:84
 msgid "Open GitHub"
 msgstr "Open GitHub"
 
@@ -570,16 +619,16 @@ msgstr ""
 msgid "W"
 msgstr ""
 
-#: src/units.ts:298
+#: src/units.ts:302
 msgid "Now"
 msgstr ""
 
-#: src/units.ts:302
+#: src/units.ts:303
 #, javascript-format
 msgid "%d h"
 msgstr ""
 
-#: src/units.ts:303
+#: src/units.ts:304
 #, javascript-format
 msgid "%d min"
 msgstr ""
@@ -654,3 +703,6 @@ msgstr ""
 #: src/welcome.ts:174
 msgid "Please configure your location and units manually."
 msgstr ""
+
+#~ msgid "The extension has been reloaded with the new language."
+#~ msgstr "Tillägget har laddats om med det nya språket."

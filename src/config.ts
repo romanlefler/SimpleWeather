@@ -447,6 +447,13 @@ export class Config {
         this.#handlerIds.push(id);
     }
 
+    onLanguageChanged(callback : () => void) {
+        const id = this.#settings.connect("changed::language", () => {
+            callback();
+        });
+        this.#handlerIds.push(id);
+    }
+
     /**
      * Shorthand for checking unit presets and outputting appropriate value,
      * or otherwise checking settings via get_enum for a number.

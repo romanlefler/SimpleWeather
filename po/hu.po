@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
-"POT-Creation-Date: 2026-01-13 23:08-0600\n"
+"POT-Creation-Date: 2026-02-01 12:48-0300\n"
 "PO-Revision-Date: 2025-11-04 19:23\n"
 "Last-Translator: \n"
 "Language-Team: Hungarian\n"
@@ -18,11 +18,11 @@ msgstr ""
 "X-Crowdin-File-ID: 2\n"
 
 #: src/autoConfig.ts:59 src/location.ts:53 src/location.ts:63
-#: src/preferences/generalPage.ts:183
+#: src/preferences/generalPage.ts:229
 msgid "My Location"
 msgstr "Saját pozícióm"
 
-#: src/details.ts:60 src/preferences/generalPage.ts:64
+#: src/details.ts:60 src/preferences/generalPage.ts:110
 msgid "Temperature"
 msgstr "Hőmérséklet"
 
@@ -50,7 +50,7 @@ msgstr "Széllökés"
 msgid "UV High"
 msgstr "UV index"
 
-#: src/details.ts:67 src/preferences/generalPage.ts:92
+#: src/details.ts:67 src/preferences/generalPage.ts:138
 msgid "Pressure"
 msgstr "Légnyomás"
 
@@ -74,11 +74,11 @@ msgstr "Felhőtakaró"
 msgid "Sun Countdown"
 msgstr ""
 
-#: src/details.ts:77 src/popup.ts:459
+#: src/details.ts:77 src/popup.ts:497
 msgid "Invalid"
 msgstr "Érvénytelen"
 
-#: src/extension.ts:357 src/preferences/search.ts:159
+#: src/extension.ts:377 src/preferences/search.ts:160
 msgid "No Internet"
 msgstr "Nincs internet"
 
@@ -138,20 +138,24 @@ msgstr "%f°Ny"
 msgid "Weather Data"
 msgstr "Időjárási adatok"
 
-#: src/popup.ts:317 src/preferences/aboutPage.ts:76
+#: src/popup.ts:280
+msgid "Refresh"
+msgstr ""
+
+#: src/popup.ts:335 src/preferences/aboutPage.ts:90
 msgid "Settings"
 msgstr "Beállítások"
 
-#: src/popup.ts:363
+#: src/popup.ts:401
 msgid "Retry"
 msgstr ""
 
-#: src/popup.ts:433
+#: src/popup.ts:471
 #, javascript-format
 msgid "H: %s"
 msgstr "M: %s"
 
-#: src/popup.ts:434
+#: src/popup.ts:472
 #, javascript-format
 msgid "L: %s"
 msgstr "A: %s"
@@ -168,43 +172,47 @@ msgstr "GitHub Repo"
 msgid "Support Me"
 msgstr "Támogatás"
 
-#: src/preferences/aboutPage.ts:68
+#: src/preferences/aboutPage.ts:70
 msgid "SimpleWeather Version"
 msgstr "SimpleWeather Verzió"
 
-#: src/preferences/aboutPage.ts:71
+#: src/preferences/aboutPage.ts:73
 msgid "Unknown"
 msgstr "Ismeretlen"
 
-#: src/preferences/aboutPage.ts:79
+#: src/preferences/aboutPage.ts:81
+msgid "Git Hash"
+msgstr ""
+
+#: src/preferences/aboutPage.ts:93
 msgid "Copy"
 msgstr "Másolás"
 
-#: src/preferences/aboutPage.ts:102
+#: src/preferences/aboutPage.ts:116
 msgid "Copied settings JSON to clipboard."
 msgstr "A beállítások JSON a vágólapra másolva."
 
-#: src/preferences/aboutPage.ts:116
+#: src/preferences/aboutPage.ts:130
 #, javascript-format
 msgid "Contributions and translations are welcome! Read how on %s."
 msgstr ""
 "Hozzájárulást és fordításokat szívesen fogadunk! Olvassa el, hogyan: %s."
 
-#: src/preferences/aboutPage.ts:119
+#: src/preferences/aboutPage.ts:133
 #, javascript-format
 msgid "If you like this extension, consider starring it on %s."
 msgstr "Ha tetszik ez a bővítmény, értékelje a %s webhelyen."
 
-#: src/preferences/aboutPage.ts:122
+#: src/preferences/aboutPage.ts:136
 msgid "here"
 msgstr "itt"
 
-#: src/preferences/aboutPage.ts:124
+#: src/preferences/aboutPage.ts:138
 #, javascript-format
 msgid "Report bugs or request new features %s."
 msgstr "Hibák jelentése vagy új funkciók kérése %s."
 
-#: src/preferences/aboutPage.ts:128 src/preferences/aboutPage.ts:138
+#: src/preferences/aboutPage.ts:142 src/preferences/aboutPage.ts:152
 msgid "Credits"
 msgstr "Készítők"
 
@@ -220,7 +228,7 @@ msgstr "Felugró"
 msgid "Drag-and-drop from bottom to configure the pop-up"
 msgstr "A felugró ablak konfigurálásához húzza ide a lenti elemeket"
 
-#: src/preferences/detailsPage.ts:185 src/preferences/generalPage.ts:239
+#: src/preferences/detailsPage.ts:185 src/preferences/generalPage.ts:285
 msgid "Panel"
 msgstr "Panel"
 
@@ -282,171 +290,212 @@ msgstr "Elnevezés szükséges."
 msgid "Invalid coordinates entry."
 msgstr "Érvénytelen koordináták."
 
-#: src/preferences/generalPage.ts:38
+#: src/preferences/generalPage.ts:40
 msgid "General"
 msgstr "Általános"
 
-#: src/preferences/generalPage.ts:43 src/preferences/generalPage.ts:53
+#: src/preferences/generalPage.ts:46
+msgid "Language"
+msgstr "Nyelv"
+
+#: src/preferences/generalPage.ts:47
+msgid "Select the interface language"
+msgstr "Válassza ki a felhasználói felület nyelvét"
+
+#: src/preferences/generalPage.ts:54
+msgid "Interface Language"
+msgstr "Felhasználói felület nyelve"
+
+#: src/preferences/generalPage.ts:55
+msgid "Extension will reload after changing language"
+msgstr "Kiterjesztés újratöltése szükséges"
+
+#: src/preferences/generalPage.ts:67
+msgid "Language Changed"
+msgstr "Nyelv megváltoztatva"
+
+#: src/preferences/generalPage.ts:68
+msgid "Please log out and log back in to apply the new language."
+msgstr "Kérjük, jelentkezzen ki és jelentkezzen be újra az új nyelv alkalmazásához."
+
+#: src/preferences/generalPage.ts:69
+msgid "OK"
+msgstr ""
+
+#: src/preferences/generalPage.ts:89 src/preferences/generalPage.ts:99
 msgid "Units"
 msgstr "Mértékegységek"
 
-#: src/preferences/generalPage.ts:44
+#: src/preferences/generalPage.ts:90
 msgid "Configure units of measurement"
 msgstr "Mértékegységek konfigurálása"
 
-#: src/preferences/generalPage.ts:48
+#: src/preferences/generalPage.ts:94
 msgid "Custom"
 msgstr "Egyéni"
 
-#: src/preferences/generalPage.ts:48
+#: src/preferences/generalPage.ts:94
 msgid "Metric"
 msgstr "Metrikus"
 
-#: src/preferences/generalPage.ts:48
+#: src/preferences/generalPage.ts:94
 msgid "Nordic"
 msgstr ""
 
-#: src/preferences/generalPage.ts:48
+#: src/preferences/generalPage.ts:94
 msgid "UK"
 msgstr "UK"
 
-#: src/preferences/generalPage.ts:48
+#: src/preferences/generalPage.ts:94
 msgid "US"
 msgstr "US"
 
-#: src/preferences/generalPage.ts:61
+#: src/preferences/generalPage.ts:107
 msgid "Fahrenheit"
 msgstr "Farenheit"
 
-#: src/preferences/generalPage.ts:62
+#: src/preferences/generalPage.ts:108
 msgid "Celsius"
 msgstr "Celsius"
 
-#: src/preferences/generalPage.ts:78
+#: src/preferences/generalPage.ts:124
 msgid "Speed"
 msgstr "Sebesség"
 
-#: src/preferences/generalPage.ts:106
+#: src/preferences/generalPage.ts:152
 msgid "Rain Measurement"
 msgstr "Csapadékmennyiség"
 
-#: src/preferences/generalPage.ts:120
+#: src/preferences/generalPage.ts:166
 msgid "Distance"
 msgstr "Távolság"
 
-#: src/preferences/generalPage.ts:148
+#: src/preferences/generalPage.ts:194
 msgid "Degrees"
 msgstr "Fok"
 
-#: src/preferences/generalPage.ts:148
+#: src/preferences/generalPage.ts:194
 msgid "Eight-Point Compass"
 msgstr "Nyolc-pontos iránytű"
 
-#: src/preferences/generalPage.ts:151
+#: src/preferences/generalPage.ts:197
 msgid "Direction"
 msgstr "Irány"
 
-#: src/preferences/generalPage.ts:163
+#: src/preferences/generalPage.ts:209
 msgid "Weather Service"
 msgstr "Időjárás szolgáltatás"
 
-#: src/preferences/generalPage.ts:164
+#: src/preferences/generalPage.ts:210
 msgid "Configure how the weather is attained"
 msgstr "Állítsa be az időjárási adatok elérésének módját"
 
-#: src/preferences/generalPage.ts:171
+#: src/preferences/generalPage.ts:217
 msgid "Weather Provider"
 msgstr "Időjárás szolgáltató"
 
-#: src/preferences/generalPage.ts:184
+#: src/preferences/generalPage.ts:230
 msgid "Configure how your location is found"
 msgstr "Állítsa be, hogyan találjuk meg a helyét"
 
-#: src/preferences/generalPage.ts:188 src/preferences/generalPage.ts:189
+#: src/preferences/generalPage.ts:234 src/preferences/generalPage.ts:235
 msgid "Online"
 msgstr "Online"
 
-#: src/preferences/generalPage.ts:190 src/preferences/generalPage.ts:249
+#: src/preferences/generalPage.ts:236 src/preferences/generalPage.ts:295
 msgid "System"
 msgstr "Rendszer"
 
-#: src/preferences/generalPage.ts:191
+#: src/preferences/generalPage.ts:237
 msgid "Disable"
 msgstr "Letiltás"
 
-#: src/preferences/generalPage.ts:194
+#: src/preferences/generalPage.ts:240
 msgid "Provider"
 msgstr "Szolgáltató"
 
-#: src/preferences/generalPage.ts:206
+#: src/preferences/generalPage.ts:252
 msgid "Refresh Interval (Minutes)"
 msgstr "Frissítési gyakoriság (perc)"
 
-#: src/preferences/generalPage.ts:224
+#: src/preferences/generalPage.ts:270
 msgid "Accessibility"
 msgstr "Kisegítő lehetőségek"
 
-#: src/preferences/generalPage.ts:225
+#: src/preferences/generalPage.ts:271
 msgid "Configure accessibility features"
 msgstr "Kisegítő lehetőségek konfigurálása"
 
-#: src/preferences/generalPage.ts:228
+#: src/preferences/generalPage.ts:274
 msgid "High Contrast"
 msgstr "Nagy kontraszt"
 
-#: src/preferences/generalPage.ts:240
+#: src/preferences/generalPage.ts:286
 msgid "Configure the panel and pop-up"
 msgstr "Felugró ablak és a panel konfigurációja"
 
-#: src/preferences/generalPage.ts:250
+#: src/preferences/generalPage.ts:296
 msgid "Light"
 msgstr "Világos"
 
-#: src/preferences/generalPage.ts:251
+#: src/preferences/generalPage.ts:297
 msgid "Afterdark"
 msgstr "Sötétedés után"
 
-#: src/preferences/generalPage.ts:252
+#: src/preferences/generalPage.ts:298
 msgid "Immersive"
 msgstr "Magával ragadó"
 
-#: src/preferences/generalPage.ts:255
+#: src/preferences/generalPage.ts:301
 msgid "Theme"
 msgstr "Téma"
 
-#: src/preferences/generalPage.ts:265
+#: src/preferences/generalPage.ts:311
 msgid "Center"
 msgstr "Középre"
 
-#: src/preferences/generalPage.ts:265
+#: src/preferences/generalPage.ts:311
 msgid "Left"
 msgstr "Balra"
 
-#: src/preferences/generalPage.ts:265
+#: src/preferences/generalPage.ts:311
 msgid "Right"
 msgstr "Jobbra"
 
-#: src/preferences/generalPage.ts:268
+#: src/preferences/generalPage.ts:314
 msgid "Side of Panel"
 msgstr "Elhelyezés a panelen"
 
-#: src/preferences/generalPage.ts:278
+#: src/preferences/generalPage.ts:327
 msgid "Order in Panel"
 msgstr "Sorrend a panelen"
 
-#: src/preferences/generalPage.ts:294
+#: src/preferences/generalPage.ts:344
+#, fuzzy
+msgid "Pop-Up Offset"
+msgstr "Felugró"
+
+#: src/preferences/generalPage.ts:345
+msgid "Horizontal pop-up offset from 0–100."
+msgstr ""
+
+#: src/preferences/generalPage.ts:385
 msgid "Use Symbolic Icons in Panel"
 msgstr ""
 
-#: src/preferences/generalPage.ts:304
+#: src/preferences/generalPage.ts:395
 msgid "Always Use Packaged Icons"
 msgstr ""
 
-#: src/preferences/generalPage.ts:315
+#: src/preferences/generalPage.ts:406
+msgid "Show Refresh Button"
+msgstr ""
+
+#: src/preferences/generalPage.ts:417
 msgid "Hide Error Popup"
 msgstr ""
 
-#: src/preferences/generalPage.ts:316
+#: src/preferences/generalPage.ts:418
 msgid "If the popup just says Error, don't even show it."
 msgstr ""
 
@@ -454,7 +503,7 @@ msgstr ""
 msgid "Locations"
 msgstr "Helyszínek"
 
-#: src/preferences/locationsPage.ts:70 src/preferences/search.ts:76
+#: src/preferences/locationsPage.ts:70 src/preferences/search.ts:77
 msgid "Add"
 msgstr "Hozzáad"
 
@@ -496,27 +545,27 @@ msgstr "Belső hiba"
 msgid "Something else edited the locations."
 msgstr "Valami más szerkesztette a helyeket."
 
-#: src/preferences/search.ts:46
+#: src/preferences/search.ts:47
 msgid "Search Location"
 msgstr "Helyiségek keresése"
 
-#: src/preferences/search.ts:55
+#: src/preferences/search.ts:56
 msgid "City, Neighborhood, etc."
 msgstr "Városnév, járás, stb."
 
-#: src/preferences/search.ts:60
+#: src/preferences/search.ts:61
 msgid "Search"
 msgstr "Keresés"
 
-#: src/preferences/search.ts:207
+#: src/preferences/search.ts:208
 msgid "No results."
 msgstr "Nincs találat."
 
-#: src/preferences/search.ts:212
+#: src/preferences/search.ts:213
 msgid "No copyright information available."
 msgstr "Nem érhető el szerzői jogi információ."
 
-#: src/prefs.ts:74
+#: src/prefs.ts:81
 #, javascript-format
 msgid ""
 "SimpleWeather doesn't know how to handle your locale.\n"
@@ -527,15 +576,15 @@ msgstr ""
 "\tHiba - %s\n"
 "Fontolja meg hibajelentés küldését a GitHubon."
 
-#: src/prefs.ts:77
+#: src/prefs.ts:84
 msgid "Don't Show Again"
 msgstr "Ne mutassa újra"
 
-#: src/prefs.ts:77
+#: src/prefs.ts:84
 msgid "Ignore"
 msgstr "Kihagyás"
 
-#: src/prefs.ts:77
+#: src/prefs.ts:84
 msgid "Open GitHub"
 msgstr "GitHub megnyitása"
 
@@ -571,16 +620,16 @@ msgstr ""
 msgid "W"
 msgstr ""
 
-#: src/units.ts:298
+#: src/units.ts:302
 msgid "Now"
 msgstr ""
 
-#: src/units.ts:302
+#: src/units.ts:303
 #, javascript-format
 msgid "%d h"
 msgstr ""
 
-#: src/units.ts:303
+#: src/units.ts:304
 #, javascript-format
 msgid "%d min"
 msgstr ""
@@ -655,3 +704,6 @@ msgstr ""
 #: src/welcome.ts:174
 msgid "Please configure your location and units manually."
 msgstr ""
+
+#~ msgid "The extension has been reloaded with the new language."
+#~ msgstr "A kiterjesztés újratöltődött az új nyelvvel."

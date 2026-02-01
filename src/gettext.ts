@@ -15,14 +15,64 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import GLib from "gi://GLib";
+
+// Access gettext functions from globalThis (GJS runtime)
+declare const globalThis: typeof global & {
+    bindtextdomain?: (domain: string, location: string) => string;
+    textdomain?: (domain: string) => string;
+};
+
 let gettextFn : ((str : string) => string) | undefined;
+let localeDir : string | undefined;
+let domain : string | undefined;
+
+/**
+ * Sets the language environment variable to force a specific locale
+ * @param languageCode - The language code (e.g., 'pt_BR', 'es_ES', 'en')
+ *                       or 'auto' to use system default
+ */
+export function setLanguage(languageCode: string): void {
+    if (languageCode && languageCode !== 'auto') {
+        // Set LANGUAGE environment variable to override system locale
+        GLib.setenv('LANGUAGE', languageCode, true);
+        // Also set LANG to ensure consistency
+        GLib.setenv('LANG', `${languageCode}.UTF-8`, true);
+        GLib.setenv('LC_MESSAGES', `${languageCode}.UTF-8`, true);
+    } else {
+        // Reset to system default
+        GLib.unsetenv('LANGUAGE');
+        GLib.unsetenv('LC_MESSAGES');
+    }
+    
+    // Force gettext to reload by re-binding the text domain
+    if (localeDir && domain) {
+        try {
+            if (globalThis.bindtextdomain && globalThis.textdomain) {
+                globalThis.bindtextdomain(domain, localeDir);
+                globalThis.textdomain(domain);
+            }
+        } catch (e) {
+            console.warn("Failed to rebind textdomain:", e);
+        }
+    }
+}
 
 /**
  * Sets up the gettext abstraction.
  * Import the correct gettext for the process and pass it into here.
+ * @param gettext - The gettext function to use
+ * @param textLocaleDir - The directory containing locale files (optional)
+ * @param textDomain - The gettext domain name (optional)
  */
-export function setUpGettext(gettext : (str : string) => string) : void {
+export function setUpGettext(
+    gettext : (str : string) => string,
+    textLocaleDir? : string,
+    textDomain? : string
+) : void {
     gettextFn = gettext;
+    localeDir = textLocaleDir;
+    domain = textDomain;
 }
 
 /**
@@ -34,3 +84,4 @@ export function setUpGettext(gettext : (str : string) => string) : void {
 export function gettext(str : string) : string {
     return gettextFn!(str);
 }
+

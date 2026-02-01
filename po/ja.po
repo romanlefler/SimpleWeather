@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
-"POT-Creation-Date: 2026-01-13 23:08-0600\n"
+"POT-Creation-Date: 2026-02-01 12:48-0300\n"
 "PO-Revision-Date: 2026-01-22 10:58+0900\n"
 "Last-Translator: \n"
 "Language-Team: Japanese\n"
@@ -22,11 +22,11 @@ msgstr ""
 "X-Generator: Gtranslator 49.0\n"
 
 #: src/autoConfig.ts:59 src/location.ts:53 src/location.ts:63
-#: src/preferences/generalPage.ts:183
+#: src/preferences/generalPage.ts:229
 msgid "My Location"
 msgstr "自分の場所"
 
-#: src/details.ts:60 src/preferences/generalPage.ts:64
+#: src/details.ts:60 src/preferences/generalPage.ts:110
 msgid "Temperature"
 msgstr "気温"
 
@@ -54,7 +54,7 @@ msgstr "突風"
 msgid "UV High"
 msgstr "UVインデックス"
 
-#: src/details.ts:67 src/preferences/generalPage.ts:92
+#: src/details.ts:67 src/preferences/generalPage.ts:138
 msgid "Pressure"
 msgstr "気圧"
 
@@ -78,11 +78,11 @@ msgstr "雲量"
 msgid "Sun Countdown"
 msgstr "日没までの時間"
 
-#: src/details.ts:77 src/popup.ts:459
+#: src/details.ts:77 src/popup.ts:497
 msgid "Invalid"
 msgstr "無効"
 
-#: src/extension.ts:357 src/preferences/search.ts:159
+#: src/extension.ts:377 src/preferences/search.ts:160
 msgid "No Internet"
 msgstr "インターネットがありません"
 
@@ -142,20 +142,24 @@ msgstr "西経 %f°"
 msgid "Weather Data"
 msgstr "天気データ"
 
-#: src/popup.ts:317 src/preferences/aboutPage.ts:76
+#: src/popup.ts:280
+msgid "Refresh"
+msgstr ""
+
+#: src/popup.ts:335 src/preferences/aboutPage.ts:90
 msgid "Settings"
 msgstr "設定"
 
-#: src/popup.ts:363
+#: src/popup.ts:401
 msgid "Retry"
 msgstr "リトライ"
 
-#: src/popup.ts:433
+#: src/popup.ts:471
 #, javascript-format
 msgid "H: %s"
 msgstr "最高: %s"
 
-#: src/popup.ts:434
+#: src/popup.ts:472
 #, javascript-format
 msgid "L: %s"
 msgstr "最低: %s"
@@ -172,44 +176,48 @@ msgstr "GitHub リポジトリ"
 msgid "Support Me"
 msgstr "支援してください"
 
-#: src/preferences/aboutPage.ts:68
+#: src/preferences/aboutPage.ts:70
 msgid "SimpleWeather Version"
 msgstr "SimpleWeather バージョン"
 
-#: src/preferences/aboutPage.ts:71
+#: src/preferences/aboutPage.ts:73
 msgid "Unknown"
 msgstr "不明"
 
-#: src/preferences/aboutPage.ts:79
+#: src/preferences/aboutPage.ts:81
+msgid "Git Hash"
+msgstr ""
+
+#: src/preferences/aboutPage.ts:93
 msgid "Copy"
 msgstr "コピー"
 
-#: src/preferences/aboutPage.ts:102
+#: src/preferences/aboutPage.ts:116
 msgid "Copied settings JSON to clipboard."
 msgstr "設定JSONをクリップボードにコピーしました。"
 
-#: src/preferences/aboutPage.ts:116
+#: src/preferences/aboutPage.ts:130
 #, javascript-format
 msgid "Contributions and translations are welcome! Read how on %s."
 msgstr "貢献と翻訳を歓迎します! %s の方法をお読みください。"
 
-#: src/preferences/aboutPage.ts:119
+#: src/preferences/aboutPage.ts:133
 #, javascript-format
 msgid "If you like this extension, consider starring it on %s."
 msgstr ""
 "この拡張機能が気に入った場合は、 %s で主要な役割を果たすことを検討してくださ"
 "い。"
 
-#: src/preferences/aboutPage.ts:122
+#: src/preferences/aboutPage.ts:136
 msgid "here"
 msgstr "ここ"
 
-#: src/preferences/aboutPage.ts:124
+#: src/preferences/aboutPage.ts:138
 #, javascript-format
 msgid "Report bugs or request new features %s."
 msgstr "バグを報告するか、新機能 %sをリクエストしてください。"
 
-#: src/preferences/aboutPage.ts:128 src/preferences/aboutPage.ts:138
+#: src/preferences/aboutPage.ts:142 src/preferences/aboutPage.ts:152
 msgid "Credits"
 msgstr "クレジット"
 
@@ -225,7 +233,7 @@ msgstr "ポップアップ"
 msgid "Drag-and-drop from bottom to configure the pop-up"
 msgstr "下からドラッグ＆ドロップしてポップアップを設定します"
 
-#: src/preferences/detailsPage.ts:185 src/preferences/generalPage.ts:239
+#: src/preferences/detailsPage.ts:185 src/preferences/generalPage.ts:285
 msgid "Panel"
 msgstr "パネル"
 
@@ -287,171 +295,212 @@ msgstr "名前が必要です。"
 msgid "Invalid coordinates entry."
 msgstr "座標入力が無効です。"
 
-#: src/preferences/generalPage.ts:38
+#: src/preferences/generalPage.ts:40
 msgid "General"
 msgstr "全般"
 
-#: src/preferences/generalPage.ts:43 src/preferences/generalPage.ts:53
+#: src/preferences/generalPage.ts:46
+msgid "Language"
+msgstr "言語"
+
+#: src/preferences/generalPage.ts:47
+msgid "Select the interface language"
+msgstr "インターフェース言語を選択"
+
+#: src/preferences/generalPage.ts:54
+msgid "Interface Language"
+msgstr "インターフェース言語"
+
+#: src/preferences/generalPage.ts:55
+msgid "Extension will reload after changing language"
+msgstr "拡張機能の再読み込みが必要"
+
+#: src/preferences/generalPage.ts:67
+msgid "Language Changed"
+msgstr "言語が変更されました"
+
+#: src/preferences/generalPage.ts:68
+msgid "Please log out and log back in to apply the new language."
+msgstr "新しい言語を適用するには、ログアウトして再度ログインしてください。"
+
+#: src/preferences/generalPage.ts:69
+msgid "OK"
+msgstr ""
+
+#: src/preferences/generalPage.ts:89 src/preferences/generalPage.ts:99
 msgid "Units"
 msgstr "単位"
 
-#: src/preferences/generalPage.ts:44
+#: src/preferences/generalPage.ts:90
 msgid "Configure units of measurement"
 msgstr "測定単位の設定"
 
-#: src/preferences/generalPage.ts:48
+#: src/preferences/generalPage.ts:94
 msgid "Custom"
 msgstr "カスタム"
 
-#: src/preferences/generalPage.ts:48
+#: src/preferences/generalPage.ts:94
 msgid "Metric"
 msgstr "メトリック"
 
-#: src/preferences/generalPage.ts:48
+#: src/preferences/generalPage.ts:94
 msgid "Nordic"
 msgstr "ノルディック"
 
-#: src/preferences/generalPage.ts:48
+#: src/preferences/generalPage.ts:94
 msgid "UK"
 msgstr "英国"
 
-#: src/preferences/generalPage.ts:48
+#: src/preferences/generalPage.ts:94
 msgid "US"
 msgstr "米国"
 
-#: src/preferences/generalPage.ts:61
+#: src/preferences/generalPage.ts:107
 msgid "Fahrenheit"
 msgstr "華氏"
 
-#: src/preferences/generalPage.ts:62
+#: src/preferences/generalPage.ts:108
 msgid "Celsius"
 msgstr "摂氏"
 
-#: src/preferences/generalPage.ts:78
+#: src/preferences/generalPage.ts:124
 msgid "Speed"
 msgstr "速度"
 
-#: src/preferences/generalPage.ts:106
+#: src/preferences/generalPage.ts:152
 msgid "Rain Measurement"
 msgstr "雨量"
 
-#: src/preferences/generalPage.ts:120
+#: src/preferences/generalPage.ts:166
 msgid "Distance"
 msgstr "距離"
 
-#: src/preferences/generalPage.ts:148
+#: src/preferences/generalPage.ts:194
 msgid "Degrees"
 msgstr "度"
 
-#: src/preferences/generalPage.ts:148
+#: src/preferences/generalPage.ts:194
 msgid "Eight-Point Compass"
 msgstr "方位（8点）"
 
-#: src/preferences/generalPage.ts:151
+#: src/preferences/generalPage.ts:197
 msgid "Direction"
 msgstr "方向"
 
-#: src/preferences/generalPage.ts:163
+#: src/preferences/generalPage.ts:209
 msgid "Weather Service"
 msgstr "天気サービス"
 
-#: src/preferences/generalPage.ts:164
+#: src/preferences/generalPage.ts:210
 msgid "Configure how the weather is attained"
 msgstr "天気の取得方法を設定します"
 
-#: src/preferences/generalPage.ts:171
+#: src/preferences/generalPage.ts:217
 msgid "Weather Provider"
 msgstr "天気プロバイダー"
 
-#: src/preferences/generalPage.ts:184
+#: src/preferences/generalPage.ts:230
 msgid "Configure how your location is found"
 msgstr "場所をどのように見つけるかを設定します"
 
-#: src/preferences/generalPage.ts:188 src/preferences/generalPage.ts:189
+#: src/preferences/generalPage.ts:234 src/preferences/generalPage.ts:235
 msgid "Online"
 msgstr "オンライン"
 
-#: src/preferences/generalPage.ts:190 src/preferences/generalPage.ts:249
+#: src/preferences/generalPage.ts:236 src/preferences/generalPage.ts:295
 msgid "System"
 msgstr "システム"
 
-#: src/preferences/generalPage.ts:191
+#: src/preferences/generalPage.ts:237
 msgid "Disable"
 msgstr "無効"
 
-#: src/preferences/generalPage.ts:194
+#: src/preferences/generalPage.ts:240
 msgid "Provider"
 msgstr "プロバイダー"
 
-#: src/preferences/generalPage.ts:206
+#: src/preferences/generalPage.ts:252
 msgid "Refresh Interval (Minutes)"
 msgstr "更新間隔 (分)"
 
-#: src/preferences/generalPage.ts:224
+#: src/preferences/generalPage.ts:270
 msgid "Accessibility"
 msgstr "アクセシビリティ"
 
-#: src/preferences/generalPage.ts:225
+#: src/preferences/generalPage.ts:271
 msgid "Configure accessibility features"
 msgstr "ユーザー補助機能を設定"
 
-#: src/preferences/generalPage.ts:228
+#: src/preferences/generalPage.ts:274
 msgid "High Contrast"
 msgstr "ハイコントラスト"
 
-#: src/preferences/generalPage.ts:240
+#: src/preferences/generalPage.ts:286
 msgid "Configure the panel and pop-up"
 msgstr "パネルとポップアップを設定する"
 
-#: src/preferences/generalPage.ts:250
+#: src/preferences/generalPage.ts:296
 msgid "Light"
 msgstr "ライト"
 
-#: src/preferences/generalPage.ts:251
+#: src/preferences/generalPage.ts:297
 msgid "Afterdark"
 msgstr "日没"
 
-#: src/preferences/generalPage.ts:252
+#: src/preferences/generalPage.ts:298
 msgid "Immersive"
 msgstr "没入型"
 
-#: src/preferences/generalPage.ts:255
+#: src/preferences/generalPage.ts:301
 msgid "Theme"
 msgstr "テーマ"
 
-#: src/preferences/generalPage.ts:265
+#: src/preferences/generalPage.ts:311
 msgid "Center"
 msgstr "中央揃え"
 
-#: src/preferences/generalPage.ts:265
+#: src/preferences/generalPage.ts:311
 msgid "Left"
 msgstr "左"
 
-#: src/preferences/generalPage.ts:265
+#: src/preferences/generalPage.ts:311
 msgid "Right"
 msgstr "右"
 
-#: src/preferences/generalPage.ts:268
+#: src/preferences/generalPage.ts:314
 msgid "Side of Panel"
 msgstr "パネルの水平位置"
 
-#: src/preferences/generalPage.ts:278
+#: src/preferences/generalPage.ts:327
 msgid "Order in Panel"
 msgstr "パネルの順序"
 
-#: src/preferences/generalPage.ts:294
+#: src/preferences/generalPage.ts:344
+#, fuzzy
+msgid "Pop-Up Offset"
+msgstr "ポップアップ"
+
+#: src/preferences/generalPage.ts:345
+msgid "Horizontal pop-up offset from 0–100."
+msgstr ""
+
+#: src/preferences/generalPage.ts:385
 msgid "Use Symbolic Icons in Panel"
 msgstr "シンボリックなアイコンを使用する"
 
-#: src/preferences/generalPage.ts:304
+#: src/preferences/generalPage.ts:395
 msgid "Always Use Packaged Icons"
 msgstr "常にパッケージ内のアイコンを使用する"
 
-#: src/preferences/generalPage.ts:315
+#: src/preferences/generalPage.ts:406
+msgid "Show Refresh Button"
+msgstr ""
+
+#: src/preferences/generalPage.ts:417
 msgid "Hide Error Popup"
 msgstr "エラー・ポップアップを隠す"
 
-#: src/preferences/generalPage.ts:316
+#: src/preferences/generalPage.ts:418
 msgid "If the popup just says Error, don't even show it."
 msgstr "ポップアップにエラーとだけ表示される場合は、表示しない。"
 
@@ -459,7 +508,7 @@ msgstr "ポップアップにエラーとだけ表示される場合は、表示
 msgid "Locations"
 msgstr "場所"
 
-#: src/preferences/locationsPage.ts:70 src/preferences/search.ts:76
+#: src/preferences/locationsPage.ts:70 src/preferences/search.ts:77
 msgid "Add"
 msgstr "追加"
 
@@ -501,27 +550,27 @@ msgstr "内部エラー"
 msgid "Something else edited the locations."
 msgstr "他の何かが場所を編集しました。"
 
-#: src/preferences/search.ts:46
+#: src/preferences/search.ts:47
 msgid "Search Location"
 msgstr "場所を検索"
 
-#: src/preferences/search.ts:55
+#: src/preferences/search.ts:56
 msgid "City, Neighborhood, etc."
 msgstr "市区町村等"
 
-#: src/preferences/search.ts:60
+#: src/preferences/search.ts:61
 msgid "Search"
 msgstr "検索"
 
-#: src/preferences/search.ts:207
+#: src/preferences/search.ts:208
 msgid "No results."
 msgstr "結果はありません。"
 
-#: src/preferences/search.ts:212
+#: src/preferences/search.ts:213
 msgid "No copyright information available."
 msgstr "著作権情報がありません。"
 
-#: src/prefs.ts:74
+#: src/prefs.ts:81
 #, javascript-format
 msgid ""
 "SimpleWeather doesn't know how to handle your locale.\n"
@@ -532,15 +581,15 @@ msgstr ""
 "\tエラー - %s\n"
 "GitHubでバグレポートを送信することを検討してください。"
 
-#: src/prefs.ts:77
+#: src/prefs.ts:84
 msgid "Don't Show Again"
 msgstr "今後表示しない"
 
-#: src/prefs.ts:77
+#: src/prefs.ts:84
 msgid "Ignore"
 msgstr "無視"
 
-#: src/prefs.ts:77
+#: src/prefs.ts:84
 msgid "Open GitHub"
 msgstr "GitHubを開く"
 
@@ -576,16 +625,16 @@ msgstr "南西"
 msgid "W"
 msgstr "西"
 
-#: src/units.ts:298
+#: src/units.ts:302
 msgid "Now"
 msgstr "現在"
 
-#: src/units.ts:302
+#: src/units.ts:303
 #, javascript-format
 msgid "%d h"
 msgstr "%d 時間"
 
-#: src/units.ts:303
+#: src/units.ts:304
 #, javascript-format
 msgid "%d min"
 msgstr "%d 分"
@@ -660,3 +709,6 @@ msgstr "場所の検知に失敗しました。"
 #: src/welcome.ts:174
 msgid "Please configure your location and units manually."
 msgstr "手動で場所と単位を設定してください。"
+
+#~ msgid "The extension has been reloaded with the new language."
+#~ msgstr "拡張機能が新しい言語で再読み込みされました。"
