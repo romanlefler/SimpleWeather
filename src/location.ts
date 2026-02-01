@@ -17,12 +17,18 @@
 
 import { gettext as _g } from "./gettext.js";
 import { getMyLocation } from "./myLocation.js";
+import { OmModel } from "./openmeteo-models.js";
 
 const latlonRegex = /^([0-9]+\.?[0-9]*),([0-9]+\.?[0-9]*)$/;
 
 export interface LatLon {
     lat : number;
     lon : number;
+}
+
+export interface ExtraLocData {
+    omModel? : OmModel;
+    countryCode? : string;
 }
 
 export class Location {
@@ -36,16 +42,21 @@ export class Location {
      */
     #hereCityName? : string;
 
+    #omModel : OmModel;
+    #countryCode? : string;
+
     #lat? : number;
     #lon? : number;
 
     #name? : string;
 
-    private constructor(name? : string, isHere? : boolean, lat? : number, lon? : number) {
+    private constructor(name? : string, isHere? : boolean, lat? : number, lon? : number, data : ExtraLocData = {}) {
         this.#name = name;
         this.#isHere = isHere ?? false;
         this.#lat = lat;
         this.#lon = lon;
+        this.#omModel = data.omModel ?? OmModel.AUTO;
+        this.#countryCode = data.countryCode;
     }
 
     getName() : string {
@@ -86,6 +97,15 @@ export class Location {
         return `${latFmt.format(latStr)} ${lonFmt.format(lonStr)}`;
     }
 
+    getOmModel() : OmModel {
+        return this.#omModel;
+    }
+
+    // Currently unused, may be useful in future
+    getCountryCode() : string | null {
+        return this.#countryCode ?? null;
+    }
+
     toString() {
         const obj : Record<string, any> = {
             name: this.#name
@@ -94,6 +114,12 @@ export class Location {
         if(this.#lat) {
             obj.lat = this.#lat;
             obj.lon = this.#lon;
+        }
+        if(this.#omModel !== OmModel.AUTO) {
+            obj.omm = this.#omModel;
+        }
+        if(this.#countryCode) {
+            obj.cc = this.#countryCode;
         }
 
         return JSON.stringify(obj);
@@ -122,20 +148,23 @@ export class Location {
         // either neither lat or lon or both lon and lat
         if(containsLat !== containsLon) return null;
 
+        if(typeof obj.cc !== "undefined" && typeof obj.cc !== "string") return null;
+
         return new Location(
             obj.name ?? undefined,
             obj.isHere,
             obj.lat,
-            obj.lon
+            obj.lon,
+            { omModel: obj.omModel, countryCode: obj.cc }
         );
     }
 
-    static newCoords(name : string, lat : number, lon : number) : Location {
-        return new Location(name, false, lat, lon);
+    static newCoords(name : string, lat : number, lon : number, data : ExtraLocData = {}) : Location {
+        return new Location(name, false, lat, lon, data);
     }
 
-    static newHere(name? : string) : Location {
-        return new Location(name, true);
+    static newHere(name? : string, data : ExtraLocData = {}) : Location {
+        return new Location(name, true, undefined, undefined, data);
     }
 
 }
