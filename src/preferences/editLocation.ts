@@ -58,6 +58,17 @@ export async function editLocation(parent : Gtk.Window, loc? : Location) : Promi
         text: coordsText
     });
 
+    coordsRow.connect("changed", w => {
+        const txt = w.text;
+        const coords = parseCoords(txt);
+        const valid = txt === "here" || coords !== null;
+        if (valid) {
+            w.remove_css_class("error");
+        } else {
+            w.add_css_class("error");
+        }
+    });
+
     group.add(nameRow);
     group.add(coordsRow);
 
