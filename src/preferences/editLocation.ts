@@ -41,6 +41,15 @@ export async function editLocation(parent : Gtk.Window, loc? : Location) : Promi
         title: _g("Name"),
         text: loc?.getRawName() ?? ""
     });
+    nameRow.connect("changed", w => {
+        if(w.text === "") {
+            w.add_css_class("error");
+            save.set_sensitive(false);
+        } else {
+            w.remove_css_class("error");
+            save.set_sensitive(true);
+        }
+    });
 
     // TODO: There should be a radio with Here vs. Coords
     // TODO: More localized coordinates; right now positive/negative with space separator is adequate
@@ -81,6 +90,7 @@ export async function editLocation(parent : Gtk.Window, loc? : Location) : Promi
         }),
         css_classes: [ "suggested-action" ]
     });
+    if(nameRow.text === "") save.set_sensitive(false);
     group.add(save);
     page.add(group);
     dialog.set_child(page);
