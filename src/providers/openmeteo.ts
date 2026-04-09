@@ -23,6 +23,7 @@ import { getGIconName, Icons } from "../icons.js"
 import { Provider } from "./provider.js";
 import { getTimezoneName } from "../utils.js";
 import { Location } from "../location.js";
+import { OmModel } from "../openmeteo-models.js";
 
 const ENDPOINT = "https://api.open-meteo.com/v1/forecast";
 
@@ -57,6 +58,7 @@ export class OpenMeteo implements Provider {
             temperature_unit: "fahrenheit",
             wind_speed_unit: "mph",
             precipitation_unit: "inch",
+            models: loc.getOmModel(),
             timezone: getTimezoneName()
         };
 
@@ -229,3 +231,4 @@ const codeToIcon : Record<number, { c : Condition, i : string }> = {
     96: { c : Condition.SNOWY, i: Icons.Hail },
     99: { c : Condition.SNOWY, i: Icons.Hail }
 };
+

@@ -146,7 +146,7 @@ msgstr "Настройки"
 
 #: src/popup.ts:363
 msgid "Retry"
-msgstr ""
+msgstr "Обновить"
 
 #: src/popup.ts:433
 #, javascript-format
@@ -305,7 +305,7 @@ msgstr "Метрические"
 
 #: src/preferences/generalPage.ts:48
 msgid "Nordic"
-msgstr ""
+msgstr "Скандинавские"
 
 #: src/preferences/generalPage.ts:48
 msgid "UK"
@@ -445,11 +445,11 @@ msgstr "Всегда использовать встроенные значки"
 
 #: src/preferences/generalPage.ts:315
 msgid "Hide Error Popup"
-msgstr ""
+msgstr "Скрывать всплывающее окно с ошибкой"
 
 #: src/preferences/generalPage.ts:316
 msgid "If the popup just says Error, don't even show it."
-msgstr ""
+msgstr "Не показывать всплывающее окно, если оно содержит только сообщение об ошибке"
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"

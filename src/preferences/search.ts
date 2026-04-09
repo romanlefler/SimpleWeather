@@ -26,6 +26,7 @@ import { gettext as _g } from "resource:///org/gnome/Shell/Extensions/js/extensi
 import { LibSoup } from "../libsoup.js";
 import { Config } from "../config.js";
 import { isNoInternet } from "../utils.js";
+import { OmModel } from "../openmeteo-models.js";
 
 const SEARCH_BASE = "https://nominatim.openstreetmap.org";
 const SEARCH_ENDPOINT = `${SEARCH_BASE}/search`;
@@ -38,6 +39,8 @@ interface SelLoc {
 
     lat : number;
     lon : number;
+
+    countryCode : string | undefined;
 }
 
 export async function searchDialog(parent : Gtk.Window, soup : LibSoup, cfg : Config) : Promise<Location | null> {
@@ -129,7 +132,8 @@ export async function searchDialog(parent : Gtk.Window, soup : LibSoup, cfg : Co
         addBtn.connect("clicked", () => {
             const item = resultsLocList[selModel.selected];
             if(item) {
-                const retLoc = Location.newCoords(item.friendlyName, item.lat, item.lon);
+                const countryCode = item.countryCode;
+                const retLoc = Location.newCoords(item.friendlyName, item.lat, item.lon, { countryCode });
                 resolve(retLoc);
                 dialog.close();
             }
@@ -228,7 +232,8 @@ async function fetchNominatim(a : SearchArgs) : Promise<SelLoc[]> {
             buttonName: name,
             friendlyName,
             lat,
-            lon
+            lon,
+            countryCode: place.address?.country_code
         });
     }
     return list;

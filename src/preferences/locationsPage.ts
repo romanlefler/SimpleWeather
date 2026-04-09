@@ -123,6 +123,12 @@ export class LocationsPage extends Adw.PreferencesPage {
             this.#moveLocs(index, true);
         });
         bottomBox.append(this.#moveDown);
+        this.#locGroup.add(bottomBox);
+
+        const addExtraBox = new Gtk.Box({
+            orientation: Gtk.Orientation.HORIZONTAL,
+            margin_top: 10
+        });
         const addMyLocBtn = new Gtk.Button({
             child: new Adw.ButtonContent({
                 label: _g("Add Here"),
@@ -134,8 +140,23 @@ export class LocationsPage extends Adw.PreferencesPage {
         addMyLocBtn.connect("clicked", () => {
             this.#appendLocObj(Location.newHere());
         });
-        bottomBox.append(addMyLocBtn);
-        this.#locGroup.add(bottomBox);
+        addExtraBox.append(addMyLocBtn);
+        const addCoordsBtn = new Gtk.Button({
+            child: new Adw.ButtonContent({
+                label: _g("Add By Coords"),
+                icon_name: "list-add-symbolic"
+            }),
+            hexpand: true,
+            margin_start: 2
+        });
+        addCoordsBtn.connect("clicked", () => {
+            this.#editLoc(null, -1).catch(e => {
+                console.error(e);
+                this.#toastError(e);
+            });
+        });
+        addExtraBox.append(addCoordsBtn);
+        this.#locGroup.add(addExtraBox);
 
         this.#guiRefreshList();
     }
