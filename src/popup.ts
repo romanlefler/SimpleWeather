@@ -17,8 +17,8 @@
 
 import Clutter from "gi://Clutter";
 import Gio from "gi://Gio";
-import St from "gi://St";
 import Meta from "gi://Meta";
+import St from "gi://St";
 import { ExtensionMetadata, gettext as _ } from "resource:///org/gnome/shell/extensions/extension.js";
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as PopupMenu from "resource:///org/gnome/shell/ui/popupMenu.js";
@@ -145,12 +145,18 @@ function copyrightText(provName : string) : string {
 
 // Widget must have reactive and track_hover true
 function setPointer(widget : Clutter.Actor) : void {
-    if(Meta.Cursor.POINTER && Meta.Cursor.DEFAULT) {
+    //@ts-ignore
+    if(widget.set_cursor_type) {
+        // GNOME 50
+        //@ts-ignore
+        widget.set_cursor_type(Clutter.CursorType.POINTER);
+    } else if(global?.display?.set_cursor) {
+        // Pre-GNOME 50
         widget.connect("enter-event", () => {
-            global.display.set_cursor(Meta.Cursor.POINTER);
+            global.display.set_cursor(Meta.Cursor?.POINTER ?? 5);
         });
         widget.connect("leave-event", () => {
-            global.display.set_cursor(Meta.Cursor.DEFAULT);
+            global.display.set_cursor(Meta.Cursor?.DEFAULT ?? 2);
         });
     }
 }

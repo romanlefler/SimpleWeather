@@ -145,7 +145,7 @@ msgstr "Setelan"
 
 #: src/popup.ts:363
 msgid "Retry"
-msgstr ""
+msgstr "Ulangi"
 
 #: src/popup.ts:433
 #, javascript-format
@@ -246,7 +246,7 @@ msgstr "Tampilkan Pagi/Petang"
 
 #: src/preferences/detailsPage.ts:251
 msgid "Use Countdown for Sun"
-msgstr ""
+msgstr "Gunakan Perhitungan Matahari"
 
 #: src/preferences/editLocation.ts:33
 #, javascript-format
@@ -264,7 +264,7 @@ msgstr "Nama"
 #: src/preferences/editLocation.ts:57
 #, javascript-format
 msgid "%s (e.g. \"%s\")"
-msgstr ""
+msgstr "%s (cth. \"%s\")"
 
 #: src/preferences/editLocation.ts:57
 msgid "Coordinates"
@@ -304,7 +304,7 @@ msgstr "Metrik"
 
 #: src/preferences/generalPage.ts:48
 msgid "Nordic"
-msgstr ""
+msgstr "Nordik"
 
 #: src/preferences/generalPage.ts:48
 msgid "UK"
@@ -436,19 +436,19 @@ msgstr "Urutan di Panel"
 
 #: src/preferences/generalPage.ts:294
 msgid "Use Symbolic Icons in Panel"
-msgstr ""
+msgstr "Gunakan Simbol di Panel"
 
 #: src/preferences/generalPage.ts:304
 msgid "Always Use Packaged Icons"
-msgstr ""
+msgstr "Selalu Gunakan Icon Aslinya"
 
 #: src/preferences/generalPage.ts:315
 msgid "Hide Error Popup"
-msgstr ""
+msgstr "Sembunyikan Tampilan Error"
 
 #: src/preferences/generalPage.ts:316
 msgid "If the popup just says Error, don't even show it."
-msgstr ""
+msgstr "Jika ada kegagalan, tidak usah ditampilkan."
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
@@ -541,49 +541,49 @@ msgstr "Buka GitHub"
 
 #: src/units.ts:133
 msgid "E"
-msgstr ""
+msgstr "T"
 
 #: src/units.ts:133
 msgid "N"
-msgstr ""
+msgstr "U"
 
 #: src/units.ts:133
 msgid "NE"
-msgstr ""
+msgstr "TL"
 
 #: src/units.ts:133
 msgid "NW"
-msgstr ""
+msgstr "BL"
 
 #: src/units.ts:133
 msgid "S"
-msgstr ""
+msgstr "D"
 
 #: src/units.ts:133
 msgid "SE"
-msgstr ""
+msgstr "TG"
 
 #: src/units.ts:133
 msgid "SW"
-msgstr ""
+msgstr "BD"
 
 #: src/units.ts:133
 msgid "W"
-msgstr ""
+msgstr "B"
 
 #: src/units.ts:298
 msgid "Now"
-msgstr ""
+msgstr "Sekarang"
 
 #: src/units.ts:302
 #, javascript-format
 msgid "%d h"
-msgstr ""
+msgstr "%d j"
 
 #: src/units.ts:303
 #, javascript-format
 msgid "%d min"
-msgstr ""
+msgstr "%d mnt"
 
 #: src/weather.ts:105
 msgid "Clear"
@@ -646,12 +646,12 @@ msgstr "Batalkan"
 
 #: src/welcome.ts:151
 msgid "Manual Configuration"
-msgstr ""
+msgstr "Konfigurasi Manual"
 
 #: src/welcome.ts:171
 msgid "Failed to detect location."
-msgstr ""
+msgstr "Gagal menemukan lokasi."
 
 #: src/welcome.ts:174
 msgid "Please configure your location and units manually."
-msgstr ""
+msgstr "Silakan atur unit dan lokasi secara manual."

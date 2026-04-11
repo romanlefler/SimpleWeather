@@ -110,7 +110,7 @@ export class AboutPage extends Adw.PreferencesPage {
             obj["gnome-version"] = PACKAGE_VERSION;
             obj["user-locale"] = (getLocales() ?? [])[0] ?? "Unknown";
             settingsBtnContent.icon_name = "checkbox";
-            settingsButton.get_clipboard().set(JSON.stringify(obj));
+            settingsButton.get_clipboard().set(JSON.stringify(obj, null, 1));
 
             let toast = new Adw.Toast({
                 title: _g("Copied settings JSON to clipboard.")

@@ -96,7 +96,7 @@ msgstr "Vasárnap"
 
 #: src/lang.ts:115
 msgid "Tuesday"
-msgstr "Csütörtök"
+msgstr "Kedd"
 
 #: src/lang.ts:115
 msgid "Wednesday"

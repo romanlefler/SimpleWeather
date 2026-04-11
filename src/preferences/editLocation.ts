@@ -41,6 +41,15 @@ export async function editLocation(parent : Gtk.Window, loc? : Location) : Promi
         title: _g("Name"),
         text: loc?.getRawName() ?? ""
     });
+    nameRow.connect("changed", w => {
+        if(w.text === "") {
+            w.add_css_class("error");
+            save.set_sensitive(false);
+        } else {
+            w.remove_css_class("error");
+            save.set_sensitive(true);
+        }
+    });
 
     // TODO: There should be a radio with Here vs. Coords
     // TODO: More localized coordinates; right now positive/negative with space separator is adequate
@@ -58,6 +67,19 @@ export async function editLocation(parent : Gtk.Window, loc? : Location) : Promi
         text: coordsText
     });
 
+    coordsRow.connect("changed", w => {
+        const txt = w.text;
+        const coords = parseCoords(txt);
+        const valid = txt === "here" || coords !== null;
+        if (valid) {
+            w.remove_css_class("error");
+            save.set_sensitive(true);
+        } else {
+            w.add_css_class("error");
+            save.set_sensitive(false);
+        }
+    });
+
     group.add(nameRow);
     group.add(coordsRow);
 
@@ -68,6 +90,7 @@ export async function editLocation(parent : Gtk.Window, loc? : Location) : Promi
         }),
         css_classes: [ "suggested-action" ]
     });
+    if(nameRow.text === "") save.set_sensitive(false);
     group.add(save);
     page.add(group);
     dialog.set_child(page);
@@ -112,6 +135,10 @@ export async function editLocation(parent : Gtk.Window, loc? : Location) : Promi
     return prom;
 }
 
+function isDecimalNum(s : string) : boolean {
+    return /^-?(\d+\.?\d*|\.\d+)$/.test(s);
+}
+
 function parseCoords(s : string) : [number, number] | null {
     // e.g. replaces 5,43 with 5.43 for l10n
     s = s.replace(/(\d)(,)(\d)/g, "$1.$2");
@@ -124,6 +151,7 @@ function parseCoords(s : string) : [number, number] | null {
 
     const split = s.split(" ");
     if(split.length !== 2) return null;
+    for(const s of split) if(!isDecimalNum(s.trim())) return null;
 
     // Parse float handles trimming
     const lat = parseFloat(split[0]);
