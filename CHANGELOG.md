@@ -1,4 +1,23 @@
 
+# v50.0.0
+
+## Features
+
+- Support for GNOME 50
+- New button to add a location by latitude/longitude instead of name search
+
+## Improvements
+
+- Format JSON settings dump from About menu (thanks @FrankDana)
+- Several edit location menu improvements
+
+## Translations
+
+- Hungarian (thanks arckster)
+- Indonesian (thanks Fakhrul Rijal)
+- Russian (thanks Valetss)
+- Turkish (thanks berkerozgur)
+
 # v49.2.0
 
 ## Features
