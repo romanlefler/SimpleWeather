@@ -277,12 +277,14 @@ export class Percentage implements Displayable {
     }
 }
 
-export class GettextKey implements Displayable {
-    #key : string;
-    constructor(key : string) {
+export class GettextKey {
+    #key: string;
+
+    constructor(key: string) {
         this.#key = key;
     }
-    display(_cfg : Config) : string {
+
+    display(_cfg:unknown) {
         return _g(this.#key);
     }
 }

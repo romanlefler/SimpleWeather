@@ -78,14 +78,18 @@ export function displayDetail(w : Weather, detail : Details, gettext : (s : stri
 
     const value = w[detail];
     let fmt: string;
-    if (typeof (value as any).display === "function") {
-        fmt = (value as Displayable).display(cfg);
-    } else if(value instanceof Date) {
-        fmt = displayTime(value, cfg);
-    } else if (typeof value === "number") {
-        fmt = `${Math.round(value)}`;
-    } else throw new Error("Detail must implement Displayable or be a Date or number.");
-
+    if (typeof value === "object" && value !== null && "display" in value && typeof value.display === "function") {
+    fmt = value.display(cfg);
+    }
+    else if (value instanceof Date) {
+    fmt = displayTime(value, cfg);
+    }
+    else if (typeof value === "number") {
+    fmt = `${Math.round(value)}`;
+    }
+    else
+	throw new Error("Detail must implement Displayable or be a Date or number.");
+    
     if(onlyValue) return fmt;
     const name = detailName[detail] as string;
     return `${realGettext(name)}: ${fmt}`;
