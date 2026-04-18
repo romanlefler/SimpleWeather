@@ -296,7 +296,7 @@ export class GeneralPage extends Adw.PreferencesPage {
 
         const panelOffsetRow = new Adw.ActionRow({
             title: _g("Pop-Up Offset"),
-            subtitle: _g("Horizontal pop-up offset from 0\u2013100.")
+            subtitle: _g("Horizontal pop-up offset from 0–100.")
         });
         const OFFSET_STEP = 5;
         const panelOffsetScale = new Gtk.Scale({
