@@ -19,6 +19,7 @@ import { Config } from "../config.js";
 import { LibSoup } from "../libsoup.js";
 import { Weather } from "../weather.js";
 import { OpenMeteo } from "./openmeteo.js";
+import { OpenWeatherMap } from "./openweathermap.js";
 
 export interface Provider {
 
@@ -33,11 +34,24 @@ export function createProvider(soup : LibSoup, config : Config) {
     switch(id) {
         case 1:
             return new OpenMeteo(soup, config);
+        case 2:
+            return new OpenWeatherMap(soup, config);
         default:
             throw new Error("Invalid weather provider ID.");
     }
 }
 
-export const WeatherProviderNames : readonly string[] = Object.freeze([
-    "Open-Meteo"
+export const WeatherProviderKeys : readonly string[] = Object.freeze([
+    "Open-Meteo", "OpenWeatherMap"
 ]);
+
+export function provRequiresKey(index : number) : boolean {
+    const v : Record<string, boolean> = {
+        0: false,
+        1: true
+    };
+    const ret = v[index];
+    if(typeof ret !== "boolean") throw new Error("Invalid argument.");
+    return ret;
+}
+
