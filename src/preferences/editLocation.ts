@@ -54,12 +54,15 @@ export async function editLocation(parent : Gtk.Window, loc? : Location) : Promi
     // TODO: There should be a radio with Here vs. Coords
     // TODO: More localized coordinates; right now positive/negative with space separator is adequate
     // (see https://i18n.leifgehrmann.com/geo-coordinates/)
+    let currentLatLon : [number, number] | null = null;
     let coordsText;
+
     if(!loc) coordsText = "40.7 -73.97";
     else if(loc.isHere()) coordsText = "here";
     else {
         const latLon = await loc.latLon();
         coordsText = `${latLon.lat} ${latLon.lon}`;
+        currentLatLon = [ latLon.lat, latLon.lon ];
     }
     const coordsRow = new Adw.EntryRow({
         // This is done kind of goofy since Coordinates is already translated
@@ -70,6 +73,7 @@ export async function editLocation(parent : Gtk.Window, loc? : Location) : Promi
     coordsRow.connect("changed", w => {
         const txt = w.text;
         const coords = parseCoords(txt);
+        setOsmLink(osmLink, coords);
         const valid = txt === "here" || coords !== null;
         if (valid) {
             w.remove_css_class("error");
@@ -92,6 +96,21 @@ export async function editLocation(parent : Gtk.Window, loc? : Location) : Promi
     });
     if(nameRow.text === "") save.set_sensitive(false);
     group.add(save);
+
+    const linkRow = new Adw.ActionRow({
+        title: _g("View in %s").format("OpenStreetMap"),
+        subtitle: _g("Open in Browser"),
+    });
+    const osmLink = new Gtk.LinkButton({
+        label: _g("Open"),
+        uri: "",
+        sensitive: false,
+        visited: false
+    });
+    linkRow.add_suffix(osmLink);
+    setOsmLink(osmLink, currentLatLon);
+    group.add(linkRow);
+
     page.add(group);
     dialog.set_child(page);
     dialog.set_default_widget(save);
@@ -159,3 +178,18 @@ function parseCoords(s : string) : [number, number] | null {
     if(isNaN(lat) || isNaN(lon)) return null;
     else return [ lat, lon ];
 }
+
+function setOsmLink(btn : Gtk.LinkButton, coords : [number, number] | null) {
+    if(coords === null) {
+        btn.uri = "";
+        btn.sensitive = false;
+        return;
+    }
+
+    const zoom = 11; // Higher = more zoomed in
+    const [ lat, lon ] = coords!;
+    const url = `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=${zoom}/${lat}/${lon}`;
+    btn.uri = url;
+    btn.sensitive = true;
+}
+
