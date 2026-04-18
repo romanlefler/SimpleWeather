@@ -146,7 +146,7 @@ msgstr "Ustawienia"
 
 #: src/popup.ts:363
 msgid "Retry"
-msgstr ""
+msgstr "Spróbuj ponownie"
 
 #: src/popup.ts:433
 #, javascript-format
@@ -164,11 +164,11 @@ msgstr "O programie"
 
 #: src/preferences/aboutPage.ts:59
 msgid "GitHub Repository"
-msgstr "GitHub Repository"
+msgstr "Repozytorium Githuba"
 
 #: src/preferences/aboutPage.ts:61
 msgid "Support Me"
-msgstr "Wsparcie mnie"
+msgstr "Wsparcie"
 
 #: src/preferences/aboutPage.ts:68
 msgid "SimpleWeather Version"
@@ -189,7 +189,7 @@ msgstr "Skopiowano ustawienia do schowka (JSON)."
 #: src/preferences/aboutPage.ts:116
 #, javascript-format
 msgid "Contributions and translations are welcome! Read how on %s."
-msgstr "Wkłady i tłumaczenia są mile widziane! Przeczytaj jak na %s."
+msgstr "Wkład w rozwój i tłumaczenia są mile widziane! Przeczytaj jak na %s."
 
 #: src/preferences/aboutPage.ts:119
 #, javascript-format
@@ -305,7 +305,7 @@ msgstr "Metryczne"
 
 #: src/preferences/generalPage.ts:48
 msgid "Nordic"
-msgstr ""
+msgstr "Skandynawski"
 
 #: src/preferences/generalPage.ts:48
 msgid "UK"
@@ -361,7 +361,7 @@ msgstr "Dostawca pogody"
 
 #: src/preferences/generalPage.ts:184
 msgid "Configure how your location is found"
-msgstr "Wybierz jak ma zostać znaleziona Twoja lokalizacja"
+msgstr "Wybierz sposób znalezienia Twojej lokalizacji"
 
 #: src/preferences/generalPage.ts:188 src/preferences/generalPage.ts:189
 msgid "Online"
@@ -445,11 +445,11 @@ msgstr "Zawsze używaj ikon wbudowanych"
 
 #: src/preferences/generalPage.ts:315
 msgid "Hide Error Popup"
-msgstr ""
+msgstr "Ukryj okno błędu"
 
 #: src/preferences/generalPage.ts:316
 msgid "If the popup just says Error, don't even show it."
-msgstr ""
+msgstr "Nie pokazuj okna, które komunikuje błąd."
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
@@ -538,7 +538,7 @@ msgstr "Ignoruj"
 
 #: src/prefs.ts:77
 msgid "Open GitHub"
-msgstr "Open GitHub"
+msgstr "Otwórz GitHub"
 
 #: src/units.ts:133
 msgid "E"
@@ -588,7 +588,7 @@ msgstr "%d min"
 
 #: src/weather.ts:105
 msgid "Clear"
-msgstr "Wyczyść"
+msgstr "Pogodnie"
 
 #: src/weather.ts:105
 msgid "Sunny"
@@ -656,3 +656,19 @@ msgstr "Nie udało się wykryć lokalizacji."
 #: src/welcome.ts:174
 msgid "Please configure your location and units manually."
 msgstr "Proszę skonfigurować lokalizację i jednostki manualnie."
+
+#: src/preferences/generalPage.ts:360
+msgid "Show Refresh Button"
+msgstr "Pokaż przycisk odświeżania"
+
+#: src/preferences/locationsPage.ts:146
+msgid "Add By Coords"
+msgstr "Dodaj przez współrzędne"
+
+#: src/preferences/generalPage.ts:298
+msgid "Pop-Up Offset"
+msgstr "Przesunięcie okna"
+
+#: src/preferences/generalPage.ts:299
+msgid "Horizontal pop-up offset from 0\u2013100"
+msgstr "Poziome przesunięcie okna w zakresie 0\u2013100"

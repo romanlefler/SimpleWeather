@@ -78,7 +78,7 @@ export function displayDetail(w : Weather, detail : Details, gettext : (s : stri
 
     const value = w[detail];
     let fmt: string;
-    if (typeof (value as any).display === "function") {
+    if (typeof (value as any)?.display === "function") {
         fmt = (value as Displayable).display(cfg);
     } else if(value instanceof Date) {
         fmt = displayTime(value, cfg);
