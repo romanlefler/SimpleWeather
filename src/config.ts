@@ -20,7 +20,7 @@ import Gio from "gi://Gio";
 import { DirectionUnits, DistanceUnits, PressureUnits, RainMeasurementUnits, SpeedUnits, TempUnits } from "./units.js";
 import { Location } from "./location.js";
 import { MyLocationProvider } from "./myLocation.js";
-import { WeatherProviderNames } from "./providers/provider.js";
+import { WeatherProviderKeys } from "./providers/provider.js";
 import { Details } from "./details.js";
 
 export enum UnitPreset {
@@ -155,7 +155,7 @@ export class Config {
 
     getWeatherProvider() : number {
         const val = this.#settings.get_enum("weather-provider");
-        if(val < 1 || val > WeatherProviderNames.length) return 1;
+        if(val < 1 || val > WeatherProviderKeys.length) return 1;
         else return val;
     }
 
@@ -430,6 +430,21 @@ export class Config {
         this.#handlerIds.push(id);
     }
 
+    /**
+     * Gets the API keys map. The key is the index of the provider and the value is the API key.
+     * The map will not be NULL or undefined, but each provider is not guaranteed to be present.
+     */
+    getApiKeys() : Map<string, string> {
+        const gval = this.#settings.get_value("api-keys");
+        return readGTypeABSS(gval);
+    }
+
+    onApiKeysChanged(callback : () => void) : void {
+        const id = this.#settings.connect("changed", (_, key) => {
+            if(key === "api-keys") callback();
+        });
+        this.#handlerIds.push(id);
+    }
 
 
     getUnitPreset() : UnitPreset {
@@ -483,6 +498,9 @@ export class Config {
     }
 }
 
+/**
+ * Reads a GVariant of type "as" and returns a string array.
+ */
 function readGTypeAS(gvariant : GLib.Variant<any>) : string[] {
     const len = gvariant.n_children();
 
@@ -496,6 +514,9 @@ function readGTypeAS(gvariant : GLib.Variant<any>) : string[] {
     return arr;
 }
 
+/**
+ * Writes a string array into a GVariant of type "as".
+ */
 export function writeGTypeAS(arr : string[]) : GLib.Variant<any> {
     const gVariantArr = [ ];
     for(let k of arr) {
@@ -507,3 +528,50 @@ export function writeGTypeAS(arr : string[]) : GLib.Variant<any> {
         gVariantArr
     );
 }
+
+/**
+ * Reads a GVariant of type "a{ss}" and returns a Map<string, string>.
+ */
+export function readGTypeABSS(gvariant : GLib.Variant<any>) : Map<string, string>
+{
+    const len = gvariant.n_children();
+
+    const map = new Map<string, string>();
+    for (let i = 0; i < len; i++)
+    {
+        const gEntry = gvariant.get_child_value(i);
+
+        const gKey = gEntry.get_child_value(0);
+        const gValue = gEntry.get_child_value(1);
+
+        const key = gKey.get_string()[0];
+        const value = gValue.get_string()[0];
+
+        map.set(key, value);
+    }
+
+    return map;
+}
+
+/**
+ * Writes a Map<string, string> into a GVariant of type "a{ss}".
+ */
+export function writeGTypeABSS(map : Map<string, string>) : GLib.Variant<any>
+{
+    const gVariantEntries : GLib.Variant<any>[] = [];
+
+    for (const [key, value] of map)
+    {
+        const gKey = GLib.Variant.new_string(key);
+        const gValue = GLib.Variant.new_string(value);
+
+        const gEntry = GLib.Variant.new_dict_entry(gKey, gValue);
+        gVariantEntries.push(gEntry);
+    }
+
+    return GLib.Variant.new_array(
+        new GLib.VariantType("{ss}"),
+        gVariantEntries
+    );
+}
+

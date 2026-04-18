@@ -20,7 +20,8 @@ import Gtk from "gi://Gtk";
 import Gio from "gi://Gio";
 import Adw from "gi://Adw";
 import { gettext as _g } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
-import { WeatherProviderNames } from "../providers/provider.js";
+import { WeatherProviderKeys, provRequiresKey } from "../providers/provider.js";
+import { readGTypeABSS, writeGTypeABSS } from "../config.js";
 
 function setVisibilites(value : boolean, ...widgets : Gtk.Widget[]) {
     for(let w of widgets) w.visible = value;
@@ -165,18 +166,40 @@ export class GeneralPage extends Adw.PreferencesPage {
         });
 
         const wProvList = new Gtk.StringList({
-            strings: WeatherProviderNames as string[]
+            // Add an asterisk to paid providers
+            strings: WeatherProviderKeys.map((s, i) => provRequiresKey(i) ? s + "*" : s)
         });
+        const currentWProv = settings.get_enum("weather-provider") - 1
         const wProvRow = new Adw.ComboRow({
             title: _g("Weather Provider"),
             model: wProvList,
-            selected: settings.get_enum("weather-provider") - 1
+            selected: currentWProv
         });
         wProvRow.connect("notify::selected", () => {
-            settings.set_enum("weather-provider", wProvRow.selected + 1);
+            const i = wProvRow.selected;
+
+            settings.set_enum("weather-provider", i + 1);
             settings.apply();
+
+            const keyNeeded = provRequiresKey(i);
+            apiKeyRow.title = keyNeeded ? _g("API Key (Required)") : _g("API Key");
+            apiKeyRow.sensitive = keyNeeded;
+            apiKeyRow.text = this.#getApiKey(settings, i);
         });
         weatherServiceGroup.add(wProvRow);
+
+        const currentKeyNeeded = provRequiresKey(currentWProv);
+        const currentApiKey = this.#getApiKey(settings, currentWProv);
+        const apiKeyRow = new Adw.EntryRow({
+            title: currentKeyNeeded ? _g("API Key (Required)") : _g("API Key"),
+            sensitive: currentKeyNeeded,
+            text: currentApiKey,
+            showApplyButton: true
+        });
+        const setKey = () => this.#setApiKey(settings, apiKeyRow, wProvRow);
+        apiKeyRow.connect("apply", setKey);
+        weatherServiceGroup.add(apiKeyRow);
+
         this.add(weatherServiceGroup);
 
         const myLocGroup = new Adw.PreferencesGroup({
@@ -380,6 +403,27 @@ export class GeneralPage extends Adw.PreferencesPage {
         panelGroup.add(hideErrPopupRow);
 
         this.add(panelGroup);
+    }
+
+    #getApiKey(settings : Gio.Settings, providerIndex : number) : string {
+        const map = readGTypeABSS(settings.get_value("api-keys"));
+        const key = WeatherProviderKeys[providerIndex];
+        return map.get(key) ?? "";
+    }
+
+    #setApiKey(settings : Gio.Settings, apiKeyRow : Adw.EntryRow, wProvRow : Adw.ComboRow) {
+        const v = apiKeyRow.text.trim();
+        const i = wProvRow.selected;
+        const k = WeatherProviderKeys[i];
+        console.error(`Save triggered (${i}: ${v})`);
+
+        const map = readGTypeABSS(settings.get_value("api-keys"));
+        if(v.length > 0) map.set(k, v);
+        else map.delete(k);
+
+        const gtype = writeGTypeABSS(map);
+        settings.set_value("api-keys", gtype);
+        settings.apply();
     }
 
 }
