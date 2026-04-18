@@ -670,5 +670,5 @@ msgid "Pop-Up Offset"
 msgstr "Przesunięcie okna"
 
 #: src/preferences/generalPage.ts:299
-msgid "Horizontal pop-up offset from 0\u2013100"
-msgstr "Poziome przesunięcie okna w zakresie 0\u2013100"
+msgid "Horizontal pop-up offset from 0–100"
+msgstr "Poziome przesunięcie okna w zakresie 0–100"
