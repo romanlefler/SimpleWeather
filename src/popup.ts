@@ -27,7 +27,8 @@ import { Condition, Forecast, Weather } from "./weather.js";
 import { displayDayOfWeek, displayTime } from "./lang.js";
 import { gettext as _g } from "./gettext.js";
 import { Details, displayDetail } from "./details.js";
-import { theme, themeInitAll } from "./theme.js";
+import { theme } from "./theme.js";
+import { CarouselBox } from "./carouselbox.js";
 
 interface ForecastCard {
     card : St.BoxLayout;
@@ -230,27 +231,30 @@ export class Popup {
         const forecasts = new St.BoxLayout({
             vertical: false,
             x_expand: true,
-            y_expand: false,
-            track_hover: true,
-            reactive: true,
-            style_class: "button simpleweather-card-row"
+            y_expand: true,
+            style_class: "simpleweather-card-row"
         });
-        theme(forecasts, "forecast-box button");
         this.#forecastCards = [ ];
         for(let i = 0; i < 7; i++) {
             const c = createForecastCard();
             forecasts.add_child(c.card);
             this.#forecastCards.push(c);
         }
-        rightVBox.add_child(forecasts);
+        const carousel = new CarouselBox(forecasts, ForecastMode.Max, {
+            track_hover: true,
+            style_class: "button"
+        });
+        carousel.setPage(this.#foreMode);
+        theme(carousel, "forecast-box button");
+
+        rightVBox.add_child(carousel);
+
         this.#currentLabels = createCurInfo(this.#config, rightVBox);
         if(this.#currentLabels.length !== 8) throw new Error("Incorrect cur len.");
         hbox.add_child(rightVBox);
 
-        forecasts.connect("button-press-event", () => {
-            this.#foreMode++;
-            if(this.#foreMode > ForecastMode.Max) this.#foreMode = 0;
-
+        carousel.onPageChanged(() => {
+            this.#foreMode = carousel.page;
             const w = this.#cachedWeather;
             if(w) this.#updateForecast(w);
         });
@@ -351,7 +355,7 @@ export class Popup {
         });
         baseText.actor.add_child(configBtn);
 
-        setPointer(forecasts);
+        setPointer(carousel);
         setPointer(this.#placeBtn);
         setPointer(configBtn);
 

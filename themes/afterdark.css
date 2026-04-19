@@ -30,4 +30,12 @@
     background: #35332D;
 }
 
+.sw-style-afterdark-carousel-dot {
+    background-color: rgba(239, 237, 220, 0.35);
+}
+
+.sw-style-afterdark-carousel-dot.sw-active {
+    background-color: rgba(239, 237, 220, 0.95);
+}
+
 /* end theme afterdark */

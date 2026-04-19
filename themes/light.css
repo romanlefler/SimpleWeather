@@ -1,5 +1,5 @@
 
-/* light theme */
+/* begin theme light */
 
 .sw-style-light-menu {
     border: 4px solid #CACCD2;
@@ -29,3 +29,14 @@
 .sw-style-light-button:hover {
     background: #CACCD2;
 }
+
+.sw-style-light-carousel-dot {
+    background-color: rgba(16, 18, 35, 0.35);
+}
+
+.sw-style-light-carousel-dot.sw-active {
+    background-color: rgba(16, 18, 35, 0.95);
+}
+
+/* end theme light */
+

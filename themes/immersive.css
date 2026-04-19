@@ -1,7 +1,6 @@
 
 /* begin theme immersive */
 
-
 .sw-style-immersive-menu {
     border: none;
     box-shadow: none;
@@ -75,6 +74,14 @@
 .sw-style-immersive-menu.swa-stormy {
     background: url("./stormy-aiac-pl.jpg");
     background-size: cover;
+}
+
+.sw-style-immersive-carousel-dot {
+    background-color: rgba(220, 237, 239, 0.35);
+}
+
+.sw-style-immersive-carousel-dot.sw-active {
+    background-color: rgba(220, 237, 239, 0.95);
 }
 
 /* end theme immersive */
