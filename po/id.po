@@ -73,7 +73,7 @@ msgstr "Tertutup Awan"
 
 #: src/details.ts:72
 msgid "Sun Countdown"
-msgstr ""
+msgstr "Menjelang Terbenam"
 
 #: src/details.ts:77 src/popup.ts:459
 msgid "Invalid"
