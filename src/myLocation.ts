@@ -66,9 +66,9 @@ export function freeMyLocation() {
 export async function getMyLocation() : Promise<MyLocResult> {
     if (cachedMyLoc) {
         const diffMin = (Date.now() - lastGotTime.getTime()) / 1000 / 60;
-        // TODO: This should be a setting
-        // refresh every 60 min
-        if (diffMin < config.getMyLocationRefreshMin()) return cloneCache();
+
+        const refreshIntervalMin = config.getMyLocationRefreshMin();
+        if (diffMin < refreshIntervalMin) return cloneCache();
     }
 
     try {
