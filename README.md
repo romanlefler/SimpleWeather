@@ -14,7 +14,43 @@ SimpleWeather is highly configurable but has zero required setup.
 
 ## Installation
 
+### Package Managers
+
+Note that the following packages are not affiliated with this project or checked and may be out of date, broken, etc.
+Install at your own risk.
+
+- **ALT Linux Sisyphus**: [gnome-shell-extension-simple-weather](https://pkgs.org/download/gnome-shell-extension-simple-weather)
+- **AUR** *(Arch Linux)*: [gnome-shell-extension-simpleweather](https://aur.archlinux.org/packages/gnome-shell-extension-simpleweather)
+- **FreeBSD**: [gnome-shell-extension-simple-weather](https://www.freshports.org/deskutils/gnome-shell-extension-simple-weather/)
+
+If you make a package for another platform please make an issue and tell me to list it here.
+
+### GNOME Extensions
+
 [![Get on GNOME Extensions](./docs/ego.png)](https://extensions.gnome.org/extension/8261/simpleweather/)
+
+Generally the recommended way, although sometimes updates take a while to show up.
+
+### Manual Installation
+
+Not recommended, but a guaranteed way to have the latest version.
+
+```shell
+git clone https://github.com/romanlefler/SimpleWeather.git
+
+cd SimpleWeather
+git switch master
+
+make install
+```
+
+Then to update, go back to the directory and pull the new version:
+
+```shell
+git pull
+
+make install
+```
 
 ## Features
 
