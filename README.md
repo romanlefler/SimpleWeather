@@ -62,6 +62,7 @@ make install
 - Show hourly and weekly forecast
 - Configurable details like Rain Chance, Humidity, Wind Speed, UV, etc.
 - Location lookup with Nominatim or use latitude/longitude
+- Change provider between Open-Meteo or OpenWeatherMap (w/ API Key)
 
 ## Translations
 
