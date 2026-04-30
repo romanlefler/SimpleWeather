@@ -57,7 +57,7 @@ export default class SimpleWeatherPreferences extends ExtensionPreferences {
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
         );
 
-        window.add(new GeneralPage(settings));
+        window.add(new GeneralPage(settings, window));
         window.add(new LocationsPage(settings, window));
         window.add(new DetailsPage(settings));
         window.add(new AboutPage(settings, this.#metadata, window));
