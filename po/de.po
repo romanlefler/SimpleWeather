@@ -72,7 +72,7 @@ msgstr "Wolkenbedeckung"
 
 #: src/details.ts:72
 msgid "Sun Countdown"
-msgstr ""
+msgstr "Sonnen-Countdown"
 
 #: src/details.ts:77 src/popup.ts:459
 msgid "Invalid"
@@ -144,7 +144,7 @@ msgstr "Einstellungen"
 
 #: src/popup.ts:363
 msgid "Retry"
-msgstr ""
+msgstr "Erneut versuchen"
 
 #: src/popup.ts:433
 #, javascript-format
@@ -246,7 +246,7 @@ msgstr "Sonnenauf-/untergang anzeigen"
 
 #: src/preferences/detailsPage.ts:251
 msgid "Use Countdown for Sun"
-msgstr ""
+msgstr "Nutzung der Countdown-Funktion für die Sonne"
 
 #: src/preferences/editLocation.ts:33
 #, javascript-format
@@ -264,7 +264,7 @@ msgstr "Name"
 #: src/preferences/editLocation.ts:57
 #, javascript-format
 msgid "%s (e.g. \"%s\")"
-msgstr ""
+msgstr "%s (z. B. \"%s\")"
 
 #: src/preferences/editLocation.ts:57
 msgid "Coordinates"
@@ -304,7 +304,7 @@ msgstr "Metrisch"
 
 #: src/preferences/generalPage.ts:48
 msgid "Nordic"
-msgstr ""
+msgstr "Nordisch"
 
 #: src/preferences/generalPage.ts:48
 msgid "UK"
@@ -436,19 +436,19 @@ msgstr "Reihenfolge im Panel"
 
 #: src/preferences/generalPage.ts:294
 msgid "Use Symbolic Icons in Panel"
-msgstr ""
+msgstr "Symbolische Symbole im Panel verwenden"
 
 #: src/preferences/generalPage.ts:304
 msgid "Always Use Packaged Icons"
-msgstr ""
+msgstr "Immer die mitgelieferten Symbole verwenden"
 
 #: src/preferences/generalPage.ts:315
 msgid "Hide Error Popup"
-msgstr ""
+msgstr "Fehler-Popup ausblenden"
 
 #: src/preferences/generalPage.ts:316
 msgid "If the popup just says Error, don't even show it."
-msgstr ""
+msgstr "Wenn das Popup nur 'Fehler' anzeigt, zeigen Sie es nicht an."
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
@@ -541,49 +541,49 @@ msgstr "GitHub öffnen"
 
 #: src/units.ts:133
 msgid "E"
-msgstr ""
+msgstr "O"
 
 #: src/units.ts:133
 msgid "N"
-msgstr ""
+msgstr "N"
 
 #: src/units.ts:133
 msgid "NE"
-msgstr ""
+msgstr "NO"
 
 #: src/units.ts:133
 msgid "NW"
-msgstr ""
+msgstr "NW"
 
 #: src/units.ts:133
 msgid "S"
-msgstr ""
+msgstr "S"
 
 #: src/units.ts:133
 msgid "SE"
-msgstr ""
+msgstr "SO"
 
 #: src/units.ts:133
 msgid "SW"
-msgstr ""
+msgstr "SW"
 
 #: src/units.ts:133
 msgid "W"
-msgstr ""
+msgstr "W"
 
 #: src/units.ts:298
 msgid "Now"
-msgstr ""
+msgstr "Jetzt"
 
 #: src/units.ts:302
 #, javascript-format
 msgid "%d h"
-msgstr ""
+msgstr "%d Std."
 
 #: src/units.ts:303
 #, javascript-format
 msgid "%d min"
-msgstr ""
+msgstr "%d Min."
 
 #: src/weather.ts:105
 msgid "Clear"
@@ -647,12 +647,12 @@ msgstr "Abbrechen"
 
 #: src/welcome.ts:151
 msgid "Manual Configuration"
-msgstr ""
+msgstr "Manuelle Konfiguration"
 
 #: src/welcome.ts:171
 msgid "Failed to detect location."
-msgstr ""
+msgstr "Standort konnte nicht erkannt werden."
 
 #: src/welcome.ts:174
 msgid "Please configure your location and units manually."
-msgstr ""
+msgstr "Bitte konfigurieren Sie Ihren Standort und die Einheiten manuell."
