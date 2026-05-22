@@ -72,7 +72,7 @@ msgstr "Couverture nuageuse"
 
 #: src/details.ts:72
 msgid "Sun Countdown"
-msgstr ""
+msgstr "Compteur solaire"
 
 #: src/details.ts:77 src/popup.ts:459
 msgid "Invalid"
@@ -144,7 +144,7 @@ msgstr "Réglages"
 
 #: src/popup.ts:363
 msgid "Retry"
-msgstr ""
+msgstr "Réessayer"
 
 #: src/popup.ts:433
 #, javascript-format
@@ -264,7 +264,7 @@ msgstr "Nom"
 #: src/preferences/editLocation.ts:57
 #, javascript-format
 msgid "%s (e.g. \"%s\")"
-msgstr ""
+msgstr "%s (e.g. \"%s\")"
 
 #: src/preferences/editLocation.ts:57
 msgid "Coordinates"
@@ -578,12 +578,12 @@ msgstr "Maintenant"
 #: src/units.ts:302
 #, javascript-format
 msgid "%d h"
-msgstr ""
+msgstr "%d h"
 
 #: src/units.ts:303
 #, javascript-format
 msgid "%d min"
-msgstr ""
+msgstr "%d min"
 
 #: src/weather.ts:105
 msgid "Clear"

@@ -22,6 +22,8 @@ import Adw from "gi://Adw";
 import { gettext as _g } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
 import { WeatherProviderKeys, provRequiresKey } from "../providers/provider.js";
 import { readGTypeABSS, writeGTypeABSS } from "../config.js";
+import { LibSoup } from "../libsoup.js";
+import { isNoInternet } from "../utils.js";
 
 function setVisibilites(value : boolean, ...widgets : Gtk.Widget[]) {
     for(let w of widgets) w.visible = value;
@@ -33,12 +35,15 @@ export class GeneralPage extends Adw.PreferencesPage {
         GObject.registerClass(this);
     }
 
-    constructor(settings : Gio.Settings) {
+    #window : Adw.PreferencesWindow;
+
+    constructor(settings : Gio.Settings, window : Adw.PreferencesWindow) {
 
         super({
             title: _g("General"),
             icon_name: "preferences-system-symbolic"
         });
+        this.#window = window;
 
         const unitGroup = new Adw.PreferencesGroup({
             title: _g("Units"),
@@ -415,7 +420,6 @@ export class GeneralPage extends Adw.PreferencesPage {
         const v = apiKeyRow.text.trim();
         const i = wProvRow.selected;
         const k = WeatherProviderKeys[i];
-        console.error(`Save triggered (${i}: ${v})`);
 
         const map = readGTypeABSS(settings.get_value("api-keys"));
         if(v.length > 0) map.set(k, v);
@@ -424,6 +428,41 @@ export class GeneralPage extends Adw.PreferencesPage {
         const gtype = writeGTypeABSS(map);
         settings.set_value("api-keys", gtype);
         settings.apply();
+
+        this.#validateOwmKey(v).then(msg => {
+            if(msg !== null) {
+                const alert = new Gtk.AlertDialog({
+                    message: _g("API Key Warning"),
+                    detail: msg
+                });
+                alert.show(this.#window);
+            }
+        });
+    }
+
+    /**
+     * Returns an error message, or null if valid or unable to validate.
+     */
+    async #validateOwmKey(key : string) : Promise<string | null> {
+        const soup = new LibSoup();
+        try {
+            const resp = await soup.fetchJson(
+                "https://api.openweathermap.org/data/3.0/onecall",
+                {
+                    "lat": "40.73", "lon": "-73.93",
+                    "exclude": "current,minutely,hourly,daily,alerts",
+                    "appid": key
+                }
+            );
+
+            if(resp.status === 401) return _g("Key is invalid or is not subscribed to the One Call 3.0 API.");
+            else return null;
+        } catch(e) {
+            if(isNoInternet(e)) return null;
+            else return _g("Error when validating API Key: %s").format(e?.toString() ?? _g("Unknown Error"));
+        } finally {
+            soup.free();
+        }
     }
 
 }
