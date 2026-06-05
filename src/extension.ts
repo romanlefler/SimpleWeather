@@ -305,7 +305,6 @@ export default class SimpleWeatherExtension extends Extension {
         this.#libsoup = undefined;
         this.#config?.free();
         this.#config = undefined;
-        this.#updateWeather();
 
         freeMyLocation();
         this.#provider = undefined;
