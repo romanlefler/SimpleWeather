@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
-"POT-Creation-Date: 2026-01-13 23:08-0600\n"
+"POT-Creation-Date: 2026-06-05 16:48-0500\n"
 "PO-Revision-Date: 2025-08-24 14:37+0800\n"
 "Last-Translator: Fakhrul Rijal <frijal@gmail.com>\n"
 "Language-Team: English\n"
@@ -18,12 +18,12 @@ msgstr ""
 "X-Crowdin-File-ID: 2\n"
 "X-Generator: Poedit 3.6\n"
 
-#: src/autoConfig.ts:59 src/location.ts:53 src/location.ts:63
-#: src/preferences/generalPage.ts:183
+#: src/autoConfig.ts:59 src/location.ts:64 src/location.ts:74
+#: src/preferences/generalPage.ts:211
 msgid "My Location"
 msgstr "Lokasi Saya"
 
-#: src/details.ts:60 src/preferences/generalPage.ts:64
+#: src/details.ts:60 src/preferences/generalPage.ts:70
 msgid "Temperature"
 msgstr "Temperatur"
 
@@ -51,7 +51,7 @@ msgstr "Hembusan Angin"
 msgid "UV High"
 msgstr "Sinar UV"
 
-#: src/details.ts:67 src/preferences/generalPage.ts:92
+#: src/details.ts:67 src/preferences/generalPage.ts:98
 msgid "Pressure"
 msgstr "Tekanan"
 
@@ -75,13 +75,26 @@ msgstr "Tertutup Awan"
 msgid "Sun Countdown"
 msgstr "Menjelang Terbenam"
 
-#: src/details.ts:77 src/popup.ts:459
+#: src/details.ts:77 src/popup.ts:507
 msgid "Invalid"
 msgstr "Gagal"
 
-#: src/extension.ts:357 src/preferences/search.ts:159
+#: src/errors.ts:57
+msgid "Location unavailable or permission not granted."
+msgstr ""
+
+#: src/errors.ts:79
+#, javascript-format
+msgid "Service down (%s)"
+msgstr ""
+
+#: src/extension.ts:360 src/preferences/search.ts:164
 msgid "No Internet"
 msgstr "Tidak ada Internet"
+
+#: src/extension.ts:366 src/preferences/generalPage.ts:462
+msgid "Unknown Error"
+msgstr ""
 
 #: src/lang.ts:112
 msgid "Today"
@@ -115,44 +128,48 @@ msgstr "Sabtu"
 msgid "Thursday"
 msgstr "Kamis"
 
-#: src/location.ts:82
+#: src/location.ts:93
 #, javascript-format
 msgid "%f°N"
 msgstr "%f°U"
 
-#: src/location.ts:82
+#: src/location.ts:93
 #, javascript-format
 msgid "%f°S"
 msgstr "%f°S"
 
-#: src/location.ts:83
+#: src/location.ts:94
 #, javascript-format
 msgid "%f°E"
 msgstr "%f°T"
 
-#: src/location.ts:83
+#: src/location.ts:94
 #, javascript-format
 msgid "%f°W"
 msgstr "%f°B"
 
-#: src/popup.ts:143
+#: src/popup.ts:144
 msgid "Weather Data"
 msgstr "Data Cuaca"
 
-#: src/popup.ts:317 src/preferences/aboutPage.ts:76
+#: src/popup.ts:290
+msgid "Refresh"
+msgstr ""
+
+#: src/popup.ts:345 src/preferences/aboutPage.ts:90
 msgid "Settings"
 msgstr "Setelan"
 
-#: src/popup.ts:363
+#: src/popup.ts:411
 msgid "Retry"
 msgstr "Ulangi"
 
-#: src/popup.ts:433
+#: src/popup.ts:481
 #, javascript-format
 msgid "H: %s"
 msgstr "T: %s"
 
-#: src/popup.ts:434
+#: src/popup.ts:482
 #, javascript-format
 msgid "L: %s"
 msgstr "R: %s"
@@ -169,42 +186,46 @@ msgstr "Repositori GitHub"
 msgid "Support Me"
 msgstr "Dukung Saya"
 
-#: src/preferences/aboutPage.ts:68
+#: src/preferences/aboutPage.ts:70
 msgid "SimpleWeather Version"
 msgstr "Versi SimpleWeather"
 
-#: src/preferences/aboutPage.ts:71
+#: src/preferences/aboutPage.ts:73
 msgid "Unknown"
 msgstr "TidakDiketahui"
 
-#: src/preferences/aboutPage.ts:79
+#: src/preferences/aboutPage.ts:81
+msgid "Git Hash"
+msgstr ""
+
+#: src/preferences/aboutPage.ts:93
 msgid "Copy"
 msgstr "Salin"
 
-#: src/preferences/aboutPage.ts:102
+#: src/preferences/aboutPage.ts:116
 msgid "Copied settings JSON to clipboard."
 msgstr "Salin setelan JSON ke papan klip."
 
-#: src/preferences/aboutPage.ts:116
+#: src/preferences/aboutPage.ts:130
 #, javascript-format
 msgid "Contributions and translations are welcome! Read how on %s."
 msgstr "Kontribusi dan terjemahan sudah dibuka! baca di %s."
 
-#: src/preferences/aboutPage.ts:119
+#: src/preferences/aboutPage.ts:133
 #, javascript-format
 msgid "If you like this extension, consider starring it on %s."
 msgstr "Kalau anda berkenan, berikan bintang di %s."
 
-#: src/preferences/aboutPage.ts:122
+#: src/preferences/aboutPage.ts:136
 msgid "here"
 msgstr "disini"
 
-#: src/preferences/aboutPage.ts:124
+#: src/preferences/aboutPage.ts:138
 #, javascript-format
 msgid "Report bugs or request new features %s."
 msgstr "Laporkan bug atau minta fitur baru %s."
 
-#: src/preferences/aboutPage.ts:128 src/preferences/aboutPage.ts:138
+#: src/preferences/aboutPage.ts:142 src/preferences/aboutPage.ts:152
 msgid "Credits"
 msgstr "Kredit"
 
@@ -220,7 +241,7 @@ msgstr "Pop-Up"
 msgid "Drag-and-drop from bottom to configure the pop-up"
 msgstr "Geser dari bawah untuk mengatur pop-up"
 
-#: src/preferences/detailsPage.ts:185 src/preferences/generalPage.ts:239
+#: src/preferences/detailsPage.ts:185 src/preferences/generalPage.ts:267
 msgid "Panel"
 msgstr "Panel"
 
@@ -261,200 +282,246 @@ msgstr "Lokasi Baru"
 msgid "Name"
 msgstr "Nama"
 
-#: src/preferences/editLocation.ts:57
+#: src/preferences/editLocation.ts:69
 #, javascript-format
 msgid "%s (e.g. \"%s\")"
 msgstr "%s (cth. \"%s\")"
 
-#: src/preferences/editLocation.ts:57
+#: src/preferences/editLocation.ts:69
 msgid "Coordinates"
 msgstr "Koordinat"
 
-#: src/preferences/editLocation.ts:67
+#: src/preferences/editLocation.ts:93
 msgid "Save"
 msgstr "Simpan"
 
-#: src/preferences/editLocation.ts:95
+#: src/preferences/editLocation.ts:101
+#, javascript-format
+msgid "View in %s"
+msgstr ""
+
+#: src/preferences/editLocation.ts:102
+msgid "Open in Browser"
+msgstr ""
+
+#: src/preferences/editLocation.ts:105
+msgid "Open"
+msgstr ""
+
+#: src/preferences/editLocation.ts:137
 msgid "Name is required."
 msgstr "Nama di perlukan."
 
-#: src/preferences/editLocation.ts:100
+#: src/preferences/editLocation.ts:142
 msgid "Invalid coordinates entry."
 msgstr "Info koordinat salah."
 
-#: src/preferences/generalPage.ts:38
+#: src/preferences/generalPage.ts:43
 msgid "General"
 msgstr "Umum"
 
-#: src/preferences/generalPage.ts:43 src/preferences/generalPage.ts:53
+#: src/preferences/generalPage.ts:49 src/preferences/generalPage.ts:59
 msgid "Units"
 msgstr "Unit"
 
-#: src/preferences/generalPage.ts:44
+#: src/preferences/generalPage.ts:50
 msgid "Configure units of measurement"
 msgstr "Atur jenis pengukuran"
 
-#: src/preferences/generalPage.ts:48
+#: src/preferences/generalPage.ts:54
 msgid "Custom"
 msgstr "Kustom"
 
-#: src/preferences/generalPage.ts:48
+#: src/preferences/generalPage.ts:54
 msgid "Metric"
 msgstr "Metrik"
 
-#: src/preferences/generalPage.ts:48
+#: src/preferences/generalPage.ts:54
 msgid "Nordic"
 msgstr "Nordik"
 
-#: src/preferences/generalPage.ts:48
+#: src/preferences/generalPage.ts:54
 msgid "UK"
 msgstr "UK"
 
-#: src/preferences/generalPage.ts:48
+#: src/preferences/generalPage.ts:54
 msgid "US"
 msgstr "US"
 
-#: src/preferences/generalPage.ts:61
+#: src/preferences/generalPage.ts:67
 msgid "Fahrenheit"
 msgstr "Fahrenheit"
 
-#: src/preferences/generalPage.ts:62
+#: src/preferences/generalPage.ts:68
 msgid "Celsius"
 msgstr "Celsius"
 
-#: src/preferences/generalPage.ts:78
+#: src/preferences/generalPage.ts:84
 msgid "Speed"
 msgstr "Kecepatan"
 
-#: src/preferences/generalPage.ts:106
+#: src/preferences/generalPage.ts:112
 msgid "Rain Measurement"
 msgstr "Kondisi Hujan"
 
-#: src/preferences/generalPage.ts:120
+#: src/preferences/generalPage.ts:126
 msgid "Distance"
 msgstr "Jarak"
 
-#: src/preferences/generalPage.ts:148
+#: src/preferences/generalPage.ts:154
 msgid "Degrees"
 msgstr "Derajat"
 
-#: src/preferences/generalPage.ts:148
+#: src/preferences/generalPage.ts:154
 msgid "Eight-Point Compass"
 msgstr "Kompas 8 arah"
 
-#: src/preferences/generalPage.ts:151
+#: src/preferences/generalPage.ts:157
 msgid "Direction"
 msgstr "Arah"
 
-#: src/preferences/generalPage.ts:163
+#: src/preferences/generalPage.ts:169
 msgid "Weather Service"
 msgstr "Layanan Cuaca"
 
-#: src/preferences/generalPage.ts:164
+#: src/preferences/generalPage.ts:170
 msgid "Configure how the weather is attained"
 msgstr "Konfigurasikan bagaimana cuaca di atur"
 
-#: src/preferences/generalPage.ts:171
+#: src/preferences/generalPage.ts:179
 msgid "Weather Provider"
 msgstr "Penyedia Layanan Cuaca"
 
-#: src/preferences/generalPage.ts:184
+#: src/preferences/generalPage.ts:190 src/preferences/generalPage.ts:199
+msgid "API Key"
+msgstr ""
+
+#: src/preferences/generalPage.ts:190 src/preferences/generalPage.ts:199
+msgid "API Key (Required)"
+msgstr ""
+
+#: src/preferences/generalPage.ts:212
 msgid "Configure how your location is found"
 msgstr "Konfigurasikan bagaimana lokasi di atur"
 
-#: src/preferences/generalPage.ts:188 src/preferences/generalPage.ts:189
+#: src/preferences/generalPage.ts:216 src/preferences/generalPage.ts:217
 msgid "Online"
 msgstr "Daring"
 
-#: src/preferences/generalPage.ts:190 src/preferences/generalPage.ts:249
+#: src/preferences/generalPage.ts:218 src/preferences/generalPage.ts:277
 msgid "System"
 msgstr "Sistem"
 
-#: src/preferences/generalPage.ts:191
+#: src/preferences/generalPage.ts:219
 msgid "Disable"
 msgstr "Sistem"
 
-#: src/preferences/generalPage.ts:194
+#: src/preferences/generalPage.ts:222
 msgid "Provider"
 msgstr "Layanan"
 
-#: src/preferences/generalPage.ts:206
+#: src/preferences/generalPage.ts:234
 msgid "Refresh Interval (Minutes)"
 msgstr "Tenggang Waktu (menit)"
 
-#: src/preferences/generalPage.ts:224
+#: src/preferences/generalPage.ts:252
 msgid "Accessibility"
 msgstr "Aksesibilitas"
 
-#: src/preferences/generalPage.ts:225
+#: src/preferences/generalPage.ts:253
 msgid "Configure accessibility features"
 msgstr "Konfigurasikan fitur aksesibilitas"
 
-#: src/preferences/generalPage.ts:228
+#: src/preferences/generalPage.ts:256
 msgid "High Contrast"
 msgstr "Kontras Tinggi"
 
-#: src/preferences/generalPage.ts:240
+#: src/preferences/generalPage.ts:268
 msgid "Configure the panel and pop-up"
 msgstr "Konfigurasikan panel dan pop-up"
 
-#: src/preferences/generalPage.ts:250
+#: src/preferences/generalPage.ts:278
 msgid "Light"
 msgstr "Ringan"
 
-#: src/preferences/generalPage.ts:251
+#: src/preferences/generalPage.ts:279
 msgid "Afterdark"
 msgstr "Setelah Gelap"
 
-#: src/preferences/generalPage.ts:252
+#: src/preferences/generalPage.ts:280
 msgid "Immersive"
 msgstr "Melingkupi"
 
-#: src/preferences/generalPage.ts:255
+#: src/preferences/generalPage.ts:283
 msgid "Theme"
 msgstr "Tema"
 
-#: src/preferences/generalPage.ts:265
+#: src/preferences/generalPage.ts:293
 msgid "Center"
 msgstr "Tengah"
 
-#: src/preferences/generalPage.ts:265
+#: src/preferences/generalPage.ts:293
 msgid "Left"
 msgstr "Kiri"
 
-#: src/preferences/generalPage.ts:265
+#: src/preferences/generalPage.ts:293
 msgid "Right"
 msgstr "Kanan"
 
-#: src/preferences/generalPage.ts:268
+#: src/preferences/generalPage.ts:296
 msgid "Side of Panel"
 msgstr "Panel Samping"
 
-#: src/preferences/generalPage.ts:278
+#: src/preferences/generalPage.ts:309
 msgid "Order in Panel"
 msgstr "Urutan di Panel"
 
-#: src/preferences/generalPage.ts:294
+#: src/preferences/generalPage.ts:326
+msgid "Pop-Up Offset"
+msgstr ""
+
+#: src/preferences/generalPage.ts:327
+msgid "Horizontal pop-up offset from 0–100."
+msgstr ""
+
+#: src/preferences/generalPage.ts:367
 msgid "Use Symbolic Icons in Panel"
 msgstr "Gunakan Simbol di Panel"
 
-#: src/preferences/generalPage.ts:304
+#: src/preferences/generalPage.ts:377
 msgid "Always Use Packaged Icons"
 msgstr "Selalu Gunakan Icon Aslinya"
 
-#: src/preferences/generalPage.ts:315
+#: src/preferences/generalPage.ts:388
+msgid "Show Refresh Button"
+msgstr ""
+
+#: src/preferences/generalPage.ts:399
 msgid "Hide Error Popup"
 msgstr "Sembunyikan Tampilan Error"
 
-#: src/preferences/generalPage.ts:316
+#: src/preferences/generalPage.ts:400
 msgid "If the popup just says Error, don't even show it."
 msgstr "Jika ada kegagalan, tidak usah ditampilkan."
+
+#: src/preferences/generalPage.ts:435
+msgid "API Key Warning"
+msgstr ""
+
+#: src/preferences/generalPage.ts:458
+msgid "Key is invalid or is not subscribed to the One Call 3.0 API."
+msgstr ""
+
+#: src/preferences/generalPage.ts:462
+#, javascript-format
+msgid "Error when validating API Key: %s"
+msgstr ""
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
 msgstr "Lokasi"
 
-#: src/preferences/locationsPage.ts:70 src/preferences/search.ts:76
+#: src/preferences/locationsPage.ts:70 src/preferences/search.ts:80
 msgid "Add"
 msgstr "Masukkan"
 
@@ -466,53 +533,57 @@ msgstr "Pindah ke Atas"
 msgid "Move Down"
 msgstr "Pindah ke Bawah"
 
-#: src/preferences/locationsPage.ts:128
+#: src/preferences/locationsPage.ts:134
 msgid "Add Here"
 msgstr "Masukkan Disini"
 
-#: src/preferences/locationsPage.ts:193
+#: src/preferences/locationsPage.ts:146
+msgid "Add By Coords"
+msgstr ""
+
+#: src/preferences/locationsPage.ts:214
 #, javascript-format
 msgid "Are you sure you want delete %s?"
 msgstr "Apakah anda yakinakan menghapus %s?"
 
-#: src/preferences/locationsPage.ts:194
+#: src/preferences/locationsPage.ts:215
 msgid "Cancel"
 msgstr "Batal"
 
-#: src/preferences/locationsPage.ts:194
+#: src/preferences/locationsPage.ts:215
 msgid "Delete"
 msgstr "Hapus"
 
-#: src/preferences/locationsPage.ts:235
+#: src/preferences/locationsPage.ts:256
 #, javascript-format
 msgid "Internal Error: %s"
 msgstr "Sistem Gagal: %s"
 
-#: src/preferences/locationsPage.ts:236
+#: src/preferences/locationsPage.ts:257
 msgid "Internal Error"
 msgstr "Sistem Gagal"
 
-#: src/preferences/locationsPage.ts:261
+#: src/preferences/locationsPage.ts:282
 msgid "Something else edited the locations."
 msgstr "Sesuatu yang lain mengedit lokasinya."
 
-#: src/preferences/search.ts:46
+#: src/preferences/search.ts:50
 msgid "Search Location"
 msgstr "Cari Lokasi"
 
-#: src/preferences/search.ts:55
+#: src/preferences/search.ts:59
 msgid "City, Neighborhood, etc."
 msgstr "Kota, Sekitarnya, dll."
 
-#: src/preferences/search.ts:60
+#: src/preferences/search.ts:64
 msgid "Search"
 msgstr "Cari"
 
-#: src/preferences/search.ts:207
+#: src/preferences/search.ts:212
 msgid "No results."
 msgstr "Tidak Berhasil."
 
-#: src/preferences/search.ts:212
+#: src/preferences/search.ts:217
 msgid "No copyright information available."
 msgstr "Tidak ada informasi hak cipta yang tersedia."
 
@@ -571,16 +642,16 @@ msgstr "BD"
 msgid "W"
 msgstr "B"
 
-#: src/units.ts:298
+#: src/units.ts:302
 msgid "Now"
 msgstr "Sekarang"
 
-#: src/units.ts:302
+#: src/units.ts:303
 #, javascript-format
 msgid "%d h"
 msgstr "%d j"
 
-#: src/units.ts:303
+#: src/units.ts:304
 #, javascript-format
 msgid "%d min"
 msgstr "%d mnt"
