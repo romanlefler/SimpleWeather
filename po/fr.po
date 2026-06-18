@@ -80,7 +80,7 @@ msgstr "Invalide"
 
 #: src/errors.ts:57
 msgid "Location unavailable or permission not granted."
-msgstr "Localisation indisponible ou permission non acordée"
+msgstr "Localisation indisponible ou permission non accordée"
 
 #: src/errors.ts:79
 #, javascript-format
@@ -239,7 +239,7 @@ msgstr "Pop-Up"
 
 #: src/preferences/detailsPage.ts:87
 msgid "Drag-and-drop from bottom to configure the pop-up"
-msgstr "Glisser-déposer depuis le bas pour configurer la pop-up"
+msgstr "Glisser-déposer depuis le bas pour configurer la fenêtre contextuelle"
 
 #: src/preferences/detailsPage.ts:185 src/preferences/generalPage.ts:267
 msgid "Panel"
