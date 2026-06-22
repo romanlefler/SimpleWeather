@@ -85,7 +85,7 @@ msgstr "Localisation indisponible ou permission non accordée"
 #: src/errors.ts:79
 #, javascript-format
 msgid "Service down (%s)"
-msgstr "Service indisponible"
+msgstr "Service indisponible (%s)"
 
 #: src/extension.ts:360 src/preferences/search.ts:164
 msgid "No Internet"
@@ -515,7 +515,7 @@ msgstr "La clé API est invalide ou ne dispose pas d'un abonnement à l'API One 
 #: src/preferences/generalPage.ts:462
 #, javascript-format
 msgid "Error when validating API Key: %s"
-msgstr "Erreur lors de la validation de la clé API"
+msgstr "Erreur lors de la validation de la clé API: %s"
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
