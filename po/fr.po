@@ -80,12 +80,12 @@ msgstr "Invalide"
 
 #: src/errors.ts:57
 msgid "Location unavailable or permission not granted."
-msgstr ""
+msgstr "Localisation indisponible ou permission non accordée"
 
 #: src/errors.ts:79
 #, javascript-format
 msgid "Service down (%s)"
-msgstr ""
+msgstr "Service indisponible (%s)"
 
 #: src/extension.ts:360 src/preferences/search.ts:164
 msgid "No Internet"
@@ -93,7 +93,7 @@ msgstr "Pas de connexion à Internet"
 
 #: src/extension.ts:366 src/preferences/generalPage.ts:462
 msgid "Unknown Error"
-msgstr ""
+msgstr "Erreur inconnue"
 
 #: src/lang.ts:112
 msgid "Today"
@@ -153,7 +153,7 @@ msgstr "Données météo"
 
 #: src/popup.ts:290
 msgid "Refresh"
-msgstr ""
+msgstr "Actualiser"
 
 #: src/popup.ts:345 src/preferences/aboutPage.ts:90
 msgid "Settings"
@@ -239,7 +239,7 @@ msgstr "Pop-Up"
 
 #: src/preferences/detailsPage.ts:87
 msgid "Drag-and-drop from bottom to configure the pop-up"
-msgstr "Glisser-déposer depuis le bas pour configurer la pop-up"
+msgstr "Glisser-déposer depuis le bas pour configurer la fenêtre contextuelle"
 
 #: src/preferences/detailsPage.ts:185 src/preferences/generalPage.ts:267
 msgid "Panel"
@@ -302,11 +302,11 @@ msgstr ""
 
 #: src/preferences/editLocation.ts:102
 msgid "Open in Browser"
-msgstr ""
+msgstr "Ouvrir dans le navigateur"
 
 #: src/preferences/editLocation.ts:105
 msgid "Open"
-msgstr ""
+msgstr "Ouvrir"
 
 #: src/preferences/editLocation.ts:137
 msgid "Name is required."
@@ -338,7 +338,7 @@ msgstr "Métrique"
 
 #: src/preferences/generalPage.ts:54
 msgid "Nordic"
-msgstr ""
+msgstr "Nordique"
 
 #: src/preferences/generalPage.ts:54
 msgid "UK"
@@ -394,7 +394,7 @@ msgstr "Fournisseur Météo"
 
 #: src/preferences/generalPage.ts:190 src/preferences/generalPage.ts:199
 msgid "API Key"
-msgstr ""
+msgstr "Clé API"
 
 #: src/preferences/generalPage.ts:190 src/preferences/generalPage.ts:199
 msgid "API Key (Required)"
@@ -478,7 +478,7 @@ msgstr "Ordre dans le panneau"
 
 #: src/preferences/generalPage.ts:326
 msgid "Pop-Up Offset"
-msgstr ""
+msgstr "Décalage de la fenêtre contexteuelle"
 
 #: src/preferences/generalPage.ts:327
 msgid "Horizontal pop-up offset from 0–100."
@@ -494,7 +494,7 @@ msgstr "Toujours utiliser les icônes du système"
 
 #: src/preferences/generalPage.ts:388
 msgid "Show Refresh Button"
-msgstr ""
+msgstr "Afficher le bouton de rafraîchissement"
 
 #: src/preferences/generalPage.ts:399
 msgid "Hide Error Popup"
@@ -506,16 +506,16 @@ msgstr "Si la fenêtre contextuelle affiche Erreur, ne pas le montrer"
 
 #: src/preferences/generalPage.ts:435
 msgid "API Key Warning"
-msgstr ""
+msgstr "Avertissement concernant la clé API"
 
 #: src/preferences/generalPage.ts:458
 msgid "Key is invalid or is not subscribed to the One Call 3.0 API."
-msgstr ""
+msgstr "La clé API est invalide ou ne dispose pas d'un abonnement à l'API One Call 3.0"
 
 #: src/preferences/generalPage.ts:462
 #, javascript-format
 msgid "Error when validating API Key: %s"
-msgstr ""
+msgstr "Erreur lors de la validation de la clé API: %s"
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
@@ -539,7 +539,7 @@ msgstr "Ajouter ici"
 
 #: src/preferences/locationsPage.ts:146
 msgid "Add By Coords"
-msgstr ""
+msgstr "Ajouter par coordonnées"
 
 #: src/preferences/locationsPage.ts:214
 #, javascript-format
