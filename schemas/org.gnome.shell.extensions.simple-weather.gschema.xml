@@ -12,6 +12,7 @@
     </enum>
     <enum id="org.gnome.shell.extensions.simple-weather.weather-provider">
         <value value="1" nick="open-meteo" />
+        <value value="2" nick="openweathermap" />
     </enum>
     <enum id="org.gnome.shell.extensions.simple-weather.unit-preset">
         <value value="0" nick="custom" />
@@ -204,6 +205,11 @@
         <key name="show-refresh-button" type="b">
             <default>false</default>
             <summary>Show refresh button in the popup</summary>
+        </key>
+
+        <key name="api-keys" type="a{ss}">
+            <default>{ }</default>
+            <summary>API Keys</summary>
         </key>
 
     </schema>

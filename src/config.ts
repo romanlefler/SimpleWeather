@@ -20,7 +20,7 @@ import Gio from "gi://Gio";
 import { DirectionUnits, DistanceUnits, PressureUnits, RainMeasurementUnits, SpeedUnits, TempUnits } from "./units.js";
 import { Location } from "./location.js";
 import { MyLocationProvider } from "./myLocation.js";
-import { WeatherProviderNames } from "./providers/provider.js";
+import { WeatherProviderKeys } from "./providers/provider.js";
 import { Details } from "./details.js";
 
 export enum UnitPreset {
@@ -41,12 +41,28 @@ export class Config {
 
     #systemSettings : Gio.Settings | null;
     #settings : Gio.Settings;
+
     #handlerIds : number[];
+    #sysHandlerIds : number[];
+
+    /**
+     * Using this wrapper allows for easy logging if needed (i.e. to see which method gave which handlerId).
+     */
+    #addId(handlerId : number) {
+        // console.trace(`Added handler ${handlerId}.`);
+        this.#handlerIds.push(handlerId);
+    }
+
+    #addSysId(handlerId : number) {
+        // console.trace(`Added handler ${handlerId}.`);
+        this.#sysHandlerIds.push(handlerId);
+    }
 
     constructor(settings : Gio.Settings, systemSettings : Gio.Settings | null = null) {
         this.#systemSettings = systemSettings;
         this.#settings = settings;
         this.#handlerIds = [ ];
+        this.#sysHandlerIds = [ ];
     }
 
     free() {
@@ -54,6 +70,12 @@ export class Config {
             const id = this.#handlerIds.pop()!;
             this.#settings?.disconnect(id);
         }
+
+        while(this.#sysHandlerIds.length > 0) {
+            const id = this.#sysHandlerIds.pop()!;
+            this.#systemSettings?.disconnect(id);
+        }
+
         // @ts-ignore
         this.#settings = undefined;
     }
@@ -69,7 +91,7 @@ export class Config {
         const id = this.#settings.connect("changed", (_, key) => {
             if(key === "temp-unit" || key === "unit-preset") callback();
         });
-        this.#handlerIds.push(id);
+        this.#addId(id);
     }
 
     getLocations() : Location[] {
@@ -89,7 +111,7 @@ export class Config {
         const id = this.#settings.connect("changed", (_, key) => {
             if(key === "locations") callback();
         });
-        this.#handlerIds.push(id);
+        this.#addId(id);
     }
 
     getMainLocation() : Location {
@@ -116,7 +138,7 @@ export class Config {
 
             return false;
         });
-        this.#handlerIds.push(id);
+        this.#addId(id);
     }
 
     getMainLocationIndex() : number {
@@ -127,7 +149,7 @@ export class Config {
         const id = this.#settings.connect("changed", (_, key) => {
             if(key === "main-location-index") callback();
         });
-        this.#handlerIds.push(id);
+        this.#addId(id);
     }
 
     getMyLocationProvider() : MyLocationProvider {
@@ -140,7 +162,7 @@ export class Config {
         const id = this.#settings.connect("changed", (_, key) => {
             if(key === "my-loc-provider") callback();
         });
-        this.#handlerIds.push(id);
+        this.#addId(id);
     }
 
     getMyLocationRefreshMin() : number {
@@ -155,7 +177,7 @@ export class Config {
 
     getWeatherProvider() : number {
         const val = this.#settings.get_enum("weather-provider");
-        if(val < 1 || val > WeatherProviderNames.length) return 1;
+        if(val < 1 || val > WeatherProviderKeys.length) return 1;
         else return val;
     }
 
@@ -163,7 +185,7 @@ export class Config {
         const id = this.#settings.connect("changed", (_, key) => {
             if(key === "weather-provider") callback();
         });
-        this.#handlerIds.push(id);
+        this.#addId(id);
     }
 
     getSpeedUnit() : SpeedUnits {
@@ -182,7 +204,7 @@ export class Config {
         const id = this.#settings.connect("changed", (_, key) => {
             if(key === "speed-unit" || key === "unit-preset") callback();
         });
-        this.#handlerIds.push(id);
+        this.#addId(id);
     }
 
     getDirectionUnit(): DirectionUnits {
@@ -193,7 +215,7 @@ export class Config {
         const id = this.#settings.connect("changed", (_, key) => {
             if(key === "direction-unit" || key === "unit-preset") callback();
         });
-        this.#handlerIds.push(id);
+        this.#addId(id);
     }
 
     getPressureUnit() : PressureUnits {
@@ -207,7 +229,7 @@ export class Config {
         const id = this.#settings.connect("changed", (_, key) => {
             if(key === "pressure-unit" || key === "unit-preset") callback();
         });
-        this.#handlerIds.push(id);
+        this.#addId(id);
     }
 
     getRainMeasurementUnit() : RainMeasurementUnits {
@@ -221,7 +243,7 @@ export class Config {
         const id = this.#settings.connect("changed", (_, key) => {
             if(key === "rain-measurement-unit" || key === "unit-preset") callback();
         });
-        this.#handlerIds.push(id);
+        this.#addId(id);
     }
 
     getDistanceUnit() : DistanceUnits {
@@ -235,7 +257,7 @@ export class Config {
         const id = this.#settings.connect("changed", (_, key) => {
             if(key === "distance-unit" || key === "unit-preset") callback();
         });
-        this.#handlerIds.push(id);
+        this.#addId(id);
     }
 
     getHighContrast() : boolean {
@@ -246,7 +268,7 @@ export class Config {
         const id = this.#settings.connect("changed", (_, key) => {
             if(key === "high-contrast") callback();
         });
-        this.#handlerIds.push(id);
+        this.#addId(id);
     }
 
     getShowSunTime() : boolean {
@@ -259,7 +281,7 @@ export class Config {
                 callback(this.#settings.get_boolean("show-suntime"));
             }
         });
-        this.#handlerIds.push(id);
+        this.#addId(id);
     }
 
     getShowSunTimeAsCountdown() : boolean {
@@ -272,7 +294,7 @@ export class Config {
                 callback(this.#settings.get_boolean("show-suntime-as-countdown"));
             }
         });
-        this.#handlerIds.push(id);
+        this.#addId(id);
     }
 
     getSecondaryPanelDetail() : Details | null {
@@ -285,7 +307,7 @@ export class Config {
         const id = this.#settings.connect("changed", (_, key) => {
             if(key === "secondary-panel-detail") callback();
         });
-        this.#handlerIds.push(id);
+        this.#addId(id);
     }
 
     getShowPanelIcon() : boolean {
@@ -296,7 +318,7 @@ export class Config {
         const id = this.#settings.connect("changed", (_, key) => {
             if(key === "show-panel-icon") callback();
         });
-        this.#handlerIds.push(id);
+        this.#addId(id);
     }
 
     is24HourClock() : boolean | null {
@@ -309,7 +331,7 @@ export class Config {
         const id = this.#systemSettings.connect("changed", (_, key) => {
             if(key === "clock-format") callback();
         });
-        this.#handlerIds.push(id);
+        this.#addSysId(id);
     }
 
     /**
@@ -338,7 +360,7 @@ export class Config {
                 callback();
             }
         });
-        this.#handlerIds.push(id);
+        this.#addId(id);
     }
 
     getPanelPosition() : PanelPosition {
@@ -355,7 +377,7 @@ export class Config {
         const id = this.#settings.connect("changed", (_, key) => {
             if(key === "panel-box" || key === "panel-priority") callback();
         });
-        this.#handlerIds.push(id);
+        this.#addId(id);
     }
 
     getPanelOffset() : number {
@@ -366,7 +388,7 @@ export class Config {
         const id = this.#settings.connect("changed", (_, key) => {
             if(key === "panel-offset") callback();
         });
-        this.#handlerIds.push(id);
+        this.#addId(id);
     }
 
     getPanelDetail() : Details | null {
@@ -379,7 +401,7 @@ export class Config {
         const id = this.#settings.connect("changed", (_, key) => {
             if(key === "panel-detail") callback();
         });
-        this.#handlerIds.push(id);
+        this.#addId(id);
     }
 
     getTheme() : string {
@@ -390,7 +412,7 @@ export class Config {
         const id = this.#settings.connect("changed", (_, key) => {
             if(key === "theme") callback();
         });
-        this.#handlerIds.push(id);
+        this.#addId(id);
     }
 
     getSymbolicIcons() : boolean {
@@ -401,7 +423,7 @@ export class Config {
         const id = this.#settings.connect("changed", (_, key) => {
             if(key === "symbolic-icons-panel") callback();
         });
-        this.#handlerIds.push(id);
+        this.#addId(id);
     }
 
     getAlwaysPackagedIcons() : boolean {
@@ -412,7 +434,7 @@ export class Config {
         const id = this.#settings.connect("changed", (_, key) => {
             if(key === "always-packaged-icons") callback();
         });
-        this.#handlerIds.push(id);
+        this.#addId(id);
     }
 
     getHideErrPopup() : boolean {
@@ -427,9 +449,24 @@ export class Config {
         const id = this.#settings.connect("changed", (_, key) => {
             if(key === "show-refresh-button") callback();
         });
-        this.#handlerIds.push(id);
+        this.#addId(id);
     }
 
+    /**
+     * Gets the API keys map. The key is the index of the provider and the value is the API key.
+     * The map will not be NULL or undefined, but each provider is not guaranteed to be present.
+     */
+    getApiKeys() : Map<string, string> {
+        const gval = this.#settings.get_value("api-keys");
+        return readGTypeABSS(gval);
+    }
+
+    onApiKeysChanged(callback : () => void) : void {
+        const id = this.#settings.connect("changed", (_, key) => {
+            if(key === "api-keys") callback();
+        });
+        this.#addId(id);
+    }
 
 
     getUnitPreset() : UnitPreset {
@@ -444,7 +481,7 @@ export class Config {
              ];
              if(unitKeys.includes(key)) callback();
         });
-        this.#handlerIds.push(id);
+        this.#addId(id);
     }
 
     /**
@@ -483,6 +520,9 @@ export class Config {
     }
 }
 
+/**
+ * Reads a GVariant of type "as" and returns a string array.
+ */
 function readGTypeAS(gvariant : GLib.Variant<any>) : string[] {
     const len = gvariant.n_children();
 
@@ -496,6 +536,9 @@ function readGTypeAS(gvariant : GLib.Variant<any>) : string[] {
     return arr;
 }
 
+/**
+ * Writes a string array into a GVariant of type "as".
+ */
 export function writeGTypeAS(arr : string[]) : GLib.Variant<any> {
     const gVariantArr = [ ];
     for(let k of arr) {
@@ -507,3 +550,50 @@ export function writeGTypeAS(arr : string[]) : GLib.Variant<any> {
         gVariantArr
     );
 }
+
+/**
+ * Reads a GVariant of type "a{ss}" and returns a Map<string, string>.
+ */
+export function readGTypeABSS(gvariant : GLib.Variant<any>) : Map<string, string>
+{
+    const len = gvariant.n_children();
+
+    const map = new Map<string, string>();
+    for (let i = 0; i < len; i++)
+    {
+        const gEntry = gvariant.get_child_value(i);
+
+        const gKey = gEntry.get_child_value(0);
+        const gValue = gEntry.get_child_value(1);
+
+        const key = gKey.get_string()[0];
+        const value = gValue.get_string()[0];
+
+        map.set(key, value);
+    }
+
+    return map;
+}
+
+/**
+ * Writes a Map<string, string> into a GVariant of type "a{ss}".
+ */
+export function writeGTypeABSS(map : Map<string, string>) : GLib.Variant<any>
+{
+    const gVariantEntries : GLib.Variant<any>[] = [];
+
+    for (const [key, value] of map)
+    {
+        const gKey = GLib.Variant.new_string(key);
+        const gValue = GLib.Variant.new_string(value);
+
+        const gEntry = GLib.Variant.new_dict_entry(gKey, gValue);
+        gVariantEntries.push(gEntry);
+    }
+
+    return GLib.Variant.new_array(
+        new GLib.VariantType("{ss}"),
+        gVariantEntries
+    );
+}
+

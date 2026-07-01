@@ -32,3 +32,29 @@
 .simpleweather-second-panel-label {
     margin-left: 8px;
 }
+
+.sw-carousel
+{
+    spacing: 8px;
+}
+
+.sw-carousel-indic
+{
+    spacing: 6px;
+    margin-bottom: 4px;
+}
+
+.sw-carousel-dot
+{
+    width: 6px;
+    height: 6px;
+    border-radius: 99px;
+    background-color: rgba(255, 255, 255, 0.35);
+}
+
+.sw-carousel-dot.sw-active
+{
+    width: 12px;
+    background-color: rgba(255, 255, 255, 0.95);
+}
+

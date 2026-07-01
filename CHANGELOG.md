@@ -1,4 +1,28 @@
 
+# v50.1.0
+
+## Features
+
+- New OpenWeatherMap provider available to OpenWeatherMap subscribers (personal API key required)
+- Link to map in Edit Location menu to view where your coordinates are
+
+## Improvements
+
+- Show carousel dots under forecast carousel in pop-up
+- If provider responds with a server error the pop-up will indicate that
+
+## Bug Fixes
+
+- Fixed error that sometimes happened on disable (was invisible to user anyway)
+- Fixed invisible error related to system clock setting
+
+## Translations
+
+- French (thanks Vincent Morel & Neo-29)
+- German (thanks Romain Loutrel)
+- Indonesian (thanks Fakhrul Rijal)
+- Polish (thanks Krzysiek Zalewski)
+
 # v50.0.0
 
 ## Features

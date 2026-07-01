@@ -20,7 +20,10 @@ import Gtk from "gi://Gtk";
 import Gio from "gi://Gio";
 import Adw from "gi://Adw";
 import { gettext as _g } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
-import { WeatherProviderNames } from "../providers/provider.js";
+import { WeatherProviderKeys, provRequiresKey } from "../providers/provider.js";
+import { readGTypeABSS, writeGTypeABSS } from "../config.js";
+import { LibSoup } from "../libsoup.js";
+import { isNoInternet } from "../utils.js";
 
 function setVisibilites(value : boolean, ...widgets : Gtk.Widget[]) {
     for(let w of widgets) w.visible = value;
@@ -32,12 +35,15 @@ export class GeneralPage extends Adw.PreferencesPage {
         GObject.registerClass(this);
     }
 
-    constructor(settings : Gio.Settings) {
+    #window : Adw.PreferencesWindow;
+
+    constructor(settings : Gio.Settings, window : Adw.PreferencesWindow) {
 
         super({
             title: _g("General"),
             icon_name: "preferences-system-symbolic"
         });
+        this.#window = window;
 
         const unitGroup = new Adw.PreferencesGroup({
             title: _g("Units"),
@@ -165,18 +171,40 @@ export class GeneralPage extends Adw.PreferencesPage {
         });
 
         const wProvList = new Gtk.StringList({
-            strings: WeatherProviderNames as string[]
+            // Add an asterisk to paid providers
+            strings: WeatherProviderKeys.map((s, i) => provRequiresKey(i) ? s + "*" : s)
         });
+        const currentWProv = settings.get_enum("weather-provider") - 1
         const wProvRow = new Adw.ComboRow({
             title: _g("Weather Provider"),
             model: wProvList,
-            selected: settings.get_enum("weather-provider") - 1
+            selected: currentWProv
         });
         wProvRow.connect("notify::selected", () => {
-            settings.set_enum("weather-provider", wProvRow.selected + 1);
+            const i = wProvRow.selected;
+
+            settings.set_enum("weather-provider", i + 1);
             settings.apply();
+
+            const keyNeeded = provRequiresKey(i);
+            apiKeyRow.title = keyNeeded ? _g("API Key (Required)") : _g("API Key");
+            apiKeyRow.sensitive = keyNeeded;
+            apiKeyRow.text = this.#getApiKey(settings, i);
         });
         weatherServiceGroup.add(wProvRow);
+
+        const currentKeyNeeded = provRequiresKey(currentWProv);
+        const currentApiKey = this.#getApiKey(settings, currentWProv);
+        const apiKeyRow = new Adw.EntryRow({
+            title: currentKeyNeeded ? _g("API Key (Required)") : _g("API Key"),
+            sensitive: currentKeyNeeded,
+            text: currentApiKey,
+            showApplyButton: true
+        });
+        const setKey = () => this.#setApiKey(settings, apiKeyRow, wProvRow);
+        apiKeyRow.connect("apply", setKey);
+        weatherServiceGroup.add(apiKeyRow);
+
         this.add(weatherServiceGroup);
 
         const myLocGroup = new Adw.PreferencesGroup({
@@ -296,7 +324,7 @@ export class GeneralPage extends Adw.PreferencesPage {
 
         const panelOffsetRow = new Adw.ActionRow({
             title: _g("Pop-Up Offset"),
-            subtitle: _g("Horizontal pop-up offset from 0\u2013100.")
+            subtitle: _g("Horizontal pop-up offset from 0–100.")
         });
         const OFFSET_STEP = 5;
         const panelOffsetScale = new Gtk.Scale({
@@ -380,6 +408,61 @@ export class GeneralPage extends Adw.PreferencesPage {
         panelGroup.add(hideErrPopupRow);
 
         this.add(panelGroup);
+    }
+
+    #getApiKey(settings : Gio.Settings, providerIndex : number) : string {
+        const map = readGTypeABSS(settings.get_value("api-keys"));
+        const key = WeatherProviderKeys[providerIndex];
+        return map.get(key) ?? "";
+    }
+
+    #setApiKey(settings : Gio.Settings, apiKeyRow : Adw.EntryRow, wProvRow : Adw.ComboRow) {
+        const v = apiKeyRow.text.trim();
+        const i = wProvRow.selected;
+        const k = WeatherProviderKeys[i];
+
+        const map = readGTypeABSS(settings.get_value("api-keys"));
+        if(v.length > 0) map.set(k, v);
+        else map.delete(k);
+
+        const gtype = writeGTypeABSS(map);
+        settings.set_value("api-keys", gtype);
+        settings.apply();
+
+        this.#validateOwmKey(v).then(msg => {
+            if(msg !== null) {
+                const alert = new Gtk.AlertDialog({
+                    message: _g("API Key Warning"),
+                    detail: msg
+                });
+                alert.show(this.#window);
+            }
+        });
+    }
+
+    /**
+     * Returns an error message, or null if valid or unable to validate.
+     */
+    async #validateOwmKey(key : string) : Promise<string | null> {
+        const soup = new LibSoup();
+        try {
+            const resp = await soup.fetchJson(
+                "https://api.openweathermap.org/data/3.0/onecall",
+                {
+                    "lat": "40.73", "lon": "-73.93",
+                    "exclude": "current,minutely,hourly,daily,alerts",
+                    "appid": key
+                }
+            );
+
+            if(resp.status === 401) return _g("Key is invalid or is not subscribed to the One Call 3.0 API.");
+            else return null;
+        } catch(e) {
+            if(isNoInternet(e)) return null;
+            else return _g("Error when validating API Key: %s").format(e?.toString() ?? _g("Unknown Error"));
+        } finally {
+            soup.free();
+        }
     }
 
 }

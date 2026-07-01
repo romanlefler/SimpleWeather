@@ -39,7 +39,7 @@ import { showWelcome, showManualConfig } from "./welcome.js";
 import { setFirstTimeConfig } from "./autoConfig.js";
 import { displayDetail } from "./details.js";
 import { theme, themeInitAll, themeRemoveAll } from "./theme.js";
-import { AutoConfigFailError } from "./errors.js";
+import { AutoConfigFailError, FriendlyError } from "./errors.js";
 
 const FAIL_RETRIES : number = 10;
 
@@ -230,6 +230,7 @@ export default class SimpleWeatherExtension extends Extension {
         // Some settings require the weather to be re-fetched
         this.#config!.onMainLocationChanged(this.#updateWeather.bind(this));
         this.#config!.onMyLocationProviderChanged(this.#updateWeather.bind(this));
+        this.#config!.onApiKeysChanged(this.#updateWeather.bind(this));
         this.#config!.onWeatherProviderChanged(() => {
             this.#provider = createProvider(this.#libsoup!, this.#config!);
             this.#updateWeather();
@@ -304,7 +305,6 @@ export default class SimpleWeatherExtension extends Extension {
         this.#libsoup = undefined;
         this.#config?.free();
         this.#config = undefined;
-        this.#updateWeather();
 
         freeMyLocation();
         this.#provider = undefined;
@@ -361,7 +361,10 @@ export default class SimpleWeatherExtension extends Extension {
             } else {
                 console.error(err);
 
-                errStr = err && err.toString ? err.toString() : String(err);
+                if(err instanceof FriendlyError) errStr = err.transl(_g);
+                else if(err instanceof Object) errStr = err.toString();
+                else errStr = _g("Unknown Error");
+
                 if(errStr.length > 25) errStr = errStr.substring(0, 25) + "...";
             }
 
