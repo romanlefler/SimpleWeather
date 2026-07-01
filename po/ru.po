@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
-"POT-Creation-Date: 2026-01-13 23:08-0600\n"
+"POT-Creation-Date: 2026-06-05 16:48-0500\n"
 "PO-Revision-Date: 2025-07-23 22:06\n"
 "Last-Translator: \n"
 "Language-Team: Russian\n"
@@ -19,12 +19,12 @@ msgstr ""
 "X-Crowdin-File: simple-weather@romanlefler.com.pot\n"
 "X-Crowdin-File-ID: 2\n"
 
-#: src/autoConfig.ts:59 src/location.ts:53 src/location.ts:63
-#: src/preferences/generalPage.ts:183
+#: src/autoConfig.ts:59 src/location.ts:64 src/location.ts:74
+#: src/preferences/generalPage.ts:211
 msgid "My Location"
 msgstr "Текущее местоположение"
 
-#: src/details.ts:60 src/preferences/generalPage.ts:64
+#: src/details.ts:60 src/preferences/generalPage.ts:70
 msgid "Temperature"
 msgstr "Температура"
 
@@ -52,7 +52,7 @@ msgstr "Порывы ветра"
 msgid "UV High"
 msgstr "УФ-индекс"
 
-#: src/details.ts:67 src/preferences/generalPage.ts:92
+#: src/details.ts:67 src/preferences/generalPage.ts:98
 msgid "Pressure"
 msgstr "Давление"
 
@@ -76,13 +76,26 @@ msgstr "Облачность"
 msgid "Sun Countdown"
 msgstr "До восхода/заката"
 
-#: src/details.ts:77 src/popup.ts:459
+#: src/details.ts:77 src/popup.ts:507
 msgid "Invalid"
 msgstr "Недействительно"
 
-#: src/extension.ts:357 src/preferences/search.ts:159
+#: src/errors.ts:57
+msgid "Location unavailable or permission not granted."
+msgstr ""
+
+#: src/errors.ts:79
+#, javascript-format
+msgid "Service down (%s)"
+msgstr ""
+
+#: src/extension.ts:360 src/preferences/search.ts:164
 msgid "No Internet"
 msgstr "Нет подключения"
+
+#: src/extension.ts:366 src/preferences/generalPage.ts:462
+msgid "Unknown Error"
+msgstr ""
 
 #: src/lang.ts:112
 msgid "Today"
@@ -116,44 +129,48 @@ msgstr "Суббота"
 msgid "Thursday"
 msgstr "Четверг"
 
-#: src/location.ts:82
+#: src/location.ts:93
 #, javascript-format
 msgid "%f°N"
 msgstr "%f°С"
 
-#: src/location.ts:82
+#: src/location.ts:93
 #, javascript-format
 msgid "%f°S"
 msgstr "%f°Ю"
 
-#: src/location.ts:83
+#: src/location.ts:94
 #, javascript-format
 msgid "%f°E"
 msgstr "%f°В"
 
-#: src/location.ts:83
+#: src/location.ts:94
 #, javascript-format
 msgid "%f°W"
 msgstr "%f°З"
 
-#: src/popup.ts:143
+#: src/popup.ts:144
 msgid "Weather Data"
 msgstr "Погодные данные"
 
-#: src/popup.ts:317 src/preferences/aboutPage.ts:76
+#: src/popup.ts:290
+msgid "Refresh"
+msgstr ""
+
+#: src/popup.ts:345 src/preferences/aboutPage.ts:90
 msgid "Settings"
 msgstr "Настройки"
 
-#: src/popup.ts:363
+#: src/popup.ts:411
 msgid "Retry"
 msgstr "Обновить"
 
-#: src/popup.ts:433
+#: src/popup.ts:481
 #, javascript-format
 msgid "H: %s"
 msgstr "Макс: %s"
 
-#: src/popup.ts:434
+#: src/popup.ts:482
 #, javascript-format
 msgid "L: %s"
 msgstr "Мин: %s"
@@ -170,42 +187,46 @@ msgstr "Репозиторий GitHub"
 msgid "Support Me"
 msgstr "Поддержать меня"
 
-#: src/preferences/aboutPage.ts:68
+#: src/preferences/aboutPage.ts:70
 msgid "SimpleWeather Version"
 msgstr "Версия SimpleWeather"
 
-#: src/preferences/aboutPage.ts:71
+#: src/preferences/aboutPage.ts:73
 msgid "Unknown"
 msgstr "Неизвестно"
 
-#: src/preferences/aboutPage.ts:79
+#: src/preferences/aboutPage.ts:81
+msgid "Git Hash"
+msgstr ""
+
+#: src/preferences/aboutPage.ts:93
 msgid "Copy"
 msgstr "Скопировать"
 
-#: src/preferences/aboutPage.ts:102
+#: src/preferences/aboutPage.ts:116
 msgid "Copied settings JSON to clipboard."
 msgstr "Настройки в формате JSON скопированы в буфер обмена."
 
-#: src/preferences/aboutPage.ts:116
+#: src/preferences/aboutPage.ts:130
 #, javascript-format
 msgid "Contributions and translations are welcome! Read how on %s."
 msgstr "Пожертвования и помощь в переводе приветствуются! Подробнее на %s."
 
-#: src/preferences/aboutPage.ts:119
+#: src/preferences/aboutPage.ts:133
 #, javascript-format
 msgid "If you like this extension, consider starring it on %s."
 msgstr "Если вам нравится это расширение, поставьте ему звездочку на %s."
 
-#: src/preferences/aboutPage.ts:122
+#: src/preferences/aboutPage.ts:136
 msgid "here"
 msgstr "здесь"
 
-#: src/preferences/aboutPage.ts:124
+#: src/preferences/aboutPage.ts:138
 #, javascript-format
 msgid "Report bugs or request new features %s."
 msgstr "Сообщить об ошибках или предложить новые функции можно %s."
 
-#: src/preferences/aboutPage.ts:128 src/preferences/aboutPage.ts:138
+#: src/preferences/aboutPage.ts:142 src/preferences/aboutPage.ts:152
 msgid "Credits"
 msgstr "Благодарности"
 
@@ -221,7 +242,7 @@ msgstr "Всплывающее окно"
 msgid "Drag-and-drop from bottom to configure the pop-up"
 msgstr "Перетащите из нижней части, чтобы настроить всплывающее окно"
 
-#: src/preferences/detailsPage.ts:185 src/preferences/generalPage.ts:239
+#: src/preferences/detailsPage.ts:185 src/preferences/generalPage.ts:267
 msgid "Panel"
 msgstr "Панель"
 
@@ -262,200 +283,247 @@ msgstr "Новое местоположение"
 msgid "Name"
 msgstr "Название"
 
-#: src/preferences/editLocation.ts:57
+#: src/preferences/editLocation.ts:69
 #, javascript-format
 msgid "%s (e.g. \"%s\")"
 msgstr "%s (например, \"%s\")"
 
-#: src/preferences/editLocation.ts:57
+#: src/preferences/editLocation.ts:69
 msgid "Coordinates"
 msgstr "Координаты"
 
-#: src/preferences/editLocation.ts:67
+#: src/preferences/editLocation.ts:93
 msgid "Save"
 msgstr "Сохранить"
 
-#: src/preferences/editLocation.ts:95
+#: src/preferences/editLocation.ts:101
+#, javascript-format
+msgid "View in %s"
+msgstr ""
+
+#: src/preferences/editLocation.ts:102
+msgid "Open in Browser"
+msgstr ""
+
+#: src/preferences/editLocation.ts:105
+msgid "Open"
+msgstr ""
+
+#: src/preferences/editLocation.ts:137
 msgid "Name is required."
 msgstr "Требуется указать название."
 
-#: src/preferences/editLocation.ts:100
+#: src/preferences/editLocation.ts:142
 msgid "Invalid coordinates entry."
 msgstr "Недопустимые координаты."
 
-#: src/preferences/generalPage.ts:38
+#: src/preferences/generalPage.ts:43
 msgid "General"
 msgstr "Основные"
 
-#: src/preferences/generalPage.ts:43 src/preferences/generalPage.ts:53
+#: src/preferences/generalPage.ts:49 src/preferences/generalPage.ts:59
 msgid "Units"
 msgstr "Единицы измерения"
 
-#: src/preferences/generalPage.ts:44
+#: src/preferences/generalPage.ts:50
 msgid "Configure units of measurement"
 msgstr "Настроить единицы измерения"
 
-#: src/preferences/generalPage.ts:48
+#: src/preferences/generalPage.ts:54
 msgid "Custom"
 msgstr "Пользовательские"
 
-#: src/preferences/generalPage.ts:48
+#: src/preferences/generalPage.ts:54
 msgid "Metric"
 msgstr "Метрические"
 
-#: src/preferences/generalPage.ts:48
+#: src/preferences/generalPage.ts:54
 msgid "Nordic"
 msgstr "Скандинавские"
 
-#: src/preferences/generalPage.ts:48
+#: src/preferences/generalPage.ts:54
 msgid "UK"
 msgstr "Британские"
 
-#: src/preferences/generalPage.ts:48
+#: src/preferences/generalPage.ts:54
 msgid "US"
 msgstr "Американские"
 
-#: src/preferences/generalPage.ts:61
+#: src/preferences/generalPage.ts:67
 msgid "Fahrenheit"
 msgstr "Фаренгейт"
 
-#: src/preferences/generalPage.ts:62
+#: src/preferences/generalPage.ts:68
 msgid "Celsius"
 msgstr "Цельсий"
 
-#: src/preferences/generalPage.ts:78
+#: src/preferences/generalPage.ts:84
 msgid "Speed"
 msgstr "Скорость"
 
-#: src/preferences/generalPage.ts:106
+#: src/preferences/generalPage.ts:112
 msgid "Rain Measurement"
 msgstr "Осадки"
 
-#: src/preferences/generalPage.ts:120
+#: src/preferences/generalPage.ts:126
 msgid "Distance"
 msgstr "Расстояние"
 
-#: src/preferences/generalPage.ts:148
+#: src/preferences/generalPage.ts:154
 msgid "Degrees"
 msgstr "Градусы"
 
-#: src/preferences/generalPage.ts:148
+#: src/preferences/generalPage.ts:154
 msgid "Eight-Point Compass"
 msgstr "8-румбовый компас"
 
-#: src/preferences/generalPage.ts:151
+#: src/preferences/generalPage.ts:157
 msgid "Direction"
 msgstr "Направление"
 
-#: src/preferences/generalPage.ts:163
+#: src/preferences/generalPage.ts:169
 msgid "Weather Service"
 msgstr "Служба погоды"
 
-#: src/preferences/generalPage.ts:164
+#: src/preferences/generalPage.ts:170
 msgid "Configure how the weather is attained"
 msgstr "Настроить способ получения данных о погоде"
 
-#: src/preferences/generalPage.ts:171
+#: src/preferences/generalPage.ts:179
 msgid "Weather Provider"
 msgstr "Источник погодных данных"
 
-#: src/preferences/generalPage.ts:184
+#: src/preferences/generalPage.ts:190 src/preferences/generalPage.ts:199
+msgid "API Key"
+msgstr ""
+
+#: src/preferences/generalPage.ts:190 src/preferences/generalPage.ts:199
+msgid "API Key (Required)"
+msgstr ""
+
+#: src/preferences/generalPage.ts:212
 msgid "Configure how your location is found"
 msgstr "Настроить способ определения вашего местоположения"
 
-#: src/preferences/generalPage.ts:188 src/preferences/generalPage.ts:189
+#: src/preferences/generalPage.ts:216 src/preferences/generalPage.ts:217
 msgid "Online"
 msgstr "Онлайн"
 
-#: src/preferences/generalPage.ts:190 src/preferences/generalPage.ts:249
+#: src/preferences/generalPage.ts:218 src/preferences/generalPage.ts:277
 msgid "System"
 msgstr "Система"
 
-#: src/preferences/generalPage.ts:191
+#: src/preferences/generalPage.ts:219
 msgid "Disable"
 msgstr "Отключено"
 
-#: src/preferences/generalPage.ts:194
+#: src/preferences/generalPage.ts:222
 msgid "Provider"
 msgstr "Источник"
 
-#: src/preferences/generalPage.ts:206
+#: src/preferences/generalPage.ts:234
 msgid "Refresh Interval (Minutes)"
 msgstr "Частота обновления (минуты)"
 
-#: src/preferences/generalPage.ts:224
+#: src/preferences/generalPage.ts:252
 msgid "Accessibility"
 msgstr "Специальные возможности"
 
-#: src/preferences/generalPage.ts:225
+#: src/preferences/generalPage.ts:253
 msgid "Configure accessibility features"
 msgstr "Настроить функции специальных возможностей"
 
-#: src/preferences/generalPage.ts:228
+#: src/preferences/generalPage.ts:256
 msgid "High Contrast"
 msgstr "Высокая контрастность"
 
-#: src/preferences/generalPage.ts:240
+#: src/preferences/generalPage.ts:268
 msgid "Configure the panel and pop-up"
 msgstr "Настроить верхнюю панель и всплывающее окно"
 
-#: src/preferences/generalPage.ts:250
+#: src/preferences/generalPage.ts:278
 msgid "Light"
 msgstr "Светлая"
 
-#: src/preferences/generalPage.ts:251
+#: src/preferences/generalPage.ts:279
 msgid "Afterdark"
 msgstr "Темная"
 
-#: src/preferences/generalPage.ts:252
+#: src/preferences/generalPage.ts:280
 msgid "Immersive"
 msgstr "Иммерсивная"
 
-#: src/preferences/generalPage.ts:255
+#: src/preferences/generalPage.ts:283
 msgid "Theme"
 msgstr "Тема"
 
-#: src/preferences/generalPage.ts:265
+#: src/preferences/generalPage.ts:293
 msgid "Center"
 msgstr "По центру"
 
-#: src/preferences/generalPage.ts:265
+#: src/preferences/generalPage.ts:293
 msgid "Left"
 msgstr "Слева"
 
-#: src/preferences/generalPage.ts:265
+#: src/preferences/generalPage.ts:293
 msgid "Right"
 msgstr "Справа"
 
-#: src/preferences/generalPage.ts:268
+#: src/preferences/generalPage.ts:296
 msgid "Side of Panel"
 msgstr "Расположение на панели"
 
-#: src/preferences/generalPage.ts:278
+#: src/preferences/generalPage.ts:309
 msgid "Order in Panel"
 msgstr "Порядок на панели"
 
-#: src/preferences/generalPage.ts:294
+#: src/preferences/generalPage.ts:326
+msgid "Pop-Up Offset"
+msgstr ""
+
+#: src/preferences/generalPage.ts:327
+msgid "Horizontal pop-up offset from 0–100."
+msgstr ""
+
+#: src/preferences/generalPage.ts:367
 msgid "Use Symbolic Icons in Panel"
 msgstr "Использовать символические значки на панели"
 
-#: src/preferences/generalPage.ts:304
+#: src/preferences/generalPage.ts:377
 msgid "Always Use Packaged Icons"
 msgstr "Всегда использовать встроенные значки"
 
-#: src/preferences/generalPage.ts:315
+#: src/preferences/generalPage.ts:388
+msgid "Show Refresh Button"
+msgstr ""
+
+#: src/preferences/generalPage.ts:399
 msgid "Hide Error Popup"
 msgstr "Скрывать всплывающее окно с ошибкой"
 
-#: src/preferences/generalPage.ts:316
+#: src/preferences/generalPage.ts:400
 msgid "If the popup just says Error, don't even show it."
-msgstr "Не показывать всплывающее окно, если оно содержит только сообщение об ошибке"
+msgstr ""
+"Не показывать всплывающее окно, если оно содержит только сообщение об ошибке"
+
+#: src/preferences/generalPage.ts:435
+msgid "API Key Warning"
+msgstr ""
+
+#: src/preferences/generalPage.ts:458
+msgid "Key is invalid or is not subscribed to the One Call 3.0 API."
+msgstr ""
+
+#: src/preferences/generalPage.ts:462
+#, javascript-format
+msgid "Error when validating API Key: %s"
+msgstr ""
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
 msgstr "Местоположения"
 
-#: src/preferences/locationsPage.ts:70 src/preferences/search.ts:76
+#: src/preferences/locationsPage.ts:70 src/preferences/search.ts:80
 msgid "Add"
 msgstr "Добавить"
 
@@ -467,53 +535,57 @@ msgstr "Переместить выше"
 msgid "Move Down"
 msgstr "Переместить ниже"
 
-#: src/preferences/locationsPage.ts:128
+#: src/preferences/locationsPage.ts:134
 msgid "Add Here"
 msgstr "Добавить текущее"
 
-#: src/preferences/locationsPage.ts:193
+#: src/preferences/locationsPage.ts:146
+msgid "Add By Coords"
+msgstr ""
+
+#: src/preferences/locationsPage.ts:214
 #, javascript-format
 msgid "Are you sure you want delete %s?"
 msgstr "Вы уверены, что хотите удалить %s?"
 
-#: src/preferences/locationsPage.ts:194
+#: src/preferences/locationsPage.ts:215
 msgid "Cancel"
 msgstr "Отмена"
 
-#: src/preferences/locationsPage.ts:194
+#: src/preferences/locationsPage.ts:215
 msgid "Delete"
 msgstr "Удалить"
 
-#: src/preferences/locationsPage.ts:235
+#: src/preferences/locationsPage.ts:256
 #, javascript-format
 msgid "Internal Error: %s"
 msgstr "Внутренняя ошибка: %s"
 
-#: src/preferences/locationsPage.ts:236
+#: src/preferences/locationsPage.ts:257
 msgid "Internal Error"
 msgstr "Внутренняя ошибка"
 
-#: src/preferences/locationsPage.ts:261
+#: src/preferences/locationsPage.ts:282
 msgid "Something else edited the locations."
 msgstr "Местоположения были изменены другой программой."
 
-#: src/preferences/search.ts:46
+#: src/preferences/search.ts:50
 msgid "Search Location"
 msgstr "Поиск местоположения"
 
-#: src/preferences/search.ts:55
+#: src/preferences/search.ts:59
 msgid "City, Neighborhood, etc."
 msgstr "Город, район и т.д."
 
-#: src/preferences/search.ts:60
+#: src/preferences/search.ts:64
 msgid "Search"
 msgstr "Найти"
 
-#: src/preferences/search.ts:207
+#: src/preferences/search.ts:212
 msgid "No results."
 msgstr "Ничего не найдено."
 
-#: src/preferences/search.ts:212
+#: src/preferences/search.ts:217
 msgid "No copyright information available."
 msgstr "Информация об авторских правах отсутствует."
 
@@ -572,16 +644,16 @@ msgstr "ЮЗ"
 msgid "W"
 msgstr "З"
 
-#: src/units.ts:298
+#: src/units.ts:302
 msgid "Now"
 msgstr "Сейчас"
 
-#: src/units.ts:302
+#: src/units.ts:303
 #, javascript-format
 msgid "%d h"
 msgstr "%d ч"
 
-#: src/units.ts:303
+#: src/units.ts:304
 #, javascript-format
 msgid "%d min"
 msgstr "%d мин"

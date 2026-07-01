@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
-"POT-Creation-Date: 2026-01-13 23:08-0600\n"
+"POT-Creation-Date: 2026-06-05 16:48-0500\n"
 "PO-Revision-Date: 2025-11-28 00:00\n"
 "Last-Translator: \n"
 "Language-Team: Korean\n"
@@ -17,12 +17,12 @@ msgstr ""
 "X-Crowdin-File: simple-weather@romanlefler.com.pot\n"
 "X-Crowdin-File-ID: 2\n"
 
-#: src/autoConfig.ts:59 src/location.ts:53 src/location.ts:63
-#: src/preferences/generalPage.ts:183
+#: src/autoConfig.ts:59 src/location.ts:64 src/location.ts:74
+#: src/preferences/generalPage.ts:211
 msgid "My Location"
 msgstr "내 위치"
 
-#: src/details.ts:60 src/preferences/generalPage.ts:64
+#: src/details.ts:60 src/preferences/generalPage.ts:70
 msgid "Temperature"
 msgstr "기온"
 
@@ -50,7 +50,7 @@ msgstr "돌풍"
 msgid "UV High"
 msgstr "자외선지수"
 
-#: src/details.ts:67 src/preferences/generalPage.ts:92
+#: src/details.ts:67 src/preferences/generalPage.ts:98
 msgid "Pressure"
 msgstr "기압"
 
@@ -74,13 +74,26 @@ msgstr "구름량"
 msgid "Sun Countdown"
 msgstr "일출/일몰까지"
 
-#: src/details.ts:77 src/popup.ts:459
+#: src/details.ts:77 src/popup.ts:507
 msgid "Invalid"
 msgstr "유효하지 않음"
 
-#: src/extension.ts:357 src/preferences/search.ts:159
+#: src/errors.ts:57
+msgid "Location unavailable or permission not granted."
+msgstr ""
+
+#: src/errors.ts:79
+#, javascript-format
+msgid "Service down (%s)"
+msgstr ""
+
+#: src/extension.ts:360 src/preferences/search.ts:164
 msgid "No Internet"
 msgstr "인터넷 연결 없음"
+
+#: src/extension.ts:366 src/preferences/generalPage.ts:462
+msgid "Unknown Error"
+msgstr ""
 
 #: src/lang.ts:112
 msgid "Today"
@@ -114,44 +127,48 @@ msgstr "토요일"
 msgid "Thursday"
 msgstr "목요일"
 
-#: src/location.ts:82
+#: src/location.ts:93
 #, javascript-format
 msgid "%f°N"
 msgstr "북위 %f°"
 
-#: src/location.ts:82
+#: src/location.ts:93
 #, javascript-format
 msgid "%f°S"
 msgstr "남위 %f°"
 
-#: src/location.ts:83
+#: src/location.ts:94
 #, javascript-format
 msgid "%f°E"
 msgstr "동경 %f°"
 
-#: src/location.ts:83
+#: src/location.ts:94
 #, javascript-format
 msgid "%f°W"
 msgstr "서경 %f°"
 
-#: src/popup.ts:143
+#: src/popup.ts:144
 msgid "Weather Data"
 msgstr "날씨 정보"
 
-#: src/popup.ts:317 src/preferences/aboutPage.ts:76
+#: src/popup.ts:290
+msgid "Refresh"
+msgstr ""
+
+#: src/popup.ts:345 src/preferences/aboutPage.ts:90
 msgid "Settings"
 msgstr "설정"
 
-#: src/popup.ts:363
+#: src/popup.ts:411
 msgid "Retry"
 msgstr ""
 
-#: src/popup.ts:433
+#: src/popup.ts:481
 #, javascript-format
 msgid "H: %s"
 msgstr "최고: %s"
 
-#: src/popup.ts:434
+#: src/popup.ts:482
 #, javascript-format
 msgid "L: %s"
 msgstr "최저: %s"
@@ -168,42 +185,46 @@ msgstr "GitHub 저장소"
 msgid "Support Me"
 msgstr "후원하기"
 
-#: src/preferences/aboutPage.ts:68
+#: src/preferences/aboutPage.ts:70
 msgid "SimpleWeather Version"
 msgstr "SimpleWeather 버전"
 
-#: src/preferences/aboutPage.ts:71
+#: src/preferences/aboutPage.ts:73
 msgid "Unknown"
 msgstr "알 수 없음"
 
-#: src/preferences/aboutPage.ts:79
+#: src/preferences/aboutPage.ts:81
+msgid "Git Hash"
+msgstr ""
+
+#: src/preferences/aboutPage.ts:93
 msgid "Copy"
 msgstr "복사"
 
-#: src/preferences/aboutPage.ts:102
+#: src/preferences/aboutPage.ts:116
 msgid "Copied settings JSON to clipboard."
 msgstr "설정 JSON을 클립보드에 복사했습니다."
 
-#: src/preferences/aboutPage.ts:116
+#: src/preferences/aboutPage.ts:130
 #, javascript-format
 msgid "Contributions and translations are welcome! Read how on %s."
 msgstr "기여와 번역을 환영합니다! %s에서 방법을 확인하세요."
 
-#: src/preferences/aboutPage.ts:119
+#: src/preferences/aboutPage.ts:133
 #, javascript-format
 msgid "If you like this extension, consider starring it on %s."
 msgstr "이 확장 기능이 마음에 드시면 %s에서 별표를 눌러주세요."
 
-#: src/preferences/aboutPage.ts:122
+#: src/preferences/aboutPage.ts:136
 msgid "here"
 msgstr "여기"
 
-#: src/preferences/aboutPage.ts:124
+#: src/preferences/aboutPage.ts:138
 #, javascript-format
 msgid "Report bugs or request new features %s."
 msgstr "버그 신고 또는 새 기능 요청은 %s에서 해주세요."
 
-#: src/preferences/aboutPage.ts:128 src/preferences/aboutPage.ts:138
+#: src/preferences/aboutPage.ts:142 src/preferences/aboutPage.ts:152
 msgid "Credits"
 msgstr "크레딧"
 
@@ -219,7 +240,7 @@ msgstr "팝업"
 msgid "Drag-and-drop from bottom to configure the pop-up"
 msgstr "아래에서 드래그 앤 드롭하여 팝업을 구성하세요"
 
-#: src/preferences/detailsPage.ts:185 src/preferences/generalPage.ts:239
+#: src/preferences/detailsPage.ts:185 src/preferences/generalPage.ts:267
 msgid "Panel"
 msgstr "패널"
 
@@ -260,200 +281,246 @@ msgstr "새 위치"
 msgid "Name"
 msgstr "이름"
 
-#: src/preferences/editLocation.ts:57
+#: src/preferences/editLocation.ts:69
 #, javascript-format
 msgid "%s (e.g. \"%s\")"
 msgstr "%s (예: \"%s\")"
 
-#: src/preferences/editLocation.ts:57
+#: src/preferences/editLocation.ts:69
 msgid "Coordinates"
 msgstr "좌표"
 
-#: src/preferences/editLocation.ts:67
+#: src/preferences/editLocation.ts:93
 msgid "Save"
 msgstr "저장"
 
-#: src/preferences/editLocation.ts:95
+#: src/preferences/editLocation.ts:101
+#, javascript-format
+msgid "View in %s"
+msgstr ""
+
+#: src/preferences/editLocation.ts:102
+msgid "Open in Browser"
+msgstr ""
+
+#: src/preferences/editLocation.ts:105
+msgid "Open"
+msgstr ""
+
+#: src/preferences/editLocation.ts:137
 msgid "Name is required."
 msgstr "이름을 입력해야 합니다."
 
-#: src/preferences/editLocation.ts:100
+#: src/preferences/editLocation.ts:142
 msgid "Invalid coordinates entry."
 msgstr "잘못된 좌표 입력입니다."
 
-#: src/preferences/generalPage.ts:38
+#: src/preferences/generalPage.ts:43
 msgid "General"
 msgstr "일반"
 
-#: src/preferences/generalPage.ts:43 src/preferences/generalPage.ts:53
+#: src/preferences/generalPage.ts:49 src/preferences/generalPage.ts:59
 msgid "Units"
 msgstr "단위"
 
-#: src/preferences/generalPage.ts:44
+#: src/preferences/generalPage.ts:50
 msgid "Configure units of measurement"
 msgstr "측정 단위 설정"
 
-#: src/preferences/generalPage.ts:48
+#: src/preferences/generalPage.ts:54
 msgid "Custom"
 msgstr "사용자 지정"
 
-#: src/preferences/generalPage.ts:48
+#: src/preferences/generalPage.ts:54
 msgid "Metric"
 msgstr "미터법"
 
-#: src/preferences/generalPage.ts:48
+#: src/preferences/generalPage.ts:54
 msgid "Nordic"
 msgstr ""
 
-#: src/preferences/generalPage.ts:48
+#: src/preferences/generalPage.ts:54
 msgid "UK"
 msgstr "영국"
 
-#: src/preferences/generalPage.ts:48
+#: src/preferences/generalPage.ts:54
 msgid "US"
 msgstr "미국"
 
-#: src/preferences/generalPage.ts:61
+#: src/preferences/generalPage.ts:67
 msgid "Fahrenheit"
 msgstr "화씨"
 
-#: src/preferences/generalPage.ts:62
+#: src/preferences/generalPage.ts:68
 msgid "Celsius"
 msgstr "섭씨"
 
-#: src/preferences/generalPage.ts:78
+#: src/preferences/generalPage.ts:84
 msgid "Speed"
 msgstr "풍속"
 
-#: src/preferences/generalPage.ts:106
+#: src/preferences/generalPage.ts:112
 msgid "Rain Measurement"
 msgstr "강수량 단위"
 
-#: src/preferences/generalPage.ts:120
+#: src/preferences/generalPage.ts:126
 msgid "Distance"
 msgstr "거리"
 
-#: src/preferences/generalPage.ts:148
+#: src/preferences/generalPage.ts:154
 msgid "Degrees"
 msgstr "도"
 
-#: src/preferences/generalPage.ts:148
+#: src/preferences/generalPage.ts:154
 msgid "Eight-Point Compass"
 msgstr "8방위"
 
-#: src/preferences/generalPage.ts:151
+#: src/preferences/generalPage.ts:157
 msgid "Direction"
 msgstr "풍향"
 
-#: src/preferences/generalPage.ts:163
+#: src/preferences/generalPage.ts:169
 msgid "Weather Service"
 msgstr "날씨 서비스"
 
-#: src/preferences/generalPage.ts:164
+#: src/preferences/generalPage.ts:170
 msgid "Configure how the weather is attained"
 msgstr "날씨 정보 가져오기 설정"
 
-#: src/preferences/generalPage.ts:171
+#: src/preferences/generalPage.ts:179
 msgid "Weather Provider"
 msgstr "날씨 제공자"
 
-#: src/preferences/generalPage.ts:184
+#: src/preferences/generalPage.ts:190 src/preferences/generalPage.ts:199
+msgid "API Key"
+msgstr ""
+
+#: src/preferences/generalPage.ts:190 src/preferences/generalPage.ts:199
+msgid "API Key (Required)"
+msgstr ""
+
+#: src/preferences/generalPage.ts:212
 msgid "Configure how your location is found"
 msgstr "위치 확인 방법 설정"
 
-#: src/preferences/generalPage.ts:188 src/preferences/generalPage.ts:189
+#: src/preferences/generalPage.ts:216 src/preferences/generalPage.ts:217
 msgid "Online"
 msgstr "온라인"
 
-#: src/preferences/generalPage.ts:190 src/preferences/generalPage.ts:249
+#: src/preferences/generalPage.ts:218 src/preferences/generalPage.ts:277
 msgid "System"
 msgstr "시스템"
 
-#: src/preferences/generalPage.ts:191
+#: src/preferences/generalPage.ts:219
 msgid "Disable"
 msgstr "비활성화"
 
-#: src/preferences/generalPage.ts:194
+#: src/preferences/generalPage.ts:222
 msgid "Provider"
 msgstr "제공자"
 
-#: src/preferences/generalPage.ts:206
+#: src/preferences/generalPage.ts:234
 msgid "Refresh Interval (Minutes)"
 msgstr "새로고침 간격 (분)"
 
-#: src/preferences/generalPage.ts:224
+#: src/preferences/generalPage.ts:252
 msgid "Accessibility"
 msgstr "접근성"
 
-#: src/preferences/generalPage.ts:225
+#: src/preferences/generalPage.ts:253
 msgid "Configure accessibility features"
 msgstr "접근성 기능 설정"
 
-#: src/preferences/generalPage.ts:228
+#: src/preferences/generalPage.ts:256
 msgid "High Contrast"
 msgstr "고대비"
 
-#: src/preferences/generalPage.ts:240
+#: src/preferences/generalPage.ts:268
 msgid "Configure the panel and pop-up"
 msgstr "패널 및 팝업 설정"
 
-#: src/preferences/generalPage.ts:250
+#: src/preferences/generalPage.ts:278
 msgid "Light"
 msgstr "밝게"
 
-#: src/preferences/generalPage.ts:251
+#: src/preferences/generalPage.ts:279
 msgid "Afterdark"
 msgstr "야간 모드"
 
-#: src/preferences/generalPage.ts:252
+#: src/preferences/generalPage.ts:280
 msgid "Immersive"
 msgstr "몰입형"
 
-#: src/preferences/generalPage.ts:255
+#: src/preferences/generalPage.ts:283
 msgid "Theme"
 msgstr "테마"
 
-#: src/preferences/generalPage.ts:265
+#: src/preferences/generalPage.ts:293
 msgid "Center"
 msgstr "가운데"
 
-#: src/preferences/generalPage.ts:265
+#: src/preferences/generalPage.ts:293
 msgid "Left"
 msgstr "왼쪽"
 
-#: src/preferences/generalPage.ts:265
+#: src/preferences/generalPage.ts:293
 msgid "Right"
 msgstr "오른쪽"
 
-#: src/preferences/generalPage.ts:268
+#: src/preferences/generalPage.ts:296
 msgid "Side of Panel"
 msgstr "패널 위치"
 
-#: src/preferences/generalPage.ts:278
+#: src/preferences/generalPage.ts:309
 msgid "Order in Panel"
 msgstr "패널 내 순서"
 
-#: src/preferences/generalPage.ts:294
+#: src/preferences/generalPage.ts:326
+msgid "Pop-Up Offset"
+msgstr ""
+
+#: src/preferences/generalPage.ts:327
+msgid "Horizontal pop-up offset from 0–100."
+msgstr ""
+
+#: src/preferences/generalPage.ts:367
 msgid "Use Symbolic Icons in Panel"
 msgstr "패널에 심볼 아이콘 사용"
 
-#: src/preferences/generalPage.ts:304
+#: src/preferences/generalPage.ts:377
 msgid "Always Use Packaged Icons"
 msgstr "항상 패키지 아이콘 사용"
 
-#: src/preferences/generalPage.ts:315
+#: src/preferences/generalPage.ts:388
+msgid "Show Refresh Button"
+msgstr ""
+
+#: src/preferences/generalPage.ts:399
 msgid "Hide Error Popup"
 msgstr ""
 
-#: src/preferences/generalPage.ts:316
+#: src/preferences/generalPage.ts:400
 msgid "If the popup just says Error, don't even show it."
+msgstr ""
+
+#: src/preferences/generalPage.ts:435
+msgid "API Key Warning"
+msgstr ""
+
+#: src/preferences/generalPage.ts:458
+msgid "Key is invalid or is not subscribed to the One Call 3.0 API."
+msgstr ""
+
+#: src/preferences/generalPage.ts:462
+#, javascript-format
+msgid "Error when validating API Key: %s"
 msgstr ""
 
 #: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
 msgid "Locations"
 msgstr "위치"
 
-#: src/preferences/locationsPage.ts:70 src/preferences/search.ts:76
+#: src/preferences/locationsPage.ts:70 src/preferences/search.ts:80
 msgid "Add"
 msgstr "추가"
 
@@ -465,53 +532,57 @@ msgstr "위로 이동"
 msgid "Move Down"
 msgstr "아래로 이동"
 
-#: src/preferences/locationsPage.ts:128
+#: src/preferences/locationsPage.ts:134
 msgid "Add Here"
 msgstr "여기에 추가"
 
-#: src/preferences/locationsPage.ts:193
+#: src/preferences/locationsPage.ts:146
+msgid "Add By Coords"
+msgstr ""
+
+#: src/preferences/locationsPage.ts:214
 #, javascript-format
 msgid "Are you sure you want delete %s?"
 msgstr "%s을(를) 삭제하시겠습니까?"
 
-#: src/preferences/locationsPage.ts:194
+#: src/preferences/locationsPage.ts:215
 msgid "Cancel"
 msgstr "취소"
 
-#: src/preferences/locationsPage.ts:194
+#: src/preferences/locationsPage.ts:215
 msgid "Delete"
 msgstr "삭제"
 
-#: src/preferences/locationsPage.ts:235
+#: src/preferences/locationsPage.ts:256
 #, javascript-format
 msgid "Internal Error: %s"
 msgstr "내부 오류: %s"
 
-#: src/preferences/locationsPage.ts:236
+#: src/preferences/locationsPage.ts:257
 msgid "Internal Error"
 msgstr "내부 오류"
 
-#: src/preferences/locationsPage.ts:261
+#: src/preferences/locationsPage.ts:282
 msgid "Something else edited the locations."
 msgstr "다른 곳에서 위치가 수정되었습니다."
 
-#: src/preferences/search.ts:46
+#: src/preferences/search.ts:50
 msgid "Search Location"
 msgstr "위치 검색"
 
-#: src/preferences/search.ts:55
+#: src/preferences/search.ts:59
 msgid "City, Neighborhood, etc."
 msgstr "도시, 동네 등"
 
-#: src/preferences/search.ts:60
+#: src/preferences/search.ts:64
 msgid "Search"
 msgstr "검색"
 
-#: src/preferences/search.ts:207
+#: src/preferences/search.ts:212
 msgid "No results."
 msgstr "검색 결과가 없습니다."
 
-#: src/preferences/search.ts:212
+#: src/preferences/search.ts:217
 msgid "No copyright information available."
 msgstr "저작권 정보가 없습니다."
 
@@ -570,16 +641,16 @@ msgstr "남서"
 msgid "W"
 msgstr "서"
 
-#: src/units.ts:298
+#: src/units.ts:302
 msgid "Now"
 msgstr "지금"
 
-#: src/units.ts:302
+#: src/units.ts:303
 #, javascript-format
 msgid "%d h"
 msgstr "%d시간"
 
-#: src/units.ts:303
+#: src/units.ts:304
 #, javascript-format
 msgid "%d min"
 msgstr "%d분"
