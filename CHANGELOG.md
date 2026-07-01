@@ -1,5 +1,5 @@
 
-# v50.1.0 WIP
+# v50.1.0
 
 ## Features
 
@@ -9,9 +9,17 @@
 ## Improvements
 
 - Show carousel dots under forecast carousel in pop-up
+- If provider responds with a server error the pop-up will indicate that
+
+## Bug Fixes
+
+- Fixed error that sometimes happened on disable (was invisible to user anyway)
+- Fixed invisible error related to system clock setting
 
 ## Translations
 
+- French (thanks Vincent Morel & Neo-29)
+- German (thanks Romain Loutrel)
 - Indonesian (thanks Fakhrul Rijal)
 - Polish (thanks Krzysiek Zalewski)
 
