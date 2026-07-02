@@ -297,6 +297,12 @@ export default class SimpleWeatherExtension extends Extension {
         this.#panelIcon = undefined;
         this.#panelLabel = undefined;
         this.#secondPanelLabel = undefined;
+
+        this.#sunTimeIcon?.destroy();
+        this.#sunTimeIcon = undefined;
+        this.#sunTimeLabel?.destroy();
+        this.#sunTimeLabel = undefined;
+
         this.#indicator?.destroy();
         this.#indicator = undefined;
 

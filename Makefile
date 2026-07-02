@@ -134,7 +134,7 @@ $(CSSOUT): $(THEMES)/stylesheet.css $(CSSSRCS)
 $(ZIP): out
 	printf -- 'NEEDED: zip\n'
 	mkdir -p $(DIST)
-	(cd $(BUILD) && zip ../../$(ZIP) -9r ./)
+	(cd $(BUILD) && zip ../../$(ZIP) -9r ./ -x'./schemas/gschemas.compiled')
 	
 # Updates all existing po files by merging them with the pot.
 # If already present, the pot is removed and recreated.

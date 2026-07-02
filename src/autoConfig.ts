@@ -26,16 +26,37 @@ import { AutoConfigFailError } from "./errors.js";
 // Denmark, Finland, Sweden, Norway, Iceland, Faroe Islands, Greenland
 const NORDIC : string[] = [ "DK", "FI", "SE", "NO", "IS", "FO", "GL" ];
 
+async function readFileAsync(path : string) : Promise<string | null> {
+
+    const f = Gio.File.new_for_path(path);
+    return new Promise<string | null>(resolve => {
+        f.load_contents_async(null, (_, res) => {
+            try {
+                const [ ok, contents ] = f.load_contents_finish(res);
+                if(!ok) {
+                    resolve(null);
+                    return;
+                }
+                const str = new TextDecoder().decode(contents);
+                resolve(str);
+                return;
+            } catch(e) {
+                resolve(null);
+                return;
+            }
+        });
+    });
+}
+
 /**
  * Tests if this computer is a desktop.
  * @returns True if a desktop, otherwise false if not or unknown.
  */
-function isDesktop() : boolean {
-    const fileResult = GLib.file_get_contents("/sys/class/dmi/id/chassis_type");
+async function isDesktop() : Promise<boolean> {
+    const str = await readFileAsync("/sys/class/dmi/id/chassis_type");
     // Return false if file read failed
-    if(!fileResult[0]) return false;
+    if(!str) return false;
 
-    const str = new TextDecoder().decode(fileResult[1]);
     // Chassis 3 = desktop
     return str === "3\n";
 }
@@ -55,7 +76,7 @@ export async function setFirstTimeConfig(settings : Gio.Settings) {
     }
 
     // If it isn't a laptop then set your location once and never query the server again
-    if(isDesktop()) {
+    if(await isDesktop()) {
         const loc = Location.newCoords(myLoc.city ?? _g("My Location"), myLoc.lat, myLoc.lon);
         const strArr = [ loc.toString() ];
         settings.set_value("locations", writeGTypeAS(strArr));
