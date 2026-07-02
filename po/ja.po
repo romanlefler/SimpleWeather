@@ -89,7 +89,7 @@ msgstr "位置情報を利用できないか、権限が許可されていませ
 #: src/errors.ts:79
 #, javascript-format
 msgid "Service down (%s)"
-msgstr "サービス停止"
+msgstr "サービス停止 (%s)"
 
 #: src/extension.ts:360 src/preferences/search.ts:164
 msgid "No Internet"
@@ -303,7 +303,7 @@ msgstr "保存"
 #: src/preferences/editLocation.ts:101
 #, javascript-format
 msgid "View in %s"
-msgstr "%s で見る\n"
+msgstr "%s で見る"
 
 #: src/preferences/editLocation.ts:102
 msgid "Open in Browser"
