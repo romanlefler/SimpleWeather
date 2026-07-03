@@ -142,7 +142,7 @@
         </key>
 
         <key name="show-suntime-as-countdown" type="b">
-            <default>false</default>
+            <default>true</default>
             <summary>Show sunrise/sunset as countdown in panel</summary>
         </key>
 
