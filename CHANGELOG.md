@@ -1,4 +1,17 @@
 
+# v51.DEV
+
+## Improvements
+
+- Some widgets that may not have been freed before are now always freed on disable
+- First-time run auto-configuration is now more performant
+
+## Translations
+
+- Hungarian (thanks SzAti69)
+- Japanese (thanks hidenosuke)
+- Russian (thanks Valetss)
+
 # v50.1.0
 
 ## Features
