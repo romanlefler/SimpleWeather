@@ -5,6 +5,7 @@
 
 - Some widgets that may not have been freed before are now always freed on disable
 - First-time run auto-configuration is now more performant
+- Showing the countdown instead of time for the sunset/sunrise is now the default
 
 ## Translations
 
