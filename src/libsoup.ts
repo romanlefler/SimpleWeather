@@ -16,7 +16,7 @@
 */
 
 import GLib from "gi://GLib";
-import Soup from "gi://Soup?version=3.0";
+import Soup from "gi://Soup";
 import { ServiceStatusError } from "./errors.js";
 
 const genericUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
