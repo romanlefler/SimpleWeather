@@ -13,6 +13,7 @@ fi
 
 # Make sure there is a zip
 make pack
+zips=(dist/*.zip)
 
 uvx --python 3.12 \
   --from 'shexli==0.2.1' \
