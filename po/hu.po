@@ -125,7 +125,7 @@ msgstr "Szombat"
 
 #: src/lang.ts:116
 msgid "Thursday"
-msgstr "Kedd"
+msgstr "Csütörtök"
 
 #: src/location.ts:93
 #, javascript-format
