@@ -7,6 +7,10 @@
 - First-time run auto-configuration is now more performant
 - Showing the countdown instead of time for the sunset/sunrise is now the default
 
+## Bug Fixes
+
+- Forecast now can cycle through all 3 pages instead of just 2
+
 ## Translations
 
 - Hungarian (thanks SzAti69)

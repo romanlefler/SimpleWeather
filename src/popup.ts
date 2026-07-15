@@ -240,7 +240,7 @@ export class Popup {
             forecasts.add_child(c.card);
             this.#forecastCards.push(c);
         }
-        const carousel = new CarouselBox(forecasts, ForecastMode.Max, {
+        const carousel = new CarouselBox(forecasts, ForecastMode.Max + 1, {
             track_hover: true,
             style_class: "button"
         });
