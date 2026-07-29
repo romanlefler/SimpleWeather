@@ -23,7 +23,7 @@ import { ExtensionMetadata, gettext as _ } from "resource:///org/gnome/shell/ext
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as PopupMenu from "resource:///org/gnome/shell/ui/popupMenu.js";
 import { Config } from "./config.js";
-import { Condition, Forecast, Weather } from "./weather.js";
+import { Forecast, Weather } from "./weather.js";
 import { displayDayOfWeek, displayTime } from "./lang.js";
 import { gettext as _g } from "./gettext.js";
 import { Details, displayDetail } from "./details.js";
@@ -446,26 +446,59 @@ export class Popup {
         }
     }
 
+    #getForecastLabels(w : Weather) : [ string[], number ] {
+
+        const foreLen = this.#forecastCards.length;
+        const everyOtherHour = w.hourForecast.filter((_, i) => i % 2 === 0);
+        const forecastArrs : Forecast[] = [
+            ...w.forecast,
+            ...everyOtherHour.slice(0, foreLen * 2)
+        ];
+
+        // Keep a full possible list to determine the max width of a cell
+        // Doing all of this and setting a consistent width fixes the problem
+        // of "Wednesday" being so long it messes with the layout (and this is
+        // done dynamically so no matter the translation this doesn't happen)
+        const fullLabelList : string[] = [ ];
+        let maxLabelWidth = 0;
+        const lbl = this.#forecastCards[0].day;
+        const originalText = lbl.text;
+
+        for(let i = 0; i < foreLen * 3; i++) {
+            let text : string;
+            if(i < foreLen) text = displayDayOfWeek(forecastArrs[i].date, true);
+            else text = displayTime(forecastArrs[i].date, this.#config, true);
+
+            lbl.set_text(text);
+            const [ , w ] = lbl.get_preferred_width(-1);
+            
+            fullLabelList.push(text);
+            if(w > maxLabelWidth) maxLabelWidth = w;
+        }
+
+        lbl.set_text(originalText);
+        return [ fullLabelList, maxLabelWidth ];
+    }
+
     #updateForecast(w : Weather) {
         this.#cachedWeather = w;
 
+        const foreLen = this.#forecastCards.length;
+        const [ labelList, maxWidth ] = this.#getForecastLabels(w);
+
         const everyOtherHour = w.hourForecast.filter((_, i) => i % 2 === 0);
-
-        const forecastArrs = [
-            w.forecast,
-            everyOtherHour,
-            everyOtherHour.slice(7)
+        const forecastArrs : Forecast[] = [
+            ...w.forecast,
+            ...everyOtherHour.slice(0, foreLen * 2)
         ];
-        const fore : Forecast[] = forecastArrs[this.#foreMode];
+        const fore = forecastArrs.slice(this.#foreMode * foreLen, (this.#foreMode + 1) * foreLen);
 
-        for(let i = 0; i < this.#forecastCards.length; i++) {
+        for(let i = 0; i < foreLen; i++) {
             const c = this.#forecastCards[i];
 
-            let dateText : string;
-            if(this.#foreMode === ForecastMode.Week) dateText = displayDayOfWeek(fore[i].date, true);
-            else dateText = displayTime(fore[i].date, this.#config, true);
-
+            const dateText = labelList[i + this.#foreMode * foreLen];
             c.day.text = dateText;
+            c.card.set_width(maxWidth);
 
             c.icon.gicon = this.#createIcon(fore[i].gIconName);
 
