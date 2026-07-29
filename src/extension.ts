@@ -16,7 +16,6 @@
 */
 
 import Clutter from "gi://Clutter";
-import Cogl from "gi://Cogl";
 import Gio from "gi://Gio";
 import GLib from "gi://GLib";
 import St from 'gi://St';
@@ -24,12 +23,11 @@ import { Extension } from "resource:///org/gnome/shell/extensions/extension.js";
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as PanelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js';
 import { createProvider, Provider } from "./providers/provider.js";
-import { OpenMeteo } from "./providers/openmeteo.js";
 import { LibSoup } from "./libsoup.js";
 import { Config } from "./config.js";
 import { Weather } from "./weather.js";
-import { delayTask, removeSourceIfTruthy, isNoInternet } from "./utils.js";
-import { displayTemp, displayTime, initLocales } from "./lang.js";
+import { delayTask, isNoInternet } from "./utils.js";
+import { displayTime, initLocales } from "./lang.js";
 import { freeMyLocation, setUpMyLocation } from "./myLocation.js";
 import { setUpGettext, gettext as _g } from "./gettext.js";
 import { gettext as shellGettext } from "resource:///org/gnome/shell/extensions/extension.js";
@@ -38,7 +36,7 @@ import { PopupMenu } from "resource:///org/gnome/shell/ui/popupMenu.js";
 import { showWelcome, showManualConfig } from "./welcome.js";
 import { setFirstTimeConfig } from "./autoConfig.js";
 import { displayDetail } from "./details.js";
-import { theme, themeInitAll, themeRemoveAll } from "./theme.js";
+import { theme, themeInitAll } from "./theme.js";
 import { AutoConfigFailError, FriendlyError } from "./errors.js";
 
 const FAIL_RETRIES : number = 10;
@@ -283,11 +281,12 @@ export default class SimpleWeatherExtension extends Extension {
      * garbage-collected.
      */
     disable() {
-        // removeSourceIfTruthy is a shorthand for removing source
-        // if it is defined then returning undefined
-        this.#fetchLoopId = removeSourceIfTruthy(this.#fetchLoopId);
-        this.#delayFetchId = removeSourceIfTruthy(this.#delayFetchId);
-        this.#waitLayoutId = removeSourceIfTruthy(this.#waitLayoutId);
+        if(this.#fetchLoopId) GLib.source_remove(this.#fetchLoopId);
+        this.#fetchLoopId = undefined;
+        if(this.#delayFetchId) GLib.source_remove(this.#delayFetchId);
+        this.#delayFetchId = undefined;
+        if(this.#waitLayoutId) GLib.source_remove(this.#waitLayoutId);
+        this.#waitLayoutId = undefined;
 
         if(this.#popup && this.#indicator) {
             this.#popup.destroy(this.#indicator.menu as PopupMenu);

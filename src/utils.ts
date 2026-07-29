@@ -30,11 +30,6 @@ export function delayTask(seconds : number, callback : () => void) : number {
     );
 }
 
-export function removeSourceIfTruthy(id : number | null | undefined) : undefined {
-    if(id) GLib.source_remove(id);
-    return undefined;
-}
-
 export function getTimezoneName() : string {
     return Intl.DateTimeFormat(getLocales()).resolvedOptions().timeZone;
 }
