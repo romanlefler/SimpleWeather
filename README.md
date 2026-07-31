@@ -2,7 +2,7 @@
 
 A highly configurable GNOME shell extension for viewing the weather.
 
-Supports GNOME 46, 48, 49, and 50.
+Supports GNOME 46, 48, 49, 50, and unstable 51.
 
 ![Screenshot](./docs/screenshot.png)
 
