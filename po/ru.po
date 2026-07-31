@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
-"POT-Creation-Date: 2026-06-05 16:48-0500\n"
+"POT-Creation-Date: 2026-07-28 23:33-0500\n"
 "PO-Revision-Date: 2025-07-23 22:06\n"
 "Last-Translator: \n"
 "Language-Team: Russian\n"
@@ -19,7 +19,7 @@ msgstr ""
 "X-Crowdin-File: simple-weather@romanlefler.com.pot\n"
 "X-Crowdin-File-ID: 2\n"
 
-#: src/autoConfig.ts:59 src/location.ts:64 src/location.ts:74
+#: src/autoConfig.ts:80 src/location.ts:64 src/location.ts:74
 #: src/preferences/generalPage.ts:211
 msgid "My Location"
 msgstr "Текущее местоположение"
@@ -76,7 +76,7 @@ msgstr "Облачность"
 msgid "Sun Countdown"
 msgstr "До восхода/заката"
 
-#: src/details.ts:77 src/popup.ts:507
+#: src/details.ts:77 src/popup.ts:540
 msgid "Invalid"
 msgstr "Недействительно"
 
@@ -89,11 +89,11 @@ msgstr "Местоположение недоступно или разреше�
 msgid "Service down (%s)"
 msgstr "Сервис недоступен (%s)"
 
-#: src/extension.ts:360 src/preferences/search.ts:164
+#: src/extension.ts:365 src/preferences/search.ts:164
 msgid "No Internet"
 msgstr "Нет подключения"
 
-#: src/extension.ts:366 src/preferences/generalPage.ts:462
+#: src/extension.ts:371 src/preferences/generalPage.ts:462
 msgid "Unknown Error"
 msgstr "Неизвестная ошибка"
 
@@ -165,12 +165,12 @@ msgstr "Настройки"
 msgid "Retry"
 msgstr "Повторить"
 
-#: src/popup.ts:481
+#: src/popup.ts:514
 #, javascript-format
 msgid "H: %s"
 msgstr "Макс: %s"
 
-#: src/popup.ts:482
+#: src/popup.ts:515
 #, javascript-format
 msgid "L: %s"
 msgstr "Мин: %s"
@@ -503,7 +503,8 @@ msgstr "Скрывать всплывающее окно с ошибкой"
 
 #: src/preferences/generalPage.ts:400
 msgid "If the popup just says Error, don't even show it."
-msgstr "Не показывать всплывающее окно, если оно содержит только сообщение об ошибке"
+msgstr ""
+"Не показывать всплывающее окно, если оно содержит только сообщение об ошибке"
 
 #: src/preferences/generalPage.ts:435
 msgid "API Key Warning"

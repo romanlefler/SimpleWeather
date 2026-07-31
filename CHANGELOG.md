@@ -6,6 +6,7 @@
 - Some widgets that may not have been freed before are now always freed on disable
 - First-time run auto-configuration is now more performant
 - Showing the countdown instead of time for the sunset/sunrise is now the default
+- Every forecast column is now the same size
 
 ## Bug Fixes
 
@@ -13,6 +14,7 @@
 
 ## Translations
 
+- German (thanks Anexity)
 - Hungarian (thanks SzAti69)
 - Japanese (thanks hidenosuke)
 - Russian (thanks Valetss)

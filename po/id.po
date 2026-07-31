@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
-"POT-Creation-Date: 2026-06-05 16:48-0500\n"
+"POT-Creation-Date: 2026-07-28 23:33-0500\n"
 "PO-Revision-Date: 2025-08-24 14:37+0800\n"
 "Last-Translator: Fakhrul Rijal <frijal@gmail.com>\n"
 "Language-Team: English\n"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Crowdin-File-ID: 2\n"
 "X-Generator: Poedit 3.6\n"
 
-#: src/autoConfig.ts:59 src/location.ts:64 src/location.ts:74
+#: src/autoConfig.ts:80 src/location.ts:64 src/location.ts:74
 #: src/preferences/generalPage.ts:211
 msgid "My Location"
 msgstr "Lokasi Saya"
@@ -75,7 +75,7 @@ msgstr "Tertutup Awan"
 msgid "Sun Countdown"
 msgstr "Menjelang Terbenam"
 
-#: src/details.ts:77 src/popup.ts:507
+#: src/details.ts:77 src/popup.ts:540
 msgid "Invalid"
 msgstr "Gagal"
 
@@ -88,11 +88,11 @@ msgstr "Lokasi tidak tersedia atau izin tidak diberikan."
 msgid "Service down (%s)"
 msgstr "Layanan tidak tersedia (%s)"
 
-#: src/extension.ts:360 src/preferences/search.ts:164
+#: src/extension.ts:365 src/preferences/search.ts:164
 msgid "No Internet"
 msgstr "Tidak ada Internet"
 
-#: src/extension.ts:366 src/preferences/generalPage.ts:462
+#: src/extension.ts:371 src/preferences/generalPage.ts:462
 msgid "Unknown Error"
 msgstr "Kesalahan yang Tidak Diketahui"
 
@@ -164,12 +164,12 @@ msgstr "Setelan"
 msgid "Retry"
 msgstr "Ulangi"
 
-#: src/popup.ts:481
+#: src/popup.ts:514
 #, javascript-format
 msgid "H: %s"
 msgstr "T: %s"
 
-#: src/popup.ts:482
+#: src/popup.ts:515
 #, javascript-format
 msgid "L: %s"
 msgstr "R: %s"

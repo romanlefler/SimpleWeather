@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
-"POT-Creation-Date: 2026-06-05 16:48-0500\n"
+"POT-Creation-Date: 2026-07-28 23:33-0500\n"
 "PO-Revision-Date: 2026-07-02 14:10+0900\n"
 "Last-Translator: \n"
 "Language-Team: Japanese\n"
@@ -21,7 +21,7 @@ msgstr ""
 "X-Crowdin-File-ID: 2\n"
 "X-Generator: Gtranslator 50.0\n"
 
-#: src/autoConfig.ts:59 src/location.ts:64 src/location.ts:74
+#: src/autoConfig.ts:80 src/location.ts:64 src/location.ts:74
 #: src/preferences/generalPage.ts:211
 msgid "My Location"
 msgstr "自分の場所"
@@ -78,7 +78,7 @@ msgstr "雲量"
 msgid "Sun Countdown"
 msgstr "日没までの時間"
 
-#: src/details.ts:77 src/popup.ts:507
+#: src/details.ts:77 src/popup.ts:540
 msgid "Invalid"
 msgstr "無効"
 
@@ -91,11 +91,11 @@ msgstr "位置情報を利用できないか、権限が許可されていませ
 msgid "Service down (%s)"
 msgstr "サービス停止 (%s)"
 
-#: src/extension.ts:360 src/preferences/search.ts:164
+#: src/extension.ts:365 src/preferences/search.ts:164
 msgid "No Internet"
 msgstr "インターネットがありません"
 
-#: src/extension.ts:366 src/preferences/generalPage.ts:462
+#: src/extension.ts:371 src/preferences/generalPage.ts:462
 msgid "Unknown Error"
 msgstr "不明なエラー"
 
@@ -167,12 +167,12 @@ msgstr "設定"
 msgid "Retry"
 msgstr "リトライ"
 
-#: src/popup.ts:481
+#: src/popup.ts:514
 #, javascript-format
 msgid "H: %s"
 msgstr "最高: %s"
 
-#: src/popup.ts:482
+#: src/popup.ts:515
 #, javascript-format
 msgid "L: %s"
 msgstr "最低: %s"

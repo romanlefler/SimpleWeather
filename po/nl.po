@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
-"POT-Creation-Date: 2026-06-05 16:48-0500\n"
+"POT-Creation-Date: 2026-07-28 23:33-0500\n"
 "PO-Revision-Date: 2025-08-28 16:56\n"
 "Last-Translator: koenraad-verv\n"
 "Language-Team: Dutch\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Crowdin-File: simple-weather@romanlefler.com.pot\n"
 "X-Crowdin-File-ID: 2\n"
 
-#: src/autoConfig.ts:59 src/location.ts:64 src/location.ts:74
+#: src/autoConfig.ts:80 src/location.ts:64 src/location.ts:74
 #: src/preferences/generalPage.ts:211
 msgid "My Location"
 msgstr "Mijn locatie"
@@ -74,7 +74,7 @@ msgstr "Bewolking"
 msgid "Sun Countdown"
 msgstr "Max aantal uren zon"
 
-#: src/details.ts:77 src/popup.ts:507
+#: src/details.ts:77 src/popup.ts:540
 msgid "Invalid"
 msgstr "Ongeldig"
 
@@ -87,11 +87,11 @@ msgstr ""
 msgid "Service down (%s)"
 msgstr ""
 
-#: src/extension.ts:360 src/preferences/search.ts:164
+#: src/extension.ts:365 src/preferences/search.ts:164
 msgid "No Internet"
 msgstr "Geen internet"
 
-#: src/extension.ts:366 src/preferences/generalPage.ts:462
+#: src/extension.ts:371 src/preferences/generalPage.ts:462
 msgid "Unknown Error"
 msgstr ""
 
@@ -163,12 +163,12 @@ msgstr "Instellingen"
 msgid "Retry"
 msgstr ""
 
-#: src/popup.ts:481
+#: src/popup.ts:514
 #, javascript-format
 msgid "H: %s"
 msgstr "H: %s"
 
-#: src/popup.ts:482
+#: src/popup.ts:515
 #, javascript-format
 msgid "L: %s"
 msgstr "L: %s"

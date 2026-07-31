@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
-"POT-Creation-Date: 2026-06-05 16:48-0500\n"
+"POT-Creation-Date: 2026-07-28 23:33-0500\n"
 "PO-Revision-Date: 2025-07-23 22:08\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Crowdin-File: simple-weather@romanlefler.com.pot\n"
 "X-Crowdin-File-ID: 2\n"
 
-#: src/autoConfig.ts:59 src/location.ts:64 src/location.ts:74
+#: src/autoConfig.ts:80 src/location.ts:64 src/location.ts:74
 #: src/preferences/generalPage.ts:211
 msgid "My Location"
 msgstr "Ma position"
@@ -74,7 +74,7 @@ msgstr "Couverture nuageuse"
 msgid "Sun Countdown"
 msgstr "Compteur solaire"
 
-#: src/details.ts:77 src/popup.ts:507
+#: src/details.ts:77 src/popup.ts:540
 msgid "Invalid"
 msgstr "Invalide"
 
@@ -87,11 +87,11 @@ msgstr "Localisation indisponible ou permission non accordée"
 msgid "Service down (%s)"
 msgstr "Service indisponible (%s)"
 
-#: src/extension.ts:360 src/preferences/search.ts:164
+#: src/extension.ts:365 src/preferences/search.ts:164
 msgid "No Internet"
 msgstr "Pas de connexion à Internet"
 
-#: src/extension.ts:366 src/preferences/generalPage.ts:462
+#: src/extension.ts:371 src/preferences/generalPage.ts:462
 msgid "Unknown Error"
 msgstr "Erreur inconnue"
 
@@ -163,12 +163,12 @@ msgstr "Réglages"
 msgid "Retry"
 msgstr "Réessayer"
 
-#: src/popup.ts:481
+#: src/popup.ts:514
 #, javascript-format
 msgid "H: %s"
 msgstr "Max: %s"
 
-#: src/popup.ts:482
+#: src/popup.ts:515
 #, javascript-format
 msgid "L: %s"
 msgstr "Min: %s"
@@ -510,7 +510,9 @@ msgstr "Avertissement concernant la clé API"
 
 #: src/preferences/generalPage.ts:458
 msgid "Key is invalid or is not subscribed to the One Call 3.0 API."
-msgstr "La clé API est invalide ou ne dispose pas d'un abonnement à l'API One Call 3.0"
+msgstr ""
+"La clé API est invalide ou ne dispose pas d'un abonnement à l'API One Call "
+"3.0"
 
 #: src/preferences/generalPage.ts:462
 #, javascript-format
