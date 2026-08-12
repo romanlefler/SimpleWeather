@@ -29,6 +29,8 @@ export interface Weather extends IDetails {
 
     isNight : boolean;
 
+    observedAt : Date;
+
     sunset : Date;
 
     sunrise : Date;
@@ -75,6 +77,8 @@ export interface Forecast {
 
     gIconName : string;
 
+    conditionText? : GettextKey;
+
     temp? : Temp;
 
     tempMin? : Temp;
@@ -117,4 +121,3 @@ export function gettextCondit(condit : Condition, isNight : boolean) : GettextKe
             throw new Error(`Unknown condition: ${condit}`);
     }
 }
-

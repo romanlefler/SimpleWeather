@@ -43,6 +43,7 @@ const MOCK_WEATHER : Weather = {
     temp: new Temp(71),
     gIconName: "weather-clear-symbolic",
     isNight: false,
+    observedAt: new Date(),
     sunset: fromTime(12 + 8),
     sunrise: fromTime(6),
     forecast: [ ],

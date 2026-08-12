@@ -119,6 +119,7 @@ export class OpenMeteo implements Provider {
                 // This T00 thing tells the parser to assume local time (which we must do)
                 date: new Date(`${fDateStr}T00:00:00`),
                 gIconName: fIconName,
+                conditionText: gettextCondit(fIcon.c, false),
                 tempMin: new Temp(daily.temperature_2m_min[i]),
                 tempMax: new Temp(daily.temperature_2m_max[i]),
                 precipChancePercent: daily.precipitation_probability_max[i]
@@ -139,6 +140,7 @@ export class OpenMeteo implements Provider {
             hourForecast.push({
                 date: new Date(fDateStr),
                 gIconName: fIconName,
+                conditionText: gettextCondit(fIcon.c, fIsNight),
                 temp: new Temp(hourly.temperature_2m[i]),
                 precipChancePercent: hourly.precipitation_probability[i]
             });
@@ -149,6 +151,7 @@ export class OpenMeteo implements Provider {
             temp,
             gIconName,
             isNight,
+            observedAt: new Date(cur.time),
             sunrise,
             sunset,
             forecast: dayForecast,
@@ -231,4 +234,3 @@ const codeToIcon : Record<number, { c : Condition, i : string }> = {
     96: { c : Condition.SNOWY, i: Icons.Hail },
     99: { c : Condition.SNOWY, i: Icons.Hail }
 };
-

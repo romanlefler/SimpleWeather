@@ -109,6 +109,7 @@ export class OpenWeatherMap implements Provider {
             dayForecast.push({
                 date: unixToDate(daily[i].dt),
                 gIconName: fIconName,
+                conditionText: gettextCondit(fIcon.c, false),
                 tempMin: new Temp(daily[i].temp.min),
                 tempMax: new Temp(daily[i].temp.max),
                 precipChancePercent: Math.round(daily[i].pop * 100)
@@ -125,6 +126,7 @@ export class OpenWeatherMap implements Provider {
             hourForecast.push({
                 date: unixToDate(hourly[i].dt),
                 gIconName: fIconName,
+                conditionText: gettextCondit(fIcon.c, fIsNight),
                 temp: new Temp(hourly[i].temp),
                 precipChancePercent: Math.round(hourly[i].pop * 100)
             });
@@ -135,6 +137,7 @@ export class OpenWeatherMap implements Provider {
             temp,
             gIconName,
             isNight,
+            observedAt: unixToDate(cur.dt),
             sunrise,
             sunset,
             forecast: dayForecast,
