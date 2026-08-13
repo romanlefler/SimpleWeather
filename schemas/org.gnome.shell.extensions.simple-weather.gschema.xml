@@ -160,6 +160,11 @@
             <summary>Current weather details in the Classic pop-up</summary>
         </key>
 
+        <key name="highlight-detail-values" type="b">
+            <default>false</default>
+            <summary>Highlight detail values in the Default pop-up</summary>
+        </key>
+
         <key name="panel-box" enum="org.gnome.shell.extensions.simple-weather.panel-box">
             <default>'right'</default>
             <summary>Which box to put the button into in the panel</summary>

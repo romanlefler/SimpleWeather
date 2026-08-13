@@ -261,6 +261,7 @@ export default class SimpleWeatherExtension extends Extension {
         this.#config!.onPanelOffsetChanged(this.#rebuildIndicator.bind(this));
         this.#config!.onThemeChanged(this.#rebuildIndicator.bind(this));
         this.#config!.onHighContrastChanged(this.#rebuildIndicator.bind(this));
+        this.#config!.onHighlightDetailValuesChanged(this.#rebuildIndicator.bind(this));
         this.#config!.onShowRefreshButtonChanged(this.#rebuildIndicator.bind(this));
 
         // GNOME Settings

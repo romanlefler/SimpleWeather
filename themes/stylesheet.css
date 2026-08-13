@@ -32,6 +32,15 @@
     text-align: center;
 }
 
+.sw-default-detail-caption {
+    padding-right: 4px;
+    text-align: right;
+}
+
+.sw-default-detail-value {
+    text-align: left;
+}
+
 .simpleweather-card-icon {
     icon-size: 64px;
 }

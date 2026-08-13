@@ -373,6 +373,17 @@ export class Config {
         this.#addId(id);
     }
 
+    getHighlightDetailValues() : boolean {
+        return this.#settings.get_boolean("highlight-detail-values");
+    }
+
+    onHighlightDetailValuesChanged(callback : () => void) : void {
+        const id = this.#settings.connect("changed", (_, key) => {
+            if(key === "highlight-detail-values") callback();
+        });
+        this.#addId(id);
+    }
+
     /**
      * Gets the variable-length details selection edited in preferences.
      * An empty list is valid; a list cannot exceed the number of detail types.

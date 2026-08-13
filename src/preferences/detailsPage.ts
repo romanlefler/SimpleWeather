@@ -156,6 +156,20 @@ export class DetailsPage extends Adw.PreferencesPage {
             settings.apply();
         });
         popupGroup.add(popupLayoutRow);
+
+        const highlightDetailValuesRow = new Adw.SwitchRow({
+            title: _g("Highlight Detail Values"),
+            active: settings.get_boolean("highlight-detail-values"),
+            visible: this.#config.getPopupLayout() === PopupLayout.Default
+        });
+        highlightDetailValuesRow.connect("notify::active", () => {
+            settings.set_boolean("highlight-detail-values", highlightDetailValuesRow.active);
+            settings.apply();
+        });
+        this.#config.onPopupLayoutChanged(layout => {
+            highlightDetailValuesRow.visible = layout === PopupLayout.Default;
+        });
+        popupGroup.add(highlightDetailValuesRow);
         this.add(popupGroup);
 
         const curGroup = new Adw.PreferencesGroup({

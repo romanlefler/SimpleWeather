@@ -19,7 +19,7 @@ import Clutter from "gi://Clutter";
 import St from "gi://St";
 import * as Main from "resource:///org/gnome/shell/ui/main.js";
 import { Config } from "../config.js";
-import { Details, displayDetail } from "../details.js";
+import { detailName, Details, displayDetail } from "../details.js";
 import { gettext as _g } from "../gettext.js";
 import { displayDayOfWeek, displayTime } from "../lang.js";
 import { theme } from "../theme.js";
@@ -39,7 +39,8 @@ interface ForecastCard {
 }
 
 interface CurrentInfoItem {
-    label : St.Label;
+    caption : St.Label;
+    value : St.Label;
     box : St.BoxLayout;
 }
 
@@ -80,21 +81,34 @@ function getTextColor() : `rgba(${number}, ${number}, ${number}, ${number})` {
     return `rgba(${color.red}, ${color.green}, ${color.blue}, ${color.alpha / 255})`;
 }
 
-function evenLabel(config : Config) {
-    const label = new St.Label({
+function createDetailItem(config : Config) : CurrentInfoItem {
+    const caption = new St.Label({
         x_expand: true,
         y_align: Clutter.ActorAlign.CENTER,
         x_align: Clutter.ActorAlign.FILL,
-        style_class: "simpleweather-current-item"
+        style_class: "simpleweather-current-item sw-default-detail-caption"
+    });
+    const value = new St.Label({
+        x_expand: true,
+        y_align: Clutter.ActorAlign.CENTER,
+        x_align: Clutter.ActorAlign.FILL,
+        style_class: "simpleweather-current-item sw-default-detail-value"
     });
 
     if(config.getHighContrast()) {
-        if(config.getTheme() === "") label.style = `color:${getTextColor()}`;
-    } else theme(label, "faded");
+        if(config.getTheme() === "") caption.style = `color:${getTextColor()}`;
+    } else {
+        theme(caption, "faded");
+        if(!config.getHighlightDetailValues()) theme(value, "faded");
+    }
+    if((config.getHighContrast() || config.getHighlightDetailValues())
+        && config.getTheme() === "") {
+        value.style = `color:${getTextColor()}`;
+    }
 
     const box = new St.BoxLayout({ x_expand: true, x_align: Clutter.ActorAlign.FILL });
-    box.add_child(label);
-    return { label, box };
+    addChildren(box, caption, value);
+    return { caption, value, box };
 }
 
 function createCurrentInfo(config : Config, parent : Clutter.Actor) : CurrentInfo {
@@ -103,7 +117,10 @@ function createCurrentInfo(config : Config, parent : Clutter.Actor) : CurrentInf
     const row2 = new St.BoxLayout({ x_expand: true, y_expand: true, x_align: Clutter.ActorAlign.FILL });
     addChildren(columns, row1, row2);
 
-    const items = Array.from({ length: Object.values(Details).length }, () => evenLabel(config));
+    const items = Array.from(
+        { length: Object.values(Details).length },
+        () => createDetailItem(config)
+    );
     parent.add_child(columns);
     return { columns, rows: [row1, row2], items };
 }
@@ -277,9 +294,14 @@ export class DefaultLayout implements PopupLayout {
         this.#arrangeCurrentInfo(details.length);
         for(let index = 0; index < details.length; index++) {
             const detail = details[index] as Details;
-            this.#currentInfo.items[index].label.text = Object.values(Details).includes(detail)
-                ? displayDetail(weather, detail, _g, this.#args.config)
-                : _g("Invalid");
+            const item = this.#currentInfo.items[index];
+            if(!Object.values(Details).includes(detail)) {
+                item.caption.text = `${_g("Invalid")}:`;
+                item.value.text = "";
+                continue;
+            }
+            item.caption.text = `${_g(detailName[detail] as string)}:`;
+            item.value.text = displayDetail(weather, detail, _g, this.#args.config, true);
         }
     }
 
