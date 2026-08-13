@@ -48,30 +48,30 @@ function createForecastView(config : PopupLayoutArgs["config"]) {
         vertical: true,
         x_expand: true,
         x_align: Clutter.ActorAlign.CENTER,
-        style_class: "classic-hourly-item"
+        style_class: "sw-classic-hourly-item"
     });
     const time = new St.Label({
         x_align: Clutter.ActorAlign.CENTER,
-        style_class: "classic-forecast-time"
+        style_class: "sw-classic-forecast-time"
     });
     const iconBox = new St.BoxLayout({
         x_expand: true,
         x_align: Clutter.ActorAlign.CENTER,
-        style_class: "classic-forecast-icon-box"
+        style_class: "sw-classic-forecast-icon-box"
     });
     const icon = new St.Icon({
         icon_name: "view-refresh-symbolic",
         x_align: Clutter.ActorAlign.CENTER,
-        style_class: "classic-forecast-icon"
+        style_class: "sw-classic-forecast-icon"
     });
     const temperature = new St.Label({
         y_align: Clutter.ActorAlign.CENTER,
-        style_class: "classic-forecast-temperature"
+        style_class: "sw-classic-forecast-temperature"
     });
     usePrimaryTextColor(config, temperature);
     const summary = new St.Label({
         x_align: Clutter.ActorAlign.CENTER,
-        style_class: "classic-forecast-summary"
+        style_class: "sw-classic-forecast-summary"
     });
     summary.clutter_text.line_wrap = true;
     addChildren(iconBox, icon, temperature);
@@ -102,16 +102,16 @@ export class ClassicLayout implements PopupLayout {
         this.actor = new St.BoxLayout({
             vertical: true,
             x_expand: true,
-            style_class: "classic-layout"
+            style_class: "sw-classic-layout"
         });
 
         const currentRow = new St.BoxLayout({
             x_expand: true,
-            style_class: "classic-current-row"
+            style_class: "sw-classic-current-row"
         });
         this.#currentIcon = new St.Icon({
             icon_name: "weather-clear-symbolic",
-            style_class: "classic-current-icon"
+            style_class: "sw-classic-current-icon"
         });
         currentRow.add_child(this.#currentIcon);
 
@@ -120,26 +120,26 @@ export class ClassicLayout implements PopupLayout {
             x_expand: true,
             y_expand: true,
             y_align: Clutter.ActorAlign.CENTER,
-            style_class: "classic-summary-box"
+            style_class: "sw-classic-summary-box"
         });
-        this.#location = new St.Label({ style_class: "classic-location" });
-        this.#summary = new St.Label({ style_class: "classic-summary" });
+        this.#location = new St.Label({ style_class: "sw-classic-location" });
+        this.#summary = new St.Label({ style_class: "sw-classic-summary" });
         usePrimaryTextColor(args.config, this.#summary);
 
-        const sunInfo = new St.BoxLayout({ style_class: "classic-sun-info" });
+        const sunInfo = new St.BoxLayout({ style_class: "sw-classic-sun-info" });
         const sunriseIcon = new St.Icon({
             icon_name: "daytime-sunrise-symbolic",
-            style_class: "classic-sun-icon classic-first-sun-icon"
+            style_class: "sw-classic-sun-icon sw-classic-first-sun-icon"
         });
         this.#sunrise = new St.Label();
         const sunsetIcon = new St.Icon({
             icon_name: "daytime-sunset-symbolic",
-            style_class: "classic-sun-icon"
+            style_class: "sw-classic-sun-icon"
         });
         this.#sunset = new St.Label();
         const updatedIcon = new St.Icon({
             icon_name: "view-refresh-symbolic",
-            style_class: "classic-update-icon"
+            style_class: "sw-classic-update-icon"
         });
         this.#updated = new St.Label();
         addChildren(
@@ -157,15 +157,15 @@ export class ClassicLayout implements PopupLayout {
         const detailBox = new St.BoxLayout({
             x_expand: false,
             y_align: Clutter.ActorAlign.CENTER,
-            style_class: "classic-detail-box"
+            style_class: "sw-classic-detail-box"
         });
         const captions = new St.BoxLayout({
             vertical: true,
-            style_class: "classic-detail-captions"
+            style_class: "sw-classic-detail-captions"
         });
         const values = new St.BoxLayout({
             vertical: true,
-            style_class: "classic-detail-values"
+            style_class: "sw-classic-detail-values"
         });
         const detailNames = [
             _g("Feels Like"),
@@ -187,7 +187,7 @@ export class ClassicLayout implements PopupLayout {
 
         const hourlyRow = new St.BoxLayout({
             x_expand: true,
-            style_class: "classic-hourly-row"
+            style_class: "sw-classic-hourly-row"
         });
         this.#hourly = [];
         for(let index = 0; index < 4; index++) {

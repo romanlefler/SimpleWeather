@@ -33,81 +33,81 @@
     margin-left: 8px;
 }
 
-.classic-layout {
+.sw-classic-layout {
     min-width: 720px;
 }
 
-.classic-current-row {
+.sw-classic-current-row {
     padding: 0 20px;
 }
 
-.classic-current-icon {
+.sw-classic-current-icon {
     icon-size: 96px;
     padding-right: 40px;
 }
 
-.classic-summary-box {
+.sw-classic-summary-box {
     padding-top: 5px;
     padding-right: 60px;
 }
 
-.classic-summary {
+.sw-classic-summary {
     font-size: 36px;
 }
 
-.classic-sun-info {
+.sw-classic-sun-info {
     spacing: 0;
 }
 
-.classic-sun-icon {
+.sw-classic-sun-icon {
     icon-size: 15px;
     padding-left: 15px;
     padding-right: 5px;
 }
 
-.classic-first-sun-icon {
+.sw-classic-first-sun-icon {
     padding-left: 0;
 }
 
-.classic-update-icon {
+.sw-classic-update-icon {
     icon-size: 15px;
     padding-left: 15px;
     padding-right: 5px;
 }
 
-.classic-detail-box {
+.sw-classic-detail-box {
     padding: 5px 15px 0;
 }
 
-.classic-detail-captions {
+.sw-classic-detail-captions {
     text-align: right;
     padding-right: 6px;
 }
 
-.classic-hourly-row {
+.sw-classic-hourly-row {
     padding: 15px 0;
 }
 
-.classic-hourly-item {
+.sw-classic-hourly-item {
     padding: 0 35px;
     text-align: center;
 }
 
-.classic-forecast-time {
+.sw-classic-forecast-time {
     font-size: 85%;
     padding-bottom: 5px;
 }
 
-.classic-forecast-icon-box {
+.sw-classic-forecast-icon-box {
     text-align: center;
 }
 
-.classic-forecast-icon {
+.sw-classic-forecast-icon {
     icon-size: 24px;
     padding-right: 10px;
 }
 
-.classic-forecast-summary {
+.sw-classic-forecast-summary {
     padding-top: 5px;
     font-size: 80%;
 }
