@@ -10,6 +10,8 @@
 
 .simpleweather-current {
     margin-right: 24px;
+    padding: 24px;
+    spacing: 18px;
 }
 
 .sw-default-current-one-detail-row .simpleweather-popup-icon {

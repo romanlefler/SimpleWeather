@@ -175,7 +175,6 @@ export class DefaultLayout implements PopupLayout {
             vertical: true,
             style_class: "simpleweather-current"
         });
-        if(!args.config.getTheme()) this.#current.add_style_class_name("modal-dialog");
         theme(this.#current, "left-box");
         addChildren(this.#current, this.#condition, this.#temp);
         this.actor.add_child(this.#current);
