@@ -155,6 +155,11 @@
             <summary>Current weather details in pop-up</summary>
         </key>
 
+        <key name="classic-details-list" type="as">
+            <default>[ 'feelsLike', 'humidity', 'pressure', 'windSpeedAndDir', 'gusts' ]</default>
+            <summary>Current weather details in the Classic pop-up</summary>
+        </key>
+
         <key name="panel-box" enum="org.gnome.shell.extensions.simple-weather.panel-box">
             <default>'right'</default>
             <summary>Which box to put the button into in the panel</summary>

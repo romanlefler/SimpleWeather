@@ -265,45 +265,8 @@ export class GeneralPage extends Adw.PreferencesPage {
 
         const panelGroup = new Adw.PreferencesGroup({
             title: _g("Panel"),
-            description: _g("Configure the panel and pop-up")
+            description: _g("Configure the panel")
         });
-        const themes = [
-            "",
-            "light",
-            "afterdark",
-            "immersive"
-        ];
-        const themeModel = new Gtk.StringList({ strings: [
-            _g("System"),
-            _g("Light"),
-            _g("Afterdark"),
-            _g("Immersive")
-        ]});
-        const themeRow = new Adw.ComboRow({
-            title: _g("Theme"),
-            model: themeModel,
-            selected: Math.max(themes.indexOf(settings.get_string("theme")), 0)
-        });
-        themeRow.connect("notify::selected", (w : Adw.ComboRow) => {
-            settings.set_string("theme", themes[w.selected]);
-            settings.apply();
-        });
-        panelGroup.add(themeRow);
-
-        const popupLayoutModel = new Gtk.StringList({ strings: [
-            _g("SimpleWeather"),
-            _g("Classic")
-        ]});
-        const popupLayoutRow = new Adw.ComboRow({
-            title: _g("Pop-Up Layout"),
-            model: popupLayoutModel,
-            selected: settings.get_enum("popup-layout")
-        });
-        popupLayoutRow.connect("notify::selected", () => {
-            settings.set_enum("popup-layout", popupLayoutRow.selected);
-            settings.apply();
-        });
-        panelGroup.add(popupLayoutRow);
 
         const panelBoxModel = new Gtk.StringList({ strings: [
             _g("Right"), _g("Center"), _g("Left")
