@@ -39,11 +39,11 @@
 }
 
 .sw-style-immersive-button {
-    background: transparent;
+    background: rgba(0, 10, 0, 0.15);
 }
 
 .sw-style-immersive-button:hover {
-    background: rgba(0, 10, 0, 0.15);
+    background: rgba(0, 10, 0, 0.25);
 }
 
 .sw-style-immersive-menu.swa-clear.swa-day, .sw-style-immersive-menu.swa-windy.swa-day {
