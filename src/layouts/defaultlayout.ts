@@ -38,6 +38,17 @@ interface ForecastCard {
     data3 : St.Label;
 }
 
+interface CurrentInfoItem {
+    label : St.Label;
+    box : St.BoxLayout;
+}
+
+interface CurrentInfo {
+    columns : St.BoxLayout;
+    rows : [St.BoxLayout, St.BoxLayout];
+    items : CurrentInfoItem[];
+}
+
 enum ForecastMode {
     Week = 0,
     SevenHours = 1,
@@ -86,17 +97,15 @@ function evenLabel(config : Config) {
     return { label, box };
 }
 
-function createCurrentInfo(config : Config, parent : Clutter.Actor) : St.Label[] {
+function createCurrentInfo(config : Config, parent : Clutter.Actor) : CurrentInfo {
     const columns = new St.BoxLayout({ vertical: true, x_expand: true });
     const row1 = new St.BoxLayout({ x_expand: true, y_expand: true, x_align: Clutter.ActorAlign.FILL });
     const row2 = new St.BoxLayout({ x_expand: true, y_expand: true, x_align: Clutter.ActorAlign.FILL });
     addChildren(columns, row1, row2);
 
-    const items = Array.from({ length: 8 }, () => evenLabel(config));
-    addChildren(row1, ...items.slice(0, 4).map(item => item.box));
-    addChildren(row2, ...items.slice(4).map(item => item.box));
+    const items = Array.from({ length: Object.values(Details).length }, () => evenLabel(config));
     parent.add_child(columns);
-    return items.map(item => item.label);
+    return { columns, rows: [row1, row2], items };
 }
 
 export class DefaultLayout implements PopupLayout {
@@ -106,7 +115,7 @@ export class DefaultLayout implements PopupLayout {
     readonly #condition : St.Icon;
     readonly #temp : St.Label;
     readonly #forecastCards : ForecastCard[];
-    readonly #currentLabels : St.Label[];
+    readonly #currentInfo : CurrentInfo;
     readonly #carousel : CarouselBox;
     #forecastMode = ForecastMode.Week;
     #cachedWeather? : Weather;
@@ -167,7 +176,8 @@ export class DefaultLayout implements PopupLayout {
         this.#carousel.setPage(this.#forecastMode);
         theme(this.#carousel, "forecast-box button");
         right.add_child(this.#carousel);
-        this.#currentLabels = createCurrentInfo(args.config, right);
+        this.#currentInfo = createCurrentInfo(args.config, right);
+        this.#arrangeCurrentInfo(args.config.getDetailsList().length);
         this.actor.add_child(right);
 
         this.#carousel.onPageChanged(() => {
@@ -263,12 +273,26 @@ export class DefaultLayout implements PopupLayout {
         }
 
         const details = this.#args.config.getDetailsList();
-        const possibilities = Object.values(details);
-        for(let index = 0; index < this.#currentLabels.length; index++) {
-            const detail = details[index];
-            this.#currentLabels[index].text = possibilities.includes(detail)
-                ? displayDetail(weather, detail as Details, _g, this.#args.config)
+        this.#arrangeCurrentInfo(details.length);
+        for(let index = 0; index < details.length; index++) {
+            const detail = details[index] as Details;
+            this.#currentInfo.items[index].label.text = Object.values(Details).includes(detail)
+                ? displayDetail(weather, detail, _g, this.#args.config)
                 : _g("Invalid");
         }
+    }
+
+    #arrangeCurrentInfo(count : number) {
+        const { columns, rows, items } = this.#currentInfo;
+        const firstRowCount = Math.ceil(count / 2);
+
+        for(const { box } of items) {
+            const parent = box.get_parent();
+            if(parent) parent.remove_child(box);
+        }
+        items.slice(0, firstRowCount).forEach(item => rows[0].add_child(item.box));
+        items.slice(firstRowCount, count).forEach(item => rows[1].add_child(item.box));
+        columns.visible = count > 0;
+        rows[1].visible = count > firstRowCount;
     }
 }

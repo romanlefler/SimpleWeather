@@ -342,21 +342,10 @@ export class Config {
     /**
      * Gets the details list.
      * Items are not sanitized and may not be in Details.
-     * If value is severely malformed a string full of
-     * "invalid" will be returned.
-     * @returns Guaranteed to be an 8 item string array.
+     * @returns Between zero and the number of available detail types.
      */
     getDetailsList() : string[] {
-        const gval = this.#settings.get_value("details-list");
-        const strarr = readGTypeAS(gval);
-        if(strarr.length !== 8) {
-            const defVal = this.#settings.get_default_value("details-list");
-            if(!defVal) return new Array(8).fill("invalid");
-            const defStrarr = readGTypeAS(defVal);
-            if(defStrarr.length !== 8) return new Array(8).fill("invalid");
-            return defStrarr;
-        }
-        else return strarr;
+        return this.getFeaturedDetailsList(PopupLayout.Default);
     }
 
     onDetailsListChanged(callback : () => void) : void {
@@ -369,20 +358,12 @@ export class Config {
     }
 
     /**
-     * Gets the five details shown by the Classic layout.
+     * Gets the details shown by the Classic layout.
      * Items are not sanitized and may not be in Details.
+     * @returns Between zero and the number of available detail types.
      */
     getClassicDetailsList() : string[] {
-        const gval = this.#settings.get_value("classic-details-list");
-        const strarr = readGTypeAS(gval);
-        if(strarr.length !== 5) {
-            const defVal = this.#settings.get_default_value("classic-details-list");
-            if(!defVal) return new Array(5).fill("invalid");
-            const defStrarr = readGTypeAS(defVal);
-            if(defStrarr.length !== 5) return new Array(5).fill("invalid");
-            return defStrarr;
-        }
-        return strarr;
+        return this.getFeaturedDetailsList(PopupLayout.Classic);
     }
 
     onClassicDetailsListChanged(callback : () => void) : void {

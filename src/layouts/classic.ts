@@ -94,6 +94,7 @@ export class ClassicLayout implements PopupLayout {
     readonly #sunrise : St.Label;
     readonly #sunset : St.Label;
     readonly #updated : St.Label;
+    readonly #detailBox : St.BoxLayout;
     readonly #detailCaptions : St.Label[];
     readonly #detailValues : St.Label[];
     readonly #hourly : ForecastView[];
@@ -155,7 +156,7 @@ export class ClassicLayout implements PopupLayout {
         addChildren(summaryBox, this.#location, this.#summary, sunInfo);
         currentRow.add_child(summaryBox);
 
-        const detailBox = new St.BoxLayout({
+        this.#detailBox = new St.BoxLayout({
             x_expand: false,
             y_align: Clutter.ActorAlign.CENTER,
             style_class: "sw-classic-detail-box"
@@ -169,7 +170,7 @@ export class ClassicLayout implements PopupLayout {
             style_class: "sw-classic-detail-values"
         });
         this.#detailCaptions = [];
-        this.#detailValues = Array.from({ length: 5 }, () => {
+        this.#detailValues = Array.from({ length: Object.values(Details).length }, () => {
             const caption = new St.Label();
             captions.add_child(caption);
             this.#detailCaptions.push(caption);
@@ -178,8 +179,9 @@ export class ClassicLayout implements PopupLayout {
             values.add_child(value);
             return value;
         });
-        addChildren(detailBox, captions, values);
-        currentRow.add_child(detailBox);
+        addChildren(this.#detailBox, captions, values);
+        this.#setDetailCount(args.config.getClassicDetailsList().length);
+        currentRow.add_child(this.#detailBox);
         this.actor.add_child(currentRow);
 
         const hourlyRow = new St.BoxLayout({
@@ -205,14 +207,18 @@ export class ClassicLayout implements PopupLayout {
         this.#updated.text = displayTime(weather.observedAt, config);
 
         const details = config.getClassicDetailsList();
-        details.forEach((rawDetail, index) => {
+        this.#setDetailCount(details.length);
+        this.#detailCaptions.forEach((caption, index) => {
+            if(index >= details.length) return;
+
+            const rawDetail = details[index];
             const detail = rawDetail as Details;
             if(!Object.values(Details).includes(detail)) {
-                this.#detailCaptions[index].text = `${_g("Invalid")}:`;
+                caption.text = `${_g("Invalid")}:`;
                 this.#detailValues[index].text = "";
                 return;
             }
-            this.#detailCaptions[index].text = `${_g(detailName[detail] as string)}:`;
+            caption.text = `${_g(detailName[detail] as string)}:`;
             this.#detailValues[index].text = displayDetail(weather, detail, _g, config, true);
         });
 
@@ -225,6 +231,15 @@ export class ClassicLayout implements PopupLayout {
 
     destroy() {
         this.actor.destroy();
+    }
+
+    #setDetailCount(count : number) {
+        this.#detailBox.visible = count > 0;
+        this.#detailCaptions.forEach((caption, index) => {
+            const visible = index < count;
+            caption.visible = visible;
+            this.#detailValues[index].visible = visible;
+        });
     }
 
     #updateForecastViews(
