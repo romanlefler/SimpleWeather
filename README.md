@@ -11,7 +11,7 @@ Support for themes and layouts. The following screenshot uses the *Immersive* th
 
 ![Immersive Theme Screenshot](./docs/assets/gallery/default-immersive-chinese.png)
 
-If you liked OpenWeather/OpenWeather Refined, you can use the classic layout:
+If you liked OpenWeather/OpenWeather Refined (this extension's predecessor), you can use the classic layout:
 
 ![Immersive Theme Screenshot](./docs/assets/gallery/classic-system.png)
 
