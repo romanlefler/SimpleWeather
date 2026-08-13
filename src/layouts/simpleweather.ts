@@ -27,6 +27,7 @@ import { Forecast, Weather } from "../weather.js";
 import { CarouselBox } from "../carouselbox.js";
 import { createWeatherIcon } from "./icons.js";
 import type { PopupLayout, PopupLayoutArgs } from "./layout.js";
+import { getDayOfWeekDate } from "../utils.js";
 
 interface ForecastCard {
     card : St.BoxLayout;
@@ -143,6 +144,22 @@ export class SimpleWeatherLayout implements PopupLayout {
         this.#forecastCards = Array.from({ length: 7 }, () => createForecastCard());
         addChildren(forecasts, ...this.#forecastCards.map(card => card.card));
 
+        let mappedCards = 0;
+        for(const { card } of this.#forecastCards) {
+            const signalId = card.connect("notify::mapped", () => {
+                if(!card.mapped) return;
+
+                card.disconnect(signalId);
+                mappedCards++;
+                if(mappedCards !== this.#forecastCards.length) return;
+
+                const maxWidth = this.#getMaxCellWidth();
+                for(const forecastCard of this.#forecastCards) {
+                    forecastCard.card.set_width(maxWidth);
+                }
+            });
+        }
+
         this.#carousel = new CarouselBox(forecasts, ForecastMode.Max + 1, {
             track_hover: true,
             style_class: "button"
@@ -169,7 +186,32 @@ export class SimpleWeatherLayout implements PopupLayout {
         this.actor.destroy();
     }
 
-    #getForecastLabels(weather : Weather) : [string[], number] {
+    #getMaxCellWidth() {
+        // Minimum of 50
+        let maxWidth = 50;
+        const measureLabel = this.#forecastCards[0].day;
+        const originalText = measureLabel.text;
+
+        // Times probably wouldn't ever be longer than the days of week text
+        // but might as well check
+        for(let i = -1; i < 7 + 24; i++) {
+            let text;
+            if(i === -1) {
+                text = _g("Today");
+            } else if(i < 7) {
+                text = displayDayOfWeek(getDayOfWeekDate(i), false);
+            } else {
+                text = displayTime(new Date(2026, 0, 4, i - 7), this.#args.config, true);
+            }
+            measureLabel.set_text(text);
+            const [, width] = measureLabel.get_preferred_width(-1);
+            maxWidth = Math.max(maxWidth, width);
+        }
+        measureLabel.set_text(originalText);
+        return maxWidth;
+    }
+
+    #getForecastLabels(weather : Weather) : string[] {
         const count = this.#forecastCards.length;
         const everyOtherHour = weather.hourForecast.filter((_, index) => index % 2 === 0);
         const forecasts : Forecast[] = [
@@ -177,27 +219,23 @@ export class SimpleWeatherLayout implements PopupLayout {
             ...everyOtherHour.slice(0, count * 2)
         ];
         const labels : string[] = [];
-        let maxWidth = 0;
-        const measureLabel = this.#forecastCards[0].day;
-        const originalText = measureLabel.text;
 
         for(let index = 0; index < count * 3; index++) {
-            const text = index < count
-                ? displayDayOfWeek(forecasts[index].date, true)
-                : displayTime(forecasts[index].date, this.#args.config, true);
-            measureLabel.set_text(text);
-            const [, width] = measureLabel.get_preferred_width(-1);
+            let text;
+            if(index < count) {
+                text = displayDayOfWeek(forecasts[index].date, true);
+            } else {
+                text = displayTime(forecasts[index].date, this.#args.config, true);
+            }
             labels.push(text);
-            maxWidth = Math.max(maxWidth, width);
         }
-        measureLabel.set_text(originalText);
-        return [labels, maxWidth];
+        return labels;
     }
 
     #updateForecast(weather : Weather) {
         this.#cachedWeather = weather;
         const count = this.#forecastCards.length;
-        const [labels, maxWidth] = this.#getForecastLabels(weather);
+        const labels = this.#getForecastLabels(weather);
         const everyOtherHour = weather.hourForecast.filter((_, index) => index % 2 === 0);
         const forecasts : Forecast[] = [
             ...weather.forecast,
@@ -209,7 +247,6 @@ export class SimpleWeatherLayout implements PopupLayout {
             const card = this.#forecastCards[index];
             const forecast = visible[index];
             card.day.text = labels[index + this.#forecastMode * count];
-            card.card.set_width(maxWidth);
             card.icon.gicon = createWeatherIcon(this.#args.metadata, forecast.gIconName);
 
             const text : string[] = [];

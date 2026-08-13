@@ -46,6 +46,11 @@ export function sameDate(d1 : Date, d2 : Date) : boolean {
     return dup1.getTime() === dup2.getTime();
 }
 
+export function getDayOfWeekDate(dayOfWeek : number) : Date {
+    // 2026/01/04 is a Sunday, i.e. day 0
+    return new Date(2026, 0, 4 + dayOfWeek);
+}
+
 export function isNoInternet(error : unknown) {
     return error instanceof Gio.ResolverError ||
         error instanceof Gio.IOErrorEnum;
