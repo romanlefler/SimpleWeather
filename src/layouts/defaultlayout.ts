@@ -112,6 +112,7 @@ export class DefaultLayout implements PopupLayout {
     readonly actor : St.BoxLayout;
 
     readonly #args : PopupLayoutArgs;
+    readonly #current : St.BoxLayout;
     readonly #condition : St.Icon;
     readonly #temp : St.Label;
     readonly #forecastCards : ForecastCard[];
@@ -135,14 +136,14 @@ export class DefaultLayout implements PopupLayout {
             x_align: Clutter.ActorAlign.CENTER
         });
 
-        const current = new St.BoxLayout({
+        this.#current = new St.BoxLayout({
             vertical: true,
             style_class: "simpleweather-current"
         });
-        if(!args.config.getTheme()) current.add_style_class_name("modal-dialog");
-        theme(current, "left-box");
-        addChildren(current, this.#condition, this.#temp);
-        this.actor.add_child(current);
+        if(!args.config.getTheme()) this.#current.add_style_class_name("modal-dialog");
+        theme(this.#current, "left-box");
+        addChildren(this.#current, this.#condition, this.#temp);
+        this.actor.add_child(this.#current);
 
         const right = new St.BoxLayout({ vertical: true });
         const forecasts = new St.BoxLayout({
@@ -284,7 +285,15 @@ export class DefaultLayout implements PopupLayout {
 
     #arrangeCurrentInfo(count : number) {
         const { columns, rows, items } = this.#currentInfo;
-        const firstRowCount = Math.ceil(count / 2);
+        const firstRowCount = count <= 4 ? count : Math.ceil(count / 2);
+
+        this.#current.remove_style_class_name("sw-default-current-one-detail-row");
+        this.#current.remove_style_class_name("sw-default-current-no-details");
+        if(count > 0 && count <= 4) {
+            this.#current.add_style_class_name("sw-default-current-one-detail-row");
+        } else if(count === 0) {
+            this.#current.add_style_class_name("sw-default-current-no-details");
+        }
 
         for(const { box } of items) {
             const parent = box.get_parent();

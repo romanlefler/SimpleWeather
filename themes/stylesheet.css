@@ -12,6 +12,22 @@
     margin-right: 24px;
 }
 
+.sw-default-current-one-detail-row .simpleweather-popup-icon {
+    icon-size: 80px;
+}
+
+.sw-default-current-one-detail-row .simpleweather-popup-temp {
+    font-size: 40px;
+}
+
+.sw-default-current-no-details .simpleweather-popup-icon {
+    icon-size: 64px;
+}
+
+.sw-default-current-no-details .simpleweather-popup-temp {
+    font-size: 32px;
+}
+
 .simpleweather-current-item {
     text-align: center;
 }
