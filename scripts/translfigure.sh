@@ -3,7 +3,7 @@ set -eu
 
 URL="https://github.com/romanlefler/readme-tools"
 DIR="./.readme-tools"
-IMGOUT="./docs/transl.png"
+IMGOUT="./docs/assets/transl.png"
 
 echo '### Creating Translation Progress Figure for README ###'
 
