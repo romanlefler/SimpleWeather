@@ -1,75 +1,73 @@
 # SimpleWeather
 
-A highly configurable GNOME shell extension for viewing the weather. Available in 25
-languages and growing!
+A highly configurable weather extension for GNOME Shell, with hourly and
+weekly forecasts, multiple locations, customizable weather details, and
+multiple providers.
 
-Supports GNOME 46, 48, 49, 50, and unstable 51.
+[![GNOME Extensions](https://img.shields.io/badge/GNOME_Extensions-Install-4A86CF?logo=gnome&logoColor=white)](https://extensions.gnome.org/extension/8261/simpleweather/)
+[![Downloads](https://img.shields.io/gnome-extensions/dt/simple-weather%40romanlefler.com?logo=gnome&logoColor=white&label=Downloads)](https://extensions.gnome.org/extension/8261/simpleweather/)
+[![GNOME Shell](https://img.shields.io/badge/GNOME_Shell-46%20%7C%2048%20%7C%2049%20%7C%2050%20%7C%2051-4A86CF?logo=gnome&logoColor=white)](https://extensions.gnome.org/extension/8261/simpleweather/)
+[![License](https://img.shields.io/github/license/romanlefler/SimpleWeather?label=License)](https://github.com/romanlefler/SimpleWeather/blob/development/LICENSE)
+[![Languages](https://img.shields.io/github/directory-file-count/romanlefler/SimpleWeather/po?type=file&extension=po&label=Languages)](https://github.com/romanlefler/SimpleWeather/tree/development/po)
 
 ![Screenshot](./docs/assets/gallery/default-system.png)
 
-Support for themes and layouts. The following screenshot uses the *Immersive* theme:
+## Features
 
-![Immersive Theme Screenshot](./docs/assets/gallery/default-immersive-chinese.png)
+### Weather & Forecasts
 
-If you liked OpenWeather/OpenWeather Refined (this extension's predecessor), you can use the classic layout:
+- View the current conditions in the top bar
+- Hourly and weekly forecasts
+- Configurable weather details, including rain chance, humidity, wind, and more
 
-![Immersive Theme Screenshot](./docs/assets/gallery/classic-system.png)
+### Locations
 
-Check out the [gallery](./docs/gallery.md) for more screenshots.
+- Use your current location or any number of saved locations
+- Search for locations with Nominatim or enter latitude and longitude manually
+- Does not use GNOME Weather, which lets you set any location in the world
+- Quickly switch between saved locations
 
-SimpleWeather is highly configurable but has zero required setup.
+### Customization
+
+- Choose from US, UK, Metric, Nordic, or a custom mix of units
+- Auto-configuration selects the appropriate units based on your country
+- Customize the details shown in the panel and pop-up
+- Multiple themes and layouts, including a theme that looks like OpenWeather Refined
+
+### Weather Providers
+
+- Open-Meteo works out of the box with no API key
+- OpenWeatherMap is available with your own [One Call 3.0 API key](https://home.openweathermap.org/subscriptions/unauth_subscribe/onecall_30/base)
+- Does not depend on GNOME Weather
 
 ## Installation
 
+### GNOME Extensions
+
+The recommended way to install SimpleWeather is through the GNOME extensions website.
+
+[![Get on GNOME Extensions](./docs/assets/ego.png)](https://extensions.gnome.org/extension/8261/simpleweather/)
+
 ### Package Managers
 
-Note that the following packages are not affiliated with this project or checked and may be out of date, broken, etc.
-Install at your own risk.
+SimpleWeather may also be available through distribution package managers.
+
+> Package-manager versions are maintained by third parties and may not always
+> match the latest upstream release.
 
 - **ALT Linux Sisyphus**: [gnome-shell-extension-simple-weather](https://pkgs.org/download/gnome-shell-extension-simple-weather)
 - **AUR** *(Arch Linux)*: [gnome-shell-extension-simpleweather](https://aur.archlinux.org/packages/gnome-shell-extension-simpleweather)
 - **FreeBSD**: [gnome-shell-extension-simple-weather](https://www.freshports.org/deskutils/gnome-shell-extension-simple-weather/)
 
-If you make a package for another platform please make an issue and tell me to list it here.
-
-### GNOME Extensions
-
-[![Get on GNOME Extensions](./docs/assets/ego.png)](https://extensions.gnome.org/extension/8261/simpleweather/)
-
-Generally the recommended way, although sometimes updates take a while to show up.
-
 ### Manual Installation
 
-Not recommended, but a guaranteed way to have the latest version.
+For development or manual installation, see [Building from Source](docs/building.md).
 
-```shell
-git clone https://github.com/romanlefler/SimpleWeather.git
+## Compatibility
 
-cd SimpleWeather
-git switch master
+SimpleWeather supports GNOME Shell versions 46, 48, 49, and 50.
 
-make install
-```
-
-Then to update, go back to the directory and pull the new version:
-
-```shell
-git pull
-
-make install
-```
-
-## Features
-
-- Does not depend on GNOME Weather which eliminates location issues
-- Display temperature and conditions in top bar
-- Configure units (US, UK, Metric, Nordic, mix and match...)
-- Automatically configures units based on country
-- Use current location or add any number of locations and easily cycle through
-- Show hourly and weekly forecast
-- Configurable details like Rain Chance, Humidity, Wind Speed, UV, etc.
-- Location lookup with Nominatim or use latitude/longitude
-- Change provider between Open-Meteo or OpenWeatherMap (w/ API Key)
+The development release supports the unstable GNOME 51.
 
 ## Translations
 
@@ -96,6 +94,10 @@ to the source code. If you plan to add a feature, it is a good
 idea to make an [issue](https://github.com/romanlefler/SimpleWeather/issues)
 first and label it as a feature request and add that you are willing
 to do it (and perhaps how).
+
+## License
+
+Licensed under [GPL 3.0](./LICENSE).
 
 Check [AUTHORS](./AUTHORS) for a list of contributors.
 
