@@ -45,8 +45,8 @@ interface CurrentInfoItem {
 }
 
 interface CurrentInfo {
-    columns : St.BoxLayout;
-    rows : St.BoxLayout[];
+    columns : St.Widget;
+    grid : Clutter.GridLayout;
     items : CurrentInfoItem[];
 }
 
@@ -108,28 +108,33 @@ function createDetailItem(config : Config) : CurrentInfoItem {
         value.style = `color:${getTextColor()}`;
     }
 
-    const box = new St.BoxLayout({ x_expand: true, x_align: Clutter.ActorAlign.FILL });
+    const box = new St.BoxLayout({
+        x_expand: true,
+        y_expand: true,
+        x_align: Clutter.ActorAlign.FILL,
+        y_align: Clutter.ActorAlign.FILL
+    });
     addChildren(box, caption, value);
     return { caption, value, box };
 }
 
 function createCurrentInfo(config : Config, parent : Clutter.Actor) : CurrentInfo {
-    const columns = new St.BoxLayout({ vertical: true, x_expand: true });
-    const rows = Array.from({
-        length: Math.ceil(Object.values(Details).length / MAX_DETAILS_PER_ROW)
-    }, () => new St.BoxLayout({
+    const grid = new Clutter.GridLayout({
+        column_homogeneous: true,
+        row_homogeneous: true
+    });
+    const columns = new St.Widget({
         x_expand: true,
         y_expand: true,
-        x_align: Clutter.ActorAlign.FILL
-    }));
-    addChildren(columns, ...rows);
+        layout_manager: grid
+    });
 
     const items = Array.from(
         { length: Object.values(Details).length },
         () => createDetailItem(config)
     );
     parent.add_child(columns);
-    return { columns, rows, items };
+    return { columns, grid, items };
 }
 
 export class DefaultLayout implements PopupLayout {
@@ -313,8 +318,7 @@ export class DefaultLayout implements PopupLayout {
     }
 
     #arrangeCurrentInfo(count : number) {
-        const { columns, rows, items } = this.#currentInfo;
-        const rowCount = Math.ceil(count / MAX_DETAILS_PER_ROW);
+        const { columns, grid, items } = this.#currentInfo;
 
         this.#current.remove_style_class_name("sw-default-current-one-detail-row");
         this.#current.remove_style_class_name("sw-default-current-no-details");
@@ -328,12 +332,11 @@ export class DefaultLayout implements PopupLayout {
             const parent = box.get_parent();
             if(parent) parent.remove_child(box);
         }
-        for(let rowIndex = 0; rowIndex < rowCount; rowIndex++) {
-            const start = rowIndex * MAX_DETAILS_PER_ROW;
-            items.slice(start, start + MAX_DETAILS_PER_ROW)
-                .forEach(item => rows[rowIndex].add_child(item.box));
+        for(let index = 0; index < count; index++) {
+            const column = index % MAX_DETAILS_PER_ROW;
+            const row = Math.floor(index / MAX_DETAILS_PER_ROW);
+            grid.attach(items[index].box, column, row, 1, 1);
         }
         columns.visible = count > 0;
-        rows.forEach((row, index) => row.visible = index < rowCount && count > 0);
     }
 }
