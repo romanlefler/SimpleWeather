@@ -15,6 +15,7 @@
 - Every forecast column is now the same size so flipping forecasts does not change size
 - Some settings have been rearranged in the menus
 - Custom themes now have background box colors so they look more like the System theme
+- Auto-config falls back to locale if it cannot connect to the location service
 
 ## Bug Fixes
 

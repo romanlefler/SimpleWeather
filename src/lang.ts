@@ -37,14 +37,17 @@ export function initLocales() : string | undefined {
         let k = gLibLocales[i];
         // C and POSIX are not valid JS locales
         if(strcaseeq(k, "C") || strcaseeq(k, "POSIX")) continue;
+        // handle something with an @ at the end
+        k = k.split("@")[0];
         // "en.UTF-8" is valid system locale but in JS
         // it is not
-        if(strcaseends(k, ".UTF-8")) continue;
-        if(strcaseends(k, ".utf8")) continue;
+        k = k.split(".")[0];
         // "en_US" is system locale but JS locale should be "en-US"
         // or Intl will throw
-        k = k.replace(/_/g, "-");
+        k = k.replace("_", "-");
 
+        // Since we modified it a bunch, make sure we aren't duplicating
+        if(out.includes(k)) continue;
         out.push(k);
     }
     // Always add "en" as a backup, this is effectively the same as "C"
@@ -84,6 +87,17 @@ export function strcaseends(s1 : string, suffix : string) : boolean {
 
 export function getLocales() : string[] | undefined {
     return locales;
+}
+
+/**
+ * Assumes that the locale is JS-safe, as given by `getLocales()`
+ */
+export function getCountryCode(locale : string) : string | null {
+    try {
+        return new Intl.Locale(locale).region ?? null;
+    } catch {
+        return null;
+    }
 }
 
 export function displayTemp(t : Temp, cfg : Config) : string {
