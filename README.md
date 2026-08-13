@@ -1,14 +1,21 @@
 # SimpleWeather
 
-A highly configurable GNOME shell extension for viewing the weather.
+A highly configurable GNOME shell extension for viewing the weather. Available in 25
+languages and growing!
 
 Supports GNOME 46, 48, 49, 50, and unstable 51.
 
-![Screenshot](./docs/assets/screenshot.png)
+![Screenshot](./docs/assets/gallery/default-system.png)
 
-Support for themes, the following screenshot uses the *Immersive* theme:
+Support for themes and layouts. The following screenshot uses the *Immersive* theme:
 
-![Immersive Theme Screenshot](./docs/assets/immersivescreenshot.png)
+![Immersive Theme Screenshot](./docs/assets/gallery/default-immersive-chinese.png)
+
+If you liked OpenWeather/OpenWeather Refined, you can use the classic layout:
+
+![Immersive Theme Screenshot](./docs/assets/gallery/classic-system.png)
+
+Check out the [gallery](./docs/gallery.md) for more screenshots.
 
 SimpleWeather is highly configurable but has zero required setup.
 

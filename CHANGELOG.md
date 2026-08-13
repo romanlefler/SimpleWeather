@@ -14,11 +14,14 @@
 - Showing the countdown instead of time for the sunset/sunrise is now the default
 - Every forecast column is now the same size so flipping forecasts does not change size
 - Some settings have been rearranged in the menus
+- Custom themes now have background box colors so they look more like the System theme
 
 ## Bug Fixes
 
 - Forecast now can cycle through all 3 pages instead of just 2
 - Details are now arranged in a grid and are aligned by columns
+- Fixed some weird spacing in custom themes
+- The left box in the pop-up is no longer a modal dialog which on some GNOME themes looked odd
 
 ## Translations
 
