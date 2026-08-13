@@ -48,6 +48,7 @@ interface CurrentInfo {
     columns : St.Widget;
     grid : Clutter.GridLayout;
     items : CurrentInfoItem[];
+    spacers : [St.Widget, St.Widget];
 }
 
 const MAX_DETAILS_PER_ROW = 4;
@@ -133,8 +134,12 @@ function createCurrentInfo(config : Config, parent : Clutter.Actor) : CurrentInf
         { length: Object.values(Details).length },
         () => createDetailItem(config)
     );
+    const spacers : [St.Widget, St.Widget] = [
+        new St.Widget({ x_expand: true }),
+        new St.Widget({ x_expand: true })
+    ];
     parent.add_child(columns);
-    return { columns, grid, items };
+    return { columns, grid, items, spacers };
 }
 
 export class DefaultLayout implements PopupLayout {
@@ -318,7 +323,7 @@ export class DefaultLayout implements PopupLayout {
     }
 
     #arrangeCurrentInfo(count : number) {
-        const { columns, grid, items } = this.#currentInfo;
+        const { columns, grid, items, spacers } = this.#currentInfo;
 
         this.#current.remove_style_class_name("sw-default-current-one-detail-row");
         this.#current.remove_style_class_name("sw-default-current-no-details");
@@ -328,14 +333,29 @@ export class DefaultLayout implements PopupLayout {
             this.#current.add_style_class_name("sw-default-current-no-details");
         }
 
-        for(const { box } of items) {
-            const parent = box.get_parent();
-            if(parent) parent.remove_child(box);
+        for(const actor of [...items.map(item => item.box), ...spacers]) {
+            const parent = actor.get_parent();
+            if(parent) parent.remove_child(actor);
         }
-        for(let index = 0; index < count; index++) {
-            const column = index % MAX_DETAILS_PER_ROW;
+        const itemsInLastRow = count % MAX_DETAILS_PER_ROW;
+        const fullRowItemCount = count - itemsInLastRow;
+        for(let index = 0; index < fullRowItemCount; index++) {
+            const column = index % MAX_DETAILS_PER_ROW * 2;
             const row = Math.floor(index / MAX_DETAILS_PER_ROW);
-            grid.attach(items[index].box, column, row, 1, 1);
+            grid.attach(items[index].box, column, row, 2, 1);
+        }
+
+        if(itemsInLastRow > 0) {
+            const row = Math.floor(count / MAX_DETAILS_PER_ROW);
+            const spacerWidth = MAX_DETAILS_PER_ROW - itemsInLastRow;
+            grid.attach(spacers[0], 0, row, spacerWidth, 1);
+
+            for(let index = 0; index < itemsInLastRow; index++) {
+                grid.attach(items[count - itemsInLastRow + index].box,
+                    spacerWidth + index * 2, row, 2, 1);
+            }
+            grid.attach(spacers[1], spacerWidth + itemsInLastRow * 2,
+                row, spacerWidth, 1);
         }
         columns.visible = count > 0;
     }
