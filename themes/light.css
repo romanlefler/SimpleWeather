@@ -8,6 +8,8 @@
 .sw-style-light-left-box {
     background: #CACCD2;
     border-radius: 20px;
+    padding: 24px;
+    spacing: 18px;
 }
 
 .sw-style-light-bg, .sw-style-light-menu, .sw-style-light-forecast-box {
@@ -39,4 +41,3 @@
 }
 
 /* end theme light */
-
