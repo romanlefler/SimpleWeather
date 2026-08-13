@@ -17,7 +17,6 @@
 
 import Clutter from "gi://Clutter";
 import Gio from "gi://Gio";
-import Meta from "gi://Meta";
 import St from "gi://St";
 import { ExtensionMetadata } from "resource:///org/gnome/shell/extensions/extension.js";
 import * as PopupMenu from "resource:///org/gnome/shell/ui/popupMenu.js";
@@ -27,27 +26,12 @@ import {
     PopupLayout,
     createPopupLayout
 } from "./layouts/layout.js";
+import { setPointer } from "./clutterutils.js";
 import { theme, themeInitAll } from "./theme.js";
 import { Weather } from "./weather.js";
 
 function copyrightText(providerName : string) : string {
     return `${_g("Weather Data")} \u00A9 ${providerName} ${new Date().getFullYear()}`;
-}
-
-// Widget must have reactive and track_hover true.
-function setPointer(widget : Clutter.Actor) : void {
-    // @ts-ignore GNOME 50
-    if(widget.set_cursor_type) {
-        // @ts-ignore GNOME 50
-        widget.set_cursor_type(Clutter.CursorType.POINTER);
-    } else if(global?.display?.set_cursor) {
-        widget.connect("enter-event", () => {
-            global.display.set_cursor(Meta.Cursor?.POINTER ?? 5);
-        });
-        widget.connect("leave-event", () => {
-            global.display.set_cursor(Meta.Cursor?.DEFAULT ?? 2);
-        });
-    }
 }
 
 export interface PopupCtorArgs {

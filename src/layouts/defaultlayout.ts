@@ -25,6 +25,7 @@ import { displayDayOfWeek, displayTime } from "../lang.js";
 import { theme } from "../theme.js";
 import { Forecast, Weather } from "../weather.js";
 import { CarouselBox } from "../carouselbox.js";
+import { setPointer } from "../clutterutils.js";
 import { createWeatherIcon } from "./icons.js";
 import type { PopupLayout, PopupLayoutArgs } from "./layout.js";
 import { getDayOfWeekDate } from "../utils.js";
@@ -210,6 +211,7 @@ export class DefaultLayout implements PopupLayout {
         });
         this.#carousel.setPage(this.#forecastMode);
         theme(this.#carousel, "forecast-box button");
+        setPointer(this.#carousel);
         right.add_child(this.#carousel);
         this.#currentInfo = createCurrentInfo(args.config, right);
         this.#arrangeCurrentInfo(args.config.getDetailsList().length);
