@@ -20,7 +20,7 @@ import { ExtensionMetadata } from "resource:///org/gnome/shell/extensions/extens
 import { Config, PopupLayout as PopupLayoutPreset } from "../config.js";
 import { Weather } from "../weather.js";
 import { ClassicLayout } from "./classic.js";
-import { SimpleWeatherLayout } from "./simpleWeather.js";
+import { SimpleWeatherLayout } from "./simpleweather.js";
 
 export interface PopupLayout {
     readonly actor : Clutter.Actor;
