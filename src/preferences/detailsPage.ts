@@ -25,7 +25,7 @@ import { detailName, Details, displayDetail } from "../details.js";
 import { Condition, Weather, gettextCondit } from "../weather.js";
 import { Direction, Percentage, Pressure, RainMeasurement, Speed, SpeedAndDir, Temp, Countdown } from "../units.js";
 import { Location } from "../location.js";
-import { Config, writeGTypeAS } from "../config.js";
+import { Config, PopupLayout, writeGTypeAS } from "../config.js";
 
 function fromTime(hr : number, day : Date | null = null) : Date {
     if(day === null) day = new Date();
@@ -97,6 +97,7 @@ export class DetailsPage extends Adw.PreferencesPage {
             selection_mode: Gtk.SelectionMode.NONE
         });
         const initialDetails = this.#config.getDetailsList();
+        const selectedChildren : Gtk.FlowBoxChild[] = [];
         for(let i = 0; i < 8; i++) {
             const selection = new Gtk.Frame({
                 receives_default: true,
@@ -135,7 +136,16 @@ export class DetailsPage extends Adw.PreferencesPage {
             selection.add_controller(gesture);
 
             curBox.append(selection);
+            const child = curBox.get_child_at_index(i);
+            if(child) selectedChildren.push(child);
         }
+
+        const updateSelectedCount = (layout : PopupLayout) => {
+            const count = layout === PopupLayout.Classic ? 5 : 8;
+            selectedChildren.forEach((child, index) => child.visible = index < count);
+        };
+        updateSelectedCount(this.#config.getPopupLayout());
+        this.#config.onPopupLayoutChanged(updateSelectedCount);
 
         const pool = new Gtk.FlowBox({
             orientation: Gtk.Orientation.HORIZONTAL,
