@@ -1,19 +1,28 @@
 
 # v51.DEV
 
+## Features
+
+- LAYOUTS: Choose between the Default or Classic layout.
+- CLASSIC LAYOUT: This layout mimics the OpenWeather Refined pop-up menu.
+- FLEXIBLE DETAILS: Choose any number of details to show, or show none. Available for both layouts.
+
 ## Improvements
 
 - Some widgets that may not have been freed before are now always freed on disable
 - First-time run auto-configuration is now more performant
 - Showing the countdown instead of time for the sunset/sunrise is now the default
-- Every forecast column is now the same size
+- Every forecast column is now the same size so flipping forecasts does not change size
+- Some settings have been rearranged in the menus
 
 ## Bug Fixes
 
 - Forecast now can cycle through all 3 pages instead of just 2
+- Details are now arranged in a grid and are aligned by columns
 
 ## Translations
 
+- Chinese (thanks CreateCN)
 - German (thanks Anexity)
 - Hungarian (thanks SzAti69)
 - Japanese (thanks hidenosuke)
