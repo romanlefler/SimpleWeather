@@ -4,11 +4,11 @@ A highly configurable GNOME shell extension for viewing the weather.
 
 Supports GNOME 46, 48, 49, 50, and unstable 51.
 
-![Screenshot](./docs/screenshot.png)
+![Screenshot](./docs/assets/screenshot.png)
 
 Support for themes, the following screenshot uses the *Immersive* theme:
 
-![Immersive Theme Screenshot](./docs/immersivescreenshot.png)
+![Immersive Theme Screenshot](./docs/assets/immersivescreenshot.png)
 
 SimpleWeather is highly configurable but has zero required setup.
 
@@ -27,7 +27,7 @@ If you make a package for another platform please make an issue and tell me to l
 
 ### GNOME Extensions
 
-[![Get on GNOME Extensions](./docs/ego.png)](https://extensions.gnome.org/extension/8261/simpleweather/)
+[![Get on GNOME Extensions](./docs/assets/ego.png)](https://extensions.gnome.org/extension/8261/simpleweather/)
 
 Generally the recommended way, although sometimes updates take a while to show up.
 
@@ -73,7 +73,7 @@ Many languages or dialects also do not exist in the project.
 
 Check [AUTHORS](./AUTHORS) for a list of contributors.
 
-![Translation Progress Chart](./docs/transl.png)
+![Translation Progress Chart](./docs/assets/transl.png)
 
 ## Building
 
