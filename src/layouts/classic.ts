@@ -18,7 +18,7 @@
 import Clutter from "gi://Clutter";
 import St from "gi://St";
 import * as Main from "resource:///org/gnome/shell/ui/main.js";
-import { Details, displayDetail } from "../details.js";
+import { detailName, Details, displayDetail } from "../details.js";
 import { gettext as _g } from "../gettext.js";
 import { displayTime } from "../lang.js";
 import type { Forecast, Weather } from "../weather.js";
@@ -94,6 +94,7 @@ export class ClassicLayout implements PopupLayout {
     readonly #sunrise : St.Label;
     readonly #sunset : St.Label;
     readonly #updated : St.Label;
+    readonly #detailCaptions : St.Label[];
     readonly #detailValues : St.Label[];
     readonly #hourly : ForecastView[];
 
@@ -167,15 +168,11 @@ export class ClassicLayout implements PopupLayout {
             vertical: true,
             style_class: "sw-classic-detail-values"
         });
-        const detailNames = [
-            _g("Feels Like"),
-            _g("Humidity"),
-            _g("Pressure"),
-            _g("Wind"),
-            _g("Gusts")
-        ];
-        this.#detailValues = detailNames.map(name => {
-            captions.add_child(new St.Label({ text: `${name}:` }));
+        this.#detailCaptions = [];
+        this.#detailValues = Array.from({ length: 5 }, () => {
+            const caption = new St.Label();
+            captions.add_child(caption);
+            this.#detailCaptions.push(caption);
             const value = new St.Label({ text: "\u2026" });
             usePrimaryTextColor(args.config, value);
             values.add_child(value);
@@ -207,14 +204,15 @@ export class ClassicLayout implements PopupLayout {
         this.#sunset.text = displayTime(weather.sunset, config);
         this.#updated.text = displayTime(weather.observedAt, config);
 
-        const details = [
-            Details.FEELS_LIKE,
-            Details.HUMIDITY,
-            Details.PRESSURE,
-            Details.WIND_SPEED_AND_DIR,
-            Details.GUSTS
-        ];
-        details.forEach((detail, index) => {
+        const details = config.getClassicDetailsList();
+        details.forEach((rawDetail, index) => {
+            const detail = rawDetail as Details;
+            if(!Object.values(Details).includes(detail)) {
+                this.#detailCaptions[index].text = `${_g("Invalid")}:`;
+                this.#detailValues[index].text = "";
+                return;
+            }
+            this.#detailCaptions[index].text = `${_g(detailName[detail] as string)}:`;
             this.#detailValues[index].text = displayDetail(weather, detail, _g, config, true);
         });
 

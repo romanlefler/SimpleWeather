@@ -64,12 +64,36 @@ const MOCK_WEATHER : Weather = {
     sunEventCountdown: new Countdown(fromTime(6))
 };
 
-const CLASSIC_DETAILS_DEFAULT = [
+const DEFAULT_LAYOUT_DETAILS = [
+    Details.TEMP,
+    Details.WIND_SPEED_AND_DIR,
+    Details.GUSTS,
+    Details.PRESSURE,
+    Details.FEELS_LIKE,
+    Details.HUMIDITY,
+    Details.UV_INDEX,
+    Details.PRECIPITATION, // 8 items by default
+    Details.SUNRISE,
+    Details.SUNSET,
+    Details.CLOUD_COVER,
+    Details.SUN_EVENT_COUNTDOWN,
+    Details.CONDITION_TEXT
+];
+
+const CLASSIC_LAYOUT_DETAILS = [
     Details.FEELS_LIKE,
     Details.HUMIDITY,
     Details.PRESSURE,
     Details.WIND_SPEED_AND_DIR,
-    Details.GUSTS
+    Details.GUSTS, // 5 items by default
+    Details.UV_INDEX,
+    Details.PRECIPITATION,
+    Details.SUNRISE,
+    Details.SUNSET,
+    Details.CLOUD_COVER,
+    Details.SUN_EVENT_COUNTDOWN,
+    Details.TEMP,
+    Details.CONDITION_TEXT
 ];
 
 export class DetailsPage extends Adw.PreferencesPage {
@@ -140,6 +164,19 @@ export class DetailsPage extends Adw.PreferencesPage {
         });
 
         const stringFmt = Gdk.ContentFormats.new_for_gtype(GObject.TYPE_STRING);
+        const detailOptions = Object.values(Details);
+
+        const detailsCountRow = new Adw.SpinRow({
+            title: _g("Number of Details"),
+            adjustment: new Gtk.Adjustment({
+                lower: 0,
+                upper: detailOptions.length,
+                step_increment: 1,
+                page_increment: 1,
+                value: this.#getPopupDetails(this.#config.getPopupLayout()).length
+            })
+        });
+        curGroup.add(detailsCountRow);
 
         // Selected
         const curBox = new Gtk.FlowBox({
@@ -148,7 +185,7 @@ export class DetailsPage extends Adw.PreferencesPage {
         });
         const selectedChildren : Gtk.FlowBoxChild[] = [];
         const selectedLabels : Gtk.Label[] = [];
-        for(let i = 0; i < 8; i++) {
+        for(let i = 0; i < detailOptions.length; i++) {
             const selection = new Gtk.Frame({
                 receives_default: true,
                 can_focus: true
@@ -187,12 +224,15 @@ export class DetailsPage extends Adw.PreferencesPage {
             if(child) selectedChildren.push(child);
         }
 
+        let updatingDetailsCount = false;
         const updateSelectedCount = (layout : PopupLayout) => {
-            const count = layout === PopupLayout.Classic ? 5 : 8;
             const details = this.#getPopupDetails(layout);
+            updatingDetailsCount = true;
+            detailsCountRow.value = details.length;
+            updatingDetailsCount = false;
             selectedChildren.forEach((child, index) => {
-                child.visible = index < count;
-                if(index >= count) return;
+                child.visible = index < details.length;
+                if(index >= details.length) return;
 
                 let detail = details[index] as Details;
                 if(!Object.values(Details).includes(detail)) detail = "invalid" as Details;
@@ -207,12 +247,34 @@ export class DetailsPage extends Adw.PreferencesPage {
         updateSelectedCount(this.#config.getPopupLayout());
         this.#config.onPopupLayoutChanged(updateSelectedCount);
 
+        detailsCountRow.connect("notify::value", () => {
+            if(updatingDetailsCount) return;
+
+            const layout = this.#config.getPopupLayout();
+            const details = this.#getPopupDetails(layout);
+            const count = Math.round(detailsCountRow.value);
+            if(count < details.length) {
+                details.length = count;
+            } else {
+                const orderedDetails = layout === PopupLayout.Classic
+                    ? CLASSIC_LAYOUT_DETAILS
+                    : DEFAULT_LAYOUT_DETAILS;
+                const previousCount = details.length;
+                details.length = count;
+                for(let i = previousCount; i < count; i++) {
+                    details[i] = orderedDetails[i];
+                }
+            }
+
+            this.#setPopupDetails(layout, details);
+            updateSelectedCount(layout);
+        });
+
         const pool = new Gtk.FlowBox({
             orientation: Gtk.Orientation.HORIZONTAL,
             selection_mode: Gtk.SelectionMode.NONE
         });
-        const items = Object.values(Details);
-        for(const d of items) {
+        for(const d of detailOptions) {
             const btn = new Gtk.Button({
                 label: displayDetail(MOCK_WEATHER, d, _g, this.#config),
                 can_focus: true,
@@ -338,18 +400,17 @@ export class DetailsPage extends Adw.PreferencesPage {
         const layout = this.#config.getPopupLayout();
         const arr = this.#getPopupDetails(layout);
         arr[idx] = detail;
-        const key = layout === PopupLayout.Classic ? "classic-details-list" : "details-list";
-        this.#settings.set_value(key, writeGTypeAS(arr));
-        this.#settings.apply();
+        this.#setPopupDetails(layout, arr);
     }
 
     #getPopupDetails(layout : PopupLayout) : string[] {
-        if(layout === PopupLayout.Default) return this.#config.getDetailsList();
+        return this.#config.getFeaturedDetailsList(layout);
+    }
 
-        const details = this.#settings.get_strv("classic-details-list");
-        return details.length === CLASSIC_DETAILS_DEFAULT.length
-            ? details
-            : [...CLASSIC_DETAILS_DEFAULT];
+    #setPopupDetails(layout : PopupLayout, details : string[]) : void {
+        const key = layout === PopupLayout.Classic ? "classic-details-list" : "details-list";
+        this.#settings.set_value(key, writeGTypeAS(details));
+        this.#settings.apply();
     }
 
     #setClickedDetail(deet : Details, widget : Gtk.Widget) : void {

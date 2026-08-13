@@ -236,6 +236,7 @@ export default class SimpleWeatherExtension extends Extension {
         // Some settings just require a GUI update
         this.#config!.onAnyUnitChanged(this.#updateGui.bind(this));
         this.#config!.onDetailsListChanged(this.#updateGui.bind(this));
+        this.#config!.onClassicDetailsListChanged(this.#updateGui.bind(this));
         this.#config!.onSymbolicIconsChanged(this.#updateGui.bind(this));
         this.#config!.onAlwaysPackagedIconsChanged(this.#updateGui.bind(this));
         this.#config!.onPopupLayoutChanged(layout => this.#popup?.setLayout(layout));

@@ -368,6 +368,45 @@ export class Config {
         this.#addId(id);
     }
 
+    /**
+     * Gets the five details shown by the Classic layout.
+     * Items are not sanitized and may not be in Details.
+     */
+    getClassicDetailsList() : string[] {
+        const gval = this.#settings.get_value("classic-details-list");
+        const strarr = readGTypeAS(gval);
+        if(strarr.length !== 5) {
+            const defVal = this.#settings.get_default_value("classic-details-list");
+            if(!defVal) return new Array(5).fill("invalid");
+            const defStrarr = readGTypeAS(defVal);
+            if(defStrarr.length !== 5) return new Array(5).fill("invalid");
+            return defStrarr;
+        }
+        return strarr;
+    }
+
+    onClassicDetailsListChanged(callback : () => void) : void {
+        const id = this.#settings.connect("changed", (_, key) => {
+            if(key === "classic-details-list") callback();
+        });
+        this.#addId(id);
+    }
+
+    /**
+     * Gets the variable-length details selection edited in preferences.
+     * An empty list is valid; a list cannot exceed the number of detail types.
+     */
+    getFeaturedDetailsList(layout : PopupLayout) : string[] {
+        const key = layout === PopupLayout.Classic
+            ? "classic-details-list"
+            : "details-list";
+        const details = readGTypeAS(this.#settings.get_value(key));
+        if(details.length <= Object.values(Details).length) return details;
+
+        const defaultValue = this.#settings.get_default_value(key);
+        return defaultValue ? readGTypeAS(defaultValue) : [];
+    }
+
     getPanelPosition() : PanelPosition {
         const boxNum = this.#settings.get_enum("panel-box");
         const box = (["right", "center", "left"])[boxNum] ?? "right";
