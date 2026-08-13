@@ -56,7 +56,7 @@
         <value value="2" nick="left" />
     </enum>
     <enum id="org.gnome.shell.extensions.simple-weather.popup-layout">
-        <value value="0" nick="simpleweather" />
+        <value value="0" nick="default-layout" />
         <value value="1" nick="classic" />
     </enum>
     <schema id="org.gnome.shell.extensions.simple-weather" path="/org/gnome/shell/extensions/simple-weather/">
@@ -217,7 +217,7 @@
         </key>
 
         <key name="popup-layout" enum="org.gnome.shell.extensions.simple-weather.popup-layout">
-            <default>'simpleweather'</default>
+            <default>'default-layout'</default>
             <summary>Popup Layout</summary>
             <description>Preset used to lay out current weather, details, and forecasts.</description>
         </key>

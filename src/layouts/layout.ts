@@ -20,7 +20,7 @@ import { ExtensionMetadata } from "resource:///org/gnome/shell/extensions/extens
 import { Config, PopupLayout as PopupLayoutPreset } from "../config.js";
 import { Weather } from "../weather.js";
 import { ClassicLayout } from "./classic.js";
-import { SimpleWeatherLayout } from "./simpleweather.js";
+import { DefaultLayout } from "./defaultlayout.js";
 
 export interface PopupLayout {
     readonly actor : Clutter.Actor;
@@ -35,8 +35,8 @@ export interface PopupLayoutArgs {
 
 export function createPopupLayout(preset : PopupLayoutPreset, args : PopupLayoutArgs) : PopupLayout {
     switch(preset) {
-        case PopupLayoutPreset.SimpleWeather:
-            return new SimpleWeatherLayout(args);
+        case PopupLayoutPreset.Default:
+            return new DefaultLayout(args);
         case PopupLayoutPreset.Classic:
             return new ClassicLayout(args);
     }

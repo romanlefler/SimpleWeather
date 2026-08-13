@@ -119,7 +119,7 @@ export class DetailsPage extends Adw.PreferencesPage {
         popupGroup.add(themeRow);
 
         const popupLayoutModel = new Gtk.StringList({ strings: [
-            _g("SimpleWeather"),
+            _g("Default"),
             _g("Classic")
         ]});
         const popupLayoutRow = new Adw.ComboRow({
@@ -344,7 +344,7 @@ export class DetailsPage extends Adw.PreferencesPage {
     }
 
     #getPopupDetails(layout : PopupLayout) : string[] {
-        if(layout === PopupLayout.SimpleWeather) return this.#config.getDetailsList();
+        if(layout === PopupLayout.Default) return this.#config.getDetailsList();
 
         const details = this.#settings.get_strv("classic-details-list");
         return details.length === CLASSIC_DETAILS_DEFAULT.length

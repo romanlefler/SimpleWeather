@@ -32,7 +32,7 @@ export enum UnitPreset {
 }
 
 export enum PopupLayout {
-    SimpleWeather = 0,
+    Default = 0,
     Classic = 1
 }
 
@@ -459,8 +459,8 @@ export class Config {
 
     getPopupLayout() : PopupLayout {
         const layout = this.#settings.get_enum("popup-layout");
-        if(layout < PopupLayout.SimpleWeather || layout > PopupLayout.Classic) {
-            return PopupLayout.SimpleWeather;
+        if(layout < PopupLayout.Default || layout > PopupLayout.Classic) {
+            return PopupLayout.Default;
         }
         return layout;
     }

@@ -99,7 +99,7 @@ function createCurrentInfo(config : Config, parent : Clutter.Actor) : St.Label[]
     return items.map(item => item.label);
 }
 
-export class SimpleWeatherLayout implements PopupLayout {
+export class DefaultLayout implements PopupLayout {
     readonly actor : St.BoxLayout;
 
     readonly #args : PopupLayoutArgs;
