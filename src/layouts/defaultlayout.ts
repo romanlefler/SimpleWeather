@@ -46,9 +46,11 @@ interface CurrentInfoItem {
 
 interface CurrentInfo {
     columns : St.BoxLayout;
-    rows : [St.BoxLayout, St.BoxLayout];
+    rows : St.BoxLayout[];
     items : CurrentInfoItem[];
 }
+
+const MAX_DETAILS_PER_ROW = 4;
 
 enum ForecastMode {
     Week = 0,
@@ -113,16 +115,21 @@ function createDetailItem(config : Config) : CurrentInfoItem {
 
 function createCurrentInfo(config : Config, parent : Clutter.Actor) : CurrentInfo {
     const columns = new St.BoxLayout({ vertical: true, x_expand: true });
-    const row1 = new St.BoxLayout({ x_expand: true, y_expand: true, x_align: Clutter.ActorAlign.FILL });
-    const row2 = new St.BoxLayout({ x_expand: true, y_expand: true, x_align: Clutter.ActorAlign.FILL });
-    addChildren(columns, row1, row2);
+    const rows = Array.from({
+        length: Math.ceil(Object.values(Details).length / MAX_DETAILS_PER_ROW)
+    }, () => new St.BoxLayout({
+        x_expand: true,
+        y_expand: true,
+        x_align: Clutter.ActorAlign.FILL
+    }));
+    addChildren(columns, ...rows);
 
     const items = Array.from(
         { length: Object.values(Details).length },
         () => createDetailItem(config)
     );
     parent.add_child(columns);
-    return { columns, rows: [row1, row2], items };
+    return { columns, rows, items };
 }
 
 export class DefaultLayout implements PopupLayout {
@@ -307,7 +314,7 @@ export class DefaultLayout implements PopupLayout {
 
     #arrangeCurrentInfo(count : number) {
         const { columns, rows, items } = this.#currentInfo;
-        const firstRowCount = count <= 4 ? count : Math.ceil(count / 2);
+        const rowCount = Math.ceil(count / MAX_DETAILS_PER_ROW);
 
         this.#current.remove_style_class_name("sw-default-current-one-detail-row");
         this.#current.remove_style_class_name("sw-default-current-no-details");
@@ -321,9 +328,12 @@ export class DefaultLayout implements PopupLayout {
             const parent = box.get_parent();
             if(parent) parent.remove_child(box);
         }
-        items.slice(0, firstRowCount).forEach(item => rows[0].add_child(item.box));
-        items.slice(firstRowCount, count).forEach(item => rows[1].add_child(item.box));
+        for(let rowIndex = 0; rowIndex < rowCount; rowIndex++) {
+            const start = rowIndex * MAX_DETAILS_PER_ROW;
+            items.slice(start, start + MAX_DETAILS_PER_ROW)
+                .forEach(item => rows[rowIndex].add_child(item.box));
+        }
         columns.visible = count > 0;
-        rows[1].visible = count > firstRowCount;
+        rows.forEach((row, index) => row.visible = index < rowCount && count > 0);
     }
 }
