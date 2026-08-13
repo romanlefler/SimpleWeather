@@ -289,6 +289,22 @@ export class GeneralPage extends Adw.PreferencesPage {
             settings.apply();
         });
         panelGroup.add(themeRow);
+
+        const popupLayoutModel = new Gtk.StringList({ strings: [
+            _g("SimpleWeather"),
+            _g("Classic")
+        ]});
+        const popupLayoutRow = new Adw.ComboRow({
+            title: _g("Pop-Up Layout"),
+            model: popupLayoutModel,
+            selected: settings.get_enum("popup-layout")
+        });
+        popupLayoutRow.connect("notify::selected", () => {
+            settings.set_enum("popup-layout", popupLayoutRow.selected);
+            settings.apply();
+        });
+        panelGroup.add(popupLayoutRow);
+
         const panelBoxModel = new Gtk.StringList({ strings: [
             _g("Right"), _g("Center"), _g("Left")
         ]});

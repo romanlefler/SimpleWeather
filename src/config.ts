@@ -31,6 +31,11 @@ export enum UnitPreset {
     Nordic = 4
 }
 
+export enum PopupLayout {
+    SimpleWeather = 0,
+    Classic = 1
+}
+
 export type PanelBox = "right" | "center" | "left";
 export interface PanelPosition {
     box: PanelBox;
@@ -452,6 +457,21 @@ export class Config {
         this.#addId(id);
     }
 
+    getPopupLayout() : PopupLayout {
+        const layout = this.#settings.get_enum("popup-layout");
+        if(layout < PopupLayout.SimpleWeather || layout > PopupLayout.Classic) {
+            return PopupLayout.SimpleWeather;
+        }
+        return layout;
+    }
+
+    onPopupLayoutChanged(callback : (layout : PopupLayout) => void) : void {
+        const id = this.#settings.connect("changed", (_, key) => {
+            if(key === "popup-layout") callback(this.getPopupLayout());
+        });
+        this.#addId(id);
+    }
+
     /**
      * Gets the API keys map. The key is the index of the provider and the value is the API key.
      * The map will not be NULL or undefined, but each provider is not guaranteed to be present.
@@ -596,4 +616,3 @@ export function writeGTypeABSS(map : Map<string, string>) : GLib.Variant<any>
         gVariantEntries
     );
 }
-

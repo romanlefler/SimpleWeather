@@ -19,140 +19,28 @@ import Clutter from "gi://Clutter";
 import Gio from "gi://Gio";
 import Meta from "gi://Meta";
 import St from "gi://St";
-import { ExtensionMetadata, gettext as _ } from "resource:///org/gnome/shell/extensions/extension.js";
-import * as Main from 'resource:///org/gnome/shell/ui/main.js';
+import { ExtensionMetadata } from "resource:///org/gnome/shell/extensions/extension.js";
 import * as PopupMenu from "resource:///org/gnome/shell/ui/popupMenu.js";
-import { Config } from "./config.js";
-import { Forecast, Weather } from "./weather.js";
-import { displayDayOfWeek, displayTime } from "./lang.js";
+import { Config, PopupLayout as PopupLayoutPreset } from "./config.js";
 import { gettext as _g } from "./gettext.js";
-import { Details, displayDetail } from "./details.js";
-import { theme } from "./theme.js";
-import { CarouselBox } from "./carouselbox.js";
+import {
+    PopupLayout,
+    createPopupLayout
+} from "./layouts/layout.js";
+import { theme, themeInitAll } from "./theme.js";
+import { Weather } from "./weather.js";
 
-interface ForecastCard {
-    card : St.BoxLayout;
-    day : St.Label;
-    icon : St.Icon;
-    data1 : St.Label;
-    data2 : St.Label;
-    data3 : St.Label;
+function copyrightText(providerName : string) : string {
+    return `${_g("Weather Data")} \u00A9 ${providerName} ${new Date().getFullYear()}`;
 }
 
-enum ForecastMode {
-    Week = 0,
-    SevenHours = 1,
-    SecondPartOfDay = 2,
-
-    Max = 2
-}
-
-function createForecastCard() : ForecastCard {
-    const card = new St.BoxLayout({
-        vertical: true,
-        x_expand: true,
-        y_expand: true
-    });
-
-    const day = new St.Label({
-        text: "",
-        x_align: Clutter.ActorAlign.CENTER
-    });
-
-    const icon = new St.Icon({
-        icon_name: "",
-        style_class: "simpleweather-card-icon",
-        x_align: Clutter.ActorAlign.CENTER
-    });
-
-    const data1 = new St.Label({
-        text: "",
-        x_align: Clutter.ActorAlign.CENTER
-    });
-
-    const data2 = new St.Label({
-        text: "",
-        x_align: Clutter.ActorAlign.CENTER
-    });
-
-    const data3 = new St.Label({
-        text: "",
-        x_align: Clutter.ActorAlign.CENTER
-    });
-
-    card.add_child(day);
-    card.add_child(icon);
-    card.add_child(data1);
-    card.add_child(data2);
-    card.add_child(data3);
-    return {
-        card,
-        day,
-        icon,
-        data1,
-        data2,
-        data3
-    };
-}
-
-function addChildren(parent : Clutter.Actor, ...children : Clutter.Actor[]) {
-    children.forEach(m => parent.add_child(m));
-}
-
-function getTextColor() : `rgba(${number}, ${number}, ${number}, ${number})` {
-    const color = Main.panel.get_theme_node().get_foreground_color();
-    return `rgba(${color.red}, ${color.green}, ${color.blue}, ${color.alpha / 255})`;
-}
-
-function evenLabel(cfg : Config, opts : Partial<St.Label.ConstructorProps> = {}) {
-    const label = new St.Label({
-        x_expand: true,
-        y_align: Clutter.ActorAlign.CENTER,
-        x_align: Clutter.ActorAlign.FILL,
-        style_class: "simpleweather-current-item",
-        ...opts
-    });
-
-    if(cfg.getHighContrast()) {
-        if(cfg.getTheme() === "") label.style = `color:${getTextColor()}`;
-    } else theme(label, "faded");
-
-    const box = new St.BoxLayout({
-        x_expand: true,
-        x_align: Clutter.ActorAlign.FILL,
-    });
-    box.add_child(label);
-    return { label, box };
-}
-
-function createCurInfo(cfg : Config, parent : Clutter.Actor) : St.Label[] {
-    const cols = new St.BoxLayout({ vertical: true, x_expand: true });
-    const row1 = new St.BoxLayout({ vertical: false, x_expand: true, y_expand: true, x_align: Clutter.ActorAlign.FILL });
-    const row2 = new St.BoxLayout({ vertical: false, x_expand: true, y_expand: true, x_align: Clutter.ActorAlign.FILL });
-    addChildren(cols, row1, row2);
-
-    const list = Array.from({ length: 8 }, evenLabel.bind(null, cfg));
-    const boxes = list.map(l => l.box);
-    addChildren(row1, ...boxes.slice(0, 4));
-    addChildren(row2, ...boxes.slice(4, 8));
-
-    parent.add_child(cols);
-    return list.map(l => l.label);
-}
-
-function copyrightText(provName : string) : string {
-    return `${_g("Weather Data")} \u00A9 ${provName} ${new Date().getFullYear()}`;
-}
-
-// Widget must have reactive and track_hover true
+// Widget must have reactive and track_hover true.
 function setPointer(widget : Clutter.Actor) : void {
-    //@ts-ignore
+    // @ts-ignore GNOME 50
     if(widget.set_cursor_type) {
-        // GNOME 50
-        //@ts-ignore
+        // @ts-ignore GNOME 50
         widget.set_cursor_type(Clutter.CursorType.POINTER);
     } else if(global?.display?.set_cursor) {
-        // Pre-GNOME 50
         widget.connect("enter-event", () => {
             global.display.set_cursor(Meta.Cursor?.POINTER ?? 5);
         });
@@ -172,114 +60,44 @@ export interface PopupCtorArgs {
 }
 
 export class Popup {
-
-    readonly #config : Config;
-    readonly #metadata : ExtensionMetadata;
-
-    readonly #condition : St.Icon;
-    readonly #temp : St.Label;
-    readonly #forecastCards : ForecastCard[];
+    readonly #args : PopupCtorArgs;
     readonly #copyright : St.Label;
-    readonly #currentLabels : St.Label[];
     readonly #placeLabel : St.Label;
     readonly #placeBtn : St.Button;
     readonly #refreshBtn : St.Button | null;
-
-    readonly #menuItems : PopupMenu.PopupBaseMenuItem[];
+    readonly #layoutItem : PopupMenu.PopupBaseMenuItem;
+    readonly #footerItem : PopupMenu.PopupBaseMenuItem;
     readonly #menuBox : St.BoxLayout;
 
-    #foreMode : ForecastMode;
+    #layout : PopupLayout;
+    #layoutPreset : PopupLayoutPreset;
     #cachedWeather? : Weather;
+    #err : string | null = null;
 
-    #err : string | null;
-    #refreshWeather : () => Promise<void>;
+    constructor(args : PopupCtorArgs) {
+        this.#args = args;
+        this.#layoutPreset = args.config.getPopupLayout();
+        this.#layout = this.#createLayout(this.#layoutPreset);
 
-    constructor(a: PopupCtorArgs) {
-        this.#err = null;
-        this.#refreshWeather = a.refreshWeather;
-        this.#config = a.config;
-        this.#metadata = a.metadata;
-        this.#foreMode = ForecastMode.Week;
+        this.#layoutItem = new PopupMenu.PopupBaseMenuItem({ reactive: false });
+        theme(this.#layoutItem, "bg");
+        this.#layoutItem.actor.add_child(this.#layout.actor);
 
-        this.#condition = new St.Icon({
-            icon_name: "weather-clear-symbolic",
-            style_class: "simpleweather-popup-icon",
-            x_align: Clutter.ActorAlign.CENTER
-        });
-        this.#temp = new St.Label({
-            text: "",
-            style_class: "simpleweather-popup-temp",
-            x_align: Clutter.ActorAlign.CENTER
-        });
-
-        const hbox = new St.BoxLayout({ vertical: false });
-
-        const leftVBox = new St.BoxLayout({
-            vertical: true,
-            style_class: "simpleweather-current"
-        });
-        if(!this.#config.getTheme()) leftVBox.add_style_class_name("modal-dialog");
-        theme(leftVBox, "left-box");
-        leftVBox.add_child(this.#condition);
-        leftVBox.add_child(this.#temp);
-
-        hbox.add_child(leftVBox);
-
-        const rightVBox = new St.BoxLayout({
-            vertical: true
-        });
-        const forecasts = new St.BoxLayout({
-            vertical: false,
-            x_expand: true,
-            y_expand: true,
-            style_class: "simpleweather-card-row"
-        });
-        this.#forecastCards = [ ];
-        for(let i = 0; i < 7; i++) {
-            const c = createForecastCard();
-            forecasts.add_child(c.card);
-            this.#forecastCards.push(c);
-        }
-        const carousel = new CarouselBox(forecasts, ForecastMode.Max + 1, {
-            track_hover: true,
-            style_class: "button"
-        });
-        carousel.setPage(this.#foreMode);
-        theme(carousel, "forecast-box button");
-
-        rightVBox.add_child(carousel);
-
-        this.#currentLabels = createCurInfo(this.#config, rightVBox);
-        if(this.#currentLabels.length !== 8) throw new Error("Incorrect cur len.");
-        hbox.add_child(rightVBox);
-
-        carousel.onPageChanged(() => {
-            this.#foreMode = carousel.page;
-            const w = this.#cachedWeather;
-            if(w) this.#updateForecast(w);
-        });
-
-        const childItem = new PopupMenu.PopupBaseMenuItem({ reactive: false });
-        theme(childItem, "bg");
-        childItem.actor.add_child(hbox);
-
-        const textRect = new St.BoxLayout({
-            vertical: false,
-        });
+        const footer = new St.BoxLayout({ vertical: false });
         this.#copyright = new St.Label({
             text: "",
             x_expand: false,
             x_align: Clutter.ActorAlign.START,
-            y_align: Clutter.ActorAlign.CENTER,
+            y_align: Clutter.ActorAlign.CENTER
         });
-        textRect.add_child(this.#copyright);
+        footer.add_child(this.#copyright);
 
-        const baseText = new PopupMenu.PopupBaseMenuItem({ reactive: false });
-        theme(baseText, "bg");
-        baseText.actor.add_child(textRect);
+        this.#footerItem = new PopupMenu.PopupBaseMenuItem({ reactive: false });
+        theme(this.#footerItem, "bg");
+        this.#footerItem.actor.add_child(footer);
 
-        if(a.config.getShowRefreshButton()) {
-            const refreshBtn = new St.Button({
+        if(args.config.getShowRefreshButton()) {
+            this.#refreshBtn = new St.Button({
                 child: new St.Icon({
                     icon_name: "view-refresh-symbolic",
                     style_class: "simpleweather-settings-icon"
@@ -291,15 +109,12 @@ export class Popup {
                 x_expand: false,
                 x_align: Clutter.ActorAlign.END,
                 y_align: Clutter.ActorAlign.CENTER,
-                style_class: "message-list-clear-button button",
+                style_class: "message-list-clear-button button"
             });
-            theme(refreshBtn, "button");
-            refreshBtn.connect("clicked", () => {
-                this.#triggerRefresh();
-            });
-            baseText.actor.add_child(refreshBtn);
-            setPointer(refreshBtn);
-            this.#refreshBtn = refreshBtn;
+            theme(this.#refreshBtn, "button");
+            this.#refreshBtn.connect("clicked", () => this.#triggerRefresh());
+            this.#footerItem.actor.add_child(this.#refreshBtn);
+            setPointer(this.#refreshBtn);
         } else {
             this.#refreshBtn = null;
         }
@@ -315,26 +130,10 @@ export class Popup {
             x_expand: true
         });
         theme(this.#placeBtn, "button");
-        this.#placeBtn.connect("clicked", () => {
-            if(this.#err) {
-                this.#triggerRefresh();
-                return;
-            }
+        this.#placeBtn.connect("clicked", () => this.#onPlaceClicked());
+        this.#footerItem.actor.add_child(this.#placeBtn);
 
-            const placeCount = a.config.getLocations().length;
-            if(placeCount === 1) return;
-            // These will be restored in the #updateGUI method
-            this.#setRefreshStatus(true);
-
-            const index = a.config.getMainLocationIndex();
-            let newIndex;
-            if(index === placeCount - 1) newIndex = 0;
-            else newIndex = index + 1;
-            a.settings.set_int64("main-location-index", newIndex);
-        });
-        baseText.actor.add_child(this.#placeBtn);
-
-        const configBtn = new St.Button({
+        const settingsBtn = new St.Button({
             child: new St.Icon({
                 icon_name: "preferences-system-symbolic",
                 style_class: "simpleweather-settings-icon"
@@ -346,205 +145,123 @@ export class Popup {
             x_expand: false,
             x_align: Clutter.ActorAlign.END,
             y_align: Clutter.ActorAlign.CENTER,
-            style_class: "message-list-clear-button button",
+            style_class: "message-list-clear-button button"
         });
-        theme(configBtn, "button");
-        configBtn.connect("clicked", () => {
-            a.menu.toggle();
-            a.openPreferences();
+        theme(settingsBtn, "button");
+        settingsBtn.connect("clicked", () => {
+            args.menu.toggle();
+            args.openPreferences();
         });
-        baseText.actor.add_child(configBtn);
+        this.#footerItem.actor.add_child(settingsBtn);
 
-        setPointer(carousel);
         setPointer(this.#placeBtn);
-        setPointer(configBtn);
+        setPointer(settingsBtn);
 
-        this.#menuItems = [ childItem, baseText ];
-        this.#menuBox = a.menu.box;
-        a.menu.addMenuItem(childItem);
-        a.menu.addMenuItem(baseText);
+        this.#menuBox = args.menu.box;
+        args.menu.addMenuItem(this.#layoutItem);
+        args.menu.addMenuItem(this.#footerItem);
     }
 
-    #setRefreshStatus(fetching : boolean) : void {
-        const op = fetching ? 127 : 255;
-
-        this.#placeBtn.reactive = !fetching;
-        this.#placeBtn.opacity = op;
-        if(this.#refreshBtn) {
-            this.#refreshBtn.reactive = !fetching;
-            this.#refreshBtn.opacity = op;
-        }
+    get layoutPreset() : PopupLayoutPreset {
+        return this.#layoutPreset;
     }
 
-    #triggerRefresh() : void {
-        this.#setRefreshStatus(true);
-        this.setError(null);
-        this.#refreshWeather().finally(() => {
-            this.#setRefreshStatus(false);
-        });
-        return;
+    /**
+     * Replaces only the weather presentation. The footer and its controls
+     * remain mounted and retain their state.
+     */
+    setLayout(preset : PopupLayoutPreset) {
+        if(preset === this.#layoutPreset) return;
+
+        this.#layoutItem.actor.remove_child(this.#layout.actor);
+        this.#layout.destroy();
+        this.#layoutPreset = preset;
+        this.#layout = this.#createLayout(preset);
+        this.#layoutItem.actor.add_child(this.#layout.actor);
+        const themeName = this.#args.config.getTheme();
+        if(themeName) themeInitAll(this.#layout.actor, themeName);
+        if(this.#cachedWeather) this.#layout.updateGui(this.#cachedWeather);
     }
 
-    setError(msg : string | null) {
-        this.#err = msg;
+    setError(message : string | null) {
+        this.#err = message;
     }
 
-    #getErrMsg() : string {
-        return this.#err ?? "";
-    }
-
-    destroy(menu : PopupMenu.PopupMenu) {
-        this.#menuItems.forEach(m => m.destroy());
-    }
-
-    #createIcon(s : string) : Gio.Icon {
-        const iconPath = `${this.#metadata.path}/icons/${s}-symbolic.svg`;
-        const iconFile = Gio.File.new_for_path(iconPath);
-        return new Gio.FileIcon({ file: iconFile });
-    }
-
-    #displayErr(copyrightText : string | undefined = undefined) : void {
-        const c = copyrightText;
-        if(c) this.#copyright.text = `${c} | ${this.#getErrMsg()}`;
-        else this.#copyright.text = this.#getErrMsg();
-
-        this.#placeLabel.text = _g("Retry");
-        this.#placeBtn.reactive = true;
-        this.#placeBtn.opacity = 255;
-    }
-
-    updateGui(w : Weather | undefined) {
-        if(!w) {
-            this.#displayErr();
+    updateGui(weather : Weather | undefined) {
+        if(!weather) {
+            this.#displayError();
             return;
         }
 
         const old = this.#cachedWeather;
+        this.#cachedWeather = weather;
+        this.#layout.updateGui(weather);
+        this.#placeLabel.text = weather.loc.getName();
 
-        this.#condition.gicon = this.#createIcon(w.gIconName);
-        this.#temp.text = w.temp.display(this.#config);
-
-        const c = copyrightText(w.providerName);
-        if(this.#err) this.#copyright.text = `${c} | ${this.#getErrMsg()}`;
-        else this.#copyright.text = c;
+        const copyright = copyrightText(weather.providerName);
+        this.#copyright.text = this.#err ? `${copyright} | ${this.#err}` : copyright;
 
         if(old) this.#menuBox.remove_style_class_name(`swa-${old.condit}`);
-        this.#menuBox.add_style_class_name(`swa-${w.condit}`);
-
-        if(old) {
-            if(old.isNight !== w.isNight) {
-                const names = w.isNight ? [ "day", "night" ] : [ "night", "day" ];
-                this.#menuBox.remove_style_class_name(`swa-${names[0]}`);
-                this.#menuBox.add_style_class_name(`swa-${names[1]}`);
-            }
-        } else this.#menuBox.add_style_class_name(`swa-${w.isNight ? "night" : "day"}`);
-
-        this.#updateForecast(w);
-
-        if(this.#getErrMsg()) {
-            this.#displayErr(c);
-        }
-    }
-
-    #getForecastLabels(w : Weather) : [ string[], number ] {
-
-        const foreLen = this.#forecastCards.length;
-        const everyOtherHour = w.hourForecast.filter((_, i) => i % 2 === 0);
-        const forecastArrs : Forecast[] = [
-            ...w.forecast,
-            ...everyOtherHour.slice(0, foreLen * 2)
-        ];
-
-        // Keep a full possible list to determine the max width of a cell
-        // Doing all of this and setting a consistent width fixes the problem
-        // of "Wednesday" being so long it messes with the layout (and this is
-        // done dynamically so no matter the translation this doesn't happen)
-        const fullLabelList : string[] = [ ];
-        let maxLabelWidth = 0;
-        const lbl = this.#forecastCards[0].day;
-        const originalText = lbl.text;
-
-        for(let i = 0; i < foreLen * 3; i++) {
-            let text : string;
-            if(i < foreLen) text = displayDayOfWeek(forecastArrs[i].date, true);
-            else text = displayTime(forecastArrs[i].date, this.#config, true);
-
-            lbl.set_text(text);
-            const [ , w ] = lbl.get_preferred_width(-1);
-            
-            fullLabelList.push(text);
-            if(w > maxLabelWidth) maxLabelWidth = w;
+        this.#menuBox.add_style_class_name(`swa-${weather.condit}`);
+        if(!old || old.isNight !== weather.isNight) {
+            this.#menuBox.remove_style_class_name(`swa-${weather.isNight ? "day" : "night"}`);
+            this.#menuBox.add_style_class_name(`swa-${weather.isNight ? "night" : "day"}`);
         }
 
-        lbl.set_text(originalText);
-        return [ fullLabelList, maxLabelWidth ];
-    }
-
-    #updateForecast(w : Weather) {
-        this.#cachedWeather = w;
-
-        const foreLen = this.#forecastCards.length;
-        const [ labelList, maxWidth ] = this.#getForecastLabels(w);
-
-        const everyOtherHour = w.hourForecast.filter((_, i) => i % 2 === 0);
-        const forecastArrs : Forecast[] = [
-            ...w.forecast,
-            ...everyOtherHour.slice(0, foreLen * 2)
-        ];
-        const fore = forecastArrs.slice(this.#foreMode * foreLen, (this.#foreMode + 1) * foreLen);
-
-        for(let i = 0; i < foreLen; i++) {
-            const c = this.#forecastCards[i];
-
-            const dateText = labelList[i + this.#foreMode * foreLen];
-            c.day.text = dateText;
-            c.card.set_width(maxWidth);
-
-            c.icon.gicon = this.#createIcon(fore[i].gIconName);
-
-            const text : string[] = [ ];
-
-            const temp = fore[i].temp;
-            const tempMin = fore[i].tempMin;
-            const tempMax = fore[i].tempMax;
-            if(temp !== undefined) {
-                text.push(temp.display(this.#config));
-            }
-            else if(tempMax !== undefined && tempMin !== undefined) {
-                text.push(_g("H: %s").format(tempMax.display(this.#config)));
-                text.push(_g("L: %s").format(tempMin.display(this.#config)));
-            }
-            
-            const rainChance = fore[i].precipChancePercent;
-            // Round to multiple of 5
-            const roundedRainChance = Math.round(rainChance / 5) * 5;
-            // Only show chances >= 30%
-            text.push(rainChance >= 30 ? `${roundedRainChance}%` : "");
-
-            if(text.length > 3) throw new Error("Too much text to display.");
-            while(text.length < 3) text.push("");
-
-            c.data1.text = text[0];
-            c.data2.text = text[1];
-            c.data3.text = text[2];
-
-        }
-
-        this.#placeLabel.text = w.loc.getName();
-
-        const details = this.#config.getDetailsList();
-        const detailPossibilities = Object.values(details);
-        for(let i = 0; i < 8; i++) {
-            const label = this.#currentLabels[i];
-            if(!detailPossibilities.includes(details[i])) {
-                label.text = _g("Invalid");
-                continue;
-            }
-            const deet = details[i] as Details;
-            label.text = displayDetail(w, deet, _g, this.#config);
-        }
-
+        if(this.#err) this.#displayError(copyright);
         this.#setRefreshStatus(false);
     }
 
+    destroy(_menu : PopupMenu.PopupMenu) {
+        this.#layout.destroy();
+        this.#layoutItem.destroy();
+        this.#footerItem.destroy();
+    }
+
+    #createLayout(preset : PopupLayoutPreset) : PopupLayout {
+        return createPopupLayout(preset, {
+            config: this.#args.config,
+            metadata: this.#args.metadata
+        });
+    }
+
+    #onPlaceClicked() {
+        if(this.#err) {
+            this.#triggerRefresh();
+            return;
+        }
+        const placeCount = this.#args.config.getLocations().length;
+        if(placeCount === 1) return;
+        this.#setRefreshStatus(true);
+        const index = this.#args.config.getMainLocationIndex();
+        this.#args.settings.set_int64(
+            "main-location-index",
+            index === placeCount - 1 ? 0 : index + 1
+        );
+    }
+
+    #setRefreshStatus(fetching : boolean) {
+        const opacity = fetching ? 127 : 255;
+        this.#placeBtn.reactive = !fetching;
+        this.#placeBtn.opacity = opacity;
+        if(this.#refreshBtn) {
+            this.#refreshBtn.reactive = !fetching;
+            this.#refreshBtn.opacity = opacity;
+        }
+    }
+
+    #triggerRefresh() {
+        this.#setRefreshStatus(true);
+        this.setError(null);
+        this.#args.refreshWeather().finally(() => this.#setRefreshStatus(false));
+    }
+
+    #displayError(copyright? : string) {
+        this.#copyright.text = copyright
+            ? `${copyright} | ${this.#err ?? ""}`
+            : this.#err ?? "";
+        this.#placeLabel.text = _g("Retry");
+        this.#placeBtn.reactive = true;
+        this.#placeBtn.opacity = 255;
+    }
 }

@@ -33,6 +33,85 @@
     margin-left: 8px;
 }
 
+.classic-layout {
+    min-width: 720px;
+}
+
+.classic-current-row {
+    padding: 0 20px;
+}
+
+.classic-current-icon {
+    icon-size: 96px;
+    padding-right: 40px;
+}
+
+.classic-summary-box {
+    padding-top: 5px;
+    padding-right: 60px;
+}
+
+.classic-summary {
+    font-size: 36px;
+}
+
+.classic-sun-info {
+    spacing: 0;
+}
+
+.classic-sun-icon {
+    icon-size: 15px;
+    padding-left: 15px;
+    padding-right: 5px;
+}
+
+.classic-first-sun-icon {
+    padding-left: 0;
+}
+
+.classic-update-icon {
+    icon-size: 15px;
+    padding-left: 15px;
+    padding-right: 5px;
+}
+
+.classic-detail-box {
+    padding: 5px 15px 0;
+}
+
+.classic-detail-captions {
+    text-align: right;
+    padding-right: 6px;
+}
+
+.classic-hourly-row {
+    padding: 15px 0;
+}
+
+.classic-hourly-item {
+    padding: 0 35px;
+    text-align: center;
+}
+
+.classic-forecast-time {
+    font-size: 85%;
+    padding-bottom: 5px;
+}
+
+.classic-forecast-icon-box {
+    text-align: center;
+}
+
+.classic-forecast-icon {
+    icon-size: 24px;
+    padding-right: 10px;
+}
+
+.classic-forecast-summary {
+    padding-top: 5px;
+    font-size: 80%;
+}
+
 .sw-carousel
 {
     spacing: 8px;
@@ -57,4 +136,3 @@
     width: 12px;
     background-color: rgba(255, 255, 255, 0.95);
 }
-

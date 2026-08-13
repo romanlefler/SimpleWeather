@@ -238,6 +238,7 @@ export default class SimpleWeatherExtension extends Extension {
         this.#config!.onDetailsListChanged(this.#updateGui.bind(this));
         this.#config!.onSymbolicIconsChanged(this.#updateGui.bind(this));
         this.#config!.onAlwaysPackagedIconsChanged(this.#updateGui.bind(this));
+        this.#config!.onPopupLayoutChanged(layout => this.#popup?.setLayout(layout));
         // Some require extra stuff
         this.#config!.onShowSunTimeChanged(b => {
             if(!this.#indicator) return;
