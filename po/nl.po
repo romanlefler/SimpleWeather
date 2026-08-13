@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simpleweather\n"
 "Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
-"POT-Creation-Date: 2026-07-28 23:33-0500\n"
+"POT-Creation-Date: 2026-08-13 00:08-0500\n"
 "PO-Revision-Date: 2025-08-28 16:56\n"
 "Last-Translator: koenraad-verv\n"
 "Language-Team: Dutch\n"
@@ -17,10 +17,9 @@ msgstr ""
 "X-Crowdin-File: simple-weather@romanlefler.com.pot\n"
 "X-Crowdin-File-ID: 2\n"
 
-#: src/autoConfig.ts:80 src/location.ts:64 src/location.ts:74
-#: src/preferences/generalPage.ts:211
-msgid "My Location"
-msgstr "Mijn locatie"
+#: src/autoConfig.ts:115
+msgid "Unnamed Location"
+msgstr ""
 
 #: src/details.ts:60 src/preferences/generalPage.ts:70
 msgid "Temperature"
@@ -74,7 +73,8 @@ msgstr "Bewolking"
 msgid "Sun Countdown"
 msgstr "Max aantal uren zon"
 
-#: src/details.ts:77 src/popup.ts:540
+#: src/details.ts:77 src/layouts/classic.ts:217
+#: src/layouts/defaultlayout.ts:317
 msgid "Invalid"
 msgstr "Ongeldig"
 
@@ -87,45 +87,59 @@ msgstr ""
 msgid "Service down (%s)"
 msgstr ""
 
-#: src/extension.ts:365 src/preferences/search.ts:164
+#: src/extension.ts:368 src/preferences/search.ts:164
 msgid "No Internet"
 msgstr "Geen internet"
 
-#: src/extension.ts:371 src/preferences/generalPage.ts:462
+#: src/extension.ts:374 src/preferences/generalPage.ts:441
 msgid "Unknown Error"
 msgstr ""
 
-#: src/lang.ts:112
+#: src/lang.ts:126 src/layouts/defaultlayout.ts:246
 msgid "Today"
 msgstr "vandaag"
 
-#: src/lang.ts:115
+#: src/lang.ts:129
 msgid "Monday"
 msgstr "maandag"
 
-#: src/lang.ts:115
+#: src/lang.ts:129
 msgid "Sunday"
 msgstr "zondag"
 
-#: src/lang.ts:115
+#: src/lang.ts:129
 msgid "Tuesday"
 msgstr "dinsdag"
 
-#: src/lang.ts:115
+#: src/lang.ts:129
 msgid "Wednesday"
 msgstr "woensdag"
 
-#: src/lang.ts:116
+#: src/lang.ts:130
 msgid "Friday"
 msgstr "vrijdag"
 
-#: src/lang.ts:116
+#: src/lang.ts:130
 msgid "Saturday"
 msgstr "zaterdag"
 
-#: src/lang.ts:116
+#: src/lang.ts:130
 msgid "Thursday"
 msgstr "donderdag"
+
+#: src/layouts/defaultlayout.ts:302
+#, javascript-format
+msgid "H: %s"
+msgstr "H: %s"
+
+#: src/layouts/defaultlayout.ts:303
+#, javascript-format
+msgid "L: %s"
+msgstr "L: %s"
+
+#: src/location.ts:64 src/location.ts:74 src/preferences/generalPage.ts:211
+msgid "My Location"
+msgstr "Mijn locatie"
 
 #: src/location.ts:93
 #, javascript-format
@@ -147,31 +161,21 @@ msgstr "%f°O"
 msgid "%f°W"
 msgstr "%f°W"
 
-#: src/popup.ts:144
+#: src/popup.ts:34
 msgid "Weather Data"
 msgstr "Weer gegevens"
 
-#: src/popup.ts:290
+#: src/popup.ts:92
 msgid "Refresh"
 msgstr ""
 
-#: src/popup.ts:345 src/preferences/aboutPage.ts:90
+#: src/popup.ts:128 src/preferences/aboutPage.ts:90
 msgid "Settings"
 msgstr "Instellingen"
 
-#: src/popup.ts:411
+#: src/popup.ts:247
 msgid "Retry"
 msgstr ""
-
-#: src/popup.ts:514
-#, javascript-format
-msgid "H: %s"
-msgstr "H: %s"
-
-#: src/popup.ts:515
-#, javascript-format
-msgid "L: %s"
-msgstr "L: %s"
 
 #: src/preferences/aboutPage.ts:48
 msgid "About"
@@ -228,43 +232,87 @@ msgstr "Rapporteer bugs of verzoek nieuwe functies %s."
 msgid "Credits"
 msgstr "Met dank aan"
 
-#: src/preferences/detailsPage.ts:80
+#: src/preferences/detailsPage.ts:113
 msgid "Details"
 msgstr "Beschrijving"
 
-#: src/preferences/detailsPage.ts:86
+#: src/preferences/detailsPage.ts:120
 msgid "Pop-Up"
 msgstr "Pop-Up"
 
-#: src/preferences/detailsPage.ts:87
+#: src/preferences/detailsPage.ts:129 src/preferences/generalPage.ts:218
+msgid "System"
+msgstr "Systeem"
+
+#: src/preferences/detailsPage.ts:130
+msgid "Light"
+msgstr "Licht"
+
+#: src/preferences/detailsPage.ts:131
+msgid "Afterdark"
+msgstr "Na zonsondergang"
+
+#: src/preferences/detailsPage.ts:132
+msgid "Immersive"
+msgstr "Meeslepend"
+
+#: src/preferences/detailsPage.ts:135
+msgid "Theme"
+msgstr "Thema"
+
+#: src/preferences/detailsPage.ts:146
+msgid "Default"
+msgstr ""
+
+#: src/preferences/detailsPage.ts:147
+msgid "Classic"
+msgstr ""
+
+#: src/preferences/detailsPage.ts:150
+msgid "Layout"
+msgstr ""
+
+#: src/preferences/detailsPage.ts:161
+msgid "Highlight Detail Values"
+msgstr ""
+
+#: src/preferences/detailsPage.ts:176
+msgid "Featured Details"
+msgstr ""
+
+#: src/preferences/detailsPage.ts:177
 msgid "Drag-and-drop from bottom to configure the pop-up"
 msgstr "Slepen en neerzetten van onder om de pop-up te configureren"
 
-#: src/preferences/detailsPage.ts:185 src/preferences/generalPage.ts:267
+#: src/preferences/detailsPage.ts:184
+msgid "Number of Details"
+msgstr ""
+
+#: src/preferences/detailsPage.ts:332 src/preferences/generalPage.ts:267
 msgid "Panel"
 msgstr "Paneel"
 
-#: src/preferences/detailsPage.ts:188
+#: src/preferences/detailsPage.ts:335
 msgid "None"
 msgstr "geen"
 
-#: src/preferences/detailsPage.ts:200
+#: src/preferences/detailsPage.ts:347
 msgid "Panel Detail"
 msgstr "Detail primair paneel"
 
-#: src/preferences/detailsPage.ts:218
+#: src/preferences/detailsPage.ts:365
 msgid "Secondary Panel Detail"
 msgstr "Detail Secundair paneel"
 
-#: src/preferences/detailsPage.ts:230
+#: src/preferences/detailsPage.ts:377
 msgid "Show Condition Icon"
 msgstr "Toon situatie als Icoon"
 
-#: src/preferences/detailsPage.ts:240
+#: src/preferences/detailsPage.ts:387
 msgid "Show Sunrise/Sunset"
 msgstr "Toon zonsopgang/Zonsondergang"
 
-#: src/preferences/detailsPage.ts:251
+#: src/preferences/detailsPage.ts:398
 msgid "Use Countdown for Sun"
 msgstr "Gebruik max aantal uren zon"
 
@@ -407,10 +455,6 @@ msgstr "Configureer hoe uw locatie wordt bepaald"
 msgid "Online"
 msgstr "Online"
 
-#: src/preferences/generalPage.ts:218 src/preferences/generalPage.ts:277
-msgid "System"
-msgstr "Systeem"
-
 #: src/preferences/generalPage.ts:219
 msgid "Disable"
 msgstr "Uitschakelen"
@@ -436,82 +480,66 @@ msgid "High Contrast"
 msgstr "Hoog contrast"
 
 #: src/preferences/generalPage.ts:268
-msgid "Configure the panel and pop-up"
-msgstr "Configureer het paneel en pop-up"
+msgid "Configure the panel"
+msgstr ""
 
-#: src/preferences/generalPage.ts:278
-msgid "Light"
-msgstr "Licht"
-
-#: src/preferences/generalPage.ts:279
-msgid "Afterdark"
-msgstr "Na zonsondergang"
-
-#: src/preferences/generalPage.ts:280
-msgid "Immersive"
-msgstr "Meeslepend"
-
-#: src/preferences/generalPage.ts:283
-msgid "Theme"
-msgstr "Thema"
-
-#: src/preferences/generalPage.ts:293
+#: src/preferences/generalPage.ts:272
 msgid "Center"
 msgstr "Gecentreerd"
 
-#: src/preferences/generalPage.ts:293
+#: src/preferences/generalPage.ts:272
 msgid "Left"
 msgstr "Links"
 
-#: src/preferences/generalPage.ts:293
+#: src/preferences/generalPage.ts:272
 msgid "Right"
 msgstr "Rechts"
 
-#: src/preferences/generalPage.ts:296
+#: src/preferences/generalPage.ts:275
 msgid "Side of Panel"
 msgstr "Zijkant van paneel"
 
-#: src/preferences/generalPage.ts:309
+#: src/preferences/generalPage.ts:288
 msgid "Order in Panel"
 msgstr "Plaats op het paneel"
 
-#: src/preferences/generalPage.ts:326
+#: src/preferences/generalPage.ts:305
 msgid "Pop-Up Offset"
 msgstr ""
 
-#: src/preferences/generalPage.ts:327
+#: src/preferences/generalPage.ts:306
 msgid "Horizontal pop-up offset from 0–100."
 msgstr ""
 
-#: src/preferences/generalPage.ts:367
+#: src/preferences/generalPage.ts:346
 msgid "Use Symbolic Icons in Panel"
 msgstr "Gebruik iconen in paneel"
 
-#: src/preferences/generalPage.ts:377
+#: src/preferences/generalPage.ts:356
 msgid "Always Use Packaged Icons"
 msgstr "Altijd meegeleverde iconen gebruiken"
 
-#: src/preferences/generalPage.ts:388
+#: src/preferences/generalPage.ts:367
 msgid "Show Refresh Button"
 msgstr ""
 
-#: src/preferences/generalPage.ts:399
+#: src/preferences/generalPage.ts:378
 msgid "Hide Error Popup"
 msgstr ""
 
-#: src/preferences/generalPage.ts:400
+#: src/preferences/generalPage.ts:379
 msgid "If the popup just says Error, don't even show it."
 msgstr ""
 
-#: src/preferences/generalPage.ts:435
+#: src/preferences/generalPage.ts:414
 msgid "API Key Warning"
 msgstr ""
 
-#: src/preferences/generalPage.ts:458
+#: src/preferences/generalPage.ts:437
 msgid "Key is invalid or is not subscribed to the One Call 3.0 API."
 msgstr ""
 
-#: src/preferences/generalPage.ts:462
+#: src/preferences/generalPage.ts:441
 #, javascript-format
 msgid "Error when validating API Key: %s"
 msgstr ""
@@ -655,31 +683,31 @@ msgstr "%d u"
 msgid "%d min"
 msgstr ""
 
-#: src/weather.ts:105
+#: src/weather.ts:109
 msgid "Clear"
 msgstr "Wissen"
 
-#: src/weather.ts:105
+#: src/weather.ts:109
 msgid "Sunny"
 msgstr "Zonnig"
 
-#: src/weather.ts:107
+#: src/weather.ts:111
 msgid "Cloudy"
 msgstr "Bewolkt"
 
-#: src/weather.ts:109
+#: src/weather.ts:113
 msgid "Rainy"
 msgstr "Regenachtig"
 
-#: src/weather.ts:111
+#: src/weather.ts:115
 msgid "Snowy"
 msgstr "Sneeuwachtig"
 
-#: src/weather.ts:113
+#: src/weather.ts:117
 msgid "Stormy"
 msgstr "Stormachtig"
 
-#: src/weather.ts:115
+#: src/weather.ts:119
 msgid "Windy"
 msgstr "Winderig"
 
@@ -725,3 +753,6 @@ msgstr ""
 #: src/welcome.ts:174
 msgid "Please configure your location and units manually."
 msgstr ""
+
+#~ msgid "Configure the panel and pop-up"
+#~ msgstr "Configureer het paneel en pop-up"
