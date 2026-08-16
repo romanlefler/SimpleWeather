@@ -20,7 +20,12 @@ import Gtk from "gi://Gtk";
 import Gio from "gi://Gio";
 import Adw from "gi://Adw";
 import { gettext as _g } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
-import { WeatherProviderKeys, provRequiresKey, provRequiresHost } from "../providers/provider.js";
+import {
+    WeatherProviderApiKeys,
+    WeatherProviderKeys,
+    provRequiresKey,
+    provRequiresHost
+} from "../providers/provider.js";
 import { readGTypeABSS, writeGTypeABSS } from "../config.js";
 import { LibSoup } from "../libsoup.js";
 import { isNoInternet } from "../utils.js";
@@ -409,20 +414,20 @@ export class GeneralPage extends Adw.PreferencesPage {
 
     #getApiKey(settings : Gio.Settings, providerIndex : number) : string {
         const map = readGTypeABSS(settings.get_value("api-keys"));
-        const key = WeatherProviderKeys[providerIndex];
+        const key = WeatherProviderApiKeys[providerIndex];
         return map.get(key) ?? "";
     }
 
     #getApiHost(settings : Gio.Settings, providerIndex : number) : string {
         const map = readGTypeABSS(settings.get_value("api-hosts"));
-        const key = WeatherProviderKeys[providerIndex];
+        const key = WeatherProviderApiKeys[providerIndex];
         return map.get(key) ?? "";
     }
 
     #setApiKey(settings : Gio.Settings, apiKeyRow : Adw.EntryRow, wProvRow : Adw.ComboRow) {
         const v = apiKeyRow.text.trim();
         const i = wProvRow.selected;
-        const k = WeatherProviderKeys[i];
+        const k = WeatherProviderApiKeys[i];
 
         const map = readGTypeABSS(settings.get_value("api-keys"));
         if(v.length > 0) map.set(k, v);
@@ -436,7 +441,7 @@ export class GeneralPage extends Adw.PreferencesPage {
         // Don't validate keys of other providers against its API
         if(k !== "OpenWeatherMap") return;
 
-        this.#validateOwmKey(v).then(msg => {
+        this.#validateOwm3Key(v).then(msg => {
             if(msg !== null) {
                 const alert = new Gtk.AlertDialog({
                     message: _g("API Key Warning"),
@@ -450,7 +455,7 @@ export class GeneralPage extends Adw.PreferencesPage {
     #setApiHost(settings : Gio.Settings, apiHostRow : Adw.EntryRow, wProvRow : Adw.ComboRow) {
         const v = apiHostRow.text.trim();
         const i = wProvRow.selected;
-        const k = WeatherProviderKeys[i];
+        const k = WeatherProviderApiKeys[i];
 
         const map = readGTypeABSS(settings.get_value("api-hosts"));
         if(v.length > 0) map.set(k, v);
@@ -464,7 +469,7 @@ export class GeneralPage extends Adw.PreferencesPage {
     /**
      * Returns an error message, or null if valid or unable to validate.
      */
-    async #validateOwmKey(key : string) : Promise<string | null> {
+    async #validateOwm3Key(key : string) : Promise<string | null> {
         const soup = new LibSoup();
         try {
             const resp = await soup.fetchJson(

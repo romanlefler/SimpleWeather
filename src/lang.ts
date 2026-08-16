@@ -18,7 +18,7 @@
 import GLib from "gi://GLib";
 import { Weather } from "./weather.js";
 import { Config } from "./config.js";
-import { Direction, DirectionUnits, Pressure, RainMeasurement, RainMeasurementUnits, Speed, Temp } from "./units.js";
+import { Direction, DirectionUnits, Pressure, RainMeasurement, RainMeasurementUnits, RainRate, Speed, Temp } from "./units.js";
 import { sameDate } from "./utils.js";
 import { gettext as _g } from "./gettext.js"
 
@@ -164,4 +164,17 @@ export function displayRainMeasurement(r : RainMeasurement, cfg : Config) {
     } else rounded = String(Math.round(num));
 
     return `${rounded}${suffices[unit - 1]}`;
+}
+
+export function displayRainRate(r : RainRate, cfg : Config, showUnit : boolean) {
+    const unit = cfg.getRainMeasurementUnit();
+    const suffices = [ " in/h", " mm/h", " cm/h", " pts/h" ];
+
+    let num = r.get(unit);
+    let rounded;
+    if(unit === RainMeasurementUnits.In || unit === RainMeasurementUnits.Pt) {
+        rounded = num % 1 === 0 ? String(num) : num.toFixed(1);
+    } else rounded = String(Math.round(num));
+
+    return showUnit ? `${rounded}${suffices[unit - 1]}` : rounded;
 }
