@@ -17,7 +17,7 @@
 
 import { Config } from "./config.js";
 import { UnitError } from "./errors.js";
-import { displayDirection, displayPressure, displayRainMeasurement, displaySpeed, displayTemp } from "./lang.js";
+import { displayDirection, displayPressure, displayRainMeasurement, displayRainRate, displaySpeed, displayTemp } from "./lang.js";
 import { gettext as _g } from "./gettext.js";
 
 /*
@@ -209,6 +209,34 @@ export class RainMeasurement implements Displayable {
     }
 }
 
+export class RainRate implements Displayable {
+
+    #inchesPerHour : number;
+
+    constructor(inchesPerHour : number) {
+        this.#inchesPerHour = inchesPerHour;
+    }
+
+    get(unit : RainMeasurementUnits) : number {
+        switch(unit) {
+            case RainMeasurementUnits.In:
+                return this.#inchesPerHour;
+            case RainMeasurementUnits.Mm:
+                return this.#inchesPerHour * 25.4;
+            case RainMeasurementUnits.Cm:
+                return this.#inchesPerHour * 2.54;
+            case RainMeasurementUnits.Pt:
+                return this.#inchesPerHour * 0.01;
+            default:
+                throw new UnitError("Rain rate unit invalid.");
+        }
+    }
+
+    display(cfg : Config, showUnit = true) : string {
+        return displayRainRate(this, cfg, showUnit);
+    }
+}
+
 export enum DistanceUnits {
     Mi = 1,
     Km = 2,
@@ -304,4 +332,3 @@ export class Countdown implements Displayable {
         else return _g("%d min").format(minutes % 60);
     }
 }
-
