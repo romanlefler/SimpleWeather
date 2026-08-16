@@ -17,8 +17,8 @@
 
 import { Config } from "../config.js";
 import { LibSoup } from "../libsoup.js";
-import { Direction, Percentage, Pressure, RainMeasurement, Speed, SpeedAndDir, Temp, Countdown } from "../units.js";
-import { Condition, Forecast, Weather, gettextCondit } from "../weather.js";
+import { Direction, Percentage, Pressure, RainMeasurement, RainRate, Speed, SpeedAndDir, Temp, Countdown } from "../units.js";
+import { Condition, Forecast, PrecipitationForecast, Weather, gettextCondit } from "../weather.js";
 import { getGIconName, Icons } from "../icons.js"
 import { Provider } from "./provider.js";
 import { Location } from "../location.js";
@@ -46,7 +46,7 @@ export class OpenWeatherMap implements Provider {
             lat: String(coords.lat),
             lon: String(coords.lon),
             units: "imperial",
-            exclude: "minutely,alerts",
+            exclude: "alerts",
             appid: key
         };
         console.log(`Fetching with key ${key}`);
@@ -68,6 +68,7 @@ export class OpenWeatherMap implements Provider {
         const cur = body.current!;
         const daily = body.daily!;
         const hourly = body.hourly!;
+        const minutely = body.minutely;
 
         const weather = cur.weather[0]!;
         const temp = new Temp(cur.temp);
@@ -83,6 +84,13 @@ export class OpenWeatherMap implements Provider {
         const precipitation = new RainMeasurement(mmToIn(
             (cur.rain?.["1h"] ?? 0) + (cur.snow?.["1h"] ?? 0)
         ));
+        const precipForecast : PrecipitationForecast | undefined = minutely?.length > 0
+            ? {
+                start: unixToDate(minutely[0].dt),
+                intervalMin: 1,
+                levels: minutely.map((m : any) => new RainRate(mmToIn(m.precipitation)))
+            }
+            : undefined;
         const cloudCover = new Percentage(cur.clouds);
 
         const { c: condit, i: icon } = codeToIcon[weather.id] ?? codeToIcon[800];
@@ -132,6 +140,8 @@ export class OpenWeatherMap implements Provider {
             });
         }
 
+        if(precipForecast) for(let l of precipForecast.levels) console.log(`Level ${l.display(this.#config, true)}`);
+
         return {
             condit,
             temp,
@@ -150,6 +160,7 @@ export class OpenWeatherMap implements Provider {
             pressure,
             uvIndex,
             precipitation,
+            precipForecast,
             cloudCover,
             conditionText: gettextCondit(condit, isNight),
             windSpeedAndDir: new SpeedAndDir(wind, windDir),

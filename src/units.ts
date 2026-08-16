@@ -232,7 +232,7 @@ export class RainRate implements Displayable {
         }
     }
 
-    display(cfg : Config, showUnit = true) : string {
+    display(cfg : Config, showUnit : boolean = true) : string {
         return displayRainRate(this, cfg, showUnit);
     }
 }
