@@ -19,6 +19,7 @@
 
 ## Bug Fixes
 
+- Fixed stale resolver errors on system boot showing in pop-up
 - Forecast now can cycle through all 3 pages instead of just 2
 - Details are now arranged in a grid and are aligned by columns
 - Fixed some weird spacing in custom themes

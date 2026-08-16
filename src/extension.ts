@@ -376,7 +376,10 @@ export default class SimpleWeatherExtension extends Extension {
                 if(errStr.length > 25) errStr = errStr.substring(0, 25) + "...";
             }
 
-            if(!this.#cachedWeather) await this.#handleErr(err);
+            if(!this.#cachedWeather) {
+                await this.#handleErr(err);
+                if(this.#cachedWeather) errStr = null;
+            }
         }
         if(this.#popup) this.#popup.setError(errStr);
         else console.error(`No popup to notify of error (${errStr})`);
