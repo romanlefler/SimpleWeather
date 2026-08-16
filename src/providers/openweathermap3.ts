@@ -24,13 +24,15 @@ import { Provider } from "./provider.js";
 import { Location } from "../location.js";
 
 const ENDPOINT = "https://api.openweathermap.org/data/3.0/onecall";
+export const OPENWEATHERMAP3_NAME = "OpenWeatherMap 3.0";
+export const OPENWEATHERMAP3_API_KEY = "OpenWeatherMap"; // Not a 3 for legacy purposes
 
-export class OpenWeatherMap implements Provider {
+export class OpenWeatherMap3 implements Provider {
 
     readonly #soup : LibSoup;
     readonly #config : Config;
 
-    readonly nameKey = "OpenWeatherMap";
+    readonly nameKey = OPENWEATHERMAP3_NAME;
 
     constructor(soup : LibSoup, config : Config) {
         this.#soup = soup;
@@ -41,7 +43,7 @@ export class OpenWeatherMap implements Provider {
 
         const coords = await loc.latLon();
 
-        const key = this.#config.getApiKeys().get(this.nameKey) ?? "";
+        const key = this.#config.getApiKeys().get(OPENWEATHERMAP3_API_KEY) ?? "";
         const params : Record<string, string> = {
             lat: String(coords.lat),
             lon: String(coords.lon),
@@ -54,7 +56,7 @@ export class OpenWeatherMap implements Provider {
         const response = await this.#soup.fetchJson(ENDPOINT, params, false);
         if(!response.is2xx) {
             throw new Error(
-                `OpenWeatherMap gave status code ${response.status}. ` +
+                `OpenWeatherMap3 gave status code ${response.status}. ` +
                 `Reason: ${response.body?.message ?? response.body?.reason ?? "None Given"}`
             );
         }
