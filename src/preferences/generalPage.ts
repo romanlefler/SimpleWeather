@@ -20,7 +20,7 @@ import Gtk from "gi://Gtk";
 import Gio from "gi://Gio";
 import Adw from "gi://Adw";
 import { gettext as _g } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
-import { WeatherProviderKeys, provRequiresKey } from "../providers/provider.js";
+import { WeatherProviderKeys, provRequiresKey, provRequiresHost } from "../providers/provider.js";
 import { readGTypeABSS, writeGTypeABSS } from "../config.js";
 import { LibSoup } from "../libsoup.js";
 import { isNoInternet } from "../utils.js";
@@ -190,6 +190,11 @@ export class GeneralPage extends Adw.PreferencesPage {
             apiKeyRow.title = keyNeeded ? _g("API Key (Required)") : _g("API Key");
             apiKeyRow.sensitive = keyNeeded;
             apiKeyRow.text = this.#getApiKey(settings, i);
+
+            const hostNeeded = provRequiresHost(i);
+            apiHostRow.title = hostNeeded ? _g("API Host (Required)") : _g("API Host");
+            apiHostRow.sensitive = hostNeeded;
+            apiHostRow.text = this.#getApiHost(settings, i);
         });
         weatherServiceGroup.add(wProvRow);
 
@@ -205,6 +210,18 @@ export class GeneralPage extends Adw.PreferencesPage {
         apiKeyRow.connect("apply", setKey);
         weatherServiceGroup.add(apiKeyRow);
 
+        const currentHostNeeded = provRequiresHost(currentWProv);
+        const currentApiHost = this.#getApiHost(settings, currentWProv);
+        const apiHostRow = new Adw.EntryRow({
+            title: currentHostNeeded ? _g("API Host (Required)") : _g("API Host"),
+            sensitive: currentHostNeeded,
+            text: currentApiHost,
+            showApplyButton: true
+        });
+        const setHost = () => this.#setApiHost(settings, apiHostRow, wProvRow);
+        apiHostRow.connect("apply", setHost);
+        weatherServiceGroup.add(apiHostRow);
+
         this.add(weatherServiceGroup);
 
         const myLocGroup = new Adw.PreferencesGroup({
@@ -215,16 +232,17 @@ export class GeneralPage extends Adw.PreferencesPage {
         const myLocProvs = new Gtk.StringList();
         myLocProvs.append(`${_g("Online")} - ipapi.co`);
         myLocProvs.append(`${_g("Online")} - IPinfo`);
+        myLocProvs.append(`${_g("Online")} - ip.sb`);
         myLocProvs.append(`${_g("System")} - Geoclue`);
         myLocProvs.append(_g("Disable"));
-        const myLocProvFromEnum = [ 0x0, 1, 2, 3, 0 ];
+        const myLocProvFromEnum = [ 0x0, 1, 3, 4, 0, 2 ];
         const myLocRow = new Adw.ComboRow({
             title: _g("Provider"),
             model: myLocProvs,
             selected: myLocProvFromEnum[settings.get_enum("my-loc-provider")]
         });
         myLocRow.connect("notify::selected", () => {
-            const myLocProvToEnum = [ 4, 1, 2, 3 ];
+            const myLocProvToEnum = [ 4, 1, 5, 2, 3 ];
             settings.set_enum("my-loc-provider", myLocProvToEnum[myLocRow.selected]);
             settings.apply();
         });
@@ -395,6 +413,12 @@ export class GeneralPage extends Adw.PreferencesPage {
         return map.get(key) ?? "";
     }
 
+    #getApiHost(settings : Gio.Settings, providerIndex : number) : string {
+        const map = readGTypeABSS(settings.get_value("api-hosts"));
+        const key = WeatherProviderKeys[providerIndex];
+        return map.get(key) ?? "";
+    }
+
     #setApiKey(settings : Gio.Settings, apiKeyRow : Adw.EntryRow, wProvRow : Adw.ComboRow) {
         const v = apiKeyRow.text.trim();
         const i = wProvRow.selected;
@@ -408,6 +432,10 @@ export class GeneralPage extends Adw.PreferencesPage {
         settings.set_value("api-keys", gtype);
         settings.apply();
 
+        // Only OpenWeatherMap supports online key validation.
+        // Don't validate keys of other providers against its API
+        if(k !== "OpenWeatherMap") return;
+
         this.#validateOwmKey(v).then(msg => {
             if(msg !== null) {
                 const alert = new Gtk.AlertDialog({
@@ -417,6 +445,20 @@ export class GeneralPage extends Adw.PreferencesPage {
                 alert.show(this.#window);
             }
         });
+    }
+
+    #setApiHost(settings : Gio.Settings, apiHostRow : Adw.EntryRow, wProvRow : Adw.ComboRow) {
+        const v = apiHostRow.text.trim();
+        const i = wProvRow.selected;
+        const k = WeatherProviderKeys[i];
+
+        const map = readGTypeABSS(settings.get_value("api-hosts"));
+        if(v.length > 0) map.set(k, v);
+        else map.delete(k);
+
+        const gtype = writeGTypeABSS(map);
+        settings.set_value("api-hosts", gtype);
+        settings.apply();
     }
 
     /**

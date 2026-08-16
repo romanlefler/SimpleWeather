@@ -31,6 +31,11 @@ import { OmModel } from "../openmeteo-models.js";
 const SEARCH_BASE = "https://nominatim.openstreetmap.org";
 const SEARCH_ENDPOINT = `${SEARCH_BASE}/search`;
 
+// The enum value of the QWeather weather provider
+const QWEATHER_PROVIDER = 3;
+// Must match the nameKey of the QWeather provider
+const QWEATHER_KEY = "QWeather";
+
 interface SelLoc {
     // What to show on the button to clarify results
     buttonName : string;
@@ -114,7 +119,7 @@ export async function searchDialog(parent : Gtk.Window, soup : LibSoup, cfg : Co
                 soup,
                 currentLocNames: cfg.getLocations().map(l => l.getName())
             };
-            fetchNominatim(a).then(locArr => {
+            getSearchFetcher(cfg)(a).then(locArr => {
                 const oldLen = resultsLocList.length;
                 resultsLocList.splice(0, oldLen, ...locArr);
                 populateList(stringList, locArr);
@@ -157,6 +162,20 @@ interface SearchArgs {
     resultsList : Gtk.StringList;
     soup : LibSoup;
     currentLocNames : string[];
+}
+
+/**
+ * Uses the QWeather GeoAPI for searching when QWeather is selected
+ * and configured as the weather provider (Nominatim/OpenStreetMap
+ * doesn't work well in some regions), otherwise uses Nominatim.
+ */
+function getSearchFetcher(cfg : Config) : (a : SearchArgs) => Promise<SelLoc[]> {
+    if(cfg.getWeatherProvider() === QWEATHER_PROVIDER) {
+        const host = cfg.getApiHosts().get(QWEATHER_KEY);
+        const key = cfg.getApiKeys().get(QWEATHER_KEY);
+        if(host && key) return a => fetchQweather(a, host, key);
+    }
+    return fetchNominatim;
 }
 
 function showNoInternetDialog(parent : Gtk.Window) {
@@ -234,6 +253,56 @@ async function fetchNominatim(a : SearchArgs) : Promise<SelLoc[]> {
             lat,
             lon,
             countryCode: place.address?.country_code
+        });
+    }
+    return list;
+}
+
+async function fetchQweather(a : SearchArgs, hostIn : string, key : string) : Promise<SelLoc[]> {
+    // Strip the scheme and trailing slashes in case the user included them
+    const host = hostIn.replace(/^https?:\/\//, "").replace(/\/+$/, "");
+    const params = {
+        location: a.search,
+        number: "10"
+    };
+    const resp = await a.soup.fetchJson(
+        `https://${host}/geo/v2/city/lookup`, params, false,
+        { "X-QW-Api-Key": key }
+    );
+    if(!resp.is2xx) throw new Error(`QWeather status code ${resp.status}.`);
+    const b = resp.body;
+    if(b.code !== "200") throw new Error(`QWeather gave error code ${b.code}.`);
+
+    const locs : any[] = b.location ?? [ ];
+    if(!locs[0]) {
+        a.licenseLabel.label = _g("No results.");
+        return [ ];
+    }
+
+    const refer = b.refer;
+    const licenseParts : string[] = [ ...refer?.license ?? [ ], ...refer?.sources ?? [ ] ];
+    a.licenseLabel.label = licenseParts.length > 0
+        ? licenseParts.join(", ")
+        : _g("No copyright information available.");
+
+    const list : SelLoc[] = [ ];
+    for(let loc of locs) {
+        // e.g. "Dongcheng, Beijing City, China"
+        const display = [ loc.name, loc.adm1, loc.country ]
+            .filter((s : any) => typeof s === "string" && s.length > 0)
+            .join(", ");
+
+        let friendlyName = loc.name;
+        // If a duplicate name exists use the longer one
+        if(a.currentLocNames.includes(friendlyName)) friendlyName = display;
+
+        list.push({
+            buttonName: display,
+            friendlyName,
+            lat: parseFloat(loc.lat),
+            lon: parseFloat(loc.lon),
+            // QWeather does not return a country code
+            countryCode: undefined
         });
     }
     return list;

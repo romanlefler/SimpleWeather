@@ -159,7 +159,7 @@ export class Config {
 
     getMyLocationProvider() : MyLocationProvider {
         const val = this.#settings.get_enum("my-loc-provider");
-        if(val > 2 || val < 1) return 1;
+        if(val > 5 || val < 1) return 1;
         else return val;
     }
 
@@ -515,6 +515,22 @@ export class Config {
     onApiKeysChanged(callback : () => void) : void {
         const id = this.#settings.connect("changed", (_, key) => {
             if(key === "api-keys") callback();
+        });
+        this.#addId(id);
+    }
+
+    /**
+     * Gets the API hosts map. The key is the name of the provider and the value is the API host.
+     * The map will not be NULL or undefined, but each provider is not guaranteed to be present.
+     */
+    getApiHosts() : Map<string, string> {
+        const gval = this.#settings.get_value("api-hosts");
+        return readGTypeABSS(gval);
+    }
+
+    onApiHostsChanged(callback : () => void) : void {
+        const id = this.#settings.connect("changed", (_, key) => {
+            if(key === "api-hosts") callback();
         });
         this.#addId(id);
     }
