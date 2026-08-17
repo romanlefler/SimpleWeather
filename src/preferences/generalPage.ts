@@ -185,6 +185,70 @@ export class GeneralPage extends Adw.PreferencesPage {
             model: wProvList,
             selected: currentWProv
         });
+        weatherServiceGroup.add(wProvRow);
+
+        const currentKeyNeeded = provRequiresKey(currentWProv);
+        const currentApiKey = this.#getApiKey(settings, currentWProv);
+        const apiKeyRow = new Adw.EntryRow({
+            title: currentKeyNeeded ? _g("API Key (Required)") : _g("API Key"),
+            visible: currentKeyNeeded,
+            text: currentApiKey,
+            showApplyButton: true
+        });
+        weatherServiceGroup.add(apiKeyRow);
+
+        const currentHostNeeded = provRequiresHost(currentWProv);
+        const currentApiHost = this.#getApiHost(settings, currentWProv);
+        const apiHostRow = new Adw.EntryRow({
+            title: currentHostNeeded ? _g("API Host (Required)") : _g("API Host"),
+            visible: currentHostNeeded,
+            text: currentApiHost,
+            showApplyButton: true
+        });
+        weatherServiceGroup.add(apiHostRow);
+
+        const isQWeatherSelected = () =>
+            WeatherProviderApiKeys[wProvRow.selected] === "QWeather";
+        const validateCredentialsRow = new Adw.ButtonRow({
+            title: _g("Validate Credentials"),
+            visible: isQWeatherSelected()
+        });
+        weatherServiceGroup.add(validateCredentialsRow);
+
+        const updateValidateCredentialsRow = () => {
+            const i = wProvRow.selected;
+            validateCredentialsRow.visible = isQWeatherSelected();
+            validateCredentialsRow.sensitive =
+                apiKeyRow.text.trim() === this.#getApiKey(settings, i) &&
+                apiHostRow.text.trim() === this.#getApiHost(settings, i);
+        };
+
+        apiKeyRow.connect("changed", updateValidateCredentialsRow);
+        apiHostRow.connect("changed", updateValidateCredentialsRow);
+        apiKeyRow.connect("apply", () => {
+            this.#setApiKey(settings, apiKeyRow, wProvRow);
+            updateValidateCredentialsRow();
+        });
+        apiHostRow.connect("apply", () => {
+            this.#setApiHost(settings, apiHostRow, wProvRow);
+            updateValidateCredentialsRow();
+        });
+
+        validateCredentialsRow.connect("activated", () => {
+            const i = wProvRow.selected;
+            const key = this.#getApiKey(settings, i);
+            const host = this.#getApiHost(settings, i);
+            this.#validateQWeatherCreds(key, host).then(msg => {
+                if(msg !== null) {
+                    const alert = new Gtk.AlertDialog({
+                        message: _g("API Credentials Warning"),
+                        detail: msg
+                    });
+                    alert.show(this.#window);
+                }
+            });
+        });
+
         wProvRow.connect("notify::selected", () => {
             const i = wProvRow.selected;
 
@@ -200,32 +264,10 @@ export class GeneralPage extends Adw.PreferencesPage {
             apiHostRow.title = hostNeeded ? _g("API Host (Required)") : _g("API Host");
             apiHostRow.visible = hostNeeded;
             apiHostRow.text = this.#getApiHost(settings, i);
-        });
-        weatherServiceGroup.add(wProvRow);
 
-        const currentKeyNeeded = provRequiresKey(currentWProv);
-        const currentApiKey = this.#getApiKey(settings, currentWProv);
-        const apiKeyRow = new Adw.EntryRow({
-            title: currentKeyNeeded ? _g("API Key (Required)") : _g("API Key"),
-            visible: currentKeyNeeded,
-            text: currentApiKey,
-            showApplyButton: true
+            updateValidateCredentialsRow();
         });
-        const setKey = () => this.#setApiKey(settings, apiKeyRow, wProvRow);
-        apiKeyRow.connect("apply", setKey);
-        weatherServiceGroup.add(apiKeyRow);
-
-        const currentHostNeeded = provRequiresHost(currentWProv);
-        const currentApiHost = this.#getApiHost(settings, currentWProv);
-        const apiHostRow = new Adw.EntryRow({
-            title: currentHostNeeded ? _g("API Host (Required)") : _g("API Host"),
-            visible: currentHostNeeded,
-            text: currentApiHost,
-            showApplyButton: true
-        });
-        const setHost = () => this.#setApiHost(settings, apiHostRow, wProvRow);
-        apiHostRow.connect("apply", setHost);
-        weatherServiceGroup.add(apiHostRow);
+        updateValidateCredentialsRow();
 
         this.add(weatherServiceGroup);
 
@@ -437,19 +479,17 @@ export class GeneralPage extends Adw.PreferencesPage {
         settings.set_value("api-keys", gtype);
         settings.apply();
 
-        // Only OpenWeatherMap supports online key validation.
-        // Don't validate keys of other providers against its API
-        if(k !== "OpenWeatherMap") return;
-
-        this.#validateOwm3Key(v).then(msg => {
-            if(msg !== null) {
-                const alert = new Gtk.AlertDialog({
-                    message: _g("API Key Warning"),
-                    detail: msg
-                });
-                alert.show(this.#window);
-            }
-        });
+        if(k === "OpenWeatherMap") {
+            this.#validateOwm3Key(v).then(msg => {
+                if(msg !== null) {
+                    const alert = new Gtk.AlertDialog({
+                        message: _g("API Key Warning"),
+                        detail: msg
+                    });
+                    alert.show(this.#window);
+                }
+            });
+        }
     }
 
     #setApiHost(settings : Gio.Settings, apiHostRow : Adw.EntryRow, wProvRow : Adw.ComboRow) {
@@ -464,6 +504,16 @@ export class GeneralPage extends Adw.PreferencesPage {
         const gtype = writeGTypeABSS(map);
         settings.set_value("api-hosts", gtype);
         settings.apply();
+
+        if(k === "QWeather") {
+            if(!v.startsWith("https://")) {
+                const alert = new Gtk.AlertDialog({
+                    message: _g("API Host Warning"),
+                    detail: _g("API Host must start with https://")
+                });
+                alert.show(this.#window);
+            }
+        }
     }
 
     /**
@@ -486,6 +536,39 @@ export class GeneralPage extends Adw.PreferencesPage {
         } catch(e) {
             if(isNoInternet(e)) return null;
             else return _g("Error when validating API Key: %s").format(e?.toString() ?? _g("Unknown Error"));
+        } finally {
+            soup.free();
+        }
+    }
+
+    /**
+     * Returns an error message for invalid QWeather credentials, or null otherwise.
+     */
+    async #validateQWeatherCreds(key : string, host : string) : Promise<string | null> {
+        if(!host) return _g("Host is required.");
+        const soup = new LibSoup();
+        try {
+            const baseUrl = host.replace(/\/+$/, "");
+            const resp = await soup.fetchJson(
+                `${baseUrl}/weather/v1/current/39.92/116.41`,
+                { },
+                false,
+                { "X-QW-Api-Key": key }
+            );
+
+            if(resp.status === 401) return _g("Key or host is invalid.");
+
+            const error = resp.body?.error;
+            const invalidHost = error?.title === "Invalid Host" ||
+                (typeof error?.type === "string" && error.type.endsWith("#invalid-host"));
+            if(resp.status === 403 && invalidHost) return _g("Host is invalid.");
+
+            return null;
+        } catch(e) {
+            // We can error on NoInternet because this is a manually triggered action
+            if(isNoInternet(e)) return _g("No Internet");
+            else if(e instanceof SyntaxError) return _g("The API Host returned an invalid response.");
+            else return _g("Error when validating credentials.");
         } finally {
             soup.free();
         }
