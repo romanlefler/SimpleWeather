@@ -136,7 +136,8 @@ async function ipapiGetLoc() : Promise<MyLocResult> {
 }
 
 async function ipsbGetLoc() : Promise<MyLocResult> {
-    const resp = await soup.fetchJson("https://api.ip.sb/geoip", { });
+    // ip.sb requires an application-specific UA: https://ip.sb/api/
+    const resp = await soup.fetchJson("https://api.ip.sb/geoip", { }, true);
     if(!resp.is2xx) throw new Error(`ip.sb responded with error ${resp.status}.`);
 
     const body = resp.body;
