@@ -88,7 +88,7 @@
         </key>
 
         <key name="my-loc-provider" enum="org.gnome.shell.extensions.simple-weather.my-loc-provider">
-            <default>'ipapi.co'</default>
+            <default>'ip.sb'</default>
             <summary>My Location Provider</summary>
         </key>
 
