@@ -34,7 +34,8 @@ export enum MyLocationProvider {
     IpInfoIo = 1,
     Geoclue = 2,
     Disable = 3,
-    Ipapi = 4
+    Ipapi = 4,
+    IpSb = 5
 }
 
 export interface MyLocResult extends LatLon {
@@ -85,6 +86,9 @@ export async function getMyLocation() : Promise<MyLocResult> {
                 case MyLocationProvider.Ipapi:
                     isGettingLoc = ipapiGetLoc();
                     break;
+                case MyLocationProvider.IpSb:
+                    isGettingLoc = ipsbGetLoc();
+                    break;
                 case MyLocationProvider.Disable:
                     throw new Error("My Location Disabled");
             }
@@ -122,6 +126,20 @@ async function ipinfoGetLoc() : Promise<MyLocResult> {
 
 async function ipapiGetLoc() : Promise<MyLocResult> {
     const resp = await soup.fetchJson("https://ipapi.co/json", { });
+    const body = resp.body;
+    return {
+        lat: body.latitude,
+        lon: body.longitude,
+        city: body.city ?? null,
+        country: body.country_code ?? null
+    };
+}
+
+async function ipsbGetLoc() : Promise<MyLocResult> {
+    // ip.sb requires an application-specific UA: https://ip.sb/api/
+    const resp = await soup.fetchJson("https://api.ip.sb/geoip", { }, true);
+    if(!resp.is2xx) throw new Error(`ip.sb responded with error ${resp.status}.`);
+
     const body = resp.body;
     return {
         lat: body.latitude,

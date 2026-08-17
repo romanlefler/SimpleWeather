@@ -17,7 +17,7 @@
 
 import GLib from "gi://GLib";
 import Gio from "gi://Gio";
-import { UnitPreset, writeGTypeAS } from "./config.js";
+import { UnitPreset, writeGTypeAS, SearchProvider } from "./config.js";
 import { getMyLocation, MyLocResult } from "./myLocation.js";
 import { Location } from "./location.js";
 import { gettext as _g } from "./gettext.js"
@@ -32,6 +32,8 @@ const US_COORDS : MyLocResult = { lat: 40.7834, lon: -73.9662, city: "New York",
 const UK_COORDS : MyLocResult = { lat: 51.51279, lon: -0.09184, city: "London", country: "UK" };
 const NORDIC_COORDS : MyLocResult = { lat: 51.51279, lon: -0.09184, city: "Stockholm", country: "Sverige" };
 const METRIC_COORDS : MyLocResult = { lat: 52.52001, lon: 13.40495, city: "Berlin", country: "Deutschland" };
+// Beijing, China:
+const CHINA_COORDS: MyLocResult = { lat: 39.9042, lon: 116.4074, city: "\u5317\u4eac", country: "\u4e2d\u56fd" };
 
 async function readFileAsync(path : string) : Promise<string | null> {
 
@@ -97,13 +99,20 @@ export async function setFirstTimeConfig(settings : Gio.Settings) {
         settings.set_enum("unit-preset", UnitPreset.US);
         if(!myLoc) myLoc = US_COORDS;
     }
-    else if(cc === "UK" || cc === "GB") {
+    else if(cc === "UK") {
         settings.set_enum("unit-preset", UnitPreset.UK);
         if(!myLoc) myLoc = UK_COORDS;
     }
     else if(cc && NORDIC.includes(cc)) {
         settings.set_enum("unit-preset", UnitPreset.Nordic);
         if(!myLoc) myLoc = NORDIC_COORDS;
+    }
+    else if(cc === "CN") {
+        // Nominatim/OpenStreetMap are blocked by China's GFW
+        // Note that Hong Kong and Taiwan are not subject to the GFW
+        settings.set_enum("unit-preset", UnitPreset.Metric);
+        settings.set_enum("search-provider", SearchProvider.OpenMeteo);
+        if(!myLoc) myLoc = CHINA_COORDS;
     }
     else {
         settings.set_enum("unit-preset", UnitPreset.Metric);

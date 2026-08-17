@@ -9,10 +9,17 @@
         <value value="2" nick="geoclue" />
         <value value="3" nick="disable" />
         <value value="4" nick="ipapi.co" />
+        <value value="5" nick="ip.sb" />
     </enum>
     <enum id="org.gnome.shell.extensions.simple-weather.weather-provider">
         <value value="1" nick="open-meteo" />
         <value value="2" nick="openweathermap" />
+        <value value="3" nick="qweather" />
+    </enum>
+    <enum id="org.gnome.shell.extensions.simple-weather.search-provider">
+        <value value="0" nick="nominatim" />
+        <value value="1" nick="qweather" />
+        <value value="2" nick="open-meteo" />
     </enum>
     <enum id="org.gnome.shell.extensions.simple-weather.unit-preset">
         <value value="0" nick="custom" />
@@ -86,7 +93,7 @@
         </key>
 
         <key name="my-loc-provider" enum="org.gnome.shell.extensions.simple-weather.my-loc-provider">
-            <default>'ipapi.co'</default>
+            <default>'ip.sb'</default>
             <summary>My Location Provider</summary>
         </key>
 
@@ -103,6 +110,11 @@
         <key name="weather-provider" enum="org.gnome.shell.extensions.simple-weather.weather-provider">
             <default>'open-meteo'</default>
             <summary>Weather Provider</summary>
+        </key>
+
+        <key name="search-provider" enum="org.gnome.shell.extensions.simple-weather.search-provider">
+            <default>'nominatim'</default>
+            <summary>Location Search Provider</summary>
         </key>
 
         <key name="speed-unit" enum="org.gnome.shell.extensions.simple-weather.speed-unit">
@@ -230,6 +242,11 @@
         <key name="api-keys" type="a{ss}">
             <default>{ }</default>
             <summary>API Keys</summary>
+        </key>
+
+        <key name="api-hosts" type="a{ss}">
+            <default>{ }</default>
+            <summary>API Hosts</summary>
         </key>
 
     </schema>

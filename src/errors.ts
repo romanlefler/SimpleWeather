@@ -46,6 +46,18 @@ export class UserInputError extends Error {
     }
 }
 
+export class MissingQWeatherCredentialsError extends FriendlyError {
+
+    constructor() {
+        super("%s requires an API key and host.");
+        this.name = "MissingQWeatherCredentialsError";
+    }
+
+    transl(gettext : ((s : string) => string)) : string {
+        return gettext("%s requires an API key and host.").format("QWeather");
+    }
+}
+
 export class NoLocServiceError extends FriendlyError {
 
     constructor(msg? : string) {
@@ -79,4 +91,3 @@ export class ServiceStatusError extends FriendlyError {
         return gettext("Service down (%s)").format(this.#code.toString());
     }
 }
-

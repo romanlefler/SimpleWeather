@@ -21,7 +21,7 @@ import Gio from "gi://Gio";
 import GLib from "gi://GLib";
 import Adw from "gi://Adw";
 import { LibSoup } from "../libsoup.js";
-import { Config, writeGTypeAS } from "../config.js";
+import { Config, SearchProvider, writeGTypeAS } from "../config.js";
 import { editLocation } from "./editLocation.js";
 import { Location } from "../location.js";
 import { UserInputError } from "../errors.js";
@@ -157,6 +157,38 @@ export class LocationsPage extends Adw.PreferencesPage {
         });
         addExtraBox.append(addCoordsBtn);
         this.#locGroup.add(addExtraBox);
+
+        const searchProviderGroup = new Adw.PreferencesGroup({
+            title: _g("Location Search")
+        });
+        const searchProviderList = new Gtk.StringList({
+            strings: [ "Nominatim", "QWeather*", "Open-Meteo" ]
+        });
+        const searchProviderRow = new Adw.ComboRow({
+            title: _g("Search Provider"),
+            model: searchProviderList,
+            selected: this.#config.getSearchProvider()
+        });
+        searchProviderGroup.add(searchProviderRow);
+
+        const qWeatherNote = new Gtk.Label({
+            label: _g(
+                "QWeather requires you to input your credentials in the %s section in %s."
+            ).format(_g("Weather Provider"), _g("General")),
+            visible: searchProviderRow.selected === SearchProvider.QWeather,
+            wrap: true,
+            xalign: 0,
+            css_classes: [ "simpleweather-small", "simpleweather-margin-wide" ]
+        });
+        searchProviderGroup.add(qWeatherNote);
+
+        searchProviderRow.connect("notify::selected", () => {
+            const selected = searchProviderRow.selected;
+            this.#settings.set_enum("search-provider", selected);
+            this.#settings.apply();
+            qWeatherNote.visible = selected === SearchProvider.QWeather;
+        });
+        this.add(searchProviderGroup);
 
         this.#guiRefreshList();
     }
@@ -350,4 +382,3 @@ export class LocationsPage extends Adw.PreferencesPage {
     }
 
 }
-

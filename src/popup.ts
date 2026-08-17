@@ -30,8 +30,13 @@ import { setPointer } from "./clutterutils.js";
 import { theme, themeInitAll } from "./theme.js";
 import { Weather } from "./weather.js";
 
-function copyrightText(providerName : string) : string {
-    return `${_g("Weather Data")} \u00A9 ${providerName} ${new Date().getFullYear()}`;
+function providerUrl(providerName : string) : string | null {
+    const urls : Record<string, string> = {
+        "Open-Meteo": "https://open-meteo.com/",
+        "OpenWeatherMap 3.0": "https://openweathermap.org/",
+        "QWeather": "https://www.qweather.com/"
+    };
+    return urls[providerName] ?? null;
 }
 
 export interface PopupCtorArgs {
@@ -46,6 +51,8 @@ export interface PopupCtorArgs {
 export class Popup {
     readonly #args : PopupCtorArgs;
     readonly #copyright : St.Label;
+    readonly #providerCredit : St.Button;
+    readonly #copyrightError : St.Label;
     readonly #placeLabel : St.Label;
     readonly #placeBtn : St.Button;
     readonly #refreshBtn : St.Button | null;
@@ -57,6 +64,7 @@ export class Popup {
     #layoutPreset : PopupLayoutPreset;
     #cachedWeather? : Weather;
     #err : string | null = null;
+    #providerUrl : string | null = null;
 
     constructor(args : PopupCtorArgs) {
         this.#args = args;
@@ -69,12 +77,43 @@ export class Popup {
 
         const footer = new St.BoxLayout({ vertical: false });
         this.#copyright = new St.Label({
-            text: "",
+            text: `${_g("Weather Data")} \u00A9 `,
+            visible: false,
             x_expand: false,
             x_align: Clutter.ActorAlign.START,
             y_align: Clutter.ActorAlign.CENTER
         });
         footer.add_child(this.#copyright);
+        this.#providerCredit = new St.Button({
+            label: "",
+            visible: false,
+            reactive: false,
+            can_focus: true,
+            track_hover: true,
+            x_expand: false,
+            y_align: Clutter.ActorAlign.CENTER,
+            style_class: "swa-provider-credit"
+        });
+        this.#providerCredit.connect("clicked", () => {
+            if(!this.#providerUrl) return;
+            Gio.AppInfo.launch_default_for_uri_async(
+                this.#providerUrl, null, null, (_, result) => {
+                    try {
+                        Gio.AppInfo.launch_default_for_uri_finish(result);
+                    } catch(e) {
+                        console.error(e);
+                    }
+                }
+            );
+        });
+        setPointer(this.#providerCredit);
+        footer.add_child(this.#providerCredit);
+        this.#copyrightError = new St.Label({
+            text: "",
+            x_expand: false,
+            y_align: Clutter.ActorAlign.CENTER
+        });
+        footer.add_child(this.#copyrightError);
 
         this.#footerItem = new PopupMenu.PopupBaseMenuItem({ reactive: false });
         theme(this.#footerItem, "bg");
@@ -182,8 +221,12 @@ export class Popup {
         this.#layout.updateGui(weather);
         this.#placeLabel.text = weather.loc.getName();
 
-        const copyright = copyrightText(weather.providerName);
-        this.#copyright.text = this.#err ? `${copyright} | ${this.#err}` : copyright;
+        this.#providerUrl = providerUrl(weather.providerName);
+        this.#providerCredit.label = `${weather.providerName} ${new Date().getFullYear()}`;
+        this.#providerCredit.reactive = this.#providerUrl !== null;
+        this.#copyright.visible = true;
+        this.#providerCredit.visible = true;
+        this.#copyrightError.text = this.#err ? ` | ${this.#err}` : "";
 
         if(old) this.#menuBox.remove_style_class_name(`swa-${old.condit}`);
         this.#menuBox.add_style_class_name(`swa-${weather.condit}`);
@@ -192,7 +235,7 @@ export class Popup {
             this.#menuBox.add_style_class_name(`swa-${weather.isNight ? "night" : "day"}`);
         }
 
-        if(this.#err) this.#displayError(copyright);
+        if(this.#err) this.#displayError(true);
         this.#setRefreshStatus(false);
     }
 
@@ -240,9 +283,11 @@ export class Popup {
         this.#args.refreshWeather().finally(() => this.#setRefreshStatus(false));
     }
 
-    #displayError(copyright? : string) {
-        this.#copyright.text = copyright
-            ? `${copyright} | ${this.#err ?? ""}`
+    #displayError(showProviderCredit = false) {
+        this.#copyright.visible = showProviderCredit;
+        this.#providerCredit.visible = showProviderCredit;
+        this.#copyrightError.text = showProviderCredit
+            ? ` | ${this.#err ?? ""}`
             : this.#err ?? "";
         this.#placeLabel.text = _g("Retry");
         this.#placeBtn.reactive = true;
