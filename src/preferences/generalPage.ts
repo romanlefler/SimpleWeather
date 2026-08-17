@@ -191,6 +191,19 @@ export class GeneralPage extends Adw.PreferencesPage {
         });
         weatherServiceGroup.add(wProvRow);
 
+        const weatherProviderNotes = [
+            _g("The open-source, most privacy-friendly default."),
+            _g("Requires an account with a One Call 3.0 subscription."),
+            _g("Recommended primarily for users in mainland China. Requires an account.")
+        ];
+        const weatherProviderNote = new Gtk.Label({
+            label: weatherProviderNotes[currentWProv] ?? "",
+            wrap: true,
+            xalign: 0,
+            css_classes: [ "simpleweather-small", "simpleweather-margin-wide" ]
+        });
+        weatherServiceGroup.add(weatherProviderNote);
+
         const currentKeyNeeded = provRequiresKey(currentWProv);
         const currentApiKey = this.#getApiKey(settings, currentWProv);
         const apiKeyRow = new Adw.EntryRow({
@@ -259,6 +272,7 @@ export class GeneralPage extends Adw.PreferencesPage {
 
             settings.set_enum("weather-provider", i + 1);
             settings.apply();
+            weatherProviderNote.label = weatherProviderNotes[i] ?? "";
 
             const keyNeeded = provRequiresKey(i);
             apiKeyRow.title = keyNeeded ? _g("API Key (Required)") : _g("API Key");
