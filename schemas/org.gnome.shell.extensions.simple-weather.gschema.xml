@@ -19,6 +19,7 @@
     <enum id="org.gnome.shell.extensions.simple-weather.search-provider">
         <value value="0" nick="nominatim" />
         <value value="1" nick="qweather" />
+        <value value="2" nick="open-meteo" />
     </enum>
     <enum id="org.gnome.shell.extensions.simple-weather.unit-preset">
         <value value="0" nick="custom" />

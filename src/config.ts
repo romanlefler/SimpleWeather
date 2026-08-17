@@ -38,7 +38,8 @@ export enum PopupLayout {
 
 export enum SearchProvider {
     Nominatim,
-    QWeather
+    QWeather,
+    OpenMeteo
 }
 
 export type PanelBox = "right" | "center" | "left";
@@ -200,7 +201,7 @@ export class Config {
 
     getSearchProvider() : SearchProvider {
         const val = this.#settings.get_enum("search-provider");
-        if(val < SearchProvider.Nominatim || val > SearchProvider.QWeather) {
+        if(val < SearchProvider.Nominatim || val > SearchProvider.OpenMeteo) {
             return SearchProvider.Nominatim;
         }
         return val;
