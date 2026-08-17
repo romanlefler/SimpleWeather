@@ -24,15 +24,13 @@ import { NominatimPlace, getShortName, getDisplayName } from "./placenames.js";
 import { Location } from "../location.js";
 import { gettext as _g } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
 import { LibSoup } from "../libsoup.js";
-import { Config } from "../config.js";
+import { Config, SearchProvider } from "../config.js";
 import { isNoInternet } from "../utils.js";
 import { OmModel } from "../openmeteo-models.js";
 
 const SEARCH_BASE = "https://nominatim.openstreetmap.org";
 const SEARCH_ENDPOINT = `${SEARCH_BASE}/search`;
 
-// The enum value of the QWeather weather provider
-const QWEATHER_PROVIDER = 3;
 // Must match the nameKey of the QWeather provider
 const QWEATHER_KEY = "QWeather";
 
@@ -165,15 +163,14 @@ interface SearchArgs {
 }
 
 /**
- * Uses the QWeather GeoAPI for searching when QWeather is selected
- * and configured as the weather provider (Nominatim/OpenStreetMap
- * doesn't work well in some regions), otherwise uses Nominatim.
+ * Uses the configured search provider, falling back to Nominatim if
+ * QWeather credentials are unavailable.
  */
 function getSearchFetcher(cfg : Config) : (a : SearchArgs) => Promise<SelLoc[]> {
-    if(cfg.getWeatherProvider() === QWEATHER_PROVIDER) {
+    if(cfg.getSearchProvider() === SearchProvider.QWeather) {
         const host = cfg.getApiHosts().get(QWEATHER_KEY);
         const key = cfg.getApiKeys().get(QWEATHER_KEY);
-        if(host && key) return a => fetchQweather(a, host, key);
+        if(host && key) return a => fetchQWeather(a, host, key);
     }
     return fetchNominatim;
 }
@@ -258,8 +255,8 @@ async function fetchNominatim(a : SearchArgs) : Promise<SelLoc[]> {
     return list;
 }
 
-async function fetchQweather(a : SearchArgs, hostIn : string, key : string) : Promise<SelLoc[]> {
-    // Strip the scheme and trailing slashes in case the user included them
+async function fetchQWeather(a : SearchArgs, hostIn : string, key : string) : Promise<SelLoc[]> {
+    // Strip the scheme and trailing slashes
     const host = hostIn.replace(/^https?:\/\//, "").replace(/\/+$/, "");
     const params = {
         location: a.search,
@@ -307,4 +304,3 @@ async function fetchQweather(a : SearchArgs, hostIn : string, key : string) : Pr
     }
     return list;
 }
-

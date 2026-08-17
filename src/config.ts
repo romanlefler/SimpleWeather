@@ -36,6 +36,11 @@ export enum PopupLayout {
     Classic = 1
 }
 
+export enum SearchProvider {
+    Nominatim,
+    QWeather
+}
+
 export type PanelBox = "right" | "center" | "left";
 export interface PanelPosition {
     box: PanelBox;
@@ -191,6 +196,13 @@ export class Config {
             if(key === "weather-provider") callback();
         });
         this.#addId(id);
+    }
+
+    getSearchProvider() : SearchProvider {
+        const weatherProvider = WeatherProviderKeys[this.getWeatherProvider() - 1];
+        return weatherProvider === "QWeather"
+            ? SearchProvider.QWeather
+            : SearchProvider.Nominatim;
     }
 
     getSpeedUnit() : SpeedUnits {
