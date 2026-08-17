@@ -16,7 +16,7 @@
 */
 
 import Adw from "gi://Adw";
-import Gio from "gi://Gio";
+import GLib from "gi://GLib";
 import GObject from "gi://GObject";
 import Gtk from "gi://Gtk";
 import Pango from "gi://Pango";
@@ -31,6 +31,9 @@ import { MissingQWeatherCredentialsError } from "../errors.js";
 const SEARCH_BASE = "https://nominatim.openstreetmap.org";
 const SEARCH_ENDPOINT = `${SEARCH_BASE}/search`;
 const OPEN_METEO_SEARCH_ENDPOINT = "https://geocoding-api.open-meteo.com/v1/search";
+const NOMINATIM_ATTRIBUTION_URL = "https://www.openstreetmap.org/copyright";
+const OPEN_METEO_ATTRIBUTION_URL = "https://open-meteo.com/";
+const QWEATHER_ATTRIBUTION_URL = "https://www.qweather.com/";
 
 // Must match the nameKey of the QWeather provider
 const QWEATHER_KEY = "QWeather";
@@ -236,6 +239,12 @@ function populateList(resultsList : Gtk.StringList, locs : SelLoc[]) {
     resultsList.splice(0, oldLen, names);
 }
 
+function setAttributionLink(label : Gtk.Label, attribution : string, url : string) {
+    const escapedAttribution = GLib.markup_escape_text(attribution, -1);
+    const escapedUrl = GLib.markup_escape_text(url, -1);
+    label.set_markup(`<a href="${escapedUrl}">${escapedAttribution}</a>`);
+}
+
 async function fetchNominatim(a : SearchArgs) : Promise<SelLoc[]> {
     const params = {
         format: "jsonv2",
@@ -247,12 +256,18 @@ async function fetchNominatim(a : SearchArgs) : Promise<SelLoc[]> {
     const b = resp.body;
 
     if(!b[0]) {
-        a.licenseLabel.label = _g("No results.");
+        a.licenseLabel.set_text(_g("No results."));
         return [ ];
     }
 
     // British spelling of license
-    a.licenseLabel.label = b[0]?.licence ?? _g("No copyright information available.");
+    const licence = b[0]?.licence;
+    if(typeof licence === "string" && licence.length > 0) {
+        setAttributionLink(a.licenseLabel, licence, NOMINATIM_ATTRIBUTION_URL);
+    }
+    else {
+        a.licenseLabel.set_text(_g("No copyright information available."));
+    }
 
     const list : SelLoc[] = [ ];
     for(let result of b) {
@@ -293,11 +308,15 @@ async function fetchOpenMeteo(a : SearchArgs) : Promise<SelLoc[]> {
 
     const locs : OpenMeteoPlace[] = resp.body?.results ?? [ ];
     if(!locs[0]) {
-        a.licenseLabel.label = _g("No results.");
+        a.licenseLabel.set_text(_g("No results."));
         return [ ];
     }
 
-    a.licenseLabel.label = "Open-Meteo, GeoNames (CC BY 4.0)";
+    setAttributionLink(
+        a.licenseLabel,
+        "Open-Meteo, GeoNames (CC BY 4.0)",
+        OPEN_METEO_ATTRIBUTION_URL
+    );
 
     const list : SelLoc[] = [ ];
     for(const loc of locs) {
@@ -340,15 +359,18 @@ async function fetchQWeather(a : SearchArgs, cfg : Config) : Promise<SelLoc[]> {
 
     const locs : any[] = b.location ?? [ ];
     if(!locs[0]) {
-        a.licenseLabel.label = _g("No results.");
+        a.licenseLabel.set_text(_g("No results."));
         return [ ];
     }
 
     const refer = b.refer;
     const licenseParts : string[] = [ ...refer?.license ?? [ ], ...refer?.sources ?? [ ] ];
-    a.licenseLabel.label = licenseParts.length > 0
-        ? licenseParts.join(", ")
-        : _g("No copyright information available.");
+    if(licenseParts.length > 0) {
+        setAttributionLink(a.licenseLabel, licenseParts.join(", "), QWEATHER_ATTRIBUTION_URL);
+    }
+    else {
+        a.licenseLabel.set_text(_g("No copyright information available."));
+    }
 
     const list : SelLoc[] = [ ];
     for(let loc of locs) {
