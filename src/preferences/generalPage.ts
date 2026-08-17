@@ -34,6 +34,10 @@ function setVisibilites(value : boolean, ...widgets : Gtk.Widget[]) {
     for(let w of widgets) w.visible = value;
 }
 
+function normalizeApiHost(host : string) : string {
+    return host.trim().replace(/^https?:\/\//i, "").replace(/\/+$/, "");
+}
+
 export class GeneralPage extends Adw.PreferencesPage {
 
     static {
@@ -220,7 +224,8 @@ export class GeneralPage extends Adw.PreferencesPage {
             validateCredentialsRow.visible = isQWeatherSelected();
             validateCredentialsRow.sensitive =
                 apiKeyRow.text.trim() === this.#getApiKey(settings, i) &&
-                apiHostRow.text.trim() === this.#getApiHost(settings, i);
+                normalizeApiHost(apiHostRow.text) ===
+                    normalizeApiHost(this.#getApiHost(settings, i));
         };
 
         apiKeyRow.connect("changed", updateValidateCredentialsRow);
@@ -493,7 +498,7 @@ export class GeneralPage extends Adw.PreferencesPage {
     }
 
     #setApiHost(settings : Gio.Settings, apiHostRow : Adw.EntryRow, wProvRow : Adw.ComboRow) {
-        const v = apiHostRow.text.trim();
+        const v = normalizeApiHost(apiHostRow.text);
         const i = wProvRow.selected;
         const k = WeatherProviderApiKeys[i];
 
@@ -504,16 +509,10 @@ export class GeneralPage extends Adw.PreferencesPage {
         const gtype = writeGTypeABSS(map);
         settings.set_value("api-hosts", gtype);
         settings.apply();
+        apiHostRow.text = v;
 
-        if(k === "QWeather") {
-            if(!v.startsWith("https://")) {
-                const alert = new Gtk.AlertDialog({
-                    message: _g("API Host Warning"),
-                    detail: _g("API Host must start with https://")
-                });
-                alert.show(this.#window);
-            }
-        }
+        // For QWeather, there are no guarantees given on the API host:
+        // https://dev.qweather.com/en/docs/configuration/api-host/
     }
 
     /**
@@ -545,12 +544,12 @@ export class GeneralPage extends Adw.PreferencesPage {
      * Returns an error message for invalid QWeather credentials, or null otherwise.
      */
     async #validateQWeatherCreds(key : string, host : string) : Promise<string | null> {
-        if(!host) return _g("Host is required.");
+        const normalizedHost = normalizeApiHost(host);
+        if(!normalizedHost) return _g("Host is required.");
         const soup = new LibSoup();
         try {
-            const baseUrl = host.replace(/\/+$/, "");
             const resp = await soup.fetchJson(
-                `${baseUrl}/weather/v1/current/39.92/116.41`,
+                `https://${normalizedHost}/weather/v1/current/39.92/116.41`,
                 { },
                 false,
                 { "X-QW-Api-Key": key }
