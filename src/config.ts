@@ -199,10 +199,18 @@ export class Config {
     }
 
     getSearchProvider() : SearchProvider {
-        const weatherProvider = WeatherProviderKeys[this.getWeatherProvider() - 1];
-        return weatherProvider === "QWeather"
-            ? SearchProvider.QWeather
-            : SearchProvider.Nominatim;
+        const val = this.#settings.get_enum("search-provider");
+        if(val < SearchProvider.Nominatim || val > SearchProvider.QWeather) {
+            return SearchProvider.Nominatim;
+        }
+        return val;
+    }
+
+    onSearchProviderChanged(callback : () => void) {
+        const id = this.#settings.connect("changed", (_, key) => {
+            if(key === "search-provider") callback();
+        });
+        this.#addId(id);
     }
 
     getSpeedUnit() : SpeedUnits {

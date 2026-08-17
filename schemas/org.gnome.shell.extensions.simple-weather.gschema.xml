@@ -16,6 +16,10 @@
         <value value="2" nick="openweathermap" />
         <value value="3" nick="qweather" />
     </enum>
+    <enum id="org.gnome.shell.extensions.simple-weather.search-provider">
+        <value value="0" nick="nominatim" />
+        <value value="1" nick="qweather" />
+    </enum>
     <enum id="org.gnome.shell.extensions.simple-weather.unit-preset">
         <value value="0" nick="custom" />
         <value value="1" nick="us" />
@@ -105,6 +109,11 @@
         <key name="weather-provider" enum="org.gnome.shell.extensions.simple-weather.weather-provider">
             <default>'open-meteo'</default>
             <summary>Weather Provider</summary>
+        </key>
+
+        <key name="search-provider" enum="org.gnome.shell.extensions.simple-weather.search-provider">
+            <default>'nominatim'</default>
+            <summary>Location Search Provider</summary>
         </key>
 
         <key name="speed-unit" enum="org.gnome.shell.extensions.simple-weather.speed-unit">
