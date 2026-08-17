@@ -193,12 +193,12 @@ export class GeneralPage extends Adw.PreferencesPage {
 
             const keyNeeded = provRequiresKey(i);
             apiKeyRow.title = keyNeeded ? _g("API Key (Required)") : _g("API Key");
-            apiKeyRow.sensitive = keyNeeded;
+            apiKeyRow.visible = keyNeeded;
             apiKeyRow.text = this.#getApiKey(settings, i);
 
             const hostNeeded = provRequiresHost(i);
             apiHostRow.title = hostNeeded ? _g("API Host (Required)") : _g("API Host");
-            apiHostRow.sensitive = hostNeeded;
+            apiHostRow.visible = hostNeeded;
             apiHostRow.text = this.#getApiHost(settings, i);
         });
         weatherServiceGroup.add(wProvRow);
@@ -207,7 +207,7 @@ export class GeneralPage extends Adw.PreferencesPage {
         const currentApiKey = this.#getApiKey(settings, currentWProv);
         const apiKeyRow = new Adw.EntryRow({
             title: currentKeyNeeded ? _g("API Key (Required)") : _g("API Key"),
-            sensitive: currentKeyNeeded,
+            visible: currentKeyNeeded,
             text: currentApiKey,
             showApplyButton: true
         });
@@ -219,7 +219,7 @@ export class GeneralPage extends Adw.PreferencesPage {
         const currentApiHost = this.#getApiHost(settings, currentWProv);
         const apiHostRow = new Adw.EntryRow({
             title: currentHostNeeded ? _g("API Host (Required)") : _g("API Host"),
-            sensitive: currentHostNeeded,
+            visible: currentHostNeeded,
             text: currentApiHost,
             showApplyButton: true
         });
