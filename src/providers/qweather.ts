@@ -103,10 +103,10 @@ export class QWeather implements Provider {
     async fetchWeather() : Promise<Weather> {
         const loc = this.#config.getMainLocation();
         const body = await this.#requestWeatherJson(loc);
-        return this.#parseWeatherJson(body, loc);
+        return this.parseWeatherJson(body, loc);
     }
 
-    #parseWeatherJson(body : QWeatherJson, loc : Location) : Weather {
+    parseWeatherJson(body : QWeatherJson, loc : Location) : Weather {
         const { current: cur, daily, hourly } = body;
         const days = daily.days!;
         const hours = hourly.hours!;

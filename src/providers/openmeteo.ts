@@ -77,10 +77,10 @@ export class OpenMeteo implements Provider {
     async fetchWeather() : Promise<Weather> {
         const loc = this.#config.getMainLocation();
         const body = await this.#requestWeatherJson(loc);
-        return this.#parseWeatherJson(body, loc);
+        return this.parseWeatherJson(body, loc);
     }
 
-    #parseWeatherJson(body : any, loc : Location) : Weather {
+    parseWeatherJson(body : any, loc : Location) : Weather {
         const cur = body.current!;
         const daily = body.daily!;
         const hourly = body.hourly!;

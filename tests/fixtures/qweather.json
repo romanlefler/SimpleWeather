@@ -1,0 +1,64 @@
+{
+  "current": {
+    "forecastTime": "2099-01-01T05:00:00Z",
+    "condition": {"code": "150"},
+    "temperature": {"value": 20},
+    "feelsLike": {"value": 18},
+    "wind": {
+      "speed": {"value": 0.44704},
+      "direction": {"degree": 270}
+    },
+    "windGust": {"value": 0.89408},
+    "humidity": 0.65,
+    "pressure": {"value": 1000},
+    "uvIndex": 4,
+    "precipitation": {"amount": {"value": 25.4}},
+    "cloudCover": 0.25
+  },
+  "daily": {
+    "days": [
+      {
+        "forecastStartTime": "2099-01-01T00:00:00Z",
+        "temperatureMin": {"value": 10},
+        "temperatureMax": {"value": 20},
+        "astro": {
+          "sunrise": "2099-01-01T06:00:00Z",
+          "sunset": "2099-01-01T18:00:00Z"
+        },
+        "daytime": {
+          "condition": {"code": "101"},
+          "precipitation": {"probability": 0.2}
+        }
+      },
+      {
+        "forecastStartTime": "2099-01-02T00:00:00Z",
+        "temperatureMin": {"value": 5},
+        "temperatureMax": {"value": 15},
+        "astro": {
+          "sunrise": "2099-01-02T06:00:00Z",
+          "sunset": "2099-01-02T18:00:00Z"
+        },
+        "daytime": {
+          "condition": {"code": "400"},
+          "precipitation": {"probability": 0.8}
+        }
+      }
+    ]
+  },
+  "hourly": {
+    "hours": [
+      {
+        "forecastTime": "2099-01-01T05:00:00Z",
+        "condition": {"code": "150"},
+        "temperature": {"value": 20},
+        "precipitation": {"probability": 0.1}
+      },
+      {
+        "forecastTime": "2099-01-01T13:00:00Z",
+        "condition": {"code": "305"},
+        "temperature": {"value": 21},
+        "precipitation": {"probability": 0.7}
+      }
+    ]
+  }
+}
