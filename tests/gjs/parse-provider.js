@@ -1,6 +1,5 @@
 import Gio from "gi://Gio";
 
-import { Location } from "../../dist/build/location.js";
 import { setUpGettext } from "../../dist/build/gettext.js";
 import {
     DirectionUnits,
@@ -20,7 +19,12 @@ const [ success, contents ] = Gio.File.new_for_path(fixturePath).load_contents(n
 if(!success) throw new Error(`Could not load fixture: ${fixturePath}`);
 
 const json = JSON.parse(new TextDecoder().decode(contents));
-const loc = Location.newCoords("Test location", 41.88, -87.63);
+// Parsing only stores the location on the Weather result. Keep this fixture
+// runner independent of Location's runtime geolocation dependencies (such as
+// Geoclue), which are not involved in parsing a provider response.
+const loc = {
+    getName: () => "Test location"
+};
 const config = {
     getDirectionUnit: () => DirectionUnits.Degrees,
     getRainMeasurementUnit: () => RainMeasurementUnits.In,
