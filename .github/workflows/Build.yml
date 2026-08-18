@@ -7,6 +7,7 @@ on:
         branches: [ 'master', 'development' ]
         paths:
         - '**.po'
+        - '**.js'
         - '**.ts'
         - '**.svg'
         - '**.xml'
@@ -22,6 +23,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
         - uses: actions/checkout@v3
-        - run: sudo apt-get install gettext npm
+        - run: sudo apt-get install gettext gjs npm
         - run: make
+        - run: npm test
         - run: make clean
