@@ -39,7 +39,7 @@ export class OpenWeatherMap3 implements Provider {
         this.#config = config;
     }
 
-    async #fetch(loc : Location) : Promise<any> {
+    async #requestWeatherJson(loc : Location) : Promise<any> {
 
         const coords = await loc.latLon();
 
@@ -66,7 +66,11 @@ export class OpenWeatherMap3 implements Provider {
 
     async fetchWeather() : Promise<Weather> {
         const loc = this.#config.getMainLocation();
-        const body = await this.#fetch(loc);
+        const body = await this.#requestWeatherJson(loc);
+        return this.#parseWeatherJson(body, loc);
+    }
+
+    #parseWeatherJson(body : any, loc : Location) : Weather {
         const cur = body.current!;
         const daily = body.daily!;
         const hourly = body.hourly!;

@@ -23,6 +23,12 @@ import { getGIconName, Icons } from "../icons.js"
 import { Provider } from "./provider.js";
 import { Location } from "../location.js";
 
+interface QWeatherJson {
+    current : any;
+    daily : any;
+    hourly : any;
+}
+
 export class QWeather implements Provider {
 
     readonly #soup : LibSoup;
@@ -54,7 +60,7 @@ export class QWeather implements Provider {
         };
     }
 
-    async #fetch(path : string, params : Record<string, string>) : Promise<any> {
+    async #requestJson(path : string, params : Record<string, string>) : Promise<any> {
         const { host, headers } = this.#getAuth();
 
         const response = await this.#soup.fetchJson(
@@ -79,19 +85,29 @@ export class QWeather implements Provider {
         return body;
     }
 
-    async fetchWeather() : Promise<Weather> {
-        const loc = this.#config.getMainLocation();
+    async #requestWeatherJson(loc : Location) : Promise<QWeatherJson> {
         const coords = await loc.latLon();
         // The API supports at most two decimal places
         const lat = coords.lat.toFixed(2);
         const lon = coords.lon.toFixed(2);
 
-        const [ cur, daily, hourly ] = await Promise.all([
-            this.#fetch(`/weather/v1/current/${lat}/${lon}`, { localTime: "true" }),
-            this.#fetch(`/weather/v1/daily/${lat}/${lon}`, { days: "7", localTime: "true" }),
-            this.#fetch(`/weather/v1/hourly/${lat}/${lon}`, { hours: "28", localTime: "true" })
+        const [ current, daily, hourly ] = await Promise.all([
+            this.#requestJson(`/weather/v1/current/${lat}/${lon}`, { localTime: "true" }),
+            this.#requestJson(`/weather/v1/daily/${lat}/${lon}`, { days: "7", localTime: "true" }),
+            this.#requestJson(`/weather/v1/hourly/${lat}/${lon}`, { hours: "28", localTime: "true" })
         ]);
 
+        return { current, daily, hourly };
+    }
+
+    async fetchWeather() : Promise<Weather> {
+        const loc = this.#config.getMainLocation();
+        const body = await this.#requestWeatherJson(loc);
+        return this.#parseWeatherJson(body, loc);
+    }
+
+    #parseWeatherJson(body : QWeatherJson, loc : Location) : Weather {
+        const { current: cur, daily, hourly } = body;
         const days = daily.days!;
         const hours = hourly.hours!;
 
