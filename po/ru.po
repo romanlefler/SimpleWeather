@@ -21,7 +21,7 @@ msgstr ""
 
 #: src/autoConfig.ts:115
 msgid "Unnamed Location"
-msgstr ""
+msgstr "Неизвестное местоположение"
 
 #: src/details.ts:60 src/preferences/generalPage.ts:70
 msgid "Temperature"
@@ -205,7 +205,7 @@ msgstr "Git-хеш"
 
 #: src/preferences/aboutPage.ts:93
 msgid "Copy"
-msgstr "Скопировать"
+msgstr "Копировать"
 
 #: src/preferences/aboutPage.ts:116
 msgid "Copied settings JSON to clipboard."
@@ -264,31 +264,31 @@ msgstr "Тема"
 
 #: src/preferences/detailsPage.ts:146
 msgid "Default"
-msgstr ""
+msgstr "По умолчанию"
 
 #: src/preferences/detailsPage.ts:147
 msgid "Classic"
-msgstr ""
+msgstr "Классическое"
 
 #: src/preferences/detailsPage.ts:150
 msgid "Layout"
-msgstr ""
+msgstr "Оформление"
 
 #: src/preferences/detailsPage.ts:161
 msgid "Highlight Detail Values"
-msgstr ""
+msgstr "Выделять значения"
 
 #: src/preferences/detailsPage.ts:176
 msgid "Featured Details"
-msgstr ""
+msgstr "Отображаемые элементы"
 
 #: src/preferences/detailsPage.ts:177
 msgid "Drag-and-drop from bottom to configure the pop-up"
-msgstr "Перетащите из нижней части, чтобы настроить всплывающее окно"
+msgstr "Перетащите элементы из списка ниже, чтобы настроить всплывающее окно"
 
 #: src/preferences/detailsPage.ts:184
 msgid "Number of Details"
-msgstr ""
+msgstr "Количество элементов"
 
 #: src/preferences/detailsPage.ts:332 src/preferences/generalPage.ts:267
 msgid "Panel"
@@ -451,7 +451,7 @@ msgstr "API-ключ (обязательно)"
 
 #: src/preferences/generalPage.ts:212
 msgid "Configure how your location is found"
-msgstr "Настроить способ определения вашего местоположения"
+msgstr "Настроить способ определения местоположения"
 
 #: src/preferences/generalPage.ts:216 src/preferences/generalPage.ts:217
 msgid "Online"
@@ -483,7 +483,7 @@ msgstr "Высокая контрастность"
 
 #: src/preferences/generalPage.ts:268
 msgid "Configure the panel"
-msgstr ""
+msgstr "Настроить отображение на панели"
 
 #: src/preferences/generalPage.ts:272
 msgid "Center"
@@ -758,4 +758,4 @@ msgid "Please configure your location and units manually."
 msgstr "Пожалуйста, укажите местоположение и единицы измерения вручную."
 
 #~ msgid "Configure the panel and pop-up"
-#~ msgstr "Настроить верхнюю панель и всплывающее окно"
+#~ msgstr "Настроить отображение на панели и всплывающее окно"
