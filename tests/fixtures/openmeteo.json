@@ -1,0 +1,41 @@
+{
+  "current": {
+    "time": "2099-01-01T12:00:00Z",
+    "temperature_2m": 72,
+    "weather_code": 2,
+    "is_day": 1,
+    "relative_humidity_2m": 55,
+    "apparent_temperature": 70,
+    "surface_pressure": 1000,
+    "wind_speed_10m": 12,
+    "wind_gusts_10m": 20,
+    "wind_direction_10m": 225,
+    "precipitation": 0.1,
+    "cloud_cover": 60
+  },
+  "daily": {
+    "time": ["2099-01-01", "2099-01-02"],
+    "sunrise": ["2099-01-01T06:00:00Z", "2099-01-02T06:00:00Z"],
+    "sunset": ["2099-01-01T18:00:00Z", "2099-01-02T18:00:00Z"],
+    "weather_code": [1, 63],
+    "temperature_2m_min": [50, 51],
+    "temperature_2m_max": [70, 65],
+    "precipitation_probability_max": [10, 80],
+    "uv_index_max": [5, 3],
+    "cloud_cover_mean": [10, 90],
+    "precipitation_sum": [0, 0.5]
+  },
+  "hourly": {
+    "time": ["2099-01-01T12:00:00Z", "2099-01-01T13:00:00Z"],
+    "temperature_2m": [72, 68],
+    "weather_code": [2, 63],
+    "precipitation_probability": [20, 70],
+    "is_day": [1, 0],
+    "cloud_cover": [50, 90],
+    "precipitation": [0, 0.2]
+  },
+  "minutely_15": {
+    "time": ["2099-01-01T12:00:00Z", "2099-01-01T12:15:00Z"],
+    "precipitation": [0.01, 0.02]
+  }
+}

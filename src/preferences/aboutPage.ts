@@ -98,7 +98,9 @@ export class AboutPage extends Adw.PreferencesPage {
         });
         settingsButton.connect("clicked", () => {
             const keys : string[] = settings.settings_schema.list_keys();
-            keys.splice(keys.indexOf("locations"), 1);
+            if(keys.includes("locations")) keys.splice(keys.indexOf("locations"), 1);
+            if(keys.includes("api-keys")) keys.splice(keys.indexOf("api-keys"), 1);
+            if(keys.includes("api-hosts")) keys.splice(keys.indexOf("api-hosts"), 1);
 
             const obj : Record<string, string> = { };
             for(let k of keys) {

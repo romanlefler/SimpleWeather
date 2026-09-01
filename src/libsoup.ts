@@ -16,7 +16,8 @@
 */
 
 import GLib from "gi://GLib";
-import Soup from "gi://Soup?version=3.0";
+import Soup from "gi://Soup";
+import { ServiceStatusError } from "./errors.js";
 
 const genericUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
     "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36";
@@ -47,7 +48,7 @@ export class LibSoup {
     }
 
     async fetchJson(url : string, params : Record<string, string>,
-        useTrackedAgent = false) : Promise<ServerResponse> {
+        useTrackedAgent = false, headers? : Record<string, string>) : Promise<ServerResponse> {
 
         const sess = useTrackedAgent ? this.#realUserSession : this.#genericSession;
         if(!sess) throw new Error("Attempt to use LibSoup after freed.");
@@ -55,6 +56,11 @@ export class LibSoup {
         const paramsEncoded = Soup.form_encode_hash(params);
         const msg = Soup.Message.new_from_encoded_form("GET", url, paramsEncoded);
         msg.request_headers.append("Accept", "application/json");
+        if(headers) {
+            for(const [ k, v ] of Object.entries(headers)) {
+                msg.request_headers.append(k, v);
+            }
+        }
 
         return new Promise((resolve, reject) => {
             sess.send_and_read_async(
@@ -80,6 +86,12 @@ export class LibSoup {
                         }
                         catch(e) {
                             if(e instanceof SyntaxError) {
+                                // For the sake of informing the user we're gonna simplify
+                                // all these codes to "the service is down"
+                                if([ 408, 500, 502, 503, 504 ].includes(status)) {
+                                    return reject(new ServiceStatusError(status));
+                                }
+
                                 return reject(new SyntaxError(
                                     "Couldn't parse body JSON. " +
                                     `User-Agent: ${sess.userAgent}, Status: ${status}, Text: "${json}"`,

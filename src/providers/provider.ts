@@ -19,7 +19,12 @@ import { Config } from "../config.js";
 import { LibSoup } from "../libsoup.js";
 import { Weather } from "../weather.js";
 import { OpenMeteo } from "./openmeteo.js";
-import { OpenWeatherMap } from "./openweathermap.js";
+import {
+    OPENWEATHERMAP3_API_KEY,
+    OPENWEATHERMAP3_NAME,
+    OpenWeatherMap3
+} from "./openweathermap3.js";
+import { QWeather } from "./qweather.js";
 
 export interface Provider {
 
@@ -35,23 +40,43 @@ export function createProvider(soup : LibSoup, config : Config) {
         case 1:
             return new OpenMeteo(soup, config);
         case 2:
-            return new OpenWeatherMap(soup, config);
+            return new OpenWeatherMap3(soup, config);
+        case 3:
+            return new QWeather(soup, config);
         default:
             throw new Error("Invalid weather provider ID.");
     }
 }
 
 export const WeatherProviderKeys : readonly string[] = Object.freeze([
-    "Open-Meteo", "OpenWeatherMap"
+    "Open-Meteo", OPENWEATHERMAP3_NAME, "QWeather"
+]);
+
+/**
+ * Keys used by the api-keys setting.
+ */
+export const WeatherProviderApiKeys : readonly string[] = Object.freeze([
+    "Open-Meteo", OPENWEATHERMAP3_API_KEY, "QWeather"
 ]);
 
 export function provRequiresKey(index : number) : boolean {
     const v : Record<string, boolean> = {
         0: false,
-        1: true
+        1: true,
+        2: true
     };
     const ret = v[index];
     if(typeof ret !== "boolean") throw new Error("Invalid argument.");
     return ret;
 }
 
+export function provRequiresHost(index : number) : boolean {
+    const v : Record<string, boolean> = {
+        0: false,
+        1: false,
+        2: true
+    };
+    const ret = v[index];
+    if(typeof ret !== "boolean") throw new Error("Invalid argument.");
+    return ret;
+}

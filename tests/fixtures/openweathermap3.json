@@ -1,0 +1,55 @@
+{
+  "current": {
+    "dt": 4070952000,
+    "sunrise": 4070930400,
+    "sunset": 4070973600,
+    "temp": 72,
+    "feels_like": 70,
+    "pressure": 1000,
+    "humidity": 55,
+    "uvi": 5,
+    "clouds": 10,
+    "wind_speed": 12,
+    "wind_gust": 20,
+    "wind_deg": 225,
+    "rain": {"1h": 12.7},
+    "snow": {"1h": 12.7},
+    "weather": [{"id": 800, "icon": "01d"}]
+  },
+  "daily": [
+    {
+      "dt": 4070952000,
+      "sunrise": 4070930400,
+      "sunset": 4070973600,
+      "temp": {"min": 50, "max": 70},
+      "pop": 0.1,
+      "weather": [{"id": 601, "icon": "13d"}]
+    },
+    {
+      "dt": 4071038400,
+      "sunrise": 4071016800,
+      "sunset": 4071060000,
+      "temp": {"min": 51, "max": 65},
+      "pop": 0.8,
+      "weather": [{"id": 500, "icon": "10d"}]
+    }
+  ],
+  "hourly": [
+    {
+      "dt": 4070952000,
+      "temp": 72,
+      "pop": 0.2,
+      "weather": [{"id": 801, "icon": "02d"}]
+    },
+    {
+      "dt": 4070955600,
+      "temp": 68,
+      "pop": 0.7,
+      "weather": [{"id": 802, "icon": "03n"}]
+    }
+  ],
+  "minutely": [
+    {"dt": 4070952000, "precipitation": 0.254},
+    {"dt": 4070952060, "precipitation": 0.508}
+  ]
+}

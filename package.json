@@ -1,6 +1,6 @@
 {
   "name": "simpleweather",
-  "version": "0.1.0",
+  "version": "51.0.0",
   "description": "GNOME Shell Extension to show the weather.",
   "keywords": [
     "gnome",
@@ -20,7 +20,7 @@
   "type": "module",
   "main": "dist/build/extension.ts",
   "scripts": {
-    "test": "echo 'Tests not implemeneted yet.'"
+    "test": "tsc --incremental false && node --test tests/*.test.ts"
   },
   "devDependencies": {
     "eslint": "^9.28.0",

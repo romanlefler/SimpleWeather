@@ -15,6 +15,17 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+export class FriendlyError extends Error {
+
+    constructor(msg? : string) {
+        super(msg);
+    }
+
+    transl(gettext : ((s : string) => string)) : string {
+        return "Override me.";
+    }
+}
+
 /**
  * Thrown when a unit is unexpected or invalid.
  */
@@ -35,11 +46,27 @@ export class UserInputError extends Error {
     }
 }
 
-export class NoLocServiceError extends Error {
+export class MissingQWeatherCredentialsError extends FriendlyError {
+
+    constructor() {
+        super("%s requires an API key and host.");
+        this.name = "MissingQWeatherCredentialsError";
+    }
+
+    transl(gettext : ((s : string) => string)) : string {
+        return gettext("%s requires an API key and host.").format("QWeather");
+    }
+}
+
+export class NoLocServiceError extends FriendlyError {
 
     constructor(msg? : string) {
         super(msg ?? "Location unavailable or permission not granted.");
         this.name = "NoLocServiceError";
+    }
+
+    transl(gettext : ((s : string) => string)) : string {
+        return gettext("Location unavailable or permission not granted.");
     }
 
 }
@@ -51,3 +78,16 @@ export class AutoConfigFailError extends Error {
     }
 }
 
+export class ServiceStatusError extends FriendlyError {
+    #code : number;
+
+    constructor(code : number) {
+        super("Got ${code} (Service is temporarily down.)");
+        this.#code = code;
+        this.name = "Provider502Error";
+    }
+
+    transl(gettext : ((s : string) => string)) : string {
+        return gettext("Service down (%s)").format(this.#code.toString());
+    }
+}

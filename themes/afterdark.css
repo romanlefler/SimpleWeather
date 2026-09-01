@@ -23,11 +23,11 @@
 }
 
 .sw-style-afterdark-button {
-    background: transparent;
+    background: rgba(239, 237, 220, 0.10);
 }
 
 .sw-style-afterdark-button:hover {
-    background: #35332D;
+    background: rgba(239, 237, 220, 0.16);
 }
 
 .sw-style-afterdark-carousel-dot {

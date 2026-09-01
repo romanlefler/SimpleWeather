@@ -9,10 +9,17 @@
         <value value="2" nick="geoclue" />
         <value value="3" nick="disable" />
         <value value="4" nick="ipapi.co" />
+        <value value="5" nick="ip.sb" />
     </enum>
     <enum id="org.gnome.shell.extensions.simple-weather.weather-provider">
         <value value="1" nick="open-meteo" />
         <value value="2" nick="openweathermap" />
+        <value value="3" nick="qweather" />
+    </enum>
+    <enum id="org.gnome.shell.extensions.simple-weather.search-provider">
+        <value value="0" nick="nominatim" />
+        <value value="1" nick="qweather" />
+        <value value="2" nick="open-meteo" />
     </enum>
     <enum id="org.gnome.shell.extensions.simple-weather.unit-preset">
         <value value="0" nick="custom" />
@@ -55,6 +62,10 @@
         <value value="1" nick="center" />
         <value value="2" nick="left" />
     </enum>
+    <enum id="org.gnome.shell.extensions.simple-weather.popup-layout">
+        <value value="0" nick="default-layout" />
+        <value value="1" nick="classic" />
+    </enum>
     <schema id="org.gnome.shell.extensions.simple-weather" path="/org/gnome/shell/extensions/simple-weather/">
 
         <key name="is-activated" type="b">
@@ -82,7 +93,7 @@
         </key>
 
         <key name="my-loc-provider" enum="org.gnome.shell.extensions.simple-weather.my-loc-provider">
-            <default>'ipapi.co'</default>
+            <default>'ip.sb'</default>
             <summary>My Location Provider</summary>
         </key>
 
@@ -99,6 +110,11 @@
         <key name="weather-provider" enum="org.gnome.shell.extensions.simple-weather.weather-provider">
             <default>'open-meteo'</default>
             <summary>Weather Provider</summary>
+        </key>
+
+        <key name="search-provider" enum="org.gnome.shell.extensions.simple-weather.search-provider">
+            <default>'nominatim'</default>
+            <summary>Location Search Provider</summary>
         </key>
 
         <key name="speed-unit" enum="org.gnome.shell.extensions.simple-weather.speed-unit">
@@ -142,13 +158,23 @@
         </key>
 
         <key name="show-suntime-as-countdown" type="b">
-            <default>false</default>
+            <default>true</default>
             <summary>Show sunrise/sunset as countdown in panel</summary>
         </key>
 
         <key name="details-list" type="as">
             <default>[ 'temp', 'windSpeedAndDir', 'gusts', 'pressure', 'feelsLike', 'humidity', 'uvIndex', 'precipitation' ]</default>
             <summary>Current weather details in pop-up</summary>
+        </key>
+
+        <key name="classic-details-list" type="as">
+            <default>[ 'feelsLike', 'humidity', 'pressure', 'windSpeedAndDir', 'gusts' ]</default>
+            <summary>Current weather details in the Classic pop-up</summary>
+        </key>
+
+        <key name="highlight-detail-values" type="b">
+            <default>false</default>
+            <summary>Highlight detail values in the Default pop-up</summary>
         </key>
 
         <key name="panel-box" enum="org.gnome.shell.extensions.simple-weather.panel-box">
@@ -207,9 +233,20 @@
             <summary>Show refresh button in the popup</summary>
         </key>
 
+        <key name="popup-layout" enum="org.gnome.shell.extensions.simple-weather.popup-layout">
+            <default>'default-layout'</default>
+            <summary>Popup Layout</summary>
+            <description>Preset used to lay out current weather, details, and forecasts.</description>
+        </key>
+
         <key name="api-keys" type="a{ss}">
             <default>{ }</default>
             <summary>API Keys</summary>
+        </key>
+
+        <key name="api-hosts" type="a{ss}">
+            <default>{ }</default>
+            <summary>API Hosts</summary>
         </key>
 
     </schema>

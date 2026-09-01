@@ -17,36 +17,38 @@
 
 import { Config } from "../config.js";
 import { LibSoup } from "../libsoup.js";
-import { Direction, Percentage, Pressure, RainMeasurement, Speed, SpeedAndDir, Temp, Countdown } from "../units.js";
-import { Condition, Forecast, Weather, gettextCondit } from "../weather.js";
+import { Direction, Percentage, Pressure, RainMeasurement, RainRate, Speed, SpeedAndDir, Temp, Countdown } from "../units.js";
+import { Condition, Forecast, PrecipitationForecast, Weather, gettextCondit } from "../weather.js";
 import { getGIconName, Icons } from "../icons.js"
 import { Provider } from "./provider.js";
 import { Location } from "../location.js";
 
 const ENDPOINT = "https://api.openweathermap.org/data/3.0/onecall";
+export const OPENWEATHERMAP3_NAME = "OpenWeatherMap 3.0";
+export const OPENWEATHERMAP3_API_KEY = "OpenWeatherMap"; // Not a 3 for legacy purposes
 
-export class OpenWeatherMap implements Provider {
+export class OpenWeatherMap3 implements Provider {
 
     readonly #soup : LibSoup;
     readonly #config : Config;
 
-    readonly nameKey = "OpenWeatherMap";
+    readonly nameKey = OPENWEATHERMAP3_NAME;
 
     constructor(soup : LibSoup, config : Config) {
         this.#soup = soup;
         this.#config = config;
     }
 
-    async #fetch(loc : Location) : Promise<any> {
+    async #requestWeatherJson(loc : Location) : Promise<any> {
 
         const coords = await loc.latLon();
 
-        const key = this.#config.getApiKeys().get(this.nameKey) ?? "";
+        const key = this.#config.getApiKeys().get(OPENWEATHERMAP3_API_KEY) ?? "";
         const params : Record<string, string> = {
             lat: String(coords.lat),
             lon: String(coords.lon),
             units: "imperial",
-            exclude: "minutely,alerts",
+            exclude: "alerts",
             appid: key
         };
         console.log(`Fetching with key ${key}`);
@@ -54,7 +56,7 @@ export class OpenWeatherMap implements Provider {
         const response = await this.#soup.fetchJson(ENDPOINT, params, false);
         if(!response.is2xx) {
             throw new Error(
-                `OpenWeatherMap gave status code ${response.status}. ` +
+                `OpenWeatherMap3 gave status code ${response.status}. ` +
                 `Reason: ${response.body?.message ?? response.body?.reason ?? "None Given"}`
             );
         }
@@ -64,10 +66,15 @@ export class OpenWeatherMap implements Provider {
 
     async fetchWeather() : Promise<Weather> {
         const loc = this.#config.getMainLocation();
-        const body = await this.#fetch(loc);
+        const body = await this.#requestWeatherJson(loc);
+        return this.parseWeatherJson(body, loc);
+    }
+
+    parseWeatherJson(body : any, loc : Location) : Weather {
         const cur = body.current!;
         const daily = body.daily!;
         const hourly = body.hourly!;
+        const minutely = body.minutely;
 
         const weather = cur.weather[0]!;
         const temp = new Temp(cur.temp);
@@ -83,6 +90,13 @@ export class OpenWeatherMap implements Provider {
         const precipitation = new RainMeasurement(mmToIn(
             (cur.rain?.["1h"] ?? 0) + (cur.snow?.["1h"] ?? 0)
         ));
+        const precipForecast : PrecipitationForecast | undefined = minutely?.length > 0
+            ? {
+                start: unixToDate(minutely[0].dt),
+                intervalMin: 1,
+                levels: minutely.map((m : any) => new RainRate(mmToIn(m.precipitation)))
+            }
+            : undefined;
         const cloudCover = new Percentage(cur.clouds);
 
         const { c: condit, i: icon } = codeToIcon[weather.id] ?? codeToIcon[800];
@@ -109,6 +123,7 @@ export class OpenWeatherMap implements Provider {
             dayForecast.push({
                 date: unixToDate(daily[i].dt),
                 gIconName: fIconName,
+                conditionText: gettextCondit(fIcon.c, false),
                 tempMin: new Temp(daily[i].temp.min),
                 tempMax: new Temp(daily[i].temp.max),
                 precipChancePercent: Math.round(daily[i].pop * 100)
@@ -125,16 +140,20 @@ export class OpenWeatherMap implements Provider {
             hourForecast.push({
                 date: unixToDate(hourly[i].dt),
                 gIconName: fIconName,
+                conditionText: gettextCondit(fIcon.c, fIsNight),
                 temp: new Temp(hourly[i].temp),
                 precipChancePercent: Math.round(hourly[i].pop * 100)
             });
         }
+
+        if(precipForecast) for(let l of precipForecast.levels) console.log(`Level ${l.display(this.#config, true)}`);
 
         return {
             condit,
             temp,
             gIconName,
             isNight,
+            observedAt: unixToDate(cur.dt),
             sunrise,
             sunset,
             forecast: dayForecast,
@@ -147,6 +166,7 @@ export class OpenWeatherMap implements Provider {
             pressure,
             uvIndex,
             precipitation,
+            precipForecast,
             cloudCover,
             conditionText: gettextCondit(condit, isNight),
             windSpeedAndDir: new SpeedAndDir(wind, windDir),

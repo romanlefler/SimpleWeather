@@ -1,5 +1,39 @@
 
-# v50.1.0 WIP
+# v51.DEV
+
+## Features
+
+- LAYOUTS: Choose between the Default or Classic layout.
+- CLASSIC LAYOUT: This layout mimics the OpenWeather Refined pop-up menu.
+- FLEXIBLE DETAILS: Choose any number of details to show, or show none. Available for both layouts.
+
+## Improvements
+
+- Some widgets that may not have been freed before are now always freed on disable
+- First-time run auto-configuration is now more performant
+- Showing the countdown instead of time for the sunset/sunrise is now the default
+- Every forecast column is now the same size so flipping forecasts does not change size
+- Some settings have been rearranged in the menus
+- Custom themes now have background box colors so they look more like the System theme
+- Auto-config falls back to locale if it cannot connect to the location service
+
+## Bug Fixes
+
+- Fixed stale resolver errors on system boot showing in pop-up
+- Forecast now can cycle through all 3 pages instead of just 2
+- Details are now arranged in a grid and are aligned by columns
+- Fixed some weird spacing in custom themes
+- The left box in the pop-up is no longer a modal dialog which on some GNOME themes looked odd
+
+## Translations
+
+- Chinese (thanks CreateCN)
+- German (thanks Anexity)
+- Hungarian (thanks SzAti69)
+- Japanese (thanks hidenosuke)
+- Russian (thanks Valetss)
+
+# v50.1.0
 
 ## Features
 
@@ -9,9 +43,17 @@
 ## Improvements
 
 - Show carousel dots under forecast carousel in pop-up
+- If provider responds with a server error the pop-up will indicate that
+
+## Bug Fixes
+
+- Fixed error that sometimes happened on disable (was invisible to user anyway)
+- Fixed invisible error related to system clock setting
 
 ## Translations
 
+- French (thanks Vincent Morel & Neo-29)
+- German (thanks Romain Loutrel)
 - Indonesian (thanks Fakhrul Rijal)
 - Polish (thanks Krzysiek Zalewski)
 

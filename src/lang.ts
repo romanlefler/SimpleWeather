@@ -18,7 +18,7 @@
 import GLib from "gi://GLib";
 import { Weather } from "./weather.js";
 import { Config } from "./config.js";
-import { Direction, DirectionUnits, Pressure, RainMeasurement, RainMeasurementUnits, Speed, Temp } from "./units.js";
+import { Direction, DirectionUnits, Pressure, RainMeasurement, RainMeasurementUnits, RainRate, Speed, Temp } from "./units.js";
 import { sameDate } from "./utils.js";
 import { gettext as _g } from "./gettext.js"
 
@@ -37,14 +37,17 @@ export function initLocales() : string | undefined {
         let k = gLibLocales[i];
         // C and POSIX are not valid JS locales
         if(strcaseeq(k, "C") || strcaseeq(k, "POSIX")) continue;
+        // handle something with an @ at the end
+        k = k.split("@")[0];
         // "en.UTF-8" is valid system locale but in JS
         // it is not
-        if(strcaseends(k, ".UTF-8")) continue;
-        if(strcaseends(k, ".utf8")) continue;
+        k = k.split(".")[0];
         // "en_US" is system locale but JS locale should be "en-US"
         // or Intl will throw
-        k = k.replace(/_/g, "-");
+        k = k.replace("_", "-");
 
+        // Since we modified it a bunch, make sure we aren't duplicating
+        if(out.includes(k)) continue;
         out.push(k);
     }
     // Always add "en" as a backup, this is effectively the same as "C"
@@ -84,6 +87,17 @@ export function strcaseends(s1 : string, suffix : string) : boolean {
 
 export function getLocales() : string[] | undefined {
     return locales;
+}
+
+/**
+ * Assumes that the locale is JS-safe, as given by `getLocales()`
+ */
+export function getCountryCode(locale : string) : string | null {
+    try {
+        return new Intl.Locale(locale).region ?? null;
+    } catch {
+        return null;
+    }
 }
 
 export function displayTemp(t : Temp, cfg : Config) : string {
@@ -150,4 +164,17 @@ export function displayRainMeasurement(r : RainMeasurement, cfg : Config) {
     } else rounded = String(Math.round(num));
 
     return `${rounded}${suffices[unit - 1]}`;
+}
+
+export function displayRainRate(r : RainRate, cfg : Config, showUnit : boolean) {
+    const unit = cfg.getRainMeasurementUnit();
+    const suffices = [ " in/h", " mm/h", " cm/h", " pts/h" ];
+
+    let num = r.get(unit);
+    let rounded;
+    if(unit === RainMeasurementUnits.In || unit === RainMeasurementUnits.Pt) {
+        rounded = num % 1 === 0 ? String(num) : num.toFixed(1);
+    } else rounded = String(Math.round(num));
+
+    return showUnit ? `${rounded}${suffices[unit - 1]}` : rounded;
 }

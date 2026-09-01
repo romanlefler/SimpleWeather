@@ -10,10 +10,37 @@
 
 .simpleweather-current {
     margin-right: 24px;
+    padding: 24px;
+    spacing: 18px;
+}
+
+.sw-default-current-one-detail-row .simpleweather-popup-icon {
+    icon-size: 80px;
+}
+
+.sw-default-current-one-detail-row .simpleweather-popup-temp {
+    font-size: 40px;
+}
+
+.sw-default-current-no-details .simpleweather-popup-icon {
+    icon-size: 64px;
+}
+
+.sw-default-current-no-details .simpleweather-popup-temp {
+    font-size: 32px;
 }
 
 .simpleweather-current-item {
     text-align: center;
+}
+
+.sw-default-detail-caption {
+    padding-right: 4px;
+    text-align: right;
+}
+
+.sw-default-detail-value {
+    text-align: left;
 }
 
 .simpleweather-card-icon {
@@ -29,8 +56,91 @@
     icon-size: 16px;
 }
 
+.swa-provider-credit {
+    text-decoration: underline;
+}
+
 .simpleweather-second-panel-label {
     margin-left: 8px;
+}
+
+.sw-classic-layout {
+    min-width: 720px;
+}
+
+.sw-classic-current-row {
+    padding: 0 20px;
+}
+
+.sw-classic-current-icon {
+    icon-size: 96px;
+    padding-right: 40px;
+}
+
+.sw-classic-summary-box {
+    padding-top: 5px;
+    padding-right: 60px;
+}
+
+.sw-classic-summary {
+    font-size: 36px;
+}
+
+.sw-classic-sun-info {
+    spacing: 0;
+}
+
+.sw-classic-sun-icon {
+    icon-size: 15px;
+    padding-left: 15px;
+    padding-right: 5px;
+}
+
+.sw-classic-first-sun-icon {
+    padding-left: 0;
+}
+
+.sw-classic-update-icon {
+    icon-size: 15px;
+    padding-left: 15px;
+    padding-right: 5px;
+}
+
+.sw-classic-detail-box {
+    padding: 5px 15px 0;
+}
+
+.sw-classic-detail-captions {
+    text-align: right;
+    padding-right: 6px;
+}
+
+.sw-classic-hourly-row {
+    padding: 15px 0;
+}
+
+.sw-classic-hourly-item {
+    padding: 0 35px;
+    text-align: center;
+}
+
+.sw-classic-forecast-time {
+    font-size: 85%;
+    padding-bottom: 5px;
+}
+
+.sw-classic-forecast-icon-box {
+    text-align: center;
+}
+
+.sw-classic-forecast-icon {
+    icon-size: 24px;
+    padding-right: 10px;
+}
+
+.sw-classic-forecast-summary {
+    padding-top: 5px;
+    font-size: 80%;
 }
 
 .sw-carousel
@@ -42,6 +152,12 @@
 {
     spacing: 6px;
     margin-bottom: 4px;
+}
+
+.sw-carousel-dot-slot
+{
+    width: 12px;
+    height: 6px;
 }
 
 .sw-carousel-dot
@@ -57,4 +173,3 @@
     width: 12px;
     background-color: rgba(255, 255, 255, 0.95);
 }
-

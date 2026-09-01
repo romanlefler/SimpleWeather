@@ -23,11 +23,11 @@
 }
 
 .sw-style-light-button {
-    background: transparent;
+    background: rgba(16, 18, 35, 0.10);
 }
 
 .sw-style-light-button:hover {
-    background: #CACCD2;
+    background: rgba(16, 18, 35, 0.16);
 }
 
 .sw-style-light-carousel-dot {
@@ -39,4 +39,3 @@
 }
 
 /* end theme light */
-

@@ -17,7 +17,7 @@
 
 import { IDetails } from "./details.js";
 import { Location } from "./location.js";
-import { Direction, Percentage, Pressure, RainMeasurement, Speed, SpeedAndDir, Temp, GettextKey, Countdown } from "./units.js";
+import { Direction, Percentage, Pressure, RainMeasurement, RainRate, Speed, SpeedAndDir, Temp, GettextKey, Countdown } from "./units.js";
 
 export interface Weather extends IDetails {
 
@@ -28,6 +28,8 @@ export interface Weather extends IDetails {
     gIconName : string;
 
     isNight : boolean;
+
+    observedAt : Date;
 
     sunset : Date;
 
@@ -55,6 +57,8 @@ export interface Weather extends IDetails {
 
     precipitation : RainMeasurement;
 
+    precipForecast? : PrecipitationForecast;
+
     providerName : string;
 
     loc : Location;
@@ -75,6 +79,8 @@ export interface Forecast {
 
     gIconName : string;
 
+    conditionText? : GettextKey;
+
     temp? : Temp;
 
     tempMin? : Temp;
@@ -83,6 +89,18 @@ export interface Forecast {
 
     // Should be 0 - 100
     precipChancePercent : number;
+}
+
+export interface PrecipitationForecast {
+
+    /* The timestamp of `levels[0]`. Close to, but not guaranteed to be, "now"/observedAt. */
+    start : Date;
+
+    /* Space between levels in minutes. */
+    intervalMin : number;
+
+    /* Rain intensity every `intervalMin` minutes, where `levels[0]` is at `start`. */
+    levels : RainRate[];
 }
 
 export enum Condition {
@@ -117,4 +135,3 @@ export function gettextCondit(condit : Condition, isNight : boolean) : GettextKe
             throw new Error(`Unknown condition: ${condit}`);
     }
 }
-

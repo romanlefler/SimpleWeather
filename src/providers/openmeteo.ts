@@ -17,13 +17,12 @@
 
 import { Config } from "../config.js";
 import { LibSoup } from "../libsoup.js";
-import { Direction, Percentage, Pressure, RainMeasurement, RainMeasurementUnits, Speed, SpeedAndDir, Temp, Countdown } from "../units.js";
-import { Condition, Forecast, Weather, gettextCondit } from "../weather.js";
+import { Direction, Percentage, Pressure, RainMeasurement, RainMeasurementUnits, RainRate, Speed, SpeedAndDir, Temp, Countdown } from "../units.js";
+import { Condition, Forecast, PrecipitationForecast, Weather, gettextCondit } from "../weather.js";
 import { getGIconName, Icons } from "../icons.js"
 import { Provider } from "./provider.js";
 import { getTimezoneName } from "../utils.js";
 import { Location } from "../location.js";
-import { OmModel } from "../openmeteo-models.js";
 
 const ENDPOINT = "https://api.open-meteo.com/v1/forecast";
 
@@ -39,7 +38,7 @@ export class OpenMeteo implements Provider {
         this.#config = config;
     }
 
-    async #fetch(loc : Location) : Promise<any> {
+    async #requestWeatherJson(loc : Location) : Promise<any> {
 
         const coords = await loc.latLon();
 
@@ -53,8 +52,10 @@ export class OpenMeteo implements Provider {
                 "precipitation_probability_max,uv_index_max,cloud_cover_mean,precipitation_sum",
             hourly: "temperature_2m,weather_code,precipitation_probability,is_day,cloud_cover," +
                 "precipitation",
+            minutely_15: "precipitation",
             // Note that 24 is not the max
             forecast_hours: "28",
+            forecast_minutely_15: "4",
             temperature_unit: "fahrenheit",
             wind_speed_unit: "mph",
             precipitation_unit: "inch",
@@ -75,10 +76,15 @@ export class OpenMeteo implements Provider {
 
     async fetchWeather() : Promise<Weather> {
         const loc = this.#config.getMainLocation();
-        const body = await this.#fetch(loc);
+        const body = await this.#requestWeatherJson(loc);
+        return this.parseWeatherJson(body, loc);
+    }
+
+    parseWeatherJson(body : any, loc : Location) : Weather {
         const cur = body.current!;
         const daily = body.daily!;
         const hourly = body.hourly!;
+        const minutely = body.minutely_15;
 
         const temp = new Temp(cur.temperature_2m);
         const feelsLike = new Temp(cur.apparent_temperature);
@@ -96,6 +102,17 @@ export class OpenMeteo implements Provider {
         const weatherCode = fixWeatherCode(cur.weather_code, cloudCover, precipitation);
         const { c: condit, i: icon } = codeToIcon[weatherCode];
         const gIconName = getGIconName(icon, isNight);
+
+        let precipForecast : PrecipitationForecast | undefined = undefined;
+        if(minutely?.time?.length > 0) {
+            precipForecast = {
+                start: new Date(minutely.time[0]),
+                intervalMin: 15,
+                levels: minutely.precipitation.map(
+                    (inches : number) => new RainRate(inches * 4)
+                )
+            };
+        }
 
         // If sunrise/sunset have already happened, take the next day's
         const now = new Date();
@@ -119,6 +136,7 @@ export class OpenMeteo implements Provider {
                 // This T00 thing tells the parser to assume local time (which we must do)
                 date: new Date(`${fDateStr}T00:00:00`),
                 gIconName: fIconName,
+                conditionText: gettextCondit(fIcon.c, false),
                 tempMin: new Temp(daily.temperature_2m_min[i]),
                 tempMax: new Temp(daily.temperature_2m_max[i]),
                 precipChancePercent: daily.precipitation_probability_max[i]
@@ -139,16 +157,20 @@ export class OpenMeteo implements Provider {
             hourForecast.push({
                 date: new Date(fDateStr),
                 gIconName: fIconName,
+                conditionText: gettextCondit(fIcon.c, fIsNight),
                 temp: new Temp(hourly.temperature_2m[i]),
                 precipChancePercent: hourly.precipitation_probability[i]
             });
         }
+
+        if(precipForecast) for(let l of precipForecast.levels) console.log(`Level ${l.display(this.#config, true)}`);
 
         return {
             condit,
             temp,
             gIconName,
             isNight,
+            observedAt: new Date(cur.time),
             sunrise,
             sunset,
             forecast: dayForecast,
@@ -161,6 +183,7 @@ export class OpenMeteo implements Provider {
             pressure,
             uvIndex,
             precipitation,
+            precipForecast,
             cloudCover,
             conditionText: gettextCondit(condit, isNight),
             windSpeedAndDir: new SpeedAndDir(wind, windDir),
@@ -231,4 +254,3 @@ const codeToIcon : Record<number, { c : Condition, i : string }> = {
     96: { c : Condition.SNOWY, i: Icons.Hail },
     99: { c : Condition.SNOWY, i: Icons.Hail }
 };
-

@@ -30,11 +30,6 @@ export function delayTask(seconds : number, callback : () => void) : number {
     );
 }
 
-export function removeSourceIfTruthy(id : number | null | undefined) : undefined {
-    if(id) GLib.source_remove(id);
-    return undefined;
-}
-
 export function getTimezoneName() : string {
     return Intl.DateTimeFormat(getLocales()).resolvedOptions().timeZone;
 }
@@ -49,6 +44,11 @@ export function sameDate(d1 : Date, d2 : Date) : boolean {
     const dup1 = noTime(d1);
     const dup2 = noTime(d2);
     return dup1.getTime() === dup2.getTime();
+}
+
+export function getDayOfWeekDate(dayOfWeek : number) : Date {
+    // 2026/01/04 is a Sunday, i.e. day 0
+    return new Date(2026, 0, 4 + dayOfWeek);
 }
 
 export function isNoInternet(error : unknown) {

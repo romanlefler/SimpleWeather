@@ -16,7 +16,7 @@
 */
 
 import Adw from "gi://Adw";
-import Gio from "gi://Gio";
+import GLib from "gi://GLib";
 import GObject from "gi://GObject";
 import Gtk from "gi://Gtk";
 import Pango from "gi://Pango";
@@ -24,12 +24,19 @@ import { NominatimPlace, getShortName, getDisplayName } from "./placenames.js";
 import { Location } from "../location.js";
 import { gettext as _g } from "resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js";
 import { LibSoup } from "../libsoup.js";
-import { Config } from "../config.js";
+import { Config, SearchProvider } from "../config.js";
 import { isNoInternet } from "../utils.js";
-import { OmModel } from "../openmeteo-models.js";
+import { MissingQWeatherCredentialsError } from "../errors.js";
 
 const SEARCH_BASE = "https://nominatim.openstreetmap.org";
 const SEARCH_ENDPOINT = `${SEARCH_BASE}/search`;
+const OPEN_METEO_SEARCH_ENDPOINT = "https://geocoding-api.open-meteo.com/v1/search";
+const NOMINATIM_ATTRIBUTION_URL = "https://www.openstreetmap.org/copyright";
+const OPEN_METEO_ATTRIBUTION_URL = "https://open-meteo.com/";
+const QWEATHER_ATTRIBUTION_URL = "https://www.qweather.com/";
+
+// Must match the nameKey of the QWeather provider
+const QWEATHER_KEY = "QWeather";
 
 interface SelLoc {
     // What to show on the button to clarify results
@@ -41,6 +48,15 @@ interface SelLoc {
     lon : number;
 
     countryCode : string | undefined;
+}
+
+interface OpenMeteoPlace {
+    name : string;
+    latitude : number;
+    longitude : number;
+    admin1? : string;
+    country? : string;
+    country_code? : string;
 }
 
 export async function searchDialog(parent : Gtk.Window, soup : LibSoup, cfg : Config) : Promise<Location | null> {
@@ -114,7 +130,7 @@ export async function searchDialog(parent : Gtk.Window, soup : LibSoup, cfg : Co
                 soup,
                 currentLocNames: cfg.getLocations().map(l => l.getName())
             };
-            fetchNominatim(a).then(locArr => {
+            fetchLocations(a, cfg).then(locArr => {
                 const oldLen = resultsLocList.length;
                 resultsLocList.splice(0, oldLen, ...locArr);
                 populateList(stringList, locArr);
@@ -123,6 +139,14 @@ export async function searchDialog(parent : Gtk.Window, soup : LibSoup, cfg : Co
                 if(isNoInternet(e)) {
                     console.error(e);
                     showNoInternetDialog(dialog);
+                    searchButton.sensitive = true;
+                }
+                else if(e instanceof MissingQWeatherCredentialsError) {
+                    const alert = new Gtk.AlertDialog({
+                        message: _g("API Credentials Warning"),
+                        detail: e.transl(_g)
+                    });
+                    alert.show(dialog);
                     searchButton.sensitive = true;
                 }
                 else reject(e);
@@ -157,6 +181,23 @@ interface SearchArgs {
     resultsList : Gtk.StringList;
     soup : LibSoup;
     currentLocNames : string[];
+}
+
+/**
+ * Fetches locations using the configured search provider.
+ */
+async function fetchLocations(a : SearchArgs, cfg : Config) : Promise<SelLoc[]> {
+    const provider = cfg.getSearchProvider();
+    switch(provider) {
+        case SearchProvider.Nominatim:
+            return fetchNominatim(a);
+        case SearchProvider.QWeather:
+            return fetchQWeather(a, cfg);
+        case SearchProvider.OpenMeteo:
+            return fetchOpenMeteo(a);
+        default:
+            throw new Error(`Invalid search provider: ${provider}.`);
+    }
 }
 
 function showNoInternetDialog(parent : Gtk.Window) {
@@ -198,6 +239,12 @@ function populateList(resultsList : Gtk.StringList, locs : SelLoc[]) {
     resultsList.splice(0, oldLen, names);
 }
 
+function setAttributionLink(label : Gtk.Label, attribution : string, url : string) {
+    const escapedAttribution = GLib.markup_escape_text(attribution, -1);
+    const escapedUrl = GLib.markup_escape_text(url, -1);
+    label.set_markup(`<a href="${escapedUrl}">${escapedAttribution}</a>`);
+}
+
 async function fetchNominatim(a : SearchArgs) : Promise<SelLoc[]> {
     const params = {
         format: "jsonv2",
@@ -209,12 +256,18 @@ async function fetchNominatim(a : SearchArgs) : Promise<SelLoc[]> {
     const b = resp.body;
 
     if(!b[0]) {
-        a.licenseLabel.label = _g("No results.");
+        a.licenseLabel.set_text(_g("No results."));
         return [ ];
     }
 
     // British spelling of license
-    a.licenseLabel.label = b[0]?.licence ?? _g("No copyright information available.");
+    const licence = b[0]?.licence;
+    if(typeof licence === "string" && licence.length > 0) {
+        setAttributionLink(a.licenseLabel, licence, NOMINATIM_ATTRIBUTION_URL);
+    }
+    else {
+        a.licenseLabel.set_text(_g("No copyright information available."));
+    }
 
     const list : SelLoc[] = [ ];
     for(let result of b) {
@@ -239,3 +292,105 @@ async function fetchNominatim(a : SearchArgs) : Promise<SelLoc[]> {
     return list;
 }
 
+async function fetchOpenMeteo(a : SearchArgs) : Promise<SelLoc[]> {
+    const params = {
+        name: a.search,
+        count: "10",
+        format: "json"
+    };
+    const resp = await a.soup.fetchJson(OPEN_METEO_SEARCH_ENDPOINT, params);
+    if(!resp.is2xx) {
+        throw new Error(
+            `Open-Meteo status code ${resp.status}. ` +
+            `Reason: ${resp.body?.reason ?? "None Given"}`
+        );
+    }
+
+    const locs : OpenMeteoPlace[] = resp.body?.results ?? [ ];
+    if(!locs[0]) {
+        a.licenseLabel.set_text(_g("No results."));
+        return [ ];
+    }
+
+    setAttributionLink(
+        a.licenseLabel,
+        "Open-Meteo, GeoNames (CC BY 4.0)",
+        OPEN_METEO_ATTRIBUTION_URL
+    );
+
+    const list : SelLoc[] = [ ];
+    for(const loc of locs) {
+        const displayParts = [ loc.name, loc.admin1, loc.country ]
+            .filter((s) : s is string => typeof s === "string" && s.length > 0);
+        const display = [ ...new Set(displayParts) ].join(", ");
+
+        let friendlyName = loc.name;
+        if(a.currentLocNames.includes(friendlyName)) friendlyName = display;
+
+        list.push({
+            buttonName: display,
+            friendlyName,
+            lat: loc.latitude,
+            lon: loc.longitude,
+            countryCode: loc.country_code
+        });
+    }
+    return list;
+}
+
+async function fetchQWeather(a : SearchArgs, cfg : Config) : Promise<SelLoc[]> {
+    const hostIn = cfg.getApiHosts().get(QWEATHER_KEY);
+    const key = cfg.getApiKeys().get(QWEATHER_KEY);
+    if(!hostIn || !key) throw new MissingQWeatherCredentialsError();
+
+    // Strip the scheme and trailing slashes
+    const host = hostIn.replace(/^https?:\/\//, "").replace(/\/+$/, "");
+    const params = {
+        location: a.search,
+        number: "10"
+    };
+    const resp = await a.soup.fetchJson(
+        `https://${host}/geo/v2/city/lookup`, params, false,
+        { "X-QW-Api-Key": key }
+    );
+    if(!resp.is2xx) throw new Error(`QWeather status code ${resp.status}.`);
+    const b = resp.body;
+    if(b.code !== "200") throw new Error(`QWeather gave error code ${b.code}.`);
+
+    const locs : any[] = b.location ?? [ ];
+    if(!locs[0]) {
+        a.licenseLabel.set_text(_g("No results."));
+        return [ ];
+    }
+
+    const refer = b.refer;
+    const licenseParts : string[] = [ ...refer?.license ?? [ ], ...refer?.sources ?? [ ] ];
+    if(licenseParts.length > 0) {
+        setAttributionLink(a.licenseLabel, licenseParts.join(", "), QWEATHER_ATTRIBUTION_URL);
+    }
+    else {
+        a.licenseLabel.set_text(_g("No copyright information available."));
+    }
+
+    const list : SelLoc[] = [ ];
+    for(let loc of locs) {
+        // e.g. "Dongcheng, Beijing City, China"
+        const display = [ loc.name, loc.adm1, loc.country ]
+            .filter((s : any) => typeof s === "string" && s.length > 0)
+            .join(", ");
+
+        let friendlyName = loc.name;
+        // If a duplicate name exists use the longer one
+        if(a.currentLocNames.includes(friendlyName)) friendlyName = display;
+
+        list.push({
+            buttonName: display,
+            friendlyName,
+            lat: parseFloat(loc.lat),
+            lon: parseFloat(loc.lon),
+            // QWeather does not return a country code
+            countryCode: undefined
+        });
+    }
+    return list;
+}
