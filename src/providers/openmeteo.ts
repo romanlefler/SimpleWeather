@@ -46,7 +46,7 @@ export class OpenMeteo implements Provider {
             latitude: String(coords.lat),
             longitude: String(coords.lon),
             current: "temperature_2m,weather_code,is_day,relative_humidity_2m," +
-                "apparent_temperature,surface_pressure,wind_speed_10m,wind_gusts_10m," +
+                "apparent_temperature,pressure_msl,wind_speed_10m,wind_gusts_10m," +
                 "wind_direction_10m,precipitation,cloud_cover",
             daily: "sunset,sunrise,weather_code,temperature_2m_min,temperature_2m_max," +
                 "precipitation_probability_max,uv_index_max,cloud_cover_mean,precipitation_sum",
@@ -92,8 +92,8 @@ export class OpenMeteo implements Provider {
         const gusts = new Speed(cur.wind_gusts_10m);
         const windDir = new Direction(cur.wind_direction_10m);
         const humidity = new Percentage(cur.relative_humidity_2m);
-        // hPa to inHg
-        const pressure = new Pressure(cur.surface_pressure * 0.02953);
+        // Mean sea-level (relative) pressure, converted from hPa to inHg
+        const pressure = new Pressure(cur.pressure_msl * 0.02953);
         const uvIndex = daily.uv_index_max[0];
         const isNight = cur.is_day === 0;
         const precipitation = new RainMeasurement(cur.precipitation);

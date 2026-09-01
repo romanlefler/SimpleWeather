@@ -6,7 +6,7 @@
     "is_day": 1,
     "relative_humidity_2m": 55,
     "apparent_temperature": 70,
-    "surface_pressure": 1000,
+    "pressure_msl": 1000,
     "wind_speed_10m": 12,
     "wind_gusts_10m": 20,
     "wind_direction_10m": 225,
