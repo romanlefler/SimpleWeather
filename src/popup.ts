@@ -29,6 +29,7 @@ import { gettext as _g } from "./gettext.js";
 import { Details, displayDetail } from "./details.js";
 import { theme } from "./theme.js";
 import { CarouselBox } from "./carouselbox.js";
+import { getWeatherGIcon } from "./icons.js";
 
 interface ForecastCard {
     card : St.BoxLayout;
@@ -398,9 +399,9 @@ export class Popup {
     }
 
     #createIcon(s : string) : Gio.Icon {
-        const iconPath = `${this.#metadata.path}/icons/${s}-symbolic.svg`;
-        const iconFile = Gio.File.new_for_path(iconPath);
-        return new Gio.FileIcon({ file: iconFile });
+        return getWeatherGIcon(s, this.#metadata.path, {
+            packaged: this.#config.getAlwaysPackagedIcons()
+        });
     }
 
     #displayErr(copyrightText : string | undefined = undefined) : void {

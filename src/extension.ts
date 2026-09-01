@@ -39,6 +39,7 @@ import { showWelcome, showManualConfig } from "./welcome.js";
 import { setFirstTimeConfig } from "./autoConfig.js";
 import { displayDetail } from "./details.js";
 import { theme, themeInitAll, themeRemoveAll } from "./theme.js";
+import { getWeatherGIcon } from "./icons.js";
 import { AutoConfigFailError } from "./errors.js";
 
 const FAIL_RETRIES : number = 10;
@@ -398,8 +399,10 @@ export default class SimpleWeatherExtension extends Extension {
             }
 
             if(this.#panelIcon) {
-                const suffix = this.#config!.getSymbolicIcons() ? "-symbolic" : "";
-                this.#panelIcon.icon_name = w.gIconName + suffix;
+                this.#panelIcon.gicon = getWeatherGIcon(w.gIconName, this.metadata.path, {
+                    symbolic: this.#config!.getSymbolicIcons(),
+                    packaged: this.#config!.getAlwaysPackagedIcons()
+                });
             }
 
             const showSunset = w.sunset < w.sunrise;

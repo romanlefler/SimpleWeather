@@ -15,6 +15,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import Gio from "gi://Gio";
+
 export const Icons = {
     Clear: "clear",
     Cloudy: "few-clouds",
@@ -32,6 +34,18 @@ export const Icons = {
     Tornado: "tornado"
 };
 
+const THEMED_ICON_FALLBACKS : Record<string, string[]> = {
+    "weather-freezing-rain": [ "weather-showers" ],
+    "weather-freezing-storm": [ "weather-storm" ],
+    "weather-tornado": [ "weather-severe-alert" ],
+    "weather-windy": [ "weather-few-clouds" ]
+};
+
+interface WeatherIconOptions {
+    symbolic? : boolean;
+    packaged? : boolean;
+}
+
 function iconHasNightVariant(name: string) {
     return name === "clear" || name === "few-clouds";
 }
@@ -43,3 +57,25 @@ export function getGIconName(name: string, isNight: boolean): string {
     return fullName;
 }
 
+function packagedIcon(extensionPath: string, name: string) : Gio.Icon {
+    const iconPath = `${extensionPath}/icons/${name}-symbolic.svg`;
+    const iconFile = Gio.File.new_for_path(iconPath);
+    return new Gio.FileIcon({ file: iconFile });
+}
+
+export function getWeatherGIcon(
+    name: string,
+    extensionPath: string,
+    opts: WeatherIconOptions = {}
+) : Gio.Icon {
+    const { symbolic = false, packaged = false } = opts;
+
+    if (packaged) return packagedIcon(extensionPath, name);
+
+    const names = [ name, ...(THEMED_ICON_FALLBACKS[name] ?? []) ];
+    const themedNames = symbolic
+        ? names.map(iconName => `${iconName}-symbolic`)
+        : names;
+
+    return Gio.ThemedIcon.new_from_names(themedNames);
+}
