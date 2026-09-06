@@ -1,5 +1,5 @@
 
-# v51.DEV
+# v51.0.0
 
 ## Features
 
@@ -34,6 +34,7 @@
 - Fixed some weird spacing in custom themes
 - The left box in the pop-up is no longer a modal dialog which on some GNOME themes looked odd
 - Fixed Open-Meteo reporting absolute pressure instead of relative pressure
+- Fixed locations at latitude 0 not being saved correctly
 
 ## Translations
 

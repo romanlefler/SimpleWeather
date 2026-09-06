@@ -67,9 +67,7 @@ For development or manual installation, see [Building from Source](docs/building
 
 ## Compatibility
 
-SimpleWeather supports GNOME Shell versions 46, 48, 49, and 50.
-
-The development release supports the unstable GNOME 51.
+SimpleWeather supports GNOME Shell versions 46, 48, 49, 50, and 51.
 
 ## Translations
 
