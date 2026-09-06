@@ -155,7 +155,7 @@ export class Location {
             obj.isHere,
             obj.lat,
             obj.lon,
-            { omModel: obj.omModel, countryCode: obj.cc }
+            { omModel: obj.omm, countryCode: obj.cc }
         );
     }
 
