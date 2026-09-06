@@ -4,6 +4,10 @@ Default layout; System theme:
 
 ![Default layout with the System theme](./assets/gallery/default-system.png)
 
+Default layout; Another System theme:
+
+![Default layout with another System theme](./assets/gallery/default-mylocation.png)
+
 Default layout; Afterdark theme:
 
 ![Default layout with the Afterdark theme](./assets/gallery/default-afterdark.png)
