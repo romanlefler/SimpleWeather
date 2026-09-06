@@ -30,7 +30,7 @@ const NORDIC : string[] = [ "DK", "FI", "SE", "NO", "IS", "FO", "GL" ];
 // If we have to just guess a city based off of locale here's gonna be our defaults
 const US_COORDS : MyLocResult = { lat: 40.7834, lon: -73.9662, city: "New York", country: "US" };
 const UK_COORDS : MyLocResult = { lat: 51.51279, lon: -0.09184, city: "London", country: "UK" };
-const NORDIC_COORDS : MyLocResult = { lat: 51.51279, lon: -0.09184, city: "Stockholm", country: "Sverige" };
+const NORDIC_COORDS : MyLocResult = { lat: 59.3326, lon: 18.0649, city: "Stockholm", country: "Sverige" };
 const METRIC_COORDS : MyLocResult = { lat: 52.52001, lon: 13.40495, city: "Berlin", country: "Deutschland" };
 // Beijing, China:
 const CHINA_COORDS: MyLocResult = { lat: 39.9042, lon: 116.4074, city: "\u5317\u4eac", country: "\u4e2d\u56fd" };
