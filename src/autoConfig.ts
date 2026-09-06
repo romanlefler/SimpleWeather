@@ -99,7 +99,7 @@ export async function setFirstTimeConfig(settings : Gio.Settings) {
         settings.set_enum("unit-preset", UnitPreset.US);
         if(!myLoc) myLoc = US_COORDS;
     }
-    else if(cc === "UK") {
+    else if(cc === "GB") {
         settings.set_enum("unit-preset", UnitPreset.UK);
         if(!myLoc) myLoc = UK_COORDS;
     }
