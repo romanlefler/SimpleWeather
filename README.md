@@ -12,6 +12,8 @@ multiple providers.
 
 ![Screenshot](./docs/assets/gallery/default-system.png)
 
+Consult the [gallery](./docs/gallery.md) for more screenshots.
+
 ## Features
 
 ### Weather & Forecasts
