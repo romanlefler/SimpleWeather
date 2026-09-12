@@ -163,8 +163,6 @@ export class OpenMeteo implements Provider {
             });
         }
 
-        if(precipForecast) for(let l of precipForecast.levels) console.log(`Level ${l.display(this.#config, true)}`);
-
         return {
             condit,
             temp,
