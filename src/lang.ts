@@ -18,7 +18,7 @@
 import GLib from "gi://GLib";
 import { Weather } from "./weather.js";
 import { Config } from "./config.js";
-import { Direction, DirectionUnits, Pressure, RainMeasurement, RainMeasurementUnits, RainRate, Speed, Temp } from "./units.js";
+import { Direction, DirectionUnits, Pressure, RainMeasurement, RainMeasurementUnits, RainRate, Speed, Temp, TempUnits } from "./units.js";
 import { sameDate } from "./utils.js";
 import { gettext as _g } from "./gettext.js"
 
@@ -102,7 +102,10 @@ export function getCountryCode(locale : string) : string | null {
 
 export function displayTemp(t : Temp, cfg : Config) : string {
     const tempUnit = cfg.getTempUnit();
-    return `${Math.round(t.get(tempUnit))}\u00B0`;
+    const rounded = Math.round(t.get(tempUnit));
+    if(cfg.getSimplifyDegreeLabel()) return `${rounded}\u00B0`;
+    const unitLetter = tempUnit === TempUnits.Celsius ? "C" : "F";
+    return `${rounded}\u00B0${unitLetter}`;
 }
 
 export function displayTime(d : Date, cfg : Config, showAmPm : boolean = true) : string {

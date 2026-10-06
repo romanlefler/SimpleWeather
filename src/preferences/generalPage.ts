@@ -172,6 +172,17 @@ export class GeneralPage extends Adw.PreferencesPage {
             settings.apply();
         });
         unitGroup.add(directionRow);
+
+        const simplifyDegreeRow = new Adw.SwitchRow({
+            title: _g("Simplify Degree Label"),
+            subtitle: _g("Show \u00B0F or \u00B0C instead of just \"\u00B0.\""),
+            active: settings.get_boolean("simplify-degree-label")
+        });
+        simplifyDegreeRow.connect("notify::active", w => {
+            settings.set_boolean("simplify-degree-label", w.active);
+            settings.apply();
+        });
+        unitGroup.add(simplifyDegreeRow);
         this.add(unitGroup);
 
         const weatherServiceGroup = new Adw.PreferencesGroup({

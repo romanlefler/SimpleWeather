@@ -244,6 +244,17 @@ export class Config {
         this.#addId(id);
     }
 
+    getSimplifyDegreeLabel() : boolean {
+        return this.#settings.get_boolean("simplify-degree-label");
+    }
+
+    onSimplifyDegreeLabelChanged(callback : () => void) {
+        const id = this.#settings.connect("changed", (_, key) => {
+            if(key === "simplify-degree-label") callback();
+        });
+        this.#addId(id);
+    }
+
     getPressureUnit() : PressureUnits {
         return this.#returnUnit(
             "pressure-unit",
@@ -565,7 +576,8 @@ export class Config {
         const id = this.#settings.connect("changed", (_, key) => {
             const unitKeys = [
                 "unit-preset", "temp-unit", "speed-unit", "pressure-unit",
-                "rain-measurement-unit", "distance-unit", "direction-unit"
+                "rain-measurement-unit", "distance-unit", "direction-unit",
+                "simplify-degree-label"
              ];
              if(unitKeys.includes(key)) callback();
         });

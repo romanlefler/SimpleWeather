@@ -127,6 +127,11 @@
             <summary>Direction Unit</summary>
         </key>
 
+        <key name="simplify-degree-label" type="b">
+            <default>true</default>
+            <summary>Show only the degree symbol instead of including F or C</summary>
+        </key>
+
         <key name="pressure-unit" enum="org.gnome.shell.extensions.simple-weather.pressure-unit">
             <default>'hPa'</default>
             <summary>Pressure Unit</summary>
