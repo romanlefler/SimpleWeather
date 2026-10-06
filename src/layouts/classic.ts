@@ -22,6 +22,7 @@ import { boxOrientation } from "../clutterutils.js";
 import { detailName, Details, displayDetail } from "../details.js";
 import { gettext as _g } from "../gettext.js";
 import { displayTime } from "../lang.js";
+import { theme } from "../theme.js";
 import type { Forecast, Weather } from "../weather.js";
 import { createWeatherIcon } from "./icons.js";
 import type { PopupLayout, PopupLayoutArgs } from "./layout.js";
@@ -96,6 +97,7 @@ export class ClassicLayout implements PopupLayout {
     readonly #sunset : St.Label;
     readonly #updated : St.Label;
     readonly #detailBox : St.BoxLayout;
+    readonly #error : St.Label;
     readonly #detailCaptions : St.Label[];
     readonly #detailValues : St.Label[];
     readonly #hourly : ForecastView[];
@@ -183,6 +185,18 @@ export class ClassicLayout implements PopupLayout {
         addChildren(this.#detailBox, captions, values);
         this.#setDetailCount(args.config.getClassicDetailsList().length);
         currentRow.add_child(this.#detailBox);
+        this.#error = new St.Label({
+            visible: false,
+            opacity: 160,
+            x_expand: true,
+            y_expand: true,
+            x_align: Clutter.ActorAlign.FILL,
+            y_align: Clutter.ActorAlign.CENTER,
+            style_class: "sw-details-error"
+        });
+        this.#error.clutter_text.line_wrap = true;
+        theme(this.#error, "faded");
+        currentRow.add_child(this.#error);
         this.actor.add_child(currentRow);
 
         const hourlyRow = new St.BoxLayout({
@@ -198,7 +212,15 @@ export class ClassicLayout implements PopupLayout {
         this.actor.add_child(hourlyRow);
     }
 
+    setError(message : string | null) {
+        this.#error.text = message ?? "";
+        this.#error.visible = message !== null;
+        this.#detailBox.visible = message === null &&
+            this.#args.config.getClassicDetailsList().length > 0;
+    }
+
     updateGui(weather : Weather) {
+        this.setError(null);
         const { config, metadata } = this.#args;
         this.#currentIcon.gicon = createWeatherIcon(
             metadata,

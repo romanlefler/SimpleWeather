@@ -156,6 +156,7 @@ export class DefaultLayout implements PopupLayout {
     readonly #temp : St.Label;
     readonly #forecastCards : ForecastCard[];
     readonly #currentInfo : CurrentInfo;
+    readonly #error : St.Label;
     readonly #carousel : CarouselBox;
     #forecastMode = ForecastMode.Week;
     #cachedWeather? : Weather;
@@ -217,6 +218,18 @@ export class DefaultLayout implements PopupLayout {
         setPointer(this.#carousel);
         right.add_child(this.#carousel);
         this.#currentInfo = createCurrentInfo(args.config, right);
+        this.#error = new St.Label({
+            visible: false,
+            opacity: 160,
+            x_expand: true,
+            y_expand: true,
+            x_align: Clutter.ActorAlign.FILL,
+            y_align: Clutter.ActorAlign.CENTER,
+            style_class: "sw-details-error"
+        });
+        this.#error.clutter_text.line_wrap = true;
+        theme(this.#error, "faded");
+        right.add_child(this.#error);
         this.#arrangeCurrentInfo(args.config.getDetailsList().length);
         this.actor.add_child(right);
 
@@ -226,7 +239,15 @@ export class DefaultLayout implements PopupLayout {
         });
     }
 
+    setError(message : string | null) {
+        this.#error.text = message ?? "";
+        this.#error.visible = message !== null;
+        this.#currentInfo.columns.visible = message === null &&
+            this.#args.config.getDetailsList().length > 0;
+    }
+
     updateGui(weather : Weather) {
+        this.setError(null);
         this.#condition.gicon = createWeatherIcon(
             this.#args.metadata,
             weather.gIconName,

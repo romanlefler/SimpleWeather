@@ -204,10 +204,12 @@ export class Popup {
         const themeName = this.#args.config.getTheme();
         if(themeName) themeInitAll(this.#layout.actor, themeName);
         if(this.#cachedWeather) this.#layout.updateGui(this.#cachedWeather);
+        else this.#layout.setError(this.#err);
     }
 
     setError(message : string | null) {
         this.#err = message;
+        if(!this.#cachedWeather) this.#layout.setError(message);
     }
 
     updateGui(weather : Weather | undefined) {

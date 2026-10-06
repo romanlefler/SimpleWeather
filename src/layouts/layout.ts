@@ -24,6 +24,7 @@ import { DefaultLayout } from "./defaultlayout.js";
 
 export interface PopupLayout {
     readonly actor : Clutter.Actor;
+    setError(message : string | null) : void;
     updateGui(weather : Weather) : void;
     destroy() : void;
 }
