@@ -178,7 +178,7 @@ export default class SimpleWeatherExtension extends Extension {
         }) : undefined;
         this.#panelIcon = showIcon ? new St.Icon({
             icon_name: "view-refresh-symbolic",
-            style_class: "system-status-icon"
+            style_class: "system-status-icon simpleweather-panel-icon"
         }) : undefined;
         this.#sunTimeLabel = new St.Label({
             text: "...",
@@ -188,12 +188,12 @@ export default class SimpleWeatherExtension extends Extension {
         });
         this.#sunTimeIcon = new St.Icon({
             icon_name: "daytime-sunset-symbolic",
-            style_class: "system-status-icon"
+            style_class: "system-status-icon simpleweather-panel-sun-icon"
         });
 
+        if(this.#panelIcon) layout.add_child(this.#panelIcon);
         if(this.#panelLabel) layout.add_child(this.#panelLabel);
         if(this.#secondPanelLabel) layout.add_child(this.#secondPanelLabel);
-        if(this.#panelIcon) layout.add_child(this.#panelIcon);
         if(this.#config!.getShowSunTime()) {
             layout.add_child(this.#sunTimeLabel);
             layout.add_child(this.#sunTimeIcon);
