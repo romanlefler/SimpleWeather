@@ -41,7 +41,7 @@ function normalizeApiHost(host : string) : string {
 export class GeneralPage extends Adw.PreferencesPage {
 
     static {
-        GObject.registerClass(this);
+        GObject.registerClass({ GTypeName: "SimpleWeatherGeneralPage" }, this);
     }
 
     #window : Adw.PreferencesWindow;
