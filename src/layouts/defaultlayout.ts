@@ -251,7 +251,8 @@ export class DefaultLayout implements PopupLayout {
         this.#condition.gicon = createWeatherIcon(
             this.#args.metadata,
             weather.gIconName,
-            this.#args.config.getAlwaysPackagedIcons()
+            this.#args.config.getAlwaysPackagedIcons(),
+            this.#condition.get_theme_node().get_length("icon-size")
         );
         this.#temp.text = weather.temp.display(this.#args.config);
         this.#updateForecast(weather);
@@ -325,7 +326,8 @@ export class DefaultLayout implements PopupLayout {
             card.icon.gicon = createWeatherIcon(
                 this.#args.metadata,
                 forecast.gIconName,
-                this.#args.config.getAlwaysPackagedIcons()
+                this.#args.config.getAlwaysPackagedIcons(),
+                card.icon.get_theme_node().get_length("icon-size")
             );
 
             const text : string[] = [];
