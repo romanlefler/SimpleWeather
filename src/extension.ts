@@ -37,7 +37,7 @@ import { showWelcome, showManualConfig } from "./welcome.js";
 import { setFirstTimeConfig } from "./autoConfig.js";
 import { displayDetail } from "./details.js";
 import { theme, themeInitAll, themeRemoveAll } from "./theme.js";
-import { getWeatherGIcon } from "./icons.js";
+import { THEME_DEFAULT_ICON_SIZE, updatePanelWeatherIcon } from "./icons.js";
 import { AutoConfigFailError, FriendlyError } from "./errors.js";
 import { boxOrientation } from "./clutterutils.js";
 
@@ -176,7 +176,8 @@ export default class SimpleWeatherExtension extends Extension {
         }) : undefined;
         this.#panelIcon = showIcon ? new St.Icon({
             icon_name: "view-refresh-symbolic",
-            style_class: "system-status-icon"
+            style_class: "system-status-icon",
+            y_align: Clutter.ActorAlign.CENTER
         }) : undefined;
         this.#sunTimeLabel = new St.Label({
             text: "...",
@@ -349,7 +350,10 @@ export default class SimpleWeatherExtension extends Extension {
             if(this.#config?.getHideErrPopup()) return;
 
             if(!this.#indicator) this.#indicator = this.#createIndicator();
-            if(this.#panelIcon) this.#panelIcon.icon_name = "error-app-symbolic";
+            if(this.#panelIcon) {
+                this.#panelIcon.icon_size = THEME_DEFAULT_ICON_SIZE;
+                this.#panelIcon.icon_name = "error-app-symbolic";
+            }
             if(this.#panelLabel) this.#panelLabel.text = "Error!";
             if(this.#secondPanelLabel) this.#secondPanelLabel.visible = false;
             if(this.#sunTimeLabel) this.#sunTimeLabel.visible = false;
@@ -411,7 +415,7 @@ export default class SimpleWeatherExtension extends Extension {
             }
 
             if(this.#panelIcon) {
-                this.#panelIcon.gicon = getWeatherGIcon(w.gIconName, this.metadata.path, {
+                updatePanelWeatherIcon(this.#panelIcon, w.gIconName, this.metadata.path, {
                     symbolic: this.#config!.getSymbolicIcons(),
                     packaged: this.#config!.getAlwaysPackagedIcons()
                 });

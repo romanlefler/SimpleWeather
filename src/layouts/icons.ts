@@ -12,6 +12,9 @@ import St from "gi://St";
 import type { ExtensionMetadata } from "resource:///org/gnome/shell/extensions/extension.js";
 import { getWeatherGIcon } from "../icons.js";
 
+const DEFAULT_POPUP_ICON_SIZE = 64;
+const ICON_LOOKUP_FLAGS_NONE = 0;
+
 let iconTheme : St.IconTheme | undefined;
 
 export function watchWeatherIconTheme(callback : () => void) : () => void {
@@ -24,13 +27,13 @@ export function createWeatherIcon(
     metadata : ExtensionMetadata,
     name : string,
     packaged = false,
-    size = 64
+    size = DEFAULT_POPUP_ICON_SIZE
 ) : Gio.Icon {
     const icon = getWeatherGIcon(name, metadata.path, { packaged });
     if(packaged) return icon;
 
     iconTheme ??= new St.IconTheme();
-    const filename = iconTheme.lookup_by_gicon(icon, size, 0)?.get_filename();
+    const filename = iconTheme.lookup_by_gicon(icon, size, ICON_LOOKUP_FLAGS_NONE)?.get_filename();
     if(!filename?.endsWith(".svg")) return icon;
 
     return new Gio.FileIcon({ file: Gio.File.new_for_path(filename) });

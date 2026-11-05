@@ -16,6 +16,11 @@
 */
 
 import Gio from "gi://Gio";
+import type St from "gi://St";
+
+export const THEME_DEFAULT_ICON_SIZE = -1;
+
+const PACKAGED_PANEL_ICON_SIZE = 24;
 
 export const Icons = {
     Clear: "clear",
@@ -78,4 +83,14 @@ export function getWeatherGIcon(
         : names;
 
     return Gio.ThemedIcon.new_from_names(themedNames);
+}
+
+export function updatePanelWeatherIcon(
+    icon : St.Icon,
+    name : string,
+    extensionPath : string,
+    opts : WeatherIconOptions = {}
+) : void {
+    icon.gicon = getWeatherGIcon(name, extensionPath, opts);
+    icon.icon_size = opts.packaged ? PACKAGED_PANEL_ICON_SIZE : THEME_DEFAULT_ICON_SIZE;
 }
