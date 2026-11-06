@@ -34,7 +34,7 @@ const ICON_NOT_SELECTED = "radio-symbolic";
 export class LocationsPage extends Adw.PreferencesPage {
 
     static {
-        GObject.registerClass(this);
+        GObject.registerClass({ GTypeName: "SimpleWeatherLocationsPage" }, this);
     }
 
     #window : Adw.PreferencesWindow;

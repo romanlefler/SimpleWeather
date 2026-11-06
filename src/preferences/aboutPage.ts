@@ -39,7 +39,7 @@ function md(s : string, classes? : string[]) : Gtk.Label {
 export class AboutPage extends Adw.PreferencesPage {
 
     static {
-        GObject.registerClass(this);
+        GObject.registerClass({ GTypeName: "SimpleWeatherAboutPage" }, this);
     }
 
     constructor(settings : Gio.Settings, metadata : ExtensionMetadata, window : Adw.PreferencesWindow) {

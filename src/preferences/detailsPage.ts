@@ -104,7 +104,7 @@ export class DetailsPage extends Adw.PreferencesPage {
     #clickedWidget? : Gtk.Widget;
 
     static {
-        GObject.registerClass(this);
+        GObject.registerClass({ GTypeName: "SimpleWeatherDetailsPage" }, this);
     }
 
     constructor(settings : Gio.Settings) {
