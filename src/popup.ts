@@ -26,6 +26,7 @@ import {
     PopupLayout,
     createPopupLayout
 } from "./layouts/layout.js";
+import { watchWeatherIconTheme } from "./layouts/icons.js";
 import { boxOrientation, setPointer } from "./clutterutils.js";
 import { theme, themeInitAll } from "./theme.js";
 import { Weather } from "./weather.js";
@@ -59,6 +60,7 @@ export class Popup {
     readonly #layoutItem : PopupMenu.PopupBaseMenuItem;
     readonly #footerItem : PopupMenu.PopupBaseMenuItem;
     readonly #menuBox : St.BoxLayout;
+    readonly #disconnectIconTheme : () => void;
 
     #layout : PopupLayout;
     #layoutPreset : PopupLayoutPreset;
@@ -183,6 +185,9 @@ export class Popup {
         this.#menuBox = args.menu.box;
         args.menu.addMenuItem(this.#layoutItem);
         args.menu.addMenuItem(this.#footerItem);
+        this.#disconnectIconTheme = watchWeatherIconTheme(() => {
+            if(this.#cachedWeather) this.#layout.updateGui(this.#cachedWeather);
+        });
     }
 
     get layoutPreset() : PopupLayoutPreset {
@@ -242,6 +247,7 @@ export class Popup {
     }
 
     destroy(_menu : PopupMenu.PopupMenu) {
+        this.#disconnectIconTheme();
         this.#layout.destroy();
         this.#layoutItem.destroy();
         this.#footerItem.destroy();

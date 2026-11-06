@@ -225,7 +225,8 @@ export class ClassicLayout implements PopupLayout {
         this.#currentIcon.gicon = createWeatherIcon(
             metadata,
             weather.gIconName,
-            config.getAlwaysPackagedIcons()
+            config.getAlwaysPackagedIcons(),
+            this.#currentIcon.get_theme_node().get_length("icon-size")
         );
         this.#location.text = weather.loc.getName();
         this.#summary.text = `${weather.conditionText.display(config)}, ${weather.temp.display(config)}`;
@@ -288,7 +289,8 @@ export class ClassicLayout implements PopupLayout {
             view.icon.gicon = createWeatherIcon(
                 this.#args.metadata,
                 forecast.gIconName,
-                this.#args.config.getAlwaysPackagedIcons()
+                this.#args.config.getAlwaysPackagedIcons(),
+                view.icon.get_theme_node().get_length("icon-size")
             );
             if(forecast.temp !== undefined) {
                 view.temperature.text = forecast.temp.display(this.#args.config);
