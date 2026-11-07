@@ -65,6 +65,7 @@ export class Popup {
     #cachedWeather? : Weather;
     #err : string | null = null;
     #providerUrl : string | null = null;
+    #destroyed : boolean = false;
 
     constructor(args : PopupCtorArgs) {
         this.#args = args;
@@ -194,7 +195,7 @@ export class Popup {
      * remain mounted and retain their state.
      */
     setLayout(preset : PopupLayoutPreset) {
-        if(preset === this.#layoutPreset) return;
+        if(this.#destroyed || preset === this.#layoutPreset) return;
 
         this.#layoutItem.actor.remove_child(this.#layout.actor);
         this.#layout.destroy();
@@ -208,11 +209,13 @@ export class Popup {
     }
 
     setError(message : string | null) {
+        if(this.#destroyed) return;
         this.#err = message;
         if(!this.#cachedWeather) this.#layout.setError(message);
     }
 
     updateGui(weather : Weather | undefined) {
+        if(this.#destroyed) return;
         if(!weather) {
             this.#displayError();
             return;
@@ -242,6 +245,7 @@ export class Popup {
     }
 
     destroy(_menu : PopupMenu.PopupMenu) {
+        this.#destroyed = true;
         this.#layout.destroy();
         this.#layoutItem.destroy();
         this.#footerItem.destroy();
@@ -270,6 +274,9 @@ export class Popup {
     }
 
     #setRefreshStatus(fetching : boolean) {
+        // A refresh may still be pending when the extension is disabled and
+        // the popup (with these buttons) is destroyed.
+        if(this.#destroyed) return;
         const opacity = fetching ? 127 : 255;
         this.#placeBtn.reactive = !fetching;
         this.#placeBtn.opacity = opacity;

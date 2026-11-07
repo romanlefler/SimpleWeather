@@ -68,6 +68,21 @@
     margin-left: 8px;
 }
 
+/* The panel icons keep .system-status-icon so they inherit the shell's icon
+ * sizing and colour, but the theme's status-icon padding (6px) and margin
+ * (4px) are meant for icons that share the status area. Used here they only
+ * add dead space around the indicator, so drop them and let the margins below
+ * control the gap to the neighbouring text. */
+#panel .panel-button .system-status-icon.simpleweather-panel-icon {
+    padding: 0;
+    margin: 0 4px 0 0;
+}
+
+#panel .panel-button .system-status-icon.simpleweather-panel-sun-icon {
+    padding: 0;
+    margin: 0 0 0 4px;
+}
+
 .sw-classic-layout {
     min-width: 720px;
 }

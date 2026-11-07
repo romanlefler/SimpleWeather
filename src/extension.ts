@@ -66,6 +66,7 @@ export default class SimpleWeatherExtension extends Extension {
 
     #resolverFailCount : number = 0;
     #indicIsErrored : boolean = false;
+    #disabled : boolean = false;
 
     /**
      * Waits for the layout manager's starting up property to be false.
@@ -96,6 +97,7 @@ export default class SimpleWeatherExtension extends Extension {
      */
     enable() {
         // Set up a couple necessaary things already
+        this.#disabled = false;
         setUpGettext(shellGettext);
         this.#gsettings = this.getSettings();
         initLocales();
@@ -176,7 +178,7 @@ export default class SimpleWeatherExtension extends Extension {
         }) : undefined;
         this.#panelIcon = showIcon ? new St.Icon({
             icon_name: "view-refresh-symbolic",
-            style_class: "system-status-icon"
+            style_class: "system-status-icon simpleweather-panel-icon"
         }) : undefined;
         this.#sunTimeLabel = new St.Label({
             text: "...",
@@ -186,12 +188,12 @@ export default class SimpleWeatherExtension extends Extension {
         });
         this.#sunTimeIcon = new St.Icon({
             icon_name: "daytime-sunset-symbolic",
-            style_class: "system-status-icon"
+            style_class: "system-status-icon simpleweather-panel-sun-icon"
         });
 
+        if(this.#panelIcon) layout.add_child(this.#panelIcon);
         if(this.#panelLabel) layout.add_child(this.#panelLabel);
         if(this.#secondPanelLabel) layout.add_child(this.#secondPanelLabel);
-        if(this.#panelIcon) layout.add_child(this.#panelIcon);
         if(this.#config!.getShowSunTime()) {
             layout.add_child(this.#sunTimeLabel);
             layout.add_child(this.#sunTimeIcon);
@@ -284,6 +286,7 @@ export default class SimpleWeatherExtension extends Extension {
      * garbage-collected.
      */
     disable() {
+        this.#disabled = true;
         if(this.#fetchLoopId) GLib.source_remove(this.#fetchLoopId);
         this.#fetchLoopId = undefined;
         if(this.#delayFetchId) GLib.source_remove(this.#delayFetchId);
@@ -325,6 +328,8 @@ export default class SimpleWeatherExtension extends Extension {
     }
 
     async #handleErr(err : unknown) : Promise<void> {
+        // The extension may have been disabled while the request was in flight.
+        if(this.#disabled) return;
         // This happens on boot presumably when things are loaded
         // out of order, try max 10 times
         //
@@ -395,6 +400,9 @@ export default class SimpleWeatherExtension extends Extension {
     }
 
     #updateGui() {
+        // A fetch may resolve after the extension was disabled, in which case
+        // the actors and config are already gone.
+        if(this.#disabled) return;
         const w = this.#cachedWeather;
         if(w) {
             const panelDetail = this.#config!.getPanelDetail();
@@ -432,7 +440,7 @@ export default class SimpleWeatherExtension extends Extension {
             }
         }
 
-        this.#popup!.updateGui(w);
+        this.#popup?.updateGui(w);
         this.#addIndicIfNeeded();
     }
 

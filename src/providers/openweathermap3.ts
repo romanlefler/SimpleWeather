@@ -51,7 +51,6 @@ export class OpenWeatherMap3 implements Provider {
             exclude: "alerts",
             appid: key
         };
-        console.log(`Fetching with key ${key}`);
 
         const response = await this.#soup.fetchJson(ENDPOINT, params, false);
         if(!response.is2xx) {
