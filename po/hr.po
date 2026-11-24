@@ -1,0 +1,840 @@
+# Croatian translations for simple-weather@romanlefler package.
+# Copyright (C) 2026 AnduinOS Croatian translation contributors.
+# This file is distributed under the same license as the simple-weather@romanlefler package.
+# Croatian translations by AnduinOS translation contributors.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: simple-weather@romanlefler 12\n"
+"Report-Msgid-Bugs-To: simpleweather-gnome@proton.me\n"
+"POT-Creation-Date: 2026-11-25 00:05+0100\n"
+"PO-Revision-Date: 2026-11-21 19:42+0100\n"
+"Last-Translator: AnduinOS Croatian translation contributors\n"
+"Language-Team: Croatian\n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: src/autoConfig.ts:124
+msgid "Unnamed Location"
+msgstr "Neimenovana lokacija"
+
+#: src/details.ts:60 src/preferences/generalPage.ts:79
+msgid "Temperature"
+msgstr "Temperatura"
+
+#: src/details.ts:61
+msgid "Condition"
+msgstr "Vremenske prilike"
+
+#: src/details.ts:62
+msgid "Feels Like"
+msgstr "Osjećaj temperature"
+
+#: src/details.ts:63
+msgid "Wind"
+msgstr "Vjetar"
+
+#: src/details.ts:64
+msgid "Humidity"
+msgstr "Vlažnost"
+
+#: src/details.ts:65
+msgid "Gusts"
+msgstr "Udari vjetra"
+
+#: src/details.ts:66
+msgid "UV High"
+msgstr "UV indeks"
+
+#: src/details.ts:67 src/preferences/generalPage.ts:107
+msgid "Pressure"
+msgstr "Tlak"
+
+#: src/details.ts:68
+msgid "Precipitation"
+msgstr "Oborine"
+
+#: src/details.ts:69
+msgid "Sunrise"
+msgstr "Izlazak sunca"
+
+#: src/details.ts:70
+msgid "Sunset"
+msgstr "Zalazak sunca"
+
+#: src/details.ts:71
+msgid "Cloud Cover"
+msgstr "Naoblaka"
+
+#: src/details.ts:72
+msgid "Sun Countdown"
+msgstr "Odbrojavanje do izlaska/zalaska sunca"
+
+#: src/details.ts:77 src/layouts/classic.ts:244
+#: src/layouts/defaultlayout.ts:350
+msgid "Invalid"
+msgstr "Neispravno"
+
+#: src/errors.ts:57
+#, javascript-format
+msgid "%s requires an API key and host."
+msgstr "%s zahtijeva API ključ i poslužitelj."
+
+#: src/errors.ts:69
+msgid "Location unavailable or permission not granted."
+msgstr "Lokacija nije dostupna ili nije odobren pristup."
+
+#: src/errors.ts:91
+#, javascript-format
+msgid "Service down (%s)"
+msgstr "Usluga nije dostupna (%s)"
+
+#: src/extension.ts:368 src/preferences/generalPage.ts:599
+#: src/preferences/search.ts:205
+msgid "No Internet"
+msgstr "Nema internetske veze"
+
+#: src/extension.ts:374 src/preferences/generalPage.ts:568
+msgid "Unknown Error"
+msgstr "Nepoznata pogreška"
+
+#: src/lang.ts:129 src/layouts/defaultlayout.ts:275
+msgid "Today"
+msgstr "Danas"
+
+#: src/lang.ts:132
+msgid "Monday"
+msgstr "ponedjeljak"
+
+#: src/lang.ts:132
+msgid "Sunday"
+msgstr "nedjelja"
+
+#: src/lang.ts:132
+msgid "Tuesday"
+msgstr "utorak"
+
+#: src/lang.ts:132
+msgid "Wednesday"
+msgstr "srijeda"
+
+#: src/lang.ts:133
+msgid "Friday"
+msgstr "petak"
+
+#: src/lang.ts:133
+msgid "Saturday"
+msgstr "subota"
+
+#: src/lang.ts:133
+msgid "Thursday"
+msgstr "četvrtak"
+
+#: src/layouts/defaultlayout.ts:335
+#, javascript-format
+msgid "H: %s"
+msgstr "Maks.: %s"
+
+#: src/layouts/defaultlayout.ts:336
+#, javascript-format
+msgid "L: %s"
+msgstr "Min.: %s"
+
+#: src/location.ts:64 src/location.ts:74 src/preferences/generalPage.ts:311
+msgid "My Location"
+msgstr "Moja lokacija"
+
+#: src/location.ts:93
+#, javascript-format
+msgid "%f°N"
+msgstr "%f°N"
+
+#: src/location.ts:93
+#, javascript-format
+msgid "%f°S"
+msgstr "%f°S"
+
+#: src/location.ts:94
+#, javascript-format
+msgid "%f°E"
+msgstr "%f°E"
+
+#: src/location.ts:94
+#, javascript-format
+msgid "%f°W"
+msgstr "%f°W"
+
+#: src/popup.ts:80
+msgid "Weather Data"
+msgstr "Podaci o vremenu"
+
+#: src/popup.ts:131
+msgid "Refresh"
+msgstr "Osvježi"
+
+#: src/popup.ts:167 src/preferences/aboutPage.ts:90
+msgid "Settings"
+msgstr "Postavke"
+
+#: src/popup.ts:294
+msgid "Retry"
+msgstr "Pokušaj ponovno"
+
+#: src/preferences/aboutPage.ts:48
+msgid "About"
+msgstr "O ekstenziji"
+
+#: src/preferences/aboutPage.ts:59
+msgid "GitHub Repository"
+msgstr "GitHub repozitorij"
+
+#: src/preferences/aboutPage.ts:61
+msgid "Support Me"
+msgstr "Podržite me"
+
+#: src/preferences/aboutPage.ts:70
+msgid "SimpleWeather Version"
+msgstr "Verzija Simple Weathera"
+
+#: src/preferences/aboutPage.ts:73
+msgid "Unknown"
+msgstr "Nepoznato"
+
+#: src/preferences/aboutPage.ts:81
+msgid "Git Hash"
+msgstr "Git hash"
+
+#: src/preferences/aboutPage.ts:93
+msgid "Copy"
+msgstr "Kopiraj"
+
+#: src/preferences/aboutPage.ts:118
+msgid "Copied settings JSON to clipboard."
+msgstr "JSON postavki kopiran je u međuspremnik."
+
+#: src/preferences/aboutPage.ts:132
+#, javascript-format
+msgid "Contributions and translations are welcome! Read how on %s."
+msgstr "Doprinosi i prijevodi su dobrodošli! Saznajte kako na %s."
+
+#: src/preferences/aboutPage.ts:135
+#, javascript-format
+msgid "If you like this extension, consider starring it on %s."
+msgstr "Ako vam se sviđa ova ekstenzija, označite je zvjezdicom na %s."
+
+#: src/preferences/aboutPage.ts:138
+msgid "here"
+msgstr "ovdje"
+
+#: src/preferences/aboutPage.ts:140
+#, javascript-format
+msgid "Report bugs or request new features %s."
+msgstr "Prijavite pogreške ili predložite nove značajke %s."
+
+#: src/preferences/aboutPage.ts:144 src/preferences/aboutPage.ts:154
+msgid "Credits"
+msgstr "Zasluge"
+
+#: src/preferences/detailsPage.ts:113
+msgid "Details"
+msgstr "Pojedinosti"
+
+#: src/preferences/detailsPage.ts:120
+msgid "Pop-Up"
+msgstr "Skočni prozor"
+
+#: src/preferences/detailsPage.ts:129 src/preferences/generalPage.ts:319
+msgid "System"
+msgstr "Sustav"
+
+#: src/preferences/detailsPage.ts:130
+msgid "Light"
+msgstr "Svijetla"
+
+#: src/preferences/detailsPage.ts:131
+msgid "Afterdark"
+msgstr "Nakon mraka"
+
+#: src/preferences/detailsPage.ts:132
+msgid "Immersive"
+msgstr "Imerzivna"
+
+#: src/preferences/detailsPage.ts:135
+msgid "Theme"
+msgstr "Tema"
+
+#: src/preferences/detailsPage.ts:146
+msgid "Default"
+msgstr "Zadani"
+
+#: src/preferences/detailsPage.ts:147
+msgid "Classic"
+msgstr "Klasični"
+
+#: src/preferences/detailsPage.ts:150
+msgid "Layout"
+msgstr "Raspored"
+
+#: src/preferences/detailsPage.ts:161
+msgid "Highlight Detail Values"
+msgstr "Istakni vrijednosti pojedinosti"
+
+#: src/preferences/detailsPage.ts:176
+msgid "Featured Details"
+msgstr "Odabrane pojedinosti"
+
+#: src/preferences/detailsPage.ts:177
+msgid "Drag-and-drop from bottom to configure the pop-up"
+msgstr "Povucite stavke s dna da biste prilagodili skočni prozor"
+
+#: src/preferences/detailsPage.ts:184
+msgid "Number of Details"
+msgstr "Broj pojedinosti"
+
+#: src/preferences/detailsPage.ts:332 src/preferences/generalPage.ts:368
+msgid "Panel"
+msgstr "Traka"
+
+#: src/preferences/detailsPage.ts:335
+msgid "None"
+msgstr "Ništa"
+
+#: src/preferences/detailsPage.ts:347
+msgid "Panel Detail"
+msgstr "Pojedinost na traci"
+
+#: src/preferences/detailsPage.ts:365
+msgid "Secondary Panel Detail"
+msgstr "Druga pojedinost na traci"
+
+#: src/preferences/detailsPage.ts:377
+msgid "Show Condition Icon"
+msgstr "Prikaži ikonu vremenske prilike"
+
+#: src/preferences/detailsPage.ts:387
+msgid "Show Sunrise/Sunset"
+msgstr "Prikaži izlazak/zalazak sunca"
+
+#: src/preferences/detailsPage.ts:398
+msgid "Use Countdown for Sun"
+msgstr "Prikaži odbrojavanje do izlaska/zalaska sunca"
+
+#: src/preferences/editLocation.ts:33
+#, javascript-format
+msgid "Edit %s"
+msgstr "Uredi %s"
+
+#: src/preferences/editLocation.ts:33
+msgid "New Location"
+msgstr "Nova lokacija"
+
+#: src/preferences/editLocation.ts:41
+msgid "Name"
+msgstr "Naziv"
+
+#: src/preferences/editLocation.ts:69
+#, javascript-format
+msgid "%s (e.g. \"%s\")"
+msgstr "%s (npr. „%s”)"
+
+#: src/preferences/editLocation.ts:69
+msgid "Coordinates"
+msgstr "Koordinate"
+
+#: src/preferences/editLocation.ts:93
+msgid "Save"
+msgstr "Spremi"
+
+#: src/preferences/editLocation.ts:101
+#, javascript-format
+msgid "View in %s"
+msgstr "Prikaži u aplikaciji %s"
+
+#: src/preferences/editLocation.ts:102
+msgid "Open in Browser"
+msgstr "Otvori u pregledniku"
+
+#: src/preferences/editLocation.ts:105
+msgid "Open"
+msgstr "Otvori"
+
+#: src/preferences/editLocation.ts:137
+msgid "Name is required."
+msgstr "Naziv je obavezan."
+
+#: src/preferences/editLocation.ts:142
+msgid "Invalid coordinates entry."
+msgstr "Unesene koordinate nisu valjane."
+
+#: src/preferences/generalPage.ts:52 src/preferences/locationsPage.ts:177
+msgid "General"
+msgstr "Općenito"
+
+#: src/preferences/generalPage.ts:58 src/preferences/generalPage.ts:68
+msgid "Units"
+msgstr "Jedinice"
+
+#: src/preferences/generalPage.ts:59
+msgid "Configure units of measurement"
+msgstr "Postavite mjerne jedinice"
+
+#: src/preferences/generalPage.ts:63
+msgid "Custom"
+msgstr "Prilagođene"
+
+#: src/preferences/generalPage.ts:63
+msgid "Metric"
+msgstr "Metričke"
+
+#: src/preferences/generalPage.ts:63
+msgid "Nordic"
+msgstr "Nordijske"
+
+#: src/preferences/generalPage.ts:63
+msgid "UK"
+msgstr "Britanske"
+
+#: src/preferences/generalPage.ts:63
+msgid "US"
+msgstr "Američke"
+
+#: src/preferences/generalPage.ts:76
+msgid "Fahrenheit"
+msgstr "Fahrenheit"
+
+#: src/preferences/generalPage.ts:77
+msgid "Celsius"
+msgstr "Celzij"
+
+#: src/preferences/generalPage.ts:93
+msgid "Speed"
+msgstr "Brzina"
+
+#: src/preferences/generalPage.ts:121
+msgid "Rain Measurement"
+msgstr "Količina oborina"
+
+#: src/preferences/generalPage.ts:135
+msgid "Distance"
+msgstr "Udaljenost"
+
+#: src/preferences/generalPage.ts:163
+msgid "Degrees"
+msgstr "Stupnjevi"
+
+#: src/preferences/generalPage.ts:163
+msgid "Eight-Point Compass"
+msgstr "Osmerosmjerna kompasna ruža"
+
+#: src/preferences/generalPage.ts:166
+msgid "Direction"
+msgstr "Smjer"
+
+#: src/preferences/generalPage.ts:177
+msgid "Simplify Degree Label"
+msgstr "Pojednostavi oznaku stupnjeva"
+
+#: src/preferences/generalPage.ts:178
+msgid "Show °F or °C instead of just \"°.\""
+msgstr "Prikaži °F ili °C umjesto samog znaka °."
+
+#: src/preferences/generalPage.ts:189
+msgid "Weather Service"
+msgstr "Usluga vremenske prognoze"
+
+#: src/preferences/generalPage.ts:190
+msgid "Configure how the weather is attained"
+msgstr "Podesite način dohvaćanja vremenske prognoze"
+
+#: src/preferences/generalPage.ts:199 src/preferences/locationsPage.ts:177
+msgid "Weather Provider"
+msgstr "Pružatelj vremenske prognoze"
+
+#: src/preferences/generalPage.ts:206
+msgid "The open-source, most privacy-friendly default."
+msgstr "Zadana otvorena usluga koja najbolje štiti privatnost."
+
+#: src/preferences/generalPage.ts:207
+msgid "Requires an account with a One Call 3.0 subscription."
+msgstr "Potreban je račun s pretplatom na One Call 3.0."
+
+#: src/preferences/generalPage.ts:208
+msgid "Recommended primarily for users in mainland China. Requires an account."
+msgstr ""
+"Preporučuje se prvenstveno korisnicima u kontinentalnoj Kini. Potreban je "
+"račun."
+
+#: src/preferences/generalPage.ts:221 src/preferences/generalPage.ts:295
+msgid "API Key"
+msgstr "API ključ"
+
+#: src/preferences/generalPage.ts:221 src/preferences/generalPage.ts:295
+msgid "API Key (Required)"
+msgstr "API ključ (obavezan)"
+
+#: src/preferences/generalPage.ts:231 src/preferences/generalPage.ts:300
+msgid "API Host"
+msgstr "API poslužitelj"
+
+#: src/preferences/generalPage.ts:231 src/preferences/generalPage.ts:300
+msgid "API Host (Required)"
+msgstr "API poslužitelj (obavezan)"
+
+#: src/preferences/generalPage.ts:241
+msgid "Validate Credentials"
+msgstr "Provjera vjerodajnica"
+
+#: src/preferences/generalPage.ts:245
+msgid "Validate"
+msgstr "Provjeri"
+
+#: src/preferences/generalPage.ts:279 src/preferences/search.ts:146
+msgid "API Credentials Warning"
+msgstr "Upozorenje o API vjerodajnicama"
+
+#: src/preferences/generalPage.ts:312
+msgid "Configure how your location is found"
+msgstr "Podesite način određivanja lokacije"
+
+#: src/preferences/generalPage.ts:316 src/preferences/generalPage.ts:317
+#: src/preferences/generalPage.ts:318
+msgid "Online"
+msgstr "Na mreži"
+
+#: src/preferences/generalPage.ts:320
+msgid "Disable"
+msgstr "Onemogući"
+
+#: src/preferences/generalPage.ts:323
+msgid "Provider"
+msgstr "Pružatelj usluge"
+
+#: src/preferences/generalPage.ts:335
+msgid "Refresh Interval (Minutes)"
+msgstr "Razmak između osvježavanja (u minutama)"
+
+#: src/preferences/generalPage.ts:353
+msgid "Accessibility"
+msgstr "Pristupačnost"
+
+#: src/preferences/generalPage.ts:354
+msgid "Configure accessibility features"
+msgstr "Podesite značajke pristupačnosti"
+
+#: src/preferences/generalPage.ts:357
+msgid "High Contrast"
+msgstr "Visoki kontrast"
+
+#: src/preferences/generalPage.ts:369
+msgid "Configure the panel"
+msgstr "Podesite traku"
+
+#: src/preferences/generalPage.ts:373
+msgid "Center"
+msgstr "Sredina"
+
+#: src/preferences/generalPage.ts:373
+msgid "Left"
+msgstr "Lijevo"
+
+#: src/preferences/generalPage.ts:373
+msgid "Right"
+msgstr "Desno"
+
+#: src/preferences/generalPage.ts:376
+msgid "Side of Panel"
+msgstr "Strana trake"
+
+#: src/preferences/generalPage.ts:389
+msgid "Order in Panel"
+msgstr "Redoslijed na traci"
+
+#: src/preferences/generalPage.ts:406
+msgid "Pop-Up Offset"
+msgstr "Pomak skočnog prozora"
+
+#: src/preferences/generalPage.ts:407
+msgid "Horizontal pop-up offset from 0–100."
+msgstr "Vodoravni pomak skočnog prozora od 0 do 100."
+
+#: src/preferences/generalPage.ts:447
+msgid "Use Symbolic Icons in Panel"
+msgstr "Koristi simboličke ikone na traci"
+
+#: src/preferences/generalPage.ts:457
+msgid "Always Use Packaged Icons"
+msgstr "Uvijek koristi priložene ikone"
+
+#: src/preferences/generalPage.ts:468
+msgid "Show Refresh Button"
+msgstr "Prikaži gumb za osvježavanje"
+
+#: src/preferences/generalPage.ts:479
+msgid "Hide Error Popup"
+msgstr "Sakrij skočni prozor s pogreškom"
+
+#: src/preferences/generalPage.ts:480
+msgid "If the popup just says Error, don't even show it."
+msgstr "Ako skočni prozor prikazuje samo pogrešku, nemojte ga prikazivati."
+
+#: src/preferences/generalPage.ts:522
+msgid "API Key Warning"
+msgstr "Upozorenje o API ključu"
+
+#: src/preferences/generalPage.ts:564
+msgid "Key is invalid or is not subscribed to the One Call 3.0 API."
+msgstr "Ključ nije valjan ili nema pretplatu na API One Call 3.0."
+
+#: src/preferences/generalPage.ts:568
+#, javascript-format
+msgid "Error when validating API Key: %s"
+msgstr "Pogreška pri provjeri API ključa: %s"
+
+#: src/preferences/generalPage.ts:579
+msgid "Host is required."
+msgstr "Poslužitelj je obavezan."
+
+#: src/preferences/generalPage.ts:589
+msgid "Key or host is invalid."
+msgstr "Ključ ili poslužitelj nisu valjani."
+
+#: src/preferences/generalPage.ts:594
+msgid "Host is invalid."
+msgstr "Poslužitelj nije valjan."
+
+#: src/preferences/generalPage.ts:600
+msgid "The API Host returned an invalid response."
+msgstr "API poslužitelj vratio je nevaljan odgovor."
+
+#: src/preferences/generalPage.ts:601
+msgid "Error when validating credentials."
+msgstr "Pogreška pri provjeri vjerodajnica."
+
+#: src/preferences/locationsPage.ts:57 src/preferences/locationsPage.ts:80
+msgid "Locations"
+msgstr "Lokacije"
+
+#: src/preferences/locationsPage.ts:70 src/preferences/search.ts:96
+msgid "Add"
+msgstr "Dodaj"
+
+#: src/preferences/locationsPage.ts:97
+msgid "Move Up"
+msgstr "Pomakni gore"
+
+#: src/preferences/locationsPage.ts:112
+msgid "Move Down"
+msgstr "Pomakni dolje"
+
+#: src/preferences/locationsPage.ts:134
+msgid "Add Here"
+msgstr "Dodaj ovdje"
+
+#: src/preferences/locationsPage.ts:146
+msgid "Add By Coords"
+msgstr "Dodaj prema koordinatama"
+
+#: src/preferences/locationsPage.ts:162
+msgid "Location Search"
+msgstr "Pretraživanje lokacija"
+
+#: src/preferences/locationsPage.ts:168
+msgid "Search Provider"
+msgstr "Pružatelj usluge pretraživanja"
+
+#: src/preferences/locationsPage.ts:176
+#, javascript-format
+msgid ""
+"QWeather requires you to input your credentials in the %s section in %s."
+msgstr "Za QWeather morate unijeti vjerodajnice u odjeljak %s u postavkama %s."
+
+#: src/preferences/locationsPage.ts:246
+#, javascript-format
+msgid "Are you sure you want delete %s?"
+msgstr "Želite li zaista izbrisati lokaciju %s?"
+
+#: src/preferences/locationsPage.ts:247
+msgid "Cancel"
+msgstr "Odustani"
+
+#: src/preferences/locationsPage.ts:247
+msgid "Delete"
+msgstr "Izbriši"
+
+#: src/preferences/locationsPage.ts:288
+#, javascript-format
+msgid "Internal Error: %s"
+msgstr "Unutarnja pogreška: %s"
+
+#: src/preferences/locationsPage.ts:289
+msgid "Internal Error"
+msgstr "Unutarnja pogreška"
+
+#: src/preferences/locationsPage.ts:314
+msgid "Something else edited the locations."
+msgstr "Popis lokacija promijenjen je u drugom prozoru."
+
+#: src/preferences/search.ts:66
+msgid "Search Location"
+msgstr "Pretraži lokaciju"
+
+#: src/preferences/search.ts:75
+msgid "City, Neighborhood, etc."
+msgstr "Grad, četvrt i sl."
+
+#: src/preferences/search.ts:80
+msgid "Search"
+msgstr "Pretraži"
+
+#: src/preferences/search.ts:259 src/preferences/search.ts:311
+#: src/preferences/search.ts:362
+msgid "No results."
+msgstr "Nema rezultata."
+
+#: src/preferences/search.ts:269 src/preferences/search.ts:372
+msgid "No copyright information available."
+msgstr "Nema dostupnih podataka o autorskim pravima."
+
+#: src/prefs.ts:74
+#, javascript-format
+msgid ""
+"SimpleWeather doesn't know how to handle your locale.\n"
+"\tError - %s\n"
+"Please consider submitting a bug report on GitHub."
+msgstr ""
+"SimpleWeather ne zna obraditi vaše jezične postavke.\n"
+"\tPogreška – %s\n"
+"Razmislite o prijavi pogreške na GitHubu."
+
+#: src/prefs.ts:77
+msgid "Don't Show Again"
+msgstr "Ne prikazuj ponovno"
+
+#: src/prefs.ts:77
+msgid "Ignore"
+msgstr "Zanemari"
+
+#: src/prefs.ts:77
+msgid "Open GitHub"
+msgstr "Otvori GitHub"
+
+#: src/units.ts:133
+msgid "E"
+msgstr "I"
+
+#: src/units.ts:133
+msgid "N"
+msgstr "S"
+
+#: src/units.ts:133
+msgid "NE"
+msgstr "SI"
+
+#: src/units.ts:133
+msgid "NW"
+msgstr "SZ"
+
+#: src/units.ts:133
+msgid "S"
+msgstr "J"
+
+#: src/units.ts:133
+msgid "SE"
+msgstr "JI"
+
+#: src/units.ts:133
+msgid "SW"
+msgstr "JZ"
+
+#: src/units.ts:133
+msgid "W"
+msgstr "Z"
+
+#: src/units.ts:330
+msgid "Now"
+msgstr "Sada"
+
+#: src/units.ts:331
+#, javascript-format
+msgid "%d h"
+msgstr "%d h"
+
+#: src/units.ts:332
+#, javascript-format
+msgid "%d min"
+msgstr "%d min"
+
+#: src/weather.ts:123
+msgid "Clear"
+msgstr "Vedro"
+
+#: src/weather.ts:123
+msgid "Sunny"
+msgstr "Sunčano"
+
+#: src/weather.ts:125
+msgid "Cloudy"
+msgstr "Oblačno"
+
+#: src/weather.ts:127
+msgid "Rainy"
+msgstr "Kišovito"
+
+#: src/weather.ts:129
+msgid "Snowy"
+msgstr "Snježno"
+
+#: src/weather.ts:131
+msgid "Stormy"
+msgstr "Olujno"
+
+#: src/weather.ts:133
+msgid "Windy"
+msgstr "Vjetrovito"
+
+#: src/welcome.ts:54
+#, javascript-format
+msgid "Welcome to %s"
+msgstr "Dobro došli u %s"
+
+#: src/welcome.ts:75
+#, javascript-format
+msgid ""
+"%s occasionally connects to the selected weather service. By default, it "
+"will use the Internet to connect to:\n"
+"  •  %s, an %s service for weather\n"
+"  •  %s, optional for resolving the current location\n"
+"  •  %s, for searching locations by name\n"
+"\n"
+msgstr ""
+"%s povremeno se povezuje s odabranom uslugom vremenske prognoze. Prema "
+"zadanim postavkama upotrebljava internet za povezivanje s:\n"
+"  •  %s, uslugom %s za vremensku prognozu\n"
+"  •  %s, neobaveznom uslugom za određivanje trenutačne lokacije\n"
+"  •  %s, uslugom za pretraživanje lokacija prema nazivu\n"
+"\n"
+
+#: src/welcome.ts:84
+#, javascript-format
+msgid "Thank you for installing %s!"
+msgstr "Hvala što ste instalirali %s!"
+
+#: src/welcome.ts:100
+msgid "Abort"
+msgstr "Prekini"
+
+#: src/welcome.ts:152
+msgid "Manual Configuration"
+msgstr "Ručno podešavanje"
+
+#: src/welcome.ts:172
+msgid "Failed to detect location."
+msgstr "Određivanje lokacije nije uspjelo."
+
+#: src/welcome.ts:175
+msgid "Please configure your location and units manually."
+msgstr "Ručno podesite lokaciju i mjerne jedinice."
